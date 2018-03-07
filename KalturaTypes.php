@@ -2084,13 +2084,6 @@ class KalturaBaseChannel extends KalturaObjectBase
 	 */
 	public $id = null;
 
-	/**
-	 * Channel name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
 
 }
 
@@ -2432,6 +2425,13 @@ abstract class KalturaAssetGroupBy extends KalturaObjectBase
  */
 class KalturaChannel extends KalturaBaseChannel
 {
+	/**
+	 * Channel name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
 	/**
 	 * Cannel description
 	 *
@@ -4755,6 +4755,7 @@ class KalturaSubscriptionEntitlement extends KalturaEntitlement
 	 * Scheduled Subscription Identifier
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $scheduledSubscriptionId = null;
 
@@ -4762,6 +4763,7 @@ class KalturaSubscriptionEntitlement extends KalturaEntitlement
 	 * Unified payment identifier
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $unifiedPaymentId = null;
 
