@@ -2084,6 +2084,13 @@ class KalturaBaseChannel extends KalturaObjectBase
 	 */
 	public $id = null;
 
+	/**
+	 * Channel name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
 
 }
 
@@ -2425,13 +2432,6 @@ abstract class KalturaAssetGroupBy extends KalturaObjectBase
  */
 class KalturaChannel extends KalturaBaseChannel
 {
-	/**
-	 * Channel name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
 	/**
 	 * Cannel description
 	 *
@@ -3795,34 +3795,6 @@ class KalturaAnnouncement extends KalturaObjectBase
 	 */
 	public $imageUrl = null;
 
-	/**
-	 * Include Mail
-	 *
-	 * @var bool
-	 */
-	public $includeMail = null;
-
-	/**
-	 * Mail Template
-	 *
-	 * @var string
-	 */
-	public $mailTemplate = null;
-
-	/**
-	 * Mail Subject
-	 *
-	 * @var string
-	 */
-	public $mailSubject = null;
-
-	/**
-	 * Include SMS
-	 *
-	 * @var bool
-	 */
-	public $includeSms = null;
-
 
 }
 
@@ -4755,7 +4727,6 @@ class KalturaSubscriptionEntitlement extends KalturaEntitlement
 	 * Scheduled Subscription Identifier
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $scheduledSubscriptionId = null;
 
@@ -4763,7 +4734,6 @@ class KalturaSubscriptionEntitlement extends KalturaEntitlement
 	 * Unified payment identifier
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $unifiedPaymentId = null;
 
@@ -7490,7 +7460,7 @@ class KalturaChannelFilter extends KalturaAssetFilter
 	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
 	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
 	 *             epg_channel_id – the channel identifier of the EPG program.
-	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
+	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
 	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
 	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
 	 *             Logical conjunction: and, or. 
@@ -7518,7 +7488,7 @@ class KalturaRelatedFilter extends KalturaBaseSearchAssetFilter
 	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
 	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
 	 *             epg_channel_id – the channel identifier of the EPG program.
-	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
+	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
 	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
 	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
 	 *             Logical conjunction: and, or. 
@@ -7601,7 +7571,7 @@ class KalturaSearchAssetFilter extends KalturaBaseSearchAssetFilter
 	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
 	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
 	 *             epg_channel_id – the channel identifier of the EPG program.
-	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
+	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
 	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
 	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
 	 *             Logical conjunction: and, or. 
@@ -8897,27 +8867,6 @@ class KalturaMessageTemplate extends KalturaObjectBase
 	 */
 	public $url = null;
 
-	/**
-	 * Mail template name
-	 *
-	 * @var string
-	 */
-	public $mailTemplate = null;
-
-	/**
-	 * Mail subject
-	 *
-	 * @var string
-	 */
-	public $mailSubject = null;
-
-	/**
-	 * Ratio identifier
-	 *
-	 * @var string
-	 */
-	public $ratioId = null;
-
 
 }
 
@@ -9286,20 +9235,6 @@ class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 	 */
 	public $mailSenderName = null;
 
-	/**
-	 * Mail notification adapter identifier
-	 *
-	 * @var int
-	 */
-	public $mailNotificationAdapterId = null;
-
-	/**
-	 * SMS capability is enabled for the account
-	 *
-	 * @var bool
-	 */
-	public $smsEnabled = null;
-
 
 }
 
@@ -9322,20 +9257,6 @@ class KalturaNotificationsSettings extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $pushFollowEnabled = null;
-
-	/**
-	 * Specify if the user wants to receive mail notifications or not
-	 *
-	 * @var bool
-	 */
-	public $mailEnabled = null;
-
-	/**
-	 * Specify if the user wants to receive SMS notifications or not
-	 *
-	 * @var bool
-	 */
-	public $smsEnabled = null;
 
 
 }

@@ -2442,27 +2442,6 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
 	}
 
 	/**
-	 * Delete a user&#39;s tv series follow.
-	 * 
-	 * @param int $assetId Asset identifier
-	 * @param string $token User's token identifier
-	 * @param int $partnerId Partner identifier
-	 */
-	function deleteWithToken($assetId, $token, $partnerId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "token", $token);
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->queueServiceActionCall("followtvseries", "deleteWithToken", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
 	 * List user&#39;s tv series follows.
             Possible status codes:
 	 * 
@@ -3664,25 +3643,6 @@ class KalturaNotificationService extends KalturaServiceBase
 	}
 
 	/**
-	 * Sends SMS notification to user
-	 * 
-	 * @param string $message Message to send
-	 * @return bool
-	 */
-	function sendSms($message)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "message", $message);
-		$this->client->queueServiceActionCall("notification", "sendSms", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
 	 * Registers the device push token to the push service
 	 * 
 	 * @param string $pushToken The device-application pair authentication for push delivery
@@ -3789,29 +3749,6 @@ class KalturaNotificationsSettingsService extends KalturaServiceBase
 		$kparams = array();
 		$this->client->addParam($kparams, "settings", $settings->toParams());
 		$this->client->queueServiceActionCall("notificationssettings", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
-	 * Update the user’s notification settings.
-	 * 
-	 * @param KalturaNotificationsSettings $settings Notifications settings
-	 * @param string $token User's token identifier
-	 * @param int $partnerId Partner identifier
-	 * @return bool
-	 */
-	function updateWithToken(KalturaNotificationsSettings $settings, $token, $partnerId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "settings", $settings->toParams());
-		$this->client->addParam($kparams, "token", $token);
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->queueServiceActionCall("notificationssettings", "updateWithToken", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -5384,29 +5321,6 @@ class KalturaReminderService extends KalturaServiceBase
 	}
 
 	/**
-	 * Delete a reminder. Reminder cannot be delete while being sent.
-	 * 
-	 * @param bigint $id Id of the reminder.
-	 * @param string $type Reminder type.
-	 * @param string $token User's token identifier
-	 * @param int $partnerId Partner identifier
-	 */
-	function deleteWithToken($id, $type, $token, $partnerId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "type", $type);
-		$this->client->addParam($kparams, "token", $token);
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->queueServiceActionCall("reminder", "deleteWithToken", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
 	 * Return a list of reminders with optional filter by KSQL.
 	 * 
 	 * @param KalturaReminderFilter $filter Filter object
@@ -6842,27 +6756,6 @@ class KalturaUserInterestService extends KalturaServiceBase
 	}
 
 	/**
-	 * Delete new user interest for partner user
-	 * 
-	 * @param string $id User interest identifier
-	 * @param string $token User's token identifier
-	 * @param int $partnerId Partner identifier
-	 */
-	function deleteWithToken($id, $token, $partnerId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "token", $token);
-		$this->client->addParam($kparams, "partnerId", $partnerId);
-		$this->client->queueServiceActionCall("userinterest", "deleteWithToken", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
 	 * Returns all Engagement for partner
 	 * 
 	 * @return KalturaUserInterestListResponse
@@ -7602,8 +7495,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-03-21');
-		$this->setApiVersion('4.72.67.43129');
+		$this->setClientTag('php5:18-03-22');
+		$this->setApiVersion('4.7.43.17154');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
