@@ -7501,6 +7501,13 @@ class KalturaChannelFilter extends KalturaAssetFilter
 	 */
 	public $kSql = null;
 
+	/**
+	 * Exclude watched asset.
+	 *
+	 * @var bool
+	 */
+	public $excludeWatched = null;
+
 
 }
 
@@ -7544,6 +7551,13 @@ class KalturaRelatedFilter extends KalturaBaseSearchAssetFilter
 	 * @var string
 	 */
 	public $typeIn = null;
+
+	/**
+	 * Exclude watched asset.
+	 *
+	 * @var bool
+	 */
+	public $excludeWatched = null;
 
 
 }
@@ -7627,6 +7641,13 @@ class KalturaSearchAssetFilter extends KalturaBaseSearchAssetFilter
 	 * @var string
 	 */
 	public $idIn = null;
+
+	/**
+	 * Exclude watched asset.
+	 *
+	 * @var bool
+	 */
+	public $excludeWatched = null;
 
 
 }
