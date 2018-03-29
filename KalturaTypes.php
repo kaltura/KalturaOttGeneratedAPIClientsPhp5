@@ -7374,6 +7374,66 @@ abstract class KalturaBaseSearchAssetFilter extends KalturaAssetFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSearchAssetFilter extends KalturaBaseSearchAssetFilter
+{
+	/**
+	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
+	 *             Possible keys: any Tag or Meta defined in the system and the following reserved keys: start_date, end_date. 
+	 *             epg_id, media_id - for specific asset IDs.
+	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restriced to the user by geo-block rules will return.
+	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
+	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
+	 *             epg_channel_id – the channel identifier of the EPG program.
+	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
+	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
+	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
+	 *             Logical conjunction: and, or. 
+	 *             Search values are limited to 20 characters each.
+	 *             (maximum length of entire filter is 2048 characters)
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+	/**
+	 * Comma separated list of asset types to search within. 
+	 *             Possible values: 0 – EPG linear programs entries; 1 - Recordings; Any media type ID (according to media type IDs defined dynamically in the system).
+	 *             If omitted – all types should be included.
+	 *
+	 * @var string
+	 */
+	public $typeIn = null;
+
+	/**
+	 * Comma separated list of EPG channel ids to search within.
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchAssetListFilter extends KalturaSearchAssetFilter
+{
+	/**
+	 * Exclude watched asset.
+	 *
+	 * @var bool
+	 */
+	public $excludeWatched = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaScheduledRecordingProgramFilter extends KalturaAssetFilter
 {
 	/**
@@ -7597,57 +7657,6 @@ class KalturaRelatedExternalFilter extends KalturaAssetFilter
 	 * @var string
 	 */
 	public $freeText = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSearchAssetFilter extends KalturaBaseSearchAssetFilter
-{
-	/**
-	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
-	 *             Possible keys: any Tag or Meta defined in the system and the following reserved keys: start_date, end_date. 
-	 *             epg_id, media_id - for specific asset IDs.
-	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restriced to the user by geo-block rules will return.
-	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
-	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
-	 *             epg_channel_id – the channel identifier of the EPG program.
-	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
-	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
-	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
-	 *             Logical conjunction: and, or. 
-	 *             Search values are limited to 20 characters each.
-	 *             (maximum length of entire filter is 2048 characters)
-	 *
-	 * @var string
-	 */
-	public $kSql = null;
-
-	/**
-	 * Comma separated list of asset types to search within. 
-	 *             Possible values: 0 – EPG linear programs entries; 1 - Recordings; Any media type ID (according to media type IDs defined dynamically in the system).
-	 *             If omitted – all types should be included.
-	 *
-	 * @var string
-	 */
-	public $typeIn = null;
-
-	/**
-	 * Comma separated list of EPG channel ids to search within.
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-	/**
-	 * Exclude watched asset.
-	 *
-	 * @var bool
-	 */
-	public $excludeWatched = null;
 
 
 }
