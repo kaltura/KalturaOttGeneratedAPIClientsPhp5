@@ -1575,6 +1575,39 @@ class KalturaCouponService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCouponGroupService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Generate a coupon
+	 * 
+	 * @param bigint $id Coupon group identifier
+	 * @param KalturaCouponGenerationOptions $couponGenerationOptions Coupon generation options
+	 * @return string
+	 */
+	function generate($id, KalturaCouponGenerationOptions $couponGenerationOptions)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "couponGenerationOptions", $couponGenerationOptions->toParams());
+		$this->client->queueServiceActionCall("coupongroup", "generate", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "string");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCurrencyService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -7188,6 +7221,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaCouponGroupService
+	 */
+	public $couponGroup = null;
+
+	/**
+	 * 
 	 * @var KalturaCurrencyService
 	 */
 	public $currency = null;
@@ -7603,8 +7642,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-04-07');
-		$this->setApiVersion('4.8.0.43151');
+		$this->setClientTag('php5:18-04-08');
+		$this->setApiVersion('4.8.2.15840');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -7626,6 +7665,7 @@ class KalturaClient extends KalturaClientBase
 		$this->configurations = new KalturaConfigurationsService($this);
 		$this->country = new KalturaCountryService($this);
 		$this->coupon = new KalturaCouponService($this);
+		$this->couponGroup = new KalturaCouponGroupService($this);
 		$this->currency = new KalturaCurrencyService($this);
 		$this->deviceBrand = new KalturaDeviceBrandService($this);
 		$this->deviceFamily = new KalturaDeviceFamilyService($this);

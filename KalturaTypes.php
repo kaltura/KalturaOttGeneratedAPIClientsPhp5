@@ -2261,6 +2261,13 @@ class KalturaCouponsGroup extends KalturaObjectBase
 	 */
 	public $couponGroupType = null;
 
+	/**
+	 * Maximum number of uses per household for each coupon in the group
+	 *
+	 * @var int
+	 */
+	public $maxHouseholdUses = null;
+
 
 }
 
@@ -8626,6 +8633,68 @@ class KalturaCompensation extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCouponGenerationOptions extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPublicCouponGenerationOptions extends KalturaCouponGenerationOptions
+{
+	/**
+	 * Coupon code (name)
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRandomCouponGenerationOptions extends KalturaCouponGenerationOptions
+{
+	/**
+	 * Number of coupons to generate
+	 *
+	 * @var int
+	 */
+	public $numberOfCoupons = null;
+
+	/**
+	 * Indicates whether to use letters in the generated codes (default is true)
+	 *
+	 * @var bool
+	 */
+	public $useLetters = null;
+
+	/**
+	 * Indicates whether to use numbers in the generated codes (default is true)
+	 *
+	 * @var bool
+	 */
+	public $useNumbers = null;
+
+	/**
+	 * Indicates whether to use special characters in the generated codes(default is true)
+	 *
+	 * @var bool
+	 */
+	public $useSpecialCharacters = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaKeyValue extends KalturaObjectBase
 {
 	/**
@@ -9949,6 +10018,22 @@ class KalturaCoupon extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $status = null;
+
+	/**
+	 * Total available coupon uses
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $totalUses = null;
+
+	/**
+	 * Left coupon uses
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $leftUses = null;
 
 
 }
