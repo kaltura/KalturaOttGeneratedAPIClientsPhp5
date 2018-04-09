@@ -1602,6 +1602,25 @@ class KalturaCouponsGroupService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaStringValueArray");
 		return $resultObject;
 	}
+
+	/**
+	 * Returns information about coupons group
+	 * 
+	 * @param bigint $id Coupons group ID
+	 * @return KalturaCouponsGroup
+	 */
+	function get($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("couponsgroup", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCouponsGroup");
+		return $resultObject;
+	}
 }
 
 /**
@@ -7643,7 +7662,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-04-08');
-		$this->setApiVersion('4.8.15.25280');
+		$this->setApiVersion('4.8.16.43150');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
