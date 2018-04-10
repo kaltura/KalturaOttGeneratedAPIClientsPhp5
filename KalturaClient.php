@@ -1623,6 +1623,23 @@ class KalturaCouponsGroupService extends KalturaServiceBase
 	}
 
 	/**
+	 * Returns information about partner coupons groups
+	 * 
+	 * @return KalturaCouponsGroupListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("couponsgroup", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCouponsGroupListResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Update coupons group
 	 * 
 	 * @param int $id Coupons group identifier
@@ -7683,7 +7700,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-04-10');
-		$this->setApiVersion('4.8.24.24615');
+		$this->setApiVersion('4.8.31.29070');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

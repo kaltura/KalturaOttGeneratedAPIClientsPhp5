@@ -2891,6 +2891,22 @@ class KalturaSubscriptionPrice extends KalturaProductPrice
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCouponsGroupListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of coupons groups
+	 *
+	 * @var array of KalturaCouponsGroup
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPriceDetails extends KalturaObjectBase
 {
 	/**
