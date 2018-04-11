@@ -1642,7 +1642,7 @@ class KalturaCouponsGroupService extends KalturaServiceBase
 	/**
 	 * Update coupons group
 	 * 
-	 * @param int $id Coupons group identifier
+	 * @param bigint $id Coupons group identifier
 	 * @param KalturaCouponsGroup $couponsGroup Coupons group
 	 * @return KalturaCouponsGroup
 	 */
@@ -7700,7 +7700,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-04-11');
-		$this->setApiVersion('4.8.37.21138');
+		$this->setApiVersion('4.8.38.22091');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
