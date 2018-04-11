@@ -1583,6 +1583,25 @@ class KalturaCouponsGroupService extends KalturaServiceBase
 	}
 
 	/**
+	 * Delete a coupons group
+	 * 
+	 * @param bigint $id Coupons group identifier
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("couponsgroup", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Generate a coupon
 	 * 
 	 * @param bigint $id Coupon group identifier
@@ -7700,7 +7719,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-04-11');
-		$this->setApiVersion('4.8.38.24115');
+		$this->setApiVersion('4.8.39.33422');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
