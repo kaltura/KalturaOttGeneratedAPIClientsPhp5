@@ -1421,6 +1421,7 @@ class KalturaUserInterest extends KalturaObjectBase
 	 * Identifier
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $id = null;
 
