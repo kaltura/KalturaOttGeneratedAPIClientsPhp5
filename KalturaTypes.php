@@ -2262,6 +2262,13 @@ class KalturaCouponsGroup extends KalturaObjectBase
 	 */
 	public $maxHouseholdUses = null;
 
+	/**
+	 * Discount code
+	 *
+	 * @var int
+	 */
+	public $discountCode = null;
+
 
 }
 
