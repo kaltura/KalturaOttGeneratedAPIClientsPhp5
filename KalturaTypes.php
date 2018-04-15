@@ -2221,13 +2221,6 @@ class KalturaCouponsGroup extends KalturaObjectBase
 	public $name = null;
 
 	/**
-	 * A list of the descriptions of the coupon group on different languages (language code and translation)
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $descriptions;
-
-	/**
 	 * The first date the coupons in this coupons group are valid
 	 *
 	 * @var int
