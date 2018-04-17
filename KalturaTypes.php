@@ -8253,6 +8253,22 @@ class KalturaAppToken extends KalturaObjectBase
 	 */
 	public $sessionUserId = null;
 
+	/**
+	 * Create date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
 
 }
 
