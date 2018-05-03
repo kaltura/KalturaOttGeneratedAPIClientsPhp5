@@ -559,6 +559,94 @@ class KalturaAssetHistoryService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetRuleService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add asset rule
+	 * 
+	 * @param KalturaAssetRule $assetRule Asset rule
+	 * @return KalturaAssetRule
+	 */
+	function add(KalturaAssetRule $assetRule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetRule", $assetRule->toParams());
+		$this->client->queueServiceActionCall("assetrule", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetRule");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete asset rule
+	 * 
+	 * @param bigint $id Asset rule ID
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("assetrule", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Get the list of asset rules for the partner
+	 * 
+	 * @return KalturaAssetRuleListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("assetrule", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetRuleListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update asset rule
+	 * 
+	 * @param bigint $id Asset rule ID to update
+	 * @param KalturaAssetRule $assetRule Asset rule
+	 * @return KalturaAssetRule
+	 */
+	function update($id, KalturaAssetRule $assetRule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "assetRule", $assetRule->toParams());
+		$this->client->queueServiceActionCall("assetrule", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetRule");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetStatisticsService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -7232,6 +7320,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaAssetRuleService
+	 */
+	public $assetRule = null;
+
+	/**
+	 * 
 	 * @var KalturaAssetStatisticsService
 	 */
 	public $assetStatistics = null;
@@ -7738,7 +7832,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-05-03');
-		$this->setApiVersion('4.81.0.16541');
+		$this->setApiVersion('4.81.19.17467');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -7746,6 +7840,7 @@ class KalturaClient extends KalturaClientBase
 		$this->asset = new KalturaAssetService($this);
 		$this->assetFile = new KalturaAssetFileService($this);
 		$this->assetHistory = new KalturaAssetHistoryService($this);
+		$this->assetRule = new KalturaAssetRuleService($this);
 		$this->assetStatistics = new KalturaAssetStatisticsService($this);
 		$this->bookmark = new KalturaBookmarkService($this);
 		$this->cdnAdapterProfile = new KalturaCdnAdapterProfileService($this);

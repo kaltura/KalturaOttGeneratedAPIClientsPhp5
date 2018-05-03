@@ -5459,6 +5459,195 @@ class KalturaCurrencyListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaCondition extends KalturaObjectBase
+{
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRuleAction extends KalturaObjectBase
+{
+	/**
+	 * The type of the action
+	 *
+	 * @var KalturaRuleActionType
+	 */
+	public $type = null;
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetRule extends KalturaObjectBase
+{
+	/**
+	 * ID
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+	/**
+	 * List of conditions for the rule
+	 *
+	 * @var array of KalturaCondition
+	 */
+	public $conditions;
+
+	/**
+	 * List of actions for the rule
+	 *
+	 * @var array of KalturaRuleAction
+	 */
+	public $actions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetRuleListResponse extends KalturaListResponse
+{
+	/**
+	 * Asset rules
+	 *
+	 * @var array of KalturaAssetRule
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetCondition extends KalturaCondition
+{
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCountryCondition extends KalturaCondition
+{
+	/**
+	 * Indicates whether to apply not on the other properties in the condition
+	 *
+	 * @var bool
+	 */
+	public $not = null;
+
+	/**
+	 * Comma separated countries IDs list
+	 *
+	 * @var string
+	 */
+	public $countries = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAccessControlBlockAction extends KalturaRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaTimeOffsetRuleAction extends KalturaRuleAction
+{
+	/**
+	 * Offset in seconds
+	 *
+	 * @var int
+	 */
+	public $offset = null;
+
+	/**
+	 * Indicates whether to add time zone offset to the time
+	 *
+	 * @var bool
+	 */
+	public $timeZone = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEndDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLanguage extends KalturaObjectBase
 {
 	/**
@@ -8380,22 +8569,6 @@ class KalturaPlaybackContextOptions extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaRuleAction extends KalturaObjectBase
-{
-	/**
-	 * The type of the action
-	 *
-	 * @var KalturaRuleActionType
-	 */
-	public $type = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAccessControlMessage extends KalturaObjectBase
 {
 	/**
@@ -8442,15 +8615,6 @@ class KalturaPlaybackContext extends KalturaObjectBase
 	 */
 	public $messages;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAccessControlBlockAction extends KalturaRuleAction
-{
 
 }
 
