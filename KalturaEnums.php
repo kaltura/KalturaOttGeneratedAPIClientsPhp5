@@ -991,6 +991,7 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const BLOCK = "BLOCK";
 	const START_DATE_OFFSET = "START_DATE_OFFSET";
 	const END_DATE_OFFSET = "END_DATE_OFFSET";
+	const ASSET_USER_BLOCK = "ASSET_USER_BLOCK";
 }
 
 /**

@@ -678,6 +678,37 @@ class KalturaAssetStatisticsService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetUserRuleService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add asset user rule
+	 * 
+	 * @param KalturaAssetUserRule $assetUserRule Asset user rule
+	 * @return KalturaAssetUserRule
+	 */
+	function add(KalturaAssetUserRule $assetUserRule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetUserRule", $assetUserRule->toParams());
+		$this->client->queueServiceActionCall("assetuserrule", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetUserRule");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBookmarkService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -7332,6 +7363,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaAssetUserRuleService
+	 */
+	public $assetUserRule = null;
+
+	/**
+	 * 
 	 * @var KalturaBookmarkService
 	 */
 	public $bookmark = null;
@@ -7832,7 +7869,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-05-10');
-		$this->setApiVersion('4.81.44.18995');
+		$this->setApiVersion('4.81.46.21597');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -7842,6 +7879,7 @@ class KalturaClient extends KalturaClientBase
 		$this->assetHistory = new KalturaAssetHistoryService($this);
 		$this->assetRule = new KalturaAssetRuleService($this);
 		$this->assetStatistics = new KalturaAssetStatisticsService($this);
+		$this->assetUserRule = new KalturaAssetUserRuleService($this);
 		$this->bookmark = new KalturaBookmarkService($this);
 		$this->cdnAdapterProfile = new KalturaCdnAdapterProfileService($this);
 		$this->cdnPartnerSettings = new KalturaCdnPartnerSettingsService($this);
