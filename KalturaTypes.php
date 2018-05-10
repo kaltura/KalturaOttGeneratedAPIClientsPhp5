@@ -5595,7 +5595,7 @@ class KalturaCountryCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetUserBlockRuleAction extends KalturaAssetUserRuleAction
+class KalturaAssetUserRuleBlockAction extends KalturaAssetUserRuleAction
 {
 
 }
