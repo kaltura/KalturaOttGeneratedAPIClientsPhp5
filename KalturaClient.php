@@ -703,6 +703,63 @@ class KalturaAssetUserRuleService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaAssetUserRule");
 		return $resultObject;
 	}
+
+	/**
+	 * Delete asset user rule
+	 * 
+	 * @param bigint $id Asset user rule ID
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("assetuserrule", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Get the list of asset user rules for the partner
+	 * 
+	 * @return KalturaAssetUserRuleListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("assetuserrule", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetUserRuleListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update asset user rule
+	 * 
+	 * @param bigint $id Asset user rule ID to update
+	 * @param KalturaAssetUserRule $assetUserRule Asset user rule
+	 * @return KalturaAssetUserRule
+	 */
+	function update($id, KalturaAssetUserRule $assetUserRule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "assetUserRule", $assetUserRule->toParams());
+		$this->client->queueServiceActionCall("assetuserrule", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetUserRule");
+		return $resultObject;
+	}
 }
 
 /**
@@ -7869,7 +7926,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-05-14');
-		$this->setApiVersion('4.81.51.24788');
+		$this->setApiVersion('4.81.52.42018');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

@@ -3973,6 +3973,31 @@ class KalturaTopicListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaT extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenericListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaT
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaIntegerValueListResponse extends KalturaListResponse
 {
 	/**
@@ -5527,7 +5552,7 @@ class KalturaAssetUserRule extends KalturaAssetRuleBase
 class KalturaAssetUserRuleListResponse extends KalturaListResponse
 {
 	/**
-	 * Asset rules
+	 * Asset user rules
 	 *
 	 * @var array of KalturaAssetUserRule
 	 */
