@@ -8249,6 +8249,22 @@ class KalturaAssetHistoryFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetUserRuleFilter extends KalturaFilter
+{
+	/**
+	 * Indicates if to get the asset user rule list for the associated user or for the entire group
+	 *
+	 * @var bool
+	 */
+	public $associatedUserIdEqualCurrent = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCurrencyFilter extends KalturaFilter
 {
 	/**

@@ -175,6 +175,15 @@ class KalturaAssetType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetUserRuleOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBillingAction extends KalturaEnumBase
 {
 	const UNKNOWN = "unknown";
