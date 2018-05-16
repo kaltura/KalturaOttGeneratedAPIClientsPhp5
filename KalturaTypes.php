@@ -1916,6 +1916,13 @@ class KalturaCountry extends KalturaObjectBase
 	 */
 	public $vatPercent = null;
 
+	/**
+	 * Time zone ID
+	 *
+	 * @var string
+	 */
+	public $timeZoneId = null;
+
 
 }
 
