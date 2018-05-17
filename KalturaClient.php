@@ -705,15 +705,15 @@ class KalturaAssetUserRuleService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add Asset User Rule To User
+	 * Attach AssetUserRule To User
 	 * 
-	 * @param bigint $ruleId Asset user rule id to add
+	 * @param bigint $ruleId AssetUserRule id to add
 	 */
-	function addRuleToUser($ruleId)
+	function attachUser ($ruleId)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "ruleId", $ruleId);
-		$this->client->queueServiceActionCall("assetuserrule", "addRuleToUser", $kparams);
+		$this->client->queueServiceActionCall("assetuserrule", "attachUser ", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -739,6 +739,23 @@ class KalturaAssetUserRuleService extends KalturaServiceBase
 	}
 
 	/**
+	 * Detach AssetUserRule from user
+	 * 
+	 * @param bigint $ruleId AssetUserRule id to remove
+	 */
+	function detachUser($ruleId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "ruleId", $ruleId);
+		$this->client->queueServiceActionCall("assetuserrule", "detachUser", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
 	 * Get the list of asset user rules for the partner
 	 * 
 	 * @param KalturaAssetUserRuleFilter $filter AssetUserRule Filter
@@ -756,23 +773,6 @@ class KalturaAssetUserRuleService extends KalturaServiceBase
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaAssetUserRuleListResponse");
 		return $resultObject;
-	}
-
-	/**
-	 * Remove asset user rule from user
-	 * 
-	 * @param bigint $ruleId Asset user rule id to remove
-	 */
-	function removeRuleToUser($ruleId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "ruleId", $ruleId);
-		$this->client->queueServiceActionCall("assetuserrule", "removeRuleToUser", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
 	}
 
 	/**
@@ -7961,7 +7961,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-05-17');
-		$this->setApiVersion('4.81.61.19404');
+		$this->setApiVersion('4.81.64.25405');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

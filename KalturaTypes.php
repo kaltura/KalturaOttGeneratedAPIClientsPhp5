@@ -8259,11 +8259,11 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 class KalturaAssetUserRuleFilter extends KalturaFilter
 {
 	/**
-	 * Indicates if to get the asset user rule list for the associated user or for the entire group
+	 * Indicates if to get the asset user rule list for the attached user or for the entire group
 	 *
 	 * @var bool
 	 */
-	public $associatedUserIdEqualCurrent = null;
+	public $attachedUserIdEqualCurrent = null;
 
 
 }
