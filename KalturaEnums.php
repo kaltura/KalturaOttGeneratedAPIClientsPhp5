@@ -1025,6 +1025,7 @@ class KalturaRuleType extends KalturaEnumBase
 	const GEO = "geo";
 	const USER_TYPE = "user_type";
 	const DEVICE = "device";
+	const ASSETUSER = "assetUser";
 }
 
 /**
