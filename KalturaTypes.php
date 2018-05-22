@@ -5507,6 +5507,7 @@ abstract class KalturaRuleAction extends KalturaObjectBase
 	 * The type of the action
 	 *
 	 * @var KalturaRuleActionType
+	 * @readonly
 	 */
 	public $type = null;
 
