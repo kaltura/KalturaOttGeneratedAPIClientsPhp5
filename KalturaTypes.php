@@ -1514,6 +1514,22 @@ class KalturaMediaImage extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetFile extends KalturaObjectBase
+{
+	/**
+	 * URL of the media file to be played
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStringValueArray extends KalturaObjectBase
 {
 	/**
@@ -1530,7 +1546,7 @@ class KalturaStringValueArray extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaMediaFile extends KalturaObjectBase
+class KalturaMediaFile extends KalturaAssetFile
 {
 	/**
 	 * Unique identifier for the asset
@@ -1553,13 +1569,6 @@ class KalturaMediaFile extends KalturaObjectBase
 	 * @var string
 	 */
 	public $type = null;
-
-	/**
-	 * URL of the media file to be played
-	 *
-	 * @var string
-	 */
-	public $url = null;
 
 	/**
 	 * Duration of the media file

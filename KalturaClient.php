@@ -483,7 +483,7 @@ class KalturaAssetFileService extends KalturaServiceBase
 	 * @param bigint $assetFileId Asset file identifier
 	 * @param string $contextType Playback context type
 	 * @param string $ks Kaltura session for the user, not mandatory for anonymous user
-	 * @return string
+	 * @return KalturaAssetFile
 	 */
 	function playManifest($partnerId, $assetId, $assetType, $assetFileId, $contextType, $ks = null)
 	{
@@ -499,7 +499,7 @@ class KalturaAssetFileService extends KalturaServiceBase
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "string");
+		$this->client->validateObjectType($resultObject, "KalturaAssetFile");
 		return $resultObject;
 	}
 }
@@ -7963,7 +7963,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-05-24');
-		$this->setApiVersion('4.81.77.17218');
+		$this->setApiVersion('4.81.78.22156');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
