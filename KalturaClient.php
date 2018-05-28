@@ -711,11 +711,11 @@ class KalturaAssetUserRuleService extends KalturaServiceBase
 	 * 
 	 * @param bigint $ruleId AssetUserRule id to add
 	 */
-	function attachUser ($ruleId)
+	function attachUser($ruleId)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "ruleId", $ruleId);
-		$this->client->queueServiceActionCall("assetuserrule", "attachUser ", $kparams);
+		$this->client->queueServiceActionCall("assetuserrule", "attachUser", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -7962,8 +7962,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-05-27');
-		$this->setApiVersion('4.81.83.43131');
+		$this->setClientTag('php5:18-05-28');
+		$this->setApiVersion('4.81.84.13672');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
