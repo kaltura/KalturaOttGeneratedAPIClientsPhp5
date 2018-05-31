@@ -2279,11 +2279,11 @@ class KalturaCouponsGroup extends KalturaObjectBase
 	public $maxHouseholdUses = null;
 
 	/**
-	 * Discount code
+	 * Discount ID
 	 *
 	 * @var int
 	 */
-	public $discountCode = null;
+	public $discountId = null;
 
 
 }
@@ -2585,6 +2585,121 @@ class KalturaPricePlan extends KalturaUsageModule
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPrice extends KalturaObjectBase
+{
+	/**
+	 * Price
+	 *
+	 * @var float
+	 */
+	public $amount = null;
+
+	/**
+	 * Currency
+	 *
+	 * @var string
+	 */
+	public $currency = null;
+
+	/**
+	 * Currency Sign
+	 *
+	 * @var string
+	 */
+	public $currencySign = null;
+
+	/**
+	 * Country ID
+	 *
+	 * @var int
+	 */
+	public $countryId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscount extends KalturaPrice
+{
+	/**
+	 * The discount percentage
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $percentage = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscountDetails extends KalturaObjectBase
+{
+	/**
+	 * The discount ID
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * The price code name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Multi currency discounts for all countries and currencies
+	 *
+	 * @var array of KalturaDiscount
+	 */
+	public $multiCurrencyDiscount;
+
+	/**
+	 * Start date represented as epoch
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * End date represented as epoch
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscountDetailsListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of price details
+	 *
+	 * @var array of KalturaDiscountDetails
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaSubscriptionSet extends KalturaObjectBase
 {
 	/**
@@ -2658,43 +2773,6 @@ class KalturaSubscriptionDependencySet extends KalturaSubscriptionSet
  */
 class KalturaSubscriptionSwitchSet extends KalturaSubscriptionSet
 {
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPrice extends KalturaObjectBase
-{
-	/**
-	 * Price
-	 *
-	 * @var float
-	 */
-	public $amount = null;
-
-	/**
-	 * Currency
-	 *
-	 * @var string
-	 */
-	public $currency = null;
-
-	/**
-	 * Currency Sign
-	 *
-	 * @var string
-	 */
-	public $currencySign = null;
-
-	/**
-	 * Country ID
-	 *
-	 * @var int
-	 */
-	public $countryId = null;
-
 
 }
 
@@ -7348,6 +7426,22 @@ class KalturaCollectionFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $mediaFileIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscountDetailsFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated discount codes
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
 
 
 }

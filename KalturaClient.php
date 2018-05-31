@@ -2005,6 +2005,38 @@ class KalturaDeviceFamilyService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDiscountDetailsService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Returns the list of available discounts details, can be filtered by discount codes
+	 * 
+	 * @param KalturaDiscountDetailsFilter $filter Filter
+	 * @return KalturaDiscountDetailsListResponse
+	 */
+	function listAction(KalturaDiscountDetailsFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("discountdetails", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDiscountDetailsListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEmailService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -7565,6 +7597,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaDiscountDetailsService
+	 */
+	public $discountDetails = null;
+
+	/**
+	 * 
 	 * @var KalturaEmailService
 	 */
 	public $email = null;
@@ -7963,7 +8001,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-05-31');
-		$this->setApiVersion('4.82.0.15158');
+		$this->setApiVersion('4.82.5.22442');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -7991,6 +8029,7 @@ class KalturaClient extends KalturaClientBase
 		$this->currency = new KalturaCurrencyService($this);
 		$this->deviceBrand = new KalturaDeviceBrandService($this);
 		$this->deviceFamily = new KalturaDeviceFamilyService($this);
+		$this->discountDetails = new KalturaDiscountDetailsService($this);
 		$this->email = new KalturaEmailService($this);
 		$this->engagementAdapter = new KalturaEngagementAdapterService($this);
 		$this->engagement = new KalturaEngagementService($this);
