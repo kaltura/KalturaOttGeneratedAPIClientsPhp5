@@ -791,6 +791,16 @@ class KalturaPersonalFeedOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPersonalListOrderBy extends KalturaEnumBase
+{
+	const START_DATE_DESC = "START_DATE_DESC";
+	const START_DATE_ASC = "START_DATE_ASC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPinType extends KalturaEnumBase
 {
 	const PURCHASE = "purchase";

@@ -5129,6 +5129,78 @@ class KalturaPersonalFeedService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPersonalListService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add a user&#39;s personal list item to follow.
+	 * 
+	 * @param KalturaPersonalList $personalList Follow personal list item request parameters
+	 * @return KalturaPersonalList
+	 */
+	function add(KalturaPersonalList $personalList)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "personalList", $personalList->toParams());
+		$this->client->queueServiceActionCall("personallist", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPersonalList");
+		return $resultObject;
+	}
+
+	/**
+	 * Remove followed item from user&#39;s personal list
+	 * 
+	 * @param bigint $personalListId PersonalListId identifier
+	 */
+	function delete($personalListId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "personalListId", $personalListId);
+		$this->client->queueServiceActionCall("personallist", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * List user&#39;s tv personal item to follow.
+            Possible status codes:
+	 * 
+	 * @param KalturaPersonalListFilter $filter Personal list filter
+	 * @param KalturaFilterPager $pager Pager
+	 * @return KalturaPersonalListListResponse
+	 */
+	function listAction(KalturaPersonalListFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("personallist", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPersonalListListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPinService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -7801,6 +7873,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaPersonalListService
+	 */
+	public $personalList = null;
+
+	/**
+	 * 
 	 * @var KalturaPinService
 	 */
 	public $pin = null;
@@ -8001,7 +8079,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-06-04');
-		$this->setApiVersion('4.82.8.22548');
+		$this->setApiVersion('4.82.23.25466');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -8063,6 +8141,7 @@ class KalturaClient extends KalturaClientBase
 		$this->paymentGatewayProfile = new KalturaPaymentGatewayProfileService($this);
 		$this->paymentMethodProfile = new KalturaPaymentMethodProfileService($this);
 		$this->personalFeed = new KalturaPersonalFeedService($this);
+		$this->personalList = new KalturaPersonalListService($this);
 		$this->pin = new KalturaPinService($this);
 		$this->ppv = new KalturaPpvService($this);
 		$this->priceDetails = new KalturaPriceDetailsService($this);
