@@ -7894,7 +7894,7 @@ abstract class KalturaBaseSearchAssetFilter extends KalturaAssetFilter
 	 *
 	 * @var string
 	 */
-	public $ksql = null;
+	public $kSql = null;
 
 	/**
 	 * groupBy
