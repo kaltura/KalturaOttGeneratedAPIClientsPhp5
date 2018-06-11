@@ -609,11 +609,14 @@ class KalturaAssetRuleService extends KalturaServiceBase
 	/**
 	 * Get the list of asset rules for the partner
 	 * 
+	 * @param KalturaAssetRuleFilter $filter Filter by condition name
 	 * @return KalturaAssetRuleListResponse
 	 */
-	function listAction()
+	function listAction(KalturaAssetRuleFilter $filter = null)
 	{
 		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("assetrule", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -8082,7 +8085,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-06-11');
-		$this->setApiVersion('4.82.44.21618');
+		$this->setApiVersion('4.82.49.42002');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

@@ -5634,6 +5634,14 @@ abstract class KalturaAssetRuleBase extends KalturaObjectBase
 abstract class KalturaCondition extends KalturaObjectBase
 {
 	/**
+	 * The type of the condition
+	 *
+	 * @var KalturaRuleConditionType
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
 	 * Description
 	 *
 	 * @var string
@@ -5782,6 +5790,29 @@ class KalturaCountryCondition extends KalturaCondition
 	 * @var string
 	 */
 	public $countries = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaConcurrencyCondition extends KalturaAssetCondition
+{
+	/**
+	 * Concurrency limitation
+	 *
+	 * @var int
+	 */
+	public $limit = null;
+
+	/**
+	 * Concurrency limitation type
+	 *
+	 * @var KalturaConcurrencyLimitationType
+	 */
+	public $concurrencyLimitationType = null;
 
 
 }
@@ -8447,6 +8478,22 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $daysLessThanOrEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetRuleFilter extends KalturaFilter
+{
+	/**
+	 * Indicates if to get the asset user rule list for the attached user or for the entire group
+	 *
+	 * @var KalturaRuleConditionType
+	 */
+	public $conditionsContainType = null;
 
 
 }
