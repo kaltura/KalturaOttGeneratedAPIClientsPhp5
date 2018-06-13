@@ -8489,11 +8489,18 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 class KalturaAssetRuleFilter extends KalturaFilter
 {
 	/**
-	 * Indicates if to get the asset user rule list for the attached user or for the entire group
+	 * Indicates which asset rule list to return by it KalturaRuleConditionType
 	 *
 	 * @var KalturaRuleConditionType
 	 */
 	public $conditionsContainType = null;
+
+	/**
+	 * Indicates if to return an asset rule list that related to specific asset
+	 *
+	 * @var KalturaSlimAsset
+	 */
+	public $assetApplied;
 
 
 }
