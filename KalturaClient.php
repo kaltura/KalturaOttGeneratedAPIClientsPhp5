@@ -483,7 +483,6 @@ class KalturaAssetFileService extends KalturaServiceBase
 	 * @param bigint $assetFileId Asset file identifier
 	 * @param string $contextType Playback context type
 	 * @param string $ks Kaltura session for the user, not mandatory for anonymous user
-	 * @return KalturaAssetFile
 	 */
 	function playManifest($partnerId, $assetId, $assetType, $assetFileId, $contextType, $ks = null)
 	{
@@ -499,8 +498,7 @@ class KalturaAssetFileService extends KalturaServiceBase
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetFile");
-		return $resultObject;
+		$this->client->validateObjectType($resultObject, "null");
 	}
 }
 
@@ -561,97 +559,6 @@ class KalturaAssetHistoryService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetRuleService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Add asset rule
-	 * 
-	 * @param KalturaAssetRule $assetRule Asset rule
-	 * @return KalturaAssetRule
-	 */
-	function add(KalturaAssetRule $assetRule)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetRule", $assetRule->toParams());
-		$this->client->queueServiceActionCall("assetrule", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetRule");
-		return $resultObject;
-	}
-
-	/**
-	 * Delete asset rule
-	 * 
-	 * @param bigint $id Asset rule ID
-	 * @return bool
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("assetrule", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
-	 * Get the list of asset rules for the partner
-	 * 
-	 * @param KalturaAssetRuleFilter $filter Filter by condition name
-	 * @return KalturaAssetRuleListResponse
-	 */
-	function listAction(KalturaAssetRuleFilter $filter = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("assetrule", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetRuleListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Update asset rule
-	 * 
-	 * @param bigint $id Asset rule ID to update
-	 * @param KalturaAssetRule $assetRule Asset rule
-	 * @return KalturaAssetRule
-	 */
-	function update($id, KalturaAssetRule $assetRule)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "assetRule", $assetRule->toParams());
-		$this->client->queueServiceActionCall("assetrule", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetRule");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetStatisticsService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -675,129 +582,6 @@ class KalturaAssetStatisticsService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaAssetStatisticsListResponse");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetUserRuleService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Add asset user rule
-	 * 
-	 * @param KalturaAssetUserRule $assetUserRule Asset user rule
-	 * @return KalturaAssetUserRule
-	 */
-	function add(KalturaAssetUserRule $assetUserRule)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetUserRule", $assetUserRule->toParams());
-		$this->client->queueServiceActionCall("assetuserrule", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetUserRule");
-		return $resultObject;
-	}
-
-	/**
-	 * Attach AssetUserRule To User
-	 * 
-	 * @param bigint $ruleId AssetUserRule id to add
-	 */
-	function attachUser($ruleId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "ruleId", $ruleId);
-		$this->client->queueServiceActionCall("assetuserrule", "attachUser", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * Delete asset user rule
-	 * 
-	 * @param bigint $id Asset user rule ID
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("assetuserrule", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * Detach AssetUserRule from user
-	 * 
-	 * @param bigint $ruleId AssetUserRule id to remove
-	 */
-	function detachUser($ruleId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "ruleId", $ruleId);
-		$this->client->queueServiceActionCall("assetuserrule", "detachUser", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * Get the list of asset user rules for the partner
-	 * 
-	 * @param KalturaAssetUserRuleFilter $filter AssetUserRule Filter
-	 * @return KalturaAssetUserRuleListResponse
-	 */
-	function listAction(KalturaAssetUserRuleFilter $filter = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("assetuserrule", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetUserRuleListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Update asset user rule
-	 * 
-	 * @param bigint $id Asset user rule ID to update
-	 * @param KalturaAssetUserRule $assetUserRule Asset user rule
-	 * @return KalturaAssetUserRule
-	 */
-	function update($id, KalturaAssetUserRule $assetUserRule)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "assetUserRule", $assetUserRule->toParams());
-		$this->client->queueServiceActionCall("assetuserrule", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetUserRule");
 		return $resultObject;
 	}
 }
@@ -2008,38 +1792,6 @@ class KalturaDeviceFamilyService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaDiscountDetailsService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Returns the list of available discounts details, can be filtered by discount codes
-	 * 
-	 * @param KalturaDiscountDetailsFilter $filter Filter
-	 * @return KalturaDiscountDetailsListResponse
-	 */
-	function listAction(KalturaDiscountDetailsFilter $filter = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("discountdetails", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDiscountDetailsListResponse");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaEmailService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -2778,8 +2530,7 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
 	}
 
 	/**
-	 * (Deprecated - use personalList.add)
-            Add a user&#39;s tv series follow.
+	 * Add a user&#39;s tv series follow.
             Possible status codes: UserAlreadyFollowing = 8013, NotFound = 500007, InvalidAssetId = 4024
 	 * 
 	 * @param KalturaFollowTvSeries $followTvSeries Follow series request parameters
@@ -2799,8 +2550,7 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
 	}
 
 	/**
-	 * (Deprecated - use personalList.delete)
-            Delete a user&#39;s tv series follow.
+	 * Delete a user&#39;s tv series follow.
             Possible status codes: UserNotFollowing = 8012, NotFound = 500007, InvalidAssetId = 4024, AnnouncementNotFound = 8006
 	 * 
 	 * @param int $assetId Asset identifier
@@ -2841,8 +2591,7 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
 	}
 
 	/**
-	 * (Deprecated - use personalList.list)
-            List user&#39;s tv series follows.
+	 * List user&#39;s tv series follows.
             Possible status codes:
 	 * 
 	 * @param KalturaFollowTvSeriesFilter $filter Follow TV series filter
@@ -5127,78 +4876,6 @@ class KalturaPersonalFeedService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaPersonalFeedListResponse");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPersonalListService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Add a user&#39;s personal list item to follow.
-	 * 
-	 * @param KalturaPersonalList $personalList Follow personal list item request parameters
-	 * @return KalturaPersonalList
-	 */
-	function add(KalturaPersonalList $personalList)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "personalList", $personalList->toParams());
-		$this->client->queueServiceActionCall("personallist", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPersonalList");
-		return $resultObject;
-	}
-
-	/**
-	 * Remove followed item from user&#39;s personal list
-	 * 
-	 * @param bigint $personalListId PersonalListId identifier
-	 */
-	function delete($personalListId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "personalListId", $personalListId);
-		$this->client->queueServiceActionCall("personallist", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * List user&#39;s tv personal item to follow.
-            Possible status codes:
-	 * 
-	 * @param KalturaPersonalListFilter $filter Personal list filter
-	 * @param KalturaFilterPager $pager Pager
-	 * @return KalturaPersonalListListResponse
-	 */
-	function listAction(KalturaPersonalListFilter $filter = null, KalturaFilterPager $pager = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("personallist", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPersonalListListResponse");
 		return $resultObject;
 	}
 }
@@ -7555,21 +7232,9 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaAssetRuleService
-	 */
-	public $assetRule = null;
-
-	/**
-	 * 
 	 * @var KalturaAssetStatisticsService
 	 */
 	public $assetStatistics = null;
-
-	/**
-	 * 
-	 * @var KalturaAssetUserRuleService
-	 */
-	public $assetUserRule = null;
 
 	/**
 	 * 
@@ -7672,12 +7337,6 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaDeviceFamilyService
 	 */
 	public $deviceFamily = null;
-
-	/**
-	 * 
-	 * @var KalturaDiscountDetailsService
-	 */
-	public $discountDetails = null;
 
 	/**
 	 * 
@@ -7876,12 +7535,6 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaPersonalFeedService
 	 */
 	public $personalFeed = null;
-
-	/**
-	 * 
-	 * @var KalturaPersonalListService
-	 */
-	public $personalList = null;
 
 	/**
 	 * 
@@ -8084,8 +7737,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-06-13');
-		$this->setApiVersion('4.82.54.43127');
+		$this->setClientTag('php5:18-06-14');
+		$this->setApiVersion('4.81.6.13022');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -8093,9 +7746,7 @@ class KalturaClient extends KalturaClientBase
 		$this->asset = new KalturaAssetService($this);
 		$this->assetFile = new KalturaAssetFileService($this);
 		$this->assetHistory = new KalturaAssetHistoryService($this);
-		$this->assetRule = new KalturaAssetRuleService($this);
 		$this->assetStatistics = new KalturaAssetStatisticsService($this);
-		$this->assetUserRule = new KalturaAssetUserRuleService($this);
 		$this->bookmark = new KalturaBookmarkService($this);
 		$this->cdnAdapterProfile = new KalturaCdnAdapterProfileService($this);
 		$this->cdnPartnerSettings = new KalturaCdnPartnerSettingsService($this);
@@ -8113,7 +7764,6 @@ class KalturaClient extends KalturaClientBase
 		$this->currency = new KalturaCurrencyService($this);
 		$this->deviceBrand = new KalturaDeviceBrandService($this);
 		$this->deviceFamily = new KalturaDeviceFamilyService($this);
-		$this->discountDetails = new KalturaDiscountDetailsService($this);
 		$this->email = new KalturaEmailService($this);
 		$this->engagementAdapter = new KalturaEngagementAdapterService($this);
 		$this->engagement = new KalturaEngagementService($this);
@@ -8147,7 +7797,6 @@ class KalturaClient extends KalturaClientBase
 		$this->paymentGatewayProfile = new KalturaPaymentGatewayProfileService($this);
 		$this->paymentMethodProfile = new KalturaPaymentMethodProfileService($this);
 		$this->personalFeed = new KalturaPersonalFeedService($this);
-		$this->personalList = new KalturaPersonalListService($this);
 		$this->pin = new KalturaPinService($this);
 		$this->ppv = new KalturaPpvService($this);
 		$this->priceDetails = new KalturaPriceDetailsService($this);

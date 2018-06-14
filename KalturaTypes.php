@@ -1514,22 +1514,6 @@ class KalturaMediaImage extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetFile extends KalturaObjectBase
-{
-	/**
-	 * URL of the media file to be played
-	 *
-	 * @var string
-	 */
-	public $url = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaStringValueArray extends KalturaObjectBase
 {
 	/**
@@ -1546,7 +1530,7 @@ class KalturaStringValueArray extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaMediaFile extends KalturaAssetFile
+class KalturaMediaFile extends KalturaObjectBase
 {
 	/**
 	 * Unique identifier for the asset
@@ -1569,6 +1553,13 @@ class KalturaMediaFile extends KalturaAssetFile
 	 * @var string
 	 */
 	public $type = null;
+
+	/**
+	 * URL of the media file to be played
+	 *
+	 * @var string
+	 */
+	public $url = null;
 
 	/**
 	 * Duration of the media file
@@ -1925,13 +1916,6 @@ class KalturaCountry extends KalturaObjectBase
 	 */
 	public $vatPercent = null;
 
-	/**
-	 * Time zone ID
-	 *
-	 * @var string
-	 */
-	public $timeZoneId = null;
-
 
 }
 
@@ -2279,11 +2263,11 @@ class KalturaCouponsGroup extends KalturaObjectBase
 	public $maxHouseholdUses = null;
 
 	/**
-	 * Discount ID
+	 * Discount code
 	 *
 	 * @var int
 	 */
-	public $discountId = null;
+	public $discountCode = null;
 
 
 }
@@ -2585,121 +2569,6 @@ class KalturaPricePlan extends KalturaUsageModule
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPrice extends KalturaObjectBase
-{
-	/**
-	 * Price
-	 *
-	 * @var float
-	 */
-	public $amount = null;
-
-	/**
-	 * Currency
-	 *
-	 * @var string
-	 */
-	public $currency = null;
-
-	/**
-	 * Currency Sign
-	 *
-	 * @var string
-	 */
-	public $currencySign = null;
-
-	/**
-	 * Country ID
-	 *
-	 * @var int
-	 */
-	public $countryId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscount extends KalturaPrice
-{
-	/**
-	 * The discount percentage
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $percentage = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscountDetails extends KalturaObjectBase
-{
-	/**
-	 * The discount ID
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * The price code name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Multi currency discounts for all countries and currencies
-	 *
-	 * @var array of KalturaDiscount
-	 */
-	public $multiCurrencyDiscount;
-
-	/**
-	 * Start date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * End date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscountDetailsListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of price details
-	 *
-	 * @var array of KalturaDiscountDetails
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaSubscriptionSet extends KalturaObjectBase
 {
 	/**
@@ -2773,6 +2642,43 @@ class KalturaSubscriptionDependencySet extends KalturaSubscriptionSet
  */
 class KalturaSubscriptionSwitchSet extends KalturaSubscriptionSet
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPrice extends KalturaObjectBase
+{
+	/**
+	 * Price
+	 *
+	 * @var float
+	 */
+	public $amount = null;
+
+	/**
+	 * Currency
+	 *
+	 * @var string
+	 */
+	public $currency = null;
+
+	/**
+	 * Currency Sign
+	 *
+	 * @var string
+	 */
+	public $currencySign = null;
+
+	/**
+	 * Country ID
+	 *
+	 * @var int
+	 */
+	public $countryId = null;
+
 
 }
 
@@ -3426,81 +3332,6 @@ class KalturaProductsPriceListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPersonalList extends KalturaObjectBase
-{
-	/**
-	 * Id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Create Date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
-	 *             Possible keys: any Tag or Meta defined in the system and the following reserved keys: start_date, end_date. 
-	 *             epg_id, media_id - for specific asset IDs.
-	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restricted to the user by geo-block rules will return.
-	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
-	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
-	 *             epg_channel_id – the channel identifier of the EPG program.
-	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
-	 *             asset_type - valid values: &quot;media&quot;, &quot;epg&quot;, &quot;recording&quot; or any number that represents media type in group.
-	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
-	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
-	 *             Logical conjunction: and, or. 
-	 *             Search values are limited to 20 characters each for the next operators: ~, !~, ^, ^=
-	 *             (maximum length of entire filter is 2048 characters)
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
-
-	/**
-	 * Partner List Type (optional)
-	 *
-	 * @var int
-	 */
-	public $partnerListType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPersonalListListResponse extends KalturaListResponse
-{
-	/**
-	 * Follow data list
-	 *
-	 * @var array of KalturaPersonalList
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaEngagement extends KalturaObjectBase
 {
 	/**
@@ -3840,7 +3671,7 @@ class KalturaInboxMessageListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaFollowDataBase extends KalturaObjectBase
+class KalturaFollowDataBase extends KalturaObjectBase
 {
 	/**
 	 * Announcement Id
@@ -4132,31 +3963,6 @@ class KalturaTopicListResponse extends KalturaListResponse
 	 * Follow data list
 	 *
 	 * @var array of KalturaTopic
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaT extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaGenericListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of objects
-	 *
-	 * @var array of KalturaT
 	 */
 	public $objects;
 
@@ -5600,286 +5406,6 @@ class KalturaAssetHistoryListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaAssetRuleBase extends KalturaObjectBase
-{
-	/**
-	 * ID
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaCondition extends KalturaObjectBase
-{
-	/**
-	 * The type of the condition
-	 *
-	 * @var KalturaRuleConditionType
-	 * @readonly
-	 */
-	public $type = null;
-
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetCondition extends KalturaCondition
-{
-	/**
-	 * KSQL
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaRuleAction extends KalturaObjectBase
-{
-	/**
-	 * The type of the action
-	 *
-	 * @var KalturaRuleActionType
-	 * @readonly
-	 */
-	public $type = null;
-
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetUserRule extends KalturaAssetRuleBase
-{
-	/**
-	 * List of Ksql conditions for the user rule
-	 *
-	 * @var array of KalturaAssetCondition
-	 */
-	public $conditions;
-
-	/**
-	 * List of actions for the user rule
-	 *
-	 * @var array of KalturaAssetUserRuleAction
-	 */
-	public $actions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetUserRuleListResponse extends KalturaListResponse
-{
-	/**
-	 * Asset user rules
-	 *
-	 * @var array of KalturaAssetUserRule
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaAssetRuleAction extends KalturaRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetRule extends KalturaAssetRuleBase
-{
-	/**
-	 * List of conditions for the rule
-	 *
-	 * @var array of KalturaCondition
-	 */
-	public $conditions;
-
-	/**
-	 * List of actions for the rule
-	 *
-	 * @var array of KalturaAssetRuleAction
-	 */
-	public $actions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCountryCondition extends KalturaCondition
-{
-	/**
-	 * Indicates whether to apply not on the other properties in the condition
-	 *
-	 * @var bool
-	 */
-	public $not = null;
-
-	/**
-	 * Comma separated countries IDs list
-	 *
-	 * @var string
-	 */
-	public $countries = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaConcurrencyCondition extends KalturaAssetCondition
-{
-	/**
-	 * Concurrency limitation
-	 *
-	 * @var int
-	 */
-	public $limit = null;
-
-	/**
-	 * Concurrency limitation type
-	 *
-	 * @var KalturaConcurrencyLimitationType
-	 */
-	public $concurrencyLimitationType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetUserRuleBlockAction extends KalturaAssetUserRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAccessControlBlockAction extends KalturaAssetRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaTimeOffsetRuleAction extends KalturaAssetRuleAction
-{
-	/**
-	 * Offset in seconds
-	 *
-	 * @var int
-	 */
-	public $offset = null;
-
-	/**
-	 * Indicates whether to add time zone offset to the time
-	 *
-	 * @var bool
-	 */
-	public $timeZone = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEndDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCurrency extends KalturaObjectBase
 {
 	/**
@@ -5923,22 +5449,6 @@ class KalturaCurrencyListResponse extends KalturaListResponse
 	 * Currencies
 	 *
 	 * @var array of KalturaCurrency
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetRuleListResponse extends KalturaListResponse
-{
-	/**
-	 * Asset rules
-	 *
-	 * @var array of KalturaAssetRule
 	 */
 	public $objects;
 
@@ -7540,22 +7050,6 @@ class KalturaCollectionFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaDiscountDetailsFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated discount codes
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPricePlanFilter extends KalturaFilter
 {
 	/**
@@ -7656,23 +7150,6 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $externalIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPersonalListFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated list of partner list types to search within. 
-	 *             If omitted – all types should be included.
-	 *
-	 * @var string
-	 */
-	public $partnerListTypeIn = null;
 
 
 }
@@ -7908,26 +7385,6 @@ class KalturaAssetFilter extends KalturaPersistedFilter
 abstract class KalturaBaseSearchAssetFilter extends KalturaAssetFilter
 {
 	/**
-	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
-	 *             Possible keys: any Tag or Meta defined in the system and the following reserved keys: start_date, end_date. 
-	 *             epg_id, media_id - for specific asset IDs.
-	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restricted to the user by geo-block rules will return.
-	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
-	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
-	 *             epg_channel_id – the channel identifier of the EPG program.
-	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
-	 *             asset_type - valid values: &quot;media&quot;, &quot;epg&quot;, &quot;recording&quot; or any number that represents media type in group.
-	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
-	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
-	 *             Logical conjunction: and, or. 
-	 *             Search values are limited to 20 characters each for the next operators: ~, !~, ^, ^=
-	 *             (maximum length of entire filter is 2048 characters)
-	 *
-	 * @var string
-	 */
-	public $kSql = null;
-
-	/**
 	 * groupBy
 	 *
 	 * @var array of KalturaAssetGroupBy
@@ -7941,28 +7398,29 @@ abstract class KalturaBaseSearchAssetFilter extends KalturaAssetFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPersonalListSearchFilter extends KalturaBaseSearchAssetFilter
-{
-	/**
-	 * Comma separated list of partner list types to search within. 
-	 *             If omitted – all types should be included.
-	 *
-	 * @var string
-	 */
-	public $partnerListTypeIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaSearchAssetFilter extends KalturaBaseSearchAssetFilter
 {
 	/**
-	 * (Deprecated - use KalturaBaseSearchAssetFilter.kSql)
-	 *             Comma separated list of asset types to search within. 
+	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
+	 *             Possible keys: any Tag or Meta defined in the system and the following reserved keys: start_date, end_date. 
+	 *             epg_id, media_id - for specific asset IDs.
+	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restriced to the user by geo-block rules will return.
+	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
+	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
+	 *             epg_channel_id – the channel identifier of the EPG program.
+	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
+	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
+	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
+	 *             Logical conjunction: and, or. 
+	 *             Search values are limited to 20 characters each.
+	 *             (maximum length of entire filter is 2048 characters)
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+	/**
+	 * Comma separated list of asset types to search within. 
 	 *             Possible values: 0 – EPG linear programs entries; 1 - Recordings; Any media type ID (according to media type IDs defined dynamically in the system).
 	 *             If omitted – all types should be included.
 	 *
@@ -8109,20 +7567,18 @@ class KalturaChannelFilter extends KalturaAssetFilter
 	public $idEqual = null;
 
 	/**
-	 * /// 
-	 *             Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
+	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
 	 *             Possible keys: any Tag or Meta defined in the system and the following reserved keys: start_date, end_date. 
 	 *             epg_id, media_id - for specific asset IDs.
-	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restricted to the user by geo-block rules will return.
+	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restriced to the user by geo-block rules will return.
 	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
 	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
 	 *             epg_channel_id – the channel identifier of the EPG program.
 	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
-	 *             asset_type - valid values: &quot;media&quot;, &quot;epg&quot;, &quot;recording&quot; or any number that represents media type in group.
 	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
 	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
 	 *             Logical conjunction: and, or. 
-	 *             Search values are limited to 20 characters each for the next operators: ~, !~, ^, ^=
+	 *             Search values are limited to 20 characters each.
 	 *             (maximum length of entire filter is 2048 characters)
 	 *
 	 * @var string
@@ -8146,6 +7602,25 @@ class KalturaChannelFilter extends KalturaAssetFilter
 class KalturaRelatedFilter extends KalturaBaseSearchAssetFilter
 {
 	/**
+	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
+	 *             Possible keys: any Tag or Meta defined in the system and the following reserved keys: start_date, end_date. 
+	 *             epg_id, media_id - for specific asset IDs.
+	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restriced to the user by geo-block rules will return.
+	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
+	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
+	 *             epg_channel_id – the channel identifier of the EPG program.
+	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
+	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
+	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
+	 *             Logical conjunction: and, or. 
+	 *             Search values are limited to 20 characters each.
+	 *             (maximum length of entire filter is 2048 characters)
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+	/**
 	 * the ID of the asset for which to return related assets
 	 *
 	 * @var int
@@ -8153,8 +7628,7 @@ class KalturaRelatedFilter extends KalturaBaseSearchAssetFilter
 	public $idEqual = null;
 
 	/**
-	 * (Deprecated - use KalturaBaseSearchAssetFilter.kSql)
-	 *             Comma separated list of asset types to search within. 
+	 * Comma separated list of asset types to search within. 
 	 *             Possible values: any media type ID (according to media type IDs defined dynamically in the system).
 	 *             If omitted –   same type as the provided asset.
 	 *
@@ -8478,45 +7952,6 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $daysLessThanOrEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetRuleFilter extends KalturaFilter
-{
-	/**
-	 * Indicates which asset rule list to return by it KalturaRuleConditionType
-	 *
-	 * @var KalturaRuleConditionType
-	 */
-	public $conditionsContainType = null;
-
-	/**
-	 * Indicates if to return an asset rule list that related to specific asset
-	 *
-	 * @var KalturaSlimAsset
-	 */
-	public $assetApplied;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetUserRuleFilter extends KalturaFilter
-{
-	/**
-	 * Indicates if to get the asset user rule list for the attached user or for the entire group
-	 *
-	 * @var bool
-	 */
-	public $attachedUserIdEqualCurrent = null;
 
 
 }
@@ -8945,6 +8380,22 @@ class KalturaPlaybackContextOptions extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaRuleAction extends KalturaObjectBase
+{
+	/**
+	 * The type of the action
+	 *
+	 * @var KalturaRuleActionType
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAccessControlMessage extends KalturaObjectBase
 {
 	/**
@@ -8991,6 +8442,15 @@ class KalturaPlaybackContext extends KalturaObjectBase
 	 */
 	public $messages;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAccessControlBlockAction extends KalturaRuleAction
+{
 
 }
 
