@@ -164,15 +164,6 @@ class KalturaAssetReminderOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetRuleOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -306,16 +297,6 @@ class KalturaCompensationType extends KalturaEnumBase
 {
 	const PERCENTAGE = "PERCENTAGE";
 	const FIXED_AMOUNT = "FIXED_AMOUNT";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaConcurrencyLimitationType extends KalturaEnumBase
-{
-	const SINGLE = "Single";
-	const GROUP = "Group";
 }
 
 /**
@@ -810,16 +791,6 @@ class KalturaPersonalFeedOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPersonalListOrderBy extends KalturaEnumBase
-{
-	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPinType extends KalturaEnumBase
 {
 	const PURCHASE = "purchase";
@@ -1030,17 +1001,6 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const START_DATE_OFFSET = "START_DATE_OFFSET";
 	const END_DATE_OFFSET = "END_DATE_OFFSET";
 	const USER_BLOCK = "USER_BLOCK";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRuleConditionType extends KalturaEnumBase
-{
-	const ASSET = "ASSET";
-	const COUNTRY = "COUNTRY";
-	const CONCURRENCY = "CONCURRENCY";
 }
 
 /**
