@@ -1385,6 +1385,81 @@ class KalturaConfigurationGroupListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSSOAdapterProfile extends KalturaObjectBase
+{
+	/**
+	 * SSO Adapter id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * SSO Adapter name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * SSO Adapter is active status
+	 *
+	 * @var int
+	 */
+	public $isActive = null;
+
+	/**
+	 * SSO Adapter URL
+	 *
+	 * @var string
+	 */
+	public $adapterUrl = null;
+
+	/**
+	 * SSO Adapter extra parameters
+	 *
+	 * @var map
+	 */
+	public $ssoAdapterSettings;
+
+	/**
+	 * SSO Adapter external identifier
+	 *
+	 * @var string
+	 */
+	public $externalIdentifier = null;
+
+	/**
+	 * Shared Secret
+	 *
+	 * @var string
+	 */
+	public $sharedSecret = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSSOAdapterProfileListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of payment-gateway profiles
+	 *
+	 * @var array of KalturaSSOAdapterProfile
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserInterestTopic extends KalturaObjectBase
 {
 	/**

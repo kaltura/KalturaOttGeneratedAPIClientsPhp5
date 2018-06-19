@@ -6557,6 +6557,113 @@ class KalturaSocialFriendActivityService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSsoAdapterProfileService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Insert new sso adapter for partner
+	 * 
+	 * @param KalturaSSOAdapterProfile $ssoAdapter SSO Adapter Object to be added
+	 * @return KalturaSSOAdapterProfile
+	 */
+	function add(KalturaSSOAdapterProfile $ssoAdapter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "ssoAdapter", $ssoAdapter->toParams());
+		$this->client->queueServiceActionCall("ssoadapterprofile", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSSOAdapterProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete sso adapters by sso adapters id
+	 * 
+	 * @param int $ssoAdapterId SSO Adapter Identifier
+	 * @return bool
+	 */
+	function delete($ssoAdapterId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "ssoAdapterId", $ssoAdapterId);
+		$this->client->queueServiceActionCall("ssoadapterprofile", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Generate SSO Adapter shared secret
+	 * 
+	 * @param int $ssoAdapterId SSO Adapter identifier
+	 * @return KalturaSSOAdapterProfile
+	 */
+	function generateSharedSecret($ssoAdapterId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "ssoAdapterId", $ssoAdapterId);
+		$this->client->queueServiceActionCall("ssoadapterprofile", "generateSharedSecret", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSSOAdapterProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns all sso adapters for partner : id + name
+	 * 
+	 * @return KalturaSSOAdapterProfileListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("ssoadapterprofile", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSSOAdapterProfileListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update sso adapter details
+	 * 
+	 * @param int $ssoAdapterId SSO Adapter Identifier
+	 * @param KalturaSSOAdapterProfile $ssoAdapter SSO Adapter Object
+	 * @return KalturaSSOAdapterProfile
+	 */
+	function update($ssoAdapterId, KalturaSSOAdapterProfile $ssoAdapter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "ssoAdapterId", $ssoAdapterId);
+		$this->client->addParam($kparams, "ssoAdapter", $ssoAdapter->toParams());
+		$this->client->queueServiceActionCall("ssoadapterprofile", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSSOAdapterProfile");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSubscriptionService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -7999,6 +8106,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaSsoAdapterProfileService
+	 */
+	public $ssoAdapterProfile = null;
+
+	/**
+	 * 
 	 * @var KalturaSubscriptionService
 	 */
 	public $subscription = null;
@@ -8085,7 +8198,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-06-19');
-		$this->setApiVersion('4.82.61.19886');
+		$this->setApiVersion('4.82.72.32512');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -8167,6 +8280,7 @@ class KalturaClient extends KalturaClientBase
 		$this->socialComment = new KalturaSocialCommentService($this);
 		$this->social = new KalturaSocialService($this);
 		$this->socialFriendActivity = new KalturaSocialFriendActivityService($this);
+		$this->ssoAdapterProfile = new KalturaSsoAdapterProfileService($this);
 		$this->subscription = new KalturaSubscriptionService($this);
 		$this->subscriptionSet = new KalturaSubscriptionSetService($this);
 		$this->system = new KalturaSystemService($this);
