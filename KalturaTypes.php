@@ -1421,7 +1421,7 @@ class KalturaSSOAdapterProfile extends KalturaObjectBase
 	 *
 	 * @var map
 	 */
-	public $ssoAdapterSettings;
+	public $settings;
 
 	/**
 	 * SSO Adapter external identifier
