@@ -9013,6 +9013,13 @@ class KalturaPlaybackContextOptions extends KalturaObjectBase
 	 */
 	public $context = null;
 
+	/**
+	 * Url type
+	 *
+	 * @var KalturaUrlType
+	 */
+	public $urlType = null;
+
 
 }
 

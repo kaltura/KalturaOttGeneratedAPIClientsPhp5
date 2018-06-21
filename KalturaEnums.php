@@ -851,6 +851,7 @@ class KalturaPlaybackContextType extends KalturaEnumBase
 	const CATCHUP = "CATCHUP";
 	const START_OVER = "START_OVER";
 	const PLAYBACK = "PLAYBACK";
+	const DOWNLOAD = "DOWNLOAD";
 }
 
 /**
@@ -1318,6 +1319,16 @@ class KalturaTransactionType extends KalturaEnumBase
 	const PPV = "ppv";
 	const SUBSCRIPTION = "subscription";
 	const COLLECTION = "collection";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUrlType extends KalturaEnumBase
+{
+	const PLAYMANIFEST = "PLAYMANIFEST";
+	const DIRECT = "DIRECT";
 }
 
 /**
