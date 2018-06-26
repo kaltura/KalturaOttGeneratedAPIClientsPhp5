@@ -466,6 +466,16 @@ class KalturaEntityReferenceBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEvictionPolicyType extends KalturaEnumBase
+{
+	const FIFO = "FIFO";
+	const LIFO = "LIFO";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaExportDataType extends KalturaEnumBase
 {
 	const VOD = "vod";
@@ -752,11 +762,21 @@ class KalturaParentalRuleType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPartnerConfigurationOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPartnerConfigurationType extends KalturaEnumBase
 {
 	const DEFAULTPAYMENTGATEWAY = "DefaultPaymentGateway";
 	const ENABLEPAYMENTGATEWAYSELECTION = "EnablePaymentGatewaySelection";
 	const OSSADAPTER = "OSSAdapter";
+	const CONCURRENCY = "Concurrency";
 }
 
 /**

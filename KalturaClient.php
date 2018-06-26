@@ -4850,6 +4850,25 @@ class KalturaPartnerConfigurationService extends KalturaServiceBase
 	}
 
 	/**
+	 * Get the list of PartnerConfiguration
+	 * 
+	 * @param KalturaPartnerConfigurationFilter $filter Filter by PartnerConfiguration type
+	 * @return KalturaPartnerConfigurationListResponse
+	 */
+	function listAction(KalturaPartnerConfigurationFilter $filter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("partnerconfiguration", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPartnerConfigurationListResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Update Partner Configuration
 	 * 
 	 * @param KalturaPartnerConfiguration $configuration Partner Configuration
@@ -8197,8 +8216,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-06-25');
-		$this->setApiVersion('4.82.85.42008');
+		$this->setClientTag('php5:18-06-26');
+		$this->setApiVersion('4.82.94.41999');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

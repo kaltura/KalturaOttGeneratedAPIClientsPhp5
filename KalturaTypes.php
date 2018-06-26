@@ -5261,6 +5261,13 @@ class KalturaBookmark extends KalturaSlimAsset
 	 */
 	public $playerData;
 
+	/**
+	 * Program Id
+	 *
+	 * @var int
+	 */
+	public $programId = null;
+
 
 }
 
@@ -5667,6 +5674,77 @@ class KalturaAssetHistoryListResponse extends KalturaListResponse
 	 * @var array of KalturaAssetHistory
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaPartnerConfiguration extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPartnerConfigurationListResponse extends KalturaListResponse
+{
+	/**
+	 * Partner Configurations
+	 *
+	 * @var array of KalturaPartnerConfiguration
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * Comma separated list of device Family Ids order by their priority.
+	 *
+	 * @var string
+	 */
+	public $deviceFamilyIds = null;
+
+	/**
+	 * Policy of eviction devices
+	 *
+	 * @var KalturaEvictionPolicyType
+	 */
+	public $evictionPolicy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * configuration value
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+	/**
+	 * partner configuration type
+	 *
+	 * @var KalturaPartnerConfigurationType
+	 */
+	public $type = null;
 
 
 }
@@ -8561,10 +8639,27 @@ class KalturaAssetHistoryFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPartnerConfigurationFilter extends KalturaFilter
+{
+	/**
+	 * Indicates which partner configuration list to return
+	 *
+	 * @var KalturaPartnerConfigurationType
+	 */
+	public $partnerConfigurationTypeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetRuleFilter extends KalturaFilter
 {
 	/**
-	 * Indicates which asset rule list to return by it KalturaRuleConditionType
+	 * Indicates which asset rule list to return by it KalturaRuleConditionType.
+	 *             Default value: KalturaRuleConditionType.COUNTRY
 	 *
 	 * @var KalturaRuleConditionType
 	 */
@@ -10388,38 +10483,6 @@ class KalturaHouseholdLimitations extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $deviceFamiliesLimitations;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaPartnerConfiguration extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
-{
-	/**
-	 * configuration value
-	 *
-	 * @var string
-	 */
-	public $value = null;
-
-	/**
-	 * partner configuration type
-	 *
-	 * @var KalturaPartnerConfigurationType
-	 */
-	public $type = null;
 
 
 }
