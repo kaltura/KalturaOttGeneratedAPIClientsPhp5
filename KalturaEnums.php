@@ -130,6 +130,8 @@ class KalturaAssetOrderBy extends KalturaEnumBase
 	const START_DATE_DESC = "START_DATE_DESC";
 	const START_DATE_ASC = "START_DATE_ASC";
 	const LIKES_DESC = "LIKES_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 }
 
 /**
@@ -173,6 +175,31 @@ class KalturaAssetRuleOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetStructMetaOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetStructOrderBy extends KalturaEnumBase
+{
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+	const SYSTEM_NAME_ASC = "SYSTEM_NAME_ASC";
+	const SYSTEM_NAME_DESC = "SYSTEM_NAME_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -187,6 +214,27 @@ class KalturaAssetType extends KalturaEnumBase
 class KalturaAssetUserRuleOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBatchJobStatus extends KalturaEnumBase
+{
+	const PENDING = "PENDING";
+	const QUEUED = "QUEUED";
+	const PROCESSING = "PROCESSING";
+	const PROCESSED = "PROCESSED";
+	const MOVEFILE = "MOVEFILE";
+	const FINISHED = "FINISHED";
+	const FAILED = "FAILED";
+	const ABORTED = "ABORTED";
+	const ALMOST_DONE = "ALMOST_DONE";
+	const RETRY = "RETRY";
+	const FATAL = "FATAL";
+	const DONT_PROCESS = "DONT_PROCESS";
+	const FINISHED_PARTIALLY = "FINISHED_PARTIALLY";
 }
 
 /**
@@ -263,6 +311,15 @@ class KalturaBookmarkOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBulkOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBundleType extends KalturaEnumBase
 {
 	const SUBSCRIPTION = "subscription";
@@ -287,6 +344,39 @@ class KalturaChannelEnrichment extends KalturaEnumBase
 	const PARENTAL = "Parental";
 	const DTTREGION = "DTTRegion";
 	const ATHOME = "AtHome";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaChannelOrderBy extends KalturaEnumBase
+{
+	const ORDER_NUM = "ORDER_NUM";
+	const RELEVANCY_DESC = "RELEVANCY_DESC";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+	const VIEWS_DESC = "VIEWS_DESC";
+	const RATINGS_DESC = "RATINGS_DESC";
+	const VOTES_DESC = "VOTES_DESC";
+	const START_DATE_DESC = "START_DATE_DESC";
+	const START_DATE_ASC = "START_DATE_ASC";
+	const LIKES_DESC = "LIKES_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaChannelsOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 }
 
 /**
@@ -620,6 +710,49 @@ class KalturaHouseholdUserStatus extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaImageObjectType extends KalturaEnumBase
+{
+	const MEDIA_ASSET = "MEDIA_ASSET";
+	const PROGRAM_ASSET = "PROGRAM_ASSET";
+	const CHANNEL = "CHANNEL";
+	const CATEGORY = "CATEGORY";
+	const PARTNER = "PARTNER";
+	const IMAGE_TYPE = "IMAGE_TYPE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaImageOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaImageStatus extends KalturaEnumBase
+{
+	const PENDING = "PENDING";
+	const READY = "READY";
+	const FAILED = "FAILED";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaImageTypeOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaInboxMessageOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -664,6 +797,52 @@ class KalturaLanguageOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLinearChannelType extends KalturaEnumBase
+{
+	const UNKNOWN = "UNKNOWN";
+	const DTT = "DTT";
+	const OTT = "OTT";
+	const DTT_AND_OTT = "DTT_AND_OTT";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaFileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaFileStreamerType extends KalturaEnumBase
+{
+	const APPLE_HTTP = "APPLE_HTTP";
+	const MPEG_DASH = "MPEG_DASH";
+	const URL = "URL";
+	const SMOOTH_STREAMING = "SMOOTH_STREAMING";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaFileTypeQuality extends KalturaEnumBase
+{
+	const ADAPTIVE = "ADAPTIVE";
+	const SD = "SD";
+	const HD_720 = "HD_720";
+	const HD_1080 = "HD_1080";
+	const UHD_4K = "UHD_4K";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMessageTemplateType extends KalturaEnumBase
 {
 	const SERIES = "Series";
@@ -678,12 +857,13 @@ class KalturaMessageTemplateType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaMetaFieldName extends KalturaEnumBase
+class KalturaMetaDataType extends KalturaEnumBase
 {
-	const NONE = "NONE";
-	const SERIES_ID = "SERIES_ID";
-	const SEASON_NUMBER = "SEASON_NUMBER";
-	const EPISODE_NUMBER = "EPISODE_NUMBER";
+	const STRING = "STRING";
+	const MULTILINGUAL_STRING = "MULTILINGUAL_STRING";
+	const NUMBER = "NUMBER";
+	const BOOLEAN = "BOOLEAN";
+	const DATE = "DATE";
 }
 
 /**
@@ -692,7 +872,14 @@ class KalturaMetaFieldName extends KalturaEnumBase
  */
 class KalturaMetaOrderBy extends KalturaEnumBase
 {
-	const NONE = "NONE";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+	const SYSTEM_NAME_ASC = "SYSTEM_NAME_ASC";
+	const SYSTEM_NAME_DESC = "SYSTEM_NAME_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
 }
 
 /**
@@ -703,18 +890,6 @@ class KalturaMetaTagOrderBy extends KalturaEnumBase
 {
 	const META_ASC = "META_ASC";
 	const META_DESC = "META_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaMetaType extends KalturaEnumBase
-{
-	const STRING = "STRING";
-	const NUMBER = "NUMBER";
-	const BOOLEAN = "BOOLEAN";
-	const STRING_ARRAY = "STRING_ARRAY";
 }
 
 /**
@@ -1293,6 +1468,26 @@ class KalturaSubscriptionSetType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTagOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTimeShiftedTvState extends KalturaEnumBase
+{
+	const INHERITED = "INHERITED";
+	const ENABLED = "ENABLED";
+	const DISABLED = "DISABLED";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTopicAutomaticIssueNotification extends KalturaEnumBase
 {
 	const INHERIT = "Inherit";
@@ -1339,6 +1534,17 @@ class KalturaTransactionType extends KalturaEnumBase
 	const PPV = "ppv";
 	const SUBSCRIPTION = "subscription";
 	const COLLECTION = "collection";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUploadTokenStatus extends KalturaEnumBase
+{
+	const PENDING = "PENDING";
+	const FULL_UPLOAD = "FULL_UPLOAD";
+	const CLOSED = "CLOSED";
 }
 
 /**
