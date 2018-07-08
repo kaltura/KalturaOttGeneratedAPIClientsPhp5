@@ -1123,11 +1123,11 @@ class KalturaBulkService extends KalturaServiceBase
 	 * @param bigint $id Bulk action id
 	 * @return KalturaBulk
 	 */
-	function serveLog ($id)
+	function serveLog($id)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("bulk", "serveLog ", $kparams);
+		$this->client->queueServiceActionCall("bulk", "serveLog", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -9274,8 +9274,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-07-07');
-		$this->setApiVersion('4.9.273.41993');
+		$this->setClientTag('php5:18-07-08');
+		$this->setApiVersion('4.9.274.41991');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
