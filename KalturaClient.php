@@ -2346,6 +2346,35 @@ class KalturaDiscountDetailsService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDrmProfileService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Returns all DRM adapters for partner
+	 * 
+	 * @return KalturaDrmProfileListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("drmprofile", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDrmProfileListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEmailService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -8823,6 +8852,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaDrmProfileService
+	 */
+	public $drmProfile = null;
+
+	/**
+	 * 
 	 * @var KalturaEmailService
 	 */
 	public $email = null;
@@ -9274,8 +9309,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-07-08');
-		$this->setApiVersion('4.9.274.41991');
+		$this->setClientTag('php5:18-07-09');
+		$this->setApiVersion('4.9.283.41996');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -9307,6 +9342,7 @@ class KalturaClient extends KalturaClientBase
 		$this->deviceBrand = new KalturaDeviceBrandService($this);
 		$this->deviceFamily = new KalturaDeviceFamilyService($this);
 		$this->discountDetails = new KalturaDiscountDetailsService($this);
+		$this->drmProfile = new KalturaDrmProfileService($this);
 		$this->email = new KalturaEmailService($this);
 		$this->engagementAdapter = new KalturaEngagementAdapterService($this);
 		$this->engagement = new KalturaEngagementService($this);

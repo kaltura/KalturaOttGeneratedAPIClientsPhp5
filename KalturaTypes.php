@@ -6176,6 +6176,41 @@ class KalturaAssetStruct extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
+	/**
+	 * List of supported features
+	 *
+	 * @var string
+	 */
+	public $features = null;
+
+	/**
+	 * Plural Name
+	 *
+	 * @var string
+	 */
+	public $pluralName = null;
+
+	/**
+	 * AssetStruct parent Id
+	 *
+	 * @var int
+	 */
+	public $parentId = null;
+
+	/**
+	 * connectingMetaId
+	 *
+	 * @var int
+	 */
+	public $connectingMetaId = null;
+
+	/**
+	 * connectedParentMetaId
+	 *
+	 * @var int
+	 */
+	public $connectedParentMetaId = null;
+
 
 }
 
@@ -6459,6 +6494,13 @@ class KalturaBookmark extends KalturaSlimAsset
 	 * @var int
 	 */
 	public $programId = null;
+
+	/**
+	 * Indicates if the current request is in reporting mode (hit)
+	 *
+	 * @var bool
+	 */
+	public $isReportingMode = null;
 
 
 }
