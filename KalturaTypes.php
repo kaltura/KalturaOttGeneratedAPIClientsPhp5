@@ -744,6 +744,7 @@ class KalturaMultilingualStringValue extends KalturaValue
 	 * Value
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $value = null;
 
@@ -2450,6 +2451,7 @@ class KalturaCollection extends KalturaObjectBase
 	 * Name of the subscription
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -2464,6 +2466,7 @@ class KalturaCollection extends KalturaObjectBase
 	 * description of the subscription
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $description = null;
 
@@ -2600,6 +2603,7 @@ class KalturaChannel extends KalturaBaseChannel
 	 * Channel name
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -2621,6 +2625,7 @@ class KalturaChannel extends KalturaBaseChannel
 	 * Cannel description
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $description = null;
 
@@ -3433,6 +3438,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * Name of the subscription
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -3447,6 +3453,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * description of the subscription
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $description = null;
 
@@ -4559,7 +4566,7 @@ class KalturaRecording extends KalturaObjectBase
 	public $id = null;
 
 	/**
-	 * Recording state: scheduled/recording/recorded/canceled/failed/does_not_exists/deleted
+	 * Recording state: scheduled/recording/recorded/canceled/failed/deleted
 	 *
 	 * @var KalturaRecordingStatus
 	 * @readonly
@@ -4596,6 +4603,13 @@ class KalturaRecording extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $isProtected = null;
+
+	/**
+	 * External identifier for the recording
+	 *
+	 * @var string
+	 */
+	public $externalId = null;
 
 	/**
 	 * Specifies when was the recording created. Date and time represented as epoch.
@@ -5675,6 +5689,7 @@ class KalturaTag extends KalturaObjectBase
 	 * Tag
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $tag = null;
 
@@ -5731,6 +5746,7 @@ abstract class KalturaAsset extends KalturaObjectBase
 	 * Asset name
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -5745,6 +5761,7 @@ abstract class KalturaAsset extends KalturaObjectBase
 	 * Asset description
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $description = null;
 
@@ -6105,6 +6122,7 @@ class KalturaAssetStruct extends KalturaObjectBase
 	 * Asset struct name for the partner
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -6755,6 +6773,59 @@ class KalturaDrmProfileListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMediaConcurrencyRule extends KalturaObjectBase
+{
+	/**
+	 * Media concurrency rule  identifier
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * Media concurrency rule  name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Concurrency limitation type
+	 *
+	 * @var KalturaConcurrencyLimitationType
+	 */
+	public $concurrencyLimitationType = null;
+
+	/**
+	 * Limitation
+	 *
+	 * @var int
+	 */
+	public $limitation = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaConcurrencyRuleListResponse extends KalturaListResponse
+{
+	/**
+	 * Media CONCURRENCY RULES
+	 *
+	 * @var array of KalturaMediaConcurrencyRule
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaAssetRuleBase extends KalturaObjectBase
 {
 	/**
@@ -7178,6 +7249,7 @@ class KalturaMeta extends KalturaObjectBase
 	 * Meta name for the partner
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -9198,7 +9270,7 @@ class KalturaRecordingFilter extends KalturaFilter
 	 *
 	 * @var string
 	 */
-	public $filterExpression = null;
+	public $kSql = null;
 
 
 }
