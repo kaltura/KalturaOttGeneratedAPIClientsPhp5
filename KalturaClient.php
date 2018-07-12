@@ -6641,7 +6641,7 @@ class KalturaRecordingService extends KalturaServiceBase
 	 * @param bool $isProtected Is the recording protected by the user
 	 * @return bool
 	 */
-	function notify($externalDomainRecordingId, $recordingStatus, $domainId, $externalEpgId = null, $recordingType = null, $isProtected)
+	function notify($externalDomainRecordingId, $recordingStatus, $domainId, $externalEpgId = null, $recordingType = null, $isProtected = false)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "externalDomainRecordingId", $externalDomainRecordingId);
@@ -9374,7 +9374,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-07-12');
-		$this->setApiVersion('5.1.20.17423');
+		$this->setApiVersion('5.1.23.26337');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
