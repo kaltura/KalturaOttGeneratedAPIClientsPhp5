@@ -37,6 +37,16 @@ require_once(dirname(__FILE__) . "/KalturaClientBase.php");
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAdsPolicy extends KalturaEnumBase
+{
+	const NO_ADS = "NO_ADS";
+	const KEEP_ADS = "KEEP_ADS";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAggregationCountOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -79,6 +89,18 @@ class KalturaAnnouncementStatus extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAppTokenHashType extends KalturaEnumBase
+{
+	const SHA1 = "SHA1";
+	const SHA256 = "SHA256";
+	const SHA512 = "SHA512";
+	const MD5 = "MD5";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetCommentOrderBy extends KalturaEnumBase
 {
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
@@ -110,6 +132,17 @@ class KalturaAssetOrderBy extends KalturaEnumBase
 	const LIKES_DESC = "LIKES_DESC";
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetReferenceType extends KalturaEnumBase
+{
+	const MEDIA = "media";
+	const EPG_INTERNAL = "epg_internal";
+	const EPG_EXTERNAL = "epg_external";
 }
 
 /**
@@ -359,6 +392,16 @@ class KalturaCollectionOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCompensationType extends KalturaEnumBase
+{
+	const PERCENTAGE = "PERCENTAGE";
+	const FIXED_AMOUNT = "FIXED_AMOUNT";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConcurrencyLimitationType extends KalturaEnumBase
 {
 	const SINGLE = "Single";
@@ -396,6 +439,16 @@ class KalturaConfigurationsOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaContextType extends KalturaEnumBase
+{
+	const NONE = "none";
+	const RECORDING = "recording";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCountryOrderBy extends KalturaEnumBase
 {
 	const NAME_ASC = "NAME_ASC";
@@ -409,6 +462,19 @@ class KalturaCouponGroupType extends KalturaEnumBase
 {
 	const COUPON = "COUPON";
 	const GIFT_CARD = "GIFT_CARD";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponStatus extends KalturaEnumBase
+{
+	const VALID = "VALID";
+	const NOT_EXISTS = "NOT_EXISTS";
+	const ALREADY_USED = "ALREADY_USED";
+	const EXPIRED = "EXPIRED";
+	const INACTIVE = "INACTIVE";
 }
 
 /**
@@ -569,11 +635,46 @@ class KalturaHouseholdDeviceOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdFrequencyType extends KalturaEnumBase
+{
+	const DEVICES = "devices";
+	const USERS = "users";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdPaymentGatewaySelectedBy extends KalturaEnumBase
 {
 	const NONE = "none";
 	const ACCOUNT = "account";
 	const HOUSEHOLD = "household";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdRestriction extends KalturaEnumBase
+{
+	const NOT_RESTRICTED = "not_restricted";
+	const USER_MASTER_RESTRICTED = "user_master_restricted";
+	const DEVICE_MASTER_RESTRICTED = "device_master_restricted";
+	const DEVICE_USER_MASTER_RESTRICTED = "device_user_master_restricted";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdState extends KalturaEnumBase
+{
+	const OK = "ok";
+	const CREATED_WITHOUT_NPVR_ACCOUNT = "created_without_npvr_account";
+	const SUSPENDED = "suspended";
+	const NO_USERS_IN_HOUSEHOLD = "no_users_in_household";
+	const PENDING = "pending";
 }
 
 /**
@@ -742,6 +843,20 @@ class KalturaMediaFileTypeQuality extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMessageTemplateType extends KalturaEnumBase
+{
+	const SERIES = "Series";
+	const REMINDER = "Reminder";
+	const CHURN = "Churn";
+	const SERIESREMINDER = "SeriesReminder";
+	const INTERESTVOD = "InterestVod";
+	const INTERESTEPG = "InterestEPG";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetaDataType extends KalturaEnumBase
 {
 	const STRING = "STRING";
@@ -775,6 +890,18 @@ class KalturaMetaTagOrderBy extends KalturaEnumBase
 {
 	const META_ASC = "META_ASC";
 	const META_DESC = "META_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaNotificationType extends KalturaEnumBase
+{
+	const ANNOUNCEMENT = "announcement";
+	const SYSTEM = "system";
+	const REMINDER = "Reminder";
+	const SERIES_REMINDER = "series_reminder";
 }
 
 /**
@@ -888,6 +1015,16 @@ class KalturaPersonalListOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPinType extends KalturaEnumBase
+{
+	const PURCHASE = "purchase";
+	const PARENTAL = "parental";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPlatform extends KalturaEnumBase
 {
 	const ANDROID = "Android";
@@ -897,6 +1034,19 @@ class KalturaPlatform extends KalturaEnumBase
 	const STB = "STB";
 	const CTV = "CTV";
 	const OTHER = "Other";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackContextType extends KalturaEnumBase
+{
+	const TRAILER = "TRAILER";
+	const CATCHUP = "CATCHUP";
+	const START_OVER = "START_OVER";
+	const PLAYBACK = "PLAYBACK";
+	const DOWNLOAD = "DOWNLOAD";
 }
 
 /**
@@ -941,6 +1091,27 @@ class KalturaProductPriceOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProtectionPolicy extends KalturaEnumBase
+{
+	const EXTENDINGRECORDINGLIFETIME = "ExtendingRecordingLifetime";
+	const LIMITEDBYRECORDINGLIFETIME = "LimitedByRecordingLifetime";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPurchaseSettingsType extends KalturaEnumBase
+{
+	const BLOCK = "block";
+	const ASK = "ask";
+	const ALLOW = "allow";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPurchaseStatus extends KalturaEnumBase
 {
 	const PPV_PURCHASED = "ppv_purchased";
@@ -958,6 +1129,16 @@ class KalturaPurchaseStatus extends KalturaEnumBase
 	const NOT_FOR_PURCHASE = "not_for_purchase";
 	const INVALID_CURRENCY = "invalid_currency";
 	const CURRENCY_NOT_DEFINED_ON_PRICE_CODE = "currency_not_defined_on_price_code";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaQuotaOveragePolicy extends KalturaEnumBase
+{
+	const STOPATQUOTA = "StopAtQuota";
+	const FIFOAUTODELETE = "FIFOAutoDelete";
 }
 
 /**
@@ -1139,6 +1320,16 @@ class KalturaSocialActionOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSocialActionPrivacy extends KalturaEnumBase
+{
+	const ALLOW = "ALLOW";
+	const DONT_ALLOW = "DONT_ALLOW";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSocialActionType extends KalturaEnumBase
 {
 	const LIKE = "LIKE";
@@ -1171,11 +1362,65 @@ class KalturaSocialFriendActivityOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSocialNetwork extends KalturaEnumBase
+{
+	const FACEBOOK = "facebook";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSocialPlatform extends KalturaEnumBase
 {
 	const IN_APP = "IN_APP";
 	const FACEBOOK = "FACEBOOK";
 	const TWITTER = "TWITTER";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSocialPrivacy extends KalturaEnumBase
+{
+	const UNKNOWN = "UNKNOWN";
+	const EVERYONE = "EVERYONE";
+	const ALL_FRIENDS = "ALL_FRIENDS";
+	const FRIENDS_OF_FRIENDS = "FRIENDS_OF_FRIENDS";
+	const SELF = "SELF";
+	const CUSTOM = "CUSTOM";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSocialStatus extends KalturaEnumBase
+{
+	const ERROR = "error";
+	const OK = "ok";
+	const USER_DOES_NOT_EXIST = "user_does_not_exist";
+	const NO_USER_SOCIAL_SETTINGS_FOUND = "no_user_social_settings_found";
+	const ASSET_ALREADY_LIKED = "asset_already_liked";
+	const NOT_ALLOWED = "not_allowed";
+	const INVALID_PARAMETERS = "invalid_parameters";
+	const NO_FACEBOOK_ACTION = "no_facebook_action";
+	const ASSET_ALREADY_RATED = "asset_already_rated";
+	const ASSET_DOSE_NOT_EXISTS = "asset_dose_not_exists";
+	const INVALID_PLATFORM_REQUEST = "invalid_platform_request";
+	const INVALID_ACCESS_TOKEN = "invalid_access_token";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaStreamType extends KalturaEnumBase
+{
+	const CATCHUP = "catchup";
+	const START_OVER = "start_over";
+	const TRICK_PLAY = "trick_play";
 }
 
 /**
@@ -1263,6 +1508,17 @@ class KalturaTopicOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTransactionAdapterStatus extends KalturaEnumBase
+{
+	const OK = "OK";
+	const PENDING = "PENDING";
+	const FAILED = "FAILED";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTransactionHistoryOrderBy extends KalturaEnumBase
 {
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
@@ -1284,10 +1540,53 @@ class KalturaTransactionType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUploadTokenStatus extends KalturaEnumBase
+{
+	const PENDING = "PENDING";
+	const FULL_UPLOAD = "FULL_UPLOAD";
+	const CLOSED = "CLOSED";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUrlType extends KalturaEnumBase
+{
+	const PLAYMANIFEST = "PLAYMANIFEST";
+	const DIRECT = "DIRECT";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserAssetRuleOrderBy extends KalturaEnumBase
 {
 	const NAME_ASC = "NAME_ASC";
 	const NAME_DESC = "NAME_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserAssetsListItemType extends KalturaEnumBase
+{
+	const ALL = "all";
+	const MEDIA = "media";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserAssetsListType extends KalturaEnumBase
+{
+	const ALL = "all";
+	const WATCH = "watch";
+	const PURCHASE = "purchase";
+	const LIBRARY = "library";
 }
 
 /**
