@@ -6631,35 +6631,6 @@ class KalturaRecordingService extends KalturaServiceBase
 	}
 
 	/**
-	 * Notify on an external recording
-	 * 
-	 * @param string $externalDomainRecordingId External domain recording identifier
-	 * @param string $recordingStatus Recording status: scheduled/recording/recorded/canceled/failed/deleted
-	 * @param int $domainId Houshehold identifier
-	 * @param string $externalEpgId Epg external identifier
-	 * @param string $recordingType Recording Type: single/season/series
-	 * @param bool $isProtected Is the recording protected by the user
-	 * @return bool
-	 */
-	function notify($externalDomainRecordingId, $recordingStatus, $domainId, $externalEpgId = null, $recordingType = null, $isProtected = false)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "externalDomainRecordingId", $externalDomainRecordingId);
-		$this->client->addParam($kparams, "recordingStatus", $recordingStatus);
-		$this->client->addParam($kparams, "domainId", $domainId);
-		$this->client->addParam($kparams, "externalEpgId", $externalEpgId);
-		$this->client->addParam($kparams, "recordingType", $recordingType);
-		$this->client->addParam($kparams, "isProtected", $isProtected);
-		$this->client->queueServiceActionCall("recording", "notify", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
 	 * Protects an existing recording from the cleanup process for the defined protection period
 	 * 
 	 * @param bigint $id Recording identifier
@@ -9374,7 +9345,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-07-12');
-		$this->setApiVersion('5.1.23.26337');
+		$this->setApiVersion('5.1.24.27624');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

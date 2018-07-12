@@ -4600,7 +4600,7 @@ class KalturaRecording extends KalturaObjectBase
 	 * Recording Type: single/season/series
 	 *
 	 * @var KalturaRecordingType
-	 * @readonly
+	 * @insertonly
 	 */
 	public $type = null;
 
@@ -4616,7 +4616,7 @@ class KalturaRecording extends KalturaObjectBase
 	 * Specifies whether or not the recording is protected
 	 *
 	 * @var bool
-	 * @readonly
+	 * @insertonly
 	 */
 	public $isProtected = null;
 
@@ -4624,6 +4624,7 @@ class KalturaRecording extends KalturaObjectBase
 	 * External identifier for the recording
 	 *
 	 * @var string
+	 * @insertonly
 	 */
 	public $externalId = null;
 
@@ -9280,6 +9281,13 @@ class KalturaRecordingFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $statusIn = null;
+
+	/**
+	 * Comma separated external identifiers
+	 *
+	 * @var string
+	 */
+	public $externalRecordingIdIn = null;
 
 	/**
 	 * KSQL expression
