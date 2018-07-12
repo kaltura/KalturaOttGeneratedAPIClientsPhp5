@@ -744,6 +744,7 @@ class KalturaMultilingualStringValue extends KalturaValue
 	 * Value
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $value = null;
 
@@ -1513,22 +1514,6 @@ class KalturaMediaImage extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaStringValueArray extends KalturaObjectBase
-{
-	/**
-	 * List of string values
-	 *
-	 * @var array of KalturaStringValue
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaMediaFile extends KalturaObjectBase
 {
 	/**
@@ -1573,62 +1558,6 @@ class KalturaMediaFile extends KalturaObjectBase
 	 * @var string
 	 */
 	public $externalId = null;
-
-	/**
-	 * Billing type
-	 *
-	 * @var string
-	 */
-	public $billingType = null;
-
-	/**
-	 * Quality
-	 *
-	 * @var string
-	 */
-	public $quality = null;
-
-	/**
-	 * Handling type
-	 *
-	 * @var string
-	 */
-	public $handlingType = null;
-
-	/**
-	 * CDN name
-	 *
-	 * @var string
-	 */
-	public $cdnName = null;
-
-	/**
-	 * CDN code
-	 *
-	 * @var string
-	 */
-	public $cdnCode = null;
-
-	/**
-	 * Alt CDN code
-	 *
-	 * @var string
-	 */
-	public $altCdnCode = null;
-
-	/**
-	 * PPV Module
-	 *
-	 * @var KalturaStringValueArray
-	 */
-	public $ppvModules;
-
-	/**
-	 * Product code
-	 *
-	 * @var string
-	 */
-	public $productCode = null;
 
 	/**
 	 * File size
@@ -2339,6 +2268,7 @@ class KalturaCollection extends KalturaObjectBase
 	 * Name of the subscription
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -2353,6 +2283,7 @@ class KalturaCollection extends KalturaObjectBase
 	 * description of the subscription
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $description = null;
 
@@ -3100,6 +3031,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * Name of the subscription
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -3114,6 +3046,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * description of the subscription
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $description = null;
 
@@ -4983,6 +4916,7 @@ abstract class KalturaAsset extends KalturaObjectBase
 	 * Asset name
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -4997,6 +4931,7 @@ abstract class KalturaAsset extends KalturaObjectBase
 	 * Asset description
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $description = null;
 
@@ -5076,13 +5011,6 @@ abstract class KalturaAsset extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $enableTrickPlay = null;
-
-	/**
-	 * External identifier for the media file
-	 *
-	 * @var string
-	 */
-	public $externalId = null;
 
 
 }
@@ -5206,39 +5134,11 @@ class KalturaMediaAsset extends KalturaAsset
 	public $enableRecordingPlaybackNonEntitledChannel = null;
 
 	/**
-	 * Asset type description
-	 *
-	 * @var string
-	 */
-	public $typeDescription = null;
-
-	/**
 	 * Entry Identifier
 	 *
 	 * @var string
 	 */
 	public $entryId = null;
-
-	/**
-	 * Device rule
-	 *
-	 * @var string
-	 */
-	public $deviceRule = null;
-
-	/**
-	 * Geo block rule
-	 *
-	 * @var string
-	 */
-	public $geoBlockRule = null;
-
-	/**
-	 * Watch permission rule
-	 *
-	 * @var string
-	 */
-	public $watchPermissionRule = null;
 
 
 }
