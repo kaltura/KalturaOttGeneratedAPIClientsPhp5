@@ -1640,6 +1640,14 @@ class KalturaMediaFile extends KalturaAssetFile
 	public $id = null;
 
 	/**
+	 * Deprecated - Device types as defined in the system
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
 	 * Device types identifier as defined in the system
 	 *
 	 * @var int
