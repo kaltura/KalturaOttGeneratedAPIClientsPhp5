@@ -5760,6 +5760,59 @@ class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMediaConcurrencyRule extends KalturaObjectBase
+{
+	/**
+	 * Media concurrency rule  identifier
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * Media concurrency rule  name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Concurrency limitation type
+	 *
+	 * @var KalturaConcurrencyLimitationType
+	 */
+	public $concurrencyLimitationType = null;
+
+	/**
+	 * Limitation
+	 *
+	 * @var int
+	 */
+	public $limitation = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaConcurrencyRuleListResponse extends KalturaListResponse
+{
+	/**
+	 * Media CONCURRENCY RULES
+	 *
+	 * @var array of KalturaMediaConcurrencyRule
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaAssetRuleBase extends KalturaObjectBase
 {
 	/**

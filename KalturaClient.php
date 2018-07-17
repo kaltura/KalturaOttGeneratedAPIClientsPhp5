@@ -3888,6 +3888,35 @@ class KalturaLicensedUrlService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMediaConcurrencyRuleService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Get the list of meta mappings for the partner
+	 * 
+	 * @return KalturaMediaConcurrencyRuleListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("mediaconcurrencyrule", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMediaConcurrencyRuleListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMessageTemplateService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -7927,6 +7956,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaMediaConcurrencyRuleService
+	 */
+	public $mediaConcurrencyRule = null;
+
+	/**
+	 * 
 	 * @var KalturaMessageTemplateService
 	 */
 	public $messageTemplate = null;
@@ -8216,8 +8251,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-07-11');
-		$this->setApiVersion('4.9.4.20864');
+		$this->setClientTag('php5:18-07-17');
+		$this->setApiVersion('4.9.9.13406');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -8266,6 +8301,7 @@ class KalturaClient extends KalturaClientBase
 		$this->inboxMessage = new KalturaInboxMessageService($this);
 		$this->language = new KalturaLanguageService($this);
 		$this->licensedUrl = new KalturaLicensedUrlService($this);
+		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);
 		$this->messageTemplate = new KalturaMessageTemplateService($this);
 		$this->meta = new KalturaMetaService($this);
 		$this->notification = new KalturaNotificationService($this);
