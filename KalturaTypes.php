@@ -7081,6 +7081,29 @@ class KalturaConcurrencyCondition extends KalturaAssetCondition
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIpRangeCondition extends KalturaCondition
+{
+	/**
+	 * From IP address range
+	 *
+	 * @var string
+	 */
+	public $fromIP = null;
+
+	/**
+	 * TO IP address range
+	 *
+	 * @var string
+	 */
+	public $toIP = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetUserRuleBlockAction extends KalturaAssetUserRuleAction
 {
 
@@ -7132,6 +7155,24 @@ class KalturaEndDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
  * @subpackage Client
  */
 class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAllowPlaybackAction extends KalturaAssetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBlockPlaybackAction extends KalturaAssetRuleAction
 {
 
 }
