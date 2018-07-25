@@ -2639,6 +2639,13 @@ class KalturaChannel extends KalturaBaseChannel
 	public $multilingualName;
 
 	/**
+	 * Channel name
+	 *
+	 * @var string
+	 */
+	public $oldName = null;
+
+	/**
 	 * Channel system name
 	 *
 	 * @var string
@@ -2659,6 +2666,13 @@ class KalturaChannel extends KalturaBaseChannel
 	 * @var array of KalturaTranslationToken
 	 */
 	public $multilingualDescription;
+
+	/**
+	 * Cannel description
+	 *
+	 * @var string
+	 */
+	public $oldDescription = null;
 
 	/**
 	 * active status
