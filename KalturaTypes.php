@@ -5283,14 +5283,14 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 *
 	 * @var int
 	 */
-	public $bufferCatchUp = null;
+	public $bufferCatchUpSetting = null;
 
 	/**
 	 * buffer Trick-play, configuration only
 	 *
 	 * @var int
 	 */
-	public $bufferTrickPlay = null;
+	public $bufferTrickPlaySetting = null;
 
 	/**
 	 * Enable Recording playback for non entitled channel, configuration only
@@ -5326,7 +5326,7 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @var bool
 	 * @readonly
 	 */
-	public $cdvrEnabled = null;
+	public $enableCdvr = null;
 
 	/**
 	 * Is catch-up enabled for this asset
@@ -5334,7 +5334,7 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @var bool
 	 * @readonly
 	 */
-	public $catchUpEnabled = null;
+	public $enableCatchUp = null;
 
 	/**
 	 * Is start over enabled for this asset
@@ -5342,7 +5342,7 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @var bool
 	 * @readonly
 	 */
-	public $startOverEnabled = null;
+	public $enableStartOver = null;
 
 	/**
 	 * summed Catch-up buffer, the TimeShiftedTvPartnerSettings are also taken into consideration
@@ -5350,7 +5350,7 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @var int
 	 * @readonly
 	 */
-	public $summedCatchUpBuffer = null;
+	public $catchUpBuffer = null;
 
 	/**
 	 * summed Trick-play buffer, the TimeShiftedTvPartnerSettings are also taken into consideration
@@ -5358,7 +5358,7 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @var int
 	 * @readonly
 	 */
-	public $summedTrickPlayBuffer = null;
+	public $trickPlayBuffer = null;
 
 	/**
 	 * Is recording playback for non entitled channel enabled for this asset
@@ -5366,7 +5366,7 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @var bool
 	 * @readonly
 	 */
-	public $recordingPlaybackNonEntitledChannelEnabled = null;
+	public $enableRecordingPlaybackNonEntitledChannel = null;
 
 	/**
 	 * Is trick-play enabled for this asset
@@ -5374,7 +5374,7 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @var bool
 	 * @readonly
 	 */
-	public $trickPlayEnabled = null;
+	public $enableTrickPlay = null;
 
 	/**
 	 * channel type, possible values: UNKNOWN, DTT, OTT, DTT_AND_OTT
