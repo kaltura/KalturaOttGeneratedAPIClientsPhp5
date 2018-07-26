@@ -5255,7 +5255,7 @@ class KalturaMediaAsset extends KalturaAsset
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaLinearMediaAsset extends KalturaMediaAsset
+class KalturaLiveAsset extends KalturaMediaAsset
 {
 	/**
 	 * Enable CDVR, configuration only
