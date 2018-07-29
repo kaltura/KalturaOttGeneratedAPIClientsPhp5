@@ -9359,13 +9359,6 @@ class KalturaSearchAssetFilter extends KalturaBaseSearchAssetFilter
 	 */
 	public $typeIn = null;
 
-	/**
-	 * Comma separated list of EPG channel ids to search within. *****Deprecated, please use linear_media_id inside kSql instead*****
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
 
 }
 
