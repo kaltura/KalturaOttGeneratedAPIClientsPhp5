@@ -2187,6 +2187,29 @@ class KalturaOTTUser extends KalturaBaseOTTUser
 	 */
 	public $userState = null;
 
+	/**
+	 * Comma separated list of role Ids.
+	 *
+	 * @var string
+	 */
+	public $roleIds = null;
+
+	/**
+	 * User create date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * User last update date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
 
 }
 
@@ -8884,6 +8907,13 @@ class KalturaOTTUserFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $idIn = null;
+
+	/**
+	 * Comma separated list of role Ids.
+	 *
+	 * @var string
+	 */
+	public $roleIdsIn = null;
 
 
 }

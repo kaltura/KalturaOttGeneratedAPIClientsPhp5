@@ -5153,7 +5153,7 @@ class KalturaOttUserService extends KalturaServiceBase
 	}
 
 	/**
-	 * Edit user details.
+	 * Deprecate - use Register or Update actions instead by setting user.roleIds parameter
 	 * 
 	 * @param bigint $roleId The role identifier to add
 	 * @return bool
@@ -9345,7 +9345,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-08-05');
-		$this->setApiVersion('5.0.1.17059');
+		$this->setApiVersion('5.0.1.31171');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
