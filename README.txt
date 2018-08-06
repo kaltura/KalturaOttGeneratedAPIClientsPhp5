@@ -1,2 +1,2 @@
 Kaltura PHP 5 API Client Library.
-Compatible with Kaltura server version 5.0.1.16431 and above.
+Compatible with Kaltura server version 5.0.1.17009 and above.
