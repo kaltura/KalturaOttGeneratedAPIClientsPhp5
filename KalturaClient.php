@@ -5957,6 +5957,55 @@ class KalturaPaymentMethodProfileService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPermissionService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Returns permission names as comma separated string
+	 * 
+	 * @return string
+	 */
+	function getCurrentPermissions()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("permission", "getCurrentPermissions", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "string");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieving permissions by identifiers, if filter is empty, returns all partner permissions
+	 * 
+	 * @param KalturaPermissionFilter $filter Filter for permissions
+	 * @return KalturaPermissionListResponse
+	 */
+	function listAction(KalturaPermissionFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("permission", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPermissionListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPersonalFeedService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -9109,6 +9158,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaPermissionService
+	 */
+	public $permission = null;
+
+	/**
+	 * 
 	 * @var KalturaPersonalFeedService
 	 */
 	public $personalFeed = null;
@@ -9345,7 +9400,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-08-08');
-		$this->setApiVersion('5.0.1.24791');
+		$this->setApiVersion('5.0.1.28367');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -9415,6 +9470,7 @@ class KalturaClient extends KalturaClientBase
 		$this->partnerConfiguration = new KalturaPartnerConfigurationService($this);
 		$this->paymentGatewayProfile = new KalturaPaymentGatewayProfileService($this);
 		$this->paymentMethodProfile = new KalturaPaymentMethodProfileService($this);
+		$this->permission = new KalturaPermissionService($this);
 		$this->personalFeed = new KalturaPersonalFeedService($this);
 		$this->personalList = new KalturaPersonalListService($this);
 		$this->pin = new KalturaPinService($this);

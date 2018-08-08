@@ -6844,6 +6844,69 @@ class KalturaDrmProfileListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPermission extends KalturaObjectBase
+{
+	/**
+	 * Permission identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Permission name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Permission friendly name
+	 *
+	 * @var string
+	 */
+	public $friendlyName = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of permissions
+	 *
+	 * @var array of KalturaPermission
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGroupPermission extends KalturaPermission
+{
+	/**
+	 * Permission identifier
+	 *
+	 * @var string
+	 */
+	public $group = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaConcurrencyRule extends KalturaObjectBase
 {
 	/**
@@ -10363,6 +10426,22 @@ class KalturaExportTaskFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionFilter extends KalturaFilter
+{
+	/**
+	 * Indicates whether the results should be filtered by userId using the current
+	 *
+	 * @var bool
+	 */
+	public $currentUserPermissionsContains = null;
 
 
 }

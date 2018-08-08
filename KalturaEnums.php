@@ -989,6 +989,15 @@ class KalturaPaymentMethodType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPermissionOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPersonalFeedOrderBy extends KalturaEnumBase
 {
 	const RELEVANCY_DESC = "RELEVANCY_DESC";
