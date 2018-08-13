@@ -5382,13 +5382,15 @@ class KalturaOttUserService extends KalturaServiceBase
 	 * 
 	 * @param int $partnerId Partner Identifier
 	 * @param string $username User name
+	 * @param string $templateName Template name for reset password
 	 * @return bool
 	 */
-	function resetPassword($partnerId, $username)
+	function resetPassword($partnerId, $username, $templateName = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "partnerId", $partnerId);
 		$this->client->addParam($kparams, "username", $username);
+		$this->client->addParam($kparams, "templateName", $templateName);
 		$this->client->queueServiceActionCall("ottuser", "resetPassword", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -9399,8 +9401,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-08-12');
-		$this->setApiVersion('5.0.1.43121');
+		$this->setClientTag('php5:18-08-13');
+		$this->setApiVersion('5.0.1.20140');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
