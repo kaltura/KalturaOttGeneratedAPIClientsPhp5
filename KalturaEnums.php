@@ -439,6 +439,31 @@ class KalturaConfigurationsOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaContentAction extends KalturaEnumBase
+{
+	const WATCH_LINEAR = "watch_linear";
+	const WATCH_VOD = "watch_vod";
+	const CATCHUP = "catchup";
+	const NPVR = "npvr";
+	const FAVORITE = "favorite";
+	const RECORDING = "recording";
+	const SOCIAL_ACTION = "social_action";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaContentFieldType extends KalturaEnumBase
+{
+	const META = "meta";
+	const TAG = "tag";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaContextType extends KalturaEnumBase
 {
 	const NONE = "none";
@@ -809,6 +834,17 @@ class KalturaLinearChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMathemticalOperatorType extends KalturaEnumBase
+{
+	const COUNT = "count";
+	const SUM = "sum";
+	const AVG = "avg";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaFileOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -890,6 +926,16 @@ class KalturaMetaTagOrderBy extends KalturaEnumBase
 {
 	const META_ASC = "META_ASC";
 	const META_DESC = "META_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMonetizationType extends KalturaEnumBase
+{
+	const PPV = "ppv";
+	const SUBSCRIPTION = "subscription";
 }
 
 /**

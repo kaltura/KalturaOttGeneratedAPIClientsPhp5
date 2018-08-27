@@ -6991,6 +6991,99 @@ class KalturaSearchHistoryService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSegmentationTypeService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * ...
+	 * 
+	 * @param KalturaSegmentationType $segmentationType .
+	 * @return KalturaSegmentationType
+	 */
+	function add(KalturaSegmentationType $segmentationType)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "segmentationType", $segmentationType->toParams());
+		$this->client->queueServiceActionCall("segmentationtype", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSegmentationType");
+		return $resultObject;
+	}
+
+	/**
+	 * ...
+	 * 
+	 * @param bigint $id .
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("segmentationtype", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * ...
+	 * 
+	 * @param KalturaSegmentationTypeFilter $filter .
+	 * @param KalturaFilterPager $pager .
+	 * @return KalturaSegmentationTypeListResponse
+	 */
+	function listAction(KalturaSegmentationTypeFilter $filter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("segmentationtype", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSegmentationTypeListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * ...
+	 * 
+	 * @param int $segmentationTypeId .
+	 * @param KalturaSegmentationType $segmentationType .
+	 * @return KalturaSegmentationType
+	 */
+	function update($segmentationTypeId, KalturaSegmentationType $segmentationType)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "segmentationTypeId", $segmentationTypeId);
+		$this->client->addParam($kparams, "segmentationType", $segmentationType->toParams());
+		$this->client->queueServiceActionCall("segmentationtype", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSegmentationType");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecordingService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -9262,6 +9355,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaSegmentationTypeService
+	 */
+	public $segmentationType = null;
+
+	/**
+	 * 
 	 * @var KalturaSeriesRecordingService
 	 */
 	public $seriesRecording = null;
@@ -9402,7 +9501,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-08-27');
-		$this->setApiVersion('5.0.1.22446');
+		$this->setApiVersion('5.0.1.24727');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -9489,6 +9588,7 @@ class KalturaClient extends KalturaClientBase
 		$this->reminder = new KalturaReminderService($this);
 		$this->report = new KalturaReportService($this);
 		$this->searchHistory = new KalturaSearchHistoryService($this);
+		$this->segmentationType = new KalturaSegmentationTypeService($this);
 		$this->seriesRecording = new KalturaSeriesRecordingService($this);
 		$this->session = new KalturaSessionService($this);
 		$this->socialAction = new KalturaSocialActionService($this);

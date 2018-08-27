@@ -6069,6 +6069,466 @@ class KalturaBulkListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBaseSegmentCondition extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBaseSegmentValue extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentationType extends KalturaObjectBase
+{
+	/**
+	 * Id of segmentation type
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+	/**
+	 * Name of segmentation type
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Name of segmentation type
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * Description of segmentation type
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $description = null;
+
+	/**
+	 * Description of segmentation type
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualDescription;
+
+	/**
+	 * Segmentation conditions - can be empty
+	 *
+	 * @var array of KalturaBaseSegmentCondition
+	 */
+	public $conditions;
+
+	/**
+	 * Segmentation values - can be empty (so only one segment will be created)
+	 *
+	 * @var KalturaBaseSegmentValue
+	 */
+	public $value;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentationTypeListResponse extends KalturaListResponse
+{
+	/**
+	 * Segmentation Types
+	 *
+	 * @var array of KalturaSegmentationType
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMonetizationCondition extends KalturaObjectBase
+{
+	/**
+	 * Purchase type
+	 *
+	 * @var KalturaMonetizationType
+	 */
+	public $type = null;
+
+	/**
+	 * Minimum price of purchase
+	 *
+	 * @var int
+	 */
+	public $minimumPrice = null;
+
+	/**
+	 * Score multiplier
+	 *
+	 * @var int
+	 */
+	public $multiplier = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaScoredMonetizationCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * The minimum score to be met
+	 *
+	 * @var int
+	 */
+	public $score = null;
+
+	/**
+	 * List of the actions that consist the condition
+	 *
+	 * @var array of KalturaMonetizationCondition
+	 */
+	public $actions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaContentActionCondition extends KalturaObjectBase
+{
+	/**
+	 * The relevant action to be examined
+	 *
+	 * @var KalturaContentAction
+	 */
+	public $action = null;
+
+	/**
+	 * Optional - if action required specific length to be considered
+	 *
+	 * @var int
+	 */
+	public $length = null;
+
+	/**
+	 * Score multiplier - how much is a single action worth when considering the action
+	 *
+	 * @var int
+	 */
+	public $multiplier = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * The minimum score to be met
+	 *
+	 * @var int
+	 */
+	public $score = null;
+
+	/**
+	 * List of the actions that consist the condition
+	 *
+	 * @var array of KalturaContentActionCondition
+	 */
+	public $actions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserDataCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * Field name
+	 *
+	 * @var string
+	 */
+	public $field = null;
+
+	/**
+	 * Value
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentSource extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentValue extends KalturaObjectBase
+{
+	/**
+	 * Id of segment
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+	/**
+	 * Name of segment
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Name of segment
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * The value of the segment
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+	/**
+	 * Threshold - minimuim score to be met for this specific value
+	 *
+	 * @var int
+	 */
+	public $threshold = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentValues extends KalturaBaseSegmentValue
+{
+	/**
+	 * Segment values source
+	 *
+	 * @var KalturaSegmentSource
+	 */
+	public $source;
+
+	/**
+	 * Threshold - minimum score to be met for all values in general (can be overriden)
+	 *
+	 * @var int
+	 */
+	public $threshold = null;
+
+	/**
+	 * List of segment values
+	 *
+	 * @var array of KalturaSegmentValue
+	 */
+	public $values;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentAllValues extends KalturaSegmentValues
+{
+	/**
+	 * Segment names&#39; format - they will be automatically generated
+	 *
+	 * @var string
+	 */
+	public $nameFormat = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMonetizationSource extends KalturaSegmentSource
+{
+	/**
+	 * Purchase type
+	 *
+	 * @var KalturaMonetizationType
+	 */
+	public $type = null;
+
+	/**
+	 * Mathermtical operator to calculate
+	 *
+	 * @var KalturaMathemticalOperatorType
+	 */
+	public $operator = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaContentSource extends KalturaSegmentSource
+{
+	/**
+	 * Content data type
+	 *
+	 * @var KalturaContentFieldType
+	 */
+	public $type = null;
+
+	/**
+	 * Field name
+	 *
+	 * @var string
+	 */
+	public $field = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserDynamicDataSource extends KalturaSegmentSource
+{
+	/**
+	 * Field name
+	 *
+	 * @var string
+	 */
+	public $field = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentRange extends KalturaObjectBase
+{
+	/**
+	 * Specific segment name
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Specific segment name
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * Greater than or equals &gt;=
+	 *
+	 * @var float
+	 */
+	public $gte = null;
+
+	/**
+	 * Greater than &gt;
+	 *
+	 * @var float
+	 */
+	public $gt = null;
+
+	/**
+	 * Less than or equals
+	 *
+	 * @var float
+	 */
+	public $lte = null;
+
+	/**
+	 * Less than
+	 *
+	 * @var float
+	 */
+	public $lt = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentRanges extends KalturaBaseSegmentValue
+{
+	/**
+	 * Range source
+	 *
+	 * @var KalturaSegmentSource
+	 */
+	public $source;
+
+	/**
+	 * List of ranges for segmentation
+	 *
+	 * @var array of KalturaSegmentRange
+	 */
+	public $ranges;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecording extends KalturaObjectBase
 {
 	/**
@@ -10007,6 +10467,15 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 	 */
 	public $daysLessThanOrEqual = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentationTypeFilter extends KalturaFilter
+{
 
 }
 
