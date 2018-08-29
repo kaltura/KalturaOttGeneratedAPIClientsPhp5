@@ -3113,8 +3113,7 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
 	}
 
 	/**
-	 * (Deprecated - use personalList.add)
-            Add a user&#39;s tv series follow.
+	 * Add a user&#39;s tv series follow.
             Possible status codes: UserAlreadyFollowing = 8013, NotFound = 500007, InvalidAssetId = 4024
 	 * 
 	 * @param KalturaFollowTvSeries $followTvSeries Follow series request parameters
@@ -3134,8 +3133,7 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
 	}
 
 	/**
-	 * (Deprecated - use personalList.delete)
-            Delete a user&#39;s tv series follow.
+	 * Delete a user&#39;s tv series follow.
             Possible status codes: UserNotFollowing = 8012, NotFound = 500007, InvalidAssetId = 4024, AnnouncementNotFound = 8006
 	 * 
 	 * @param int $assetId Asset identifier
@@ -3176,8 +3174,7 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
 	}
 
 	/**
-	 * (Deprecated - use personalList.list)
-            List user&#39;s tv series follows.
+	 * List user&#39;s tv series follows.
             Possible status codes:
 	 * 
 	 * @param KalturaFollowTvSeriesFilter $filter Follow TV series filter
@@ -9501,7 +9498,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-08-29');
-		$this->setApiVersion('5.0.1.16546');
+		$this->setApiVersion('5.0.1.20324');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
