@@ -6333,7 +6333,7 @@ class KalturaSegmentValue extends KalturaObjectBase
 	public $value = null;
 
 	/**
-	 * Threshold - minimuim score to be met for this specific value
+	 * Threshold - minimum score to be met for this specific value
 	 *
 	 * @var int
 	 */
