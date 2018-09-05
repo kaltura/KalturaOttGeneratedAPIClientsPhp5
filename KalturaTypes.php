@@ -2750,7 +2750,7 @@ class KalturaDynamicChannel extends KalturaChannel
 	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
 	 *             Logical conjunction: and, or. 
 	 *             Search values are limited to 20 characters each.
-	 *             (maximum length of entire filter is 4096 characters)
+	 *             (maximum length of entire filter is 2048 characters)
 	 *
 	 * @var string
 	 */
@@ -3748,7 +3748,7 @@ class KalturaPersonalList extends KalturaObjectBase
 	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
 	 *             Logical conjunction: and, or. 
 	 *             Search values are limited to 20 characters each for the next operators: ~, !~, ^, ^=
-	 *             (maximum length of entire filter is 4096 characters)
+	 *             (maximum length of entire filter is 2048 characters)
 	 *
 	 * @var string
 	 */
@@ -4726,13 +4726,6 @@ class KalturaAssetStructMeta extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $updateDate = null;
-
-	/**
-	 * Is inherited
-	 *
-	 * @var bool
-	 */
-	public $isInherited = null;
 
 
 }
@@ -9881,7 +9874,7 @@ abstract class KalturaBaseSearchAssetFilter extends KalturaAssetFilter
 	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
 	 *             Logical conjunction: and, or. 
 	 *             Search values are limited to 20 characters each for the next operators: ~, !~, ^, ^=
-	 *             (maximum length of entire filter is 4096 characters)
+	 *             (maximum length of entire filter is 2048 characters)
 	 *
 	 * @var string
 	 */
@@ -10077,7 +10070,7 @@ class KalturaChannelFilter extends KalturaAssetFilter
 	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
 	 *             Logical conjunction: and, or. 
 	 *             Search values are limited to 20 characters each for the next operators: ~, !~, ^, ^=
-	 *             (maximum length of entire filter is 4096 characters)
+	 *             (maximum length of entire filter is 2048 characters)
 	 *
 	 * @var string
 	 */
