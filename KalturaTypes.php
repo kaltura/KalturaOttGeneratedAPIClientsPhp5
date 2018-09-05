@@ -4727,6 +4727,13 @@ class KalturaAssetStructMeta extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
+	/**
+	 * Is inherited
+	 *
+	 * @var bool
+	 */
+	public $isInherited = null;
+
 
 }
 
