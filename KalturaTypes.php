@@ -5457,6 +5457,38 @@ class KalturaProgramAsset extends KalturaAsset
 	 */
 	public $linearAssetId = null;
 
+	/**
+	 * Is CDVR enabled for this asset
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $enableCdvr = null;
+
+	/**
+	 * Is catch-up enabled for this asset
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $enableCatchUp = null;
+
+	/**
+	 * Is start over enabled for this asset
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $enableStartOver = null;
+
+	/**
+	 * Is trick-play enabled for this asset
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $enableTrickPlay = null;
+
 
 }
 
