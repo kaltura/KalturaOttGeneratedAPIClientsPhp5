@@ -454,16 +454,6 @@ class KalturaContentAction extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaContentFieldType extends KalturaEnumBase
-{
-	const META = "meta";
-	const TAG = "tag";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaContextType extends KalturaEnumBase
 {
 	const NONE = "none";
@@ -936,6 +926,7 @@ class KalturaMonetizationType extends KalturaEnumBase
 {
 	const PPV = "ppv";
 	const SUBSCRIPTION = "subscription";
+	const BOXSET = "boxset";
 }
 
 /**

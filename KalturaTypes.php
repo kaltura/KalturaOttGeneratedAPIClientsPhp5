@@ -6242,6 +6242,13 @@ class KalturaScoredMonetizationCondition extends KalturaBaseSegmentCondition
 	public $score = null;
 
 	/**
+	 * How many days back should the actions be considered
+	 *
+	 * @var int
+	 */
+	public $days = null;
+
+	/**
 	 * List of the actions that consist the condition
 	 *
 	 * @var array of KalturaMonetizationCondition
@@ -6295,6 +6302,13 @@ class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
 	public $score = null;
 
 	/**
+	 * How many days back should the actions be considered
+	 *
+	 * @var int
+	 */
+	public $days = null;
+
+	/**
 	 * List of the actions that consist the condition
 	 *
 	 * @var array of KalturaContentActionCondition
@@ -6346,8 +6360,16 @@ class KalturaSegmentValue extends KalturaObjectBase
 	 * Id of segment
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $id = null;
+
+	/**
+	 * Systematic name of segment
+	 *
+	 * @var string
+	 */
+	public $systematicName = null;
 
 	/**
 	 * Name of segment
@@ -6393,13 +6415,6 @@ class KalturaSegmentValues extends KalturaBaseSegmentValue
 	 * @var KalturaSegmentSource
 	 */
 	public $source;
-
-	/**
-	 * Threshold - minimum score to be met for all values in general (can be overriden)
-	 *
-	 * @var int
-	 */
-	public $threshold = null;
 
 	/**
 	 * List of segment values
@@ -6457,14 +6472,7 @@ class KalturaMonetizationSource extends KalturaSegmentSource
 class KalturaContentSource extends KalturaSegmentSource
 {
 	/**
-	 * Content data type
-	 *
-	 * @var KalturaContentFieldType
-	 */
-	public $type = null;
-
-	/**
-	 * Field name
+	 * Topic (meta or tag) name
 	 *
 	 * @var string
 	 */
@@ -6495,6 +6503,21 @@ class KalturaUserDynamicDataSource extends KalturaSegmentSource
  */
 class KalturaSegmentRange extends KalturaObjectBase
 {
+	/**
+	 * Id of segment
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Systematic name of segment
+	 *
+	 * @var string
+	 */
+	public $systematicName = null;
+
 	/**
 	 * Specific segment name
 	 *
@@ -6538,6 +6561,13 @@ class KalturaSegmentRange extends KalturaObjectBase
 	 */
 	public $lt = null;
 
+	/**
+	 * Equals
+	 *
+	 * @var float
+	 */
+	public $equals = null;
+
 
 }
 
@@ -6560,6 +6590,52 @@ class KalturaSegmentRanges extends KalturaBaseSegmentValue
 	 * @var array of KalturaSegmentRange
 	 */
 	public $ranges;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSegment extends KalturaObjectBase
+{
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $segmentId = null;
+
+	/**
+	 * Segmentation type Id
+	 *
+	 * @var int
+	 */
+	public $segmentationTypeId = null;
+
+	/**
+	 * User Id of segment
+	 *
+	 * @var string
+	 */
+	public $userId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSegmentListResponse extends KalturaListResponse
+{
+	/**
+	 * Segmentation Types
+	 *
+	 * @var array of KalturaUserSegment
+	 */
+	public $objects;
 
 
 }
@@ -10515,6 +10591,22 @@ class KalturaAssetHistoryFilter extends KalturaFilter
  */
 class KalturaSegmentationTypeFilter extends KalturaFilter
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSegmentFilter extends KalturaFilter
+{
+	/**
+	 * User ID
+	 *
+	 * @var string
+	 */
+	public $userIdEqual = null;
+
 
 }
 

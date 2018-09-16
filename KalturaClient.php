@@ -7015,9 +7015,9 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
-	 * ...
+	 * Delete a segmentation type from the system
 	 * 
-	 * @param bigint $id .
+	 * @param bigint $id Segmentation type id
 	 * @return bool
 	 */
 	function delete($id)
@@ -8838,6 +8838,80 @@ class KalturaUserRoleService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUserSegmentService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Adds a segment to a user
+	 * 
+	 * @param KalturaUserSegment $userSegment User segment
+	 * @return KalturaUserSegment
+	 */
+	function add(KalturaUserSegment $userSegment)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "userSegment", $userSegment->toParams());
+		$this->client->queueServiceActionCall("usersegment", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUserSegment");
+		return $resultObject;
+	}
+
+	/**
+	 * Deletes a segment from a user
+	 * 
+	 * @param string $userId User id
+	 * @param bigint $segmentId Segment id
+	 * @return bool
+	 */
+	function delete($userId, $segmentId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "userId", $userId);
+		$this->client->addParam($kparams, "segmentId", $segmentId);
+		$this->client->queueServiceActionCall("usersegment", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve all the segments that apply for this user
+	 * 
+	 * @param KalturaUserSegmentFilter $filter Filter
+	 * @param KalturaFilterPager $pager Pager
+	 * @return KalturaUserSegmentListResponse
+	 */
+	function listAction(KalturaUserSegmentFilter $filter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("usersegment", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUserSegmentListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaClient extends KalturaClientBase
 {
 	/**
@@ -9489,6 +9563,12 @@ class KalturaClient extends KalturaClientBase
 	public $userRole = null;
 
 	/**
+	 * 
+	 * @var KalturaUserSegmentService
+	 */
+	public $userSegment = null;
+
+	/**
 	 * Kaltura client constructor
 	 *
 	 * @param KalturaConfiguration $config
@@ -9498,7 +9578,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-09-16');
-		$this->setApiVersion('5.0.2.20444');
+		$this->setApiVersion('5.0.2.42002');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -9608,6 +9688,7 @@ class KalturaClient extends KalturaClientBase
 		$this->userInterest = new KalturaUserInterestService($this);
 		$this->userLoginPin = new KalturaUserLoginPinService($this);
 		$this->userRole = new KalturaUserRoleService($this);
+		$this->userSegment = new KalturaUserSegmentService($this);
 	}
 	
 	/**
