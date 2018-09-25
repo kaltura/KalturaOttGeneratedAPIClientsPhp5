@@ -119,6 +119,16 @@ class KalturaAssetHistoryOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetInheritancePolicy extends KalturaEnumBase
+{
+	const ENABLE = "Enable";
+	const DISABLE = "Disable";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetOrderBy extends KalturaEnumBase
 {
 	const RELEVANCY_DESC = "RELEVANCY_DESC";
