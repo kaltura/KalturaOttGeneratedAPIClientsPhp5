@@ -1128,6 +1128,15 @@ class KalturaPositionOwner extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPpvOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPriceDetailsOrderBy extends KalturaEnumBase
 {
 	const NAME_ASC = "NAME_ASC";

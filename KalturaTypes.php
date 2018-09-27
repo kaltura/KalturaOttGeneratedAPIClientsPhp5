@@ -10491,6 +10491,22 @@ class KalturaRecordingFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPpvFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetFilePpvFilter extends KalturaFilter
 {
 	/**

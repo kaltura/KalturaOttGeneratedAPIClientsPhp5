@@ -600,6 +600,46 @@ class KalturaAssetFilePpvService extends KalturaServiceBase
 	}
 
 	/**
+	 * Add asset file ppv
+	 * 
+	 * @param KalturaAssetFilePpv $assetFilePpv Asset file ppv
+	 * @return KalturaAssetFilePpv
+	 */
+	function add(KalturaAssetFilePpv $assetFilePpv)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetFilePpv", $assetFilePpv->toParams());
+		$this->client->queueServiceActionCall("assetfileppv", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetFilePpv");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete asset file ppv
+	 * 
+	 * @param bigint $assetFileId Asset file id
+	 * @param bigint $ppvModuleId Ppv module id
+	 * @return bool
+	 */
+	function delete($assetFileId, $ppvModuleId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetFileId", $assetFileId);
+		$this->client->addParam($kparams, "ppvModuleId", $ppvModuleId);
+		$this->client->queueServiceActionCall("assetfileppv", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Return a list of asset files ppvs for the account with optional filter
 	 * 
 	 * @param KalturaAssetFilePpvFilter $filter Filter parameters for filtering out the result
@@ -615,6 +655,29 @@ class KalturaAssetFilePpvService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaAssetFilePpvListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update assetFilePpv
+	 * 
+	 * @param bigint $assetFileId Asset file id
+	 * @param bigint $ppvModuleId Ppv module id
+	 * @param KalturaAssetFilePpv $assetFilePpv AssetFilePpv
+	 * @return KalturaAssetFilePpv
+	 */
+	function update($assetFileId, $ppvModuleId, KalturaAssetFilePpv $assetFilePpv)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetFileId", $assetFileId);
+		$this->client->addParam($kparams, "ppvModuleId", $ppvModuleId);
+		$this->client->addParam($kparams, "assetFilePpv", $assetFilePpv->toParams());
+		$this->client->queueServiceActionCall("assetfileppv", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetFilePpv");
 		return $resultObject;
 	}
 }
@@ -6256,11 +6319,14 @@ class KalturaPpvService extends KalturaServiceBase
 	/**
 	 * Returns all ppv objects
 	 * 
+	 * @param KalturaPpvFilter $filter Filter parameters for filtering out the result
 	 * @return KalturaPpvListResponse
 	 */
-	function listAction()
+	function listAction(KalturaPpvFilter $filter = null)
 	{
 		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("ppv", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -9632,7 +9698,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-09-27');
-		$this->setApiVersion('5.0.2.15349');
+		$this->setApiVersion('5.0.2.41999');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
