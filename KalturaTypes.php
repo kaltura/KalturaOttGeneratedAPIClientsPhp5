@@ -2233,1482 +2233,6 @@ class KalturaOTTUserListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBaseChannel extends KalturaObjectBase
-{
-	/**
-	 * Unique identifier for the channel
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscountModule extends KalturaObjectBase
-{
-	/**
-	 * The discount percentage
-	 *
-	 * @var float
-	 */
-	public $percent = null;
-
-	/**
-	 * The first date the discount is available
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * The last date the discount is available
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUsageModule extends KalturaObjectBase
-{
-	/**
-	 * Usage module identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Usage module name
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $name = null;
-
-	/**
-	 * The maximum number of times an item in this usage module can be viewed
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $maxViewsNumber = null;
-
-	/**
-	 * The amount time an item is available for viewing since a user started watching the item
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $viewLifeCycle = null;
-
-	/**
-	 * The amount time an item is available for viewing
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $fullLifeCycle = null;
-
-	/**
-	 * Identifies a specific coupon linked to this object
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $couponId = null;
-
-	/**
-	 * Time period during which the end user can waive his rights to cancel a purchase. When the time period is passed, the purchase can no longer be cancelled
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $waiverPeriod = null;
-
-	/**
-	 * Indicates whether or not the end user has the right to waive his rights to cancel a purchase
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isWaiverEnabled = null;
-
-	/**
-	 * Indicates that usage is targeted for offline playback
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isOfflinePlayback = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCouponsGroup extends KalturaObjectBase
-{
-	/**
-	 * Coupon group identifier
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Coupon group name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * The first date the coupons in this coupons group are valid
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * The last date the coupons in this coupons group are valid
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-	/**
-	 * Maximum number of uses for each coupon in the group
-	 *
-	 * @var int
-	 */
-	public $maxUsesNumber = null;
-
-	/**
-	 * Maximum number of uses for each coupon in the group on a renewable subscription
-	 *
-	 * @var int
-	 */
-	public $maxUsesNumberOnRenewableSub = null;
-
-	/**
-	 * Type of the coupon group
-	 *
-	 * @var KalturaCouponGroupType
-	 */
-	public $couponGroupType = null;
-
-	/**
-	 * Maximum number of uses per household for each coupon in the group
-	 *
-	 * @var int
-	 */
-	public $maxHouseholdUses = null;
-
-	/**
-	 * Discount ID
-	 *
-	 * @var int
-	 */
-	public $discountId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProductCode extends KalturaObjectBase
-{
-	/**
-	 * Provider Name
-	 *
-	 * @var string
-	 */
-	public $inappProvider = null;
-
-	/**
-	 * Product Code
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCollection extends KalturaObjectBase
-{
-	/**
-	 * Collection identifier
-	 *
-	 * @var string
-	 */
-	public $id = null;
-
-	/**
-	 * A list of channels associated with this collection
-	 *
-	 * @var array of KalturaBaseChannel
-	 */
-	public $channels;
-
-	/**
-	 * The first date the collection is available for purchasing
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * The last date the collection is available for purchasing
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-	/**
-	 * The internal discount module for the subscription
-	 *
-	 * @var KalturaDiscountModule
-	 */
-	public $discountModule;
-
-	/**
-	 * Name of the subscription
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $name = null;
-
-	/**
-	 * Name of the subscription
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualName;
-
-	/**
-	 * description of the subscription
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $description = null;
-
-	/**
-	 * description of the subscription
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualDescription;
-
-	/**
-	 * Collection usage module
-	 *
-	 * @var KalturaUsageModule
-	 */
-	public $usageModule;
-
-	/**
-	 * List of Coupons group
-	 *
-	 * @var array of KalturaCouponsGroup
-	 */
-	public $couponsGroups;
-
-	/**
-	 * External ID
-	 *
-	 * @var string
-	 */
-	public $externalId = null;
-
-	/**
-	 * List of Collection product codes
-	 *
-	 * @var array of KalturaProductCode
-	 */
-	public $productCodes;
-
-	/**
-	 * The ID of the price details associated with this collection
-	 *
-	 * @var int
-	 */
-	public $priceDetailsId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCollectionListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of collections
-	 *
-	 * @var array of KalturaCollection
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaAssetGroupBy extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDynamicOrderBy extends KalturaObjectBase
-{
-	/**
-	 * order by name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * order by meta asc/desc
-	 *
-	 * @var KalturaMetaTagOrderBy
-	 */
-	public $orderBy = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaChannelOrder extends KalturaObjectBase
-{
-	/**
-	 * Channel dynamic order by (meta)
-	 *
-	 * @var KalturaDynamicOrderBy
-	 */
-	public $dynamicOrderBy;
-
-	/**
-	 * Channel order by
-	 *
-	 * @var KalturaChannelOrderBy
-	 */
-	public $orderBy = null;
-
-	/**
-	 * Sliding window period in minutes, used only when ordering by LIKES_DESC / VOTES_DESC / RATINGS_DESC / VIEWS_DESC
-	 *
-	 * @var int
-	 */
-	public $period = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaChannel extends KalturaBaseChannel
-{
-	/**
-	 * Channel name
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $name = null;
-
-	/**
-	 * Channel name
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualName;
-
-	/**
-	 * Channel name
-	 *
-	 * @var string
-	 */
-	public $oldName = null;
-
-	/**
-	 * Channel system name
-	 *
-	 * @var string
-	 */
-	public $systemName = null;
-
-	/**
-	 * Cannel description
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $description = null;
-
-	/**
-	 * Cannel description
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualDescription;
-
-	/**
-	 * Cannel description
-	 *
-	 * @var string
-	 */
-	public $oldDescription = null;
-
-	/**
-	 * active status
-	 *
-	 * @var bool
-	 */
-	public $isActive = null;
-
-	/**
-	 * Channel order by
-	 *
-	 * @var KalturaChannelOrder
-	 */
-	public $orderBy;
-
-	/**
-	 * Specifies when was the Channel was created. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Specifies when was the Channel last updated. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDynamicChannel extends KalturaChannel
-{
-	/**
-	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
-	 *             Possible keys: any Tag or Meta defined in the system and the following reserved keys: start_date, end_date. 
-	 *             epg_id, media_id - for specific asset IDs.
-	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restriced to the user by geo-block rules will return.
-	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
-	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
-	 *             epg_channel_id – the channel identifier of the EPG program. *****Deprecated, please use linear_media_id instead*****
-	 *             linear_media_id – the linear media identifier of the EPG program.
-	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
-	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
-	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
-	 *             Logical conjunction: and, or. 
-	 *             Search values are limited to 20 characters each.
-	 *             (maximum length of entire filter is 4096 characters)
-	 *
-	 * @var string
-	 */
-	public $kSql = null;
-
-	/**
-	 * Asset types in the channel.
-	 *             -26 is EPG
-	 *
-	 * @var array of KalturaIntegerValue
-	 */
-	public $assetTypes;
-
-	/**
-	 * Channel group by
-	 *
-	 * @var KalturaAssetGroupBy
-	 */
-	public $groupBy;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaManualChannel extends KalturaChannel
-{
-	/**
-	 * A list of comma separated media ids associated with this channel, according to the order of the medias in the channel.
-	 *
-	 * @var string
-	 */
-	public $mediaIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetMetaOrTagGroupBy extends KalturaAssetGroupBy
-{
-	/**
-	 * Group by a tag or meta - according to the name that appears in the system (similar to KSQL)
-	 *
-	 * @var string
-	 */
-	public $value = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetFieldGroupBy extends KalturaAssetGroupBy
-{
-	/**
-	 * Group by a specific field that is defined in enum
-	 *
-	 * @var KalturaGroupByField
-	 */
-	public $value = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPricePlan extends KalturaUsageModule
-{
-	/**
-	 * Denotes whether or not this object can be renewed
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isRenewable = null;
-
-	/**
-	 * Defines the number of times the module will be renewed (for the life_cycle period)
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $renewalsNumber = null;
-
-	/**
-	 * The discount module identifier of the price plan
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $discountId = null;
-
-	/**
-	 * The ID of the price details associated with this price plan
-	 *
-	 * @var int
-	 */
-	public $priceDetailsId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPrice extends KalturaObjectBase
-{
-	/**
-	 * Price
-	 *
-	 * @var float
-	 */
-	public $amount = null;
-
-	/**
-	 * Currency
-	 *
-	 * @var string
-	 */
-	public $currency = null;
-
-	/**
-	 * Currency Sign
-	 *
-	 * @var string
-	 */
-	public $currencySign = null;
-
-	/**
-	 * Country ID
-	 *
-	 * @var int
-	 */
-	public $countryId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscount extends KalturaPrice
-{
-	/**
-	 * The discount percentage
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $percentage = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscountDetails extends KalturaObjectBase
-{
-	/**
-	 * The discount ID
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * The price code name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Multi currency discounts for all countries and currencies
-	 *
-	 * @var array of KalturaDiscount
-	 */
-	public $multiCurrencyDiscount;
-
-	/**
-	 * Start date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * End date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscountDetailsListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of price details
-	 *
-	 * @var array of KalturaDiscountDetails
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaSubscriptionSet extends KalturaObjectBase
-{
-	/**
-	 * SubscriptionSet identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * SubscriptionSet name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Type of the Subscription Set
-	 *
-	 * @var KalturaSubscriptionSetType
-	 * @readonly
-	 */
-	public $type = null;
-
-	/**
-	 * A list of comma separated subscription ids associated with this set ordered by priority ascending
-	 *
-	 * @var string
-	 */
-	public $subscriptionIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionSetListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of subscriptionSets
-	 *
-	 * @var array of KalturaSubscriptionSet
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionDependencySet extends KalturaSubscriptionSet
-{
-	/**
-	 * Base Subscription identifier
-	 *
-	 * @var int
-	 */
-	public $baseSubscriptionId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionSwitchSet extends KalturaSubscriptionSet
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaProductPrice extends KalturaObjectBase
-{
-	/**
-	 * Product identifier
-	 *
-	 * @var string
-	 */
-	public $productId = null;
-
-	/**
-	 * Product Type
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $productType = null;
-
-	/**
-	 * Product price
-	 *
-	 * @var KalturaPrice
-	 */
-	public $price;
-
-	/**
-	 * Product purchase status
-	 *
-	 * @var KalturaPurchaseStatus
-	 */
-	public $purchaseStatus = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProductPriceListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of prices
-	 *
-	 * @var array of KalturaProductPrice
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCollectionPrice extends KalturaProductPrice
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPpvPrice extends KalturaProductPrice
-{
-	/**
-	 * Media file identifier
-	 *
-	 * @var int
-	 */
-	public $fileId = null;
-
-	/**
-	 * The associated PPV module identifier
-	 *
-	 * @var string
-	 */
-	public $ppvModuleId = null;
-
-	/**
-	 * Denotes whether this object is available only as part of a subscription or can be sold separately
-	 *
-	 * @var bool
-	 */
-	public $isSubscriptionOnly = null;
-
-	/**
-	 * The full price of the item (with no discounts)
-	 *
-	 * @var KalturaPrice
-	 */
-	public $fullPrice;
-
-	/**
-	 * The identifier of the relevant subscription
-	 *
-	 * @var string
-	 */
-	public $subscriptionId = null;
-
-	/**
-	 * The identifier of the relevant collection
-	 *
-	 * @var string
-	 */
-	public $collectionId = null;
-
-	/**
-	 * The identifier of the relevant pre paid
-	 *
-	 * @var string
-	 */
-	public $prePaidId = null;
-
-	/**
-	 * A list of the descriptions of the PPV module on different languages (language code and translation)
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $ppvDescriptions;
-
-	/**
-	 * If the item already purchased - the identifier of the user (in the household) who purchased this item
-	 *
-	 * @var string
-	 */
-	public $purchaseUserId = null;
-
-	/**
-	 * If the item already purchased - the identifier of the purchased file
-	 *
-	 * @var int
-	 */
-	public $purchasedMediaFileId = null;
-
-	/**
-	 * Related media files identifiers (different types)
-	 *
-	 * @var array of KalturaIntegerValue
-	 */
-	public $relatedMediaFileIds;
-
-	/**
-	 * If the item already purchased - since when the user can start watching the item
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * If the item already purchased - until when the user can watch the item
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-	/**
-	 * Discount end date
-	 *
-	 * @var int
-	 */
-	public $discountEndDate = null;
-
-	/**
-	 * If the item already purchased and played - the name of the device on which it was first played
-	 *
-	 * @var string
-	 */
-	public $firstDeviceName = null;
-
-	/**
-	 * If waiver period is enabled - donates whether the user is still in the cancelation window
-	 *
-	 * @var bool
-	 */
-	public $isInCancelationPeriod = null;
-
-	/**
-	 * The PPV product code
-	 *
-	 * @var string
-	 */
-	public $ppvProductCode = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionPrice extends KalturaProductPrice
-{
-	/**
-	 * If the item related to unified billing cycle purchased - until when the this price is relevant
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCouponsGroupListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of coupons groups
-	 *
-	 * @var array of KalturaCouponsGroup
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPriceDetails extends KalturaObjectBase
-{
-	/**
-	 * The price code identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * The price code name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * The price
-	 *
-	 * @var KalturaPrice
-	 * @readonly
-	 */
-	public $price;
-
-	/**
-	 * Multi currency prices for all countries and currencies
-	 *
-	 * @var array of KalturaPrice
-	 */
-	public $multiCurrencyPrice;
-
-	/**
-	 * A list of the descriptions for this price on different languages (language code and translation)
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $descriptions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPriceDetailsListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of price details
-	 *
-	 * @var array of KalturaPriceDetails
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPricePlanListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of price plans
-	 *
-	 * @var array of KalturaPricePlan
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPreviewModule extends KalturaObjectBase
-{
-	/**
-	 * Preview module identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Preview module name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Preview module life cycle - for how long the preview module is active
-	 *
-	 * @var int
-	 */
-	public $lifeCycle = null;
-
-	/**
-	 * The time you can&#39;t buy the item to which the preview module is assigned to again
-	 *
-	 * @var int
-	 */
-	public $nonRenewablePeriod = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPremiumService extends KalturaObjectBase
-{
-	/**
-	 * Service identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Service name / description
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscription extends KalturaObjectBase
-{
-	/**
-	 * Subscription identifier
-	 *
-	 * @var string
-	 */
-	public $id = null;
-
-	/**
-	 * A list of channels associated with this subscription
-	 *
-	 * @var array of KalturaBaseChannel
-	 */
-	public $channels;
-
-	/**
-	 * The first date the subscription is available for purchasing
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * The last date the subscription is available for purchasing
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-	/**
-	 * A list of file types identifiers that are supported in this subscription
-	 *
-	 * @var array of KalturaIntegerValue
-	 */
-	public $fileTypes;
-
-	/**
-	 * Denotes whether or not this subscription can be renewed
-	 *
-	 * @var bool
-	 */
-	public $isRenewable = null;
-
-	/**
-	 * Defines the number of times this subscription will be renewed
-	 *
-	 * @var int
-	 */
-	public $renewalsNumber = null;
-
-	/**
-	 * Indicates whether the subscription will renew forever
-	 *
-	 * @var bool
-	 */
-	public $isInfiniteRenewal = null;
-
-	/**
-	 * The price of the subscription
-	 *
-	 * @var KalturaPriceDetails
-	 */
-	public $price;
-
-	/**
-	 * The internal discount module for the subscription
-	 *
-	 * @var KalturaDiscountModule
-	 */
-	public $discountModule;
-
-	/**
-	 * Name of the subscription
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $name = null;
-
-	/**
-	 * Name of the subscription
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualName;
-
-	/**
-	 * description of the subscription
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $description = null;
-
-	/**
-	 * description of the subscription
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualDescription;
-
-	/**
-	 * Identifier of the media associated with the subscription
-	 *
-	 * @var int
-	 */
-	public $mediaId = null;
-
-	/**
-	 * Subscription order (when returned in methods that retrieve subscriptions)
-	 *
-	 * @var int
-	 */
-	public $prorityInOrder = null;
-
-	/**
-	 * Comma separated subscription price plan IDs
-	 *
-	 * @var string
-	 */
-	public $pricePlanIds = null;
-
-	/**
-	 * Subscription preview module
-	 *
-	 * @var KalturaPreviewModule
-	 */
-	public $previewModule;
-
-	/**
-	 * The household limitation module identifier associated with this subscription
-	 *
-	 * @var int
-	 */
-	public $householdLimitationsId = null;
-
-	/**
-	 * The subscription grace period in minutes
-	 *
-	 * @var int
-	 */
-	public $gracePeriodMinutes = null;
-
-	/**
-	 * List of premium services included in the subscription
-	 *
-	 * @var array of KalturaPremiumService
-	 */
-	public $premiumServices;
-
-	/**
-	 * The maximum number of times an item in this usage module can be viewed
-	 *
-	 * @var int
-	 */
-	public $maxViewsNumber = null;
-
-	/**
-	 * The amount time an item is available for viewing since a user started watching the item
-	 *
-	 * @var int
-	 */
-	public $viewLifeCycle = null;
-
-	/**
-	 * Time period during which the end user can waive his rights to cancel a purchase. When the time period is passed, the purchase can no longer be cancelled
-	 *
-	 * @var int
-	 */
-	public $waiverPeriod = null;
-
-	/**
-	 * Indicates whether or not the end user has the right to waive his rights to cancel a purchase
-	 *
-	 * @var bool
-	 */
-	public $isWaiverEnabled = null;
-
-	/**
-	 * List of permitted user types for the subscription
-	 *
-	 * @var array of KalturaOTTUserType
-	 */
-	public $userTypes;
-
-	/**
-	 * List of Coupons group
-	 *
-	 * @var array of KalturaCouponsGroup
-	 */
-	public $couponsGroups;
-
-	/**
-	 * List of Subscription product codes
-	 *
-	 * @var array of KalturaProductCode
-	 */
-	public $productCodes;
-
-	/**
-	 * Dependency Type
-	 *
-	 * @var KalturaSubscriptionDependencyType
-	 */
-	public $dependencyType = null;
-
-	/**
-	 * External ID
-	 *
-	 * @var string
-	 */
-	public $externalId = null;
-
-	/**
-	 * Is cancellation blocked for the subscription
-	 *
-	 * @var bool
-	 */
-	public $isCancellationBlocked = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of subscriptions
-	 *
-	 * @var array of KalturaSubscription
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaNpvrPremiumService extends KalturaPremiumService
-{
-	/**
-	 * Quota in minutes
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $quotaInMinutes = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdPremiumService extends KalturaPremiumService
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProductsPriceListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of prices
-	 *
-	 * @var array of KalturaProductPrice
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPersonalList extends KalturaObjectBase
 {
 	/**
@@ -5357,6 +3881,39 @@ class KalturaSeriesRecordingListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPremiumService extends KalturaObjectBase
+{
+	/**
+	 * Service identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Service name / description
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdPremiumService extends KalturaPremiumService
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdPremiumServiceListResponse extends KalturaListResponse
 {
 	/**
@@ -5365,6 +3922,23 @@ class KalturaHouseholdPremiumServiceListResponse extends KalturaListResponse
 	 * @var array of KalturaHouseholdPremiumService
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaNpvrPremiumService extends KalturaPremiumService
+{
+	/**
+	 * Quota in minutes
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $quotaInMinutes = null;
 
 
 }
@@ -5561,6 +4135,43 @@ class KalturaRecordingListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPrice extends KalturaObjectBase
+{
+	/**
+	 * Price
+	 *
+	 * @var float
+	 */
+	public $amount = null;
+
+	/**
+	 * Currency
+	 *
+	 * @var string
+	 */
+	public $currency = null;
+
+	/**
+	 * Currency Sign
+	 *
+	 * @var string
+	 */
+	public $currencySign = null;
+
+	/**
+	 * Country ID
+	 *
+	 * @var int
+	 */
+	public $countryId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBillingTransaction extends KalturaObjectBase
 {
 	/**
@@ -5706,6 +4317,23 @@ class KalturaBillingTransactionListResponse extends KalturaListResponse
 	 * @var array of KalturaBillingTransaction
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscount extends KalturaPrice
+{
+	/**
+	 * The discount percentage
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $percentage = null;
 
 
 }
@@ -5956,6 +4584,1533 @@ class KalturaSubscriptionEntitlement extends KalturaEntitlement
 	 * @readonly
 	 */
 	public $isSuspended = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetFilePpv extends KalturaObjectBase
+{
+	/**
+	 * Asset file identifier
+	 *
+	 * @var int
+	 */
+	public $assetFileId = null;
+
+	/**
+	 * Ppv module identifier
+	 *
+	 * @var int
+	 */
+	public $ppvModuleId = null;
+
+	/**
+	 * Start date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * End date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetFilePpvListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of asset files ppvs
+	 *
+	 * @var array of KalturaAssetFilePpv
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPriceDetails extends KalturaObjectBase
+{
+	/**
+	 * The price code identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * The price code name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * The price
+	 *
+	 * @var KalturaPrice
+	 * @readonly
+	 */
+	public $price;
+
+	/**
+	 * Multi currency prices for all countries and currencies
+	 *
+	 * @var array of KalturaPrice
+	 */
+	public $multiCurrencyPrice;
+
+	/**
+	 * A list of the descriptions for this price on different languages (language code and translation)
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $descriptions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscountModule extends KalturaObjectBase
+{
+	/**
+	 * The discount percentage
+	 *
+	 * @var float
+	 */
+	public $percent = null;
+
+	/**
+	 * The first date the discount is available
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The last date the discount is available
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponsGroup extends KalturaObjectBase
+{
+	/**
+	 * Coupon group identifier
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Coupon group name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * The first date the coupons in this coupons group are valid
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The last date the coupons in this coupons group are valid
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+	/**
+	 * Maximum number of uses for each coupon in the group
+	 *
+	 * @var int
+	 */
+	public $maxUsesNumber = null;
+
+	/**
+	 * Maximum number of uses for each coupon in the group on a renewable subscription
+	 *
+	 * @var int
+	 */
+	public $maxUsesNumberOnRenewableSub = null;
+
+	/**
+	 * Type of the coupon group
+	 *
+	 * @var KalturaCouponGroupType
+	 */
+	public $couponGroupType = null;
+
+	/**
+	 * Maximum number of uses per household for each coupon in the group
+	 *
+	 * @var int
+	 */
+	public $maxHouseholdUses = null;
+
+	/**
+	 * Discount ID
+	 *
+	 * @var int
+	 */
+	public $discountId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUsageModule extends KalturaObjectBase
+{
+	/**
+	 * Usage module identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Usage module name
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * The maximum number of times an item in this usage module can be viewed
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $maxViewsNumber = null;
+
+	/**
+	 * The amount time an item is available for viewing since a user started watching the item
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $viewLifeCycle = null;
+
+	/**
+	 * The amount time an item is available for viewing
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $fullLifeCycle = null;
+
+	/**
+	 * Identifies a specific coupon linked to this object
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $couponId = null;
+
+	/**
+	 * Time period during which the end user can waive his rights to cancel a purchase. When the time period is passed, the purchase can no longer be cancelled
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $waiverPeriod = null;
+
+	/**
+	 * Indicates whether or not the end user has the right to waive his rights to cancel a purchase
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isWaiverEnabled = null;
+
+	/**
+	 * Indicates that usage is targeted for offline playback
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isOfflinePlayback = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPpv extends KalturaObjectBase
+{
+	/**
+	 * PPV identifier
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * the name for the ppv
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * The price of the ppv
+	 *
+	 * @var KalturaPriceDetails
+	 */
+	public $price;
+
+	/**
+	 * A list of file types identifiers that are supported in this ppv
+	 *
+	 * @var array of KalturaIntegerValue
+	 */
+	public $fileTypes;
+
+	/**
+	 * The internal discount module for the ppv
+	 *
+	 * @var KalturaDiscountModule
+	 */
+	public $discountModule;
+
+	/**
+	 * Coupons group for the ppv
+	 *
+	 * @var KalturaCouponsGroup
+	 */
+	public $couponsGroup;
+
+	/**
+	 * A list of the descriptions of the ppv on different languages (language code and translation)
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $descriptions;
+
+	/**
+	 * Product code for the ppv
+	 *
+	 * @var string
+	 */
+	public $productCode = null;
+
+	/**
+	 * Indicates whether or not this ppv can be purchased standalone or only as part of a subscription
+	 *
+	 * @var bool
+	 */
+	public $isSubscriptionOnly = null;
+
+	/**
+	 * Indicates whether or not this ppv can be consumed only on the first device
+	 *
+	 * @var bool
+	 */
+	public $firstDeviceLimitation = null;
+
+	/**
+	 * PPV usage module
+	 *
+	 * @var KalturaUsageModule
+	 */
+	public $usageModule;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPpvListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of PPV
+	 *
+	 * @var array of KalturaPpv
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPricePlan extends KalturaUsageModule
+{
+	/**
+	 * Denotes whether or not this object can be renewed
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isRenewable = null;
+
+	/**
+	 * Defines the number of times the module will be renewed (for the life_cycle period)
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $renewalsNumber = null;
+
+	/**
+	 * The discount module identifier of the price plan
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $discountId = null;
+
+	/**
+	 * The ID of the price details associated with this price plan
+	 *
+	 * @var int
+	 */
+	public $priceDetailsId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBaseChannel extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the channel
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProductCode extends KalturaObjectBase
+{
+	/**
+	 * Provider Name
+	 *
+	 * @var string
+	 */
+	public $inappProvider = null;
+
+	/**
+	 * Product Code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCollection extends KalturaObjectBase
+{
+	/**
+	 * Collection identifier
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * A list of channels associated with this collection
+	 *
+	 * @var array of KalturaBaseChannel
+	 */
+	public $channels;
+
+	/**
+	 * The first date the collection is available for purchasing
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The last date the collection is available for purchasing
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+	/**
+	 * The internal discount module for the subscription
+	 *
+	 * @var KalturaDiscountModule
+	 */
+	public $discountModule;
+
+	/**
+	 * Name of the subscription
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Name of the subscription
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * description of the subscription
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $description = null;
+
+	/**
+	 * description of the subscription
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualDescription;
+
+	/**
+	 * Collection usage module
+	 *
+	 * @var KalturaUsageModule
+	 */
+	public $usageModule;
+
+	/**
+	 * List of Coupons group
+	 *
+	 * @var array of KalturaCouponsGroup
+	 */
+	public $couponsGroups;
+
+	/**
+	 * External ID
+	 *
+	 * @var string
+	 */
+	public $externalId = null;
+
+	/**
+	 * List of Collection product codes
+	 *
+	 * @var array of KalturaProductCode
+	 */
+	public $productCodes;
+
+	/**
+	 * The ID of the price details associated with this collection
+	 *
+	 * @var int
+	 */
+	public $priceDetailsId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCollectionListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of collections
+	 *
+	 * @var array of KalturaCollection
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaAssetGroupBy extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDynamicOrderBy extends KalturaObjectBase
+{
+	/**
+	 * order by name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * order by meta asc/desc
+	 *
+	 * @var KalturaMetaTagOrderBy
+	 */
+	public $orderBy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaChannelOrder extends KalturaObjectBase
+{
+	/**
+	 * Channel dynamic order by (meta)
+	 *
+	 * @var KalturaDynamicOrderBy
+	 */
+	public $dynamicOrderBy;
+
+	/**
+	 * Channel order by
+	 *
+	 * @var KalturaChannelOrderBy
+	 */
+	public $orderBy = null;
+
+	/**
+	 * Sliding window period in minutes, used only when ordering by LIKES_DESC / VOTES_DESC / RATINGS_DESC / VIEWS_DESC
+	 *
+	 * @var int
+	 */
+	public $period = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaChannel extends KalturaBaseChannel
+{
+	/**
+	 * Channel name
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Channel name
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * Channel name
+	 *
+	 * @var string
+	 */
+	public $oldName = null;
+
+	/**
+	 * Channel system name
+	 *
+	 * @var string
+	 */
+	public $systemName = null;
+
+	/**
+	 * Cannel description
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $description = null;
+
+	/**
+	 * Cannel description
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualDescription;
+
+	/**
+	 * Cannel description
+	 *
+	 * @var string
+	 */
+	public $oldDescription = null;
+
+	/**
+	 * active status
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+	/**
+	 * Channel order by
+	 *
+	 * @var KalturaChannelOrder
+	 */
+	public $orderBy;
+
+	/**
+	 * Specifies when was the Channel was created. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Specifies when was the Channel last updated. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDynamicChannel extends KalturaChannel
+{
+	/**
+	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
+	 *             Possible keys: any Tag or Meta defined in the system and the following reserved keys: start_date, end_date. 
+	 *             epg_id, media_id - for specific asset IDs.
+	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restriced to the user by geo-block rules will return.
+	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
+	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
+	 *             epg_channel_id – the channel identifier of the EPG program. *****Deprecated, please use linear_media_id instead*****
+	 *             linear_media_id – the linear media identifier of the EPG program.
+	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
+	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
+	 *             For alpha-numerical fields =, != (not), ~ (like), !~, ^ (any word starts with), ^= (phrase starts with), + (exists), !+ (not exists).
+	 *             Logical conjunction: and, or. 
+	 *             Search values are limited to 20 characters each.
+	 *             (maximum length of entire filter is 4096 characters)
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+	/**
+	 * Asset types in the channel.
+	 *             -26 is EPG
+	 *
+	 * @var array of KalturaIntegerValue
+	 */
+	public $assetTypes;
+
+	/**
+	 * Channel group by
+	 *
+	 * @var KalturaAssetGroupBy
+	 */
+	public $groupBy;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaManualChannel extends KalturaChannel
+{
+	/**
+	 * A list of comma separated media ids associated with this channel, according to the order of the medias in the channel.
+	 *
+	 * @var string
+	 */
+	public $mediaIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetMetaOrTagGroupBy extends KalturaAssetGroupBy
+{
+	/**
+	 * Group by a tag or meta - according to the name that appears in the system (similar to KSQL)
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetFieldGroupBy extends KalturaAssetGroupBy
+{
+	/**
+	 * Group by a specific field that is defined in enum
+	 *
+	 * @var KalturaGroupByField
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscountDetails extends KalturaObjectBase
+{
+	/**
+	 * The discount ID
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * The price code name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Multi currency discounts for all countries and currencies
+	 *
+	 * @var array of KalturaDiscount
+	 */
+	public $multiCurrencyDiscount;
+
+	/**
+	 * Start date represented as epoch
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * End date represented as epoch
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscountDetailsListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of price details
+	 *
+	 * @var array of KalturaDiscountDetails
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaSubscriptionSet extends KalturaObjectBase
+{
+	/**
+	 * SubscriptionSet identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * SubscriptionSet name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Type of the Subscription Set
+	 *
+	 * @var KalturaSubscriptionSetType
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
+	 * A list of comma separated subscription ids associated with this set ordered by priority ascending
+	 *
+	 * @var string
+	 */
+	public $subscriptionIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionSetListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of subscriptionSets
+	 *
+	 * @var array of KalturaSubscriptionSet
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionDependencySet extends KalturaSubscriptionSet
+{
+	/**
+	 * Base Subscription identifier
+	 *
+	 * @var int
+	 */
+	public $baseSubscriptionId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionSwitchSet extends KalturaSubscriptionSet
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaProductPrice extends KalturaObjectBase
+{
+	/**
+	 * Product identifier
+	 *
+	 * @var string
+	 */
+	public $productId = null;
+
+	/**
+	 * Product Type
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $productType = null;
+
+	/**
+	 * Product price
+	 *
+	 * @var KalturaPrice
+	 */
+	public $price;
+
+	/**
+	 * Product purchase status
+	 *
+	 * @var KalturaPurchaseStatus
+	 */
+	public $purchaseStatus = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProductPriceListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of prices
+	 *
+	 * @var array of KalturaProductPrice
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCollectionPrice extends KalturaProductPrice
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPpvPrice extends KalturaProductPrice
+{
+	/**
+	 * Media file identifier
+	 *
+	 * @var int
+	 */
+	public $fileId = null;
+
+	/**
+	 * The associated PPV module identifier
+	 *
+	 * @var string
+	 */
+	public $ppvModuleId = null;
+
+	/**
+	 * Denotes whether this object is available only as part of a subscription or can be sold separately
+	 *
+	 * @var bool
+	 */
+	public $isSubscriptionOnly = null;
+
+	/**
+	 * The full price of the item (with no discounts)
+	 *
+	 * @var KalturaPrice
+	 */
+	public $fullPrice;
+
+	/**
+	 * The identifier of the relevant subscription
+	 *
+	 * @var string
+	 */
+	public $subscriptionId = null;
+
+	/**
+	 * The identifier of the relevant collection
+	 *
+	 * @var string
+	 */
+	public $collectionId = null;
+
+	/**
+	 * The identifier of the relevant pre paid
+	 *
+	 * @var string
+	 */
+	public $prePaidId = null;
+
+	/**
+	 * A list of the descriptions of the PPV module on different languages (language code and translation)
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $ppvDescriptions;
+
+	/**
+	 * If the item already purchased - the identifier of the user (in the household) who purchased this item
+	 *
+	 * @var string
+	 */
+	public $purchaseUserId = null;
+
+	/**
+	 * If the item already purchased - the identifier of the purchased file
+	 *
+	 * @var int
+	 */
+	public $purchasedMediaFileId = null;
+
+	/**
+	 * Related media files identifiers (different types)
+	 *
+	 * @var array of KalturaIntegerValue
+	 */
+	public $relatedMediaFileIds;
+
+	/**
+	 * If the item already purchased - since when the user can start watching the item
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * If the item already purchased - until when the user can watch the item
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+	/**
+	 * Discount end date
+	 *
+	 * @var int
+	 */
+	public $discountEndDate = null;
+
+	/**
+	 * If the item already purchased and played - the name of the device on which it was first played
+	 *
+	 * @var string
+	 */
+	public $firstDeviceName = null;
+
+	/**
+	 * If waiver period is enabled - donates whether the user is still in the cancelation window
+	 *
+	 * @var bool
+	 */
+	public $isInCancelationPeriod = null;
+
+	/**
+	 * The PPV product code
+	 *
+	 * @var string
+	 */
+	public $ppvProductCode = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionPrice extends KalturaProductPrice
+{
+	/**
+	 * If the item related to unified billing cycle purchased - until when the this price is relevant
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponsGroupListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of coupons groups
+	 *
+	 * @var array of KalturaCouponsGroup
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPriceDetailsListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of price details
+	 *
+	 * @var array of KalturaPriceDetails
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPricePlanListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of price plans
+	 *
+	 * @var array of KalturaPricePlan
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPreviewModule extends KalturaObjectBase
+{
+	/**
+	 * Preview module identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Preview module name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Preview module life cycle - for how long the preview module is active
+	 *
+	 * @var int
+	 */
+	public $lifeCycle = null;
+
+	/**
+	 * The time you can&#39;t buy the item to which the preview module is assigned to again
+	 *
+	 * @var int
+	 */
+	public $nonRenewablePeriod = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscription extends KalturaObjectBase
+{
+	/**
+	 * Subscription identifier
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * A list of channels associated with this subscription
+	 *
+	 * @var array of KalturaBaseChannel
+	 */
+	public $channels;
+
+	/**
+	 * The first date the subscription is available for purchasing
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The last date the subscription is available for purchasing
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+	/**
+	 * A list of file types identifiers that are supported in this subscription
+	 *
+	 * @var array of KalturaIntegerValue
+	 */
+	public $fileTypes;
+
+	/**
+	 * Denotes whether or not this subscription can be renewed
+	 *
+	 * @var bool
+	 */
+	public $isRenewable = null;
+
+	/**
+	 * Defines the number of times this subscription will be renewed
+	 *
+	 * @var int
+	 */
+	public $renewalsNumber = null;
+
+	/**
+	 * Indicates whether the subscription will renew forever
+	 *
+	 * @var bool
+	 */
+	public $isInfiniteRenewal = null;
+
+	/**
+	 * The price of the subscription
+	 *
+	 * @var KalturaPriceDetails
+	 */
+	public $price;
+
+	/**
+	 * The internal discount module for the subscription
+	 *
+	 * @var KalturaDiscountModule
+	 */
+	public $discountModule;
+
+	/**
+	 * Name of the subscription
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Name of the subscription
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * description of the subscription
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $description = null;
+
+	/**
+	 * description of the subscription
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualDescription;
+
+	/**
+	 * Identifier of the media associated with the subscription
+	 *
+	 * @var int
+	 */
+	public $mediaId = null;
+
+	/**
+	 * Subscription order (when returned in methods that retrieve subscriptions)
+	 *
+	 * @var int
+	 */
+	public $prorityInOrder = null;
+
+	/**
+	 * Comma separated subscription price plan IDs
+	 *
+	 * @var string
+	 */
+	public $pricePlanIds = null;
+
+	/**
+	 * Subscription preview module
+	 *
+	 * @var KalturaPreviewModule
+	 */
+	public $previewModule;
+
+	/**
+	 * The household limitation module identifier associated with this subscription
+	 *
+	 * @var int
+	 */
+	public $householdLimitationsId = null;
+
+	/**
+	 * The subscription grace period in minutes
+	 *
+	 * @var int
+	 */
+	public $gracePeriodMinutes = null;
+
+	/**
+	 * List of premium services included in the subscription
+	 *
+	 * @var array of KalturaPremiumService
+	 */
+	public $premiumServices;
+
+	/**
+	 * The maximum number of times an item in this usage module can be viewed
+	 *
+	 * @var int
+	 */
+	public $maxViewsNumber = null;
+
+	/**
+	 * The amount time an item is available for viewing since a user started watching the item
+	 *
+	 * @var int
+	 */
+	public $viewLifeCycle = null;
+
+	/**
+	 * Time period during which the end user can waive his rights to cancel a purchase. When the time period is passed, the purchase can no longer be cancelled
+	 *
+	 * @var int
+	 */
+	public $waiverPeriod = null;
+
+	/**
+	 * Indicates whether or not the end user has the right to waive his rights to cancel a purchase
+	 *
+	 * @var bool
+	 */
+	public $isWaiverEnabled = null;
+
+	/**
+	 * List of permitted user types for the subscription
+	 *
+	 * @var array of KalturaOTTUserType
+	 */
+	public $userTypes;
+
+	/**
+	 * List of Coupons group
+	 *
+	 * @var array of KalturaCouponsGroup
+	 */
+	public $couponsGroups;
+
+	/**
+	 * List of Subscription product codes
+	 *
+	 * @var array of KalturaProductCode
+	 */
+	public $productCodes;
+
+	/**
+	 * Dependency Type
+	 *
+	 * @var KalturaSubscriptionDependencyType
+	 */
+	public $dependencyType = null;
+
+	/**
+	 * External ID
+	 *
+	 * @var string
+	 */
+	public $externalId = null;
+
+	/**
+	 * Is cancellation blocked for the subscription
+	 *
+	 * @var bool
+	 */
+	public $isCancellationBlocked = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of subscriptions
+	 *
+	 * @var array of KalturaSubscription
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProductsPriceListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of prices
+	 *
+	 * @var array of KalturaProductPrice
+	 */
+	public $objects;
 
 
 }
@@ -9567,153 +9722,6 @@ class KalturaOTTUserFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCollectionFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated collection IDs
-	 *
-	 * @var string
-	 */
-	public $collectionIdIn = null;
-
-	/**
-	 * Media-file ID to get the subscriptions by
-	 *
-	 * @var int
-	 */
-	public $mediaFileIdEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscountDetailsFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated discount codes
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPricePlanFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated price plans identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPriceDetailsFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated price identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionSetFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-	/**
-	 * Comma separated subscription identifiers
-	 *
-	 * @var string
-	 */
-	public $subscriptionIdContains = null;
-
-	/**
-	 * Subscription Type
-	 *
-	 * @var KalturaSubscriptionSetType
-	 */
-	public $typeEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionDependencySetFilter extends KalturaSubscriptionSetFilter
-{
-	/**
-	 * Comma separated identifiers
-	 *
-	 * @var string
-	 */
-	public $baseSubscriptionIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated subscription IDs to get the subscriptions by
-	 *
-	 * @var string
-	 */
-	public $subscriptionIdIn = null;
-
-	/**
-	 * Media-file ID to get the subscriptions by
-	 *
-	 * @var int
-	 */
-	public $mediaFileIdEqual = null;
-
-	/**
-	 * Comma separated subscription external IDs to get the subscriptions by
-	 *
-	 * @var string
-	 */
-	public $externalIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPersonalListFilter extends KalturaFilter
 {
 	/**
@@ -10475,6 +10483,176 @@ class KalturaRecordingFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $kSql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetFilePpvFilter extends KalturaFilter
+{
+	/**
+	 * Filter Asset file ppvs that contain a specific asset id
+	 *
+	 * @var int
+	 */
+	public $assetIdEqual = null;
+
+	/**
+	 * Filter Asset file ppvs that contain a specific asset file id
+	 *
+	 * @var int
+	 */
+	public $assetFileIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCollectionFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated collection IDs
+	 *
+	 * @var string
+	 */
+	public $collectionIdIn = null;
+
+	/**
+	 * Media-file ID to get the subscriptions by
+	 *
+	 * @var int
+	 */
+	public $mediaFileIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscountDetailsFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated discount codes
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPricePlanFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated price plans identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPriceDetailsFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated price identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionSetFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+	/**
+	 * Comma separated subscription identifiers
+	 *
+	 * @var string
+	 */
+	public $subscriptionIdContains = null;
+
+	/**
+	 * Subscription Type
+	 *
+	 * @var KalturaSubscriptionSetType
+	 */
+	public $typeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionDependencySetFilter extends KalturaSubscriptionSetFilter
+{
+	/**
+	 * Comma separated identifiers
+	 *
+	 * @var string
+	 */
+	public $baseSubscriptionIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated subscription IDs to get the subscriptions by
+	 *
+	 * @var string
+	 */
+	public $subscriptionIdIn = null;
+
+	/**
+	 * Media-file ID to get the subscriptions by
+	 *
+	 * @var int
+	 */
+	public $mediaFileIdEqual = null;
+
+	/**
+	 * Comma separated subscription external IDs to get the subscriptions by
+	 *
+	 * @var string
+	 */
+	public $externalIdIn = null;
 
 
 }
@@ -11990,92 +12168,6 @@ class KalturaMessageTemplate extends KalturaObjectBase
 	 * @var string
 	 */
 	public $ratioId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPpv extends KalturaObjectBase
-{
-	/**
-	 * PPV identifier
-	 *
-	 * @var string
-	 */
-	public $id = null;
-
-	/**
-	 * the name for the ppv
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * The price of the ppv
-	 *
-	 * @var KalturaPriceDetails
-	 */
-	public $price;
-
-	/**
-	 * A list of file types identifiers that are supported in this ppv
-	 *
-	 * @var array of KalturaIntegerValue
-	 */
-	public $fileTypes;
-
-	/**
-	 * The internal discount module for the ppv
-	 *
-	 * @var KalturaDiscountModule
-	 */
-	public $discountModule;
-
-	/**
-	 * Coupons group for the ppv
-	 *
-	 * @var KalturaCouponsGroup
-	 */
-	public $couponsGroup;
-
-	/**
-	 * A list of the descriptions of the ppv on different languages (language code and translation)
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $descriptions;
-
-	/**
-	 * Product code for the ppv
-	 *
-	 * @var string
-	 */
-	public $productCode = null;
-
-	/**
-	 * Indicates whether or not this ppv can be purchased standalone or only as part of a subscription
-	 *
-	 * @var bool
-	 */
-	public $isSubscriptionOnly = null;
-
-	/**
-	 * Indicates whether or not this ppv can be consumed only on the first device
-	 *
-	 * @var bool
-	 */
-	public $firstDeviceLimitation = null;
-
-	/**
-	 * PPV usage module
-	 *
-	 * @var KalturaUsageModule
-	 */
-	public $usageModule;
 
 
 }

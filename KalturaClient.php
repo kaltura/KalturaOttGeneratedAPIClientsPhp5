@@ -592,6 +592,37 @@ class KalturaAssetFileService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetFilePpvService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Return a list of asset files ppvs for the account with optional filter
+	 * 
+	 * @param KalturaAssetFilePpvFilter $filter Filter parameters for filtering out the result
+	 * @return KalturaAssetFilePpvListResponse
+	 */
+	function listAction(KalturaAssetFilePpvFilter $filter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("assetfileppv", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetFilePpvListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetHistoryService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -6221,6 +6252,23 @@ class KalturaPpvService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaPpv");
 		return $resultObject;
 	}
+
+	/**
+	 * Returns all ppv objects
+	 * 
+	 * @return KalturaPpvListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("ppv", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPpvListResponse");
+		return $resultObject;
+	}
 }
 
 /**
@@ -8946,6 +8994,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaAssetFilePpvService
+	 */
+	public $assetFilePpv = null;
+
+	/**
+	 * 
 	 * @var KalturaAssetHistoryService
 	 */
 	public $assetHistory = null;
@@ -9577,14 +9631,15 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-09-26');
-		$this->setApiVersion('5.0.2.41999');
+		$this->setClientTag('php5:18-09-27');
+		$this->setApiVersion('5.0.2.15349');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
 		$this->assetComment = new KalturaAssetCommentService($this);
 		$this->asset = new KalturaAssetService($this);
 		$this->assetFile = new KalturaAssetFileService($this);
+		$this->assetFilePpv = new KalturaAssetFilePpvService($this);
 		$this->assetHistory = new KalturaAssetHistoryService($this);
 		$this->assetRule = new KalturaAssetRuleService($this);
 		$this->assetStatistics = new KalturaAssetStatisticsService($this);
