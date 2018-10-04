@@ -4761,8 +4761,8 @@ class KalturaNotificationService extends KalturaServiceBase
 	/**
 	 * TBD
 	 * 
-	 * @param string $identifier In case type is "announcement", identifier should be the announcement ID. In case type is "system", identifier should be "login" (the login topic)
-	 * @param string $type "announcement" - TV-Series topic, "system" - login topic
+	 * @param string $identifier In case type is 'announcement', identifier should be the announcement ID. In case type is 'system', identifier should be 'login" (the login topic)
+	 * @param string $type 'announcement' - TV-Series topic, 'system' - login topic
 	 * @return KalturaRegistryResponse
 	 */
 	function register($identifier, $type)
@@ -9497,8 +9497,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-09-05');
-		$this->setApiVersion('5.0.2.28437');
+		$this->setClientTag('php5:18-10-04');
+		$this->setApiVersion('5.0.2.22860');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
