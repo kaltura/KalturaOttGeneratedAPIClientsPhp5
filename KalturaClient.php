@@ -4855,7 +4855,7 @@ class KalturaNotificationService extends KalturaServiceBase
 	/**
 	 * TBD
 	 * 
-	 * @param string $identifier In case type is 'announcement', identifier should be the announcement ID. In case type is 'system', identifier should be 'login" (the login topic)
+	 * @param string $identifier In case type is 'announcement', identifier should be the announcement ID. In case type is 'system', identifier should be 'login' (the login topic)
 	 * @param string $type 'announcement' - TV-Series topic, 'system' - login topic
 	 * @return KalturaRegistryResponse
 	 */
@@ -5805,8 +5805,8 @@ class KalturaPartnerConfigurationService extends KalturaServiceBase
 	 * 
 	 * @param KalturaPartnerConfiguration $configuration Partner Configuration
             possible configuration type: 
-            "configuration": { "value": 0, "partner_configuration_type": { "type": "OSSAdapter", "objectType": "KalturaPartnerConfigurationHolder" },
-            "objectType": "KalturaBillingPartnerConfig"}
+            'configuration': { 'value': 0, 'partner_configuration_type': { 'type': 'OSSAdapter', 'objectType': 'KalturaPartnerConfigurationHolder' },
+            'objectType': 'KalturaBillingPartnerConfig'}
 	 * @return bool
 	 */
 	function update(KalturaPartnerConfiguration $configuration)
@@ -9698,7 +9698,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-10-04');
-		$this->setApiVersion('5.0.3.23083');
+		$this->setApiVersion('5.0.3.25910');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
