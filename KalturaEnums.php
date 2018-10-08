@@ -473,16 +473,6 @@ class KalturaContentAction extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaContentActionConditionLengthType extends KalturaEnumBase
-{
-	const MINUTES = "minutes";
-	const PERCENTAGE = "percentage";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaContextType extends KalturaEnumBase
 {
 	const NONE = "none";

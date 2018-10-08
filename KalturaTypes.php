@@ -3284,15 +3284,31 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * Name of segmentation type
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
+
+	/**
+	 * Name of segmentation type
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
 
 	/**
 	 * Description of segmentation type
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $description = null;
+
+	/**
+	 * Description of segmentation type
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualDescription;
 
 	/**
 	 * Segmentation conditions - can be empty
@@ -3368,14 +3384,7 @@ class KalturaScoredMonetizationCondition extends KalturaBaseSegmentCondition
 	 *
 	 * @var int
 	 */
-	public $minScore = null;
-
-	/**
-	 * The maximum score to be met
-	 *
-	 * @var int
-	 */
-	public $maxScore = null;
+	public $score = null;
 
 	/**
 	 * How many days back should the actions be considered
@@ -3408,18 +3417,11 @@ class KalturaContentActionCondition extends KalturaObjectBase
 	public $action = null;
 
 	/**
-	 * Optional - if action required specific length to be considered (in percentage or minutes)
+	 * Optional - if action required specific length to be considered
 	 *
 	 * @var int
 	 */
 	public $length = null;
-
-	/**
-	 * Optional - if action required specific length to be considered (in percentage or minutes)
-	 *
-	 * @var KalturaContentActionConditionLengthType
-	 */
-	public $lengthType = null;
 
 	/**
 	 * Score multiplier - how much is a single action worth when considering the action
@@ -3442,14 +3444,7 @@ class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
 	 *
 	 * @var int
 	 */
-	public $minScore = null;
-
-	/**
-	 * The maximum score to be met
-	 *
-	 * @var int
-	 */
-	public $maxScore = null;
+	public $score = null;
 
 	/**
 	 * How many days back should the actions be considered
@@ -3457,20 +3452,6 @@ class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
 	 * @var int
 	 */
 	public $days = null;
-
-	/**
-	 * If condition should be applied on specific field (and not the one of the segment value)
-	 *
-	 * @var string
-	 */
-	public $field = null;
-
-	/**
-	 * If condition should be applied on specific field (and not the one of the segment value) -
-	 *
-	 * @var string
-	 */
-	public $value = null;
 
 	/**
 	 * List of the actions that consist the condition
@@ -3539,8 +3520,16 @@ class KalturaSegmentValue extends KalturaObjectBase
 	 * Name of segment
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
+
+	/**
+	 * Name of segment
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
 
 	/**
 	 * The value of the segment
@@ -3678,8 +3667,16 @@ class KalturaSegmentRange extends KalturaObjectBase
 	 * Specific segment name
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
+
+	/**
+	 * Specific segment name
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
 
 	/**
 	 * Greater than or equals &gt;=
