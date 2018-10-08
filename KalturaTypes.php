@@ -12022,6 +12022,13 @@ class KalturaUnifiedPaymentRenewal extends KalturaObjectBase
 	 */
 	public $entitlements;
 
+	/**
+	 * User ID
+	 *
+	 * @var int
+	 */
+	public $userId = null;
+
 
 }
 
@@ -13177,6 +13184,13 @@ class KalturaEntitlementRenewal extends KalturaObjectBase
 	 * @var int
 	 */
 	public $subscriptionId = null;
+
+	/**
+	 * User ID
+	 *
+	 * @var int
+	 */
+	public $userId = null;
 
 
 }
