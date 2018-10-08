@@ -7110,9 +7110,9 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
-	 * ...
+	 * Adds a new segmentation type to the system
 	 * 
-	 * @param KalturaSegmentationType $segmentationType .
+	 * @param KalturaSegmentationType $segmentationType The segmentation type to be added
 	 * @return KalturaSegmentationType
 	 */
 	function add(KalturaSegmentationType $segmentationType)
@@ -7148,10 +7148,10 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
-	 * ...
+	 * Lists all segmentation types in group
 	 * 
-	 * @param KalturaSegmentationTypeFilter $filter .
-	 * @param KalturaFilterPager $pager .
+	 * @param KalturaSegmentationTypeFilter $filter Segmentation type filter - basically empty
+	 * @param KalturaFilterPager $pager Simple pager
 	 * @return KalturaSegmentationTypeListResponse
 	 */
 	function listAction(KalturaSegmentationTypeFilter $filter, KalturaFilterPager $pager = null)
@@ -7170,10 +7170,10 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
-	 * ...
+	 * Updates an existing segmentation type
 	 * 
-	 * @param int $segmentationTypeId .
-	 * @param KalturaSegmentationType $segmentationType .
+	 * @param bigint $segmentationTypeId The ID of the object that will be updated
+	 * @param KalturaSegmentationType $segmentationType The segmentation type to be updated
 	 * @return KalturaSegmentationType
 	 */
 	function update($segmentationTypeId, KalturaSegmentationType $segmentationType)
@@ -9698,7 +9698,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-10-08');
-		$this->setApiVersion('5.0.3.14038');
+		$this->setApiVersion('5.0.3.20304');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

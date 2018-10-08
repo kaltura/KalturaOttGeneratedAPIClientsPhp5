@@ -3277,6 +3277,7 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * Id of segmentation type
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $id = null;
 
