@@ -1140,7 +1140,8 @@ class KalturaPositionOwner extends KalturaEnumBase
  */
 class KalturaPpvOrderBy extends KalturaEnumBase
 {
-	const NONE = "NONE";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
 }
 
 /**
