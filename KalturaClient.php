@@ -1235,6 +1235,95 @@ class KalturaBulkService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBusinessModuleRuleService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add business module rule
+	 * 
+	 * @param KalturaBusinessModuleRule $businessModuleRule Business module rule
+	 * @return KalturaBusinessModuleRule
+	 */
+	function add(KalturaBusinessModuleRule $businessModuleRule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "businessModuleRule", $businessModuleRule->toParams());
+		$this->client->queueServiceActionCall("businessmodulerule", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaBusinessModuleRule");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete business module rule
+	 * 
+	 * @param bigint $id Business module rule ID
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("businessmodulerule", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Get the list of business module rules for the partner
+	 * 
+	 * @param KalturaBusinessModuleRuleFilter $filter Filter by condition name
+	 * @return KalturaBusinessModuleRuleListResponse
+	 */
+	function listAction(KalturaBusinessModuleRuleFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("businessmodulerule", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaBusinessModuleRuleListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update business module rule
+	 * 
+	 * @param bigint $id Business module rule ID to update
+	 * @param KalturaBusinessModuleRule $businessModuleRule Business module rule
+	 * @return KalturaBusinessModuleRule
+	 */
+	function update($id, KalturaBusinessModuleRule $businessModuleRule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "businessModuleRule", $businessModuleRule->toParams());
+		$this->client->queueServiceActionCall("businessmodulerule", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaBusinessModuleRule");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCdnAdapterProfileService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -9002,7 +9091,7 @@ class KalturaUserSegmentService extends KalturaServiceBase
 	}
 
 	/**
-	 * Retrieve all the segments that apply for this user
+	 * Retrieve all the segments that apply for given user
 	 * 
 	 * @param KalturaUserSegmentFilter $filter Filter
 	 * @param KalturaFilterPager $pager Pager
@@ -9113,6 +9202,12 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaBulkService
 	 */
 	public $bulk = null;
+
+	/**
+	 * 
+	 * @var KalturaBusinessModuleRuleService
+	 */
+	public $businessModuleRule = null;
 
 	/**
 	 * 
@@ -9699,8 +9794,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-10-15');
-		$this->setApiVersion('5.0.3.41997');
+		$this->setClientTag('php5:18-10-16');
+		$this->setApiVersion('5.0.3.17581');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -9716,6 +9811,7 @@ class KalturaClient extends KalturaClientBase
 		$this->assetUserRule = new KalturaAssetUserRuleService($this);
 		$this->bookmark = new KalturaBookmarkService($this);
 		$this->bulk = new KalturaBulkService($this);
+		$this->businessModuleRule = new KalturaBusinessModuleRuleService($this);
 		$this->cdnAdapterProfile = new KalturaCdnAdapterProfileService($this);
 		$this->cdnPartnerSettings = new KalturaCdnPartnerSettingsService($this);
 		$this->cDVRAdapterProfile = new KalturaCDVRAdapterProfileService($this);

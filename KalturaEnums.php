@@ -1313,6 +1313,7 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const USER_BLOCK = "USER_BLOCK";
 	const ALLOW_PLAYBACK = "ALLOW_PLAYBACK";
 	const BLOCK_PLAYBACK = "BLOCK_PLAYBACK";
+	const APPLY_DISCOUNT_MODULE = "APPLY_DISCOUNT_MODULE";
 }
 
 /**
@@ -1325,6 +1326,10 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const COUNTRY = "COUNTRY";
 	const CONCURRENCY = "CONCURRENCY";
 	const IP_RANGE = "IP_RANGE";
+	const BUSINESS_MODULE = "BUSINESS_MODULE";
+	const SEGMENTS = "SEGMENTS";
+	const DATE = "DATE";
+	const OR = "OR";
 }
 
 /**
