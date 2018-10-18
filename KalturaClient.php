@@ -9073,15 +9073,13 @@ class KalturaUserSegmentService extends KalturaServiceBase
 	 * Deletes a segment from a user
 	 * 
 	 * @param string $userId User id
-	 * @param bigint $segmentationTypeId Segmentation type id
 	 * @param bigint $segmentId Segment id
 	 * @return bool
 	 */
-	function delete($userId, $segmentationTypeId, $segmentId)
+	function delete($userId, $segmentId)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "userId", $userId);
-		$this->client->addParam($kparams, "segmentationTypeId", $segmentationTypeId);
 		$this->client->addParam($kparams, "segmentId", $segmentId);
 		$this->client->queueServiceActionCall("usersegment", "delete", $kparams);
 		if ($this->client->isMultiRequest())
@@ -9796,8 +9794,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-10-17');
-		$this->setApiVersion('5.0.3.42000');
+		$this->setClientTag('php5:18-10-18');
+		$this->setApiVersion('5.0.3.42004');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

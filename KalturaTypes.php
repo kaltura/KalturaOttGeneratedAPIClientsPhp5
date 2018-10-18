@@ -3757,13 +3757,6 @@ class KalturaUserSegment extends KalturaObjectBase
 	public $segmentId = null;
 
 	/**
-	 * Segmentation type Id
-	 *
-	 * @var int
-	 */
-	public $segmentationTypeId = null;
-
-	/**
 	 * User Id of segment
 	 *
 	 * @var string
@@ -10464,6 +10457,13 @@ class KalturaSearchExternalFilter extends KalturaAssetFilter
  */
 class KalturaSegmentationTypeFilter extends KalturaFilter
 {
+	/**
+	 * Comma separated segmentation types identifieridentifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
 
 }
 
