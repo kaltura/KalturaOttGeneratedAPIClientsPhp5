@@ -3510,6 +3510,23 @@ class KalturaUserDataCondition extends KalturaBaseSegmentCondition
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDummyValue extends KalturaBaseSegmentValue
+{
+	/**
+	 * Id of segment
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSegmentSource extends KalturaObjectBase
 {
 
