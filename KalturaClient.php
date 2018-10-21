@@ -7245,10 +7245,11 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	 * @param KalturaFilterPager $pager Simple pager
 	 * @return KalturaSegmentationTypeListResponse
 	 */
-	function listAction(KalturaSegmentationTypeFilter $filter, KalturaFilterPager $pager = null)
+	function listAction(KalturaSegmentationTypeFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
 		if ($pager !== null)
 			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("segmentationtype", "list", $kparams);
@@ -9795,7 +9796,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-10-21');
-		$this->setApiVersion('5.0.3.17186');
+		$this->setApiVersion('5.0.3.17410');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
