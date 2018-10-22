@@ -3510,7 +3510,7 @@ class KalturaUserDataCondition extends KalturaBaseSegmentCondition
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaDummyValue extends KalturaBaseSegmentValue
+class KalturaSingleSegmentValue extends KalturaBaseSegmentValue
 {
 	/**
 	 * Id of segment
