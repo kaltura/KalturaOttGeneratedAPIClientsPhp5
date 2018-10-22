@@ -3309,6 +3309,21 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 */
 	public $value;
 
+	/**
+	 * Create date of segmentation type
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Do the segments of this type affect content ordering of channels and searches
+	 *
+	 * @var bool
+	 */
+	public $affectsContentOrdering = null;
+
 
 }
 
@@ -3332,51 +3347,21 @@ class KalturaSegmentationTypeListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaMonetizationCondition extends KalturaObjectBase
+class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 {
 	/**
-	 * Purchase type
-	 *
-	 * @var KalturaMonetizationType
-	 */
-	public $type = null;
-
-	/**
-	 * Minimum price of purchase
+	 * The minimum value to be met
 	 *
 	 * @var int
 	 */
-	public $minimumPrice = null;
+	public $minValue = null;
 
 	/**
-	 * Score multiplier
+	 * The maximum value to be met
 	 *
 	 * @var int
 	 */
-	public $multiplier = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaScoredMonetizationCondition extends KalturaBaseSegmentCondition
-{
-	/**
-	 * The minimum score to be met
-	 *
-	 * @var int
-	 */
-	public $minScore = null;
-
-	/**
-	 * The maximum score to be met
-	 *
-	 * @var int
-	 */
-	public $maxScore = null;
+	public $maxValue = null;
 
 	/**
 	 * How many days back should the actions be considered
@@ -3386,11 +3371,18 @@ class KalturaScoredMonetizationCondition extends KalturaBaseSegmentCondition
 	public $days = null;
 
 	/**
-	 * List of the actions that consist the condition
+	 * Purchase type
 	 *
-	 * @var array of KalturaMonetizationCondition
+	 * @var KalturaMonetizationType
 	 */
-	public $actions;
+	public $type = null;
+
+	/**
+	 * Mathermtical operator to calculate
+	 *
+	 * @var KalturaMathemticalOperatorType
+	 */
+	public $operator = null;
 
 
 }
