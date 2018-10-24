@@ -1766,6 +1766,13 @@ class KalturaMediaFile extends KalturaAssetFile
 	 */
 	public $status = null;
 
+	/**
+	 * Catalog end date
+	 *
+	 * @var int
+	 */
+	public $catalogEndDate = null;
+
 
 }
 
@@ -3316,13 +3323,6 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $createDate = null;
-
-	/**
-	 * Do the segments of this type affect content ordering of channels and searches
-	 *
-	 * @var bool
-	 */
-	public $affectsContentOrdering = null;
 
 
 }
