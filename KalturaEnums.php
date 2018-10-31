@@ -1404,6 +1404,17 @@ class KalturaSeriesReminderOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSkipOptions extends KalturaEnumBase
+{
+	const NO = "No";
+	const PREVIOUS = "Previous";
+	const ANY = "Any";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSocialActionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";

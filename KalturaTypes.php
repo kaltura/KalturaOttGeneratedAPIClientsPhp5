@@ -9525,6 +9525,20 @@ class KalturaRequestConfiguration extends KalturaObjectBase
 	 */
 	public $responseProfile;
 
+	/**
+	 * Abort all following requests if current request has an error
+	 *
+	 * @var bool
+	 */
+	public $abortAllOnError = null;
+
+	/**
+	 * Skip current request according to skip option
+	 *
+	 * @var KalturaSkipOptions
+	 */
+	public $skipOnOrror = null;
+
 
 }
 
