@@ -9796,7 +9796,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-11-01');
-		$this->setApiVersion('5.0.3.14494');
+		$this->setApiVersion('5.0.3.18941');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10131,6 +10131,56 @@ class KalturaClient extends KalturaClientBase
 		if(isset($this->requestConfiguration['responseProfile']))
 		{
 			return $this->requestConfiguration['responseProfile'];
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Abort all following requests if current request has an error
+	 * 
+	 * @param bool $abortAllOnError
+	 */
+	public function setAbortAllOnError($abortAllOnError)
+	{
+		$this->requestConfiguration['abortAllOnError'] = $abortAllOnError;
+	}
+	
+	/**
+	 * Abort all following requests if current request has an error
+	 * 
+	 * @return bool
+	 */
+	public function getAbortAllOnError()
+	{
+		if(isset($this->requestConfiguration['abortAllOnError']))
+		{
+			return $this->requestConfiguration['abortAllOnError'];
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Skip current request according to skip option
+	 * 
+	 * @param string $skipOnOrror
+	 */
+	public function setSkipOnOrror($skipOnOrror)
+	{
+		$this->requestConfiguration['skipOnOrror'] = $skipOnOrror;
+	}
+	
+	/**
+	 * Skip current request according to skip option
+	 * 
+	 * @return string
+	 */
+	public function getSkipOnOrror()
+	{
+		if(isset($this->requestConfiguration['skipOnOrror']))
+		{
+			return $this->requestConfiguration['skipOnOrror'];
 		}
 		
 		return null;
