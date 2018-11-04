@@ -1281,6 +1281,25 @@ class KalturaBusinessModuleRuleService extends KalturaServiceBase
 	}
 
 	/**
+	 * Get business module rule by ID
+	 * 
+	 * @param bigint $id ID to get
+	 * @return KalturaBusinessModuleRule
+	 */
+	function get($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("businessmodulerule", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaBusinessModuleRule");
+		return $resultObject;
+	}
+
+	/**
 	 * Get the list of business module rules for the partner
 	 * 
 	 * @param KalturaBusinessModuleRuleFilter $filter Filter by condition name
@@ -9795,8 +9814,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-11-03');
-		$this->setApiVersion('5.0.3.42004');
+		$this->setClientTag('php5:18-11-04');
+		$this->setApiVersion('5.0.3.16574');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

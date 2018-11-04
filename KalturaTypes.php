@@ -7622,6 +7622,22 @@ class KalturaBusinessModuleRule extends KalturaRule
 	 */
 	public $actions;
 
+	/**
+	 * Create date of the rule
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update date of the rule
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
 
 }
 
