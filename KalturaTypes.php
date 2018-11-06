@@ -5333,6 +5333,13 @@ class KalturaChannel extends KalturaBaseChannel
 	 */
 	public $updateDate = null;
 
+	/**
+	 * Specifies whether the assets in this channel will be ordered based on their match to the user&#39;s segments (see BEO-5524)
+	 *
+	 * @var bool
+	 */
+	public $supportSegmentBasedOrdering = null;
+
 
 }
 
