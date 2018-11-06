@@ -9560,7 +9560,7 @@ class KalturaRequestConfiguration extends KalturaObjectBase
 	 *
 	 * @var KalturaSkipOptions
 	 */
-	public $skipOnOrror = null;
+	public $skipOnError = null;
 
 
 }

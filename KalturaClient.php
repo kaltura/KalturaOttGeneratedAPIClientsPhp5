@@ -9815,7 +9815,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-11-06');
-		$this->setApiVersion('5.0.3.17592');
+		$this->setApiVersion('5.0.3.25438');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10183,11 +10183,11 @@ class KalturaClient extends KalturaClientBase
 	/**
 	 * Skip current request according to skip option
 	 * 
-	 * @param string $skipOnOrror
+	 * @param string $skipOnError
 	 */
-	public function setSkipOnOrror($skipOnOrror)
+	public function setSkipOnError($skipOnError)
 	{
-		$this->requestConfiguration['skipOnOrror'] = $skipOnOrror;
+		$this->requestConfiguration['skipOnError'] = $skipOnError;
 	}
 	
 	/**
@@ -10195,11 +10195,11 @@ class KalturaClient extends KalturaClientBase
 	 * 
 	 * @return string
 	 */
-	public function getSkipOnOrror()
+	public function getSkipOnError()
 	{
-		if(isset($this->requestConfiguration['skipOnOrror']))
+		if(isset($this->requestConfiguration['skipOnError']))
 		{
-			return $this->requestConfiguration['skipOnOrror'];
+			return $this->requestConfiguration['skipOnError'];
 		}
 		
 		return null;
