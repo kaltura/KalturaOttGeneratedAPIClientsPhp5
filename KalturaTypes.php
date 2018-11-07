@@ -3324,6 +3324,14 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 */
 	public $createDate = null;
 
+	/**
+	 * Segmentation type version
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $version = null;
+
 
 }
 
