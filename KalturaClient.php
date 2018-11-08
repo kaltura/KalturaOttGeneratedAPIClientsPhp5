@@ -1733,10 +1733,11 @@ class KalturaCollectionService extends KalturaServiceBase
 	 * @param KalturaCollectionFilter $filter Filter request
 	 * @return KalturaCollectionListResponse
 	 */
-	function listAction(KalturaCollectionFilter $filter)
+	function listAction(KalturaCollectionFilter $filter = null)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("collection", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -9815,7 +9816,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:18-11-08');
-		$this->setApiVersion('5.0.3.18238');
+		$this->setApiVersion('5.0.3.42016');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
