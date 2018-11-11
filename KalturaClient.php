@@ -1731,13 +1731,16 @@ class KalturaCollectionService extends KalturaServiceBase
 	 * Returns a list of subscriptions requested by Subscription ID or file ID
 	 * 
 	 * @param KalturaCollectionFilter $filter Filter request
+	 * @param KalturaFilterPager $pager Page size and index
 	 * @return KalturaCollectionListResponse
 	 */
-	function listAction(KalturaCollectionFilter $filter = null)
+	function listAction(KalturaCollectionFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
 			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("collection", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -7969,12 +7972,16 @@ class KalturaSubscriptionService extends KalturaServiceBase
 	 * Returns a list of subscriptions requested by Subscription ID or file ID
 	 * 
 	 * @param KalturaSubscriptionFilter $filter Filter request
+	 * @param KalturaFilterPager $pager Page size and index
 	 * @return KalturaSubscriptionListResponse
 	 */
-	function listAction(KalturaSubscriptionFilter $filter)
+	function listAction(KalturaSubscriptionFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("subscription", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -9815,8 +9822,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-11-10');
-		$this->setApiVersion('5.0.3.42017');
+		$this->setClientTag('php5:18-11-11');
+		$this->setApiVersion('5.0.3.42021');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
