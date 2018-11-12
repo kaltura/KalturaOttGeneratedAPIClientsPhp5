@@ -3636,6 +3636,13 @@ class KalturaMonetizationSource extends KalturaSegmentSource
 	 */
 	public $operator = null;
 
+	/**
+	 * Days to consider when checking the users&#39; purchaes
+	 *
+	 * @var int
+	 */
+	public $days = null;
+
 
 }
 
