@@ -3467,11 +3467,12 @@ class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
 	public $field = null;
 
 	/**
-	 * If condition should be applied on specific field (and not the one of the segment value) -
+	 * If condition should be applied on specific field (and not the one of the segment value) - 
+	 *             list of values to be considered together
 	 *
-	 * @var string
+	 * @var array of KalturaStringValue
 	 */
-	public $value = null;
+	public $values;
 
 	/**
 	 * List of the actions that consist the condition
@@ -3566,13 +3567,6 @@ class KalturaSegmentValue extends KalturaObjectBase
 	 * @var string
 	 */
 	public $value = null;
-
-	/**
-	 * Threshold - minimum score to be met for this specific value
-	 *
-	 * @var int
-	 */
-	public $threshold = null;
 
 
 }
