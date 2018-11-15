@@ -10204,6 +10204,13 @@ abstract class KalturaBaseSearchAssetFilter extends KalturaAssetFilter
 	 */
 	public $groupBy;
 
+	/**
+	 * order by of grouping
+	 *
+	 * @var KalturaGroupByOrder
+	 */
+	public $groupOrderBy = null;
+
 
 }
 

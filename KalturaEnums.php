@@ -670,6 +670,19 @@ class KalturaGroupByField extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGroupByOrder extends KalturaEnumBase
+{
+	const DEFAULTORDER = "defaultOrder";
+	const COUNT_ASC = "count_asc";
+	const COUNT_DESC = "count_desc";
+	const VALUE_ASC = "value_asc";
+	const VALUE_DESC = "value_desc";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
