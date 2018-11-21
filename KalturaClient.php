@@ -332,7 +332,8 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add a new asset
+	 * Add a new asset.
+            For metas of type bool-&gt; use kalturaBoolValue, type number-&gt; KalturaDoubleValue, type date -&gt; KalturaLongValue, type string -&gt; KalturaStringValue
 	 * 
 	 * @param KalturaAsset $asset Asset object
 	 * @return KalturaAsset
@@ -505,7 +506,8 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update an existing asset
+	 * Update an existing asset.
+            For metas of type bool-&gt; use kalturaBoolValue, type number-&gt; KalturaDoubleValue, type date -&gt; KalturaLongValue, type string -&gt; KalturaStringValue
 	 * 
 	 * @param bigint $id Asset Identifier
 	 * @param KalturaAsset $asset Asset object
@@ -9697,8 +9699,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-10-14');
-		$this->setApiVersion('5.0.3.16218');
+		$this->setClientTag('php5:18-11-21');
+		$this->setApiVersion('5.0.3.21399');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
