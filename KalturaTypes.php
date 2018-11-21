@@ -6909,6 +6909,7 @@ class KalturaProgramAsset extends KalturaAsset
 	 * EPG identifier
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $epgId = null;
 
@@ -6930,6 +6931,7 @@ class KalturaProgramAsset extends KalturaAsset
 	 * Id of linear media asset
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $linearAssetId = null;
 
@@ -6937,7 +6939,6 @@ class KalturaProgramAsset extends KalturaAsset
 	 * Is CDVR enabled for this asset
 	 *
 	 * @var bool
-	 * @readonly
 	 */
 	public $enableCdvr = null;
 
@@ -6945,7 +6946,6 @@ class KalturaProgramAsset extends KalturaAsset
 	 * Is catch-up enabled for this asset
 	 *
 	 * @var bool
-	 * @readonly
 	 */
 	public $enableCatchUp = null;
 
@@ -6953,7 +6953,6 @@ class KalturaProgramAsset extends KalturaAsset
 	 * Is start over enabled for this asset
 	 *
 	 * @var bool
-	 * @readonly
 	 */
 	public $enableStartOver = null;
 
@@ -6961,7 +6960,6 @@ class KalturaProgramAsset extends KalturaAsset
 	 * Is trick-play enabled for this asset
 	 *
 	 * @var bool
-	 * @readonly
 	 */
 	public $enableTrickPlay = null;
 
