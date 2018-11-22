@@ -10595,7 +10595,6 @@ class KalturaHousehold extends KalturaObjectBase
 	 * Household external identifier
 	 *
 	 * @var string
-	 * @insertonly
 	 */
 	public $externalId = null;
 
