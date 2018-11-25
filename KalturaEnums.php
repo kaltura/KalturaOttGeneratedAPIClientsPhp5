@@ -56,6 +56,17 @@ class KalturaAggregationCountOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAggregationType extends KalturaEnumBase
+{
+	const COUNT = "Count";
+	const SUM = "Sum";
+	const AVG = "Avg";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnouncementOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1411,6 +1422,18 @@ class KalturaSeriesRecordingOrderBy extends KalturaEnumBase
 class KalturaSeriesReminderOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSkipOperators extends KalturaEnumBase
+{
+	const EQUAL = "Equal";
+	const UNEQUAL = "UnEqual";
+	const LESSTHAN = "LessThan";
+	const GREATERTHAN = "GreaterThan";
 }
 
 /**

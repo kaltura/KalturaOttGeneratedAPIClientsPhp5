@@ -9511,6 +9511,15 @@ abstract class KalturaBaseResponseProfile extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaSkipCondition extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaRequestConfiguration extends KalturaObjectBase
 {
 	/**
@@ -9563,11 +9572,11 @@ class KalturaRequestConfiguration extends KalturaObjectBase
 	public $abortAllOnError = null;
 
 	/**
-	 * Skip current request according to skip option
+	 * Skip current request according to skip condition
 	 *
-	 * @var KalturaSkipOptions
+	 * @var KalturaSkipCondition
 	 */
-	public $skipOnError = null;
+	public $skipCondition;
 
 
 }
@@ -11469,6 +11478,68 @@ class KalturaUserRoleFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $currentUserRoleIdsContains = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSkipOnErrorCondition extends KalturaSkipCondition
+{
+	/**
+	 * Indicates which error should be considered to skip the current request
+	 *
+	 * @var KalturaSkipOptions
+	 */
+	public $condition = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPropertySkipCondition extends KalturaSkipCondition
+{
+	/**
+	 * The property path on which the condition is checked
+	 *
+	 * @var string
+	 */
+	public $propertyPath = null;
+
+	/**
+	 * The operator that applies the check to the condition
+	 *
+	 * @var KalturaSkipOperators
+	 */
+	public $operator = null;
+
+	/**
+	 * The value on which the condition is checked
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAggregatedPropertySkipCondition extends KalturaPropertySkipCondition
+{
+	/**
+	 * The aggregation type on which the condition is based on
+	 *
+	 * @var KalturaAggregationType
+	 */
+	public $aggregationType = null;
 
 
 }
