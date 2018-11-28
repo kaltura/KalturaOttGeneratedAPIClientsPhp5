@@ -11084,7 +11084,7 @@ class KalturaTagFilter extends KalturaFilter
 class KalturaAssetStructFilter extends KalturaFilter
 {
 	/**
-	 * Comma separated identifiers
+	 * Comma separated identifiers, id = 0 is identified as program AssetStruct
 	 *
 	 * @var string
 	 */

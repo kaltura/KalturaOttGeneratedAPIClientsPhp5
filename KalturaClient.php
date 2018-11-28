@@ -892,7 +892,7 @@ class KalturaAssetStructService extends KalturaServiceBase
 	/**
 	 * Delete an existing assetStruct
 	 * 
-	 * @param bigint $id AssetStruct Identifier
+	 * @param bigint $id AssetStruct Identifier, id = 0 is identified as program AssetStruct
 	 * @return bool
 	 */
 	function delete($id)
@@ -931,7 +931,7 @@ class KalturaAssetStructService extends KalturaServiceBase
 	/**
 	 * Update an existing assetStruct
 	 * 
-	 * @param bigint $id AssetStruct Identifier
+	 * @param bigint $id AssetStruct Identifier, id = 0 is identified as program AssetStruct
 	 * @param KalturaAssetStruct $assetStruct AssetStruct Object
 	 * @return KalturaAssetStruct
 	 */
@@ -9822,8 +9822,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-11-27');
-		$this->setApiVersion('5.0.3.42018');
+		$this->setClientTag('php5:18-11-28');
+		$this->setApiVersion('5.0.3.29164');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
