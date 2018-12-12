@@ -1354,6 +1354,7 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const SEGMENTS = "SEGMENTS";
 	const DATE = "DATE";
 	const OR = "OR";
+	const HEADER = "HEADER";
 }
 
 /**
@@ -1379,6 +1380,7 @@ class KalturaRuleType extends KalturaEnumBase
 	const USER_TYPE = "user_type";
 	const DEVICE = "device";
 	const ASSETUSER = "assetUser";
+	const NETWORK = "network";
 }
 
 /**

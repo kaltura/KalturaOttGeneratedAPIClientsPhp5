@@ -7749,6 +7749,22 @@ abstract class KalturaNotCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaOrCondition extends KalturaNotCondition
+{
+	/**
+	 * List of conditions with or between them
+	 *
+	 * @var array of KalturaCondition
+	 */
+	public $conditions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCountryCondition extends KalturaNotCondition
 {
 	/**
@@ -7788,14 +7804,21 @@ class KalturaDateCondition extends KalturaNotCondition
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaOrCondition extends KalturaCondition
+class KalturaHeaderCondition extends KalturaNotCondition
 {
 	/**
-	 * List of conditions with or between them
+	 * Header key
 	 *
-	 * @var array of KalturaCondition
+	 * @var string
 	 */
-	public $conditions;
+	public $key = null;
+
+	/**
+	 * Header value
+	 *
+	 * @var string
+	 */
+	public $value = null;
 
 
 }
@@ -11245,6 +11268,13 @@ class KalturaAssetRuleFilter extends KalturaFilter
 	 * @var KalturaSlimAsset
 	 */
 	public $assetApplied;
+
+	/**
+	 * Indicates which asset rule list to return by this KalturaRuleActionType.
+	 *
+	 * @var KalturaRuleActionType
+	 */
+	public $actionsContainType = null;
 
 
 }
