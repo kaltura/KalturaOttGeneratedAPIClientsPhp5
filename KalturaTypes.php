@@ -1947,6 +1947,13 @@ class KalturaPlaybackSource extends KalturaMediaFile
 	 */
 	public $drm;
 
+	/**
+	 * Is Tokenized
+	 *
+	 * @var bool
+	 */
+	public $isTokenized = null;
+
 
 }
 
