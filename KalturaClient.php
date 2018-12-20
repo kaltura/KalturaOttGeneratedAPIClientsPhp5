@@ -569,9 +569,10 @@ class KalturaAssetFileService extends KalturaServiceBase
 	 * @param bigint $assetFileId Asset file identifier
 	 * @param string $contextType Playback context type
 	 * @param string $ks Kaltura session for the user, not mandatory for anonymous user
+	 * @param string $tokenizedUrl Tokenized Url, not mandatory
 	 * @return KalturaAssetFile
 	 */
-	function playManifest($partnerId, $assetId, $assetType, $assetFileId, $contextType, $ks = null)
+	function playManifest($partnerId, $assetId, $assetType, $assetFileId, $contextType, $ks = null, $tokenizedUrl = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "partnerId", $partnerId);
@@ -580,6 +581,7 @@ class KalturaAssetFileService extends KalturaServiceBase
 		$this->client->addParam($kparams, "assetFileId", $assetFileId);
 		$this->client->addParam($kparams, "contextType", $contextType);
 		$this->client->addParam($kparams, "ks", $ks);
+		$this->client->addParam($kparams, "tokenizedUrl", $tokenizedUrl);
 		$this->client->queueServiceActionCall("assetfile", "playManifest", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -6404,6 +6406,116 @@ class KalturaPinService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPlaybackProfileService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Insert new Playback adapter for partner
+	 * 
+	 * @param KalturaPlaybackProfile $playbackProfile Playback adapter Object
+	 * @return KalturaPlaybackProfile
+	 */
+	function add(KalturaPlaybackProfile $playbackProfile)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "playbackProfile", $playbackProfile->toParams());
+		$this->client->queueServiceActionCall("playbackprofile", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPlaybackProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete Playback adapter by Playback adapter id
+	 * 
+	 * @param int $id Playback adapter identifier
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("playbackprofile", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Generate playback adapter shared secret
+	 * 
+	 * @param int $id Playback adapter identifier
+	 * @return KalturaPlaybackProfile
+	 */
+	function generateSharedSecret($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("playbackprofile", "generateSharedSecret", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPlaybackProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns all playback profiles for partner : id + name
+	 * 
+	 * @param KalturaPlaybackProfileFilter $filter Filter parameters for filtering out the result
+	 * @return KalturaPlaybackProfileListResponse
+	 */
+	function listAction(KalturaPlaybackProfileFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("playbackprofile", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPlaybackProfileListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update Playback adapter details
+	 * 
+	 * @param int $id Playback adapter identifier
+	 * @param KalturaPlaybackProfile $playbackProfile Playback adapter Object
+	 * @return KalturaPlaybackProfile
+	 */
+	function update($id, KalturaPlaybackProfile $playbackProfile)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "playbackProfile", $playbackProfile->toParams());
+		$this->client->queueServiceActionCall("playbackprofile", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPlaybackProfile");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPpvService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -9593,6 +9705,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaPlaybackProfileService
+	 */
+	public $playbackProfile = null;
+
+	/**
+	 * 
 	 * @var KalturaPpvService
 	 */
 	public $ppv = null;
@@ -9822,8 +9940,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-12-19');
-		$this->setApiVersion('5.1.61.41995');
+		$this->setClientTag('php5:18-12-20');
+		$this->setApiVersion('5.1.74.35250');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -9899,6 +10017,7 @@ class KalturaClient extends KalturaClientBase
 		$this->personalFeed = new KalturaPersonalFeedService($this);
 		$this->personalList = new KalturaPersonalListService($this);
 		$this->pin = new KalturaPinService($this);
+		$this->playbackProfile = new KalturaPlaybackProfileService($this);
 		$this->ppv = new KalturaPpvService($this);
 		$this->priceDetails = new KalturaPriceDetailsService($this);
 		$this->pricePlan = new KalturaPricePlanService($this);

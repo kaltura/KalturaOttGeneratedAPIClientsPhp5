@@ -1152,6 +1152,15 @@ class KalturaPlaybackContextType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPlaybackProfileOrderBy extends KalturaEnumBase
+{
+	const NAME_ASC = "NAME_ASC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPositionOwner extends KalturaEnumBase
 {
 	const HOUSEHOLD = "household";
@@ -1338,6 +1347,7 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const ALLOW_PLAYBACK = "ALLOW_PLAYBACK";
 	const BLOCK_PLAYBACK = "BLOCK_PLAYBACK";
 	const APPLY_DISCOUNT_MODULE = "APPLY_DISCOUNT_MODULE";
+	const APPLY_PLAYBACK_ADAPTER = "APPLY_PLAYBACK_ADAPTER";
 }
 
 /**

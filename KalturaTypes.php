@@ -7533,6 +7533,82 @@ class KalturaAssetHistoryListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPlaybackProfile extends KalturaObjectBase
+{
+	/**
+	 * Playback profile identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Playback profile name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Playback profile active status
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+	/**
+	 * Playback profile URL
+	 *
+	 * @var string
+	 */
+	public $adapterUrl = null;
+
+	/**
+	 * Playback profile settings
+	 *
+	 * @var string
+	 */
+	public $settings = null;
+
+	/**
+	 * Playback profile alias
+	 *
+	 * @var string
+	 */
+	public $systemName = null;
+
+	/**
+	 * Playback adapter shared secret
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $sharedSecret = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackProfileListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of Engagement adapter
+	 *
+	 * @var array of KalturaPlaybackProfile
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaRule extends KalturaObjectBase
 {
 	/**
@@ -7989,6 +8065,22 @@ class KalturaAllowPlaybackAction extends KalturaAssetRuleAction
  */
 class KalturaBlockPlaybackAction extends KalturaAssetRuleAction
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApplyPlaybackAdapterAction extends KalturaAssetRuleAction
+{
+	/**
+	 * Playback Adapter Identifier
+	 *
+	 * @var int
+	 */
+	public $adapterId = null;
+
 
 }
 
@@ -11251,6 +11343,22 @@ class KalturaBusinessModuleRuleFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $segmentIdsApplied = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackProfileFilter extends KalturaFilter
+{
+	/**
+	 * Playback profile to filter by
+	 *
+	 * @var int
+	 */
+	public $playbackProfileEqual = null;
 
 
 }
