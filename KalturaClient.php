@@ -7019,16 +7019,18 @@ class KalturaRecordingService extends KalturaServiceBase
 	}
 
 	/**
-	 * Protects an existing recording from the cleanup process for the defined protection period
+	 * Update an existing recording with is protected field
 	 * 
 	 * @param bigint $id Recording identifier
+	 * @param KalturaRecording $recording Recording to update
 	 * @return KalturaRecording
 	 */
-	function protect($id)
+	function update($id, KalturaRecording $recording)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("recording", "protect", $kparams);
+		$this->client->addParam($kparams, "recording", $recording->toParams());
+		$this->client->queueServiceActionCall("recording", "update", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -9940,8 +9942,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:18-12-25');
-		$this->setApiVersion('5.1.87.42800');
+		$this->setClientTag('php5:18-12-26');
+		$this->setApiVersion('5.1.98.30364');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

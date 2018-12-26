@@ -4074,6 +4074,7 @@ class KalturaRecording extends KalturaObjectBase
 	 * Kaltura unique ID representing the program identifier
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $assetId = null;
 
@@ -4097,7 +4098,6 @@ class KalturaRecording extends KalturaObjectBase
 	 * Specifies whether or not the recording is protected
 	 *
 	 * @var bool
-	 * @insertonly
 	 */
 	public $isProtected = null;
 
