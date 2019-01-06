@@ -9621,7 +9621,7 @@ class KalturaClientConfiguration extends KalturaObjectBase
 	/**
 	 * Abort the Multireuqset call if any error occurs in one of the requests
 	 *
-	 * @var string
+	 * @var bool
 	 */
 	public $abortOnError = null;
 
