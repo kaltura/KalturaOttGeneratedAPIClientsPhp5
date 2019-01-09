@@ -9,7 +9,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2019  Kaltura Inc.
+// Copyright (C) 2006-2018  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -3811,809 +3811,6 @@ class KalturaUserSegmentListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSeriesRecording extends KalturaObjectBase
-{
-	/**
-	 * Kaltura unique ID representing the series recording identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Kaltura EpgId
-	 *
-	 * @var int
-	 */
-	public $epgId = null;
-
-	/**
-	 * Kaltura ChannelId
-	 *
-	 * @var int
-	 */
-	public $channelId = null;
-
-	/**
-	 * Kaltura SeriesId
-	 *
-	 * @var string
-	 */
-	public $seriesId = null;
-
-	/**
-	 * Kaltura SeasonNumber
-	 *
-	 * @var int
-	 */
-	public $seasonNumber = null;
-
-	/**
-	 * Recording Type: single/series/season
-	 *
-	 * @var KalturaRecordingType
-	 */
-	public $type = null;
-
-	/**
-	 * Specifies when was the series recording created. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Specifies when was the series recording last updated. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-	/**
-	 * List of the season numbers to exclude.
-	 *
-	 * @var array of KalturaIntegerValue
-	 * @readonly
-	 */
-	public $excludedSeasons;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSeriesRecordingListResponse extends KalturaListResponse
-{
-	/**
-	 * Series Recordings
-	 *
-	 * @var array of KalturaSeriesRecording
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPremiumService extends KalturaObjectBase
-{
-	/**
-	 * Service identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Service name / description
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdPremiumService extends KalturaPremiumService
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdPremiumServiceListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of premium services
-	 *
-	 * @var array of KalturaHouseholdPremiumService
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaNpvrPremiumService extends KalturaPremiumService
-{
-	/**
-	 * Quota in minutes
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $quotaInMinutes = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCDVRAdapterProfile extends KalturaObjectBase
-{
-	/**
-	 * C-DVR adapter identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * C-DVR adapter name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * C-DVR adapter active status
-	 *
-	 * @var bool
-	 */
-	public $isActive = null;
-
-	/**
-	 * C-DVR adapter adapter URL
-	 *
-	 * @var string
-	 */
-	public $adapterUrl = null;
-
-	/**
-	 * C-DVR adapter extra parameters
-	 *
-	 * @var map
-	 */
-	public $settings;
-
-	/**
-	 * C-DVR adapter external identifier
-	 *
-	 * @var string
-	 */
-	public $externalIdentifier = null;
-
-	/**
-	 * C-DVR shared secret
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $sharedSecret = null;
-
-	/**
-	 * Indicates whether the C-DVR adapter supports dynamic URLs
-	 *
-	 * @var bool
-	 */
-	public $dynamicLinksSupport = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCDVRAdapterProfileListResponse extends KalturaListResponse
-{
-	/**
-	 * C-DVR adapter profiles
-	 *
-	 * @var array of KalturaCDVRAdapterProfile
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRecording extends KalturaObjectBase
-{
-	/**
-	 * Kaltura unique ID representing the recording identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Recording state: scheduled/recording/recorded/canceled/failed/deleted
-	 *
-	 * @var KalturaRecordingStatus
-	 * @readonly
-	 */
-	public $status = null;
-
-	/**
-	 * Kaltura unique ID representing the program identifier
-	 *
-	 * @var int
-	 * @insertonly
-	 */
-	public $assetId = null;
-
-	/**
-	 * Recording Type: single/season/series
-	 *
-	 * @var KalturaRecordingType
-	 * @insertonly
-	 */
-	public $type = null;
-
-	/**
-	 * Specifies until when the recording is available for viewing. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $viewableUntilDate = null;
-
-	/**
-	 * Specifies whether or not the recording is protected
-	 *
-	 * @var bool
-	 */
-	public $isProtected = null;
-
-	/**
-	 * Specifies when was the recording created. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Specifies when was the recording last updated. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaExternalRecording extends KalturaRecording
-{
-	/**
-	 * External identifier for the recording
-	 *
-	 * @var string
-	 * @insertonly
-	 */
-	public $externalId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRecordingListResponse extends KalturaListResponse
-{
-	/**
-	 * Recordings
-	 *
-	 * @var array of KalturaRecording
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPrice extends KalturaObjectBase
-{
-	/**
-	 * Price
-	 *
-	 * @var float
-	 */
-	public $amount = null;
-
-	/**
-	 * Currency
-	 *
-	 * @var string
-	 */
-	public $currency = null;
-
-	/**
-	 * Currency Sign
-	 *
-	 * @var string
-	 */
-	public $currencySign = null;
-
-	/**
-	 * Country ID
-	 *
-	 * @var int
-	 */
-	public $countryId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBillingTransaction extends KalturaObjectBase
-{
-	/**
-	 * Reciept Code
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $recieptCode = null;
-
-	/**
-	 * Purchased Item Name
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $purchasedItemName = null;
-
-	/**
-	 * Purchased Item Code
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $purchasedItemCode = null;
-
-	/**
-	 * Item Type
-	 *
-	 * @var KalturaBillingItemsType
-	 * @readonly
-	 */
-	public $itemType = null;
-
-	/**
-	 * Billing Action
-	 *
-	 * @var KalturaBillingAction
-	 * @readonly
-	 */
-	public $billingAction = null;
-
-	/**
-	 * price
-	 *
-	 * @var KalturaPrice
-	 * @readonly
-	 */
-	public $price;
-
-	/**
-	 * Action Date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $actionDate = null;
-
-	/**
-	 * Start Date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $startDate = null;
-
-	/**
-	 * End Date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $endDate = null;
-
-	/**
-	 * Payment Method
-	 *
-	 * @var KalturaPaymentMethodType
-	 * @readonly
-	 */
-	public $paymentMethod = null;
-
-	/**
-	 * Payment Method Extra Details
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $paymentMethodExtraDetails = null;
-
-	/**
-	 * Is Recurring
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isRecurring = null;
-
-	/**
-	 * Billing Provider Ref
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $billingProviderRef = null;
-
-	/**
-	 * Purchase ID
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $purchaseId = null;
-
-	/**
-	 * Remarks
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $remarks = null;
-
-	/**
-	 * Billing Price Info
-	 *
-	 * @var KalturaBillingPriceType
-	 * @readonly
-	 */
-	public $billingPriceType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBillingTransactionListResponse extends KalturaListResponse
-{
-	/**
-	 * Transactions
-	 *
-	 * @var array of KalturaBillingTransaction
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscount extends KalturaPrice
-{
-	/**
-	 * The discount percentage
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $percentage = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEntitlement extends KalturaObjectBase
-{
-	/**
-	 * Purchase identifier (for subscriptions and collections only)
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Product identifier
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $productId = null;
-
-	/**
-	 * The current number of uses
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $currentUses = null;
-
-	/**
-	 * The end date of the entitlement
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $endDate = null;
-
-	/**
-	 * Current date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $currentDate = null;
-
-	/**
-	 * The last date the item was viewed
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $lastViewDate = null;
-
-	/**
-	 * Purchase date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $purchaseDate = null;
-
-	/**
-	 * Payment Method
-	 *
-	 * @var KalturaPaymentMethodType
-	 * @readonly
-	 */
-	public $paymentMethod = null;
-
-	/**
-	 * The UDID of the device from which the purchase was made
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $deviceUdid = null;
-
-	/**
-	 * The name of the device from which the purchase was made
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $deviceName = null;
-
-	/**
-	 * Indicates whether a cancelation window period is enabled
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isCancelationWindowEnabled = null;
-
-	/**
-	 * The maximum number of uses available for this item (only for subscription and PPV)
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $maxUses = null;
-
-	/**
-	 * The Identifier of the purchasing user
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $userId = null;
-
-	/**
-	 * The Identifier of the purchasing household
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $householdId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEntitlementListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of entitlements
-	 *
-	 * @var array of KalturaEntitlement
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCollectionEntitlement extends KalturaEntitlement
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPpvEntitlement extends KalturaEntitlement
-{
-	/**
-	 * Media file identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $mediaFileId = null;
-
-	/**
-	 * Media identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $mediaId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionEntitlement extends KalturaEntitlement
-{
-	/**
-	 * The date of the next renewal (only for subscription)
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $nextRenewalDate = null;
-
-	/**
-	 * Indicates whether the subscription is renewable in this purchase (only for subscription)
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isRenewableForPurchase = null;
-
-	/**
-	 * Indicates whether a subscription is renewable (only for subscription)
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isRenewable = null;
-
-	/**
-	 * Indicates whether the user is currently in his grace period entitlement
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isInGracePeriod = null;
-
-	/**
-	 * Payment Gateway identifier
-	 *
-	 * @var int
-	 */
-	public $paymentGatewayId = null;
-
-	/**
-	 * Payment Method identifier
-	 *
-	 * @var int
-	 */
-	public $paymentMethodId = null;
-
-	/**
-	 * Scheduled Subscription Identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $scheduledSubscriptionId = null;
-
-	/**
-	 * Unified payment identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $unifiedPaymentId = null;
-
-	/**
-	 * Indicates if the subscription suspended
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isSuspended = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaOTTObjectSupportNullable extends KalturaObjectBase
 {
 
@@ -4668,6 +3865,43 @@ class KalturaAssetFilePpvListResponse extends KalturaListResponse
 	 * @var array of KalturaAssetFilePpv
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPrice extends KalturaObjectBase
+{
+	/**
+	 * Price
+	 *
+	 * @var float
+	 */
+	public $amount = null;
+
+	/**
+	 * Currency
+	 *
+	 * @var string
+	 */
+	public $currency = null;
+
+	/**
+	 * Currency Sign
+	 *
+	 * @var string
+	 */
+	public $currencySign = null;
+
+	/**
+	 * Country ID
+	 *
+	 * @var int
+	 */
+	public $countryId = null;
 
 
 }
@@ -5000,6 +4234,23 @@ class KalturaPpvListResponse extends KalturaListResponse
 	 * @var array of KalturaPpv
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscount extends KalturaPrice
+{
+	/**
+	 * The discount percentage
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $percentage = null;
 
 
 }
@@ -5897,6 +5148,30 @@ class KalturaPreviewModule extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPremiumService extends KalturaObjectBase
+{
+	/**
+	 * Service identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Service name / description
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSubscription extends KalturaObjectBase
 {
 	/**
@@ -6141,6 +5416,32 @@ class KalturaSubscriptionListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaNpvrPremiumService extends KalturaPremiumService
+{
+	/**
+	 * Quota in minutes
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $quotaInMinutes = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdPremiumService extends KalturaPremiumService
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaProductsPriceListResponse extends KalturaListResponse
 {
 	/**
@@ -6149,6 +5450,705 @@ class KalturaProductsPriceListResponse extends KalturaListResponse
 	 * @var array of KalturaProductPrice
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSeriesRecording extends KalturaObjectBase
+{
+	/**
+	 * Kaltura unique ID representing the series recording identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Kaltura EpgId
+	 *
+	 * @var int
+	 */
+	public $epgId = null;
+
+	/**
+	 * Kaltura ChannelId
+	 *
+	 * @var int
+	 */
+	public $channelId = null;
+
+	/**
+	 * Kaltura SeriesId
+	 *
+	 * @var string
+	 */
+	public $seriesId = null;
+
+	/**
+	 * Kaltura SeasonNumber
+	 *
+	 * @var int
+	 */
+	public $seasonNumber = null;
+
+	/**
+	 * Recording Type: single/series/season
+	 *
+	 * @var KalturaRecordingType
+	 */
+	public $type = null;
+
+	/**
+	 * Specifies when was the series recording created. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Specifies when was the series recording last updated. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * List of the season numbers to exclude.
+	 *
+	 * @var array of KalturaIntegerValue
+	 * @readonly
+	 */
+	public $excludedSeasons;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSeriesRecordingListResponse extends KalturaListResponse
+{
+	/**
+	 * Series Recordings
+	 *
+	 * @var array of KalturaSeriesRecording
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdPremiumServiceListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of premium services
+	 *
+	 * @var array of KalturaHouseholdPremiumService
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCDVRAdapterProfile extends KalturaObjectBase
+{
+	/**
+	 * C-DVR adapter identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * C-DVR adapter name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * C-DVR adapter active status
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+	/**
+	 * C-DVR adapter adapter URL
+	 *
+	 * @var string
+	 */
+	public $adapterUrl = null;
+
+	/**
+	 * C-DVR adapter extra parameters
+	 *
+	 * @var map
+	 */
+	public $settings;
+
+	/**
+	 * C-DVR adapter external identifier
+	 *
+	 * @var string
+	 */
+	public $externalIdentifier = null;
+
+	/**
+	 * C-DVR shared secret
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $sharedSecret = null;
+
+	/**
+	 * Indicates whether the C-DVR adapter supports dynamic URLs
+	 *
+	 * @var bool
+	 */
+	public $dynamicLinksSupport = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCDVRAdapterProfileListResponse extends KalturaListResponse
+{
+	/**
+	 * C-DVR adapter profiles
+	 *
+	 * @var array of KalturaCDVRAdapterProfile
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRecording extends KalturaObjectBase
+{
+	/**
+	 * Kaltura unique ID representing the recording identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Recording state: scheduled/recording/recorded/canceled/failed/deleted
+	 *
+	 * @var KalturaRecordingStatus
+	 * @readonly
+	 */
+	public $status = null;
+
+	/**
+	 * Kaltura unique ID representing the program identifier
+	 *
+	 * @var int
+	 * @insertonly
+	 */
+	public $assetId = null;
+
+	/**
+	 * Recording Type: single/season/series
+	 *
+	 * @var KalturaRecordingType
+	 * @insertonly
+	 */
+	public $type = null;
+
+	/**
+	 * Specifies until when the recording is available for viewing. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $viewableUntilDate = null;
+
+	/**
+	 * Specifies whether or not the recording is protected
+	 *
+	 * @var bool
+	 */
+	public $isProtected = null;
+
+	/**
+	 * Specifies when was the recording created. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Specifies when was the recording last updated. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExternalRecording extends KalturaRecording
+{
+	/**
+	 * External identifier for the recording
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $externalId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRecordingListResponse extends KalturaListResponse
+{
+	/**
+	 * Recordings
+	 *
+	 * @var array of KalturaRecording
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBillingTransaction extends KalturaObjectBase
+{
+	/**
+	 * Reciept Code
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $recieptCode = null;
+
+	/**
+	 * Purchased Item Name
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $purchasedItemName = null;
+
+	/**
+	 * Purchased Item Code
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $purchasedItemCode = null;
+
+	/**
+	 * Item Type
+	 *
+	 * @var KalturaBillingItemsType
+	 * @readonly
+	 */
+	public $itemType = null;
+
+	/**
+	 * Billing Action
+	 *
+	 * @var KalturaBillingAction
+	 * @readonly
+	 */
+	public $billingAction = null;
+
+	/**
+	 * price
+	 *
+	 * @var KalturaPrice
+	 * @readonly
+	 */
+	public $price;
+
+	/**
+	 * Action Date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $actionDate = null;
+
+	/**
+	 * Start Date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $startDate = null;
+
+	/**
+	 * End Date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $endDate = null;
+
+	/**
+	 * Payment Method
+	 *
+	 * @var KalturaPaymentMethodType
+	 * @readonly
+	 */
+	public $paymentMethod = null;
+
+	/**
+	 * Payment Method Extra Details
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $paymentMethodExtraDetails = null;
+
+	/**
+	 * Is Recurring
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isRecurring = null;
+
+	/**
+	 * Billing Provider Ref
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $billingProviderRef = null;
+
+	/**
+	 * Purchase ID
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $purchaseId = null;
+
+	/**
+	 * Remarks
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $remarks = null;
+
+	/**
+	 * Billing Price Info
+	 *
+	 * @var KalturaBillingPriceType
+	 * @readonly
+	 */
+	public $billingPriceType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBillingTransactionListResponse extends KalturaListResponse
+{
+	/**
+	 * Transactions
+	 *
+	 * @var array of KalturaBillingTransaction
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlement extends KalturaObjectBase
+{
+	/**
+	 * Purchase identifier (for subscriptions and collections only)
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Product identifier
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $productId = null;
+
+	/**
+	 * The current number of uses
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $currentUses = null;
+
+	/**
+	 * The end date of the entitlement
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $endDate = null;
+
+	/**
+	 * Current date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $currentDate = null;
+
+	/**
+	 * The last date the item was viewed
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $lastViewDate = null;
+
+	/**
+	 * Purchase date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $purchaseDate = null;
+
+	/**
+	 * Payment Method
+	 *
+	 * @var KalturaPaymentMethodType
+	 * @readonly
+	 */
+	public $paymentMethod = null;
+
+	/**
+	 * The UDID of the device from which the purchase was made
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $deviceUdid = null;
+
+	/**
+	 * The name of the device from which the purchase was made
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $deviceName = null;
+
+	/**
+	 * Indicates whether a cancelation window period is enabled
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isCancelationWindowEnabled = null;
+
+	/**
+	 * The maximum number of uses available for this item (only for subscription and PPV)
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $maxUses = null;
+
+	/**
+	 * The Identifier of the purchasing user
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $userId = null;
+
+	/**
+	 * The Identifier of the purchasing household
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $householdId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlementListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of entitlements
+	 *
+	 * @var array of KalturaEntitlement
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCollectionEntitlement extends KalturaEntitlement
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPpvEntitlement extends KalturaEntitlement
+{
+	/**
+	 * Media file identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $mediaFileId = null;
+
+	/**
+	 * Media identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $mediaId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionEntitlement extends KalturaEntitlement
+{
+	/**
+	 * The date of the next renewal (only for subscription)
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $nextRenewalDate = null;
+
+	/**
+	 * Indicates whether the subscription is renewable in this purchase (only for subscription)
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isRenewableForPurchase = null;
+
+	/**
+	 * Indicates whether a subscription is renewable (only for subscription)
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isRenewable = null;
+
+	/**
+	 * Indicates whether the user is currently in his grace period entitlement
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isInGracePeriod = null;
+
+	/**
+	 * Payment Gateway identifier
+	 *
+	 * @var int
+	 */
+	public $paymentGatewayId = null;
+
+	/**
+	 * Payment Method identifier
+	 *
+	 * @var int
+	 */
+	public $paymentMethodId = null;
+
+	/**
+	 * Scheduled Subscription Identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $scheduledSubscriptionId = null;
+
+	/**
+	 * Unified payment identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $unifiedPaymentId = null;
+
+	/**
+	 * Indicates if the subscription suspended
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isSuspended = null;
 
 
 }
@@ -10695,165 +10695,6 @@ class KalturaUserSegmentFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSeriesRecordingFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProductPriceFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated subscriptions identifiers
-	 *
-	 * @var string
-	 */
-	public $subscriptionIdIn = null;
-
-	/**
-	 * Comma separated media files identifiers
-	 *
-	 * @var string
-	 */
-	public $fileIdIn = null;
-
-	/**
-	 * Comma separated collections identifiers
-	 *
-	 * @var string
-	 */
-	public $collectionIdIn = null;
-
-	/**
-	 * A flag that indicates if only the lowest price of an item should return
-	 *
-	 * @var bool
-	 */
-	public $isLowest = null;
-
-	/**
-	 * Discount coupon code
-	 *
-	 * @var string
-	 */
-	public $couponCodeEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEntitlementFilter extends KalturaFilter
-{
-	/**
-	 * The type of the entitlements to return
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $productTypeEqual = null;
-
-	/**
-	 * Reference type to filter by
-	 *
-	 * @var KalturaEntityReferenceBy
-	 */
-	public $entityReferenceEqual = null;
-
-	/**
-	 * Is expired
-	 *
-	 * @var bool
-	 */
-	public $isExpiredEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaTransactionHistoryFilter extends KalturaFilter
-{
-	/**
-	 * Reference type to filter by
-	 *
-	 * @var KalturaEntityReferenceBy
-	 */
-	public $entityReferenceEqual = null;
-
-	/**
-	 * Filter transactions later than specific date
-	 *
-	 * @var int
-	 */
-	public $startDateGreaterThanOrEqual = null;
-
-	/**
-	 * Filter transactions earlier than specific date
-	 *
-	 * @var int
-	 */
-	public $endDateLessThanOrEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRecordingContextFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated asset ids
-	 *
-	 * @var string
-	 */
-	public $assetIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRecordingFilter extends KalturaFilter
-{
-	/**
-	 * Recording Statuses
-	 *
-	 * @var string
-	 */
-	public $statusIn = null;
-
-	/**
-	 * Comma separated external identifiers
-	 *
-	 * @var string
-	 */
-	public $externalRecordingIdIn = null;
-
-	/**
-	 * KSQL expression
-	 *
-	 * @var string
-	 */
-	public $kSql = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPpvFilter extends KalturaFilter
 {
 	/**
@@ -11032,6 +10873,165 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $externalIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSeriesRecordingFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProductPriceFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated subscriptions identifiers
+	 *
+	 * @var string
+	 */
+	public $subscriptionIdIn = null;
+
+	/**
+	 * Comma separated media files identifiers
+	 *
+	 * @var string
+	 */
+	public $fileIdIn = null;
+
+	/**
+	 * Comma separated collections identifiers
+	 *
+	 * @var string
+	 */
+	public $collectionIdIn = null;
+
+	/**
+	 * A flag that indicates if only the lowest price of an item should return
+	 *
+	 * @var bool
+	 */
+	public $isLowest = null;
+
+	/**
+	 * Discount coupon code
+	 *
+	 * @var string
+	 */
+	public $couponCodeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlementFilter extends KalturaFilter
+{
+	/**
+	 * The type of the entitlements to return
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $productTypeEqual = null;
+
+	/**
+	 * Reference type to filter by
+	 *
+	 * @var KalturaEntityReferenceBy
+	 */
+	public $entityReferenceEqual = null;
+
+	/**
+	 * Is expired
+	 *
+	 * @var bool
+	 */
+	public $isExpiredEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTransactionHistoryFilter extends KalturaFilter
+{
+	/**
+	 * Reference type to filter by
+	 *
+	 * @var KalturaEntityReferenceBy
+	 */
+	public $entityReferenceEqual = null;
+
+	/**
+	 * Filter transactions later than specific date
+	 *
+	 * @var int
+	 */
+	public $startDateGreaterThanOrEqual = null;
+
+	/**
+	 * Filter transactions earlier than specific date
+	 *
+	 * @var int
+	 */
+	public $endDateLessThanOrEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRecordingContextFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated asset ids
+	 *
+	 * @var string
+	 */
+	public $assetIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRecordingFilter extends KalturaFilter
+{
+	/**
+	 * Recording Statuses
+	 *
+	 * @var string
+	 */
+	public $statusIn = null;
+
+	/**
+	 * Comma separated external identifiers
+	 *
+	 * @var string
+	 */
+	public $externalRecordingIdIn = null;
+
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
 
 
 }
@@ -11951,6 +11951,66 @@ class KalturaAccessControlMessage extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCaptionPlaybackPluginData extends KalturaObjectBase
+{
+	/**
+	 * url
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+	/**
+	 * Language
+	 *
+	 * @var string
+	 */
+	public $language = null;
+
+	/**
+	 * Label
+	 *
+	 * @var string
+	 */
+	public $label = null;
+
+	/**
+	 * Format
+	 *
+	 * @var string
+	 */
+	public $format = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBumpersPlaybackPluginData extends KalturaObjectBase
+{
+	/**
+	 * url
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+	/**
+	 * Streamer type: hls, dash, progressive.
+	 *
+	 * @var string
+	 */
+	public $streamertype = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPlaybackContext extends KalturaObjectBase
 {
 	/**
@@ -11973,6 +12033,20 @@ class KalturaPlaybackContext extends KalturaObjectBase
 	 * @var array of KalturaAccessControlMessage
 	 */
 	public $messages;
+
+	/**
+	 * Playback captions
+	 *
+	 * @var array of KalturaCaptionPlaybackPluginData
+	 */
+	public $playbackCaptions;
+
+	/**
+	 * Playback bumpers
+	 *
+	 * @var array of KalturaBumpersPlaybackPluginData
+	 */
+	public $playbackBumpers;
 
 
 }
