@@ -11988,22 +11988,8 @@ class KalturaCaptionPlaybackPluginData extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBumpersPlaybackPluginData extends KalturaObjectBase
+class KalturaPlaybackPluginData extends KalturaObjectBase
 {
-	/**
-	 * url
-	 *
-	 * @var string
-	 */
-	public $url = null;
-
-	/**
-	 * Streamer type: hls, dash, progressive.
-	 *
-	 * @var string
-	 */
-	public $streamertype = null;
-
 
 }
 
@@ -12042,11 +12028,34 @@ class KalturaPlaybackContext extends KalturaObjectBase
 	public $playbackCaptions;
 
 	/**
-	 * Playback bumpers
+	 * Plugins
 	 *
-	 * @var array of KalturaBumpersPlaybackPluginData
+	 * @var array of KalturaPlaybackPluginData
 	 */
-	public $playbackBumpers;
+	public $plugins;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBumpersPlaybackPluginData extends KalturaPlaybackPluginData
+{
+	/**
+	 * url
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+	/**
+	 * Streamer type: hls, dash, progressive.
+	 *
+	 * @var string
+	 */
+	public $streamertype = null;
 
 
 }
