@@ -9180,13 +9180,6 @@ class KalturaExportTask extends KalturaObjectBase
 	public $notificationUrl = null;
 
 	/**
-	 * List of media type identifiers (as configured in TVM) to export. used only in case data_type = vod
-	 *
-	 * @var array of KalturaIntegerValue
-	 */
-	public $vodTypes;
-
-	/**
 	 * Indicates if the task is active or not
 	 *
 	 * @var bool
