@@ -9,7 +9,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2019  Kaltura Inc.
+// Copyright (C) 2006-2018  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -9620,13 +9620,6 @@ class KalturaClientConfiguration extends KalturaObjectBase
 	 */
 	public $apiVersion = null;
 
-	/**
-	 * Abort the Multireuqset call if any error occurs in one of the requests
-	 *
-	 * @var bool
-	 */
-	public $abortOnError = null;
-
 
 }
 
@@ -9697,7 +9690,14 @@ class KalturaRequestConfiguration extends KalturaObjectBase
 	public $responseProfile;
 
 	/**
-	 * Abort all following requests if current request has an error
+	 * Abort the Multireuqset call if any error occurs in one of the requests
+	 *
+	 * @var bool
+	 */
+	public $abortOnError = null;
+
+	/**
+	 * Abort all following requests in Multireuqset if current request has an error
 	 *
 	 * @var bool
 	 */
