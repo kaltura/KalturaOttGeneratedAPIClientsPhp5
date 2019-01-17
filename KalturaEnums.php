@@ -786,6 +786,7 @@ class KalturaImageObjectType extends KalturaEnumBase
 	const CATEGORY = "CATEGORY";
 	const PARTNER = "PARTNER";
 	const IMAGE_TYPE = "IMAGE_TYPE";
+	const PROGRAM_GROUP = "PROGRAM_GROUP";
 }
 
 /**

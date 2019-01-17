@@ -3274,7 +3274,7 @@ class KalturaFavoriteService extends KalturaServiceBase
 	/**
 	 * Remove media from user&#39;s favorite list
 	 * 
-	 * @param int $id Media identifier
+	 * @param bigint $id Media identifier
 	 * @return bool
 	 */
 	function delete($id)
@@ -4344,11 +4344,10 @@ class KalturaImageService extends KalturaServiceBase
 	 * @param KalturaImageFilter $filter Filter
 	 * @return KalturaImageListResponse
 	 */
-	function listAction(KalturaImageFilter $filter = null)
+	function listAction(KalturaImageFilter $filter)
 	{
 		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("image", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -9963,7 +9962,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:19-01-17');
-		$this->setApiVersion('5.1.1.15927');
+		$this->setApiVersion('5.1.1.24444');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

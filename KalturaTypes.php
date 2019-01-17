@@ -11140,7 +11140,7 @@ class KalturaImageFilter extends KalturaFilter
 	public $imageObjectTypeEqual = null;
 
 	/**
-	 * Filter images that are default on atleast on image type or not default at any
+	 * Filter images that are default on at least on image type or not default at any
 	 *
 	 * @var bool
 	 */
