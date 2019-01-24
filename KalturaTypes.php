@@ -7633,7 +7633,7 @@ class KalturaTvmDeviceRule extends KalturaTvmRule
 class KalturaTvmGeoRule extends KalturaTvmRule
 {
 	/**
-	 * Indicates if the rule is relevent ONLY for the country ids or except country ids here.
+	 * Indicates if the rule is relevent ONLY for the country ids or except country ids here. - is that true?
 	 *
 	 * @var bool
 	 */
@@ -7647,18 +7647,32 @@ class KalturaTvmGeoRule extends KalturaTvmRule
 	public $countryIds = null;
 
 	/**
-	 * proxyRule - what is that?
+	 * proxyRuleId - what is that?
 	 *
 	 * @var int
 	 */
-	public $proxyRule = null;
+	public $proxyRuleId = null;
 
 	/**
-	 * proxyLevel - what is that?
+	 * proxyRuleName - what is that?
+	 *
+	 * @var string
+	 */
+	public $proxyRuleName = null;
+
+	/**
+	 * proxyLevelId - what is that?
 	 *
 	 * @var int
 	 */
-	public $proxyLevel = null;
+	public $proxyLevelId = null;
+
+	/**
+	 * proxyLevelName - what is that?
+	 *
+	 * @var string
+	 */
+	public $proxyLevelName = null;
 
 
 }
