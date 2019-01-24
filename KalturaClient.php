@@ -8746,6 +8746,38 @@ class KalturaTransactionHistoryService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTvmRuleService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Get the list of tvm rules for the partner
+	 * 
+	 * @param KalturaTvmRuleFilter $filter TvmRuleFilter Filter
+	 * @return KalturaTvmRuleListResponse
+	 */
+	function listAction(KalturaTvmRuleFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("tvmrule", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaTvmRuleListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUnifiedPaymentService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -9906,6 +9938,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaTvmRuleService
+	 */
+	public $tvmRule = null;
+
+	/**
+	 * 
 	 * @var KalturaUnifiedPaymentService
 	 */
 	public $unifiedPayment = null;
@@ -9961,8 +9999,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-01-23');
-		$this->setApiVersion('5.1.1.42808');
+		$this->setClientTag('php5:19-01-24');
+		$this->setApiVersion('5.1.1.21077');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10068,6 +10106,7 @@ class KalturaClient extends KalturaClientBase
 		$this->topic = new KalturaTopicService($this);
 		$this->transaction = new KalturaTransactionService($this);
 		$this->transactionHistory = new KalturaTransactionHistoryService($this);
+		$this->tvmRule = new KalturaTvmRuleService($this);
 		$this->unifiedPayment = new KalturaUnifiedPaymentService($this);
 		$this->uploadToken = new KalturaUploadTokenService($this);
 		$this->userAssetRule = new KalturaUserAssetRuleService($this);

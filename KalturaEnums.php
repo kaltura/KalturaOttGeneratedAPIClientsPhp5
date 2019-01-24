@@ -1693,6 +1693,15 @@ class KalturaTransactionType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTvmRuleOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUploadTokenStatus extends KalturaEnumBase
 {
 	const PENDING = "PENDING";

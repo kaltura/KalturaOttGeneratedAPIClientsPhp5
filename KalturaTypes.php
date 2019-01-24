@@ -7542,82 +7542,6 @@ class KalturaAssetHistoryListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPlaybackProfile extends KalturaObjectBase
-{
-	/**
-	 * Playback profile identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Playback profile name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Playback profile active status
-	 *
-	 * @var bool
-	 */
-	public $isActive = null;
-
-	/**
-	 * Playback profile URL
-	 *
-	 * @var string
-	 */
-	public $adapterUrl = null;
-
-	/**
-	 * Playback profile settings
-	 *
-	 * @var string
-	 */
-	public $settings = null;
-
-	/**
-	 * Playback profile alias
-	 *
-	 * @var string
-	 */
-	public $systemName = null;
-
-	/**
-	 * Playback adapter shared secret
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $sharedSecret = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPlaybackProfileListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of Engagement adapter
-	 *
-	 * @var array of KalturaPlaybackProfile
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaRule extends KalturaObjectBase
 {
 	/**
@@ -7641,6 +7565,84 @@ abstract class KalturaRule extends KalturaObjectBase
 	 * @var string
 	 */
 	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaTvmRule extends KalturaRule
+{
+	/**
+	 * Specifies when was the tvm rule was created. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Specifies the tvm rule type.
+	 *
+	 * @var KalturaRuleType
+	 * @readonly
+	 */
+	public $ruleType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTvmRuleListResponse extends KalturaListResponse
+{
+	/**
+	 * tvm rules
+	 *
+	 * @var array of KalturaTvmRule
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTvmGeoRule extends KalturaTvmRule
+{
+	/**
+	 * Indicates if the rule is relevent ONLY for the country ids or except country ids here.
+	 *
+	 * @var bool
+	 */
+	public $onlyOrBut = null;
+
+	/**
+	 * Comma separated list of country Ids.
+	 *
+	 * @var string
+	 */
+	public $countryIds = null;
+
+	/**
+	 * proxyRule - what is that?
+	 *
+	 * @var int
+	 */
+	public $proxyRule = null;
+
+	/**
+	 * proxyLevel - what is that?
+	 *
+	 * @var int
+	 */
+	public $proxyLevel = null;
 
 
 }
@@ -7752,79 +7754,6 @@ class KalturaBusinessModuleRule extends KalturaRule
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBusinessModuleRuleListResponse extends KalturaListResponse
-{
-	/**
-	 * Asset rules
-	 *
-	 * @var array of KalturaBusinessModuleRule
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaAssetRuleBase extends KalturaRule
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetCondition extends KalturaCondition
-{
-	/**
-	 * KSQL
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetUserRule extends KalturaAssetRuleBase
-{
-	/**
-	 * List of Ksql conditions for the user rule
-	 *
-	 * @var array of KalturaAssetCondition
-	 */
-	public $conditions;
-
-	/**
-	 * List of actions for the user rule
-	 *
-	 * @var array of KalturaAssetUserRuleAction
-	 */
-	public $actions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaNotCondition extends KalturaCondition
 {
 	/**
@@ -7911,6 +7840,22 @@ class KalturaHeaderCondition extends KalturaNotCondition
 	 * @var string
 	 */
 	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetCondition extends KalturaCondition
+{
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
 
 
 }
@@ -8097,8 +8042,49 @@ class KalturaApplyPlaybackAdapterAction extends KalturaAssetRuleAction
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetUserRuleBlockAction extends KalturaAssetUserRuleAction
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaAssetRuleBase extends KalturaRule
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetUserRule extends KalturaAssetRuleBase
+{
+	/**
+	 * List of Ksql conditions for the user rule
+	 *
+	 * @var array of KalturaAssetCondition
+	 */
+	public $conditions;
+
+	/**
+	 * List of actions for the user rule
+	 *
+	 * @var array of KalturaAssetUserRuleAction
+	 */
+	public $actions;
+
 
 }
 
@@ -8121,6 +8107,98 @@ class KalturaAssetRule extends KalturaAssetRuleBase
 	 * @var array of KalturaAssetRuleAction
 	 */
 	public $actions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackProfile extends KalturaObjectBase
+{
+	/**
+	 * Playback profile identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Playback profile name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Playback profile active status
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+	/**
+	 * Playback profile URL
+	 *
+	 * @var string
+	 */
+	public $adapterUrl = null;
+
+	/**
+	 * Playback profile settings
+	 *
+	 * @var string
+	 */
+	public $settings = null;
+
+	/**
+	 * Playback profile alias
+	 *
+	 * @var string
+	 */
+	public $systemName = null;
+
+	/**
+	 * Playback adapter shared secret
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $sharedSecret = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackProfileListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of Engagement adapter
+	 *
+	 * @var array of KalturaPlaybackProfile
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBusinessModuleRuleListResponse extends KalturaListResponse
+{
+	/**
+	 * Asset rules
+	 *
+	 * @var array of KalturaBusinessModuleRule
+	 */
+	public $objects;
 
 
 }
@@ -11322,6 +11400,29 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $daysLessThanOrEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTvmRuleFilter extends KalturaFilter
+{
+	/**
+	 * Indicates which tvm rule list to return by their type.
+	 *
+	 * @var KalturaRuleType
+	 */
+	public $ruleTypeEqual = null;
+
+	/**
+	 * Indicates which tvm rule list to return by their name.
+	 *
+	 * @var string
+	 */
+	public $nameEqual = null;
 
 
 }
