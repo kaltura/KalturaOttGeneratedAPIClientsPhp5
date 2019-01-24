@@ -7614,6 +7614,22 @@ class KalturaTvmRuleListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTvmDeviceRule extends KalturaTvmRule
+{
+	/**
+	 * Comma separated list of country Ids.
+	 *
+	 * @var string
+	 */
+	public $deviceBrandIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTvmGeoRule extends KalturaTvmRule
 {
 	/**
