@@ -5714,6 +5714,13 @@ class KalturaRecording extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
+	/**
+	 * key/value map field for extra data
+	 *
+	 * @var map
+	 */
+	public $metaData;
+
 
 }
 
@@ -7586,7 +7593,7 @@ abstract class KalturaTvmRule extends KalturaRule
 	/**
 	 * Specifies the tvm rule type.
 	 *
-	 * @var KalturaRuleType
+	 * @var KalturaTvmRuleType
 	 * @readonly
 	 */
 	public $ruleType = null;
@@ -11443,7 +11450,7 @@ class KalturaTvmRuleFilter extends KalturaFilter
 	/**
 	 * Indicates which tvm rule list to return by their type.
 	 *
-	 * @var KalturaRuleType
+	 * @var KalturaTvmRuleType
 	 */
 	public $ruleTypeEqual = null;
 
@@ -14079,6 +14086,13 @@ class KalturaPurchaseBase extends KalturaObjectBase
 	 */
 	public $productType = null;
 
+	/**
+	 * Additional data for the adapter
+	 *
+	 * @var string
+	 */
+	public $adapterData = null;
+
 
 }
 
@@ -14122,13 +14136,6 @@ class KalturaPurchase extends KalturaPurchaseBase
 	 * @var string
 	 */
 	public $coupon = null;
-
-	/**
-	 * Additional data for the adapter
-	 *
-	 * @var string
-	 */
-	public $adapterData = null;
 
 
 }

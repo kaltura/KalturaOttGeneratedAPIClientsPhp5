@@ -1702,6 +1702,16 @@ class KalturaTvmRuleOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTvmRuleType extends KalturaEnumBase
+{
+	const GEO = "Geo";
+	const DEVICE = "Device";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUploadTokenStatus extends KalturaEnumBase
 {
 	const PENDING = "PENDING";
