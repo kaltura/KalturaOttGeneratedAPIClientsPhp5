@@ -3059,6 +3059,602 @@ class KalturaGenericListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaRule extends KalturaObjectBase
+{
+	/**
+	 * ID
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaTvmRule extends KalturaRule
+{
+	/**
+	 * Specifies when was the tvm rule was created. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Specifies the tvm rule type.
+	 *
+	 * @var KalturaTvmRuleType
+	 * @readonly
+	 */
+	public $ruleType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTvmGeoRule extends KalturaTvmRule
+{
+	/**
+	 * Indicates if the rule is relevent ONLY for the country ids or except country ids here. - is that true?
+	 *
+	 * @var bool
+	 */
+	public $onlyOrBut = null;
+
+	/**
+	 * Comma separated list of country Ids.
+	 *
+	 * @var string
+	 */
+	public $countryIds = null;
+
+	/**
+	 * proxyRuleId - what is that?
+	 *
+	 * @var int
+	 */
+	public $proxyRuleId = null;
+
+	/**
+	 * proxyRuleName - what is that?
+	 *
+	 * @var string
+	 */
+	public $proxyRuleName = null;
+
+	/**
+	 * proxyLevelId - what is that?
+	 *
+	 * @var int
+	 */
+	public $proxyLevelId = null;
+
+	/**
+	 * proxyLevelName - what is that?
+	 *
+	 * @var string
+	 */
+	public $proxyLevelName = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaShirCheckListResponse extends KalturaGenericListResponse
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTvmDeviceRule extends KalturaTvmRule
+{
+	/**
+	 * Comma separated list of country Ids.
+	 *
+	 * @var string
+	 */
+	public $deviceBrandIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaCondition extends KalturaObjectBase
+{
+	/**
+	 * The type of the condition
+	 *
+	 * @var KalturaRuleConditionType
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaRuleAction extends KalturaObjectBase
+{
+	/**
+	 * The type of the action
+	 *
+	 * @var KalturaRuleActionType
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApplyDiscountModuleAction extends KalturaRuleAction
+{
+	/**
+	 * Discount module ID
+	 *
+	 * @var int
+	 */
+	public $discountModuleId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBusinessModuleRule extends KalturaRule
+{
+	/**
+	 * List of conditions for the rule
+	 *
+	 * @var array of KalturaCondition
+	 */
+	public $conditions;
+
+	/**
+	 * List of actions for the rule
+	 *
+	 * @var array of KalturaApplyDiscountModuleAction
+	 */
+	public $actions;
+
+	/**
+	 * Create date of the rule
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update date of the rule
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaNotCondition extends KalturaCondition
+{
+	/**
+	 * Indicates whether to apply not on the other properties in the condition
+	 *
+	 * @var bool
+	 */
+	public $not = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaOrCondition extends KalturaNotCondition
+{
+	/**
+	 * List of conditions with or between them
+	 *
+	 * @var array of KalturaCondition
+	 */
+	public $conditions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCountryCondition extends KalturaNotCondition
+{
+	/**
+	 * Comma separated countries IDs list
+	 *
+	 * @var string
+	 */
+	public $countries = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDateCondition extends KalturaNotCondition
+{
+	/**
+	 * Start date
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * End date
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHeaderCondition extends KalturaNotCondition
+{
+	/**
+	 * Header key
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+	/**
+	 * Header value
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetCondition extends KalturaCondition
+{
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaConcurrencyCondition extends KalturaAssetCondition
+{
+	/**
+	 * Concurrency limitation
+	 *
+	 * @var int
+	 */
+	public $limit = null;
+
+	/**
+	 * Concurrency limitation type
+	 *
+	 * @var KalturaConcurrencyLimitationType
+	 */
+	public $concurrencyLimitationType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIpRangeCondition extends KalturaCondition
+{
+	/**
+	 * From IP address range
+	 *
+	 * @var string
+	 */
+	public $fromIP = null;
+
+	/**
+	 * TO IP address range
+	 *
+	 * @var string
+	 */
+	public $toIP = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBusinessModuleCondition extends KalturaCondition
+{
+	/**
+	 * Business module type
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $businessModuleType = null;
+
+	/**
+	 * Business module ID
+	 *
+	 * @var int
+	 */
+	public $businessModuleId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentsCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated segments IDs list
+	 *
+	 * @var string
+	 */
+	public $segmentsIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaAssetRuleAction extends KalturaRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAccessControlBlockAction extends KalturaAssetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaTimeOffsetRuleAction extends KalturaAssetRuleAction
+{
+	/**
+	 * Offset in seconds
+	 *
+	 * @var int
+	 */
+	public $offset = null;
+
+	/**
+	 * Indicates whether to add time zone offset to the time
+	 *
+	 * @var bool
+	 */
+	public $timeZone = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEndDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAllowPlaybackAction extends KalturaAssetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBlockPlaybackAction extends KalturaAssetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApplyPlaybackAdapterAction extends KalturaAssetRuleAction
+{
+	/**
+	 * Playback Adapter Identifier
+	 *
+	 * @var int
+	 */
+	public $adapterId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetUserRuleBlockAction extends KalturaAssetUserRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaAssetRuleBase extends KalturaRule
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetUserRule extends KalturaAssetRuleBase
+{
+	/**
+	 * List of Ksql conditions for the user rule
+	 *
+	 * @var array of KalturaAssetCondition
+	 */
+	public $conditions;
+
+	/**
+	 * List of actions for the user rule
+	 *
+	 * @var array of KalturaAssetUserRuleAction
+	 */
+	public $actions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetRule extends KalturaAssetRuleBase
+{
+	/**
+	 * List of conditions for the rule
+	 *
+	 * @var array of KalturaCondition
+	 */
+	public $conditions;
+
+	/**
+	 * List of actions for the rule
+	 *
+	 * @var array of KalturaAssetRuleAction
+	 */
+	public $actions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaIntegerValueListResponse extends KalturaListResponse
 {
 	/**
@@ -7549,62 +8145,6 @@ class KalturaAssetHistoryListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaRule extends KalturaObjectBase
-{
-	/**
-	 * ID
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaTvmRule extends KalturaRule
-{
-	/**
-	 * Specifies when was the tvm rule was created. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Specifies the tvm rule type.
-	 *
-	 * @var KalturaTvmRuleType
-	 * @readonly
-	 */
-	public $ruleType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaTvmRuleListResponse extends KalturaListResponse
 {
 	/**
@@ -7613,537 +8153,6 @@ class KalturaTvmRuleListResponse extends KalturaListResponse
 	 * @var array of KalturaTvmRule
 	 */
 	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaTvmDeviceRule extends KalturaTvmRule
-{
-	/**
-	 * Comma separated list of country Ids.
-	 *
-	 * @var string
-	 */
-	public $deviceBrandIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaTvmGeoRule extends KalturaTvmRule
-{
-	/**
-	 * Indicates if the rule is relevent ONLY for the country ids or except country ids here. - is that true?
-	 *
-	 * @var bool
-	 */
-	public $onlyOrBut = null;
-
-	/**
-	 * Comma separated list of country Ids.
-	 *
-	 * @var string
-	 */
-	public $countryIds = null;
-
-	/**
-	 * proxyRuleId - what is that?
-	 *
-	 * @var int
-	 */
-	public $proxyRuleId = null;
-
-	/**
-	 * proxyRuleName - what is that?
-	 *
-	 * @var string
-	 */
-	public $proxyRuleName = null;
-
-	/**
-	 * proxyLevelId - what is that?
-	 *
-	 * @var int
-	 */
-	public $proxyLevelId = null;
-
-	/**
-	 * proxyLevelName - what is that?
-	 *
-	 * @var string
-	 */
-	public $proxyLevelName = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaCondition extends KalturaObjectBase
-{
-	/**
-	 * The type of the condition
-	 *
-	 * @var KalturaRuleConditionType
-	 * @readonly
-	 */
-	public $type = null;
-
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaRuleAction extends KalturaObjectBase
-{
-	/**
-	 * The type of the action
-	 *
-	 * @var KalturaRuleActionType
-	 * @readonly
-	 */
-	public $type = null;
-
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaApplyDiscountModuleAction extends KalturaRuleAction
-{
-	/**
-	 * Discount module ID
-	 *
-	 * @var int
-	 */
-	public $discountModuleId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBusinessModuleRule extends KalturaRule
-{
-	/**
-	 * List of conditions for the rule
-	 *
-	 * @var array of KalturaCondition
-	 */
-	public $conditions;
-
-	/**
-	 * List of actions for the rule
-	 *
-	 * @var array of KalturaApplyDiscountModuleAction
-	 */
-	public $actions;
-
-	/**
-	 * Create date of the rule
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Update date of the rule
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaNotCondition extends KalturaCondition
-{
-	/**
-	 * Indicates whether to apply not on the other properties in the condition
-	 *
-	 * @var bool
-	 */
-	public $not = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaOrCondition extends KalturaNotCondition
-{
-	/**
-	 * List of conditions with or between them
-	 *
-	 * @var array of KalturaCondition
-	 */
-	public $conditions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCountryCondition extends KalturaNotCondition
-{
-	/**
-	 * Comma separated countries IDs list
-	 *
-	 * @var string
-	 */
-	public $countries = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDateCondition extends KalturaNotCondition
-{
-	/**
-	 * Start date
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * End date
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHeaderCondition extends KalturaNotCondition
-{
-	/**
-	 * Header key
-	 *
-	 * @var string
-	 */
-	public $key = null;
-
-	/**
-	 * Header value
-	 *
-	 * @var string
-	 */
-	public $value = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetCondition extends KalturaCondition
-{
-	/**
-	 * KSQL
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaConcurrencyCondition extends KalturaAssetCondition
-{
-	/**
-	 * Concurrency limitation
-	 *
-	 * @var int
-	 */
-	public $limit = null;
-
-	/**
-	 * Concurrency limitation type
-	 *
-	 * @var KalturaConcurrencyLimitationType
-	 */
-	public $concurrencyLimitationType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIpRangeCondition extends KalturaCondition
-{
-	/**
-	 * From IP address range
-	 *
-	 * @var string
-	 */
-	public $fromIP = null;
-
-	/**
-	 * TO IP address range
-	 *
-	 * @var string
-	 */
-	public $toIP = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBusinessModuleCondition extends KalturaCondition
-{
-	/**
-	 * Business module type
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $businessModuleType = null;
-
-	/**
-	 * Business module ID
-	 *
-	 * @var int
-	 */
-	public $businessModuleId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentsCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated segments IDs list
-	 *
-	 * @var string
-	 */
-	public $segmentsIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaAssetRuleAction extends KalturaRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAccessControlBlockAction extends KalturaAssetRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaTimeOffsetRuleAction extends KalturaAssetRuleAction
-{
-	/**
-	 * Offset in seconds
-	 *
-	 * @var int
-	 */
-	public $offset = null;
-
-	/**
-	 * Indicates whether to add time zone offset to the time
-	 *
-	 * @var bool
-	 */
-	public $timeZone = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEndDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAllowPlaybackAction extends KalturaAssetRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBlockPlaybackAction extends KalturaAssetRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaApplyPlaybackAdapterAction extends KalturaAssetRuleAction
-{
-	/**
-	 * Playback Adapter Identifier
-	 *
-	 * @var int
-	 */
-	public $adapterId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetUserRuleBlockAction extends KalturaAssetUserRuleAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaAssetRuleBase extends KalturaRule
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetUserRule extends KalturaAssetRuleBase
-{
-	/**
-	 * List of Ksql conditions for the user rule
-	 *
-	 * @var array of KalturaAssetCondition
-	 */
-	public $conditions;
-
-	/**
-	 * List of actions for the user rule
-	 *
-	 * @var array of KalturaAssetUserRuleAction
-	 */
-	public $actions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetRule extends KalturaAssetRuleBase
-{
-	/**
-	 * List of conditions for the rule
-	 *
-	 * @var array of KalturaCondition
-	 */
-	public $conditions;
-
-	/**
-	 * List of actions for the rule
-	 *
-	 * @var array of KalturaAssetRuleAction
-	 */
-	public $actions;
 
 
 }
