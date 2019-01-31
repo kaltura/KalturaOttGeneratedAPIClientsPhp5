@@ -5450,7 +5450,7 @@ class KalturaOttUserService extends KalturaServiceBase
 	}
 
 	/**
-	 * Retrieve user by external identifier or username or if filter is null all user in the master or the user itself
+	 * Returns list of OTTUser (limited to 500 items). Filters by username/external identifier/idIn or roleIdIn
 	 * 
 	 * @param KalturaOTTUserFilter $filter Filter request
 	 * @return KalturaOTTUserListResponse
@@ -9999,8 +9999,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-01-28');
-		$this->setApiVersion('5.1.1.42810');
+		$this->setClientTag('php5:19-01-31');
+		$this->setApiVersion('5.1.1.16000');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

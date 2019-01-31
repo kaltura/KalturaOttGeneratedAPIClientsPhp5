@@ -5714,13 +5714,6 @@ class KalturaRecording extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
-	/**
-	 * key/value map field for extra data
-	 *
-	 * @var map
-	 */
-	public $metaData;
-
 
 }
 
@@ -5737,6 +5730,13 @@ class KalturaExternalRecording extends KalturaRecording
 	 * @insertonly
 	 */
 	public $externalId = null;
+
+	/**
+	 * key/value map field for extra data
+	 *
+	 * @var map
+	 */
+	public $metaData;
 
 
 }
@@ -10989,6 +10989,52 @@ class KalturaSubscriptionFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaRecordingFilter extends KalturaFilter
+{
+	/**
+	 * Recording Statuses
+	 *
+	 * @var string
+	 */
+	public $statusIn = null;
+
+	/**
+	 * Comma separated external identifiers
+	 *
+	 * @var string
+	 */
+	public $externalRecordingIdIn = null;
+
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExternalRecordingFilter extends KalturaRecordingFilter
+{
+	/**
+	 * MetaData filtering
+	 *
+	 * @var map
+	 */
+	public $metaData;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecordingFilter extends KalturaFilter
 {
 
@@ -11110,36 +11156,6 @@ class KalturaRecordingContextFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $assetIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRecordingFilter extends KalturaFilter
-{
-	/**
-	 * Recording Statuses
-	 *
-	 * @var string
-	 */
-	public $statusIn = null;
-
-	/**
-	 * Comma separated external identifiers
-	 *
-	 * @var string
-	 */
-	public $externalRecordingIdIn = null;
-
-	/**
-	 * KSQL expression
-	 *
-	 * @var string
-	 */
-	public $kSql = null;
 
 
 }
