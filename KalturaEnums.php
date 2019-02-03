@@ -548,11 +548,31 @@ class KalturaCurrencyOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDeleteMediaPolicy extends KalturaEnumBase
+{
+	const DISABLE = "Disable";
+	const DELETE = "Delete";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDeviceStatus extends KalturaEnumBase
 {
 	const PENDING = "PENDING";
 	const ACTIVATED = "ACTIVATED";
 	const NOT_ACTIVATED = "NOT_ACTIVATED";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDowngradePolicy extends KalturaEnumBase
+{
+	const LIFO = "LIFO";
+	const FIFO = "FIFO";
 }
 
 /**
@@ -1043,6 +1063,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const ENABLEPAYMENTGATEWAYSELECTION = "EnablePaymentGatewaySelection";
 	const OSSADAPTER = "OSSAdapter";
 	const CONCURRENCY = "Concurrency";
+	const GENERAL = "General";
 }
 
 /**

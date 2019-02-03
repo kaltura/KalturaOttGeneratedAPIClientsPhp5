@@ -3881,6 +3881,23 @@ class KalturaHouseholdLimitationsService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitations");
 		return $resultObject;
 	}
+
+	/**
+	 * Get the list of PartnerConfiguration
+	 * 
+	 * @return KalturaHouseholdLimitationsListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("householdlimitations", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitationsListResponse");
+		return $resultObject;
+	}
 }
 
 /**
@@ -9999,8 +10016,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-02-02');
-		$this->setApiVersion('5.1.1.42812');
+		$this->setClientTag('php5:19-02-03');
+		$this->setApiVersion('5.1.1.15343');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

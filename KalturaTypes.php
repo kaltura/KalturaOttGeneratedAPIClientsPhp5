@@ -826,279 +826,6 @@ class KalturaIntegerValue extends KalturaValue
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPluginData extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDrmPlaybackPluginData extends KalturaPluginData
-{
-	/**
-	 * Scheme
-	 *
-	 * @var KalturaDrmSchemeName
-	 */
-	public $scheme = null;
-
-	/**
-	 * License URL
-	 *
-	 * @var string
-	 */
-	public $licenseURL = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCustomDrmPlaybackPluginData extends KalturaDrmPlaybackPluginData
-{
-	/**
-	 * Custom DRM license data
-	 *
-	 * @var string
-	 */
-	public $data = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdDevice extends KalturaObjectBase
-{
-	/**
-	 * Household identifier
-	 *
-	 * @var int
-	 */
-	public $householdId = null;
-
-	/**
-	 * Device UDID
-	 *
-	 * @var string
-	 * @insertonly
-	 */
-	public $udid = null;
-
-	/**
-	 * Device name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Device brand identifier
-	 *
-	 * @var int
-	 */
-	public $brandId = null;
-
-	/**
-	 * Device activation date (epoch)
-	 *
-	 * @var int
-	 */
-	public $activatedOn = null;
-
-	/**
-	 * Device state
-	 *
-	 * @var KalturaDeviceStatus
-	 * @readonly
-	 */
-	public $status = null;
-
-	/**
-	 * Device family id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $deviceFamilyId = null;
-
-	/**
-	 * Device DRM data
-	 *
-	 * @var KalturaCustomDrmPlaybackPluginData
-	 * @readonly
-	 */
-	public $drm;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdDeviceListResponse extends KalturaListResponse
-{
-	/**
-	 * Household devices
-	 *
-	 * @var array of KalturaHouseholdDevice
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFairPlayPlaybackPluginData extends KalturaDrmPlaybackPluginData
-{
-	/**
-	 * Custom data string
-	 *
-	 * @var string
-	 */
-	public $certificate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdUser extends KalturaObjectBase
-{
-	/**
-	 * The identifier of the household
-	 *
-	 * @var int
-	 */
-	public $householdId = null;
-
-	/**
-	 * The identifier of the user
-	 *
-	 * @var string
-	 */
-	public $userId = null;
-
-	/**
-	 * True if the user added as master use
-	 *
-	 * @var bool
-	 */
-	public $isMaster = null;
-
-	/**
-	 * The username of the household master for adding a user in status pending for the household master to approve
-	 *
-	 * @var string
-	 * @insertonly
-	 */
-	public $householdMasterUsername = null;
-
-	/**
-	 * The status of the user in the household
-	 *
-	 * @var KalturaHouseholdUserStatus
-	 * @readonly
-	 */
-	public $status = null;
-
-	/**
-	 * True if the user is a default user
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $isDefault = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdUserListResponse extends KalturaListResponse
-{
-	/**
-	 * Household users
-	 *
-	 * @var array of KalturaHouseholdUser
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHomeNetwork extends KalturaObjectBase
-{
-	/**
-	 * Home network identifier
-	 *
-	 * @var string
-	 * @insertonly
-	 */
-	public $externalId = null;
-
-	/**
-	 * Home network name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Home network description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-	/**
-	 * Is home network is active
-	 *
-	 * @var bool
-	 */
-	public $isActive = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHomeNetworkListResponse extends KalturaListResponse
-{
-	/**
-	 * Home networks
-	 *
-	 * @var array of KalturaHomeNetwork
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaConfigurations extends KalturaObjectBase
 {
 	/**
@@ -1924,6 +1651,38 @@ class KalturaFavoriteListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPluginData extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDrmPlaybackPluginData extends KalturaPluginData
+{
+	/**
+	 * Scheme
+	 *
+	 * @var KalturaDrmSchemeName
+	 */
+	public $scheme = null;
+
+	/**
+	 * License URL
+	 *
+	 * @var string
+	 */
+	public $licenseURL = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPlaybackSource extends KalturaMediaFile
 {
 	/**
@@ -1953,6 +1712,38 @@ class KalturaPlaybackSource extends KalturaMediaFile
 	 * @var bool
 	 */
 	public $isTokenized = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFairPlayPlaybackPluginData extends KalturaDrmPlaybackPluginData
+{
+	/**
+	 * Custom data string
+	 *
+	 * @var string
+	 */
+	public $certificate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCustomDrmPlaybackPluginData extends KalturaDrmPlaybackPluginData
+{
+	/**
+	 * Custom DRM license data
+	 *
+	 * @var string
+	 */
+	public $data = null;
 
 
 }
@@ -2955,77 +2746,6 @@ class KalturaTopicListResponse extends KalturaListResponse
 	 * @var array of KalturaTopic
 	 */
 	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaPartnerConfiguration extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPartnerConfigurationListResponse extends KalturaListResponse
-{
-	/**
-	 * Partner Configurations
-	 *
-	 * @var array of KalturaPartnerConfiguration
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
-{
-	/**
-	 * Comma separated list of device Family Ids order by their priority.
-	 *
-	 * @var string
-	 */
-	public $deviceFamilyIds = null;
-
-	/**
-	 * Policy of eviction devices
-	 *
-	 * @var KalturaEvictionPolicyType
-	 */
-	public $evictionPolicy = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
-{
-	/**
-	 * configuration value
-	 *
-	 * @var string
-	 */
-	public $value = null;
-
-	/**
-	 * partner configuration type
-	 *
-	 * @var KalturaPartnerConfigurationType
-	 */
-	public $type = null;
 
 
 }
@@ -6054,6 +5774,541 @@ class KalturaProductsPriceListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaPartnerConfiguration extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPartnerConfigurationListResponse extends KalturaListResponse
+{
+	/**
+	 * Partner Configurations
+	 *
+	 * @var array of KalturaPartnerConfiguration
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * Partner name
+	 *
+	 * @var string
+	 */
+	public $partnerName = null;
+
+	/**
+	 * Main metadata language
+	 *
+	 * @var int
+	 */
+	public $mainLanguage = null;
+
+	/**
+	 * More languages
+	 *
+	 * @var array of KalturaIntegerValue
+	 */
+	public $secondaryLanguages;
+
+	/**
+	 * Delete media policy
+	 *
+	 * @var KalturaDeleteMediaPolicy
+	 */
+	public $deleteMediaPolicy = null;
+
+	/**
+	 * Main currency
+	 *
+	 * @var int
+	 */
+	public $mainCurrency = null;
+
+	/**
+	 * More currencys
+	 *
+	 * @var array of KalturaIntegerValue
+	 */
+	public $secondaryCurrencys;
+
+	/**
+	 * Downgrade policy
+	 *
+	 * @var KalturaDowngradePolicy
+	 */
+	public $downgradePolicy = null;
+
+	/**
+	 * Mail settings
+	 *
+	 * @var string
+	 */
+	public $mailSettings = null;
+
+	/**
+	 * Default Date Format for Email notifications (default should be: DD Month YYYY)
+	 *
+	 * @var string
+	 */
+	public $dateFormat = null;
+
+	/**
+	 * Household limitation&#160;module
+	 *
+	 * @var int
+	 */
+	public $householdLimitationModule = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * Comma separated list of device Family Ids order by their priority.
+	 *
+	 * @var string
+	 */
+	public $deviceFamilyIds = null;
+
+	/**
+	 * Policy of eviction devices
+	 *
+	 * @var KalturaEvictionPolicyType
+	 */
+	public $evictionPolicy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * configuration value
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+	/**
+	 * partner configuration type
+	 *
+	 * @var KalturaPartnerConfigurationType
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyBase extends KalturaObjectBase
+{
+	/**
+	 * Device family identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Device family name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdDeviceFamilyLimitations extends KalturaDeviceFamilyBase
+{
+	/**
+	 * Allowed device change frequency code
+	 *
+	 * @var int
+	 */
+	public $frequency = null;
+
+	/**
+	 * Max number of devices allowed for this family
+	 *
+	 * @var int
+	 */
+	public $deviceLimit = null;
+
+	/**
+	 * Max number of streams allowed for this family
+	 *
+	 * @var int
+	 */
+	public $concurrentLimit = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdLimitations extends KalturaObjectBase
+{
+	/**
+	 * Household limitation module identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Household limitation module name
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Max number of streams allowed for the household
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $concurrentLimit = null;
+
+	/**
+	 * Max number of devices allowed for the household
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $deviceLimit = null;
+
+	/**
+	 * Allowed device change frequency code
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $deviceFrequency = null;
+
+	/**
+	 * Allowed device change frequency description
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $deviceFrequencyDescription = null;
+
+	/**
+	 * Allowed user change frequency code
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $userFrequency = null;
+
+	/**
+	 * Allowed user change frequency description
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $userFrequencyDescription = null;
+
+	/**
+	 * Allowed NPVR Quota in Seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $npvrQuotaInSeconds = null;
+
+	/**
+	 * Max number of users allowed for the household
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $usersLimit = null;
+
+	/**
+	 * Device families limitations
+	 *
+	 * @var array of KalturaHouseholdDeviceFamilyLimitations
+	 * @readonly
+	 */
+	public $deviceFamiliesLimitations;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdLimitationsListResponse extends KalturaListResponse
+{
+	/**
+	 * Household limitations
+	 *
+	 * @var array of KalturaHouseholdLimitations
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdDevice extends KalturaObjectBase
+{
+	/**
+	 * Household identifier
+	 *
+	 * @var int
+	 */
+	public $householdId = null;
+
+	/**
+	 * Device UDID
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $udid = null;
+
+	/**
+	 * Device name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Device brand identifier
+	 *
+	 * @var int
+	 */
+	public $brandId = null;
+
+	/**
+	 * Device activation date (epoch)
+	 *
+	 * @var int
+	 */
+	public $activatedOn = null;
+
+	/**
+	 * Device state
+	 *
+	 * @var KalturaDeviceStatus
+	 * @readonly
+	 */
+	public $status = null;
+
+	/**
+	 * Device family id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $deviceFamilyId = null;
+
+	/**
+	 * Device DRM data
+	 *
+	 * @var KalturaCustomDrmPlaybackPluginData
+	 * @readonly
+	 */
+	public $drm;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamily extends KalturaDeviceFamilyBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdDeviceListResponse extends KalturaListResponse
+{
+	/**
+	 * Household devices
+	 *
+	 * @var array of KalturaHouseholdDevice
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdUser extends KalturaObjectBase
+{
+	/**
+	 * The identifier of the household
+	 *
+	 * @var int
+	 */
+	public $householdId = null;
+
+	/**
+	 * The identifier of the user
+	 *
+	 * @var string
+	 */
+	public $userId = null;
+
+	/**
+	 * True if the user added as master use
+	 *
+	 * @var bool
+	 */
+	public $isMaster = null;
+
+	/**
+	 * The username of the household master for adding a user in status pending for the household master to approve
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $householdMasterUsername = null;
+
+	/**
+	 * The status of the user in the household
+	 *
+	 * @var KalturaHouseholdUserStatus
+	 * @readonly
+	 */
+	public $status = null;
+
+	/**
+	 * True if the user is a default user
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isDefault = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdUserListResponse extends KalturaListResponse
+{
+	/**
+	 * Household users
+	 *
+	 * @var array of KalturaHouseholdUser
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHomeNetwork extends KalturaObjectBase
+{
+	/**
+	 * Home network identifier
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $externalId = null;
+
+	/**
+	 * Home network name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Home network description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+	/**
+	 * Is home network is active
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHomeNetworkListResponse extends KalturaListResponse
+{
+	/**
+	 * Home networks
+	 *
+	 * @var array of KalturaHomeNetwork
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecording extends KalturaObjectBase
 {
 	/**
@@ -8464,6 +8719,13 @@ class KalturaAssetUserRuleListResponse extends KalturaListResponse
 class KalturaCurrency extends KalturaObjectBase
 {
 	/**
+	 * Identifier
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+	/**
 	 * Currency name
 	 *
 	 * @var string
@@ -8532,6 +8794,13 @@ class KalturaAssetRuleListResponse extends KalturaListResponse
  */
 class KalturaLanguage extends KalturaObjectBase
 {
+	/**
+	 * Identifier
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
 	/**
 	 * Language name
 	 *
@@ -8944,39 +9213,6 @@ class KalturaSearchHistoryListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaDeviceFamilyBase extends KalturaObjectBase
-{
-	/**
-	 * Device family identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Device family name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceFamily extends KalturaDeviceFamilyBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaDeviceFamilyListResponse extends KalturaListResponse
 {
 	/**
@@ -8985,36 +9221,6 @@ class KalturaDeviceFamilyListResponse extends KalturaListResponse
 	 * @var array of KalturaDeviceFamily
 	 */
 	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdDeviceFamilyLimitations extends KalturaDeviceFamilyBase
-{
-	/**
-	 * Allowed device change frequency code
-	 *
-	 * @var int
-	 */
-	public $frequency = null;
-
-	/**
-	 * Max number of devices allowed for this family
-	 *
-	 * @var int
-	 */
-	public $deviceLimit = null;
-
-	/**
-	 * Max number of streams allowed for this family
-	 *
-	 * @var int
-	 */
-	public $concurrentLimit = null;
 
 
 }
@@ -10009,45 +10215,6 @@ class KalturaPaymentMethodProfileFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaHouseholdDeviceFilter extends KalturaFilter
-{
-	/**
-	 * The identifier of the household
-	 *
-	 * @var int
-	 */
-	public $householdIdEqual = null;
-
-	/**
-	 * Device family Ids
-	 *
-	 * @var string
-	 */
-	public $deviceFamilyIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdUserFilter extends KalturaFilter
-{
-	/**
-	 * The identifier of the household
-	 *
-	 * @var int
-	 */
-	public $householdIdEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaConfigurationsFilter extends KalturaFilter
 {
 	/**
@@ -10358,22 +10525,6 @@ class KalturaPersonalFeedFilter extends KalturaFilter
  */
 class KalturaTopicFilter extends KalturaFilter
 {
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPartnerConfigurationFilter extends KalturaFilter
-{
-	/**
-	 * Indicates which partner configuration list to return
-	 *
-	 * @var KalturaPartnerConfigurationType
-	 */
-	public $partnerConfigurationTypeEqual = null;
-
 
 }
 
@@ -10990,6 +11141,61 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $externalIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPartnerConfigurationFilter extends KalturaFilter
+{
+	/**
+	 * Indicates which partner configuration list to return
+	 *
+	 * @var KalturaPartnerConfigurationType
+	 */
+	public $partnerConfigurationTypeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdDeviceFilter extends KalturaFilter
+{
+	/**
+	 * The identifier of the household
+	 *
+	 * @var int
+	 */
+	public $householdIdEqual = null;
+
+	/**
+	 * Device family Ids
+	 *
+	 * @var string
+	 */
+	public $deviceFamilyIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdUserFilter extends KalturaFilter
+{
+	/**
+	 * The identifier of the household
+	 *
+	 * @var int
+	 */
+	public $householdIdEqual = null;
 
 
 }
@@ -13442,103 +13648,6 @@ class KalturaUserAssetsListItem extends KalturaObjectBase
 	 * @var KalturaUserAssetsListType
 	 */
 	public $listType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdLimitations extends KalturaObjectBase
-{
-	/**
-	 * Household limitation module identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Household limitation module name
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $name = null;
-
-	/**
-	 * Max number of streams allowed for the household
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $concurrentLimit = null;
-
-	/**
-	 * Max number of devices allowed for the household
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $deviceLimit = null;
-
-	/**
-	 * Allowed device change frequency code
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $deviceFrequency = null;
-
-	/**
-	 * Allowed device change frequency description
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $deviceFrequencyDescription = null;
-
-	/**
-	 * Allowed user change frequency code
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $userFrequency = null;
-
-	/**
-	 * Allowed user change frequency description
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $userFrequencyDescription = null;
-
-	/**
-	 * Allowed NPVR Quota in Seconds
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $npvrQuotaInSeconds = null;
-
-	/**
-	 * Max number of users allowed for the household
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $usersLimit = null;
-
-	/**
-	 * Device families limitations
-	 *
-	 * @var array of KalturaHouseholdDeviceFamilyLimitations
-	 * @readonly
-	 */
-	public $deviceFamiliesLimitations;
 
 
 }
