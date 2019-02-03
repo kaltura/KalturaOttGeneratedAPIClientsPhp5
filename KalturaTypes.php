@@ -5816,11 +5816,11 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	public $mainLanguage = null;
 
 	/**
-	 * More languages
+	 * A list of comma separated languages ids.
 	 *
-	 * @var array of KalturaIntegerValue
+	 * @var string
 	 */
-	public $secondaryLanguages;
+	public $secondaryLanguages = null;
 
 	/**
 	 * Delete media policy
@@ -5837,11 +5837,11 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	public $mainCurrency = null;
 
 	/**
-	 * More currencys
+	 * A list of comma separated currencys ids.
 	 *
-	 * @var array of KalturaIntegerValue
+	 * @var string
 	 */
-	public $secondaryCurrencys;
+	public $secondaryCurrencys = null;
 
 	/**
 	 * Downgrade policy
