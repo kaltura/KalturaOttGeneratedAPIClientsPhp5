@@ -3752,11 +3752,13 @@ class KalturaHouseholdDeviceService extends KalturaServiceBase
 	/**
 	 * Returns device registration status to the supplied household
 	 * 
+	 * @param string $udid Device id
 	 * @return KalturaHouseholdDevice
 	 */
-	function get()
+	function get($udid = null)
 	{
 		$kparams = array();
+		$this->client->addParam($kparams, "udid", $udid);
 		$this->client->queueServiceActionCall("householddevice", "get", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10016,8 +10018,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-02-11');
-		$this->setApiVersion('5.1.2.42811');
+		$this->setClientTag('php5:19-02-12');
+		$this->setApiVersion('5.1.2.22684');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
