@@ -3248,6 +3248,14 @@ class KalturaSingleSegmentValue extends KalturaBaseSegmentValue
 	 */
 	public $id = null;
 
+	/**
+	 * The amount of users that are being affected by this Segmentation type
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $affectedUsers = null;
+
 
 }
 
