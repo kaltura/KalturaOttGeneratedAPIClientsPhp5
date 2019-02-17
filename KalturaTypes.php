@@ -5950,7 +5950,6 @@ class KalturaRecording extends KalturaObjectBase
 	 * Specifies until when the recording is available for viewing. Date and time represented as epoch.
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $viewableUntilDate = null;
 
@@ -6000,6 +5999,14 @@ class KalturaExternalRecording extends KalturaRecording
 	 * @var map
 	 */
 	public $metaData;
+
+	/**
+	 * Specifies until when the recording is available. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $expiryDate = null;
 
 
 }
