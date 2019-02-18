@@ -10019,7 +10019,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:19-02-18');
-		$this->setApiVersion('5.1.2.19212');
+		$this->setApiVersion('5.1.2.25382');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10181,31 +10181,6 @@ class KalturaClient extends KalturaClientBase
 		if(isset($this->clientConfiguration['apiVersion']))
 		{
 			return $this->clientConfiguration['apiVersion'];
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * Abort the Multireuqset call if any error occurs in one of the requests
-	 * 
-	 * @param bool $abortOnError
-	 */
-	public function setAbortOnError($abortOnError)
-	{
-		$this->clientConfiguration['abortOnError'] = $abortOnError;
-	}
-	
-	/**
-	 * Abort the Multireuqset call if any error occurs in one of the requests
-	 * 
-	 * @return bool
-	 */
-	public function getAbortOnError()
-	{
-		if(isset($this->clientConfiguration['abortOnError']))
-		{
-			return $this->clientConfiguration['abortOnError'];
 		}
 		
 		return null;
@@ -10381,6 +10356,31 @@ class KalturaClient extends KalturaClientBase
 		if(isset($this->requestConfiguration['responseProfile']))
 		{
 			return $this->requestConfiguration['responseProfile'];
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Abort the Multireuqset call if any error occurs in one of the requests
+	 * 
+	 * @param bool $abortOnError
+	 */
+	public function setAbortOnError($abortOnError)
+	{
+		$this->requestConfiguration['abortOnError'] = $abortOnError;
+	}
+	
+	/**
+	 * Abort the Multireuqset call if any error occurs in one of the requests
+	 * 
+	 * @return bool
+	 */
+	public function getAbortOnError()
+	{
+		if(isset($this->requestConfiguration['abortOnError']))
+		{
+			return $this->requestConfiguration['abortOnError'];
 		}
 		
 		return null;
