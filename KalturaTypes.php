@@ -8369,6 +8369,13 @@ class KalturaAssetUserRuleBlockAction extends KalturaAssetUserRuleAction
  */
 class KalturaAssetUserRuleFilterAction extends KalturaAssetUserRuleAction
 {
+	/**
+	 * Indicates whether to apply on channel
+	 *
+	 * @var bool
+	 */
+	public $applyOnChannel = null;
+
 
 }
 
