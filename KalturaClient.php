@@ -10019,7 +10019,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:19-02-18');
-		$this->setApiVersion('5.1.2.28271');
+		$this->setApiVersion('5.1.2.28528');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10431,31 +10431,6 @@ class KalturaClient extends KalturaClientBase
 		if(isset($this->requestConfiguration['skipCondition']))
 		{
 			return $this->requestConfiguration['skipCondition'];
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * Abort the Multireuqset call if any error occurs in one of the requests
-	 * 
-	 * @param bool $abortOnError
-	 */
-	public function setAbortOnError($abortOnError)
-	{
-		$this->requestConfiguration['abortOnError'] = $abortOnError;
-	}
-	
-	/**
-	 * Abort the Multireuqset call if any error occurs in one of the requests
-	 * 
-	 * @return bool
-	 */
-	public function getAbortOnError()
-	{
-		if(isset($this->requestConfiguration['abortOnError']))
-		{
-			return $this->requestConfiguration['abortOnError'];
 		}
 		
 		return null;
