@@ -1370,6 +1370,7 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const BLOCK_PLAYBACK = "BLOCK_PLAYBACK";
 	const APPLY_DISCOUNT_MODULE = "APPLY_DISCOUNT_MODULE";
 	const APPLY_PLAYBACK_ADAPTER = "APPLY_PLAYBACK_ADAPTER";
+	const FILTER = "FILTER";
 }
 
 /**

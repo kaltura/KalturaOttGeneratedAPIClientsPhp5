@@ -8367,6 +8367,15 @@ class KalturaAssetUserRuleBlockAction extends KalturaAssetUserRuleAction
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetUserRuleFilterAction extends KalturaAssetUserRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaAssetRuleBase extends KalturaRule
 {
 
