@@ -5249,11 +5249,11 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	public $mainCurrency = null;
 
 	/**
-	 * A list of comma separated currencys ids.
+	 * A list of comma separated currency ids.
 	 *
 	 * @var string
 	 */
-	public $secondaryCurrencys = null;
+	public $secondaryCurrencies = null;
 
 	/**
 	 * Downgrade policy
@@ -11823,6 +11823,13 @@ class KalturaCurrencyFilter extends KalturaFilter
 	 */
 	public $codeIn = null;
 
+	/**
+	 * Exclude partner
+	 *
+	 * @var bool
+	 */
+	public $excludePartner = null;
+
 
 }
 
@@ -11838,6 +11845,13 @@ class KalturaLanguageFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $codeIn = null;
+
+	/**
+	 * Exclude partner
+	 *
+	 * @var bool
+	 */
+	public $excludePartner = null;
 
 
 }
@@ -12278,7 +12292,7 @@ class KalturaPlaybackContextOptions extends KalturaObjectBase
 	public $mediaProtocol = null;
 
 	/**
-	 * Playback streamer type: applehttp, mpegdash, url.
+	 * Playback streamer type: applehttp, mpegdash, url, smothstreaming, none
 	 *
 	 * @var string
 	 */
