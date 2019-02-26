@@ -250,7 +250,17 @@ class KalturaAssetUserRuleOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBatchJobStatus extends KalturaEnumBase
+class KalturaBatchUploadJobAction extends KalturaEnumBase
+{
+	const UPSERT = "Upsert";
+	const DELETE = "Delete";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBatchUploadJobStatus extends KalturaEnumBase
 {
 	const PENDING = "PENDING";
 	const QUEUED = "QUEUED";
@@ -260,7 +270,6 @@ class KalturaBatchJobStatus extends KalturaEnumBase
 	const FINISHED = "FINISHED";
 	const FAILED = "FAILED";
 	const ABORTED = "ABORTED";
-	const ALMOST_DONE = "ALMOST_DONE";
 	const RETRY = "RETRY";
 	const FATAL = "FATAL";
 	const DONT_PROCESS = "DONT_PROCESS";
@@ -341,9 +350,11 @@ class KalturaBookmarkOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkOrderBy extends KalturaEnumBase
+class KalturaBulkUploadOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+	const UPDATE_DATE = "UPDATE_DATE";
+	const STATUS = "STATUS";
 }
 
 /**
