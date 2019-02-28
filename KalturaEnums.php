@@ -250,36 +250,6 @@ class KalturaAssetUserRuleOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBatchUploadJobAction extends KalturaEnumBase
-{
-	const UPSERT = "Upsert";
-	const DELETE = "Delete";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBatchUploadJobStatus extends KalturaEnumBase
-{
-	const PENDING = "PENDING";
-	const QUEUED = "QUEUED";
-	const PROCESSING = "PROCESSING";
-	const PROCESSED = "PROCESSED";
-	const MOVEFILE = "MOVEFILE";
-	const FINISHED = "FINISHED";
-	const FAILED = "FAILED";
-	const ABORTED = "ABORTED";
-	const RETRY = "RETRY";
-	const FATAL = "FATAL";
-	const DONT_PROCESS = "DONT_PROCESS";
-	const FINISHED_PARTIALLY = "FINISHED_PARTIALLY";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaBillingAction extends KalturaEnumBase
 {
 	const UNKNOWN = "unknown";
@@ -350,11 +320,43 @@ class KalturaBookmarkOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBulkUploadJobAction extends KalturaEnumBase
+{
+	const UPSERT = "Upsert";
+	const DELETE = "Delete";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadJobStatus extends KalturaEnumBase
+{
+	const PENDING = "PENDING";
+	const UPLOADED = "UPLOADED";
+	const QUEUED = "QUEUED";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
 	const UPDATE_DATE = "UPDATE_DATE";
 	const STATUS = "STATUS";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadResultStatus extends KalturaEnumBase
+{
+	const ERROR = "ERROR";
+	const OK = "OK";
+	const IN_PROGRESS = "IN_PROGRESS";
 }
 
 /**

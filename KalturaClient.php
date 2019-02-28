@@ -355,21 +355,23 @@ class KalturaAssetService extends KalturaServiceBase
 	 * Add new bulk upload batch job Conversion profile id can be specified in the API.
 	 * 
 	 * @param file $fileData FileData
+	 * @param string $assetType AssetType
 	 * @param KalturaBulkUploadJobData $bulkUploadJobData BulkUploadJobData
-	 * @return bigint
+	 * @return KalturaBulkUpload
 	 */
-	function addFromBulkUpload($fileData, KalturaBulkUploadJobData $bulkUploadJobData)
+	function addFromBulkUpload($fileData, $assetType, KalturaBulkUploadJobData $bulkUploadJobData)
 	{
 		$kparams = array();
 		$kfiles = array();
 		$this->client->addParam($kfiles, "fileData", $fileData);
+		$this->client->addParam($kparams, "assetType", $assetType);
 		$this->client->addParam($kparams, "bulkUploadJobData", $bulkUploadJobData->toParams());
 		$this->client->queueServiceActionCall("asset", "addFromBulkUpload", $kparams, $kfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "double");
+		$this->client->validateObjectType($resultObject, "KalturaBulkUpload");
 		return $resultObject;
 	}
 
@@ -10018,8 +10020,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-02-27');
-		$this->setApiVersion('5.1.1.14490');
+		$this->setClientTag('php5:19-02-28');
+		$this->setApiVersion('5.1.1.14595');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

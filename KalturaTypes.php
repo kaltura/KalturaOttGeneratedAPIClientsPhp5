@@ -2754,23 +2754,174 @@ class KalturaTopicListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaResponseStatus extends KalturaObjectBase
+class KalturaT extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenericListResponse extends KalturaListResponse
 {
 	/**
-	 * Code
+	 * A list of objects
 	 *
-	 * @var int
-	 * @readonly
+	 * @var array of KalturaT
 	 */
-	public $code = null;
+	public $objects;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIntegerValueListResponse extends KalturaListResponse
+{
 	/**
-	 * Message
+	 * Interger value items
+	 *
+	 * @var array of KalturaIntegerValue
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaReport extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaReportListResponse extends KalturaListResponse
+{
+	/**
+	 * Reports
+	 *
+	 * @var array of KalturaReport
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPushParams extends KalturaObjectBase
+{
+	/**
+	 * Device-Application push token
 	 *
 	 * @var string
-	 * @readonly
 	 */
-	public $message = null;
+	public $token = null;
+
+	/**
+	 * External device token as received from external push provider in exchange for the device token
+	 *
+	 * @var string
+	 */
+	public $externalToken = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceReport extends KalturaReport
+{
+	/**
+	 * Partner unique identifier
+	 *
+	 * @var int
+	 */
+	public $partnerId = null;
+
+	/**
+	 * Configuration group identifier which the version configuration the device last received belongs to
+	 *
+	 * @var string
+	 */
+	public $configurationGroupId = null;
+
+	/**
+	 * Device unique identifier
+	 *
+	 * @var string
+	 */
+	public $udid = null;
+
+	/**
+	 * Device-Application push parameters
+	 *
+	 * @var KalturaPushParams
+	 */
+	public $pushParameters;
+
+	/**
+	 * Application version number
+	 *
+	 * @var string
+	 */
+	public $versionNumber = null;
+
+	/**
+	 * Application version type
+	 *
+	 * @var KalturaPlatform
+	 */
+	public $versionPlatform = null;
+
+	/**
+	 * Application version name
+	 *
+	 * @var string
+	 */
+	public $versionAppName = null;
+
+	/**
+	 * Last access IP
+	 *
+	 * @var string
+	 */
+	public $lastAccessIP = null;
+
+	/**
+	 * Last device configuration request date
+	 *
+	 * @var int
+	 */
+	public $lastAccessDate = null;
+
+	/**
+	 * request header property
+	 *
+	 * @var string
+	 */
+	public $userAgent = null;
+
+	/**
+	 * Request header property
+	 *             Incase value cannot be found - returns &quot;Unknown 0.0&quot;
+	 *
+	 * @var string
+	 */
+	public $operationSystem = null;
 
 
 }
@@ -2808,10 +2959,26 @@ abstract class KalturaBulkUploadResult extends KalturaObjectBase
 	/**
 	 * status
 	 *
-	 * @var KalturaResponseStatus
+	 * @var KalturaBulkUploadResultStatus
 	 * @readonly
 	 */
-	public $status;
+	public $status = null;
+
+	/**
+	 * Error Code
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $errorCode = null;
+
+	/**
+	 * Error Message
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $errorMessage = null;
 
 
 }
@@ -2831,12 +2998,36 @@ class KalturaBulkUpload extends KalturaObjectBase
 	public $id = null;
 
 	/**
+	 * File Name
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $fileName = null;
+
+	/**
 	 * Status
 	 *
-	 * @var KalturaBatchUploadJobStatus
+	 * @var KalturaBulkUploadJobStatus
 	 * @readonly
 	 */
 	public $status = null;
+
+	/**
+	 * Action
+	 *
+	 * @var KalturaBulkUploadJobAction
+	 * @readonly
+	 */
+	public $action = null;
+
+	/**
+	 * Total number of objects in file
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $numOfObjects = null;
 
 	/**
 	 * Specifies when was the bulk action created. Date and time represented as epoch
@@ -2853,22 +3044,6 @@ class KalturaBulkUpload extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $updateDate = null;
-
-	/**
-	 * Upload Token Id
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $uploadTokenId = null;
-
-	/**
-	 * Action
-	 *
-	 * @var KalturaBatchUploadJobAction
-	 * @readonly
-	 */
-	public $action = null;
 
 	/**
 	 * A list of results
@@ -2901,7 +3076,7 @@ class KalturaBulkUploadListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkUploadAssetResult extends KalturaBulkUploadResult
+abstract class KalturaBulkUploadAssetResult extends KalturaBulkUploadResult
 {
 	/**
 	 * Identifies the asset type (EPG, Recording, Movie, TV Series, etc). 
@@ -2920,6 +3095,15 @@ class KalturaBulkUploadAssetResult extends KalturaBulkUploadResult
 	 */
 	public $externalId = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadMediaAssetResult extends KalturaBulkUploadAssetResult
+{
 
 }
 
@@ -4284,6 +4468,13 @@ class KalturaChannel extends KalturaBaseChannel
 	 */
 	public $supportSegmentBasedOrdering = null;
 
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 */
+	public $assetUserRuleId = null;
+
 
 }
 
@@ -5268,182 +5459,6 @@ class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
 	 * @var KalturaPartnerConfigurationType
 	 */
 	public $type = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaT extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaGenericListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of objects
-	 *
-	 * @var array of KalturaT
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIntegerValueListResponse extends KalturaListResponse
-{
-	/**
-	 * Interger value items
-	 *
-	 * @var array of KalturaIntegerValue
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaReport extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaReportListResponse extends KalturaListResponse
-{
-	/**
-	 * Reports
-	 *
-	 * @var array of KalturaReport
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPushParams extends KalturaObjectBase
-{
-	/**
-	 * Device-Application push token
-	 *
-	 * @var string
-	 */
-	public $token = null;
-
-	/**
-	 * External device token as received from external push provider in exchange for the device token
-	 *
-	 * @var string
-	 */
-	public $externalToken = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceReport extends KalturaReport
-{
-	/**
-	 * Partner unique identifier
-	 *
-	 * @var int
-	 */
-	public $partnerId = null;
-
-	/**
-	 * Configuration group identifier which the version configuration the device last received belongs to
-	 *
-	 * @var string
-	 */
-	public $configurationGroupId = null;
-
-	/**
-	 * Device unique identifier
-	 *
-	 * @var string
-	 */
-	public $udid = null;
-
-	/**
-	 * Device-Application push parameters
-	 *
-	 * @var KalturaPushParams
-	 */
-	public $pushParameters;
-
-	/**
-	 * Application version number
-	 *
-	 * @var string
-	 */
-	public $versionNumber = null;
-
-	/**
-	 * Application version type
-	 *
-	 * @var KalturaPlatform
-	 */
-	public $versionPlatform = null;
-
-	/**
-	 * Application version name
-	 *
-	 * @var string
-	 */
-	public $versionAppName = null;
-
-	/**
-	 * Last access IP
-	 *
-	 * @var string
-	 */
-	public $lastAccessIP = null;
-
-	/**
-	 * Last device configuration request date
-	 *
-	 * @var int
-	 */
-	public $lastAccessDate = null;
-
-	/**
-	 * request header property
-	 *
-	 * @var string
-	 */
-	public $userAgent = null;
-
-	/**
-	 * Request header property
-	 *             Incase value cannot be found - returns &quot;Unknown 0.0&quot;
-	 *
-	 * @var string
-	 */
-	public $operationSystem = null;
 
 
 }
@@ -10670,6 +10685,15 @@ class KalturaTopicFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaPersistedFilter extends KalturaFilter
 {
 	/**
@@ -10691,7 +10715,7 @@ class KalturaBulkUploadFilter extends KalturaPersistedFilter
 	/**
 	 * Indicates which Bulk Upload list to return by this KalturaBatchUploadJobStatus.
 	 *
-	 * @var KalturaBatchUploadJobStatus
+	 * @var KalturaBulkUploadJobStatus
 	 */
 	public $statusEqual = null;
 
@@ -11287,15 +11311,6 @@ class KalturaPartnerConfigurationFilter extends KalturaFilter
 	 */
 	public $partnerConfigurationTypeEqual = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
-{
 
 }
 
@@ -12639,24 +12654,8 @@ class KalturaAdsContext extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaBulkUploadEntryData extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaBulkUploadJobData extends KalturaObjectBase
 {
-	/**
-	 * EntryData
-	 *
-	 * @var KalturaBulkUploadEntryData
-	 */
-	public $entryData;
-
 
 }
 
@@ -12674,33 +12673,6 @@ class KalturaBulkUploadExcelJobData extends KalturaBulkUploadJobData
  * @subpackage Client
  */
 class KalturaBulkUploadXmlJobData extends KalturaBulkUploadJobData
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaBulkUploadAssetEntryData extends KalturaBulkUploadEntryData
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkUploadMediaEntryData extends KalturaBulkUploadAssetEntryData
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkUploadEpgEntryData extends KalturaBulkUploadAssetEntryData
 {
 
 }
