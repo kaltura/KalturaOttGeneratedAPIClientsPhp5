@@ -332,9 +332,16 @@ class KalturaBulkUploadJobAction extends KalturaEnumBase
  */
 class KalturaBulkUploadJobStatus extends KalturaEnumBase
 {
-	const PENDING = "PENDING";
-	const UPLOADED = "UPLOADED";
-	const QUEUED = "QUEUED";
+	const PENDING = "Pending";
+	const UPLOADED = "Uploaded";
+	const QUEUED = "Queued";
+	const PARSING = "Parsing";
+	const PROCESSING = "Processing";
+	const PROCESSED = "Processed";
+	const SUCCESS = "Success";
+	const PARTIAL = "Partial";
+	const FAILED = "Failed";
+	const FATAL = "Fatal";
 }
 
 /**
@@ -354,9 +361,9 @@ class KalturaBulkUploadOrderBy extends KalturaEnumBase
  */
 class KalturaBulkUploadResultStatus extends KalturaEnumBase
 {
-	const ERROR = "ERROR";
-	const OK = "OK";
-	const IN_PROGRESS = "IN_PROGRESS";
+	const ERROR = "Error";
+	const OK = "Ok";
+	const INPROGRESS = "InProgress";
 }
 
 /**
@@ -1368,6 +1375,19 @@ class KalturaReminderType extends KalturaEnumBase
 class KalturaReportOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaResponseType extends KalturaEnumBase
+{
+	const JSON = 1;
+	const XML = 2;
+	const JSONP = 9;
+	const ASSET_XML = 30;
+	const EXCEL = 31;
 }
 
 /**

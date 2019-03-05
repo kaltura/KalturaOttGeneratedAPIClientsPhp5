@@ -12444,6 +12444,13 @@ class KalturaPlaybackContextOptions extends KalturaObjectBase
 	public $assetFileIds = null;
 
 	/**
+	 * key/value map field for extra data
+	 *
+	 * @var map
+	 */
+	public $adapterData;
+
+	/**
 	 * Playback context type
 	 *
 	 * @var KalturaPlaybackContextType
@@ -12674,6 +12681,32 @@ class KalturaBulkUploadExcelJobData extends KalturaBulkUploadJobData
  */
 class KalturaBulkUploadXmlJobData extends KalturaBulkUploadJobData
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaBulkUploadObjectData extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadAssetData extends KalturaBulkUploadObjectData
+{
+	/**
+	 * Identifies the asset type (EPG, Recording, Movie, TV Series, etc). 
+	 *             Possible values: 0 – EPG linear programs, 1 - Recording; or any asset type ID according to the asset types IDs defined in the system.
+	 *
+	 * @var int
+	 */
+	public $typeId = null;
+
 
 }
 

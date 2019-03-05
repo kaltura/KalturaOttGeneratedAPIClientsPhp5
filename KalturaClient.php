@@ -355,17 +355,17 @@ class KalturaAssetService extends KalturaServiceBase
 	 * Add new bulk upload batch job Conversion profile id can be specified in the API.
 	 * 
 	 * @param file $fileData FileData
-	 * @param string $assetType AssetType
 	 * @param KalturaBulkUploadJobData $bulkUploadJobData BulkUploadJobData
+	 * @param KalturaBulkUploadAssetData $bulkUploadAssetData BulkUploadAssetData
 	 * @return KalturaBulkUpload
 	 */
-	function addFromBulkUpload($fileData, $assetType, KalturaBulkUploadJobData $bulkUploadJobData)
+	function addFromBulkUpload($fileData, KalturaBulkUploadJobData $bulkUploadJobData, KalturaBulkUploadAssetData $bulkUploadAssetData)
 	{
 		$kparams = array();
 		$kfiles = array();
 		$this->client->addParam($kfiles, "fileData", $fileData);
-		$this->client->addParam($kparams, "assetType", $assetType);
 		$this->client->addParam($kparams, "bulkUploadJobData", $bulkUploadJobData->toParams());
+		$this->client->addParam($kparams, "bulkUploadAssetData", $bulkUploadAssetData->toParams());
 		$this->client->queueServiceActionCall("asset", "addFromBulkUpload", $kparams, $kfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -935,6 +935,25 @@ class KalturaAssetStructService extends KalturaServiceBase
 	}
 
 	/**
+	 * Get AssetStruct by ID
+	 * 
+	 * @param bigint $id ID to get
+	 * @return KalturaAssetStruct
+	 */
+	function get($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("assetstruct", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetStruct");
+		return $resultObject;
+	}
+
+	/**
 	 * Return a list of asset structs for the account with optional filter
 	 * 
 	 * @param KalturaAssetStructFilter $filter Filter parameters for filtering out the result
@@ -1214,6 +1233,25 @@ class KalturaBulkUploadService extends KalturaServiceBase
 	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
+	}
+
+	/**
+	 * Get BulkUpload by ID
+	 * 
+	 * @param bigint $id ID to get
+	 * @return KalturaBulkUpload
+	 */
+	function get($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("bulkupload", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaBulkUpload");
+		return $resultObject;
 	}
 
 	/**
@@ -10020,8 +10058,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-03-03');
-		$this->setApiVersion('5.1.2.42049');
+		$this->setClientTag('php5:19-03-05');
+		$this->setApiVersion('5.1.2.17963');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
