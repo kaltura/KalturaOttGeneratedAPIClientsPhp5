@@ -2754,182 +2754,6 @@ class KalturaTopicListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaT extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaGenericListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of objects
-	 *
-	 * @var array of KalturaT
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIntegerValueListResponse extends KalturaListResponse
-{
-	/**
-	 * Interger value items
-	 *
-	 * @var array of KalturaIntegerValue
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaReport extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaReportListResponse extends KalturaListResponse
-{
-	/**
-	 * Reports
-	 *
-	 * @var array of KalturaReport
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPushParams extends KalturaObjectBase
-{
-	/**
-	 * Device-Application push token
-	 *
-	 * @var string
-	 */
-	public $token = null;
-
-	/**
-	 * External device token as received from external push provider in exchange for the device token
-	 *
-	 * @var string
-	 */
-	public $externalToken = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceReport extends KalturaReport
-{
-	/**
-	 * Partner unique identifier
-	 *
-	 * @var int
-	 */
-	public $partnerId = null;
-
-	/**
-	 * Configuration group identifier which the version configuration the device last received belongs to
-	 *
-	 * @var string
-	 */
-	public $configurationGroupId = null;
-
-	/**
-	 * Device unique identifier
-	 *
-	 * @var string
-	 */
-	public $udid = null;
-
-	/**
-	 * Device-Application push parameters
-	 *
-	 * @var KalturaPushParams
-	 */
-	public $pushParameters;
-
-	/**
-	 * Application version number
-	 *
-	 * @var string
-	 */
-	public $versionNumber = null;
-
-	/**
-	 * Application version type
-	 *
-	 * @var KalturaPlatform
-	 */
-	public $versionPlatform = null;
-
-	/**
-	 * Application version name
-	 *
-	 * @var string
-	 */
-	public $versionAppName = null;
-
-	/**
-	 * Last access IP
-	 *
-	 * @var string
-	 */
-	public $lastAccessIP = null;
-
-	/**
-	 * Last device configuration request date
-	 *
-	 * @var int
-	 */
-	public $lastAccessDate = null;
-
-	/**
-	 * request header property
-	 *
-	 * @var string
-	 */
-	public $userAgent = null;
-
-	/**
-	 * Request header property
-	 *             Incase value cannot be found - returns &quot;Unknown 0.0&quot;
-	 *
-	 * @var string
-	 */
-	public $operationSystem = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaBulkUploadResult extends KalturaObjectBase
 {
 	/**
@@ -5459,6 +5283,182 @@ class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
 	 * @var KalturaPartnerConfigurationType
 	 */
 	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaT extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenericListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaT
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIntegerValueListResponse extends KalturaListResponse
+{
+	/**
+	 * Interger value items
+	 *
+	 * @var array of KalturaIntegerValue
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaReport extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaReportListResponse extends KalturaListResponse
+{
+	/**
+	 * Reports
+	 *
+	 * @var array of KalturaReport
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPushParams extends KalturaObjectBase
+{
+	/**
+	 * Device-Application push token
+	 *
+	 * @var string
+	 */
+	public $token = null;
+
+	/**
+	 * External device token as received from external push provider in exchange for the device token
+	 *
+	 * @var string
+	 */
+	public $externalToken = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceReport extends KalturaReport
+{
+	/**
+	 * Partner unique identifier
+	 *
+	 * @var int
+	 */
+	public $partnerId = null;
+
+	/**
+	 * Configuration group identifier which the version configuration the device last received belongs to
+	 *
+	 * @var string
+	 */
+	public $configurationGroupId = null;
+
+	/**
+	 * Device unique identifier
+	 *
+	 * @var string
+	 */
+	public $udid = null;
+
+	/**
+	 * Device-Application push parameters
+	 *
+	 * @var KalturaPushParams
+	 */
+	public $pushParameters;
+
+	/**
+	 * Application version number
+	 *
+	 * @var string
+	 */
+	public $versionNumber = null;
+
+	/**
+	 * Application version type
+	 *
+	 * @var KalturaPlatform
+	 */
+	public $versionPlatform = null;
+
+	/**
+	 * Application version name
+	 *
+	 * @var string
+	 */
+	public $versionAppName = null;
+
+	/**
+	 * Last access IP
+	 *
+	 * @var string
+	 */
+	public $lastAccessIP = null;
+
+	/**
+	 * Last device configuration request date
+	 *
+	 * @var int
+	 */
+	public $lastAccessDate = null;
+
+	/**
+	 * request header property
+	 *
+	 * @var string
+	 */
+	public $userAgent = null;
+
+	/**
+	 * Request header property
+	 *             Incase value cannot be found - returns &quot;Unknown 0.0&quot;
+	 *
+	 * @var string
+	 */
+	public $operationSystem = null;
 
 
 }
@@ -9760,6 +9760,13 @@ class KalturaExternalChannelProfile extends KalturaObjectBase
 	 */
 	public $enrichments;
 
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 */
+	public $assetUserRuleId = null;
+
 
 }
 
@@ -10685,6 +10692,277 @@ class KalturaTopicFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBulkUploadFilter extends KalturaFilter
+{
+	/**
+	 * upload date to search within.
+	 *
+	 * @var int
+	 */
+	public $uploadedOnEqual = null;
+
+	/**
+	 * Date Comparison Type.
+	 *
+	 * @var KalturaDateComparisonType
+	 */
+	public $dateComparisonType = null;
+
+	/**
+	 * List of KalturaBulkUploadJobStatus to search within.
+	 *
+	 * @var string
+	 */
+	public $statusIn = null;
+
+	/**
+	 * Indicates if to get the BulkUpload list that created by current user or by the entire group.
+	 *
+	 * @var bool
+	 */
+	public $userIdEqualCurrent = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentationTypeFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated segmentation types identifieridentifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSegmentFilter extends KalturaFilter
+{
+	/**
+	 * User ID
+	 *
+	 * @var string
+	 */
+	public $userIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPpvFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetFilePpvFilter extends KalturaFilter
+{
+	/**
+	 * Filter Asset file ppvs that contain a specific asset id
+	 *
+	 * @var int
+	 */
+	public $assetIdEqual = null;
+
+	/**
+	 * Filter Asset file ppvs that contain a specific asset file id
+	 *
+	 * @var int
+	 */
+	public $assetFileIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCollectionFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated collection IDs
+	 *
+	 * @var string
+	 */
+	public $collectionIdIn = null;
+
+	/**
+	 * Media-file ID to get the subscriptions by
+	 *
+	 * @var int
+	 */
+	public $mediaFileIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscountDetailsFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated discount codes
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPricePlanFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated price plans identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPriceDetailsFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated price identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionSetFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+	/**
+	 * Comma separated subscription identifiers
+	 *
+	 * @var string
+	 */
+	public $subscriptionIdContains = null;
+
+	/**
+	 * Subscription Type
+	 *
+	 * @var KalturaSubscriptionSetType
+	 */
+	public $typeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionDependencySetFilter extends KalturaSubscriptionSetFilter
+{
+	/**
+	 * Comma separated identifiers
+	 *
+	 * @var string
+	 */
+	public $baseSubscriptionIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated subscription IDs to get the subscriptions by
+	 *
+	 * @var string
+	 */
+	public $subscriptionIdIn = null;
+
+	/**
+	 * Media-file ID to get the subscriptions by
+	 *
+	 * @var int
+	 */
+	public $mediaFileIdEqual = null;
+
+	/**
+	 * Comma separated subscription external IDs to get the subscriptions by
+	 *
+	 * @var string
+	 */
+	public $externalIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPartnerConfigurationFilter extends KalturaFilter
+{
+	/**
+	 * Indicates which partner configuration list to return
+	 *
+	 * @var KalturaPartnerConfigurationType
+	 */
+	public $partnerConfigurationTypeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
 {
 
@@ -10702,22 +10980,6 @@ abstract class KalturaPersistedFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $name = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkUploadFilter extends KalturaPersistedFilter
-{
-	/**
-	 * Indicates which Bulk Upload list to return by this KalturaBatchUploadJobStatus.
-	 *
-	 * @var KalturaBulkUploadJobStatus
-	 */
-	public $statusEqual = null;
 
 
 }
@@ -11076,240 +11338,6 @@ class KalturaSearchExternalFilter extends KalturaAssetFilter
 	 * @var string
 	 */
 	public $typeIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentationTypeFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated segmentation types identifieridentifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserSegmentFilter extends KalturaFilter
-{
-	/**
-	 * User ID
-	 *
-	 * @var string
-	 */
-	public $userIdEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPpvFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetFilePpvFilter extends KalturaFilter
-{
-	/**
-	 * Filter Asset file ppvs that contain a specific asset id
-	 *
-	 * @var int
-	 */
-	public $assetIdEqual = null;
-
-	/**
-	 * Filter Asset file ppvs that contain a specific asset file id
-	 *
-	 * @var int
-	 */
-	public $assetFileIdEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCollectionFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated collection IDs
-	 *
-	 * @var string
-	 */
-	public $collectionIdIn = null;
-
-	/**
-	 * Media-file ID to get the subscriptions by
-	 *
-	 * @var int
-	 */
-	public $mediaFileIdEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscountDetailsFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated discount codes
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPricePlanFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated price plans identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPriceDetailsFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated price identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionSetFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-	/**
-	 * Comma separated subscription identifiers
-	 *
-	 * @var string
-	 */
-	public $subscriptionIdContains = null;
-
-	/**
-	 * Subscription Type
-	 *
-	 * @var KalturaSubscriptionSetType
-	 */
-	public $typeEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionDependencySetFilter extends KalturaSubscriptionSetFilter
-{
-	/**
-	 * Comma separated identifiers
-	 *
-	 * @var string
-	 */
-	public $baseSubscriptionIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated subscription IDs to get the subscriptions by
-	 *
-	 * @var string
-	 */
-	public $subscriptionIdIn = null;
-
-	/**
-	 * Media-file ID to get the subscriptions by
-	 *
-	 * @var int
-	 */
-	public $mediaFileIdEqual = null;
-
-	/**
-	 * Comma separated subscription external IDs to get the subscriptions by
-	 *
-	 * @var string
-	 */
-	public $externalIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPartnerConfigurationFilter extends KalturaFilter
-{
-	/**
-	 * Indicates which partner configuration list to return
-	 *
-	 * @var KalturaPartnerConfigurationType
-	 */
-	public $partnerConfigurationTypeEqual = null;
 
 
 }

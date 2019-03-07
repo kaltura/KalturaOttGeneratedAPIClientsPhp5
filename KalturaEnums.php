@@ -352,7 +352,6 @@ class KalturaBulkUploadOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
 	const UPDATE_DATE = "UPDATE_DATE";
-	const STATUS = "STATUS";
 }
 
 /**
@@ -562,6 +561,17 @@ class KalturaCurrencyOrderBy extends KalturaEnumBase
 	const NAME_DESC = "NAME_DESC";
 	const CODE_ASC = "CODE_ASC";
 	const CODE_DESC = "CODE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDateComparisonType extends KalturaEnumBase
+{
+	const GREATERTHANOREQUAL = "GreaterThanOrEqual";
+	const LESSTHANOREQUAL = "LessThanOrEqual";
+	const EQUAL = "Equal";
 }
 
 /**
