@@ -1261,11 +1261,10 @@ class KalturaBulkUploadService extends KalturaServiceBase
 	 * @param KalturaFilterPager $pager Paging the request
 	 * @return KalturaBulkUploadListResponse
 	 */
-	function listAction(KalturaBulkUploadFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(KalturaBulkUploadFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->addParam($kparams, "filter", $filter->toParams());
 		if ($pager !== null)
 			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("bulkupload", "list", $kparams);
@@ -10061,8 +10060,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-03-10');
-		$this->setApiVersion('5.1.2.43155');
+		$this->setClientTag('php5:19-03-11');
+		$this->setApiVersion('5.1.2.22446');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

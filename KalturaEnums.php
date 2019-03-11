@@ -351,7 +351,8 @@ class KalturaBulkUploadJobStatus extends KalturaEnumBase
 class KalturaBulkUploadOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-	const UPDATE_DATE = "UPDATE_DATE";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
 }
 
 /**
@@ -388,11 +389,7 @@ class KalturaChannelEnrichment extends KalturaEnumBase
 	const DEVICETYPE = "DeviceType";
 	const UTCOFFSET = "UTCOffset";
 	const LANGUAGE = "Language";
-	const NPVRSUPPORT = "NPVRSupport";
-	const CATCHUP = "Catchup";
-	const PARENTAL = "Parental";
 	const DTTREGION = "DTTRegion";
-	const ATHOME = "AtHome";
 }
 
 /**
@@ -561,17 +558,6 @@ class KalturaCurrencyOrderBy extends KalturaEnumBase
 	const NAME_DESC = "NAME_DESC";
 	const CODE_ASC = "CODE_ASC";
 	const CODE_DESC = "CODE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDateComparisonType extends KalturaEnumBase
-{
-	const GREATERTHANOREQUAL = "GreaterThanOrEqual";
-	const LESSTHANOREQUAL = "LessThanOrEqual";
-	const EQUAL = "Equal";
 }
 
 /**
