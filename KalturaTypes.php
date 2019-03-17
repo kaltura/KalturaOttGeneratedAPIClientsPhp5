@@ -2819,20 +2819,12 @@ abstract class KalturaBulkUploadResult extends KalturaObjectBase
 	public $status = null;
 
 	/**
-	 * Error Code
+	 * Error details
 	 *
-	 * @var int
+	 * @var KalturaMessage
 	 * @readonly
 	 */
-	public $errorCode = null;
-
-	/**
-	 * Error Message
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $errorMessage = null;
+	public $error;
 
 	/**
 	 * A list of warnings
@@ -10753,7 +10745,7 @@ class KalturaBulkUploadFilter extends KalturaFilter
 	 *
 	 * @var string
 	 */
-	public $bulkObjectNameEqual = null;
+	public $bulkObjectTypeEqual = null;
 
 	/**
 	 * upload date to search within (search in the last 60 days)
