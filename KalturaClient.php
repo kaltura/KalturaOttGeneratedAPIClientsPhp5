@@ -4608,6 +4608,94 @@ class KalturaInboxMessageService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestProfileService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Insert new ingest profile for partner
+	 * 
+	 * @param KalturaIngestProfile $ingestProfile Ingest profile Object to be added
+	 * @return KalturaIngestProfile
+	 */
+	function add(KalturaIngestProfile $ingestProfile)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "ingestProfile", $ingestProfile->toParams());
+		$this->client->queueServiceActionCall("ingestprofile", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIngestProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete ingest profiles by ingest profiles id
+	 * 
+	 * @param int $ingestProfileId Ingest profile Identifier
+	 * @return bool
+	 */
+	function delete($ingestProfileId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "ingestProfileId", $ingestProfileId);
+		$this->client->queueServiceActionCall("ingestprofile", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Returns all ingest profiles for partner
+	 * 
+	 * @return KalturaIngestProfileListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("ingestprofile", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIngestProfileListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update ingest profile details
+	 * 
+	 * @param int $ingestProfileId Ingest profile Identifier
+	 * @param KalturaIngestProfile $ingestProfile Ingest profile Object
+	 * @return KalturaIngestProfile
+	 */
+	function update($ingestProfileId, KalturaIngestProfile $ingestProfile)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "ingestProfileId", $ingestProfileId);
+		$this->client->addParam($kparams, "ingestProfile", $ingestProfile->toParams());
+		$this->client->queueServiceActionCall("ingestprofile", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIngestProfile");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLanguageService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -9693,6 +9781,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaIngestProfileService
+	 */
+	public $IngestProfile = null;
+
+	/**
+	 * 
 	 * @var KalturaLanguageService
 	 */
 	public $language = null;
@@ -10060,8 +10154,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-03-20');
-		$this->setApiVersion('5.2.0.207');
+		$this->setClientTag('php5:19-03-21');
+		$this->setApiVersion('5.2.0.15395');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10116,6 +10210,7 @@ class KalturaClient extends KalturaClientBase
 		$this->image = new KalturaImageService($this);
 		$this->imageType = new KalturaImageTypeService($this);
 		$this->inboxMessage = new KalturaInboxMessageService($this);
+		$this->IngestProfile = new KalturaIngestProfileService($this);
 		$this->language = new KalturaLanguageService($this);
 		$this->licensedUrl = new KalturaLicensedUrlService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);

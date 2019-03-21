@@ -7996,6 +7996,95 @@ class KalturaAssetHistoryListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestProfile extends KalturaObjectBase
+{
+	/**
+	 * Ingest profile identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Ingest profile name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Ingest profile externalId
+	 *
+	 * @var string
+	 */
+	public $externalId = null;
+
+	/**
+	 * Type of assets that this profile suppose to ingest: 0 - EPG, 1 - MEDIA
+	 *
+	 * @var int
+	 */
+	public $assetTypeId = null;
+
+	/**
+	 * Transformation Adapter URL
+	 *
+	 * @var string
+	 */
+	public $transformationAdapterUrl = null;
+
+	/**
+	 * Transformation Adapter settings
+	 *
+	 * @var string
+	 */
+	public $transformationAdapterSettings = null;
+
+	/**
+	 * Transformation Adapter shared secret
+	 *
+	 * @var string
+	 */
+	public $transformationAdapterSharedSecret = null;
+
+	/**
+	 * Ingest profile default Auto-fill policy
+	 *
+	 * @var int
+	 */
+	public $defaultAutoFillPolicy = null;
+
+	/**
+	 * Ingest profile default Overlap policy
+	 *
+	 * @var int
+	 */
+	public $defaultOverlapPolicy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestProfileListResponse extends KalturaListResponse
+{
+	/**
+	 * Adapters
+	 *
+	 * @var array of KalturaIngestProfile
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaRule extends KalturaObjectBase
 {
 	/**
