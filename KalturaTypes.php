@@ -12842,8 +12842,16 @@ class KalturaBulkUploadExcelJobData extends KalturaBulkUploadJobData
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkUploadXmlJobData extends KalturaBulkUploadJobData
+class KalturaBulkUploadIngestJobData extends KalturaBulkUploadJobData
 {
+	/**
+	 * Identifies the ingest profile that will handle the ingest of programs
+	 *             Ingest profiles are created separately using the ingest profile service
+	 *
+	 * @var int
+	 */
+	public $ingestProfileId = null;
+
 
 }
 
