@@ -8037,9 +8037,9 @@ class KalturaIngestProfile extends KalturaObjectBase
 	/**
 	 * Transformation Adapter settings
 	 *
-	 * @var string
+	 * @var map
 	 */
-	public $transformationAdapterSettings = null;
+	public $transformationAdapterSettings;
 
 	/**
 	 * Transformation Adapter shared secret
@@ -12878,6 +12878,24 @@ class KalturaBulkUploadAssetData extends KalturaBulkUploadObjectData
 	 */
 	public $typeId = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadMediaAssetData extends KalturaBulkUploadAssetData
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadEpgAssetData extends KalturaBulkUploadAssetData
+{
 
 }
 
