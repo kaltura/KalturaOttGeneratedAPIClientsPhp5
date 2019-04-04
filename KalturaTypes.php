@@ -14088,6 +14088,13 @@ class KalturaLoginSession extends KalturaObjectBase
 	 */
 	public $ks = null;
 
+	/**
+	 * Expiration
+	 *
+	 * @var int
+	 */
+	public $expiration = null;
+
 
 }
 
