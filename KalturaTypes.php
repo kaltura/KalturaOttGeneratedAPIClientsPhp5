@@ -2819,12 +2819,12 @@ abstract class KalturaBulkUploadResult extends KalturaObjectBase
 	public $status = null;
 
 	/**
-	 * Error details
+	 * A list of errors
 	 *
-	 * @var KalturaMessage
+	 * @var array of KalturaMessage
 	 * @readonly
 	 */
-	public $error;
+	public $errors;
 
 	/**
 	 * A list of warnings
@@ -12868,7 +12868,7 @@ abstract class KalturaBulkUploadObjectData extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkUploadAssetData extends KalturaBulkUploadObjectData
+abstract class KalturaBulkUploadAssetData extends KalturaBulkUploadObjectData
 {
 	/**
 	 * Identifies the asset type (EPG, Recording, Movie, TV Series, etc). 
@@ -12894,7 +12894,7 @@ class KalturaBulkUploadMediaAssetData extends KalturaBulkUploadAssetData
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkUploadEpgAssetData extends KalturaBulkUploadAssetData
+class KalturaBulkUploadProgramAssetData extends KalturaBulkUploadAssetData
 {
 
 }
