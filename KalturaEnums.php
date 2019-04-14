@@ -250,27 +250,6 @@ class KalturaAssetUserRuleOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBatchJobStatus extends KalturaEnumBase
-{
-	const PENDING = "PENDING";
-	const QUEUED = "QUEUED";
-	const PROCESSING = "PROCESSING";
-	const PROCESSED = "PROCESSED";
-	const MOVEFILE = "MOVEFILE";
-	const FINISHED = "FINISHED";
-	const FAILED = "FAILED";
-	const ABORTED = "ABORTED";
-	const ALMOST_DONE = "ALMOST_DONE";
-	const RETRY = "RETRY";
-	const FATAL = "FATAL";
-	const DONT_PROCESS = "DONT_PROCESS";
-	const FINISHED_PARTIALLY = "FINISHED_PARTIALLY";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaBillingAction extends KalturaEnumBase
 {
 	const UNKNOWN = "unknown";
@@ -341,9 +320,50 @@ class KalturaBookmarkOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkOrderBy extends KalturaEnumBase
+class KalturaBulkUploadJobAction extends KalturaEnumBase
+{
+	const UPSERT = "Upsert";
+	const DELETE = "Delete";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadJobStatus extends KalturaEnumBase
+{
+	const PENDING = "Pending";
+	const UPLOADED = "Uploaded";
+	const QUEUED = "Queued";
+	const PARSING = "Parsing";
+	const PROCESSING = "Processing";
+	const PROCESSED = "Processed";
+	const SUCCESS = "Success";
+	const PARTIAL = "Partial";
+	const FAILED = "Failed";
+	const FATAL = "Fatal";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadResultStatus extends KalturaEnumBase
+{
+	const ERROR = "Error";
+	const OK = "Ok";
+	const INPROGRESS = "InProgress";
 }
 
 /**
@@ -369,11 +389,7 @@ class KalturaChannelEnrichment extends KalturaEnumBase
 	const DEVICETYPE = "DeviceType";
 	const UTCOFFSET = "UTCOffset";
 	const LANGUAGE = "Language";
-	const NPVRSUPPORT = "NPVRSupport";
-	const CATCHUP = "Catchup";
-	const PARENTAL = "Parental";
 	const DTTREGION = "DTTRegion";
-	const ATHOME = "AtHome";
 }
 
 /**
@@ -1355,6 +1371,19 @@ class KalturaReminderType extends KalturaEnumBase
 class KalturaReportOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaResponseType extends KalturaEnumBase
+{
+	const JSON = 1;
+	const XML = 2;
+	const JSONP = 9;
+	const ASSET_XML = 30;
+	const EXCEL = 31;
 }
 
 /**

@@ -352,6 +352,30 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
+	 * Add new bulk upload batch job Conversion profile id can be specified in the API.
+	 * 
+	 * @param file $fileData FileData
+	 * @param KalturaBulkUploadJobData $bulkUploadJobData BulkUploadJobData
+	 * @param KalturaBulkUploadAssetData $bulkUploadAssetData BulkUploadAssetData
+	 * @return KalturaBulkUpload
+	 */
+	function addFromBulkUpload($fileData, KalturaBulkUploadJobData $bulkUploadJobData, KalturaBulkUploadAssetData $bulkUploadAssetData)
+	{
+		$kparams = array();
+		$kfiles = array();
+		$this->client->addParam($kfiles, "fileData", $fileData);
+		$this->client->addParam($kparams, "bulkUploadJobData", $bulkUploadJobData->toParams());
+		$this->client->addParam($kparams, "bulkUploadAssetData", $bulkUploadAssetData->toParams());
+		$this->client->queueServiceActionCall("asset", "addFromBulkUpload", $kparams, $kfiles);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaBulkUpload");
+		return $resultObject;
+	}
+
+	/**
 	 * Returns a group-by result for media or EPG according to given filter. Lists values of each field and their respective count.
 	 * 
 	 * @param KalturaSearchAssetFilter $filter Filtering the assets request
@@ -911,6 +935,25 @@ class KalturaAssetStructService extends KalturaServiceBase
 	}
 
 	/**
+	 * Get AssetStruct by ID
+	 * 
+	 * @param bigint $id ID to get
+	 * @return KalturaAssetStruct
+	 */
+	function get($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("assetstruct", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetStruct");
+		return $resultObject;
+	}
+
+	/**
 	 * Return a list of asset structs for the account with optional filter
 	 * 
 	 * @param KalturaAssetStructFilter $filter Filter parameters for filtering out the result
@@ -1185,7 +1228,7 @@ class KalturaBookmarkService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkService extends KalturaServiceBase
+class KalturaBulkUploadService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
 	{
@@ -1193,44 +1236,43 @@ class KalturaBulkService extends KalturaServiceBase
 	}
 
 	/**
-	 * List bulk actions
+	 * Get BulkUpload by ID
 	 * 
-	 * @param KalturaBulkFilter $filter Filtering the bulk action request
-	 * @param KalturaFilterPager $pager Paging the request
-	 * @return KalturaBulkListResponse
+	 * @param bigint $id ID to get
+	 * @return KalturaBulkUpload
 	 */
-	function listAction(KalturaBulkFilter $filter = null, KalturaFilterPager $pager = null)
+	function get($id)
 	{
 		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("bulk", "list", $kparams);
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("bulkupload", "get", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBulkListResponse");
+		$this->client->validateObjectType($resultObject, "KalturaBulkUpload");
 		return $resultObject;
 	}
 
 	/**
-	 * ServeLog action returns the log file for the bulk action
+	 * Get list of KalturaBulkUpload by filter
 	 * 
-	 * @param bigint $id Bulk action id
-	 * @return KalturaBulk
+	 * @param KalturaBulkUploadFilter $filter Filtering the bulk action request
+	 * @param KalturaFilterPager $pager Paging the request
+	 * @return KalturaBulkUploadListResponse
 	 */
-	function serveLog($id)
+	function listAction(KalturaBulkUploadFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("bulk", "serveLog", $kparams);
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("bulkupload", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBulk");
+		$this->client->validateObjectType($resultObject, "KalturaBulkUploadListResponse");
 		return $resultObject;
 	}
 }
@@ -9411,9 +9453,9 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaBulkService
+	 * @var KalturaBulkUploadService
 	 */
-	public $bulk = null;
+	public $bulkUpload = null;
 
 	/**
 	 * 
@@ -10018,8 +10060,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-02-20');
-		$this->setApiVersion('5.1.1.25422');
+		$this->setClientTag('php5:19-04-14');
+		$this->setApiVersion('5.2.0.16219');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10034,7 +10076,7 @@ class KalturaClient extends KalturaClientBase
 		$this->assetStructMeta = new KalturaAssetStructMetaService($this);
 		$this->assetUserRule = new KalturaAssetUserRuleService($this);
 		$this->bookmark = new KalturaBookmarkService($this);
-		$this->bulk = new KalturaBulkService($this);
+		$this->bulkUpload = new KalturaBulkUploadService($this);
 		$this->businessModuleRule = new KalturaBusinessModuleRuleService($this);
 		$this->cdnAdapterProfile = new KalturaCdnAdapterProfileService($this);
 		$this->cdnPartnerSettings = new KalturaCdnPartnerSettingsService($this);
