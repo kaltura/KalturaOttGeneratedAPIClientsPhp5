@@ -2973,6 +2973,80 @@ class KalturaBulkUploadMediaAssetResult extends KalturaBulkUploadAssetResult
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBulkUploadProgramAssetResult extends KalturaBulkUploadResult
+{
+	/**
+	 * The programID that was created
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $programId = null;
+
+	/**
+	 * The external program Id as was sent in the bulk xml file
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $programExternalId = null;
+
+	/**
+	 * The  live asset Id that was identified according liveAssetExternalId that was sent in bulk xml file
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $liveAssetId = null;
+
+	/**
+	 * The external live asset Id as was sent in bulk xml file
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $liveAssetExternalId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadLiveAssetResult extends KalturaBulkUploadResult
+{
+	/**
+	 * The internal kaltura channel id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Indicates the epg asset object id in the bulk file
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $externalEpgIngestId = null;
+
+	/**
+	 * List of programs that were ingested to the channel
+	 *
+	 * @var array of KalturaBulkUploadProgramAssetResult
+	 * @readonly
+	 */
+	public $programs;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBaseSegmentCondition extends KalturaObjectBase
 {
 
@@ -4336,6 +4410,13 @@ class KalturaChannel extends KalturaBaseChannel
 	 * @var int
 	 */
 	public $assetUserRuleId = null;
+
+	/**
+	 * key/value map field for extra data
+	 *
+	 * @var map
+	 */
+	public $metaData;
 
 
 }
@@ -8051,14 +8132,14 @@ class KalturaIngestProfile extends KalturaObjectBase
 	/**
 	 * Ingest profile default Auto-fill policy
 	 *
-	 * @var int
+	 * @var KalturaIngestProfileAutofillPolicy
 	 */
 	public $defaultAutoFillPolicy = null;
 
 	/**
 	 * Ingest profile default Overlap policy
 	 *
-	 * @var int
+	 * @var KalturaIngestProfileOverlapPolicy
 	 */
 	public $defaultOverlapPolicy = null;
 
@@ -9901,6 +9982,13 @@ class KalturaExternalChannelProfile extends KalturaObjectBase
 	 * @var int
 	 */
 	public $assetUserRuleId = null;
+
+	/**
+	 * key/value map field for extra data
+	 *
+	 * @var map
+	 */
+	public $metaData;
 
 
 }
@@ -14093,7 +14181,7 @@ class KalturaLoginSession extends KalturaObjectBase
 	 *
 	 * @var int
 	 */
-	public $expiration = null;
+	public $expiry = null;
 
 
 }

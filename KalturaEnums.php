@@ -890,6 +890,28 @@ class KalturaInboxMessageType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestProfileAutofillPolicy extends KalturaEnumBase
+{
+	const REJECT = "REJECT";
+	const AUTOFILL = "AUTOFILL";
+	const KEEP_HOLES = "KEEP_HOLES";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestProfileOverlapPolicy extends KalturaEnumBase
+{
+	const REJECT = "REJECT";
+	const CUT_SOURCE = "CUT_SOURCE";
+	const CUT_TARGET = "CUT_TARGET";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLanguageOrderBy extends KalturaEnumBase
 {
 	const SYSTEM_NAME_ASC = "SYSTEM_NAME_ASC";
