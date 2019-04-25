@@ -12405,6 +12405,13 @@ class KalturaPermissionFilter extends KalturaFilter
 	 */
 	public $currentUserPermissionsContains = null;
 
+	/**
+	 * Return permissions by role ID
+	 *
+	 * @var int
+	 */
+	public $roleIdIn = null;
+
 
 }
 
