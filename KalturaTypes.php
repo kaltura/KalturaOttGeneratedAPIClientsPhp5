@@ -2999,14 +2999,6 @@ class KalturaBulkUploadProgramAssetResult extends KalturaBulkUploadResult
 	 */
 	public $liveAssetId = null;
 
-	/**
-	 * The external live asset Id as was sent in bulk xml file
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $liveAssetExternalId = null;
-
 
 }
 
@@ -14121,6 +14113,13 @@ class KalturaTimeShiftedTvPartnerSettings extends KalturaObjectBase
 	 * @var int
 	 */
 	public $recoveryGracePeriod = null;
+
+	/**
+	 * Is private copy enabled for the account
+	 *
+	 * @var bool
+	 */
+	public $privateCopyEnabled = null;
 
 
 }
