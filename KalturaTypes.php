@@ -8770,6 +8770,14 @@ class KalturaAssetRule extends KalturaAssetRuleBase
 	 */
 	public $actions;
 
+	/**
+	 * List of actions for the rule
+	 *
+	 * @var KalturaAssetRuleStatus
+	 * @readonly
+	 */
+	public $status = null;
+
 
 }
 

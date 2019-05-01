@@ -205,6 +205,16 @@ class KalturaAssetRuleOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetRuleStatus extends KalturaEnumBase
+{
+	const READY = "READY";
+	const IN_PROGRESS = "IN_PROGRESS";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetStructMetaOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
