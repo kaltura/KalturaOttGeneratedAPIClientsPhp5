@@ -1013,6 +1013,7 @@ class KalturaMetaDataType extends KalturaEnumBase
 	const NUMBER = "NUMBER";
 	const BOOLEAN = "BOOLEAN";
 	const DATE = "DATE";
+	const RELEATED_ENTITY = "RELEATED_ENTITY";
 }
 
 /**
@@ -1384,6 +1385,18 @@ class KalturaRegionOrderBy extends KalturaEnumBase
 {
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRelatedEntityType extends KalturaEnumBase
+{
+	const CHANNEL = "CHANNEL";
+	const EXTERNAL_CHANNEL = "EXTERNAL_CHANNEL";
+	const MEDIA = "MEDIA";
+	const PROGRAM = "PROGRAM";
 }
 
 /**

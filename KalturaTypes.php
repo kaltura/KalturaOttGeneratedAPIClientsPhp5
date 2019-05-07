@@ -7114,6 +7114,45 @@ class KalturaTagListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaRelatedEntity extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the related entry
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * Defines related entry type
+	 *
+	 * @var KalturaRelatedEntityType
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRelatedEntityArray extends KalturaObjectBase
+{
+	/**
+	 * List of related entities
+	 *
+	 * @var array of KalturaRelatedEntity
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaAsset extends KalturaObjectBase
 {
 	/**
@@ -7192,6 +7231,13 @@ abstract class KalturaAsset extends KalturaObjectBase
 	 * @var map
 	 */
 	public $tags;
+
+	/**
+	 * Dynamic collection of key-value pairs according to the related entity defined in the system
+	 *
+	 * @var map
+	 */
+	public $relatedEntities;
 
 	/**
 	 * Date and time represented as epoch. For VOD – since when the asset is available in the catalog. For EPG/Linear – when the program is aired (can be in the future).
