@@ -5187,6 +5187,13 @@ class KalturaSubscription extends KalturaObjectBase
 	 */
 	public $isCancellationBlocked = null;
 
+	/**
+	 * The Pre-Sale date the subscription is available for purchasing
+	 *
+	 * @var int
+	 */
+	public $preSaleDate = null;
+
 
 }
 
@@ -5394,6 +5401,235 @@ class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
 	 * @var KalturaPartnerConfigurationType
 	 */
 	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscribeReference extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopicNotification extends KalturaObjectBase
+{
+	/**
+	 * Topic notification ID
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Topic notification name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Topic notification description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+	/**
+	 * Announcement enabled
+	 *
+	 * @var KalturaSubscribeReference
+	 */
+	public $subscribeReference;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopicNotificationListResponse extends KalturaListResponse
+{
+	/**
+	 * Topic notifications
+	 *
+	 * @var array of KalturaTopicNotification
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionSubscribeReference extends KalturaSubscribeReference
+{
+	/**
+	 * Subscription ID
+	 *
+	 * @var int
+	 */
+	public $subscriptionId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTrigger extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDispatcher extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopicNotificationMessage extends KalturaObjectBase
+{
+	/**
+	 * Topic notification message ID
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Topic notification message
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Topic notification ID
+	 *
+	 * @var int
+	 */
+	public $topicNotificationId = null;
+
+	/**
+	 * Topic notification message trigger
+	 *
+	 * @var KalturaTrigger
+	 */
+	public $trigger;
+
+	/**
+	 * Topic notification message dispatchers
+	 *
+	 * @var array of KalturaDispatcher
+	 */
+	public $dispatchers;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopicNotificationMessageListResponse extends KalturaListResponse
+{
+	/**
+	 * Topic notification messages
+	 *
+	 * @var array of KalturaTopicNotificationMessage
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDateTrigger extends KalturaTrigger
+{
+	/**
+	 * Trigger date
+	 *
+	 * @var int
+	 */
+	public $date = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionTrigger extends KalturaTrigger
+{
+	/**
+	 * Subscription trigger type
+	 *
+	 * @var KalturaSubscriptionTriggerType
+	 */
+	public $type = null;
+
+	/**
+	 * Subscription trigger offset
+	 *
+	 * @var int
+	 */
+	public $offset = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSmsDispatcher extends KalturaDispatcher
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMailDispatcher extends KalturaDispatcher
+{
+	/**
+	 * Mail body template
+	 *
+	 * @var string
+	 */
+	public $bodyTemplate = null;
+
+	/**
+	 * Mail subjsct template
+	 *
+	 * @var string
+	 */
+	public $subjectTemplate = null;
 
 
 }
@@ -8734,6 +8970,69 @@ class KalturaApplyPlaybackAdapterAction extends KalturaAssetRuleAction
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaAssetLifeCycleTransitionAction extends KalturaAssetRuleAction
+{
+	/**
+	 * Asset LifeCycle Rule Action Type
+	 *
+	 * @var KalturaAssetLifeCycleRuleActionType
+	 */
+	public $assetLifeCycleRuleActionType = null;
+
+	/**
+	 * Asset LifeCycle Rule Transition Type
+	 *
+	 * @var KalturaAssetLifeCycleRuleTransitionType
+	 * @readonly
+	 */
+	public $assetLifeCycleRuleTransitionType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetLifeCycleTagTransitionAction extends KalturaAssetLifeCycleTransitionAction
+{
+	/**
+	 * Comma separated list of tag Ids.
+	 *
+	 * @var string
+	 */
+	public $tagIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetLifeCycleBuisnessModuleTransitionAction extends KalturaAssetLifeCycleTransitionAction
+{
+	/**
+	 * Comma separated list of fileType Ids.
+	 *
+	 * @var string
+	 */
+	public $fileTypeIds = null;
+
+	/**
+	 * Comma separated list of ppv Ids.
+	 *
+	 * @var string
+	 */
+	public $ppvIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
 {
 
@@ -11224,6 +11523,38 @@ class KalturaPartnerConfigurationFilter extends KalturaFilter
 	 * @var KalturaPartnerConfigurationType
 	 */
 	public $partnerConfigurationTypeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopicNotificationFilter extends KalturaFilter
+{
+	/**
+	 * Subscribe rreference
+	 *
+	 * @var KalturaSubscribeReference
+	 */
+	public $subscribeReference;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopicNotificationMessageFilter extends KalturaFilter
+{
+	/**
+	 * Topic notification ID
+	 *
+	 * @var int
+	 */
+	public $topicNotificationIdEqual = null;
 
 
 }

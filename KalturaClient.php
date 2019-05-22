@@ -8711,6 +8711,218 @@ class KalturaTopicService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTopicNotificationService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add a new topic notification
+	 * 
+	 * @param KalturaTopicNotification $topicNotification The topic notification to add
+	 * @return KalturaTopicNotification
+	 */
+	function add(KalturaTopicNotification $topicNotification)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "topicNotification", $topicNotification->toParams());
+		$this->client->queueServiceActionCall("topicnotification", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaTopicNotification");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an existing topic notification
+	 * 
+	 * @param bigint $id ID of topic notification to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("topicnotification", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Lists all topic notifications in the system.
+	 * 
+	 * @param KalturaTopicNotificationFilter $filter Filter options
+	 * @return KalturaTopicNotificationListResponse
+	 */
+	function listAction(KalturaTopicNotificationFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("topicnotification", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaTopicNotificationListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Subscribe a user to a topic notification
+	 * 
+	 * @param bigint $topicNotificationId ID of topic notification to subscribe to.
+	 */
+	function subscribe($topicNotificationId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "topicNotificationId", $topicNotificationId);
+		$this->client->queueServiceActionCall("topicnotification", "subscribe", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Unubscribe a user from a topic notification
+	 * 
+	 * @param bigint $topicNotificationId ID of topic notification to unsubscribe from.
+	 */
+	function unsubscribe($topicNotificationId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "topicNotificationId", $topicNotificationId);
+		$this->client->queueServiceActionCall("topicnotification", "unsubscribe", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Update an existing topic notification
+	 * 
+	 * @param int $id The topic notification ID to update
+	 * @param KalturaTopicNotification $topicNotification The topic notification to update
+	 * @return KalturaTopicNotification
+	 */
+	function update($id, KalturaTopicNotification $topicNotification)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "topicNotification", $topicNotification->toParams());
+		$this->client->queueServiceActionCall("topicnotification", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaTopicNotification");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopicNotificationMessageService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add a new topic notification message
+	 * 
+	 * @param KalturaTopicNotificationMessage $topicNotificationMessage The topic notification message to add
+	 * @return KalturaTopicNotificationMessage
+	 */
+	function add(KalturaTopicNotificationMessage $topicNotificationMessage)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "topicNotificationMessage", $topicNotificationMessage->toParams());
+		$this->client->queueServiceActionCall("topicnotificationmessage", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaTopicNotificationMessage");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an existing topic notification message
+	 * 
+	 * @param bigint $id ID of topic notification message to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("topicnotificationmessage", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Lists all topic notifications in the system.
+	 * 
+	 * @param KalturaTopicNotificationMessageFilter $filter Filter options
+	 * @return KalturaTopicNotificationMessageListResponse
+	 */
+	function listAction(KalturaTopicNotificationMessageFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("topicnotificationmessage", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaTopicNotificationMessageListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an existing topic notification message
+	 * 
+	 * @param int $id The topic notification message ID to update
+	 * @param KalturaTopicNotificationMessage $topicNotificationMessage The topic notification message to update
+	 * @return KalturaTopicNotificationMessage
+	 */
+	function update($id, KalturaTopicNotificationMessage $topicNotificationMessage)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "topicNotificationMessage", $topicNotificationMessage->toParams());
+		$this->client->queueServiceActionCall("topicnotificationmessage", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaTopicNotificationMessage");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTransactionService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -10081,6 +10293,18 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaTopicNotificationService
+	 */
+	public $topicNotification = null;
+
+	/**
+	 * 
+	 * @var KalturaTopicNotificationMessageService
+	 */
+	public $topicNotificationMessage = null;
+
+	/**
+	 * 
 	 * @var KalturaTransactionService
 	 */
 	public $transaction = null;
@@ -10154,8 +10378,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-05-20');
-		$this->setApiVersion('5.2.0.15893');
+		$this->setClientTag('php5:19-05-21');
+		$this->setApiVersion('5.2.0.43029');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10260,6 +10484,8 @@ class KalturaClient extends KalturaClientBase
 		$this->tag = new KalturaTagService($this);
 		$this->timeShiftedTvPartnerSettings = new KalturaTimeShiftedTvPartnerSettingsService($this);
 		$this->topic = new KalturaTopicService($this);
+		$this->topicNotification = new KalturaTopicNotificationService($this);
+		$this->topicNotificationMessage = new KalturaTopicNotificationMessageService($this);
 		$this->transaction = new KalturaTransactionService($this);
 		$this->transactionHistory = new KalturaTransactionHistoryService($this);
 		$this->tvmRule = new KalturaTvmRuleService($this);

@@ -149,6 +149,26 @@ class KalturaAssetInheritancePolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetLifeCycleRuleActionType extends KalturaEnumBase
+{
+	const ADD = "ADD";
+	const REMOVE = "REMOVE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetLifeCycleRuleTransitionType extends KalturaEnumBase
+{
+	const TAG = "TAG";
+	const BUSINESS_MODEL = "BUSINESS_MODEL";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetOrderBy extends KalturaEnumBase
 {
 	const RELEVANCY_DESC = "RELEVANCY_DESC";
@@ -1446,6 +1466,7 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const APPLY_DISCOUNT_MODULE = "APPLY_DISCOUNT_MODULE";
 	const APPLY_PLAYBACK_ADAPTER = "APPLY_PLAYBACK_ADAPTER";
 	const FILTER = "FILTER";
+	const ASSET_LIFE_CYCLE_TRANSITION = "ASSET_LIFE_CYCLE_TRANSITION";
 }
 
 /**
@@ -1718,6 +1739,16 @@ class KalturaSubscriptionSetType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSubscriptionTriggerType extends KalturaEnumBase
+{
+	const START_DATE = "START_DATE";
+	const END_DATE = "END_DATE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTagOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1743,6 +1774,24 @@ class KalturaTopicAutomaticIssueNotification extends KalturaEnumBase
 	const INHERIT = "Inherit";
 	const YES = "Yes";
 	const NO = "No";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopicNotificationMessageOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopicNotificationOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
 }
 
 /**
