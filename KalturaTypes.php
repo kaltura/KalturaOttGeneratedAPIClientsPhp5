@@ -5524,6 +5524,13 @@ class KalturaTopicNotificationMessage extends KalturaObjectBase
 	public $message = null;
 
 	/**
+	 * Topic notification message image URL
+	 *
+	 * @var string
+	 */
+	public $imageUrl = null;
+
+	/**
 	 * Topic notification ID
 	 *
 	 * @var int
@@ -8463,6 +8470,13 @@ abstract class KalturaRule extends KalturaObjectBase
 	 * @var string
 	 */
 	public $description = null;
+
+	/**
+	 * Label
+	 *
+	 * @var string
+	 */
+	public $label = null;
 
 
 }
@@ -12332,6 +12346,13 @@ class KalturaTagFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $languageEqual = null;
+
+	/**
+	 * Comma separated identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
 
 
 }
