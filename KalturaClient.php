@@ -8881,13 +8881,16 @@ class KalturaTopicNotificationMessageService extends KalturaServiceBase
 	 * Lists all topic notifications in the system.
 	 * 
 	 * @param KalturaTopicNotificationMessageFilter $filter Filter options
+	 * @param KalturaFilterPager $pager Paging the request
 	 * @return KalturaTopicNotificationMessageListResponse
 	 */
-	function listAction(KalturaTopicNotificationMessageFilter $filter = null)
+	function listAction(KalturaTopicNotificationMessageFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
 			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("topicnotificationmessage", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10378,8 +10381,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-05-23');
-		$this->setApiVersion('5.2.0.43014');
+		$this->setClientTag('php5:19-05-27');
+		$this->setApiVersion('5.2.0.43007');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
