@@ -5551,6 +5551,14 @@ class KalturaTopicNotificationMessage extends KalturaObjectBase
 	 */
 	public $dispatchers;
 
+	/**
+	 * Message status
+	 *
+	 * @var KalturaAnnouncementStatus
+	 * @readonly
+	 */
+	public $status = null;
+
 
 }
 
@@ -12570,6 +12578,13 @@ class KalturaAssetRuleFilter extends KalturaFilter
 	 * @var KalturaRuleActionType
 	 */
 	public $actionsContainType = null;
+
+	/**
+	 * Asset rule id
+	 *
+	 * @var int
+	 */
+	public $assetRuleIdEqual = null;
 
 
 }
