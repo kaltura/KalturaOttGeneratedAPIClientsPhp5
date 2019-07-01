@@ -7527,6 +7527,14 @@ abstract class KalturaAsset extends KalturaObjectBase
 	 */
 	public $externalId = null;
 
+	/**
+	 * The media asset index status
+	 *
+	 * @var KalturaAssetIndexStatus
+	 * @readonly
+	 */
+	public $indexStatus = null;
+
 
 }
 
@@ -8649,15 +8657,8 @@ abstract class KalturaRuleAction extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaApplyDiscountModuleAction extends KalturaRuleAction
+abstract class KalturaBusinessModuleRuleAction extends KalturaRuleAction
 {
-	/**
-	 * Discount module ID
-	 *
-	 * @var int
-	 */
-	public $discountModuleId = null;
-
 
 }
 
@@ -8677,7 +8678,7 @@ class KalturaBusinessModuleRule extends KalturaRule
 	/**
 	 * List of actions for the rule
 	 *
-	 * @var array of KalturaApplyDiscountModuleAction
+	 * @var array of KalturaBusinessModuleRuleAction
 	 */
 	public $actions;
 
@@ -8899,6 +8900,56 @@ class KalturaSegmentsCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaSubscriptionCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated subscription IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSubscriptionCondition extends KalturaSubscriptionCondition
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetSubscriptionCondition extends KalturaSubscriptionCondition
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserRoleCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated user role IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaAssetRuleAction extends KalturaRuleAction
 {
 
@@ -9082,6 +9133,31 @@ class KalturaAssetUserRuleFilterAction extends KalturaAssetUserRuleAction
 	 */
 	public $applyOnChannel = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApplyDiscountModuleAction extends KalturaBusinessModuleRuleAction
+{
+	/**
+	 * Discount module ID
+	 *
+	 * @var int
+	 */
+	public $discountModuleId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApplyFreePlaybackAction extends KalturaBusinessModuleRuleAction
+{
 
 }
 
@@ -12053,8 +12129,40 @@ class KalturaExternalRecordingFilter extends KalturaRecordingFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCloudRecordingFilter extends KalturaExternalRecordingFilter
+{
+	/**
+	 * Adapter Data
+	 *
+	 * @var string
+	 */
+	public $adapterData = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecordingFilter extends KalturaFilter
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCloudSeriesRecordingFilter extends KalturaSeriesRecordingFilter
+{
+	/**
+	 * Adapter Data
+	 *
+	 * @var string
+	 */
+	public $adapterData = null;
+
 
 }
 
@@ -12531,6 +12639,13 @@ class KalturaBusinessModuleRuleFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $segmentIdsApplied = null;
+
+	/**
+	 * Indicates which business module rule list to return by their action.
+	 *
+	 * @var KalturaRuleActionType
+	 */
+	public $actionsContainType = null;
 
 
 }
