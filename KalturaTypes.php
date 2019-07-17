@@ -8666,6 +8666,22 @@ abstract class KalturaBusinessModuleRuleAction extends KalturaRuleAction
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaApplyDiscountModuleAction extends KalturaBusinessModuleRuleAction
+{
+	/**
+	 * Discount module ID
+	 *
+	 * @var int
+	 */
+	public $discountModuleId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBusinessModuleRule extends KalturaRule
 {
 	/**
@@ -8678,7 +8694,7 @@ class KalturaBusinessModuleRule extends KalturaRule
 	/**
 	 * List of actions for the rule
 	 *
-	 * @var array of KalturaBusinessModuleRuleAction
+	 * @var array of KalturaApplyDiscountModuleAction
 	 */
 	public $actions;
 
@@ -8900,56 +8916,6 @@ class KalturaSegmentsCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaSubscriptionCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated subscription IDs list
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserSubscriptionCondition extends KalturaSubscriptionCondition
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetSubscriptionCondition extends KalturaSubscriptionCondition
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserRoleCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated user role IDs list
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaAssetRuleAction extends KalturaRuleAction
 {
 
@@ -9133,31 +9099,6 @@ class KalturaAssetUserRuleFilterAction extends KalturaAssetUserRuleAction
 	 */
 	public $applyOnChannel = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaApplyDiscountModuleAction extends KalturaBusinessModuleRuleAction
-{
-	/**
-	 * Discount module ID
-	 *
-	 * @var int
-	 */
-	public $discountModuleId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaApplyFreePlaybackAction extends KalturaBusinessModuleRuleAction
-{
 
 }
 
@@ -12129,40 +12070,8 @@ class KalturaExternalRecordingFilter extends KalturaRecordingFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCloudRecordingFilter extends KalturaExternalRecordingFilter
-{
-	/**
-	 * Adapter Data
-	 *
-	 * @var string
-	 */
-	public $adapterData = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaSeriesRecordingFilter extends KalturaFilter
 {
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCloudSeriesRecordingFilter extends KalturaSeriesRecordingFilter
-{
-	/**
-	 * Adapter Data
-	 *
-	 * @var string
-	 */
-	public $adapterData = null;
-
 
 }
 

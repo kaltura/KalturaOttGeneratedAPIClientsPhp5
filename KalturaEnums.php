@@ -204,7 +204,6 @@ class KalturaAssetReferenceType extends KalturaEnumBase
 	const MEDIA = "media";
 	const EPG_INTERNAL = "epg_internal";
 	const EPG_EXTERNAL = "epg_external";
-	const NPVR = "npvr";
 }
 
 /**
@@ -1479,7 +1478,6 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const APPLY_PLAYBACK_ADAPTER = "APPLY_PLAYBACK_ADAPTER";
 	const FILTER = "FILTER";
 	const ASSET_LIFE_CYCLE_TRANSITION = "ASSET_LIFE_CYCLE_TRANSITION";
-	const APPLY_FREE_PLAYBACK = "APPLY_FREE_PLAYBACK";
 }
 
 /**
@@ -1497,9 +1495,6 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const DATE = "DATE";
 	const OR = "OR";
 	const HEADER = "HEADER";
-	const USER_SUBSCRIPTION = "USER_SUBSCRIPTION";
-	const ASSET_SUBSCRIPTION = "ASSET_SUBSCRIPTION";
-	const USER_ROLE = "USER_ROLE";
 }
 
 /**
