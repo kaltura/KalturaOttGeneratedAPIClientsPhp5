@@ -6322,6 +6322,42 @@ class KalturaPermissionService extends KalturaServiceBase
 	}
 
 	/**
+	 * Adds new permission
+	 * 
+	 * @param KalturaPermission $permission Permission to insert
+	 * @return KalturaPermission
+	 */
+	function add(KalturaPermission $permission)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "permission", $permission->toParams());
+		$this->client->queueServiceActionCall("permission", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPermission");
+		return $resultObject;
+	}
+
+	/**
+	 * Deletes an existing permission
+	 * 
+	 * @param bigint $id Permission ID to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("permission", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
 	 * Returns permission names as comma separated string
 	 * 
 	 * @return string
@@ -8760,11 +8796,10 @@ class KalturaTopicNotificationService extends KalturaServiceBase
 	 * @param KalturaTopicNotificationFilter $filter Filter options
 	 * @return KalturaTopicNotificationListResponse
 	 */
-	function listAction(KalturaTopicNotificationFilter $filter = null)
+	function listAction(KalturaTopicNotificationFilter $filter)
 	{
 		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("topicnotification", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10381,8 +10416,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-06-06');
-		$this->setApiVersion('5.2.0.16354');
+		$this->setClientTag('php5:19-07-17');
+		$this->setApiVersion('5.2.5.17649');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
