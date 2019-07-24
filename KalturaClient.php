@@ -2343,25 +2343,6 @@ class KalturaCouponService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaCoupon");
 		return $resultObject;
 	}
-
-	/**
-	 * Lists coupon codes.
-	 * 
-	 * @param KalturaCouponFilter $filter Filter options
-	 * @return KalturaCouponListResponse
-	 */
-	function listAction(KalturaCouponFilter $filter)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("coupon", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCouponListResponse");
-		return $resultObject;
-	}
 }
 
 /**
@@ -2896,25 +2877,6 @@ class KalturaEntitlementService extends KalturaServiceBase
 	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
-	}
-
-	/**
-	 * Apply new coupon for existing subscription
-	 * 
-	 * @param bigint $purchaseId Purchase Id
-	 * @param string $couponCode Coupon Code
-	 */
-	function applyCoupon($purchaseId, $couponCode)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "purchaseId", $purchaseId);
-		$this->client->addParam($kparams, "couponCode", $couponCode);
-		$this->client->queueServiceActionCall("entitlement", "applyCoupon", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
 	}
 
 	/**
@@ -3735,74 +3697,6 @@ class KalturaHouseholdService extends KalturaServiceBase
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaHousehold");
 		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdCouponService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Gets all HouseholdCoupon items for a household
-	 * 
-	 * @param KalturaHouseholdCouponFilter $filter Request filter
-	 * @return KalturaHouseholdCouponListResponse
-	 */
-	function listAction(KalturaHouseholdCouponFilter $filter = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("householdcoupon", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaHouseholdCouponListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * HouseholdCoupon add
-	 * 
-	 * @param KalturaHouseholdCoupon $objectToAdd HouseholdCoupon details
-	 * @return KalturaHouseholdCoupon
-	 */
-	function add(KalturaHouseholdCoupon $objectToAdd)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
-		$this->client->queueServiceActionCall("householdcoupon", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaHouseholdCoupon");
-		return $resultObject;
-	}
-
-	/**
-	 * Remove coupon from household
-	 * 
-	 * @param string $id Coupon code
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("householdcoupon", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
 	}
 }
 
@@ -6189,35 +6083,6 @@ class KalturaPartnerConfigurationService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPartnerService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Returns a login session for external system (like OVP)
-	 * 
-	 * @return KalturaLoginSession
-	 */
-	function externalLogin()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("partner", "externalLogin", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaLoginSession");
 		return $resultObject;
 	}
 }
@@ -10106,12 +9971,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaHouseholdCouponService
-	 */
-	public $householdCoupon = null;
-
-	/**
-	 * 
 	 * @var KalturaHouseholdDeviceService
 	 */
 	public $householdDevice = null;
@@ -10265,12 +10124,6 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaPartnerConfigurationService
 	 */
 	public $partnerConfiguration = null;
-
-	/**
-	 * 
-	 * @var KalturaPartnerService
-	 */
-	public $partner = null;
 
 	/**
 	 * 
@@ -10564,7 +10417,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:19-07-24');
-		$this->setApiVersion('5.2.5.13235');
+		$this->setApiVersion('5.2.5.17649');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10609,7 +10462,6 @@ class KalturaClient extends KalturaClientBase
 		$this->followTvSeries = new KalturaFollowTvSeriesService($this);
 		$this->homeNetwork = new KalturaHomeNetworkService($this);
 		$this->household = new KalturaHouseholdService($this);
-		$this->householdCoupon = new KalturaHouseholdCouponService($this);
 		$this->householdDevice = new KalturaHouseholdDeviceService($this);
 		$this->householdLimitations = new KalturaHouseholdLimitationsService($this);
 		$this->householdPaymentGateway = new KalturaHouseholdPaymentGatewayService($this);
@@ -10636,7 +10488,6 @@ class KalturaClient extends KalturaClientBase
 		$this->ottUser = new KalturaOttUserService($this);
 		$this->parentalRule = new KalturaParentalRuleService($this);
 		$this->partnerConfiguration = new KalturaPartnerConfigurationService($this);
-		$this->partner = new KalturaPartnerService($this);
 		$this->paymentGatewayProfile = new KalturaPaymentGatewayProfileService($this);
 		$this->paymentMethodProfile = new KalturaPaymentMethodProfileService($this);
 		$this->permission = new KalturaPermissionService($this);
