@@ -12155,7 +12155,7 @@ class KalturaHouseholdUserFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaHouseoldCouponCodeFilter extends KalturaRelatedObjectFilter
+class KalturaHouseholdCouponCodeFilter extends KalturaRelatedObjectFilter
 {
 
 }
