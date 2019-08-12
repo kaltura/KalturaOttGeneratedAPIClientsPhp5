@@ -772,6 +772,15 @@ class KalturaGroupByOrder extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdCouponOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
