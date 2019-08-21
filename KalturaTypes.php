@@ -2291,22 +2291,6 @@ class KalturaOTTUser extends KalturaBaseOTTUser
 	 */
 	public $updateDate = null;
 
-	/**
-	 * The date of the last successful login
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $lastLoginDate = null;
-
-	/**
-	 * The number of failed login attempts since the last successful login
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $failedLoginCount = null;
-
 
 }
 
@@ -12129,13 +12113,6 @@ class KalturaIngestProfile extends KalturaObjectBase
 	 * @var KalturaIngestProfileOverlapPolicy
 	 */
 	public $defaultOverlapPolicy = null;
-
-	/**
-	 * Ingest profile overlap channels
-	 *
-	 * @var string
-	 */
-	public $overlapChannels = null;
 
 
 }
