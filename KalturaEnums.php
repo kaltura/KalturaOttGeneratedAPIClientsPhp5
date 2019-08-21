@@ -139,6 +139,17 @@ class KalturaAssetHistoryOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetIndexStatus extends KalturaEnumBase
+{
+	const OK = "Ok";
+	const DELETED = "Deleted";
+	const NOTUPDATED = "NotUpdated";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetInheritancePolicy extends KalturaEnumBase
 {
 	const ENABLE = "Enable";
@@ -193,6 +204,7 @@ class KalturaAssetReferenceType extends KalturaEnumBase
 	const MEDIA = "media";
 	const EPG_INTERNAL = "epg_internal";
 	const EPG_EXTERNAL = "epg_external";
+	const NPVR = "npvr";
 }
 
 /**
@@ -760,6 +772,15 @@ class KalturaGroupByOrder extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdCouponOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1180,6 +1201,17 @@ class KalturaPermissionOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPermissionType extends KalturaEnumBase
+{
+	const NORMAL = "NORMAL";
+	const GROUP = "GROUP";
+	const SPECIAL_FEATURE = "SPECIAL_FEATURE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPersonalFeedOrderBy extends KalturaEnumBase
 {
 	const RELEVANCY_DESC = "RELEVANCY_DESC";
@@ -1467,6 +1499,7 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const APPLY_PLAYBACK_ADAPTER = "APPLY_PLAYBACK_ADAPTER";
 	const FILTER = "FILTER";
 	const ASSET_LIFE_CYCLE_TRANSITION = "ASSET_LIFE_CYCLE_TRANSITION";
+	const APPLY_FREE_PLAYBACK = "APPLY_FREE_PLAYBACK";
 }
 
 /**
@@ -1484,6 +1517,9 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const DATE = "DATE";
 	const OR = "OR";
 	const HEADER = "HEADER";
+	const USER_SUBSCRIPTION = "USER_SUBSCRIPTION";
+	const ASSET_SUBSCRIPTION = "ASSET_SUBSCRIPTION";
+	const USER_ROLE = "USER_ROLE";
 }
 
 /**
