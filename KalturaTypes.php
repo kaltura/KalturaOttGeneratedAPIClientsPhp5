@@ -7527,14 +7527,6 @@ abstract class KalturaAsset extends KalturaObjectBase
 	 */
 	public $externalId = null;
 
-	/**
-	 * The media asset index status
-	 *
-	 * @var KalturaAssetIndexStatus
-	 * @readonly
-	 */
-	public $indexStatus = null;
-
 
 }
 
@@ -8666,22 +8658,6 @@ abstract class KalturaBusinessModuleRuleAction extends KalturaRuleAction
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaApplyDiscountModuleAction extends KalturaBusinessModuleRuleAction
-{
-	/**
-	 * Discount module ID
-	 *
-	 * @var int
-	 */
-	public $discountModuleId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaBusinessModuleRule extends KalturaRule
 {
 	/**
@@ -8694,7 +8670,7 @@ class KalturaBusinessModuleRule extends KalturaRule
 	/**
 	 * List of actions for the rule
 	 *
-	 * @var array of KalturaApplyDiscountModuleAction
+	 * @var array of KalturaBusinessModuleRuleAction
 	 */
 	public $actions;
 
@@ -9098,6 +9074,22 @@ class KalturaAssetUserRuleFilterAction extends KalturaAssetUserRuleAction
 	 * @var bool
 	 */
 	public $applyOnChannel = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApplyDiscountModuleAction extends KalturaBusinessModuleRuleAction
+{
+	/**
+	 * Discount module ID
+	 *
+	 * @var int
+	 */
+	public $discountModuleId = null;
 
 
 }

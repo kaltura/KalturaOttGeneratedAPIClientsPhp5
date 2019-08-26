@@ -139,17 +139,6 @@ class KalturaAssetHistoryOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetIndexStatus extends KalturaEnumBase
-{
-	const OK = "Ok";
-	const DELETED = "Deleted";
-	const NOTUPDATED = "NotUpdated";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetInheritancePolicy extends KalturaEnumBase
 {
 	const ENABLE = "Enable";
