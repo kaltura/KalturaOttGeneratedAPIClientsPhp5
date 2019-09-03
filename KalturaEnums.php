@@ -981,6 +981,7 @@ class KalturaLinearChannelType extends KalturaEnumBase
 	const DTT = "DTT";
 	const OTT = "OTT";
 	const DTT_AND_OTT = "DTT_AND_OTT";
+	const VRM_EXPORT = "VRM_EXPORT";
 }
 
 /**
