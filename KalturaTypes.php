@@ -1118,7 +1118,7 @@ class KalturaEventNotificationFilter extends KalturaCrudFilter
 	 *
 	 * @var string
 	 */
-	public $objectTypeEqual = null;
+	public $eventObjectTypeEqual = null;
 
 
 }
