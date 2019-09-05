@@ -1097,6 +1097,36 @@ class KalturaHouseholdCouponFilter extends KalturaCrudFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEventNotificationFilter extends KalturaCrudFilter
+{
+	/**
+	 * Indicates which event notification to return by their event notifications Id.
+	 *
+	 * @var string
+	 */
+	public $idEqual = null;
+
+	/**
+	 * Indicates which objectId to return by their event notifications.
+	 *
+	 * @var int
+	 */
+	public $objectIdEqual = null;
+
+	/**
+	 * Indicates which objectType to return by their event notifications.
+	 *
+	 * @var string
+	 */
+	public $objectTypeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaPersistedFilter extends KalturaFilter
 {
 	/**
@@ -14125,6 +14155,114 @@ class KalturaEntitlementRenewal extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaCrudObject extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotification extends KalturaCrudObject
+{
+	/**
+	 * Identifier
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * Object identifier
+	 *
+	 * @var int
+	 */
+	public $objectId = null;
+
+	/**
+	 * Event object type
+	 *
+	 * @var string
+	 */
+	public $eventObjectType = null;
+
+	/**
+	 * Message
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Status
+	 *
+	 * @var KalturaEventNotificationStatus
+	 */
+	public $status = null;
+
+	/**
+	 * Action type
+	 *
+	 * @var string
+	 */
+	public $actionType = null;
+
+	/**
+	 * Create date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdCoupon extends KalturaCrudObject
+{
+	/**
+	 * Coupon code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotificationListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaEventNotification
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHousehold extends KalturaObjectBase
 {
 	/**
@@ -14242,31 +14380,6 @@ class KalturaHousehold extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $roleId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaCrudObject extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdCoupon extends KalturaCrudObject
-{
-	/**
-	 * Coupon code
-	 *
-	 * @var string
-	 */
-	public $code = null;
 
 
 }

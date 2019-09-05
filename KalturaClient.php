@@ -3127,6 +3127,58 @@ class KalturaEntitlementService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEventNotificationService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * EventNotification update
+	 * 
+	 * @param string $id Object ID to update
+	 * @param KalturaEventNotification $objectToUpdate EventNotification details
+	 * @return KalturaEventNotification
+	 */
+	function update($id, KalturaEventNotification $objectToUpdate)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
+		$this->client->queueServiceActionCall("eventnotification", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaEventNotification");
+		return $resultObject;
+	}
+
+	/**
+	 * Gets all EventNotification items for a given Object id and type
+	 * 
+	 * @param KalturaEventNotificationFilter $filter Request filter
+	 * @return KalturaEventNotificationListResponse
+	 */
+	function listAction(KalturaEventNotificationFilter $filter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("eventnotification", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaEventNotificationListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaExportTaskService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -10070,6 +10122,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaEventNotificationService
+	 */
+	public $eventNotification = null;
+
+	/**
+	 * 
 	 * @var KalturaExportTaskService
 	 */
 	public $exportTask = null;
@@ -10563,8 +10621,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-08-28');
-		$this->setApiVersion('5.2.6.13467');
+		$this->setClientTag('php5:19-09-05');
+		$this->setApiVersion('5.2.6.13530');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10603,6 +10661,7 @@ class KalturaClient extends KalturaClientBase
 		$this->engagementAdapter = new KalturaEngagementAdapterService($this);
 		$this->engagement = new KalturaEngagementService($this);
 		$this->entitlement = new KalturaEntitlementService($this);
+		$this->eventNotification = new KalturaEventNotificationService($this);
 		$this->exportTask = new KalturaExportTaskService($this);
 		$this->externalChannelProfile = new KalturaExternalChannelProfileService($this);
 		$this->favorite = new KalturaFavoriteService($this);

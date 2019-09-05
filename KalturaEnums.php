@@ -689,6 +689,27 @@ class KalturaEntityReferenceBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEventNotificationOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotificationStatus extends KalturaEnumBase
+{
+	const SENT = "SENT";
+	const FAILED = "FAILED";
+	const SUCCESS = "SUCCESS";
+	const FAILED_TO_SEND = "FAILED_TO_SEND";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEvictionPolicyType extends KalturaEnumBase
 {
 	const FIFO = "FIFO";
@@ -981,6 +1002,7 @@ class KalturaLinearChannelType extends KalturaEnumBase
 	const DTT = "DTT";
 	const OTT = "OTT";
 	const DTT_AND_OTT = "DTT_AND_OTT";
+	const VRM_EXPORT = "VRM_EXPORT";
 }
 
 /**
