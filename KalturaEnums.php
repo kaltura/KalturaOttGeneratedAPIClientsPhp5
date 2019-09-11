@@ -139,6 +139,17 @@ class KalturaAssetHistoryOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetIndexStatus extends KalturaEnumBase
+{
+	const OK = "Ok";
+	const DELETED = "Deleted";
+	const NOTUPDATED = "NotUpdated";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetInheritancePolicy extends KalturaEnumBase
 {
 	const ENABLE = "Enable";
@@ -193,6 +204,7 @@ class KalturaAssetReferenceType extends KalturaEnumBase
 	const MEDIA = "media";
 	const EPG_INTERNAL = "epg_internal";
 	const EPG_EXTERNAL = "epg_external";
+	const NPVR = "npvr";
 }
 
 /**
@@ -677,6 +689,27 @@ class KalturaEntityReferenceBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEventNotificationOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotificationStatus extends KalturaEnumBase
+{
+	const SENT = "SENT";
+	const FAILED = "FAILED";
+	const SUCCESS = "SUCCESS";
+	const FAILED_TO_SEND = "FAILED_TO_SEND";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEvictionPolicyType extends KalturaEnumBase
 {
 	const FIFO = "FIFO";
@@ -754,6 +787,15 @@ class KalturaGroupByOrder extends KalturaEnumBase
 	const COUNT_DESC = "count_desc";
 	const VALUE_ASC = "value_asc";
 	const VALUE_DESC = "value_desc";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdCouponOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
 }
 
 /**
@@ -960,6 +1002,7 @@ class KalturaLinearChannelType extends KalturaEnumBase
 	const DTT = "DTT";
 	const OTT = "OTT";
 	const DTT_AND_OTT = "DTT_AND_OTT";
+	const VRM_EXPORT = "VRM_EXPORT";
 }
 
 /**
@@ -1140,6 +1183,15 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPasswordPolicyOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPaymentMethodProfileOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1174,6 +1226,17 @@ class KalturaPaymentMethodType extends KalturaEnumBase
 class KalturaPermissionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionType extends KalturaEnumBase
+{
+	const NORMAL = "NORMAL";
+	const GROUP = "GROUP";
+	const SPECIAL_FEATURE = "SPECIAL_FEATURE";
 }
 
 /**
@@ -1467,6 +1530,7 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const APPLY_PLAYBACK_ADAPTER = "APPLY_PLAYBACK_ADAPTER";
 	const FILTER = "FILTER";
 	const ASSET_LIFE_CYCLE_TRANSITION = "ASSET_LIFE_CYCLE_TRANSITION";
+	const APPLY_FREE_PLAYBACK = "APPLY_FREE_PLAYBACK";
 }
 
 /**
@@ -1484,6 +1548,9 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const DATE = "DATE";
 	const OR = "OR";
 	const HEADER = "HEADER";
+	const USER_SUBSCRIPTION = "USER_SUBSCRIPTION";
+	const ASSET_SUBSCRIPTION = "ASSET_SUBSCRIPTION";
+	const USER_ROLE = "USER_ROLE";
 }
 
 /**
