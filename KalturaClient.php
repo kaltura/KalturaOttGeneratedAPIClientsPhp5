@@ -6278,6 +6278,94 @@ class KalturaPartnerService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPasswordPolicyService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add an object
+	 * 
+	 * @param KalturaPasswordPolicy $objectToAdd Object to add
+	 * @return KalturaPasswordPolicy
+	 */
+	function add(KalturaPasswordPolicy $objectToAdd)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
+		$this->client->queueServiceActionCall("passwordpolicy", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPasswordPolicy");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an object
+	 * 
+	 * @param bigint $id Object ID to update
+	 * @param KalturaPasswordPolicy $objectToUpdate Object to update
+	 * @return KalturaPasswordPolicy
+	 */
+	function update($id, KalturaPasswordPolicy $objectToUpdate)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
+		$this->client->queueServiceActionCall("passwordpolicy", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPasswordPolicy");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an object
+	 * 
+	 * @param bigint $id Object ID to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("passwordpolicy", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param KalturaPasswordPolicyFilter $filter Request filter
+	 * @return KalturaPasswordPolicyListResponse
+	 */
+	function listAction(KalturaPasswordPolicyFilter $filter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("passwordpolicy", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPasswordPolicyListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPaymentGatewayProfileService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -7443,6 +7531,42 @@ class KalturaRegionService extends KalturaServiceBase
 	}
 
 	/**
+	 * Adds a new region for partner
+	 * 
+	 * @param KalturaRegion $region Region to add
+	 * @return KalturaRegion
+	 */
+	function add(KalturaRegion $region)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "region", $region->toParams());
+		$this->client->queueServiceActionCall("region", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaRegion");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an existing region
+	 * 
+	 * @param int $id Region ID to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("region", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
 	 * Returns all regions for the partner
 	 * 
 	 * @param KalturaRegionFilter $filter Regions filter
@@ -7458,6 +7582,27 @@ class KalturaRegionService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaRegionListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an existing region
+	 * 
+	 * @param int $id Region ID to update
+	 * @param KalturaRegion $region Region to update
+	 * @return KalturaRegion
+	 */
+	function update($id, KalturaRegion $region)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "region", $region->toParams());
+		$this->client->queueServiceActionCall("region", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaRegion");
 		return $resultObject;
 	}
 }
@@ -10332,6 +10477,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaPasswordPolicyService
+	 */
+	public $passwordPolicy = null;
+
+	/**
+	 * 
 	 * @var KalturaPaymentGatewayProfileService
 	 */
 	public $paymentGatewayProfile = null;
@@ -10622,7 +10773,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:19-09-11');
-		$this->setApiVersion('5.2.6.13553');
+		$this->setApiVersion('5.2.6.13597');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10696,6 +10847,7 @@ class KalturaClient extends KalturaClientBase
 		$this->parentalRule = new KalturaParentalRuleService($this);
 		$this->partnerConfiguration = new KalturaPartnerConfigurationService($this);
 		$this->partner = new KalturaPartnerService($this);
+		$this->passwordPolicy = new KalturaPasswordPolicyService($this);
 		$this->paymentGatewayProfile = new KalturaPaymentGatewayProfileService($this);
 		$this->paymentMethodProfile = new KalturaPaymentMethodProfileService($this);
 		$this->permission = new KalturaPermissionService($this);
