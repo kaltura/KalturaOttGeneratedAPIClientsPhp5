@@ -438,84 +438,6 @@ class KalturaOTTUserFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaCrudFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPasswordPolicyFilter extends KalturaCrudFilter
-{
-	/**
-	 * Comma separated list of role Ids.
-	 *
-	 * @var string
-	 */
-	public $userRoleIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdCouponFilter extends KalturaCrudFilter
-{
-	/**
-	 * Indicates which household coupons list to return by their business module type.
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $businessModuleTypeEqual = null;
-
-	/**
-	 * Indicates which household coupons list to return by their business module ID.
-	 *
-	 * @var int
-	 */
-	public $businessModuleIdEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEventNotificationFilter extends KalturaCrudFilter
-{
-	/**
-	 * Indicates which event notification to return by their event notifications Id.
-	 *
-	 * @var string
-	 */
-	public $idEqual = null;
-
-	/**
-	 * Indicates which objectId to return by their event notifications.
-	 *
-	 * @var int
-	 */
-	public $objectIdEqual = null;
-
-	/**
-	 * Indicates which objectType to return by their event notifications.
-	 *
-	 * @var string
-	 */
-	public $eventObjectTypeEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaBulkUploadFilter extends KalturaFilter
 {
 	/**
@@ -1136,6 +1058,68 @@ class KalturaTopicNotificationMessageFilter extends KalturaFilter
  */
 class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaCrudFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdCouponFilter extends KalturaCrudFilter
+{
+	/**
+	 * Indicates which household coupons list to return by their business module type.
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $businessModuleTypeEqual = null;
+
+	/**
+	 * Indicates which household coupons list to return by their business module ID.
+	 *
+	 * @var int
+	 */
+	public $businessModuleIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotificationFilter extends KalturaCrudFilter
+{
+	/**
+	 * Indicates which event notification to return by their event notifications Id.
+	 *
+	 * @var string
+	 */
+	public $idEqual = null;
+
+	/**
+	 * Indicates which objectId to return by their event notifications.
+	 *
+	 * @var int
+	 */
+	public $objectIdEqual = null;
+
+	/**
+	 * Indicates which objectType to return by their event notifications.
+	 *
+	 * @var string
+	 */
+	public $eventObjectTypeEqual = null;
+
 
 }
 
@@ -2931,32 +2915,11 @@ class KalturaPlaybackProfileFilter extends KalturaFilter
 class KalturaRegionFilter extends KalturaFilter
 {
 	/**
-	 * List of comma separated regions external IDs
+	 * List of comma separated regions external identifiers
 	 *
 	 * @var string
 	 */
 	public $externalIdIn = null;
-
-	/**
-	 * List of comma separated regions Ids
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-	/**
-	 * Region parent ID to filter by
-	 *
-	 * @var int
-	 */
-	public $parentIdEqual = null;
-
-	/**
-	 * Region parent ID to filter by
-	 *
-	 * @var int
-	 */
-	public $liveAssetIdEqual = null;
 
 
 }
@@ -6790,20 +6753,6 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 * @var int
 	 */
 	public $householdLimitationModule = null;
-
-	/**
-	 * Enable Region Filtering
-	 *
-	 * @var bool
-	 */
-	public $enableRegionFiltering = null;
-
-	/**
-	 * Default Region
-	 *
-	 * @var int
-	 */
-	public $defaultRegion = null;
 
 
 }
@@ -12978,7 +12927,6 @@ class KalturaRegion extends KalturaObjectBase
 	 * Indicates whether this is the default region for the partner
 	 *
 	 * @var bool
-	 * @readonly
 	 */
 	public $isDefault = null;
 
@@ -12988,13 +12936,6 @@ class KalturaRegion extends KalturaObjectBase
 	 * @var array of KalturaRegionalChannel
 	 */
 	public $linearChannels;
-
-	/**
-	 * Parent region ID
-	 *
-	 * @var int
-	 */
-	public $parentId = null;
 
 
 }
@@ -14290,88 +14231,6 @@ class KalturaEventNotification extends KalturaCrudObject
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaRegex extends KalturaObjectBase
-{
-	/**
-	 * regex expression
-	 *
-	 * @var string
-	 */
-	public $expression = null;
-
-	/**
-	 * description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPasswordPolicy extends KalturaCrudObject
-{
-	/**
-	 * id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Comma separated UserRole Ids list which the policy is applied on
-	 *
-	 * @var string
-	 */
-	public $userRoleIds = null;
-
-	/**
-	 * The number of passwords that should be remembered for each user so that they cannot be reused.
-	 *
-	 * @var int
-	 */
-	public $historyCount = null;
-
-	/**
-	 * When should the password expire (will represent time as days).
-	 *
-	 * @var int
-	 */
-	public $expiration = null;
-
-	/**
-	 * array of  KalturaRegex
-	 *
-	 * @var array of KalturaRegex
-	 */
-	public $complexities;
-
-	/**
-	 * the number of passwords failures before the account is locked.
-	 *
-	 * @var int
-	 */
-	public $lockoutFailuresCount = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaHouseholdCoupon extends KalturaCrudObject
 {
 	/**
@@ -15125,22 +14984,6 @@ class KalturaOTTUserDynamicData extends KalturaObjectBase
 	 * @var KalturaStringValue
 	 */
 	public $value;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPasswordPolicyListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of objects
-	 *
-	 * @var array of KalturaPasswordPolicy
-	 */
-	public $objects;
 
 
 }

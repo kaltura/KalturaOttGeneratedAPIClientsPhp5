@@ -1183,15 +1183,6 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPasswordPolicyOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPaymentMethodProfileOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
