@@ -2915,11 +2915,32 @@ class KalturaPlaybackProfileFilter extends KalturaFilter
 class KalturaRegionFilter extends KalturaFilter
 {
 	/**
-	 * List of comma separated regions external identifiers
+	 * List of comma separated regions external IDs
 	 *
 	 * @var string
 	 */
 	public $externalIdIn = null;
+
+	/**
+	 * List of comma separated regions Ids
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+	/**
+	 * Region parent ID to filter by
+	 *
+	 * @var int
+	 */
+	public $parentIdEqual = null;
+
+	/**
+	 * Region parent ID to filter by
+	 *
+	 * @var int
+	 */
+	public $liveAssetIdEqual = null;
 
 
 }
@@ -6753,6 +6774,20 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 * @var int
 	 */
 	public $householdLimitationModule = null;
+
+	/**
+	 * Enable Region Filtering
+	 *
+	 * @var bool
+	 */
+	public $enableRegionFiltering = null;
+
+	/**
+	 * Default Region
+	 *
+	 * @var int
+	 */
+	public $defaultRegion = null;
 
 
 }
@@ -12927,6 +12962,7 @@ class KalturaRegion extends KalturaObjectBase
 	 * Indicates whether this is the default region for the partner
 	 *
 	 * @var bool
+	 * @readonly
 	 */
 	public $isDefault = null;
 
@@ -12936,6 +12972,13 @@ class KalturaRegion extends KalturaObjectBase
 	 * @var array of KalturaRegionalChannel
 	 */
 	public $linearChannels;
+
+	/**
+	 * Parent region ID
+	 *
+	 * @var int
+	 */
+	public $parentId = null;
 
 
 }

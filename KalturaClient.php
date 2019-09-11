@@ -7443,6 +7443,42 @@ class KalturaRegionService extends KalturaServiceBase
 	}
 
 	/**
+	 * Adds a new region for partner
+	 * 
+	 * @param KalturaRegion $region Region to add
+	 * @return KalturaRegion
+	 */
+	function add(KalturaRegion $region)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "region", $region->toParams());
+		$this->client->queueServiceActionCall("region", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaRegion");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an existing region
+	 * 
+	 * @param int $id Region ID to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("region", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
 	 * Returns all regions for the partner
 	 * 
 	 * @param KalturaRegionFilter $filter Regions filter
@@ -7458,6 +7494,27 @@ class KalturaRegionService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaRegionListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an existing region
+	 * 
+	 * @param int $id Region ID to update
+	 * @param KalturaRegion $region Region to update
+	 * @return KalturaRegion
+	 */
+	function update($id, KalturaRegion $region)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "region", $region->toParams());
+		$this->client->queueServiceActionCall("region", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaRegion");
 		return $resultObject;
 	}
 }
@@ -10622,7 +10679,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:19-09-11');
-		$this->setApiVersion('5.2.6.5948');
+		$this->setApiVersion('5.2.6.5958');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
