@@ -6348,10 +6348,11 @@ class KalturaPasswordPolicyService extends KalturaServiceBase
 	 * @param KalturaPasswordPolicyFilter $filter Request filter
 	 * @return KalturaPasswordPolicyListResponse
 	 */
-	function listAction(KalturaPasswordPolicyFilter $filter)
+	function listAction(KalturaPasswordPolicyFilter $filter = null)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("passwordpolicy", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10773,7 +10774,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:19-09-12');
-		$this->setApiVersion('5.2.6.5986');
+		$this->setApiVersion('5.2.6.5990');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
