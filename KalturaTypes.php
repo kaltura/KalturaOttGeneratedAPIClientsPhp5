@@ -1932,15 +1932,6 @@ class KalturaAssetCommentFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetFirstImagePerRatioFilter extends KalturaRelatedObjectFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetHistoryFilter extends KalturaFilter
 {
 	/**
@@ -1975,6 +1966,15 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 	 */
 	public $daysLessThanOrEqual = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetImagePerRatioFilter extends KalturaRelatedObjectFilter
+{
 
 }
 
