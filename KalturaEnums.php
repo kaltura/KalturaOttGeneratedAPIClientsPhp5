@@ -130,6 +130,15 @@ class KalturaAssetFilePpvOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetFirstImagePerRatioOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetHistoryOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
