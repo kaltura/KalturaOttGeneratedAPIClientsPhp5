@@ -139,6 +139,15 @@ class KalturaAssetHistoryOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetImagePerRatioOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetIndexStatus extends KalturaEnumBase
 {
 	const OK = "Ok";

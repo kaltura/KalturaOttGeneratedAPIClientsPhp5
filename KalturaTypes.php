@@ -1973,6 +1973,15 @@ class KalturaAssetHistoryFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetImagePerRatioFilter extends KalturaRelatedObjectFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetStructFilter extends KalturaFilter
 {
 	/**
