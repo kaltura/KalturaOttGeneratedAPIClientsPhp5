@@ -14299,7 +14299,7 @@ class KalturaEventNotification extends KalturaCrudObject
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaRegex extends KalturaObjectBase
+class KalturaRegexExpression extends KalturaObjectBase
 {
 	/**
 	 * regex expression
@@ -14363,7 +14363,7 @@ class KalturaPasswordPolicy extends KalturaCrudObject
 	/**
 	 * array of  KalturaRegex
 	 *
-	 * @var array of KalturaRegex
+	 * @var array of KalturaRegexExpression
 	 */
 	public $complexities;
 
