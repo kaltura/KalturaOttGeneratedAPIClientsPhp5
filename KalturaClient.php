@@ -3127,6 +3127,37 @@ class KalturaEntitlementService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEventNotificationActionService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Dispatches event notification
+	 * 
+	 * @param KalturaEventNotificationScope $scope Scope
+	 * @return bool
+	 */
+	function dispatch(KalturaEventNotificationScope $scope)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "scope", $scope->toParams());
+		$this->client->queueServiceActionCall("eventnotificationaction", "dispatch", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEventNotificationService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -10268,6 +10299,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaEventNotificationActionService
+	 */
+	public $eventNotificationAction = null;
+
+	/**
+	 * 
 	 * @var KalturaEventNotificationService
 	 */
 	public $eventNotification = null;
@@ -10773,8 +10810,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-09-18');
-		$this->setApiVersion('5.2.6.13610');
+		$this->setClientTag('php5:19-10-31');
+		$this->setApiVersion('5.2.7.0');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10813,6 +10850,7 @@ class KalturaClient extends KalturaClientBase
 		$this->engagementAdapter = new KalturaEngagementAdapterService($this);
 		$this->engagement = new KalturaEngagementService($this);
 		$this->entitlement = new KalturaEntitlementService($this);
+		$this->eventNotificationAction = new KalturaEventNotificationActionService($this);
 		$this->eventNotification = new KalturaEventNotificationService($this);
 		$this->exportTask = new KalturaExportTaskService($this);
 		$this->externalChannelProfile = new KalturaExternalChannelProfileService($this);

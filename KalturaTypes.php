@@ -479,6 +479,20 @@ class KalturaHouseholdCouponFilter extends KalturaCrudFilter
 	 */
 	public $businessModuleIdEqual = null;
 
+	/**
+	 * Allow clients to inquiry if a specific coupon is part of an HH’s wallet or not
+	 *
+	 * @var string
+	 */
+	public $couponCode = null;
+
+	/**
+	 * Allow clients to filter out coupons which are valid/invalid
+	 *
+	 * @var KalturaCouponStatus
+	 */
+	public $status = null;
+
 
 }
 
@@ -721,6 +735,13 @@ class KalturaCollectionFilter extends KalturaFilter
 	 */
 	public $mediaFileIdEqual = null;
 
+	/**
+	 * couponGroupIdEqual
+	 *
+	 * @var int
+	 */
+	public $couponGroupIdEqual = null;
+
 
 }
 
@@ -768,6 +789,13 @@ class KalturaPpvFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $idIn = null;
+
+	/**
+	 * couponGroupIdEqual
+	 *
+	 * @var int
+	 */
+	public $couponGroupIdEqual = null;
 
 
 }
@@ -876,6 +904,13 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $externalIdIn = null;
+
+	/**
+	 * couponGroupIdEqual
+	 *
+	 * @var int
+	 */
+	public $couponGroupIdEqual = null;
 
 
 }
@@ -1966,6 +2001,15 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 	 */
 	public $daysLessThanOrEqual = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetImagePerRatioFilter extends KalturaRelatedObjectFilter
+{
 
 }
 
@@ -4494,6 +4538,15 @@ class KalturaBaseSegmentCondition extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBaseSegmentAction extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBaseSegmentValue extends KalturaObjectBase
 {
 
@@ -4533,6 +4586,13 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * @var array of KalturaBaseSegmentCondition
 	 */
 	public $conditions;
+
+	/**
+	 * Segmentation conditions - can be empty
+	 *
+	 * @var array of KalturaBaseSegmentAction
+	 */
+	public $actions;
 
 	/**
 	 * Segmentation values - can be empty (so only one segment will be created)
@@ -4735,6 +4795,29 @@ class KalturaUserDataCondition extends KalturaBaseSegmentCondition
 	 * @var string
 	 */
 	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetOrderSegmentAction extends KalturaBaseSegmentAction
+{
+	/**
+	 * Action name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Action values
+	 *
+	 * @var array of KalturaStringValue
+	 */
+	public $values;
 
 
 }
@@ -14214,6 +14297,91 @@ class KalturaEntitlementRenewal extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaEventNotificationScope extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventObject extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotificationObjectScope extends KalturaEventNotificationScope
+{
+	/**
+	 * Event object to fire
+	 *
+	 * @var KalturaEventObject
+	 */
+	public $eventObject;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaConcurrencyViolation extends KalturaEventObject
+{
+	/**
+	 * Timestamp
+	 *
+	 * @var int
+	 */
+	public $timestamp = null;
+
+	/**
+	 * UDID
+	 *
+	 * @var string
+	 */
+	public $udid = null;
+
+	/**
+	 * Asset Id
+	 *
+	 * @var string
+	 */
+	public $assetId = null;
+
+	/**
+	 * Violation Rule
+	 *
+	 * @var string
+	 */
+	public $violationRule = null;
+
+	/**
+	 * Household Id
+	 *
+	 * @var string
+	 */
+	public $householdId = null;
+
+	/**
+	 * User Id
+	 *
+	 * @var string
+	 */
+	public $userId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaCrudObject extends KalturaObjectBase
 {
 
@@ -14290,7 +14458,7 @@ class KalturaEventNotification extends KalturaCrudObject
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaRegex extends KalturaObjectBase
+class KalturaRegexExpression extends KalturaObjectBase
 {
 	/**
 	 * regex expression
@@ -14354,7 +14522,7 @@ class KalturaPasswordPolicy extends KalturaCrudObject
 	/**
 	 * array of  KalturaRegex
 	 *
-	 * @var array of KalturaRegex
+	 * @var array of KalturaRegexExpression
 	 */
 	public $complexities;
 
@@ -14380,6 +14548,13 @@ class KalturaHouseholdCoupon extends KalturaCrudObject
 	 * @var string
 	 */
 	public $code = null;
+
+	/**
+	 * Last Usage Date
+	 *
+	 * @var int
+	 */
+	public $lastUsageDate = null;
 
 
 }
