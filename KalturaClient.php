@@ -466,14 +466,16 @@ class KalturaAssetService extends KalturaServiceBase
 	 * @param string $assetId Asset identifier
 	 * @param string $assetType Asset type
 	 * @param KalturaPlaybackContextOptions $contextDataParams Parameters for the request
+	 * @param string $sourceType Filter sources by type
 	 * @return KalturaPlaybackContext
 	 */
-	function getPlaybackContext($assetId, $assetType, KalturaPlaybackContextOptions $contextDataParams)
+	function getPlaybackContext($assetId, $assetType, KalturaPlaybackContextOptions $contextDataParams, $sourceType = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "assetId", $assetId);
 		$this->client->addParam($kparams, "assetType", $assetType);
 		$this->client->addParam($kparams, "contextDataParams", $contextDataParams->toParams());
+		$this->client->addParam($kparams, "sourceType", $sourceType);
 		$this->client->queueServiceActionCall("asset", "getPlaybackContext", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -2343,6 +2345,25 @@ class KalturaCouponService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaCoupon");
 		return $resultObject;
 	}
+
+	/**
+	 * Lists coupon codes.
+	 * 
+	 * @param KalturaCouponFilter $filter Filter options
+	 * @return KalturaCouponListResponse
+	 */
+	function listAction(KalturaCouponFilter $filter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("coupon", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCouponListResponse");
+		return $resultObject;
+	}
 }
 
 /**
@@ -2880,6 +2901,25 @@ class KalturaEntitlementService extends KalturaServiceBase
 	}
 
 	/**
+	 * Apply new coupon for existing subscription
+	 * 
+	 * @param bigint $purchaseId Purchase Id
+	 * @param string $couponCode Coupon Code
+	 */
+	function applyCoupon($purchaseId, $couponCode)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "purchaseId", $purchaseId);
+		$this->client->addParam($kparams, "couponCode", $couponCode);
+		$this->client->queueServiceActionCall("entitlement", "applyCoupon", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
 	 * Immediately cancel a subscription, PPV or collection. Cancel is possible only if within cancellation window and content not already consumed
 	 * 
 	 * @param int $assetId The mediaFileID to cancel
@@ -3081,6 +3121,89 @@ class KalturaEntitlementService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaEntitlement");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotificationActionService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Dispatches event notification
+	 * 
+	 * @param KalturaEventNotificationScope $scope Scope
+	 * @return bool
+	 */
+	function dispatch(KalturaEventNotificationScope $scope)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "scope", $scope->toParams());
+		$this->client->queueServiceActionCall("eventnotificationaction", "dispatch", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotificationService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * EventNotification update
+	 * 
+	 * @param string $id Object ID to update
+	 * @param KalturaEventNotification $objectToUpdate EventNotification details
+	 * @return KalturaEventNotification
+	 */
+	function update($id, KalturaEventNotification $objectToUpdate)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
+		$this->client->queueServiceActionCall("eventnotification", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaEventNotification");
+		return $resultObject;
+	}
+
+	/**
+	 * Gets all EventNotification items for a given Object id and type
+	 * 
+	 * @param KalturaEventNotificationFilter $filter Request filter
+	 * @return KalturaEventNotificationListResponse
+	 */
+	function listAction(KalturaEventNotificationFilter $filter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("eventnotification", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaEventNotificationListResponse");
 		return $resultObject;
 	}
 }
@@ -3696,6 +3819,74 @@ class KalturaHouseholdService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaHousehold");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdCouponService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * HouseholdCoupon add
+	 * 
+	 * @param KalturaHouseholdCoupon $objectToAdd HouseholdCoupon details
+	 * @return KalturaHouseholdCoupon
+	 */
+	function add(KalturaHouseholdCoupon $objectToAdd)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
+		$this->client->queueServiceActionCall("householdcoupon", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdCoupon");
+		return $resultObject;
+	}
+
+	/**
+	 * Remove coupon from household
+	 * 
+	 * @param string $id Coupon code
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("householdcoupon", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Gets all HouseholdCoupon items for a household
+	 * 
+	 * @param KalturaHouseholdCouponFilter $filter Request filter
+	 * @return KalturaHouseholdCouponListResponse
+	 */
+	function listAction(KalturaHouseholdCouponFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("householdcoupon", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdCouponListResponse");
 		return $resultObject;
 	}
 }
@@ -6091,6 +6282,124 @@ class KalturaPartnerConfigurationService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPartnerService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Returns a login session for external system (like OVP)
+	 * 
+	 * @return KalturaLoginSession
+	 */
+	function externalLogin()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("partner", "externalLogin", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLoginSession");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPasswordPolicyService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add an object
+	 * 
+	 * @param KalturaPasswordPolicy $objectToAdd Object to add
+	 * @return KalturaPasswordPolicy
+	 */
+	function add(KalturaPasswordPolicy $objectToAdd)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
+		$this->client->queueServiceActionCall("passwordpolicy", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPasswordPolicy");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an object
+	 * 
+	 * @param bigint $id Object ID to update
+	 * @param KalturaPasswordPolicy $objectToUpdate Object to update
+	 * @return KalturaPasswordPolicy
+	 */
+	function update($id, KalturaPasswordPolicy $objectToUpdate)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
+		$this->client->queueServiceActionCall("passwordpolicy", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPasswordPolicy");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an object
+	 * 
+	 * @param bigint $id Object ID to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("passwordpolicy", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param KalturaPasswordPolicyFilter $filter Request filter
+	 * @return KalturaPasswordPolicyListResponse
+	 */
+	function listAction(KalturaPasswordPolicyFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("passwordpolicy", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPasswordPolicyListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPaymentGatewayProfileService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -6319,6 +6628,42 @@ class KalturaPermissionService extends KalturaServiceBase
 	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
+	}
+
+	/**
+	 * Adds new permission
+	 * 
+	 * @param KalturaPermission $permission Permission to insert
+	 * @return KalturaPermission
+	 */
+	function add(KalturaPermission $permission)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "permission", $permission->toParams());
+		$this->client->queueServiceActionCall("permission", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPermission");
+		return $resultObject;
+	}
+
+	/**
+	 * Deletes an existing permission
+	 * 
+	 * @param bigint $id Permission ID to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("permission", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
 	}
 
 	/**
@@ -7220,6 +7565,42 @@ class KalturaRegionService extends KalturaServiceBase
 	}
 
 	/**
+	 * Adds a new region for partner
+	 * 
+	 * @param KalturaRegion $region Region to add
+	 * @return KalturaRegion
+	 */
+	function add(KalturaRegion $region)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "region", $region->toParams());
+		$this->client->queueServiceActionCall("region", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaRegion");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an existing region
+	 * 
+	 * @param int $id Region ID to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("region", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
 	 * Returns all regions for the partner
 	 * 
 	 * @param KalturaRegionFilter $filter Regions filter
@@ -7235,6 +7616,27 @@ class KalturaRegionService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaRegionListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an existing region
+	 * 
+	 * @param int $id Region ID to update
+	 * @param KalturaRegion $region Region to update
+	 * @return KalturaRegion
+	 */
+	function update($id, KalturaRegion $region)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "region", $region->toParams());
+		$this->client->queueServiceActionCall("region", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaRegion");
 		return $resultObject;
 	}
 }
@@ -8417,6 +8819,44 @@ class KalturaSystemService extends KalturaServiceBase
 	}
 
 	/**
+	 * Clear local server cache
+	 * 
+	 * @param string $action Action to perform, possible values: clear_all / keys / getKey
+	 * @param string $key Key to get in case you send action getKey
+	 * @return bool
+	 */
+	function clearLocalServerCache($action = null, $key = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "action", $action);
+		$this->client->addParam($kparams, "key", $key);
+		$this->client->queueServiceActionCall("system", "clearLocalServerCache", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Gets the current level of the KLogger
+	 * 
+	 * @return string
+	 */
+	function getLogLevel()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("system", "getLogLevel", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "string");
+		return $resultObject;
+	}
+
+	/**
 	 * Returns current server timestamp
 	 * 
 	 * @return bigint
@@ -8451,6 +8891,25 @@ class KalturaSystemService extends KalturaServiceBase
 	}
 
 	/**
+	 * Returns true if version has been incremented successfully or false otherwise. You need to send groupId only if you wish to increment for a specific groupId and not the one the KS belongs to.
+	 * 
+	 * @param int $groupId GroupId
+	 * @return bool
+	 */
+	function incrementLayeredCacheGroupConfigVersion($groupId = 0)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "groupId", $groupId);
+		$this->client->queueServiceActionCall("system", "incrementLayeredCacheGroupConfigVersion", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Returns true
 	 * 
 	 * @return bool
@@ -8459,6 +8918,25 @@ class KalturaSystemService extends KalturaServiceBase
 	{
 		$kparams = array();
 		$this->client->queueServiceActionCall("system", "ping", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Sets the current level of the KLogger
+	 * 
+	 * @param string $level Possible levels: trace, debug, info, warning, error, all
+	 * @return bool
+	 */
+	function setLogLevel($level)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "level", $level);
+		$this->client->queueServiceActionCall("system", "setLogLevel", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -8760,11 +9238,10 @@ class KalturaTopicNotificationService extends KalturaServiceBase
 	 * @param KalturaTopicNotificationFilter $filter Filter options
 	 * @return KalturaTopicNotificationListResponse
 	 */
-	function listAction(KalturaTopicNotificationFilter $filter = null)
+	function listAction(KalturaTopicNotificationFilter $filter)
 	{
 		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("topicnotification", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -9900,6 +10377,18 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaEventNotificationActionService
+	 */
+	public $eventNotificationAction = null;
+
+	/**
+	 * 
+	 * @var KalturaEventNotificationService
+	 */
+	public $eventNotification = null;
+
+	/**
+	 * 
 	 * @var KalturaExportTaskService
 	 */
 	public $exportTask = null;
@@ -9933,6 +10422,12 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaHouseholdService
 	 */
 	public $household = null;
+
+	/**
+	 * 
+	 * @var KalturaHouseholdCouponService
+	 */
+	public $householdCoupon = null;
 
 	/**
 	 * 
@@ -10089,6 +10584,18 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaPartnerConfigurationService
 	 */
 	public $partnerConfiguration = null;
+
+	/**
+	 * 
+	 * @var KalturaPartnerService
+	 */
+	public $partner = null;
+
+	/**
+	 * 
+	 * @var KalturaPasswordPolicyService
+	 */
+	public $passwordPolicy = null;
 
 	/**
 	 * 
@@ -10381,8 +10888,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-06-06');
-		$this->setApiVersion('5.2.0.16354');
+		$this->setClientTag('php5:19-11-26');
+		$this->setApiVersion('5.2.8.14122');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10421,12 +10928,15 @@ class KalturaClient extends KalturaClientBase
 		$this->engagementAdapter = new KalturaEngagementAdapterService($this);
 		$this->engagement = new KalturaEngagementService($this);
 		$this->entitlement = new KalturaEntitlementService($this);
+		$this->eventNotificationAction = new KalturaEventNotificationActionService($this);
+		$this->eventNotification = new KalturaEventNotificationService($this);
 		$this->exportTask = new KalturaExportTaskService($this);
 		$this->externalChannelProfile = new KalturaExternalChannelProfileService($this);
 		$this->favorite = new KalturaFavoriteService($this);
 		$this->followTvSeries = new KalturaFollowTvSeriesService($this);
 		$this->homeNetwork = new KalturaHomeNetworkService($this);
 		$this->household = new KalturaHouseholdService($this);
+		$this->householdCoupon = new KalturaHouseholdCouponService($this);
 		$this->householdDevice = new KalturaHouseholdDeviceService($this);
 		$this->householdLimitations = new KalturaHouseholdLimitationsService($this);
 		$this->householdPaymentGateway = new KalturaHouseholdPaymentGatewayService($this);
@@ -10453,6 +10963,8 @@ class KalturaClient extends KalturaClientBase
 		$this->ottUser = new KalturaOttUserService($this);
 		$this->parentalRule = new KalturaParentalRuleService($this);
 		$this->partnerConfiguration = new KalturaPartnerConfigurationService($this);
+		$this->partner = new KalturaPartnerService($this);
+		$this->passwordPolicy = new KalturaPasswordPolicyService($this);
 		$this->paymentGatewayProfile = new KalturaPaymentGatewayProfileService($this);
 		$this->paymentMethodProfile = new KalturaPaymentMethodProfileService($this);
 		$this->permission = new KalturaPermissionService($this);

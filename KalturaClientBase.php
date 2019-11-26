@@ -245,7 +245,7 @@ class KalturaClientBase
 
 		$params = array();
 		$files = array();
-		$this->log("service url: [" . $this->config->serviceUrl . "]");
+		$this->log("service url: [" . $this->config->getServiceUrl() . "]");
 
 		// append the basic params
 		$this->addParam($params, "format", $this->config->format);
@@ -262,7 +262,7 @@ class KalturaClientBase
 		$signature = $this->signature($params);
 		$this->addParam($params, "kalsig", $signature);
 
-		$url = $this->config->serviceUrl . "/api_v3/service/{$call->service}/action/{$call->action}";
+		$url = $this->config->getServiceUrl() . "/api_v3/service/{$call->service}/action/{$call->action}";
 		$url .= '?' . http_build_query($params);
 		$this->log("Returned url [$url]");
 		return $url;
@@ -310,7 +310,7 @@ class KalturaClientBase
 
 		$params = array();
 		$files = array();
-		$this->log("service url: [" . $this->config->serviceUrl . "]");
+		$this->log("service url: [" . $this->config->getServiceUrl() . "]");
 
 		// append the basic params
 		$this->addParam($params, "format", $this->config->format);
@@ -321,7 +321,7 @@ class KalturaClientBase
 			$this->addParam($params, $param, $value);
 		}
 
-		$url = $this->config->serviceUrl."/api_v3/service";
+		$url = $this->config->getServiceUrl()."/api_v3/service";
 		if ($this->isMultiRequest)
 		{
 			$url .= "/multirequest";
@@ -428,6 +428,13 @@ class KalturaClientBase
 		$this->log("execution time for [".$url."]: [" . ($endTime - $startTime) . "]");
 
 		return $result;
+	}
+
+	protected static function getFirstLines(&$string, $numbOfLines)
+	{
+		$stringAsArrayOfLines = explode(PHP_EOL,$string);
+		$stringAsArrayOfLines = array_slice($stringAsArrayOfLines, 0, $numbOfLines);
+		$string = implode (PHP_EOL, $stringAsArrayOfLines);
 	}
 
 	/**
@@ -823,7 +830,18 @@ class KalturaClientBase
 			
 			if(!isset($value->objectType))
 			{
-				throw new KalturaClientException("Response format not supported - objectType is required for all objects", KalturaClientException::ERROR_FORMAT_NOT_SUPPORTED);
+				if (isset($value->result))
+				{
+					$value = $this->jsObjectToClientObject($value->result);
+				}
+				else if (isset($value->error))
+				{
+					$this->jsObjectToClientObject($value->error);
+				}
+				else
+				{
+					throw new KalturaClientException("Response format not supported - objectType is required for all objects", KalturaClientException::ERROR_FORMAT_NOT_SUPPORTED);
+				}
 			}
 			
 			$objectType = $value->objectType;
@@ -974,7 +992,13 @@ class KalturaClientBase
 	protected function log($msg)
 	{
 		if ($this->shouldLog)
+		{
+			if(isset($this->config->max_print))
+			{
+				self::getFirstLines($msg, $this->config->max_print);
+			}
 			$this->config->getLogger()->log($msg);
+		}
 	}
 
 	/**
@@ -1415,6 +1439,18 @@ class KalturaConfiguration
 	public $sslCertificatePath			= null;
 	public $requestHeaders				= array();
 	public $method						= KalturaClientBase::METHOD_POST;
+
+
+	public function setServiceUrl ($serviceUrl)
+	{
+		$this->serviceUrl = $serviceUrl;
+	}
+
+	public function getServiceUrl ()
+	{
+		return $this->serviceUrl;
+	}
+
 
 	/**
 	 * Set logger to get kaltura client debug logs
