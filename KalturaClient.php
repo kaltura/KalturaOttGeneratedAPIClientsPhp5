@@ -8819,44 +8819,6 @@ class KalturaSystemService extends KalturaServiceBase
 	}
 
 	/**
-	 * Clear local server cache
-	 * 
-	 * @param string $action Action to perform, possible values: clear_all / keys / getKey
-	 * @param string $key Key to get in case you send action getKey
-	 * @return bool
-	 */
-	function clearLocalServerCache($action = null, $key = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "action", $action);
-		$this->client->addParam($kparams, "key", $key);
-		$this->client->queueServiceActionCall("system", "clearLocalServerCache", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
-	 * Gets the current level of the KLogger
-	 * 
-	 * @return string
-	 */
-	function getLogLevel()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("system", "getLogLevel", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "string");
-		return $resultObject;
-	}
-
-	/**
 	 * Returns current server timestamp
 	 * 
 	 * @return bigint
@@ -8891,25 +8853,6 @@ class KalturaSystemService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns true if version has been incremented successfully or false otherwise. You need to send groupId only if you wish to increment for a specific groupId and not the one the KS belongs to.
-	 * 
-	 * @param int $groupId GroupId
-	 * @return bool
-	 */
-	function incrementLayeredCacheGroupConfigVersion($groupId = 0)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "groupId", $groupId);
-		$this->client->queueServiceActionCall("system", "incrementLayeredCacheGroupConfigVersion", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
 	 * Returns true
 	 * 
 	 * @return bool
@@ -8918,25 +8861,6 @@ class KalturaSystemService extends KalturaServiceBase
 	{
 		$kparams = array();
 		$this->client->queueServiceActionCall("system", "ping", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
-	 * Sets the current level of the KLogger
-	 * 
-	 * @param string $level Possible levels: trace, debug, info, warning, error, all
-	 * @return bool
-	 */
-	function setLogLevel($level)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "level", $level);
-		$this->client->queueServiceActionCall("system", "setLogLevel", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -10889,7 +10813,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:19-11-28');
-		$this->setApiVersion('5.2.8.14123');
+		$this->setApiVersion('5.2.8.13994');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
