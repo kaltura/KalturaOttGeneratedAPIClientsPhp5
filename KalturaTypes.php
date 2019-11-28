@@ -3002,6 +3002,13 @@ class KalturaRegionFilter extends KalturaFilter
 	 */
 	public $liveAssetIdEqual = null;
 
+	/**
+	 * Parent region to filter by
+	 *
+	 * @var bool
+	 */
+	public $parentOnly = null;
+
 
 }
 
