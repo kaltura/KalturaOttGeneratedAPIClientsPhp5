@@ -673,6 +673,13 @@ class KalturaSegmentationTypeFilter extends KalturaFilter
 	 */
 	public $idIn = null;
 
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
 
 }
 
@@ -911,6 +918,13 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $couponGroupIdEqual = null;
+
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
 
 
 }
@@ -7636,6 +7650,52 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 * @var int
 	 */
 	public $defaultRegion = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaObjectVirtualAssetInfo extends KalturaObjectBase
+{
+	/**
+	 * Asset struct identifier
+	 *
+	 * @var int
+	 */
+	public $assetStructId = null;
+
+	/**
+	 * Meta identifier
+	 *
+	 * @var int
+	 */
+	public $metaId = null;
+
+	/**
+	 * Object virtual asset info type
+	 *
+	 * @var KalturaObjectVirtualAssetInfoType
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaObjectVirtualAssetPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * List of object virtual asset info
+	 *
+	 * @var array of KalturaObjectVirtualAssetInfo
+	 */
+	public $objectVirtualAssets;
 
 
 }

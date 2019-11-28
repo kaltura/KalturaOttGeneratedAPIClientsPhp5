@@ -1155,6 +1155,16 @@ class KalturaNotificationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
+{
+	const SUBSCRIPTION = "Subscription";
+	const SEGMENT = "Segment";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaOTTUserOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1200,6 +1210,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const OSSADAPTER = "OSSAdapter";
 	const CONCURRENCY = "Concurrency";
 	const GENERAL = "General";
+	const OBJECTVIRTUALASSET = "ObjectVirtualAsset";
 }
 
 /**
