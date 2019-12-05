@@ -7604,12 +7604,15 @@ class KalturaRegionService extends KalturaServiceBase
 	 * Returns all regions for the partner
 	 * 
 	 * @param KalturaRegionFilter $filter Regions filter
+	 * @param KalturaFilterPager $pager Paging the request
 	 * @return KalturaRegionListResponse
 	 */
-	function listAction(KalturaRegionFilter $filter)
+	function listAction(KalturaRegionFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("region", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10888,8 +10891,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-12-04');
-		$this->setApiVersion('5.2.8.14182');
+		$this->setClientTag('php5:19-12-05');
+		$this->setApiVersion('5.2.8.14197');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
