@@ -1666,6 +1666,13 @@ class KalturaHouseholdDeviceFilter extends KalturaFilter
 	 */
 	public $deviceFamilyIdIn = null;
 
+	/**
+	 * External Id
+	 *
+	 * @var string
+	 */
+	public $externalIdEqual = null;
+
 
 }
 
@@ -3001,13 +3008,6 @@ class KalturaRegionFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $liveAssetIdEqual = null;
-
-	/**
-	 * Parent region to filter by
-	 *
-	 * @var bool
-	 */
-	public $parentOnly = null;
 
 
 }
@@ -5188,6 +5188,82 @@ class KalturaAssetFilePpvListResponse extends KalturaListResponse
 	 * @var array of KalturaAssetFilePpv
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdDevice extends KalturaOTTObjectSupportNullable
+{
+	/**
+	 * Household identifier
+	 *
+	 * @var int
+	 */
+	public $householdId = null;
+
+	/**
+	 * Device UDID
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $udid = null;
+
+	/**
+	 * Device name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Device brand identifier
+	 *
+	 * @var int
+	 */
+	public $brandId = null;
+
+	/**
+	 * Device activation date (epoch)
+	 *
+	 * @var int
+	 */
+	public $activatedOn = null;
+
+	/**
+	 * Device state
+	 *
+	 * @var KalturaDeviceStatus
+	 * @readonly
+	 */
+	public $status = null;
+
+	/**
+	 * Device family id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $deviceFamilyId = null;
+
+	/**
+	 * Device DRM data
+	 *
+	 * @var KalturaCustomDrmPlaybackPluginData
+	 * @readonly
+	 */
+	public $drm;
+
+	/**
+	 * external Id
+	 *
+	 * @var string
+	 */
+	public $externalId = null;
 
 
 }
@@ -8690,75 +8766,6 @@ class KalturaHomeNetworkListResponse extends KalturaListResponse
 	 * @var array of KalturaHomeNetwork
 	 */
 	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdDevice extends KalturaObjectBase
-{
-	/**
-	 * Household identifier
-	 *
-	 * @var int
-	 */
-	public $householdId = null;
-
-	/**
-	 * Device UDID
-	 *
-	 * @var string
-	 * @insertonly
-	 */
-	public $udid = null;
-
-	/**
-	 * Device name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Device brand identifier
-	 *
-	 * @var int
-	 */
-	public $brandId = null;
-
-	/**
-	 * Device activation date (epoch)
-	 *
-	 * @var int
-	 */
-	public $activatedOn = null;
-
-	/**
-	 * Device state
-	 *
-	 * @var KalturaDeviceStatus
-	 * @readonly
-	 */
-	public $status = null;
-
-	/**
-	 * Device family id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $deviceFamilyId = null;
-
-	/**
-	 * Device DRM data
-	 *
-	 * @var KalturaCustomDrmPlaybackPluginData
-	 * @readonly
-	 */
-	public $drm;
 
 
 }
