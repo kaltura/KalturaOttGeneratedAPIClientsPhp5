@@ -4209,6 +4209,15 @@ class KalturaBulkUploadMediaAssetResult extends KalturaBulkUploadAssetResult
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBulkUploadLiveAssetResult extends KalturaBulkUploadMediaAssetResult
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadProgramAssetResult extends KalturaBulkUploadResult
 {
 	/**
@@ -4234,39 +4243,6 @@ class KalturaBulkUploadProgramAssetResult extends KalturaBulkUploadResult
 	 * @readonly
 	 */
 	public $liveAssetId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkUploadLiveAssetResult extends KalturaBulkUploadResult
-{
-	/**
-	 * The internal kaltura channel id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Indicates the epg asset object id in the bulk file
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $externalEpgIngestId = null;
-
-	/**
-	 * List of programs that were ingested to the channel
-	 *
-	 * @var array of KalturaBulkUploadProgramAssetResult
-	 * @readonly
-	 */
-	public $programs;
 
 
 }
@@ -13875,6 +13851,15 @@ abstract class KalturaBulkUploadAssetData extends KalturaBulkUploadObjectData
  * @subpackage Client
  */
 class KalturaBulkUploadMediaAssetData extends KalturaBulkUploadAssetData
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadLiveAssetData extends KalturaBulkUploadMediaAssetData
 {
 
 }
