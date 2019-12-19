@@ -696,6 +696,13 @@ class KalturaUserSegmentFilter extends KalturaFilter
 	 */
 	public $userIdEqual = null;
 
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
 
 }
 
@@ -4526,6 +4533,52 @@ class KalturaSocialFriendActivityListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdSegment extends KalturaObjectBase
+{
+	/**
+	 * Household SegmentId
+	 *
+	 * @var int
+	 */
+	public $householdId = null;
+
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $householdId = null;
+
+	/**
+	 * Blocking segment Ids
+	 *
+	 * @var string
+	 */
+	public $blockingSegmentIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdSegmentListResponse extends KalturaListResponse
+{
+	/**
+	 * Segmentation Types
+	 *
+	 * @var array of KalturaHouseholdSegment
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBaseSegmentCondition extends KalturaObjectBase
 {
 
@@ -4816,6 +4869,85 @@ class KalturaAssetOrderSegmentAction extends KalturaBaseSegmentAction
 	 */
 	public $values;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaKsqlSegmentAction extends KalturaBaseSegmentAction
+{
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaSegementAssetFilterAction extends KalturaKsqlSegmentAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegementAssetFilterSegmentAction extends KalturaSegementAssetFilterAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegementAssetFilterSubscriptionAction extends KalturaSegementAssetFilterAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaBlockSubscriptionSegmentAction extends KalturaKsqlSegmentAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentBlockPlaybackSubscriptionAction extends KalturaBlockSubscriptionSegmentAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentBlockCancelSubscriptionAction extends KalturaBlockSubscriptionSegmentAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentBlockPurchaseSubscriptionAction extends KalturaBlockSubscriptionSegmentAction
+{
 
 }
 

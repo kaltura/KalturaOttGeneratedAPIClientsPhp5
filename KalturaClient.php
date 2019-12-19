@@ -4475,6 +4475,75 @@ class KalturaHouseholdQuotaService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdSegmentService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Adds a segment to a household
+	 * 
+	 * @param KalturaHouseholdSegment $householdSegment Household segment
+	 * @return KalturaHouseholdSegment
+	 */
+	function add(KalturaHouseholdSegment $householdSegment)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "householdSegment", $householdSegment->toParams());
+		$this->client->queueServiceActionCall("householdsegment", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdSegment");
+		return $resultObject;
+	}
+
+	/**
+	 * Deletes a segment from a household
+	 * 
+	 * @param bigint $householdId Household id
+	 * @param bigint $segmentId Segemnt id
+	 * @return bool
+	 */
+	function delete($householdId, $segmentId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "householdId", $householdId);
+		$this->client->addParam($kparams, "segmentId", $segmentId);
+		$this->client->queueServiceActionCall("householdsegment", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve all the segments that apply for given household
+	 * 
+	 * @return KalturaHouseholdSegmentListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("householdsegment", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdSegmentListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdUserService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -10470,6 +10539,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaHouseholdSegmentService
+	 */
+	public $householdSegment = null;
+
+	/**
+	 * 
 	 * @var KalturaHouseholdUserService
 	 */
 	public $householdUser = null;
@@ -10891,8 +10966,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-12-18');
-		$this->setApiVersion('5.3.0.14268');
+		$this->setClientTag('php5:19-12-19');
+		$this->setApiVersion('5.3.0.14286');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -10946,6 +11021,7 @@ class KalturaClient extends KalturaClientBase
 		$this->householdPaymentMethod = new KalturaHouseholdPaymentMethodService($this);
 		$this->householdPremiumService = new KalturaHouseholdPremiumServiceService($this);
 		$this->householdQuota = new KalturaHouseholdQuotaService($this);
+		$this->householdSegment = new KalturaHouseholdSegmentService($this);
 		$this->householdUser = new KalturaHouseholdUserService($this);
 		$this->image = new KalturaImageService($this);
 		$this->imageType = new KalturaImageTypeService($this);
