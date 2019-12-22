@@ -4483,15 +4483,15 @@ class KalturaHouseholdSegmentService extends KalturaServiceBase
 	}
 
 	/**
-	 * Adds a segment to a household
+	 * HouseholdSegment add
 	 * 
-	 * @param KalturaHouseholdSegment $householdSegment Household segment
+	 * @param KalturaHouseholdSegment $objectToAdd HouseholdSegment details
 	 * @return KalturaHouseholdSegment
 	 */
-	function add(KalturaHouseholdSegment $householdSegment)
+	function add(KalturaHouseholdSegment $objectToAdd)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "householdSegment", $householdSegment->toParams());
+		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
 		$this->client->queueServiceActionCall("householdsegment", "add", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -4502,34 +4502,33 @@ class KalturaHouseholdSegmentService extends KalturaServiceBase
 	}
 
 	/**
-	 * Deletes a segment from a household
+	 * Remove segment from household
 	 * 
-	 * @param bigint $householdId Household id
-	 * @param bigint $segmentId Segemnt id
-	 * @return bool
+	 * @param bigint $id Segment identifier
 	 */
-	function delete($householdId, $segmentId)
+	function delete($id)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "householdId", $householdId);
-		$this->client->addParam($kparams, "segmentId", $segmentId);
+		$this->client->addParam($kparams, "id", $id);
 		$this->client->queueServiceActionCall("householdsegment", "delete", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
+		$this->client->validateObjectType($resultObject, "null");
 	}
 
 	/**
-	 * Retrieve all the segments that apply for given household
+	 * Gets all HouseholdSegment items for a household
 	 * 
+	 * @param KalturaHouseholdSegmentFilter $filter Request filter
 	 * @return KalturaHouseholdSegmentListResponse
 	 */
-	function listAction()
+	function listAction(KalturaHouseholdSegmentFilter $filter = null)
 	{
 		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("householdsegment", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10966,8 +10965,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:19-12-19');
-		$this->setApiVersion('5.3.0.14286');
+		$this->setClientTag('php5:19-12-22');
+		$this->setApiVersion('5.3.0.14289');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

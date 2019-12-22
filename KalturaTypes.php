@@ -463,6 +463,22 @@ class KalturaPasswordPolicyFilter extends KalturaCrudFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdSegmentFilter extends KalturaCrudFilter
+{
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdCouponFilter extends KalturaCrudFilter
 {
 	/**
@@ -4523,52 +4539,6 @@ class KalturaSocialFriendActivityListResponse extends KalturaListResponse
 	 * Social friends activity
 	 *
 	 * @var array of KalturaSocialFriendActivity
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdSegment extends KalturaObjectBase
-{
-	/**
-	 * Household SegmentId
-	 *
-	 * @var int
-	 */
-	public $householdId = null;
-
-	/**
-	 * Segment Id
-	 *
-	 * @var int
-	 */
-	public $householdId = null;
-
-	/**
-	 * Blocking segment Ids
-	 *
-	 * @var string
-	 */
-	public $blockingSegmentIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdSegmentListResponse extends KalturaListResponse
-{
-	/**
-	 * Segmentation Types
-	 *
-	 * @var array of KalturaHouseholdSegment
 	 */
 	public $objects;
 
@@ -14724,6 +14694,29 @@ class KalturaPasswordPolicy extends KalturaCrudObject
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdSegment extends KalturaCrudObject
+{
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $segmentId = null;
+
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $householdId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdCoupon extends KalturaCrudObject
 {
 	/**
@@ -15007,6 +15000,22 @@ class KalturaHouseholdQuota extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $availableQuota = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdSegmentListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaHouseholdSegment
+	 */
+	public $objects;
 
 
 }
