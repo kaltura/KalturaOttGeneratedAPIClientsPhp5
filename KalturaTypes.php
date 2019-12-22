@@ -4862,7 +4862,7 @@ abstract class KalturaKsqlSegmentAction extends KalturaBaseSegmentAction
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaSegementAssetFilterAction extends KalturaKsqlSegmentAction
+abstract class KalturaSegmentAssetFilterAction extends KalturaKsqlSegmentAction
 {
 
 }
@@ -4871,7 +4871,7 @@ abstract class KalturaSegementAssetFilterAction extends KalturaKsqlSegmentAction
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSegementAssetFilterSegmentAction extends KalturaSegementAssetFilterAction
+class KalturaSegmentAssetFilterSegmentAction extends KalturaSegmentAssetFilterAction
 {
 
 }
@@ -4880,7 +4880,7 @@ class KalturaSegementAssetFilterSegmentAction extends KalturaSegementAssetFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSegementAssetFilterSubscriptionAction extends KalturaSegementAssetFilterAction
+class KalturaSegementAssetFilterSubscriptionAction extends KalturaSegmentAssetFilterAction
 {
 
 }
