@@ -4880,7 +4880,7 @@ class KalturaSegmentAssetFilterSegmentAction extends KalturaSegmentAssetFilterAc
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSegementAssetFilterSubscriptionAction extends KalturaSegmentAssetFilterAction
+class KalturaSegmentAssetFilterSubscriptionAction extends KalturaSegmentAssetFilterAction
 {
 
 }
