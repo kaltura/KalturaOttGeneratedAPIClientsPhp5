@@ -463,6 +463,22 @@ class KalturaPasswordPolicyFilter extends KalturaCrudFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdSegmentFilter extends KalturaCrudFilter
+{
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdCouponFilter extends KalturaCrudFilter
 {
 	/**
@@ -695,6 +711,13 @@ class KalturaUserSegmentFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $userIdEqual = null;
+
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
 
 
 }
@@ -4823,6 +4846,85 @@ class KalturaAssetOrderSegmentAction extends KalturaBaseSegmentAction
 	 */
 	public $values;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaKsqlSegmentAction extends KalturaBaseSegmentAction
+{
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaSegmentAssetFilterAction extends KalturaKsqlSegmentAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentAssetFilterSegmentAction extends KalturaSegmentAssetFilterAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentAssetFilterSubscriptionAction extends KalturaSegmentAssetFilterAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaBlockSubscriptionSegmentAction extends KalturaKsqlSegmentAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentBlockPlaybackSubscriptionAction extends KalturaBlockSubscriptionSegmentAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentBlockCancelSubscriptionAction extends KalturaBlockSubscriptionSegmentAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentBlockPurchaseSubscriptionAction extends KalturaBlockSubscriptionSegmentAction
+{
 
 }
 
@@ -14606,6 +14708,29 @@ class KalturaPasswordPolicy extends KalturaCrudObject
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdSegment extends KalturaCrudObject
+{
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $segmentId = null;
+
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $householdId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdCoupon extends KalturaCrudObject
 {
 	/**
@@ -14889,6 +15014,22 @@ class KalturaHouseholdQuota extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $availableQuota = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdSegmentListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaHouseholdSegment
+	 */
+	public $objects;
 
 
 }
