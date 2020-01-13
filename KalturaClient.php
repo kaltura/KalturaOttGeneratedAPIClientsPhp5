@@ -8892,14 +8892,14 @@ class KalturaSystemService extends KalturaServiceBase
 	/**
 	 * Clear local server cache
 	 * 
-	 * @param string $action Action to perform, possible values: clear_all / keys / getKey
+	 * @param string $clearCacheAction Clear cache action to perform, possible values: clear_all / keys / getKey
 	 * @param string $key Key to get in case you send action getKey
 	 * @return bool
 	 */
-	function clearLocalServerCache($action = null, $key = null)
+	function clearLocalServerCache($clearCacheAction = null, $key = null)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "action", $action);
+		$this->client->addParam($kparams, "clearCacheAction", $clearCacheAction);
 		$this->client->addParam($kparams, "key", $key);
 		$this->client->queueServiceActionCall("system", "clearLocalServerCache", $kparams);
 		if ($this->client->isMultiRequest())
@@ -10966,7 +10966,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:20-01-13');
-		$this->setApiVersion('5.3.1.14544');
+		$this->setApiVersion('5.3.1.14547');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
