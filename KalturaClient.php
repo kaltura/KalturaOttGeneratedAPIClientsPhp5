@@ -486,6 +486,31 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
+	 * This action delivers all data relevant for player
+	 * 
+	 * @param string $assetId Asset identifier
+	 * @param string $assetType Asset type
+	 * @param KalturaPlaybackContextOptions $contextDataParams Parameters for the request
+	 * @param string $sourceType Filter sources by type
+	 * @return KalturaPlaybackContext
+	 */
+	function getPlaybackManifest($assetId, $assetType, KalturaPlaybackContextOptions $contextDataParams, $sourceType = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetId", $assetId);
+		$this->client->addParam($kparams, "assetType", $assetType);
+		$this->client->addParam($kparams, "contextDataParams", $contextDataParams->toParams());
+		$this->client->addParam($kparams, "sourceType", $sourceType);
+		$this->client->queueServiceActionCall("asset", "getPlaybackManifest", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPlaybackContext");
+		return $resultObject;
+	}
+
+	/**
 	 * Returns media or EPG assets. Filters by media identifiers or by EPG internal or external identifier.
 	 * 
 	 * @param KalturaAssetFilter $filter Filtering the assets request
@@ -8892,14 +8917,14 @@ class KalturaSystemService extends KalturaServiceBase
 	/**
 	 * Clear local server cache
 	 * 
-	 * @param string $clearCacheAction Clear cache action to perform, possible values: clear_all / keys / getKey
+	 * @param string $action Action to perform, possible values: clear_all / keys / getKey
 	 * @param string $key Key to get in case you send action getKey
 	 * @return bool
 	 */
-	function clearLocalServerCache($clearCacheAction = null, $key = null)
+	function clearLocalServerCache($action = null, $key = null)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "clearCacheAction", $clearCacheAction);
+		$this->client->addParam($kparams, "action", $action);
 		$this->client->addParam($kparams, "key", $key);
 		$this->client->queueServiceActionCall("system", "clearLocalServerCache", $kparams);
 		if ($this->client->isMultiRequest())
@@ -10965,8 +10990,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-01-15');
-		$this->setApiVersion('5.3.1.14558');
+		$this->setClientTag('php5:20-01-16');
+		$this->setApiVersion('5.3.0.14532');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
