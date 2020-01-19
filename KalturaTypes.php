@@ -2937,7 +2937,16 @@ class KalturaPlaybackProfileFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaRegionFilter extends KalturaFilter
+abstract class KalturaBaseRegionFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRegionFilter extends KalturaBaseRegionFilter
 {
 	/**
 	 * List of comma separated regions external IDs
@@ -2967,6 +2976,15 @@ class KalturaRegionFilter extends KalturaFilter
 	 */
 	public $liveAssetIdEqual = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDefaultRegionFilter extends KalturaBaseRegionFilter
+{
 
 }
 
