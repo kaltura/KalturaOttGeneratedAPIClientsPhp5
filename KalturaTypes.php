@@ -14582,6 +14582,20 @@ class KalturaBookmarkEvent extends KalturaEventObject
 	 */
 	public $action = null;
 
+	/**
+	 * Product Type
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $productType = null;
+
+	/**
+	 * Product Id
+	 *
+	 * @var int
+	 */
+	public $productId = null;
+
 
 }
 
