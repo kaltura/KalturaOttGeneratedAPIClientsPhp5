@@ -7671,11 +7671,11 @@ class KalturaRegionService extends KalturaServiceBase
 	/**
 	 * Returns all regions for the partner
 	 * 
-	 * @param KalturaRegionFilter $filter Regions filter
+	 * @param KalturaBaseRegionFilter $filter Regions filter
 	 * @param KalturaFilterPager $pager Paging the request
 	 * @return KalturaRegionListResponse
 	 */
-	function listAction(KalturaRegionFilter $filter, KalturaFilterPager $pager = null)
+	function listAction(KalturaBaseRegionFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "filter", $filter->toParams());
@@ -10966,7 +10966,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:20-01-19');
-		$this->setApiVersion('5.3.1.14567');
+		$this->setApiVersion('5.3.1.14576');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
