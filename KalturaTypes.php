@@ -680,10 +680,19 @@ class KalturaSocialFriendActivityFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSegmentationTypeFilter extends KalturaFilter
+abstract class KalturaBaseSegmentationTypeFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
 {
 	/**
-	 * Comma separated segmentation types identifieridentifiers
+	 * Comma separated segmentation types identifiers
 	 *
 	 * @var string
 	 */
@@ -695,6 +704,22 @@ class KalturaSegmentationTypeFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $kSql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentValueFilter extends KalturaBaseSegmentationTypeFilter
+{
+	/**
+	 * Comma separated segmentation identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
 
 
 }

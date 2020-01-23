@@ -8019,11 +8019,11 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	/**
 	 * Lists all segmentation types in group
 	 * 
-	 * @param KalturaSegmentationTypeFilter $filter Segmentation type filter - basically empty
+	 * @param KalturaBaseSegmentationTypeFilter $filter Segmentation type filter - basically empty
 	 * @param KalturaFilterPager $pager Simple pager
 	 * @return KalturaSegmentationTypeListResponse
 	 */
-	function listAction(KalturaSegmentationTypeFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(KalturaBaseSegmentationTypeFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
@@ -10965,8 +10965,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-01-21');
-		$this->setApiVersion('5.3.1.14579');
+		$this->setClientTag('php5:20-01-23');
+		$this->setApiVersion('5.3.1.14577');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
