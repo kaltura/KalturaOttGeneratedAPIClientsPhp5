@@ -680,19 +680,10 @@ class KalturaSocialFriendActivityFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaBaseSegmentationTypeFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
+class KalturaSegmentationTypeFilter extends KalturaFilter
 {
 	/**
-	 * Comma separated segmentation types identifiers
+	 * Comma separated segmentation types identifieridentifiers
 	 *
 	 * @var string
 	 */
@@ -704,22 +695,6 @@ class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
 	 * @var string
 	 */
 	public $kSql = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentValueFilter extends KalturaBaseSegmentationTypeFilter
-{
-	/**
-	 * Comma separated segmentation identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
 
 
 }
@@ -3041,16 +3016,7 @@ class KalturaPlaybackProfileFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaBaseRegionFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRegionFilter extends KalturaBaseRegionFilter
+class KalturaRegionFilter extends KalturaFilter
 {
 	/**
 	 * List of comma separated regions external IDs
@@ -3087,15 +3053,6 @@ class KalturaRegionFilter extends KalturaBaseRegionFilter
 	 */
 	public $parentOnly = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDefaultRegionFilter extends KalturaBaseRegionFilter
-{
 
 }
 
