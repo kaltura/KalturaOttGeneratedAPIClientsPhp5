@@ -6349,12 +6349,9 @@ class KalturaPartnerConfigurationService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update Partner Configuration
+	 * Update/set Partner Configuration
 	 * 
-	 * @param KalturaPartnerConfiguration $configuration Partner Configuration
-            possible configuration type: 
-            'configuration': { 'value': 0, 'partner_configuration_type': { 'type': 'OSSAdapter', 'objectType': 'KalturaPartnerConfigurationHolder' },
-            'objectType': 'KalturaBillingPartnerConfig'}
+	 * @param KalturaPartnerConfiguration $configuration Partner Configuration to update
 	 * @return bool
 	 */
 	function update(KalturaPartnerConfiguration $configuration)
@@ -10991,7 +10988,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:20-02-04');
-		$this->setApiVersion('5.3.1.14623');
+		$this->setApiVersion('5.3.1.14634');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

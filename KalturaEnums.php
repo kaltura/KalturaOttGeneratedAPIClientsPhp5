@@ -1220,6 +1220,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const CONCURRENCY = "Concurrency";
 	const GENERAL = "General";
 	const OBJECTVIRTUALASSET = "ObjectVirtualAsset";
+	const COMMERCE = "Commerce";
 }
 
 /**
