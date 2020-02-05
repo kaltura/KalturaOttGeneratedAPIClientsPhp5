@@ -486,31 +486,6 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * This action delivers all data relevant for player
-	 * 
-	 * @param string $assetId Asset identifier
-	 * @param string $assetType Asset type
-	 * @param KalturaPlaybackContextOptions $contextDataParams Parameters for the request
-	 * @param string $sourceType Filter sources by type
-	 * @return KalturaPlaybackContext
-	 */
-	function getPlaybackManifest($assetId, $assetType, KalturaPlaybackContextOptions $contextDataParams, $sourceType = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "assetType", $assetType);
-		$this->client->addParam($kparams, "contextDataParams", $contextDataParams->toParams());
-		$this->client->addParam($kparams, "sourceType", $sourceType);
-		$this->client->queueServiceActionCall("asset", "getPlaybackManifest", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPlaybackContext");
-		return $resultObject;
-	}
-
-	/**
 	 * Returns media or EPG assets. Filters by media identifiers or by EPG internal or external identifier.
 	 * 
 	 * @param KalturaAssetFilter $filter Filtering the assets request
@@ -6349,9 +6324,12 @@ class KalturaPartnerConfigurationService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update/set Partner Configuration
+	 * Update Partner Configuration
 	 * 
-	 * @param KalturaPartnerConfiguration $configuration Partner Configuration to update
+	 * @param KalturaPartnerConfiguration $configuration Partner Configuration
+            possible configuration type: 
+            'configuration': { 'value': 0, 'partner_configuration_type': { 'type': 'OSSAdapter', 'objectType': 'KalturaPartnerConfigurationHolder' },
+            'objectType': 'KalturaBillingPartnerConfig'}
 	 * @return bool
 	 */
 	function update(KalturaPartnerConfiguration $configuration)
@@ -8041,11 +8019,11 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	/**
 	 * Lists all segmentation types in group
 	 * 
-	 * @param KalturaBaseSegmentationTypeFilter $filter Segmentation type filter - basically empty
+	 * @param KalturaSegmentationTypeFilter $filter Segmentation type filter - basically empty
 	 * @param KalturaFilterPager $pager Simple pager
 	 * @return KalturaSegmentationTypeListResponse
 	 */
-	function listAction(KalturaBaseSegmentationTypeFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(KalturaSegmentationTypeFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
@@ -10988,7 +10966,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:20-02-05');
-		$this->setApiVersion('5.3.1.14662');
+		$this->setApiVersion('5.3.1.14595');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

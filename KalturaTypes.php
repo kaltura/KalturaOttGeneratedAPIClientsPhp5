@@ -680,19 +680,10 @@ class KalturaSocialFriendActivityFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaBaseSegmentationTypeFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
+class KalturaSegmentationTypeFilter extends KalturaFilter
 {
 	/**
-	 * Comma separated segmentation types identifiers
+	 * Comma separated segmentation types identifieridentifiers
 	 *
 	 * @var string
 	 */
@@ -704,22 +695,6 @@ class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
 	 * @var string
 	 */
 	public $kSql = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentValueFilter extends KalturaBaseSegmentationTypeFilter
-{
-	/**
-	 * Comma separated segmentation identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
 
 
 }
@@ -7753,45 +7728,6 @@ class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBookmarkEventThreshold extends KalturaObjectBase
-{
-	/**
-	 * bookmark transaction type
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $transactionType = null;
-
-	/**
-	 * event threshold in seconds
-	 *
-	 * @var int
-	 */
-	public $threshold = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCommercePartnerConfig extends KalturaPartnerConfiguration
-{
-	/**
-	 * configuration for bookmark event threshold (when to dispatch the event) in seconds.
-	 *
-	 * @var array of KalturaBookmarkEventThreshold
-	 */
-	public $bookmarkEventThresholds;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 {
 	/**
@@ -14573,71 +14509,6 @@ class KalturaEventNotificationObjectScope extends KalturaEventNotificationScope
 	 * @var KalturaEventObject
 	 */
 	public $eventObject;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBookmarkEvent extends KalturaEventObject
-{
-	/**
-	 * User Id
-	 *
-	 * @var int
-	 */
-	public $userId = null;
-
-	/**
-	 * Household Id
-	 *
-	 * @var int
-	 */
-	public $householdId = null;
-
-	/**
-	 * Asset Id
-	 *
-	 * @var int
-	 */
-	public $assetId = null;
-
-	/**
-	 * File Id
-	 *
-	 * @var int
-	 */
-	public $fileId = null;
-
-	/**
-	 * position
-	 *
-	 * @var int
-	 */
-	public $position = null;
-
-	/**
-	 * Bookmark Action Type
-	 *
-	 * @var KalturaBookmarkActionType
-	 */
-	public $action = null;
-
-	/**
-	 * Product Type
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $productType = null;
-
-	/**
-	 * Product Id
-	 *
-	 * @var int
-	 */
-	public $productId = null;
 
 
 }
