@@ -853,15 +853,6 @@ class KalturaHouseholdRestriction extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaHouseholdSegmentOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaHouseholdState extends KalturaEnumBase
 {
 	const OK = "ok";
@@ -1220,7 +1211,6 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const CONCURRENCY = "Concurrency";
 	const GENERAL = "General";
 	const OBJECTVIRTUALASSET = "ObjectVirtualAsset";
-	const COMMERCE = "Commerce";
 }
 
 /**

@@ -486,31 +486,6 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * This action delivers all data relevant for player
-	 * 
-	 * @param string $assetId Asset identifier
-	 * @param string $assetType Asset type
-	 * @param KalturaPlaybackContextOptions $contextDataParams Parameters for the request
-	 * @param string $sourceType Filter sources by type
-	 * @return KalturaPlaybackContext
-	 */
-	function getPlaybackManifest($assetId, $assetType, KalturaPlaybackContextOptions $contextDataParams, $sourceType = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "assetType", $assetType);
-		$this->client->addParam($kparams, "contextDataParams", $contextDataParams->toParams());
-		$this->client->addParam($kparams, "sourceType", $sourceType);
-		$this->client->queueServiceActionCall("asset", "getPlaybackManifest", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPlaybackContext");
-		return $resultObject;
-	}
-
-	/**
 	 * Returns media or EPG assets. Filters by media identifiers or by EPG internal or external identifier.
 	 * 
 	 * @param KalturaAssetFilter $filter Filtering the assets request
@@ -4500,74 +4475,6 @@ class KalturaHouseholdQuotaService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaHouseholdSegmentService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * HouseholdSegment add
-	 * 
-	 * @param KalturaHouseholdSegment $objectToAdd HouseholdSegment details
-	 * @return KalturaHouseholdSegment
-	 */
-	function add(KalturaHouseholdSegment $objectToAdd)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
-		$this->client->queueServiceActionCall("householdsegment", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaHouseholdSegment");
-		return $resultObject;
-	}
-
-	/**
-	 * Remove segment from household
-	 * 
-	 * @param bigint $id Segment identifier
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("householdsegment", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * Gets all HouseholdSegment items for a household
-	 * 
-	 * @param KalturaHouseholdSegmentFilter $filter Request filter
-	 * @return KalturaHouseholdSegmentListResponse
-	 */
-	function listAction(KalturaHouseholdSegmentFilter $filter = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("householdsegment", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaHouseholdSegmentListResponse");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaHouseholdUserService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -6349,9 +6256,12 @@ class KalturaPartnerConfigurationService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update/set Partner Configuration
+	 * Update Partner Configuration
 	 * 
-	 * @param KalturaPartnerConfiguration $configuration Partner Configuration to update
+	 * @param KalturaPartnerConfiguration $configuration Partner Configuration
+            possible configuration type: 
+            'configuration': { 'value': 0, 'partner_configuration_type': { 'type': 'OSSAdapter', 'objectType': 'KalturaPartnerConfigurationHolder' },
+            'objectType': 'KalturaBillingPartnerConfig'}
 	 * @return bool
 	 */
 	function update(KalturaPartnerConfiguration $configuration)
@@ -7693,11 +7603,11 @@ class KalturaRegionService extends KalturaServiceBase
 	/**
 	 * Returns all regions for the partner
 	 * 
-	 * @param KalturaBaseRegionFilter $filter Regions filter
+	 * @param KalturaRegionFilter $filter Regions filter
 	 * @param KalturaFilterPager $pager Paging the request
 	 * @return KalturaRegionListResponse
 	 */
-	function listAction(KalturaBaseRegionFilter $filter, KalturaFilterPager $pager = null)
+	function listAction(KalturaRegionFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "filter", $filter->toParams());
@@ -8041,11 +7951,11 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	/**
 	 * Lists all segmentation types in group
 	 * 
-	 * @param KalturaBaseSegmentationTypeFilter $filter Segmentation type filter - basically empty
+	 * @param KalturaSegmentationTypeFilter $filter Segmentation type filter - basically empty
 	 * @param KalturaFilterPager $pager Simple pager
 	 * @return KalturaSegmentationTypeListResponse
 	 */
-	function listAction(KalturaBaseSegmentationTypeFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(KalturaSegmentationTypeFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
@@ -8914,14 +8824,14 @@ class KalturaSystemService extends KalturaServiceBase
 	/**
 	 * Clear local server cache
 	 * 
-	 * @param string $clearCacheAction Clear cache action to perform, possible values: clear_all / keys / getKey
+	 * @param string $action Action to perform, possible values: clear_all / keys / getKey
 	 * @param string $key Key to get in case you send action getKey
 	 * @return bool
 	 */
-	function clearLocalServerCache($clearCacheAction = null, $key = null)
+	function clearLocalServerCache($action = null, $key = null)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "clearCacheAction", $clearCacheAction);
+		$this->client->addParam($kparams, "action", $action);
 		$this->client->addParam($kparams, "key", $key);
 		$this->client->queueServiceActionCall("system", "clearLocalServerCache", $kparams);
 		if ($this->client->isMultiRequest())
@@ -10560,12 +10470,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaHouseholdSegmentService
-	 */
-	public $householdSegment = null;
-
-	/**
-	 * 
 	 * @var KalturaHouseholdUserService
 	 */
 	public $householdUser = null;
@@ -10988,7 +10892,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:20-02-05');
-		$this->setApiVersion('5.3.1.14662');
+		$this->setApiVersion('5.3.0.14351');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -11042,7 +10946,6 @@ class KalturaClient extends KalturaClientBase
 		$this->householdPaymentMethod = new KalturaHouseholdPaymentMethodService($this);
 		$this->householdPremiumService = new KalturaHouseholdPremiumServiceService($this);
 		$this->householdQuota = new KalturaHouseholdQuotaService($this);
-		$this->householdSegment = new KalturaHouseholdSegmentService($this);
 		$this->householdUser = new KalturaHouseholdUserService($this);
 		$this->image = new KalturaImageService($this);
 		$this->imageType = new KalturaImageTypeService($this);
