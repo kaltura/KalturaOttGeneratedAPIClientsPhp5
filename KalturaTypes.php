@@ -516,6 +516,56 @@ class KalturaHouseholdCouponFilter extends KalturaCrudFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCategoryItemFilter extends KalturaCrudFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCategoryItemByIdInFilter extends KalturaCategoryItemFilter
+{
+	/**
+	 * Category item identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCategoryItemByKsqlFilter extends KalturaCategoryItemFilter
+{
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCategoryItemByRootFilter extends KalturaCategoryItemFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEventNotificationFilter extends KalturaCrudFilter
 {
 	/**
@@ -14197,6 +14247,371 @@ class KalturaOTTCategory extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaCrudObject extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUnifiedChannel extends KalturaObjectBase
+{
+	/**
+	 * Channel&#160;identifier
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+	/**
+	 * Channel Type
+	 *
+	 * @var KalturaChannelType
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCategoryItem extends KalturaCrudObject
+{
+	/**
+	 * Unique identifier for the category
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Category name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Category parent identifier
+	 *
+	 * @var int
+	 */
+	public $parentCategoryId = null;
+
+	/**
+	 * Comma separated list of child categories&#39; Ids.
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $childCategoriesIds = null;
+
+	/**
+	 * List of unified Channels.
+	 *
+	 * @var array of KalturaUnifiedChannel
+	 */
+	public $unifiedChannels;
+
+	/**
+	 * Dynamic data
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRegexExpression extends KalturaObjectBase
+{
+	/**
+	 * regex expression
+	 *
+	 * @var string
+	 */
+	public $expression = null;
+
+	/**
+	 * description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPasswordPolicy extends KalturaCrudObject
+{
+	/**
+	 * id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Comma separated UserRole Ids list which the policy is applied on
+	 *
+	 * @var string
+	 */
+	public $userRoleIds = null;
+
+	/**
+	 * The number of passwords that should be remembered for each user so that they cannot be reused.
+	 *
+	 * @var int
+	 */
+	public $historyCount = null;
+
+	/**
+	 * When should the password expire (will represent time as days).
+	 *
+	 * @var int
+	 */
+	public $expiration = null;
+
+	/**
+	 * array of  KalturaRegex
+	 *
+	 * @var array of KalturaRegexExpression
+	 */
+	public $complexities;
+
+	/**
+	 * the number of passwords failures before the account is locked.
+	 *
+	 * @var int
+	 */
+	public $lockoutFailuresCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdSegment extends KalturaCrudObject
+{
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $segmentId = null;
+
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $householdId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdCoupon extends KalturaCrudObject
+{
+	/**
+	 * Coupon code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+	/**
+	 * Last Usage Date
+	 *
+	 * @var int
+	 */
+	public $lastUsageDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotification extends KalturaCrudObject
+{
+	/**
+	 * Identifier
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * Object identifier
+	 *
+	 * @var int
+	 */
+	public $objectId = null;
+
+	/**
+	 * Event object type
+	 *
+	 * @var string
+	 */
+	public $eventObjectType = null;
+
+	/**
+	 * Message
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Status
+	 *
+	 * @var KalturaEventNotificationStatus
+	 */
+	public $status = null;
+
+	/**
+	 * Action type
+	 *
+	 * @var string
+	 */
+	public $actionType = null;
+
+	/**
+	 * Create date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUnifiedChannelInfo extends KalturaUnifiedChannel
+{
+	/**
+	 * Channel&#160;name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCategoryItemListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaCategoryItem
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCategoryTree extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the category item
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Category name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * List of category tree
+	 *
+	 * @var array of KalturaCategoryTree
+	 * @readonly
+	 */
+	public $children;
+
+	/**
+	 * List of unified Channels.
+	 *
+	 * @var array of KalturaUnifiedChannelInfo
+	 */
+	public $unifiedChannels;
+
+	/**
+	 * Dynamic data
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
+	/**
+	 * Category images
+	 *
+	 * @var array of KalturaMediaImage
+	 */
+	public $images;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCDNPartnerSettings extends KalturaObjectBase
 {
 	/**
@@ -14689,210 +15104,6 @@ class KalturaConcurrencyViolation extends KalturaEventObject
 	 * @var string
 	 */
 	public $userId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaCrudObject extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEventNotification extends KalturaCrudObject
-{
-	/**
-	 * Identifier
-	 *
-	 * @var string
-	 */
-	public $id = null;
-
-	/**
-	 * Object identifier
-	 *
-	 * @var int
-	 */
-	public $objectId = null;
-
-	/**
-	 * Event object type
-	 *
-	 * @var string
-	 */
-	public $eventObjectType = null;
-
-	/**
-	 * Message
-	 *
-	 * @var string
-	 */
-	public $message = null;
-
-	/**
-	 * Status
-	 *
-	 * @var KalturaEventNotificationStatus
-	 */
-	public $status = null;
-
-	/**
-	 * Action type
-	 *
-	 * @var string
-	 */
-	public $actionType = null;
-
-	/**
-	 * Create date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Update date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRegexExpression extends KalturaObjectBase
-{
-	/**
-	 * regex expression
-	 *
-	 * @var string
-	 */
-	public $expression = null;
-
-	/**
-	 * description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPasswordPolicy extends KalturaCrudObject
-{
-	/**
-	 * id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Comma separated UserRole Ids list which the policy is applied on
-	 *
-	 * @var string
-	 */
-	public $userRoleIds = null;
-
-	/**
-	 * The number of passwords that should be remembered for each user so that they cannot be reused.
-	 *
-	 * @var int
-	 */
-	public $historyCount = null;
-
-	/**
-	 * When should the password expire (will represent time as days).
-	 *
-	 * @var int
-	 */
-	public $expiration = null;
-
-	/**
-	 * array of  KalturaRegex
-	 *
-	 * @var array of KalturaRegexExpression
-	 */
-	public $complexities;
-
-	/**
-	 * the number of passwords failures before the account is locked.
-	 *
-	 * @var int
-	 */
-	public $lockoutFailuresCount = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdSegment extends KalturaCrudObject
-{
-	/**
-	 * Segment Id
-	 *
-	 * @var int
-	 */
-	public $segmentId = null;
-
-	/**
-	 * Segment Id
-	 *
-	 * @var int
-	 */
-	public $householdId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdCoupon extends KalturaCrudObject
-{
-	/**
-	 * Coupon code
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-	/**
-	 * Last Usage Date
-	 *
-	 * @var int
-	 */
-	public $lastUsageDate = null;
 
 
 }

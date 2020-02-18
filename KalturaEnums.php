@@ -431,6 +431,15 @@ class KalturaBundleType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCategoryItemOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaChannelEnrichment extends KalturaEnumBase
 {
 	const CLIENTLOCATION = "ClientLocation";
@@ -474,6 +483,16 @@ class KalturaChannelsOrderBy extends KalturaEnumBase
 	const NAME_DESC = "NAME_DESC";
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaChannelType extends KalturaEnumBase
+{
+	const INTERNAL = "Internal";
+	const EXTERNAL = "External";
 }
 
 /**
@@ -1168,6 +1187,7 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 {
 	const SUBSCRIPTION = "Subscription";
 	const SEGMENT = "Segment";
+	const CATEGORY = "Category";
 }
 
 /**

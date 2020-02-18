@@ -1416,6 +1416,147 @@ class KalturaBusinessModuleRuleService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCategoryItemService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * CategoryItem add
+	 * 
+	 * @param KalturaCategoryItem $objectToAdd CategoryItem details
+	 * @return KalturaCategoryItem
+	 */
+	function add(KalturaCategoryItem $objectToAdd)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
+		$this->client->queueServiceActionCall("categoryitem", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCategoryItem");
+		return $resultObject;
+	}
+
+	/**
+	 * CategoryItem update
+	 * 
+	 * @param bigint $id Category identifier
+	 * @param KalturaCategoryItem $objectToUpdate CategoryItem details
+	 * @return KalturaCategoryItem
+	 */
+	function update($id, KalturaCategoryItem $objectToUpdate)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
+		$this->client->queueServiceActionCall("categoryitem", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCategoryItem");
+		return $resultObject;
+	}
+
+	/**
+	 * Remove category
+	 * 
+	 * @param bigint $id Category identifier
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("categoryitem", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Gets all categoryItem items
+	 * 
+	 * @param KalturaCategoryItemFilter $filter Request filter
+	 * @param KalturaFilterPager $pager Request pager
+	 * @return KalturaCategoryItemListResponse
+	 */
+	function listAction(KalturaCategoryItemFilter $filter = null, KalturaFilterPager $pager)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("categoryitem", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCategoryItemListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCategoryTreeService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Duplicate category Item
+	 * 
+	 * @param bigint $categoryItemId Category item identifier
+	 * @return KalturaCategoryTree
+	 */
+	function duplicate($categoryItemId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "categoryItemId", $categoryItemId);
+		$this->client->queueServiceActionCall("categorytree", "duplicate", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCategoryTree");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrive category tree.
+	 * 
+	 * @param bigint $categoryItemId Category item identifier
+	 * @return KalturaCategoryTree
+	 */
+	function get($categoryItemId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "categoryItemId", $categoryItemId);
+		$this->client->queueServiceActionCall("categorytree", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCategoryTree");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCdnAdapterProfileService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -10338,6 +10479,18 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaCategoryItemService
+	 */
+	public $categoryItem = null;
+
+	/**
+	 * 
+	 * @var KalturaCategoryTreeService
+	 */
+	public $categoryTree = null;
+
+	/**
+	 * 
 	 * @var KalturaCdnAdapterProfileService
 	 */
 	public $cdnAdapterProfile = null;
@@ -10988,7 +11141,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:20-02-18');
-		$this->setApiVersion('5.3.2.14683');
+		$this->setApiVersion('5.3.1.14684');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -11005,6 +11158,8 @@ class KalturaClient extends KalturaClientBase
 		$this->bookmark = new KalturaBookmarkService($this);
 		$this->bulkUpload = new KalturaBulkUploadService($this);
 		$this->businessModuleRule = new KalturaBusinessModuleRuleService($this);
+		$this->categoryItem = new KalturaCategoryItemService($this);
+		$this->categoryTree = new KalturaCategoryTreeService($this);
 		$this->cdnAdapterProfile = new KalturaCdnAdapterProfileService($this);
 		$this->cdnPartnerSettings = new KalturaCdnPartnerSettingsService($this);
 		$this->cDVRAdapterProfile = new KalturaCDVRAdapterProfileService($this);
