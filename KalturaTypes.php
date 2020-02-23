@@ -541,7 +541,7 @@ class KalturaCategoryItemByIdInFilter extends KalturaCategoryItemFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCategoryItemByKsqlFilter extends KalturaCategoryItemFilter
+class KalturaCategoryItemSearchFilter extends KalturaCategoryItemFilter
 {
 	/**
 	 * KSQL expression
@@ -550,15 +550,13 @@ class KalturaCategoryItemByKsqlFilter extends KalturaCategoryItemFilter
 	 */
 	public $kSql = null;
 
+	/**
+	 * Root only
+	 *
+	 * @var bool
+	 */
+	public $rootOnly = null;
 
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryItemByRootFilter extends KalturaCategoryItemFilter
-{
 
 }
 
@@ -14300,6 +14298,7 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 * Category parent identifier
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $parentCategoryId = null;
 
@@ -14307,7 +14306,6 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 * Comma separated list of child categories&#39; Ids.
 	 *
 	 * @var string
-	 * @readonly
 	 */
 	public $childCategoriesIds = null;
 

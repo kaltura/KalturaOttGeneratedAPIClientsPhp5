@@ -433,7 +433,10 @@ class KalturaBundleType extends KalturaEnumBase
  */
 class KalturaCategoryItemOrderBy extends KalturaEnumBase
 {
-	const NONE = "NONE";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 }
 
 /**
