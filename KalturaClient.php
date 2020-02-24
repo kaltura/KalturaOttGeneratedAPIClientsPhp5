@@ -1487,12 +1487,13 @@ class KalturaCategoryItemService extends KalturaServiceBase
 	 * @param KalturaFilterPager $pager Request pager
 	 * @return KalturaCategoryItemListResponse
 	 */
-	function listAction(KalturaCategoryItemFilter $filter = null, KalturaFilterPager $pager)
+	function listAction(KalturaCategoryItemFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
 			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->addParam($kparams, "pager", $pager->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("categoryitem", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -1518,12 +1519,14 @@ class KalturaCategoryTreeService extends KalturaServiceBase
 	 * Duplicate category Item
 	 * 
 	 * @param bigint $categoryItemId Category item identifier
+	 * @param string $name Root category name
 	 * @return KalturaCategoryTree
 	 */
-	function duplicate($categoryItemId)
+	function duplicate($categoryItemId, $name)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "categoryItemId", $categoryItemId);
+		$this->client->addParam($kparams, "name", $name);
 		$this->client->queueServiceActionCall("categorytree", "duplicate", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11140,8 +11143,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-02-23');
-		$this->setApiVersion('5.3.2.14726');
+		$this->setClientTag('php5:20-02-24');
+		$this->setApiVersion('5.3.2.14772');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
