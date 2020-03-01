@@ -1078,6 +1078,13 @@ class KalturaInboxMessageFilter extends KalturaFilter
  */
 class KalturaAnnouncementFilter extends KalturaFilter
 {
+	/**
+	 * A list of comma separated announcement ids.
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
 
 }
 
