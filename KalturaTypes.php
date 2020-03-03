@@ -14307,8 +14307,16 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 * Category name
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
+
+	/**
+	 * Category name
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
 
 	/**
 	 * Category parent identifier
@@ -14587,8 +14595,16 @@ class KalturaCategoryTree extends KalturaObjectBase
 	 * Category name
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
+
+	/**
+	 * Category name
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
 
 	/**
 	 * List of category tree
