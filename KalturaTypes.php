@@ -1142,6 +1142,13 @@ class KalturaInboxMessageFilter extends KalturaFilter
  */
 class KalturaAnnouncementFilter extends KalturaFilter
 {
+	/**
+	 * A list of comma separated announcement ids.
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
 
 }
 
@@ -14346,6 +14353,14 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 * @var map
 	 */
 	public $dynamicData;
+
+	/**
+	 * Specifies when was the Category last updated. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
 
 
 }
