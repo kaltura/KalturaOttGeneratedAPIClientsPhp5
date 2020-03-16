@@ -7879,6 +7879,13 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 	 */
 	public $evictionPolicy = null;
 
+	/**
+	 * Device play data expiration TTL
+	 *
+	 * @var int
+	 */
+	public $devicePlayDataExpirationTTL = null;
+
 
 }
 
