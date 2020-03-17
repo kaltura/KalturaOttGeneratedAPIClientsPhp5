@@ -7879,6 +7879,13 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 	 */
 	public $evictionPolicy = null;
 
+	/**
+	 * Concurrency threshold in seconds
+	 *
+	 * @var int
+	 */
+	public $concurrencyThresholdInSeconds = null;
+
 
 }
 
