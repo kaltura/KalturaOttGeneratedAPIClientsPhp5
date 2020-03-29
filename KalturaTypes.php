@@ -14741,13 +14741,6 @@ class KalturaIotProfileAws extends KalturaCrudObject
 	public $secretAccessKey = null;
 
 	/**
-	 * tTL
-	 *
-	 * @var string
-	 */
-	public $tTL = null;
-
-	/**
 	 * iotPolicyName
 	 *
 	 * @var string
