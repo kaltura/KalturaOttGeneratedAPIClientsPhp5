@@ -1025,6 +1025,24 @@ class KalturaIngestProfileOverlapPolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIotOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIotProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLanguageOrderBy extends KalturaEnumBase
 {
 	const SYSTEM_NAME_ASC = "SYSTEM_NAME_ASC";

@@ -610,6 +610,24 @@ class KalturaEventNotificationFilter extends KalturaCrudFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIotFilter extends KalturaCrudFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIotProfileFilter extends KalturaCrudFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadFilter extends KalturaFilter
 {
 	/**
@@ -3408,6 +3426,13 @@ class KalturaAnnouncement extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $includeSms = null;
+
+	/**
+	 * Include IOT
+	 *
+	 * @var bool
+	 */
+	public $includeIot = null;
 
 
 }
@@ -14571,6 +14596,229 @@ class KalturaEventNotification extends KalturaCrudObject
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIot extends KalturaCrudObject
+{
+	/**
+	 * id
+	 *
+	 * @var string
+	 */
+	public $udid = null;
+
+	/**
+	 * accessKey
+	 *
+	 * @var string
+	 */
+	public $accessKey = null;
+
+	/**
+	 * accessSecretKey
+	 *
+	 * @var string
+	 */
+	public $accessSecretKey = null;
+
+	/**
+	 * Username
+	 *
+	 * @var string
+	 */
+	public $username = null;
+
+	/**
+	 * UserPassword
+	 *
+	 * @var string
+	 */
+	public $userPassword = null;
+
+	/**
+	 * IdentityId
+	 *
+	 * @var string
+	 */
+	public $identityId = null;
+
+	/**
+	 * ThingArn
+	 *
+	 * @var string
+	 */
+	public $thingArn = null;
+
+	/**
+	 * ThingId
+	 *
+	 * @var string
+	 */
+	public $thingId = null;
+
+	/**
+	 * Principal
+	 *
+	 * @var string
+	 */
+	public $principal = null;
+
+	/**
+	 * EndPoint
+	 *
+	 * @var string
+	 */
+	public $endPoint = null;
+
+	/**
+	 * ExtendedEndPoint
+	 *
+	 * @var string
+	 */
+	public $extendedEndPoint = null;
+
+	/**
+	 * IdentityPoolId
+	 *
+	 * @var string
+	 */
+	public $identityPoolId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIotProfileAws extends KalturaCrudObject
+{
+	/**
+	 * iotEndPoint
+	 *
+	 * @var string
+	 */
+	public $iotEndPoint = null;
+
+	/**
+	 * pfxPath
+	 *
+	 * @var string
+	 */
+	public $pfxPath = null;
+
+	/**
+	 * pfxPassword
+	 *
+	 * @var string
+	 */
+	public $pfxPassword = null;
+
+	/**
+	 * certificatePath
+	 *
+	 * @var string
+	 */
+	public $certificatePath = null;
+
+	/**
+	 * brokerPort
+	 *
+	 * @var int
+	 */
+	public $brokerPort = null;
+
+	/**
+	 * accessKeyId
+	 *
+	 * @var string
+	 */
+	public $accessKeyId = null;
+
+	/**
+	 * secretAccessKey
+	 *
+	 * @var string
+	 */
+	public $secretAccessKey = null;
+
+	/**
+	 * tTL
+	 *
+	 * @var string
+	 */
+	public $tTL = null;
+
+	/**
+	 * iotPolicyName
+	 *
+	 * @var string
+	 */
+	public $iotPolicyName = null;
+
+	/**
+	 * userPoolId
+	 *
+	 * @var string
+	 */
+	public $userPoolId = null;
+
+	/**
+	 * clientId
+	 *
+	 * @var string
+	 */
+	public $clientId = null;
+
+	/**
+	 * identityPoolId
+	 *
+	 * @var string
+	 */
+	public $identityPoolId = null;
+
+	/**
+	 * region
+	 *
+	 * @var string
+	 */
+	public $region = null;
+
+	/**
+	 * updateDate
+	 *
+	 * @var int
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIotProfile extends KalturaCrudObject
+{
+	/**
+	 * adapterUrl
+	 *
+	 * @var string
+	 */
+	public $adapterUrl = null;
+
+	/**
+	 * kalturaIotProfileAws
+	 *
+	 * @var KalturaIotProfileAws
+	 */
+	public $iotProfileAws;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUnifiedChannelInfo extends KalturaUnifiedChannel
 {
 	/**
@@ -15489,6 +15737,121 @@ class KalturaUrlResource extends KalturaContentResource
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDefault extends KalturaObjectBase
+{
+	/**
+	 * PoolId
+	 *
+	 * @var string
+	 */
+	public $poolId = null;
+
+	/**
+	 * Region
+	 *
+	 * @var string
+	 */
+	public $region = null;
+
+	/**
+	 * AppClientId
+	 *
+	 * @var string
+	 */
+	public $appClientId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCognitoIdentity extends KalturaObjectBase
+{
+	/**
+	 * Default
+	 *
+	 * @var KalturaDefault
+	 */
+	public $default;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCredentialsProvider extends KalturaObjectBase
+{
+	/**
+	 * KalturaCognitoIdentity
+	 *
+	 * @var KalturaCognitoIdentity
+	 */
+	public $cognitoIdentity;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCognitoUserPool extends KalturaObjectBase
+{
+	/**
+	 * Default
+	 *
+	 * @var KalturaDefault
+	 */
+	public $default;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIotClientConfiguration extends KalturaObjectBase
+{
+	/**
+	 * announcementTopic
+	 *
+	 * @var string
+	 */
+	public $announcementTopic = null;
+
+	/**
+	 * KalturaCredentialsProvider
+	 *
+	 * @var KalturaCredentialsProvider
+	 */
+	public $credentialsProvider;
+
+	/**
+	 * CognitoUserPool
+	 *
+	 * @var KalturaCognitoUserPool
+	 */
+	public $cognitoUserPool;
+
+	/**
+	 * json
+	 *
+	 * @var string
+	 */
+	public $json = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLicensedUrl extends KalturaObjectBase
 {
 	/**
@@ -15722,6 +16085,20 @@ class KalturaPushMessage extends KalturaObjectBase
 	 */
 	public $url = null;
 
+	/**
+	 * Device unique identifier
+	 *
+	 * @var string
+	 */
+	public $udid = null;
+
+	/**
+	 * PushChannels - separated with comma
+	 *
+	 * @var string
+	 */
+	public $pushChannels = null;
+
 
 }
 
@@ -15849,6 +16226,20 @@ class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $smsEnabled = null;
+
+	/**
+	 * IOT capability is enabled for the account
+	 *
+	 * @var bool
+	 */
+	public $iotEnabled = null;
+
+	/**
+	 * IOT adapter url and port
+	 *
+	 * @var string
+	 */
+	public $iotAdapterUrl = null;
 
 
 }
