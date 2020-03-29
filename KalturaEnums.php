@@ -1586,6 +1586,18 @@ class KalturaResponseType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaRollingDevicePolicy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+	const LIFO = "LIFO";
+	const FIFO = "FIFO";
+	const ACTIVE_DEVICE_ASCENDING = "ACTIVE_DEVICE_ASCENDING";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaRuleActionType extends KalturaEnumBase
 {
 	const BLOCK = "BLOCK";

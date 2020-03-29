@@ -7893,6 +7893,29 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaRollingDeviceRemovalData extends KalturaObjectBase
+{
+	/**
+	 * Rolling Device Policy
+	 *
+	 * @var KalturaRollingDevicePolicy
+	 */
+	public $rollingDeviceRemovalPolicy = null;
+
+	/**
+	 * Rolling Device Policy in a CSV style
+	 *
+	 * @var string
+	 */
+	public $rollingDeviceRemovalFamilyIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 {
 	/**
@@ -7978,6 +8001,13 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 * @var int
 	 */
 	public $defaultRegion = null;
+
+	/**
+	 * Rolling Device Policy
+	 *
+	 * @var KalturaRollingDeviceRemovalData
+	 */
+	public $rollingDeviceData;
 
 
 }
