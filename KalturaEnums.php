@@ -1025,6 +1025,24 @@ class KalturaIngestProfileOverlapPolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIotOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIotProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLanguageOrderBy extends KalturaEnumBase
 {
 	const SYSTEM_NAME_ASC = "SYSTEM_NAME_ASC";
@@ -1245,6 +1263,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const GENERAL = "General";
 	const OBJECTVIRTUALASSET = "ObjectVirtualAsset";
 	const COMMERCE = "Commerce";
+	const PLAYBACK = "Playback";
 }
 
 /**
@@ -1580,6 +1599,18 @@ class KalturaResponseType extends KalturaEnumBase
 	const JSONP = 9;
 	const ASSET_XML = 30;
 	const EXCEL = 31;
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRollingDevicePolicy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+	const LIFO = "LIFO";
+	const FIFO = "FIFO";
+	const ACTIVE_DEVICE_ASCENDING = "ACTIVE_DEVICE_ASCENDING";
 }
 
 /**

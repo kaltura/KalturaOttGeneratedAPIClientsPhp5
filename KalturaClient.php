@@ -5124,6 +5124,123 @@ class KalturaIngestProfileService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIotService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Get iot Client Configuration
+	 * 
+	 * @return KalturaIotClientConfiguration
+	 */
+	function getClientConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("iot", "getClientConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIotClientConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Register IOT device
+	 * 
+	 * @return KalturaIot
+	 */
+	function register()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("iot", "register", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIot");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIotProfileService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add an object
+	 * 
+	 * @param KalturaIotProfile $objectToAdd Object to add
+	 * @return KalturaIotProfile
+	 */
+	function add(KalturaIotProfile $objectToAdd)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
+		$this->client->queueServiceActionCall("iotprofile", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an object
+	 * 
+	 * @param bigint $id Object ID to update
+	 * @param KalturaIotProfile $objectToUpdate Object to update
+	 * @return KalturaIotProfile
+	 */
+	function update($id, KalturaIotProfile $objectToUpdate)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
+		$this->client->queueServiceActionCall("iotprofile", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Get an object
+	 * 
+	 * @param bigint $id Object ID to get
+	 * @return KalturaIotProfile
+	 */
+	function get($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("iotprofile", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLanguageService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -10752,6 +10869,18 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaIotService
+	 */
+	public $iot = null;
+
+	/**
+	 * 
+	 * @var KalturaIotProfileService
+	 */
+	public $iotProfile = null;
+
+	/**
+	 * 
 	 * @var KalturaLanguageService
 	 */
 	public $language = null;
@@ -11143,8 +11272,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-03-17');
-		$this->setApiVersion('5.3.3.27668');
+		$this->setClientTag('php5:20-04-05');
+		$this->setApiVersion('5.3.3.27828');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -11206,6 +11335,8 @@ class KalturaClient extends KalturaClientBase
 		$this->imageType = new KalturaImageTypeService($this);
 		$this->inboxMessage = new KalturaInboxMessageService($this);
 		$this->IngestProfile = new KalturaIngestProfileService($this);
+		$this->iot = new KalturaIotService($this);
+		$this->iotProfile = new KalturaIotProfileService($this);
 		$this->language = new KalturaLanguageService($this);
 		$this->licensedUrl = new KalturaLicensedUrlService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);
