@@ -15806,7 +15806,7 @@ class KalturaUrlResource extends KalturaContentResource
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaDefault extends KalturaObjectBase
+class KalturaIotDefault extends KalturaObjectBase
 {
 	/**
 	 * PoolId
@@ -15841,9 +15841,9 @@ class KalturaCognitoIdentity extends KalturaObjectBase
 	/**
 	 * Default
 	 *
-	 * @var KalturaDefault
+	 * @var KalturaIotDefault
 	 */
-	public $default;
+	public $iotDefault;
 
 
 }
@@ -15873,9 +15873,9 @@ class KalturaCognitoUserPool extends KalturaObjectBase
 	/**
 	 * Default
 	 *
-	 * @var KalturaDefault
+	 * @var KalturaIotDefault
 	 */
-	public $default;
+	public $iotDefault;
 
 
 }
