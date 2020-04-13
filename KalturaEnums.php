@@ -1545,6 +1545,7 @@ class KalturaRecordingType extends KalturaEnumBase
 	const SINGLE = "SINGLE";
 	const SEASON = "SEASON";
 	const SERIES = "SERIES";
+	const ORIGINALBROADCAST = "OriginalBroadcast";
 }
 
 /**
