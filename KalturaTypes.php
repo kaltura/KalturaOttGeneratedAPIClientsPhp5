@@ -14775,34 +14775,6 @@ class KalturaIotProfileAws extends KalturaCrudObject
 	public $iotEndPoint = null;
 
 	/**
-	 * pfxPath
-	 *
-	 * @var string
-	 */
-	public $pfxPath = null;
-
-	/**
-	 * pfxPassword
-	 *
-	 * @var string
-	 */
-	public $pfxPassword = null;
-
-	/**
-	 * certificatePath
-	 *
-	 * @var string
-	 */
-	public $certificatePath = null;
-
-	/**
-	 * brokerPort
-	 *
-	 * @var int
-	 */
-	public $brokerPort = null;
-
-	/**
 	 * accessKeyId
 	 *
 	 * @var string
@@ -14815,13 +14787,6 @@ class KalturaIotProfileAws extends KalturaCrudObject
 	 * @var string
 	 */
 	public $secretAccessKey = null;
-
-	/**
-	 * iotPolicyName
-	 *
-	 * @var string
-	 */
-	public $iotPolicyName = null;
 
 	/**
 	 * userPoolId
