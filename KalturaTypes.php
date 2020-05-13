@@ -2012,6 +2012,15 @@ class KalturaEntitlementFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaExternalRecordingResponseProfileFilter extends KalturaRelatedObjectFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaProductPriceFilter extends KalturaFilter
 {
 	/**

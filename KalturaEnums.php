@@ -783,6 +783,15 @@ class KalturaExportType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaExternalRecordingResponseProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFavoriteOrderBy extends KalturaEnumBase
 {
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
