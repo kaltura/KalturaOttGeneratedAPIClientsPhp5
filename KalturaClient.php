@@ -8957,6 +8957,30 @@ class KalturaSsoAdapterProfileService extends KalturaServiceBase
 	}
 
 	/**
+	 * Request validation against 3rd party
+	 * 
+	 * @param string $intent Intent
+	 * @param array $adapterData Adapter Data
+	 * @return KalturaSSOAdapterProfileInvoke
+	 */
+	function invoke($intent, array $adapterData)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "intent", $intent);
+		foreach($adapterData as $index => $obj)
+		{
+			$this->client->addParam($kparams, "adapterData:$index", $obj->toParams());
+		}
+		$this->client->queueServiceActionCall("ssoadapterprofile", "invoke", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSSOAdapterProfileInvoke");
+		return $resultObject;
+	}
+
+	/**
 	 * Returns all sso adapters for partner : id + name
 	 * 
 	 * @return KalturaSSOAdapterProfileListResponse
@@ -11272,8 +11296,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-05-03');
-		$this->setApiVersion('5.3.4.27908');
+		$this->setClientTag('php5:20-05-16');
+		$this->setApiVersion('5.3.5.27995');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

@@ -16663,6 +16663,36 @@ class KalturaSocialUserConfig extends KalturaSocialConfig
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSSOAdapterProfileInvoke extends KalturaObjectBase
+{
+	/**
+	 * key/value map field for adapter data
+	 *
+	 * @var map
+	 */
+	public $adapterData;
+
+	/**
+	 * code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+	/**
+	 * message
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTimeShiftedTvPartnerSettings extends KalturaObjectBase
 {
 	/**
