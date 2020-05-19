@@ -14470,6 +14470,27 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 */
 	public $updateDate = null;
 
+	/**
+	 * Category active status
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+	/**
+	 * Start date in seconds
+	 *
+	 * @var int
+	 */
+	public $startDateInSeconds = null;
+
+	/**
+	 * End date in seconds
+	 *
+	 * @var int
+	 */
+	public $endDateInSeconds = null;
+
 
 }
 
@@ -14897,6 +14918,20 @@ class KalturaUnifiedChannelInfo extends KalturaUnifiedChannel
 	 */
 	public $name = null;
 
+	/**
+	 * Start date in seconds
+	 *
+	 * @var int
+	 */
+	public $startDateInSeconds = null;
+
+	/**
+	 * End date in seconds
+	 *
+	 * @var int
+	 */
+	public $endDateInSeconds = null;
+
 
 }
 
@@ -14973,6 +15008,27 @@ class KalturaCategoryTree extends KalturaObjectBase
 	 * @var array of KalturaImage
 	 */
 	public $images;
+
+	/**
+	 * Category active status
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+	/**
+	 * Start date in seconds
+	 *
+	 * @var int
+	 */
+	public $startDateInSeconds = null;
+
+	/**
+	 * End date in seconds
+	 *
+	 * @var int
+	 */
+	public $endDateInSeconds = null;
 
 
 }
