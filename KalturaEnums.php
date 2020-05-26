@@ -683,6 +683,19 @@ class KalturaDrmSchemeName extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDurationUnit extends KalturaEnumBase
+{
+	const MINUTES = "Minutes";
+	const HOURS = "Hours";
+	const DAYS = "Days";
+	const MONTHS = "Months";
+	const YEARS = "Years";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEngagementOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1264,6 +1277,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const OBJECTVIRTUALASSET = "ObjectVirtualAsset";
 	const COMMERCE = "Commerce";
 	const PLAYBACK = "Playback";
+	const PAYMENT = "Payment";
 }
 
 /**

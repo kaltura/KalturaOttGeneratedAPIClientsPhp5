@@ -8087,6 +8087,75 @@ class KalturaObjectVirtualAssetPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDuration extends KalturaObjectBase
+{
+	/**
+	 * duration unit
+	 *
+	 * @var KalturaDurationUnit
+	 */
+	public $unit = null;
+
+	/**
+	 * duration value
+	 *
+	 * @var int
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUnifiedBillingCycle extends KalturaObjectBase
+{
+	/**
+	 * UnifiedBillingCycle name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * cycle duration
+	 *
+	 * @var KalturaDuration
+	 */
+	public $duration;
+
+	/**
+	 * paymentGateway Id
+	 *
+	 * @var int
+	 */
+	public $paymentGatewayId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPaymentPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * configuration for unified billing cycles.
+	 *
+	 * @var array of KalturaUnifiedBillingCycle
+	 */
+	public $unifiedBillingCycles;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDefaultPlaybackAdapters extends KalturaObjectBase
 {
 	/**
