@@ -2012,6 +2012,15 @@ class KalturaEntitlementFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaExternalRecordingResponseProfileFilter extends KalturaRelatedObjectFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaProductPriceFilter extends KalturaFilter
 {
 	/**
@@ -2698,6 +2707,13 @@ class KalturaChannelsFilter extends KalturaFilter
 	 */
 	public $nameStartsWith = null;
 
+	/**
+	 * Comma separated channel ids
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
 
 }
 
@@ -2734,6 +2750,13 @@ class KalturaImageFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $isDefaultEqual = null;
+
+	/**
+	 * Comma separated imageObject ids list
+	 *
+	 * @var string
+	 */
+	public $imageObjectIdIn = null;
 
 
 }
@@ -3003,6 +3026,31 @@ class KalturaExportTaskFilter extends KalturaFilter
 {
 	/**
 	 * Comma separated tasks identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExternalChannelProfileFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExternalChannelProfileByIdInFilter extends KalturaExternalChannelProfileFilter
+{
+	/**
+	 * Comma separated external channel profile ids
 	 *
 	 * @var string
 	 */
@@ -14775,34 +14823,6 @@ class KalturaIotProfileAws extends KalturaCrudObject
 	public $iotEndPoint = null;
 
 	/**
-	 * pfxPath
-	 *
-	 * @var string
-	 */
-	public $pfxPath = null;
-
-	/**
-	 * pfxPassword
-	 *
-	 * @var string
-	 */
-	public $pfxPassword = null;
-
-	/**
-	 * certificatePath
-	 *
-	 * @var string
-	 */
-	public $certificatePath = null;
-
-	/**
-	 * brokerPort
-	 *
-	 * @var int
-	 */
-	public $brokerPort = null;
-
-	/**
 	 * accessKeyId
 	 *
 	 * @var string
@@ -14815,13 +14835,6 @@ class KalturaIotProfileAws extends KalturaCrudObject
 	 * @var string
 	 */
 	public $secretAccessKey = null;
-
-	/**
-	 * iotPolicyName
-	 *
-	 * @var string
-	 */
-	public $iotPolicyName = null;
 
 	/**
 	 * userPoolId

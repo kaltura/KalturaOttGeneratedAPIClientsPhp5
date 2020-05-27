@@ -438,6 +438,8 @@ class KalturaCategoryItemOrderBy extends KalturaEnumBase
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 	const NONE = "NONE";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
 }
 
 /**
@@ -777,6 +779,24 @@ class KalturaExportType extends KalturaEnumBase
 {
 	const FULL = "full";
 	const INCREMENTAL = "incremental";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExternalChannelProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExternalRecordingResponseProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
 }
 
 /**
