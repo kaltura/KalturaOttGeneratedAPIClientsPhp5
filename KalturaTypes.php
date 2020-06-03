@@ -2012,6 +2012,15 @@ class KalturaEntitlementFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaExternalRecordingResponseProfileFilter extends KalturaRelatedObjectFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaProductPriceFilter extends KalturaFilter
 {
 	/**
@@ -2698,6 +2707,13 @@ class KalturaChannelsFilter extends KalturaFilter
 	 */
 	public $nameStartsWith = null;
 
+	/**
+	 * Comma separated channel ids
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
 
 }
 
@@ -2734,6 +2750,13 @@ class KalturaImageFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $isDefaultEqual = null;
+
+	/**
+	 * Comma separated imageObject ids list
+	 *
+	 * @var string
+	 */
+	public $imageObjectIdIn = null;
 
 
 }
@@ -3003,6 +3026,31 @@ class KalturaExportTaskFilter extends KalturaFilter
 {
 	/**
 	 * Comma separated tasks identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExternalChannelProfileFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExternalChannelProfileByIdInFilter extends KalturaExternalChannelProfileFilter
+{
+	/**
+	 * Comma separated external channel profile ids
 	 *
 	 * @var string
 	 */
@@ -5426,6 +5474,534 @@ class KalturaAssetFilePpvListResponse extends KalturaListResponse
 	 * @var array of KalturaAssetFilePpv
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaCrudObject extends KalturaOTTObjectSupportNullable
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRegexExpression extends KalturaObjectBase
+{
+	/**
+	 * regex expression
+	 *
+	 * @var string
+	 */
+	public $expression = null;
+
+	/**
+	 * description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPasswordPolicy extends KalturaCrudObject
+{
+	/**
+	 * id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Comma separated UserRole Ids list which the policy is applied on
+	 *
+	 * @var string
+	 */
+	public $userRoleIds = null;
+
+	/**
+	 * The number of passwords that should be remembered for each user so that they cannot be reused.
+	 *
+	 * @var int
+	 */
+	public $historyCount = null;
+
+	/**
+	 * When should the password expire (will represent time as days).
+	 *
+	 * @var int
+	 */
+	public $expiration = null;
+
+	/**
+	 * array of  KalturaRegex
+	 *
+	 * @var array of KalturaRegexExpression
+	 */
+	public $complexities;
+
+	/**
+	 * the number of passwords failures before the account is locked.
+	 *
+	 * @var int
+	 */
+	public $lockoutFailuresCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdSegment extends KalturaCrudObject
+{
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $segmentId = null;
+
+	/**
+	 * Segment Id
+	 *
+	 * @var int
+	 */
+	public $householdId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdCoupon extends KalturaCrudObject
+{
+	/**
+	 * Coupon code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+	/**
+	 * Last Usage Date
+	 *
+	 * @var int
+	 */
+	public $lastUsageDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUnifiedChannel extends KalturaOTTObjectSupportNullable
+{
+	/**
+	 * Channel&#160;identifier
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+	/**
+	 * Channel Type
+	 *
+	 * @var KalturaChannelType
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCategoryItem extends KalturaCrudObject
+{
+	/**
+	 * Unique identifier for the category
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Category name
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Category name
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * Category parent identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $parentId = null;
+
+	/**
+	 * Comma separated list of child categories&#39; Ids.
+	 *
+	 * @var string
+	 */
+	public $childrenIds = null;
+
+	/**
+	 * List of unified Channels.
+	 *
+	 * @var array of KalturaUnifiedChannel
+	 */
+	public $unifiedChannels;
+
+	/**
+	 * Dynamic data
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
+	/**
+	 * Specifies when was the Category last updated. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * Category active status
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+	/**
+	 * Start date in seconds
+	 *
+	 * @var int
+	 */
+	public $startDateInSeconds = null;
+
+	/**
+	 * End date in seconds
+	 *
+	 * @var int
+	 */
+	public $endDateInSeconds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUnifiedChannelInfo extends KalturaUnifiedChannel
+{
+	/**
+	 * Channel&#160;name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Start date in seconds
+	 *
+	 * @var int
+	 */
+	public $startDateInSeconds = null;
+
+	/**
+	 * End date in seconds
+	 *
+	 * @var int
+	 */
+	public $endDateInSeconds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotification extends KalturaCrudObject
+{
+	/**
+	 * Identifier
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * Object identifier
+	 *
+	 * @var int
+	 */
+	public $objectId = null;
+
+	/**
+	 * Event object type
+	 *
+	 * @var string
+	 */
+	public $eventObjectType = null;
+
+	/**
+	 * Message
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Status
+	 *
+	 * @var KalturaEventNotificationStatus
+	 */
+	public $status = null;
+
+	/**
+	 * Action type
+	 *
+	 * @var string
+	 */
+	public $actionType = null;
+
+	/**
+	 * Create date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIot extends KalturaCrudObject
+{
+	/**
+	 * id
+	 *
+	 * @var string
+	 */
+	public $udid = null;
+
+	/**
+	 * accessKey
+	 *
+	 * @var string
+	 */
+	public $accessKey = null;
+
+	/**
+	 * accessSecretKey
+	 *
+	 * @var string
+	 */
+	public $accessSecretKey = null;
+
+	/**
+	 * Username
+	 *
+	 * @var string
+	 */
+	public $username = null;
+
+	/**
+	 * UserPassword
+	 *
+	 * @var string
+	 */
+	public $userPassword = null;
+
+	/**
+	 * IdentityId
+	 *
+	 * @var string
+	 */
+	public $identityId = null;
+
+	/**
+	 * ThingArn
+	 *
+	 * @var string
+	 */
+	public $thingArn = null;
+
+	/**
+	 * ThingId
+	 *
+	 * @var string
+	 */
+	public $thingId = null;
+
+	/**
+	 * Principal
+	 *
+	 * @var string
+	 */
+	public $principal = null;
+
+	/**
+	 * EndPoint
+	 *
+	 * @var string
+	 */
+	public $endPoint = null;
+
+	/**
+	 * ExtendedEndPoint
+	 *
+	 * @var string
+	 */
+	public $extendedEndPoint = null;
+
+	/**
+	 * IdentityPoolId
+	 *
+	 * @var string
+	 */
+	public $identityPoolId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIotProfileAws extends KalturaCrudObject
+{
+	/**
+	 * iotEndPoint
+	 *
+	 * @var string
+	 */
+	public $iotEndPoint = null;
+
+	/**
+	 * accessKeyId
+	 *
+	 * @var string
+	 */
+	public $accessKeyId = null;
+
+	/**
+	 * secretAccessKey
+	 *
+	 * @var string
+	 */
+	public $secretAccessKey = null;
+
+	/**
+	 * userPoolId
+	 *
+	 * @var string
+	 */
+	public $userPoolId = null;
+
+	/**
+	 * clientId
+	 *
+	 * @var string
+	 */
+	public $clientId = null;
+
+	/**
+	 * identityPoolId
+	 *
+	 * @var string
+	 */
+	public $identityPoolId = null;
+
+	/**
+	 * region
+	 *
+	 * @var string
+	 */
+	public $region = null;
+
+	/**
+	 * updateDate
+	 *
+	 * @var int
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIotProfile extends KalturaCrudObject
+{
+	/**
+	 * adapterUrl
+	 *
+	 * @var string
+	 */
+	public $adapterUrl = null;
+
+	/**
+	 * kalturaIotProfileAws
+	 *
+	 * @var KalturaIotProfileAws
+	 */
+	public $iotProfileAws;
 
 
 }
@@ -14376,534 +14952,6 @@ class KalturaOTTCategory extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaCrudObject extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUnifiedChannel extends KalturaObjectBase
-{
-	/**
-	 * Channel&#160;identifier
-	 *
-	 * @var int
-	 */
-	public $id = null;
-
-	/**
-	 * Channel Type
-	 *
-	 * @var KalturaChannelType
-	 */
-	public $type = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryItem extends KalturaCrudObject
-{
-	/**
-	 * Unique identifier for the category
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Category name
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $name = null;
-
-	/**
-	 * Category name
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualName;
-
-	/**
-	 * Category parent identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $parentId = null;
-
-	/**
-	 * Comma separated list of child categories&#39; Ids.
-	 *
-	 * @var string
-	 */
-	public $childrenIds = null;
-
-	/**
-	 * List of unified Channels.
-	 *
-	 * @var array of KalturaUnifiedChannel
-	 */
-	public $unifiedChannels;
-
-	/**
-	 * Dynamic data
-	 *
-	 * @var map
-	 */
-	public $dynamicData;
-
-	/**
-	 * Specifies when was the Category last updated. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRegexExpression extends KalturaObjectBase
-{
-	/**
-	 * regex expression
-	 *
-	 * @var string
-	 */
-	public $expression = null;
-
-	/**
-	 * description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPasswordPolicy extends KalturaCrudObject
-{
-	/**
-	 * id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Comma separated UserRole Ids list which the policy is applied on
-	 *
-	 * @var string
-	 */
-	public $userRoleIds = null;
-
-	/**
-	 * The number of passwords that should be remembered for each user so that they cannot be reused.
-	 *
-	 * @var int
-	 */
-	public $historyCount = null;
-
-	/**
-	 * When should the password expire (will represent time as days).
-	 *
-	 * @var int
-	 */
-	public $expiration = null;
-
-	/**
-	 * array of  KalturaRegex
-	 *
-	 * @var array of KalturaRegexExpression
-	 */
-	public $complexities;
-
-	/**
-	 * the number of passwords failures before the account is locked.
-	 *
-	 * @var int
-	 */
-	public $lockoutFailuresCount = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdSegment extends KalturaCrudObject
-{
-	/**
-	 * Segment Id
-	 *
-	 * @var int
-	 */
-	public $segmentId = null;
-
-	/**
-	 * Segment Id
-	 *
-	 * @var int
-	 */
-	public $householdId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdCoupon extends KalturaCrudObject
-{
-	/**
-	 * Coupon code
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-	/**
-	 * Last Usage Date
-	 *
-	 * @var int
-	 */
-	public $lastUsageDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEventNotification extends KalturaCrudObject
-{
-	/**
-	 * Identifier
-	 *
-	 * @var string
-	 */
-	public $id = null;
-
-	/**
-	 * Object identifier
-	 *
-	 * @var int
-	 */
-	public $objectId = null;
-
-	/**
-	 * Event object type
-	 *
-	 * @var string
-	 */
-	public $eventObjectType = null;
-
-	/**
-	 * Message
-	 *
-	 * @var string
-	 */
-	public $message = null;
-
-	/**
-	 * Status
-	 *
-	 * @var KalturaEventNotificationStatus
-	 */
-	public $status = null;
-
-	/**
-	 * Action type
-	 *
-	 * @var string
-	 */
-	public $actionType = null;
-
-	/**
-	 * Create date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Update date
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIot extends KalturaCrudObject
-{
-	/**
-	 * id
-	 *
-	 * @var string
-	 */
-	public $udid = null;
-
-	/**
-	 * accessKey
-	 *
-	 * @var string
-	 */
-	public $accessKey = null;
-
-	/**
-	 * accessSecretKey
-	 *
-	 * @var string
-	 */
-	public $accessSecretKey = null;
-
-	/**
-	 * Username
-	 *
-	 * @var string
-	 */
-	public $username = null;
-
-	/**
-	 * UserPassword
-	 *
-	 * @var string
-	 */
-	public $userPassword = null;
-
-	/**
-	 * IdentityId
-	 *
-	 * @var string
-	 */
-	public $identityId = null;
-
-	/**
-	 * ThingArn
-	 *
-	 * @var string
-	 */
-	public $thingArn = null;
-
-	/**
-	 * ThingId
-	 *
-	 * @var string
-	 */
-	public $thingId = null;
-
-	/**
-	 * Principal
-	 *
-	 * @var string
-	 */
-	public $principal = null;
-
-	/**
-	 * EndPoint
-	 *
-	 * @var string
-	 */
-	public $endPoint = null;
-
-	/**
-	 * ExtendedEndPoint
-	 *
-	 * @var string
-	 */
-	public $extendedEndPoint = null;
-
-	/**
-	 * IdentityPoolId
-	 *
-	 * @var string
-	 */
-	public $identityPoolId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIotProfileAws extends KalturaCrudObject
-{
-	/**
-	 * iotEndPoint
-	 *
-	 * @var string
-	 */
-	public $iotEndPoint = null;
-
-	/**
-	 * pfxPath
-	 *
-	 * @var string
-	 */
-	public $pfxPath = null;
-
-	/**
-	 * pfxPassword
-	 *
-	 * @var string
-	 */
-	public $pfxPassword = null;
-
-	/**
-	 * certificatePath
-	 *
-	 * @var string
-	 */
-	public $certificatePath = null;
-
-	/**
-	 * brokerPort
-	 *
-	 * @var int
-	 */
-	public $brokerPort = null;
-
-	/**
-	 * accessKeyId
-	 *
-	 * @var string
-	 */
-	public $accessKeyId = null;
-
-	/**
-	 * secretAccessKey
-	 *
-	 * @var string
-	 */
-	public $secretAccessKey = null;
-
-	/**
-	 * iotPolicyName
-	 *
-	 * @var string
-	 */
-	public $iotPolicyName = null;
-
-	/**
-	 * userPoolId
-	 *
-	 * @var string
-	 */
-	public $userPoolId = null;
-
-	/**
-	 * clientId
-	 *
-	 * @var string
-	 */
-	public $clientId = null;
-
-	/**
-	 * identityPoolId
-	 *
-	 * @var string
-	 */
-	public $identityPoolId = null;
-
-	/**
-	 * region
-	 *
-	 * @var string
-	 */
-	public $region = null;
-
-	/**
-	 * updateDate
-	 *
-	 * @var int
-	 */
-	public $updateDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIotProfile extends KalturaCrudObject
-{
-	/**
-	 * adapterUrl
-	 *
-	 * @var string
-	 */
-	public $adapterUrl = null;
-
-	/**
-	 * kalturaIotProfileAws
-	 *
-	 * @var KalturaIotProfileAws
-	 */
-	public $iotProfileAws;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUnifiedChannelInfo extends KalturaUnifiedChannel
-{
-	/**
-	 * Channel&#160;name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCategoryItemListResponse extends KalturaListResponse
 {
 	/**
@@ -14973,6 +15021,27 @@ class KalturaCategoryTree extends KalturaObjectBase
 	 * @var array of KalturaImage
 	 */
 	public $images;
+
+	/**
+	 * Category active status
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+	/**
+	 * Start date in seconds
+	 *
+	 * @var int
+	 */
+	public $startDateInSeconds = null;
+
+	/**
+	 * End date in seconds
+	 *
+	 * @var int
+	 */
+	public $endDateInSeconds = null;
 
 
 }

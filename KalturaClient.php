@@ -3539,11 +3539,14 @@ class KalturaExternalChannelProfileService extends KalturaServiceBase
 	/**
 	 * Returns all External channels for partner
 	 * 
+	 * @param KalturaExternalChannelProfileFilter $filter External channel profile filter
 	 * @return KalturaExternalChannelProfileListResponse
 	 */
-	function listAction()
+	function listAction(KalturaExternalChannelProfileFilter $filter = null)
 	{
 		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("externalchannelprofile", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11296,8 +11299,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-05-18');
-		$this->setApiVersion('5.3.5.27997');
+		$this->setClientTag('php5:20-06-03');
+		$this->setApiVersion('5.3.5.28096');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
