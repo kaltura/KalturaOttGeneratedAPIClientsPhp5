@@ -8127,7 +8127,7 @@ class KalturaUnifiedBillingCycle extends KalturaObjectBase
 	public $duration;
 
 	/**
-	 * paymentGateway Id
+	 * Payment Gateway Id
 	 *
 	 * @var int
 	 */
@@ -11843,6 +11843,91 @@ class KalturaAssetHistoryListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSuspendSettings extends KalturaObjectBase
+{
+	/**
+	 * revoke entitlements
+	 *
+	 * @var bool
+	 */
+	public $revokeEntitlements = null;
+
+	/**
+	 * stop renew
+	 *
+	 * @var bool
+	 */
+	public $stopRenew = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdPaymentGateway extends KalturaObjectBase
+{
+	/**
+	 * payment gateway id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * payment gateway name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Payment gateway default (true/false)
+	 *
+	 * @var bool
+	 */
+	public $isDefault = null;
+
+	/**
+	 * distinction payment gateway selected by account or household
+	 *
+	 * @var KalturaHouseholdPaymentGatewaySelectedBy
+	 */
+	public $selectedBy = null;
+
+	/**
+	 * suspend settings
+	 *
+	 * @var KalturaSuspendSettings
+	 * @readonly
+	 */
+	public $suspendSettings;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdPaymentGatewayListResponse extends KalturaListResponse
+{
+	/**
+	 * Follow data list
+	 *
+	 * @var array of KalturaHouseholdPaymentGateway
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdPaymentMethod extends KalturaObjectBase
 {
 	/**
@@ -11903,60 +11988,6 @@ class KalturaHouseholdPaymentMethodListResponse extends KalturaListResponse
 	 * Follow data list
 	 *
 	 * @var array of KalturaHouseholdPaymentMethod
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdPaymentGateway extends KalturaObjectBase
-{
-	/**
-	 * payment gateway id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * payment gateway name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Payment gateway default (true/false)
-	 *
-	 * @var bool
-	 */
-	public $isDefault = null;
-
-	/**
-	 * distinction payment gateway selected by account or household
-	 *
-	 * @var KalturaHouseholdPaymentGatewaySelectedBy
-	 */
-	public $selectedBy = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdPaymentGatewayListResponse extends KalturaListResponse
-{
-	/**
-	 * Follow data list
-	 *
-	 * @var array of KalturaHouseholdPaymentGateway
 	 */
 	public $objects;
 

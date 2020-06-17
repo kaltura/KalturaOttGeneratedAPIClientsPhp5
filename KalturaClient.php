@@ -4419,11 +4419,17 @@ class KalturaHouseholdPaymentGatewayService extends KalturaServiceBase
 	 * Resumes all the entitlements of the given payment gateway
 	 * 
 	 * @param int $paymentGatewayId Payment gateway ID
+	 * @param array $adapterData Adapter data
 	 */
-	function resume($paymentGatewayId)
+	function resume($paymentGatewayId, array $adapterData = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "paymentGatewayId", $paymentGatewayId);
+		if ($adapterData !== null)
+			foreach($adapterData as $index => $obj)
+			{
+				$this->client->addParam($kparams, "adapterData:$index", $obj->toParams());
+			}
 		$this->client->queueServiceActionCall("householdpaymentgateway", "resume", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -4457,11 +4463,14 @@ class KalturaHouseholdPaymentGatewayService extends KalturaServiceBase
 	 * Suspends all the entitlements of the given payment gateway
 	 * 
 	 * @param int $paymentGatewayId Payment gateway ID
+	 * @param KalturaSuspendSettings $suspendSettings Suspend settings
 	 */
-	function suspend($paymentGatewayId)
+	function suspend($paymentGatewayId, KalturaSuspendSettings $suspendSettings = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "paymentGatewayId", $paymentGatewayId);
+		if ($suspendSettings !== null)
+			$this->client->addParam($kparams, "suspendSettings", $suspendSettings->toParams());
 		$this->client->queueServiceActionCall("householdpaymentgateway", "suspend", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11296,8 +11305,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-05-26');
-		$this->setApiVersion('5.3.5.28005');
+		$this->setClientTag('php5:20-06-17');
+		$this->setApiVersion('5.3.5.28021');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
