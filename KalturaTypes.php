@@ -8610,6 +8610,13 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 */
 	public $rollingDeviceData;
 
+	/**
+	 * Finished PercentThreshold
+	 *
+	 * @var int
+	 */
+	public $finishedPercentThreshold = null;
+
 
 }
 
@@ -11808,6 +11815,13 @@ class KalturaAssetStructMeta extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $isInherited = null;
+
+	/**
+	 * Is Location Tag
+	 *
+	 * @var bool
+	 */
+	public $isLocationTag = null;
 
 
 }
