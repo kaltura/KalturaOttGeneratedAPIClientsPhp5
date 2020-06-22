@@ -1540,14 +1540,12 @@ class KalturaCategoryTreeService extends KalturaServiceBase
 	 * Retrive category tree.
 	 * 
 	 * @param bigint $categoryItemId Category item identifier
-	 * @param bool $filter Filter categories dates
 	 * @return KalturaCategoryTree
 	 */
-	function get($categoryItemId, $filter = false)
+	function get($categoryItemId)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "categoryItemId", $categoryItemId);
-		$this->client->addParam($kparams, "filter", $filter);
 		$this->client->queueServiceActionCall("categorytree", "get", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11302,7 +11300,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:20-06-22');
-		$this->setApiVersion('5.3.7.28132');
+		$this->setApiVersion('5.3.6.28111');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
