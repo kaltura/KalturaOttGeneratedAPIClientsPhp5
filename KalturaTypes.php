@@ -2175,6 +2175,15 @@ class KalturaAssetHistoryFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetHistorySuppressFilter extends KalturaRelatedObjectFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetImagePerRatioFilter extends KalturaRelatedObjectFilter
 {
 

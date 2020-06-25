@@ -767,6 +767,25 @@ class KalturaAssetHistoryService extends KalturaServiceBase
 	}
 
 	/**
+	 * Get next episode by last watch asset in given seriesId
+	 * 
+	 * @param string $seriesId Series Id to search for next episode
+	 * @return KalturaAssetHistory
+	 */
+	function getNextEpisode($seriesId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "seriesId", $seriesId);
+		$this->client->queueServiceActionCall("assethistory", "getNextEpisode", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetHistory");
+		return $resultObject;
+	}
+
+	/**
 	 * Get recently watched media for user, ordered by recently watched first.
 	 * 
 	 * @param KalturaAssetHistoryFilter $filter Filter parameters for filtering out the result
@@ -11301,8 +11320,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-06-21');
-		$this->setApiVersion('5.3.6.28134');
+		$this->setClientTag('php5:20-06-25');
+		$this->setApiVersion('5.3.7.28139');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
