@@ -1416,152 +1416,6 @@ class KalturaBusinessModuleRuleService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCategoryItemService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * CategoryItem add
-	 * 
-	 * @param KalturaCategoryItem $objectToAdd CategoryItem details
-	 * @return KalturaCategoryItem
-	 */
-	function add(KalturaCategoryItem $objectToAdd)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
-		$this->client->queueServiceActionCall("categoryitem", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryItem");
-		return $resultObject;
-	}
-
-	/**
-	 * CategoryItem update
-	 * 
-	 * @param bigint $id Category identifier
-	 * @param KalturaCategoryItem $objectToUpdate CategoryItem details
-	 * @return KalturaCategoryItem
-	 */
-	function update($id, KalturaCategoryItem $objectToUpdate)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
-		$this->client->queueServiceActionCall("categoryitem", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryItem");
-		return $resultObject;
-	}
-
-	/**
-	 * Remove category
-	 * 
-	 * @param bigint $id Category identifier
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("categoryitem", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * Gets all categoryItem items
-	 * 
-	 * @param KalturaCategoryItemFilter $filter Request filter
-	 * @param KalturaFilterPager $pager Request pager
-	 * @return KalturaCategoryItemListResponse
-	 */
-	function listAction(KalturaCategoryItemFilter $filter = null, KalturaFilterPager $pager = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("categoryitem", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryItemListResponse");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryTreeService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Duplicate category Item
-	 * 
-	 * @param bigint $categoryItemId Category item identifier
-	 * @param string $name Root category name
-	 * @return KalturaCategoryTree
-	 */
-	function duplicate($categoryItemId, $name)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "categoryItemId", $categoryItemId);
-		$this->client->addParam($kparams, "name", $name);
-		$this->client->queueServiceActionCall("categorytree", "duplicate", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryTree");
-		return $resultObject;
-	}
-
-	/**
-	 * Retrive category tree.
-	 * 
-	 * @param bigint $categoryItemId Category item identifier
-	 * @param bool $filter Filter categories dates
-	 * @return KalturaCategoryTree
-	 */
-	function get($categoryItemId, $filter = false)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "categoryItemId", $categoryItemId);
-		$this->client->addParam($kparams, "filter", $filter);
-		$this->client->queueServiceActionCall("categorytree", "get", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryTree");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCdnAdapterProfileService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -3541,14 +3395,11 @@ class KalturaExternalChannelProfileService extends KalturaServiceBase
 	/**
 	 * Returns all External channels for partner
 	 * 
-	 * @param KalturaExternalChannelProfileFilter $filter External channel profile filter
 	 * @return KalturaExternalChannelProfileListResponse
 	 */
-	function listAction(KalturaExternalChannelProfileFilter $filter = null)
+	function listAction()
 	{
 		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("externalchannelprofile", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -5121,123 +4972,6 @@ class KalturaIngestProfileService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaIngestProfile");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIotService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Get iot Client Configuration
-	 * 
-	 * @return KalturaIotClientConfiguration
-	 */
-	function getClientConfiguration()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("iot", "getClientConfiguration", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIotClientConfiguration");
-		return $resultObject;
-	}
-
-	/**
-	 * Register IOT device
-	 * 
-	 * @return KalturaIot
-	 */
-	function register()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("iot", "register", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIot");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIotProfileService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Add an object
-	 * 
-	 * @param KalturaIotProfile $objectToAdd Object to add
-	 * @return KalturaIotProfile
-	 */
-	function add(KalturaIotProfile $objectToAdd)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
-		$this->client->queueServiceActionCall("iotprofile", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
-		return $resultObject;
-	}
-
-	/**
-	 * Update an object
-	 * 
-	 * @param bigint $id Object ID to update
-	 * @param KalturaIotProfile $objectToUpdate Object to update
-	 * @return KalturaIotProfile
-	 */
-	function update($id, KalturaIotProfile $objectToUpdate)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
-		$this->client->queueServiceActionCall("iotprofile", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
-		return $resultObject;
-	}
-
-	/**
-	 * Get an object
-	 * 
-	 * @param bigint $id Object ID to get
-	 * @return KalturaIotProfile
-	 */
-	function get($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("iotprofile", "get", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
 		return $resultObject;
 	}
 }
@@ -8962,30 +8696,6 @@ class KalturaSsoAdapterProfileService extends KalturaServiceBase
 	}
 
 	/**
-	 * Request validation against 3rd party
-	 * 
-	 * @param string $intent Intent
-	 * @param array $adapterData Adapter Data
-	 * @return KalturaSSOAdapterProfileInvoke
-	 */
-	function invoke($intent, array $adapterData)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "intent", $intent);
-		foreach($adapterData as $index => $obj)
-		{
-			$this->client->addParam($kparams, "adapterData:$index", $obj->toParams());
-		}
-		$this->client->queueServiceActionCall("ssoadapterprofile", "invoke", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSSOAdapterProfileInvoke");
-		return $resultObject;
-	}
-
-	/**
 	 * Returns all sso adapters for partner : id + name
 	 * 
 	 * @return KalturaSSOAdapterProfileListResponse
@@ -10628,18 +10338,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaCategoryItemService
-	 */
-	public $categoryItem = null;
-
-	/**
-	 * 
-	 * @var KalturaCategoryTreeService
-	 */
-	public $categoryTree = null;
-
-	/**
-	 * 
 	 * @var KalturaCdnAdapterProfileService
 	 */
 	public $cdnAdapterProfile = null;
@@ -10895,18 +10593,6 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaIngestProfileService
 	 */
 	public $IngestProfile = null;
-
-	/**
-	 * 
-	 * @var KalturaIotService
-	 */
-	public $iot = null;
-
-	/**
-	 * 
-	 * @var KalturaIotProfileService
-	 */
-	public $iotProfile = null;
 
 	/**
 	 * 
@@ -11301,8 +10987,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-06-30');
-		$this->setApiVersion('5.3.7.28150');
+		$this->setClientTag('php5:20-07-02');
+		$this->setApiVersion('5.3.2.27493');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -11319,8 +11005,6 @@ class KalturaClient extends KalturaClientBase
 		$this->bookmark = new KalturaBookmarkService($this);
 		$this->bulkUpload = new KalturaBulkUploadService($this);
 		$this->businessModuleRule = new KalturaBusinessModuleRuleService($this);
-		$this->categoryItem = new KalturaCategoryItemService($this);
-		$this->categoryTree = new KalturaCategoryTreeService($this);
 		$this->cdnAdapterProfile = new KalturaCdnAdapterProfileService($this);
 		$this->cdnPartnerSettings = new KalturaCdnPartnerSettingsService($this);
 		$this->cDVRAdapterProfile = new KalturaCDVRAdapterProfileService($this);
@@ -11364,8 +11048,6 @@ class KalturaClient extends KalturaClientBase
 		$this->imageType = new KalturaImageTypeService($this);
 		$this->inboxMessage = new KalturaInboxMessageService($this);
 		$this->IngestProfile = new KalturaIngestProfileService($this);
-		$this->iot = new KalturaIotService($this);
-		$this->iotProfile = new KalturaIotProfileService($this);
 		$this->language = new KalturaLanguageService($this);
 		$this->licensedUrl = new KalturaLicensedUrlService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);

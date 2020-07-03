@@ -431,21 +431,6 @@ class KalturaBundleType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCategoryItemOrderBy extends KalturaEnumBase
-{
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
-	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
-	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-	const NONE = "NONE";
-	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
-	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaChannelEnrichment extends KalturaEnumBase
 {
 	const CLIENTLOCATION = "ClientLocation";
@@ -489,16 +474,6 @@ class KalturaChannelsOrderBy extends KalturaEnumBase
 	const NAME_DESC = "NAME_DESC";
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaChannelType extends KalturaEnumBase
-{
-	const INTERNAL = "Internal";
-	const EXTERNAL = "External";
 }
 
 /**
@@ -785,24 +760,6 @@ class KalturaExportType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaExternalChannelProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaExternalRecordingResponseProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaFavoriteOrderBy extends KalturaEnumBase
 {
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
@@ -1045,24 +1002,6 @@ class KalturaIngestProfileOverlapPolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIotOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIotProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaLanguageOrderBy extends KalturaEnumBase
 {
 	const SYSTEM_NAME_ASC = "SYSTEM_NAME_ASC";
@@ -1229,7 +1168,6 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 {
 	const SUBSCRIPTION = "Subscription";
 	const SEGMENT = "Segment";
-	const CATEGORY = "Category";
 }
 
 /**
@@ -1283,7 +1221,6 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const GENERAL = "General";
 	const OBJECTVIRTUALASSET = "ObjectVirtualAsset";
 	const COMMERCE = "Commerce";
-	const PLAYBACK = "Playback";
 }
 
 /**
@@ -1565,7 +1502,6 @@ class KalturaRecordingType extends KalturaEnumBase
 	const SINGLE = "SINGLE";
 	const SEASON = "SEASON";
 	const SERIES = "SERIES";
-	const ORIGINALBROADCAST = "OriginalBroadcast";
 }
 
 /**
@@ -1620,18 +1556,6 @@ class KalturaResponseType extends KalturaEnumBase
 	const JSONP = 9;
 	const ASSET_XML = 30;
 	const EXCEL = 31;
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRollingDevicePolicy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-	const LIFO = "LIFO";
-	const FIFO = "FIFO";
-	const ACTIVE_DEVICE_ASCENDING = "ACTIVE_DEVICE_ASCENDING";
 }
 
 /**
