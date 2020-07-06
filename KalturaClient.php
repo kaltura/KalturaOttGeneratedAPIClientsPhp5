@@ -767,15 +767,15 @@ class KalturaAssetHistoryService extends KalturaServiceBase
 	}
 
 	/**
-	 * Get next episode by last watch asset in given seriesId
+	 * Get next episode by last watch asset in given assetId
 	 * 
-	 * @param string $seriesId Series Id to search for next episode
+	 * @param bigint $assetId Asset Id of series to search for next episode
 	 * @return KalturaAssetHistory
 	 */
-	function getNextEpisode($seriesId)
+	function getNextEpisode($assetId)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "seriesId", $seriesId);
+		$this->client->addParam($kparams, "assetId", $assetId);
 		$this->client->queueServiceActionCall("assethistory", "getNextEpisode", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11320,8 +11320,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-06-25');
-		$this->setApiVersion('5.3.7.28139');
+		$this->setClientTag('php5:20-07-06');
+		$this->setApiVersion('5.3.7.28145');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
