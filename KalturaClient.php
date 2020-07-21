@@ -767,25 +767,6 @@ class KalturaAssetHistoryService extends KalturaServiceBase
 	}
 
 	/**
-	 * Get next episode by last watch asset in given assetId
-	 * 
-	 * @param bigint $assetId Asset Id of series to search for next episode
-	 * @return KalturaAssetHistory
-	 */
-	function getNextEpisode($assetId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->queueServiceActionCall("assethistory", "getNextEpisode", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetHistory");
-		return $resultObject;
-	}
-
-	/**
 	 * Get recently watched media for user, ordered by recently watched first.
 	 * 
 	 * @param KalturaAssetHistoryFilter $filter Filter parameters for filtering out the result
@@ -4443,17 +4424,11 @@ class KalturaHouseholdPaymentGatewayService extends KalturaServiceBase
 	 * Resumes all the entitlements of the given payment gateway
 	 * 
 	 * @param int $paymentGatewayId Payment gateway ID
-	 * @param array $adapterData Adapter data
 	 */
-	function resume($paymentGatewayId, array $adapterData = null)
+	function resume($paymentGatewayId)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "paymentGatewayId", $paymentGatewayId);
-		if ($adapterData !== null)
-			foreach($adapterData as $index => $obj)
-			{
-				$this->client->addParam($kparams, "adapterData:$index", $obj->toParams());
-			}
 		$this->client->queueServiceActionCall("householdpaymentgateway", "resume", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -4487,14 +4462,11 @@ class KalturaHouseholdPaymentGatewayService extends KalturaServiceBase
 	 * Suspends all the entitlements of the given payment gateway
 	 * 
 	 * @param int $paymentGatewayId Payment gateway ID
-	 * @param KalturaSuspendSettings $suspendSettings Suspend settings
 	 */
-	function suspend($paymentGatewayId, KalturaSuspendSettings $suspendSettings = null)
+	function suspend($paymentGatewayId)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "paymentGatewayId", $paymentGatewayId);
-		if ($suspendSettings !== null)
-			$this->client->addParam($kparams, "suspendSettings", $suspendSettings->toParams());
 		$this->client->queueServiceActionCall("householdpaymentgateway", "suspend", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11329,8 +11301,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-07-09');
-		$this->setApiVersion('5.3.7.28193');
+		$this->setClientTag('php5:20-07-21');
+		$this->setApiVersion('5.3.7.28173');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
