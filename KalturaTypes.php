@@ -219,6 +219,22 @@ class KalturaDetachedResponseProfile extends KalturaBaseResponseProfile
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaOnDemandResponseProfile extends KalturaDetachedResponseProfile
+{
+	/**
+	 * Comma seperated properties names
+	 *
+	 * @var string
+	 */
+	public $retrievedProperties = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaRelatedObjectFilter extends KalturaFilter
 {
 
