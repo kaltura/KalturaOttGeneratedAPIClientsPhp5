@@ -15072,6 +15072,14 @@ class KalturaCategoryTree extends KalturaObjectBase
 	 */
 	public $endDateInSeconds = null;
 
+	/**
+	 * Category type
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $type = null;
+
 
 }
 
