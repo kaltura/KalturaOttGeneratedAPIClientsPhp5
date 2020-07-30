@@ -6252,11 +6252,14 @@ class KalturaOttUserService extends KalturaServiceBase
 	/**
 	 * Logout the calling user.
 	 * 
+	 * @param map $adapterData Adapter data
 	 * @return bool
 	 */
-	function logout()
+	function logout(array $adapterData = null)
 	{
 		$kparams = array();
+		if ($adapterData !== null)
+			$this->client->addParam($kparams, "adapterData", $adapterData->toParams());
 		$this->client->queueServiceActionCall("ottuser", "logout", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10317,15 +10320,20 @@ class KalturaUserLoginPinService extends KalturaServiceBase
 	}
 
 	/**
-	 * Generate a time and usage expiry login-PIN that can allow a single login per PIN. If an active login-PIN already exists. Calling this API again for same user will add another login-PIN
+	 * Generate a time and usage expiry login-PIN that can allow a single/multiple login/s per PIN. 
+            If an active login-PIN already exists. Calling this API again for same user will add another login-PIN
 	 * 
 	 * @param string $secret Additional security parameter for optional enhanced security
+	 * @param int $pinUsages Optional number of pin usages
+	 * @param bigint $pinDuration Optional duration in minutes of the pin
 	 * @return KalturaUserLoginPin
 	 */
-	function add($secret = null)
+	function add($secret = null, $pinUsages = null, $pinDuration = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "secret", $secret);
+		$this->client->addParam($kparams, "pinUsages", $pinUsages);
+		$this->client->addParam($kparams, "pinDuration", $pinDuration);
 		$this->client->queueServiceActionCall("userloginpin", "add", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10376,13 +10384,17 @@ class KalturaUserLoginPinService extends KalturaServiceBase
 	 * 
 	 * @param string $pinCode Device Identifier
 	 * @param string $secret Additional security parameter to validate the login
+	 * @param int $pinUsages Optional number of pin usages
+	 * @param bigint $pinDuration Optional duration in seconds of the pin
 	 * @return KalturaUserLoginPin
 	 */
-	function update($pinCode, $secret = null)
+	function update($pinCode, $secret = null, $pinUsages = null, $pinDuration = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "pinCode", $pinCode);
 		$this->client->addParam($kparams, "secret", $secret);
+		$this->client->addParam($kparams, "pinUsages", $pinUsages);
+		$this->client->addParam($kparams, "pinDuration", $pinDuration);
 		$this->client->queueServiceActionCall("userloginpin", "update", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11329,8 +11341,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-07-09');
-		$this->setApiVersion('5.3.7.28193');
+		$this->setClientTag('php5:20-07-30');
+		$this->setApiVersion('5.4.0.28257');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
