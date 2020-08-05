@@ -557,6 +557,13 @@ class KalturaCategoryItemSearchFilter extends KalturaCategoryItemFilter
 	 */
 	public $rootOnly = null;
 
+	/**
+	 * Indicates which category to return by their type.
+	 *
+	 * @var string
+	 */
+	public $typeEqual = null;
+
 
 }
 
@@ -3773,6 +3780,13 @@ class KalturaMediaFile extends KalturaAssetFile
 	 */
 	public $catalogEndDate = null;
 
+	/**
+	 * OPL
+	 *
+	 * @var string
+	 */
+	public $opl = null;
+
 
 }
 
@@ -5711,6 +5725,14 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 * @var int
 	 */
 	public $endDateInSeconds = null;
+
+	/**
+	 * Category type
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $type = null;
 
 
 }
@@ -8640,6 +8662,13 @@ class KalturaObjectVirtualAssetInfo extends KalturaObjectBase
 	 * @var KalturaObjectVirtualAssetInfoType
 	 */
 	public $type = null;
+
+	/**
+	 * Extended types mapping
+	 *
+	 * @var map
+	 */
+	public $extendedTypes;
 
 
 }
@@ -15157,6 +15186,14 @@ class KalturaCategoryTree extends KalturaObjectBase
 	 * @var int
 	 */
 	public $endDateInSeconds = null;
+
+	/**
+	 * Category type
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $type = null;
 
 
 }
