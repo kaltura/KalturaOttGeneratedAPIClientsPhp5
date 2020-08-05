@@ -557,13 +557,6 @@ class KalturaCategoryItemSearchFilter extends KalturaCategoryItemFilter
 	 */
 	public $rootOnly = null;
 
-	/**
-	 * Indicates which category to return by their type.
-	 *
-	 * @var string
-	 */
-	public $typeEqual = null;
-
 
 }
 
@@ -3780,13 +3773,6 @@ class KalturaMediaFile extends KalturaAssetFile
 	 */
 	public $catalogEndDate = null;
 
-	/**
-	 * OPL
-	 *
-	 * @var string
-	 */
-	public $opl = null;
-
 
 }
 
@@ -5725,14 +5711,6 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 * @var int
 	 */
 	public $endDateInSeconds = null;
-
-	/**
-	 * Category type
-	 *
-	 * @var string
-	 * @insertonly
-	 */
-	public $type = null;
 
 
 }
@@ -8663,13 +8641,6 @@ class KalturaObjectVirtualAssetInfo extends KalturaObjectBase
 	 */
 	public $type = null;
 
-	/**
-	 * Extended types mapping
-	 *
-	 * @var map
-	 */
-	public $extendedTypes;
-
 
 }
 
@@ -8738,6 +8709,13 @@ class KalturaUnifiedBillingCycle extends KalturaObjectBase
 	 * @var int
 	 */
 	public $paymentGatewayId = null;
+
+	/**
+	 * Define if partial billing shall be calculated or not
+	 *
+	 * @var bool
+	 */
+	public $ignorePartialBilling = null;
 
 
 }
@@ -15179,14 +15157,6 @@ class KalturaCategoryTree extends KalturaObjectBase
 	 * @var int
 	 */
 	public $endDateInSeconds = null;
-
-	/**
-	 * Category type
-	 *
-	 * @var string
-	 * @insertonly
-	 */
-	public $type = null;
 
 
 }
