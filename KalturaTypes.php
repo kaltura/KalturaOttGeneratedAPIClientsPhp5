@@ -3156,6 +3156,93 @@ class KalturaPermissionFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPermissionItemFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionItemByIdInFilter extends KalturaPermissionItemFilter
+{
+	/**
+	 * Permission item identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionItemByApiActionFilter extends KalturaPermissionItemFilter
+{
+	/**
+	 * API service name
+	 *
+	 * @var string
+	 */
+	public $serviceEqual = null;
+
+	/**
+	 * API action name
+	 *
+	 * @var string
+	 */
+	public $actionEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionItemByArgumentFilter extends KalturaPermissionItemByApiActionFilter
+{
+	/**
+	 * Parameter name
+	 *
+	 * @var string
+	 */
+	public $parameterEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionItemByParameterFilter extends KalturaPermissionItemFilter
+{
+	/**
+	 * Parameter name
+	 *
+	 * @var string
+	 */
+	public $parameterEqual = null;
+
+	/**
+	 * Parameter name
+	 *
+	 * @var string
+	 */
+	public $objectEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPlaybackProfileFilter extends KalturaFilter
 {
 	/**
@@ -3304,6 +3391,20 @@ class KalturaUserRoleFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $currentUserRoleIdsContains = null;
+
+	/**
+	 * User role type
+	 *
+	 * @var KalturaUserRoleType
+	 */
+	public $typeEqual = null;
+
+	/**
+	 * User role profile
+	 *
+	 * @var KalturaUserRoleProfile
+	 */
+	public $profileEqual = null;
 
 
 }
@@ -13952,6 +14053,14 @@ class KalturaPermission extends KalturaObjectBase
 	 */
 	public $type = null;
 
+	/**
+	 * Comma separated assosiated permission items IDs
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $permissionItemsIds = null;
+
 
 }
 
@@ -14463,6 +14572,21 @@ class KalturaUserRole extends KalturaObjectBase
 	 * @var string
 	 */
 	public $excludedPermissionNames = null;
+
+	/**
+	 * Role type
+	 *
+	 * @var KalturaUserRoleType
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
+	 * Role profile
+	 *
+	 * @var KalturaUserRoleProfile
+	 */
+	public $profile = null;
 
 
 }
@@ -16600,6 +16724,159 @@ class KalturaPasswordPolicyListResponse extends KalturaListResponse
 	 * @var array of KalturaPasswordPolicy
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionItem extends KalturaObjectBase
+{
+	/**
+	 * Permission item identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Permission item name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Permission isExcluded
+	 *
+	 * @var bool
+	 */
+	public $isExcluded = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionItemListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaPermissionItem
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApiActionPermissionItem extends KalturaPermissionItem
+{
+	/**
+	 * API service name
+	 *
+	 * @var string
+	 */
+	public $service = null;
+
+	/**
+	 * API action name
+	 *
+	 * @var string
+	 */
+	public $action = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApiArgumentPermissionItem extends KalturaPermissionItem
+{
+	/**
+	 * API service name
+	 *
+	 * @var string
+	 */
+	public $service = null;
+
+	/**
+	 * API action name
+	 *
+	 * @var string
+	 */
+	public $action = null;
+
+	/**
+	 * API parameter name
+	 *
+	 * @var string
+	 */
+	public $parameter = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApiParameterPermissionItem extends KalturaPermissionItem
+{
+	/**
+	 * API object name
+	 *
+	 * @var string
+	 */
+	public $object = null;
+
+	/**
+	 * API parameter name
+	 *
+	 * @var string
+	 */
+	public $parameter = null;
+
+	/**
+	 * API action type
+	 *
+	 * @var KalturaApiParameterPermissionItemAction
+	 */
+	public $action = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApiPriviligesPermissionItem extends KalturaPermissionItem
+{
+	/**
+	 * API object name
+	 *
+	 * @var string
+	 */
+	public $object = null;
+
+	/**
+	 * API parameter name
+	 *
+	 * @var string
+	 */
+	public $parameter = null;
 
 
 }
