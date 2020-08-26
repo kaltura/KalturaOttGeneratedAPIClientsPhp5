@@ -10398,7 +10398,7 @@ class KalturaUserLoginPinService extends KalturaServiceBase
 	 * 
 	 * @param string $secret Additional security parameter for optional enhanced security
 	 * @param int $pinUsages Optional number of pin usages
-	 * @param bigint $pinDuration Optional duration in minutes of the pin
+	 * @param int $pinDuration Optional duration in minutes of the pin
 	 * @return KalturaUserLoginPin
 	 */
 	function add($secret = null, $pinUsages = null, $pinDuration = null)
@@ -10458,7 +10458,7 @@ class KalturaUserLoginPinService extends KalturaServiceBase
 	 * @param string $pinCode Device Identifier
 	 * @param string $secret Additional security parameter to validate the login
 	 * @param int $pinUsages Optional number of pin usages
-	 * @param bigint $pinDuration Optional duration in seconds of the pin
+	 * @param int $pinDuration Optional duration in seconds of the pin
 	 * @return KalturaUserLoginPin
 	 */
 	function update($pinCode, $secret = null, $pinUsages = null, $pinDuration = null)
@@ -11420,8 +11420,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-08-06');
-		$this->setApiVersion('5.4.0.28265');
+		$this->setClientTag('php5:20-08-26');
+		$this->setApiVersion('5.5.0.28283');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

@@ -219,6 +219,22 @@ class KalturaDetachedResponseProfile extends KalturaBaseResponseProfile
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaOnDemandResponseProfile extends KalturaDetachedResponseProfile
+{
+	/**
+	 * Comma seperated properties names
+	 *
+	 * @var string
+	 */
+	public $retrievedProperties = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaRelatedObjectFilter extends KalturaFilter
 {
 
@@ -8839,6 +8855,13 @@ class KalturaUnifiedBillingCycle extends KalturaObjectBase
 	 * @var int
 	 */
 	public $paymentGatewayId = null;
+
+	/**
+	 * Define if partial billing shall be calculated or not
+	 *
+	 * @var bool
+	 */
+	public $ignorePartialBilling = null;
 
 
 }
