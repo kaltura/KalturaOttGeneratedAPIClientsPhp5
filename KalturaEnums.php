@@ -100,19 +100,6 @@ class KalturaAnnouncementStatus extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaApiParameterPermissionItemAction extends KalturaEnumBase
-{
-	const READ = "READ";
-	const INSERT = "INSERT";
-	const UPDATE = "UPDATE";
-	const WRITE = "WRITE";
-	const ALL = "ALL";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAppTokenHashType extends KalturaEnumBase
 {
 	const SHA1 = "SHA1";
@@ -1357,15 +1344,6 @@ class KalturaPaymentMethodType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPermissionItemOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPermissionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -2137,28 +2115,6 @@ class KalturaUserAssetsListType extends KalturaEnumBase
 class KalturaUserRoleOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserRoleProfile extends KalturaEnumBase
-{
-	const USER = "USER";
-	const PARTNER = "PARTNER";
-	const PROFILE = "PROFILE";
-	const SYSTEM = "SYSTEM";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserRoleType extends KalturaEnumBase
-{
-	const SYSTEM = "SYSTEM";
-	const CUSTOM = "CUSTOM";
 }
 
 /**
