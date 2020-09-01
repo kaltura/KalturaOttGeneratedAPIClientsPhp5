@@ -1805,6 +1805,15 @@ class KalturaSkipOptions extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSmsAdapterProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSocialActionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";

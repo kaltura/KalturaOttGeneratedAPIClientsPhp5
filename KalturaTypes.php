@@ -219,22 +219,6 @@ class KalturaDetachedResponseProfile extends KalturaBaseResponseProfile
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaOnDemandResponseProfile extends KalturaDetachedResponseProfile
-{
-	/**
-	 * Comma seperated properties names
-	 *
-	 * @var string
-	 */
-	public $retrievedProperties = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaRelatedObjectFilter extends KalturaFilter
 {
 
@@ -488,6 +472,15 @@ class KalturaHouseholdSegmentFilter extends KalturaCrudFilter
 	 */
 	public $kSql = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSmsAdapterProfileFilter extends KalturaCrudFilter
+{
 
 }
 
@@ -5714,6 +5707,65 @@ class KalturaHouseholdSegment extends KalturaCrudObject
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSmsAdapterProfile extends KalturaCrudObject
+{
+	/**
+	 * id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * adapter url
+	 *
+	 * @var string
+	 */
+	public $adapterUrl = null;
+
+	/**
+	 * Shared Secret
+	 *
+	 * @var string
+	 */
+	public $sharedSecret = null;
+
+	/**
+	 * SSO Adapter is active status
+	 *
+	 * @var int
+	 */
+	public $isActive = null;
+
+	/**
+	 * SSO Adapter extra parameters
+	 *
+	 * @var map
+	 */
+	public $settings;
+
+	/**
+	 * SSO Adapter external identifier
+	 *
+	 * @var string
+	 */
+	public $externalIdentifier = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdCoupon extends KalturaCrudObject
 {
 	/**
@@ -8855,13 +8907,6 @@ class KalturaUnifiedBillingCycle extends KalturaObjectBase
 	 * @var int
 	 */
 	public $paymentGatewayId = null;
-
-	/**
-	 * Define if partial billing shall be calculated or not
-	 *
-	 * @var bool
-	 */
-	public $ignorePartialBilling = null;
 
 
 }
@@ -16946,6 +16991,22 @@ class KalturaPurchaseSettings extends KalturaPin
 	 * @var KalturaPurchaseSettingsType
 	 */
 	public $permission = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSmsAdapterProfileListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaSmsAdapterProfile
+	 */
+	public $objects;
 
 
 }
