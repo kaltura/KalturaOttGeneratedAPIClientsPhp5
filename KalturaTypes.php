@@ -1832,6 +1832,22 @@ class KalturaHouseholdDeviceFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaHouseholdFilter extends KalturaFilter
+{
+	/**
+	 * Household external identifier to search by
+	 *
+	 * @var string
+	 */
+	public $externalIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHouseholdUserFilter extends KalturaFilter
 {
 	/**
@@ -2104,6 +2120,34 @@ class KalturaTransactionHistoryFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $endDateLessThanOrEqual = null;
+
+	/**
+	 * Filter transaction by entitlement id
+	 *
+	 * @var int
+	 */
+	public $entitlementIdEqual = null;
+
+	/**
+	 * Filter transaction by external Id
+	 *
+	 * @var string
+	 */
+	public $externalIdEqual = null;
+
+	/**
+	 * Filter transaction by billing item type
+	 *
+	 * @var KalturaBillingItemsType
+	 */
+	public $billingItemsTypeEqual = null;
+
+	/**
+	 * Filter transaction by billing action
+	 *
+	 * @var KalturaBillingAction
+	 */
+	public $billingActionEqual = null;
 
 
 }
@@ -10802,7 +10846,6 @@ class KalturaEntitlement extends KalturaObjectBase
 	 * The end date of the entitlement
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $endDate = null;
 
@@ -15975,6 +16018,38 @@ class KalturaHousehold extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $roleId = null;
+
+	/**
+	 * create date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * update date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaHousehold
+	 */
+	public $objects;
 
 
 }

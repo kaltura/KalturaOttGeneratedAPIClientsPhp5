@@ -3922,6 +3922,28 @@ class KalturaHouseholdService extends KalturaServiceBase
 	}
 
 	/**
+	 * Get recently watched media for user, ordered by recently watched first.
+	 * 
+	 * @param KalturaHouseholdFilter $filter Filter parameters for filtering out the result
+	 * @param KalturaFilterPager $pager Page size and index. Number of assets to return per page. Possible range 5 ≤ size ≥ 50. If omitted - will be set to 25. If a value > 50 provided – will set to 50
+	 * @return KalturaHouseholdListResponse
+	 */
+	function listAction(KalturaHouseholdFilter $filter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("household", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdListResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Purge a household. Delete all of the household information, including users, devices, entitlements, payment methods and notification date.
 	 * 
 	 * @param int $id Household identifier
@@ -11420,8 +11442,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-08-26');
-		$this->setApiVersion('5.5.0.28283');
+		$this->setClientTag('php5:20-09-02');
+		$this->setApiVersion('5.5.0.28298');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
