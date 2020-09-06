@@ -883,6 +883,8 @@ class KalturaHouseholdCouponOrderBy extends KalturaEnumBase
 class KalturaHouseholdDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+	const CREATED_DATE_ASC = "CREATED_DATE_ASC";
+	const CREATED_DATE_DESC = "CREATED_DATE_DESC";
 }
 
 /**
@@ -893,6 +895,15 @@ class KalturaHouseholdFrequencyType extends KalturaEnumBase
 {
 	const DEVICES = "devices";
 	const USERS = "users";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdOrderBy extends KalturaEnumBase
+{
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 }
 
 /**
@@ -1799,6 +1810,15 @@ class KalturaSkipOptions extends KalturaEnumBase
 	const NO = "No";
 	const PREVIOUS = "Previous";
 	const ANY = "Any";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSmsAdapterProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
 }
 
 /**

@@ -3922,6 +3922,28 @@ class KalturaHouseholdService extends KalturaServiceBase
 	}
 
 	/**
+	 * Get recently watched media for user, ordered by recently watched first.
+	 * 
+	 * @param KalturaHouseholdFilter $filter Filter parameters for filtering out the result
+	 * @param KalturaFilterPager $pager Page size and index. Number of assets to return per page. Possible range 5 ≤ size ≥ 50. If omitted - will be set to 25. If a value > 50 provided – will set to 50
+	 * @return KalturaHouseholdListResponse
+	 */
+	function listAction(KalturaHouseholdFilter $filter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("household", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdListResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Purge a household. Delete all of the household information, including users, devices, entitlements, payment methods and notification date.
 	 * 
 	 * @param int $id Household identifier
@@ -5740,12 +5762,17 @@ class KalturaNotificationService extends KalturaServiceBase
 	 * Sends SMS notification to user
 	 * 
 	 * @param string $message Message to send
+	 * @param string $phoneNumber Optional phoneNumber
+	 * @param map $adapterData Data used by the adapter
 	 * @return bool
 	 */
-	function sendSms($message)
+	function sendSms($message, $phoneNumber = null, array $adapterData = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "message", $message);
+		$this->client->addParam($kparams, "phoneNumber", $phoneNumber);
+		if ($adapterData !== null)
+			$this->client->addParam($kparams, "adapterData", $adapterData->toParams());
 		$this->client->queueServiceActionCall("notification", "sendSms", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -8676,6 +8703,132 @@ class KalturaSessionService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSmsAdapterProfileService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add an object
+	 * 
+	 * @param KalturaSmsAdapterProfile $objectToAdd Object to add
+	 * @return KalturaSmsAdapterProfile
+	 */
+	function add(KalturaSmsAdapterProfile $objectToAdd)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
+		$this->client->queueServiceActionCall("smsadapterprofile", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSmsAdapterProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an object
+	 * 
+	 * @param bigint $id Object ID to update
+	 * @param KalturaSmsAdapterProfile $objectToUpdate Object to update
+	 * @return KalturaSmsAdapterProfile
+	 */
+	function update($id, KalturaSmsAdapterProfile $objectToUpdate)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
+		$this->client->queueServiceActionCall("smsadapterprofile", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSmsAdapterProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Get an object
+	 * 
+	 * @param bigint $id Object ID to get
+	 * @return KalturaSmsAdapterProfile
+	 */
+	function get($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("smsadapterprofile", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSmsAdapterProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param KalturaSmsAdapterProfileFilter $filter Request filter
+	 * @return KalturaSmsAdapterProfileListResponse
+	 */
+	function listAction(KalturaSmsAdapterProfileFilter $filter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("smsadapterprofile", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSmsAdapterProfileListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an object
+	 * 
+	 * @param bigint $id Object ID to delete
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("smsadapterprofile", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Generate Sms Adapter shared secret
+	 * 
+	 * @param int $smsAdapterId Sms Adapter identifier
+	 * @return KalturaSmsAdapterProfile
+	 */
+	function generateSharedSecret($smsAdapterId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "smsAdapterId", $smsAdapterId);
+		$this->client->queueServiceActionCall("smsadapterprofile", "generateSharedSecret", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSmsAdapterProfile");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSocialActionService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -11269,6 +11422,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaSmsAdapterProfileService
+	 */
+	public $smsAdapterProfile = null;
+
+	/**
+	 * 
 	 * @var KalturaSocialActionService
 	 */
 	public $socialAction = null;
@@ -11420,8 +11579,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-08-26');
-		$this->setApiVersion('5.5.0.28283');
+		$this->setClientTag('php5:20-09-06');
+		$this->setApiVersion('5.5.1.28355');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -11526,6 +11685,7 @@ class KalturaClient extends KalturaClientBase
 		$this->segmentationType = new KalturaSegmentationTypeService($this);
 		$this->seriesRecording = new KalturaSeriesRecordingService($this);
 		$this->session = new KalturaSessionService($this);
+		$this->smsAdapterProfile = new KalturaSmsAdapterProfileService($this);
 		$this->socialAction = new KalturaSocialActionService($this);
 		$this->socialComment = new KalturaSocialCommentService($this);
 		$this->social = new KalturaSocialService($this);
