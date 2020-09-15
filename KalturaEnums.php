@@ -100,19 +100,6 @@ class KalturaAnnouncementStatus extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaApiParameterPermissionItemAction extends KalturaEnumBase
-{
-	const READ = "READ";
-	const INSERT = "INSERT";
-	const UPDATE = "UPDATE";
-	const WRITE = "WRITE";
-	const ALL = "ALL";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAppTokenHashType extends KalturaEnumBase
 {
 	const SHA1 = "SHA1";
@@ -444,21 +431,6 @@ class KalturaBundleType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCategoryItemOrderBy extends KalturaEnumBase
-{
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
-	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
-	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-	const NONE = "NONE";
-	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
-	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaChannelEnrichment extends KalturaEnumBase
 {
 	const CLIENTLOCATION = "ClientLocation";
@@ -502,16 +474,6 @@ class KalturaChannelsOrderBy extends KalturaEnumBase
 	const NAME_DESC = "NAME_DESC";
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaChannelType extends KalturaEnumBase
-{
-	const INTERNAL = "Internal";
-	const EXTERNAL = "External";
 }
 
 /**
@@ -698,19 +660,6 @@ class KalturaDrmSchemeName extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaDurationUnit extends KalturaEnumBase
-{
-	const MINUTES = "Minutes";
-	const HOURS = "Hours";
-	const DAYS = "Days";
-	const MONTHS = "Months";
-	const YEARS = "Years";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaEngagementOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -811,24 +760,6 @@ class KalturaExportType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaExternalChannelProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaExternalRecordingResponseProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaFavoriteOrderBy extends KalturaEnumBase
 {
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
@@ -883,8 +814,6 @@ class KalturaHouseholdCouponOrderBy extends KalturaEnumBase
 class KalturaHouseholdDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-	const CREATED_DATE_ASC = "CREATED_DATE_ASC";
-	const CREATED_DATE_DESC = "CREATED_DATE_DESC";
 }
 
 /**
@@ -895,15 +824,6 @@ class KalturaHouseholdFrequencyType extends KalturaEnumBase
 {
 	const DEVICES = "devices";
 	const USERS = "users";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdOrderBy extends KalturaEnumBase
-{
-	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 }
 
 /**
@@ -1082,24 +1002,6 @@ class KalturaIngestProfileOverlapPolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIotOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIotProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaLanguageOrderBy extends KalturaEnumBase
 {
 	const SYSTEM_NAME_ASC = "SYSTEM_NAME_ASC";
@@ -1266,7 +1168,6 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 {
 	const SUBSCRIPTION = "Subscription";
 	const SEGMENT = "Segment";
-	const CATEGORY = "Category";
 }
 
 /**
@@ -1320,8 +1221,6 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const GENERAL = "General";
 	const OBJECTVIRTUALASSET = "ObjectVirtualAsset";
 	const COMMERCE = "Commerce";
-	const PLAYBACK = "Playback";
-	const PAYMENT = "Payment";
 }
 
 /**
@@ -1362,15 +1261,6 @@ class KalturaPaymentMethodType extends KalturaEnumBase
 	const M1 = "m1";
 	const CHANGE_SUBSCRIPTION = "change_subscription";
 	const OFFLINE = "offline";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPermissionItemOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
 }
 
 /**
@@ -1612,7 +1502,6 @@ class KalturaRecordingType extends KalturaEnumBase
 	const SINGLE = "SINGLE";
 	const SEASON = "SEASON";
 	const SERIES = "SERIES";
-	const ORIGINALBROADCAST = "OriginalBroadcast";
 }
 
 /**
@@ -1667,18 +1556,6 @@ class KalturaResponseType extends KalturaEnumBase
 	const JSONP = 9;
 	const ASSET_XML = 30;
 	const EXCEL = 31;
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRollingDevicePolicy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-	const LIFO = "LIFO";
-	const FIFO = "FIFO";
-	const ACTIVE_DEVICE_ASCENDING = "ACTIVE_DEVICE_ASCENDING";
 }
 
 /**
@@ -1810,15 +1687,6 @@ class KalturaSkipOptions extends KalturaEnumBase
 	const NO = "No";
 	const PREVIOUS = "Previous";
 	const ANY = "Any";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSmsAdapterProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
 }
 
 /**
@@ -2157,28 +2025,6 @@ class KalturaUserAssetsListType extends KalturaEnumBase
 class KalturaUserRoleOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserRoleProfile extends KalturaEnumBase
-{
-	const USER = "USER";
-	const PARTNER = "PARTNER";
-	const PROFILE = "PROFILE";
-	const SYSTEM = "SYSTEM";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserRoleType extends KalturaEnumBase
-{
-	const SYSTEM = "SYSTEM";
-	const CUSTOM = "CUSTOM";
 }
 
 /**
