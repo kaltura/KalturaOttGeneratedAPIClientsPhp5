@@ -102,8 +102,7 @@ class KalturaAnnouncementStatus extends KalturaEnumBase
  */
 class KalturaApiAction extends KalturaEnumBase
 {
-	const INSERT = "INSERT";
-	const UPDATE = "UPDATE";
+	const ADD = "ADD";
 }
 
 /**
