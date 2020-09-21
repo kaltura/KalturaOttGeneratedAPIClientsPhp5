@@ -100,19 +100,6 @@ class KalturaAnnouncementStatus extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaApiParameterPermissionItemAction extends KalturaEnumBase
-{
-	const READ = "READ";
-	const INSERT = "INSERT";
-	const UPDATE = "UPDATE";
-	const WRITE = "WRITE";
-	const ALL = "ALL";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAppTokenHashType extends KalturaEnumBase
 {
 	const SHA1 = "SHA1";
@@ -883,8 +870,6 @@ class KalturaHouseholdCouponOrderBy extends KalturaEnumBase
 class KalturaHouseholdDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-	const CREATED_DATE_ASC = "CREATED_DATE_ASC";
-	const CREATED_DATE_DESC = "CREATED_DATE_DESC";
 }
 
 /**
@@ -895,15 +880,6 @@ class KalturaHouseholdFrequencyType extends KalturaEnumBase
 {
 	const DEVICES = "devices";
 	const USERS = "users";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdOrderBy extends KalturaEnumBase
-{
-	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 }
 
 /**
@@ -1368,15 +1344,6 @@ class KalturaPaymentMethodType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPermissionItemOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPermissionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1816,15 +1783,6 @@ class KalturaSkipOptions extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSmsAdapterProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaSocialActionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -2157,28 +2115,6 @@ class KalturaUserAssetsListType extends KalturaEnumBase
 class KalturaUserRoleOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserRoleProfile extends KalturaEnumBase
-{
-	const USER = "USER";
-	const PARTNER = "PARTNER";
-	const PROFILE = "PROFILE";
-	const SYSTEM = "SYSTEM";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserRoleType extends KalturaEnumBase
-{
-	const SYSTEM = "SYSTEM";
-	const CUSTOM = "CUSTOM";
 }
 
 /**
