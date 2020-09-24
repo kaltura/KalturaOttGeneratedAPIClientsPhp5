@@ -464,7 +464,7 @@ class KalturaBundleType extends KalturaEnumBase
  */
 class KalturaCampaignOrderBy extends KalturaEnumBase
 {
-	const NONE = "NONE";
+	const START_DATE_DESC = "START_DATE_DESC";
 }
 
 /**
@@ -1779,7 +1779,7 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const DEVICE_FAMILY = "DEVICE_FAMILY";
 	const DEVICE_MANUFACTURER = "DEVICE_MANUFACTURER";
 	const DEVICE_MODEL = "DEVICE_MODEL";
-	const DEVICE_UDID = "DEVICE_UDID";
+	const DEVICE_UDID_DYNAMIC_LIST = "DEVICE_UDID_DYNAMIC_LIST";
 }
 
 /**

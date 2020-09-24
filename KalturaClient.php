@@ -3125,16 +3125,16 @@ class KalturaDynamicListService extends KalturaServiceBase
 	 * 
 	 * @param file $fileData FileData
 	 * @param KalturaBulkUploadExcelJobData $jobData JobData
-	 * @param KalturaBulkUploadAssetData $bulkUploadAssetData BulkUploadAssetData
+	 * @param KalturaBulkUploadDynamicListData $bulkUploadData BulkUploadData
 	 * @return KalturaBulkUpload
 	 */
-	function addFromBulkUpload($fileData, KalturaBulkUploadExcelJobData $jobData, KalturaBulkUploadAssetData $bulkUploadAssetData)
+	function addFromBulkUpload($fileData, KalturaBulkUploadExcelJobData $jobData, KalturaBulkUploadDynamicListData $bulkUploadData)
 	{
 		$kparams = array();
 		$kfiles = array();
 		$this->client->addParam($kfiles, "fileData", $fileData);
 		$this->client->addParam($kparams, "jobData", $jobData->toParams());
-		$this->client->addParam($kparams, "bulkUploadAssetData", $bulkUploadAssetData->toParams());
+		$this->client->addParam($kparams, "bulkUploadData", $bulkUploadData->toParams());
 		$this->client->queueServiceActionCall("dynamiclist", "addFromBulkUpload", $kparams, $kfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11908,8 +11908,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-09-16');
-		$this->setApiVersion('5.6.0.28480');
+		$this->setClientTag('php5:20-09-24');
+		$this->setApiVersion('5.6.0.28513');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

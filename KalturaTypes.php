@@ -344,14 +344,21 @@ class KalturaDynamicListIdInFilter extends KalturaDynamicListFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaDynamicListSearchFilter extends KalturaDynamicListFilter
+abstract class KalturaDynamicListSearchFilter extends KalturaDynamicListFilter
 {
 	/**
-	 * Comma-separated String which represent List of objects that is in the dynamicList.
+	 * DynamicList id to search by
+	 *
+	 * @var int
+	 */
+	public $idEqual = null;
+
+	/**
+	 * udid value that should be in the DynamicList
 	 *
 	 * @var string
 	 */
-	public $valueIn = null;
+	public $valueEqual = null;
 
 
 }
@@ -360,7 +367,7 @@ class KalturaDynamicListSearchFilter extends KalturaDynamicListFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaUdidDynamicListSearchFilter extends KalturaDynamicListFilter
+class KalturaUdidDynamicListSearchFilter extends KalturaDynamicListSearchFilter
 {
 
 }
@@ -4794,6 +4801,32 @@ class KalturaBulkUploadProgramAssetResult extends KalturaBulkUploadResult
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaBulkUploadDynamicListResult extends KalturaBulkUploadResult
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadUdidDynamicListResult extends KalturaBulkUploadDynamicListResult
+{
+	/**
+	 * The udid from the excel to add to DynamicLis values
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $udid = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSocialAction extends KalturaObjectBase
 {
 	/**
@@ -6750,14 +6783,14 @@ class KalturaDeviceModelCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaDeviceUdidCondition extends KalturaCondition
+class KalturaUdidDynamicListCondition extends KalturaCondition
 {
 	/**
-	 * Comma separated Device Udid IDs list
+	 * KalturaUdidDynamicList.id
 	 *
-	 * @var string
+	 * @var int
 	 */
-	public $udidIn = null;
+	public $id = null;
 
 
 }
@@ -15759,6 +15792,31 @@ class KalturaBulkUploadLiveAssetData extends KalturaBulkUploadMediaAssetData
  * @subpackage Client
  */
 class KalturaBulkUploadProgramAssetData extends KalturaBulkUploadAssetData
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaBulkUploadDynamicListData extends KalturaBulkUploadObjectData
+{
+	/**
+	 * Identifies the dynamicList Id
+	 *
+	 * @var int
+	 */
+	public $dynamicListId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadUdidDynamicListData extends KalturaBulkUploadDynamicListData
 {
 
 }
