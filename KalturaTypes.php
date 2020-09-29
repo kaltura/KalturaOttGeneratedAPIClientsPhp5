@@ -3374,6 +3374,13 @@ class KalturaRegionFilter extends KalturaBaseRegionFilter
 	 */
 	public $parentOnly = null;
 
+	/**
+	 * Retrieves only the channels belonging specifically to the child region
+	 *
+	 * @var bool
+	 */
+	public $exclusiveLcn = null;
+
 
 }
 
@@ -10997,6 +11004,13 @@ class KalturaEntitlement extends KalturaObjectBase
 	 */
 	public $householdId = null;
 
+	/**
+	 * Indicates whether the asynchronous purchase is pending
+	 *
+	 * @var bool
+	 */
+	public $isPending = null;
+
 
 }
 
@@ -12976,6 +12990,13 @@ class KalturaPaymentGatewayProfile extends KalturaPaymentGatewayBaseProfile
 	 * @var bool
 	 */
 	public $externalVerification = null;
+
+	/**
+	 * Payment gateway - Support asynchronous purchase
+	 *
+	 * @var bool
+	 */
+	public $isAsyncPolicy = null;
 
 
 }

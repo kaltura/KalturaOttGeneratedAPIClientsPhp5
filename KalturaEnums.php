@@ -322,6 +322,7 @@ class KalturaBillingAction extends KalturaEnumBase
 	const RENEW_CANCELED_SUBSCRIPTION = "renew_canceled_subscription";
 	const CANCEL_SUBSCRIPTION_ORDER = "cancel_subscription_order";
 	const SUBSCRIPTION_DATE_CHANGED = "subscription_date_changed";
+	const PENDING = "pending";
 }
 
 /**
@@ -1556,6 +1557,7 @@ class KalturaPurchaseStatus extends KalturaEnumBase
 	const NOT_FOR_PURCHASE = "not_for_purchase";
 	const INVALID_CURRENCY = "invalid_currency";
 	const CURRENCY_NOT_DEFINED_ON_PRICE_CODE = "currency_not_defined_on_price_code";
+	const PENDING_ENTITLEMENT = "pending_entitlement";
 }
 
 /**
