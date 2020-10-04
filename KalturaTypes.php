@@ -271,6 +271,13 @@ class KalturaDeviceReferenceDataFilter extends KalturaCrudFilter
  */
 class KalturaDeviceManufacturersReferenceDataFilter extends KalturaDeviceReferenceDataFilter
 {
+	/**
+	 * name equal
+	 *
+	 * @var string
+	 */
+	public $nameEqual = null;
+
 
 }
 
@@ -3535,6 +3542,13 @@ class KalturaRegionFilter extends KalturaBaseRegionFilter
 	 * @var bool
 	 */
 	public $parentOnly = null;
+
+	/**
+	 * Retrieves only the channels belonging specifically to the child region
+	 *
+	 * @var bool
+	 */
+	public $exclusiveLcn = null;
 
 
 }
@@ -7133,7 +7147,15 @@ class KalturaHouseholdDevice extends KalturaOTTObjectSupportNullable
 	/**
 	 * manufacturer
 	 *
+	 * @var string
+	 */
+	public $manufacturer = null;
+
+	/**
+	 * manufacturer Id, read only
+	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $manufacturerId = null;
 
@@ -9229,6 +9251,22 @@ class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
 	 * @var KalturaPartnerConfigurationType
 	 */
 	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * Single multilingual mode
+	 *
+	 * @var bool
+	 */
+	public $singleMultilingualMode = null;
 
 
 }

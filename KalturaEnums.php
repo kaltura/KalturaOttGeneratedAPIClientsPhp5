@@ -1379,6 +1379,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const COMMERCE = "Commerce";
 	const PLAYBACK = "Playback";
 	const PAYMENT = "Payment";
+	const CATALOG = "Catalog";
 }
 
 /**

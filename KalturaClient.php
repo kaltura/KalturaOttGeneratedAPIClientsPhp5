@@ -1503,12 +1503,15 @@ class KalturaCampaignService extends KalturaServiceBase
 	 * 
 	 * 
 	 * @param KalturaCampaignFilter $filter Request filter
+	 * @param KalturaFilterPager $pager Request pager
 	 * @return KalturaCampaignListResponse
 	 */
-	function listAction(KalturaCampaignFilter $filter)
+	function listAction(KalturaCampaignFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("campaign", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -2952,13 +2955,15 @@ class KalturaDeviceReferenceDataService extends KalturaServiceBase
 	 * 
 	 * 
 	 * @param KalturaDeviceReferenceDataFilter $filter Request filter
+	 * @param KalturaFilterPager $pager Request pager
 	 * @return KalturaDeviceReferenceDataListResponse
 	 */
-	function listAction(KalturaDeviceReferenceDataFilter $filter = null)
+	function listAction(KalturaDeviceReferenceDataFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("devicereferencedata", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11908,8 +11913,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-09-24');
-		$this->setApiVersion('5.6.0.28513');
+		$this->setClientTag('php5:20-10-04');
+		$this->setApiVersion('5.6.0.28591');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
