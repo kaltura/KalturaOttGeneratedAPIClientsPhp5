@@ -100,6 +100,15 @@ class KalturaAnnouncementStatus extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaApiAction extends KalturaEnumBase
+{
+	const ADD = "ADD";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaApiParameterPermissionItemAction extends KalturaEnumBase
 {
 	const READ = "READ";
@@ -107,6 +116,15 @@ class KalturaApiParameterPermissionItemAction extends KalturaEnumBase
 	const UPDATE = "UPDATE";
 	const WRITE = "WRITE";
 	const ALL = "ALL";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaApiService extends KalturaEnumBase
+{
+	const HOUSEHOLD_DEVICE = "HOUSEHOLD_DEVICE";
 }
 
 /**
@@ -445,6 +463,15 @@ class KalturaBundleType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCampaignOrderBy extends KalturaEnumBase
+{
+	const START_DATE_DESC = "START_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCategoryItemOrderBy extends KalturaEnumBase
 {
 	const NAME_ASC = "NAME_ASC";
@@ -664,6 +691,15 @@ class KalturaDeleteMediaPolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDeviceReferenceDataOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDeviceStatus extends KalturaEnumBase
 {
 	const PENDING = "PENDING";
@@ -706,6 +742,15 @@ class KalturaDurationUnit extends KalturaEnumBase
 	const DAYS = "Days";
 	const MONTHS = "Months";
 	const YEARS = "Years";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDynamicListOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
 }
 
 /**
@@ -1055,6 +1100,7 @@ class KalturaInboxMessageType extends KalturaEnumBase
 	const FOLLOWED = "Followed";
 	const ENGAGEMENT = "Engagement";
 	const INTEREST = "Interest";
+	const CAMPAIGN = "Campaign";
 }
 
 /**
@@ -1257,6 +1303,17 @@ class KalturaNotificationType extends KalturaEnumBase
 	const SYSTEM = "system";
 	const REMINDER = "Reminder";
 	const SERIES_REMINDER = "series_reminder";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaObjectState extends KalturaEnumBase
+{
+	const INACTIVE = "INACTIVE";
+	const ACTIVE = "ACTIVE";
+	const ARCHIVE = "ARCHIVE";
 }
 
 /**
@@ -1721,6 +1778,11 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const USER_SUBSCRIPTION = "USER_SUBSCRIPTION";
 	const ASSET_SUBSCRIPTION = "ASSET_SUBSCRIPTION";
 	const USER_ROLE = "USER_ROLE";
+	const DEVICE_BRAND = "DEVICE_BRAND";
+	const DEVICE_FAMILY = "DEVICE_FAMILY";
+	const DEVICE_MANUFACTURER = "DEVICE_MANUFACTURER";
+	const DEVICE_MODEL = "DEVICE_MODEL";
+	const DEVICE_UDID_DYNAMIC_LIST = "DEVICE_UDID_DYNAMIC_LIST";
 }
 
 /**
