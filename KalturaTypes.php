@@ -16544,6 +16544,65 @@ class KalturaEventNotificationObjectScope extends KalturaEventNotificationScope
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetEvent extends KalturaEventObject
+{
+	/**
+	 * User Id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $userId = null;
+
+	/**
+	 * Asset Id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $assetId = null;
+
+	/**
+	 * Identifies the asset type (EPG, Recording, Movie, TV Series, etc). 
+	 *             Possible values: 0 – EPG linear programs, 1 - Recording; or any asset type ID according to the asset types IDs defined in the system.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
+	 * External identifier for the asset
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $externalId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramAssetEvent extends KalturaAssetEvent
+{
+	/**
+	 * The  live asset Id that was identified according liveAssetExternalId
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $liveAssetId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBookmarkEvent extends KalturaEventObject
 {
 	/**
