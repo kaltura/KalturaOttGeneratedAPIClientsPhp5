@@ -3975,6 +3975,29 @@ class KalturaStringValueArray extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBusinessModuleDetails extends KalturaObjectBase
+{
+	/**
+	 * BusinessModuleId
+	 *
+	 * @var int
+	 */
+	public $businessModuleId = null;
+
+	/**
+	 * BusinessModuleType
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $businessModuleType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaFile extends KalturaAssetFile
 {
 	/**
@@ -4132,6 +4155,13 @@ class KalturaMediaFile extends KalturaAssetFile
 	 * @var string
 	 */
 	public $opl = null;
+
+	/**
+	 * businessModuleDetails
+	 *
+	 * @var KalturaBusinessModuleDetails
+	 */
+	public $businessModuleDetails;
 
 
 }
@@ -4352,6 +4382,22 @@ class KalturaPlaybackSource extends KalturaMediaFile
 	 * @var bool
 	 */
 	public $isTokenized = null;
+
+	/**
+	 * Business Module Id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $businessModuleId = null;
+
+	/**
+	 * Business Module Type
+	 *
+	 * @var KalturaTransactionType
+	 * @readonly
+	 */
+	public $businessModuleType = null;
 
 
 }
