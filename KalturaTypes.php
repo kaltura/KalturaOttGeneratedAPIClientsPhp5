@@ -7212,6 +7212,14 @@ class KalturaHouseholdDevice extends KalturaOTTObjectSupportNullable
 	 */
 	public $manufacturerId = null;
 
+	/**
+	 * Last Activity Time, read only
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $lastActivityTime = null;
+
 
 }
 
