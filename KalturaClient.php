@@ -9601,6 +9601,38 @@ class KalturaSsoAdapterProfileService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaStreamingDeviceService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Lists of devices that are streaming at that moment
+	 * 
+	 * @param KalturaStreamingDeviceFilter $filter Segmentation type filter - basically empty
+	 * @return KalturaStreamingDeviceListResponse
+	 */
+	function listAction(KalturaStreamingDeviceFilter $filter = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("streamingdevice", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaStreamingDeviceListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSubscriptionService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -11792,6 +11824,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaStreamingDeviceService
+	 */
+	public $streamingDevice = null;
+
+	/**
+	 * 
 	 * @var KalturaSubscriptionService
 	 */
 	public $subscription = null;
@@ -11913,8 +11951,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:20-11-19');
-		$this->setApiVersion('5.8.0.28728');
+		$this->setClientTag('php5:20-12-01');
+		$this->setApiVersion('5.8.0.28736');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -12028,6 +12066,7 @@ class KalturaClient extends KalturaClientBase
 		$this->social = new KalturaSocialService($this);
 		$this->socialFriendActivity = new KalturaSocialFriendActivityService($this);
 		$this->ssoAdapterProfile = new KalturaSsoAdapterProfileService($this);
+		$this->streamingDevice = new KalturaStreamingDeviceService($this);
 		$this->subscription = new KalturaSubscriptionService($this);
 		$this->subscriptionSet = new KalturaSubscriptionSetService($this);
 		$this->system = new KalturaSystemService($this);

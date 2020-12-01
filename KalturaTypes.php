@@ -3043,6 +3043,22 @@ class KalturaMediaFileFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaStreamingDeviceFilter extends KalturaFilter
+{
+	/**
+	 * filter by asset type
+	 *
+	 * @var KalturaAssetType
+	 */
+	public $assetTypeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTagFilter extends KalturaFilter
 {
 	/**
@@ -9710,6 +9726,54 @@ class KalturaPlaybackPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEncryption extends KalturaObjectBase
+{
+	/**
+	 * Encryption type
+	 *
+	 * @var KalturaEncryptionType
+	 */
+	public $encryptionType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDataEncryption extends KalturaObjectBase
+{
+	/**
+	 * Username encryption config
+	 *
+	 * @var KalturaEncryption
+	 */
+	public $username;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSecurityPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * Encryption config
+	 *
+	 * @var KalturaDataEncryption
+	 */
+	public $encryption;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPersonalList extends KalturaObjectBase
 {
 	/**
@@ -11735,6 +11799,64 @@ class KalturaPpvEntitlement extends KalturaEntitlement
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEntitlementDiscountDetails extends KalturaObjectBase
+{
+	/**
+	 * Amount
+	 *
+	 * @var float
+	 * @readonly
+	 */
+	public $amount = null;
+
+	/**
+	 * Start date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $startDate = null;
+
+	/**
+	 * End date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlementPriceDetails extends KalturaObjectBase
+{
+	/**
+	 * Full price
+	 *
+	 * @var KalturaPrice
+	 * @readonly
+	 */
+	public $fullPrice;
+
+	/**
+	 * List of the season numbers to exclude.
+	 *
+	 * @var array of KalturaEntitlementDiscountDetails
+	 * @readonly
+	 */
+	public $discountDetails;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSubscriptionEntitlement extends KalturaEntitlement
 {
 	/**
@@ -11807,6 +11929,92 @@ class KalturaSubscriptionEntitlement extends KalturaEntitlement
 	 */
 	public $isSuspended = null;
 
+	/**
+	 * Price details
+	 *
+	 * @var KalturaEntitlementPriceDetails
+	 * @readonly
+	 */
+	public $priceDetails;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponEntitlementDiscountDetails extends KalturaEntitlementDiscountDetails
+{
+	/**
+	 * Coupon Code
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $couponCode = null;
+
+	/**
+	 * Endless coupon
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $endlessCoupon = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlementDiscountDetailsIdentifier extends KalturaEntitlementDiscountDetails
+{
+	/**
+	 * Identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCompensationEntitlementDiscountDetails extends KalturaEntitlementDiscountDetailsIdentifier
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCampaignEntitlementDiscountDetails extends KalturaEntitlementDiscountDetailsIdentifier
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscountEntitlementDiscountDetails extends KalturaEntitlementDiscountDetailsIdentifier
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTrailEntitlementDiscountDetails extends KalturaEntitlementDiscountDetailsIdentifier
+{
 
 }
 
@@ -13234,6 +13442,55 @@ class KalturaRatioListResponse extends KalturaListResponse
 	 * A list of ratios
 	 *
 	 * @var array of KalturaRatio
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaStreamingDevice extends KalturaObjectBase
+{
+	/**
+	 * Asset
+	 *
+	 * @var KalturaSlimAsset
+	 * @readonly
+	 */
+	public $asset;
+
+	/**
+	 * User identifier
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $userId = null;
+
+	/**
+	 * Device UDID
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $udid = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaStreamingDeviceListResponse extends KalturaListResponse
+{
+	/**
+	 * Streaming devices
+	 *
+	 * @var array of KalturaStreamingDevice
 	 */
 	public $objects;
 

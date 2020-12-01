@@ -757,6 +757,15 @@ class KalturaDynamicListOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEncryptionType extends KalturaEnumBase
+{
+	const AES256 = "AES256";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEngagementOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1381,6 +1390,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const PLAYBACK = "Playback";
 	const PAYMENT = "Payment";
 	const CATALOG = "Catalog";
+	const SECURITY = "Security";
 }
 
 /**
@@ -1989,6 +1999,15 @@ class KalturaSocialStatus extends KalturaEnumBase
 	const ASSET_DOSE_NOT_EXISTS = "asset_dose_not_exists";
 	const INVALID_PLATFORM_REQUEST = "invalid_platform_request";
 	const INVALID_ACCESS_TOKEN = "invalid_access_token";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaStreamingDeviceOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
 }
 
 /**
