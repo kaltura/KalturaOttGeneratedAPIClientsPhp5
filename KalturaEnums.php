@@ -757,15 +757,6 @@ class KalturaDynamicListOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEncryptionType extends KalturaEnumBase
-{
-	const AES256 = "AES256";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaEngagementOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1390,7 +1381,6 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const PLAYBACK = "Playback";
 	const PAYMENT = "Payment";
 	const CATALOG = "Catalog";
-	const SECURITY = "Security";
 }
 
 /**

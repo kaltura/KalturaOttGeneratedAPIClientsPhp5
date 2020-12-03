@@ -9726,54 +9726,6 @@ class KalturaPlaybackPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEncryption extends KalturaObjectBase
-{
-	/**
-	 * Encryption type
-	 *
-	 * @var KalturaEncryptionType
-	 */
-	public $encryptionType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDataEncryption extends KalturaObjectBase
-{
-	/**
-	 * Username encryption config
-	 *
-	 * @var KalturaEncryption
-	 */
-	public $username;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSecurityPartnerConfig extends KalturaPartnerConfiguration
-{
-	/**
-	 * Encryption config
-	 *
-	 * @var KalturaDataEncryption
-	 */
-	public $encryption;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPersonalList extends KalturaObjectBase
 {
 	/**
