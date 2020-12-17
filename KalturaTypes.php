@@ -3952,6 +3952,13 @@ class KalturaMediaImage extends KalturaObjectBase
 	 */
 	public $isDefault = null;
 
+	/**
+	 * Image type identifier
+	 *
+	 * @var int
+	 */
+	public $imageTypeId = null;
+
 
 }
 
