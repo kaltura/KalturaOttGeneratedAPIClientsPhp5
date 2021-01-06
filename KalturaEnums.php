@@ -487,6 +487,27 @@ class KalturaCategoryItemOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCategoryVersionOrderBy extends KalturaEnumBase
+{
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCategoryVersionState extends KalturaEnumBase
+{
+	const DRAFT = "DRAFT";
+	const DEFAULT = "DEFAULT";
+	const RELEASED = "RELEASED";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaChannelEnrichment extends KalturaEnumBase
 {
 	const CLIENTLOCATION = "ClientLocation";
