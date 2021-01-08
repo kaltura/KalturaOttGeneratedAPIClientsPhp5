@@ -491,38 +491,6 @@ class KalturaCategoryItemAncestorsFilter extends KalturaCategoryItemFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCategoryVersionFilter extends KalturaCrudFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryVersionFilterByTree extends KalturaCategoryVersionFilter
-{
-	/**
-	 * Category version tree identifier
-	 *
-	 * @var int
-	 */
-	public $treeIdEqual = null;
-
-	/**
-	 * Category version state
-	 *
-	 * @var KalturaCategoryVersionState
-	 */
-	public $stateEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCampaignFilter extends KalturaCrudFilter
 {
 
@@ -6362,14 +6330,6 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 */
 	public $type = null;
 
-	/**
-	 * Unique identifier for the category version
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $versionId = null;
-
 
 }
 
@@ -6399,101 +6359,6 @@ class KalturaUnifiedChannelInfo extends KalturaUnifiedChannel
 	 * @var int
 	 */
 	public $endDateInSeconds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryVersion extends KalturaCrudObject
-{
-	/**
-	 * Unique identifier for the category version
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Category version name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Category tree identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $treeId = null;
-
-	/**
-	 * The category version state
-	 *
-	 * @var KalturaCategoryVersionState
-	 * @readonly
-	 */
-	public $state = null;
-
-	/**
-	 * The version id that this version was created from
-	 *
-	 * @var int
-	 * @insertonly
-	 */
-	public $baseVersionId = null;
-
-	/**
-	 * The root of category item id that was created for this version
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $categoryRootId = null;
-
-	/**
-	 * The date that this version became default represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $defaultDate = null;
-
-	/**
-	 * Last updater user id.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updaterId = null;
-
-	/**
-	 * Comment.
-	 *
-	 * @var string
-	 */
-	public $comment = null;
-
-	/**
-	 * The date that this version was created represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * The date that this version was last updated represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
 
 
 }
@@ -9478,29 +9343,6 @@ class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCategoryManagement extends KalturaObjectBase
-{
-	/**
-	 * Default CategoryVersion tree id
-	 *
-	 * @var int
-	 */
-	public $defaultTreeId = null;
-
-	/**
-	 * Device family to Category TreeId mapping
-	 *
-	 * @var map
-	 */
-	public $deviceFamilyToCategoryTree;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 {
 	/**
@@ -9509,13 +9351,6 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $singleMultilingualMode = null;
-
-	/**
-	 * Category management
-	 *
-	 * @var KalturaCategoryManagement
-	 */
-	public $categoryManagement;
 
 
 }
@@ -16289,6 +16124,14 @@ class KalturaBulkUploadIngestJobData extends KalturaBulkUploadJobData
 	 */
 	public $ingestProfileId = null;
 
+	/**
+	 * By default, after the successful ingest, devices will be notified about changes in epg channels.
+	 *             This parameter disables this notification.
+	 *
+	 * @var bool
+	 */
+	public $disableEpgNotification = null;
+
 
 }
 
@@ -16610,30 +16453,6 @@ class KalturaCategoryTree extends KalturaObjectBase
 	 * @insertonly
 	 */
 	public $type = null;
-
-	/**
-	 * Unique identifier for the category version
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $versionId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryVersionListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of objects
-	 *
-	 * @var array of KalturaCategoryVersion
-	 */
-	public $objects;
 
 
 }
@@ -17698,6 +17517,13 @@ class KalturaIotClientConfiguration extends KalturaObjectBase
 	 */
 	public $json = null;
 
+	/**
+	 * topics
+	 *
+	 * @var string
+	 */
+	public $topics = null;
+
 
 }
 
@@ -17959,6 +17785,44 @@ class KalturaPushMessage extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEpgNotificationSettings extends KalturaObjectBase
+{
+	/**
+	 * EPG notification capability is enabled for the account
+	 *
+	 * @var bool
+	 */
+	public $enabled = null;
+
+	/**
+	 * Specify which devices should receive notifications
+	 *
+	 * @var string
+	 */
+	public $deviceFamilyIds = null;
+
+	/**
+	 * Specify which live assets should fire notifications
+	 *
+	 * @var string
+	 */
+	public $liveAssetIds = null;
+
+	/**
+	 * The range (in hours), in which, EPG updates triggers a notification,
+	 *             every program that is updated and it’s starts time falls within this range shall trigger a notification
+	 *
+	 * @var int
+	 */
+	public $timeRange = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 {
 	/**
@@ -18086,6 +17950,13 @@ class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $iotEnabled = null;
+
+	/**
+	 * Settings for epg notifications
+	 *
+	 * @var KalturaEpgNotificationSettings
+	 */
+	public $epgNotification;
 
 
 }
