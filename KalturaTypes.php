@@ -6330,6 +6330,14 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 */
 	public $type = null;
 
+	/**
+	 * Virtual asset id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $virtualAssetId = null;
+
 
 }
 
