@@ -6330,6 +6330,14 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 */
 	public $type = null;
 
+	/**
+	 * Virtual asset id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $virtualAssetId = null;
+
 
 }
 
@@ -12682,6 +12690,8 @@ class KalturaLiveAsset extends KalturaMediaAsset
 
 	/**
 	 * Is CDVR enabled for this asset
+	 *             Please, note that value of this property is strictly connected with CDV-R setting on Partner level.
+	 *             In order to enable CDV-R for KalturaLiveAsset, Partner CDV-R setting should be enabled.
 	 *
 	 * @var bool
 	 * @readonly
@@ -12690,6 +12700,8 @@ class KalturaLiveAsset extends KalturaMediaAsset
 
 	/**
 	 * Is catch-up enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Catch Up setting on Partner level.
+	 *             In order to enable Catch Up for KalturaLiveAsset, Partner Catch Up setting should be enabled.
 	 *
 	 * @var bool
 	 * @readonly
@@ -12698,6 +12710,8 @@ class KalturaLiveAsset extends KalturaMediaAsset
 
 	/**
 	 * Is start over enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Start Over setting on Partner level.
+	 *             In order to enable Start Over for KalturaLiveAsset, Partner Start Over setting should be enabled.
 	 *
 	 * @var bool
 	 * @readonly
@@ -12730,6 +12744,8 @@ class KalturaLiveAsset extends KalturaMediaAsset
 
 	/**
 	 * Is trick-play enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Trick Play setting on Partner level.
+	 *             In order to enable Trick Play for KalturaLiveAsset, Partner Trick Play setting should be enabled.
 	 *
 	 * @var bool
 	 * @readonly
@@ -12792,6 +12808,8 @@ class KalturaProgramAsset extends KalturaAsset
 
 	/**
 	 * Is CDVR enabled for this asset
+	 *             Please, note that value of this property is strictly connected with CDV-R setting on Partner and KalturaLiveAsset levels.
+	 *             In order to enable CDV-R for KalturaProgramAsset, Partner and KalturaLiveAsset CDV-R settings should be enabled.
 	 *
 	 * @var bool
 	 */
@@ -12799,6 +12817,8 @@ class KalturaProgramAsset extends KalturaAsset
 
 	/**
 	 * Is catch-up enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Catch Up setting on Partner and KalturaLiveAsset levels.
+	 *             In order to enable Catch Up for KalturaProgramAsset, Partner and KalturaLiveAsset Catch Up settings should be enabled.
 	 *
 	 * @var bool
 	 */
@@ -12806,6 +12826,8 @@ class KalturaProgramAsset extends KalturaAsset
 
 	/**
 	 * Is start over enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Start Over setting on Partner and KalturaLiveAsset levels.
+	 *             In order to enable Start Over for KalturaProgramAsset, Partner and KalturaLiveAsset Start Over settings should be enabled.
 	 *
 	 * @var bool
 	 */
@@ -12813,6 +12835,8 @@ class KalturaProgramAsset extends KalturaAsset
 
 	/**
 	 * Is trick-play enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Trick Play setting on Partner and KalturaLiveAsset levels.
+	 *             In order to enable Trick Play for KalturaProgramAsset, Partner and KalturaLiveAsset Trick Play settings should be enabled.
 	 *
 	 * @var bool
 	 */
@@ -16586,22 +16610,6 @@ class KalturaCoupon extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $couponCode = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCouponListResponse extends KalturaListResponse
-{
-	/**
-	 * Coupons
-	 *
-	 * @var array of KalturaCoupon
-	 */
-	public $objects;
 
 
 }
