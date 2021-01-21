@@ -3952,13 +3952,6 @@ class KalturaMediaImage extends KalturaObjectBase
 	 */
 	public $isDefault = null;
 
-	/**
-	 * Image type identifier
-	 *
-	 * @var int
-	 */
-	public $imageTypeId = null;
-
 
 }
 
@@ -9420,13 +9413,6 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 	 * @var int
 	 */
 	public $concurrencyThresholdInSeconds = null;
-
-	/**
-	 * Revoke on device delete
-	 *
-	 * @var bool
-	 */
-	public $revokeOnDeviceDelete = null;
 
 
 }
@@ -16124,14 +16110,6 @@ class KalturaBulkUploadIngestJobData extends KalturaBulkUploadJobData
 	 */
 	public $ingestProfileId = null;
 
-	/**
-	 * By default, after the successful ingest, devices will be notified about changes in epg channels.
-	 *             This parameter disables this notification.
-	 *
-	 * @var bool
-	 */
-	public $disableEpgNotification = null;
-
 
 }
 
@@ -17517,13 +17495,6 @@ class KalturaIotClientConfiguration extends KalturaObjectBase
 	 */
 	public $json = null;
 
-	/**
-	 * topics
-	 *
-	 * @var string
-	 */
-	public $topics = null;
-
 
 }
 
@@ -17785,44 +17756,6 @@ class KalturaPushMessage extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEpgNotificationSettings extends KalturaObjectBase
-{
-	/**
-	 * EPG notification capability is enabled for the account
-	 *
-	 * @var bool
-	 */
-	public $enabled = null;
-
-	/**
-	 * Specify which devices should receive notifications
-	 *
-	 * @var string
-	 */
-	public $deviceFamilyIds = null;
-
-	/**
-	 * Specify which live assets should fire notifications
-	 *
-	 * @var string
-	 */
-	public $liveAssetIds = null;
-
-	/**
-	 * The range (in hours), in which, EPG updates triggers a notification,
-	 *             every program that is updated and it’s starts time falls within this range shall trigger a notification
-	 *
-	 * @var int
-	 */
-	public $timeRange = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 {
 	/**
@@ -17950,13 +17883,6 @@ class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $iotEnabled = null;
-
-	/**
-	 * Settings for epg notifications
-	 *
-	 * @var KalturaEpgNotificationSettings
-	 */
-	public $epgNotification;
 
 
 }
