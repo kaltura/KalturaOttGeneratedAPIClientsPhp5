@@ -822,6 +822,13 @@ class KalturaOTTUserFilter extends KalturaFilter
 	 */
 	public $roleIdsIn = null;
 
+	/**
+	 * User email
+	 *
+	 * @var string
+	 */
+	public $emailEqual = null;
+
 
 }
 
