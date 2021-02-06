@@ -1685,158 +1685,6 @@ class KalturaCategoryTreeService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaCategoryTree");
 		return $resultObject;
 	}
-
-	/**
-	 * Retrieve default category tree of deviceFamilyId by KS or specific one if versionId is set.
-	 * 
-	 * @param bigint $versionId Category version id of tree
-	 * @return KalturaCategoryTree
-	 */
-	function getByVersion($versionId = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "versionId", $versionId);
-		$this->client->queueServiceActionCall("categorytree", "getByVersion", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryTree");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryVersionService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * CategoryVersion add
-	 * 
-	 * @param KalturaCategoryVersion $objectToAdd CategoryVersion details
-	 * @return KalturaCategoryVersion
-	 */
-	function add(KalturaCategoryVersion $objectToAdd)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
-		$this->client->queueServiceActionCall("categoryversion", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryVersion");
-		return $resultObject;
-	}
-
-	/**
-	 * CategoryVersion update
-	 * 
-	 * @param bigint $id Category version identifier
-	 * @param KalturaCategoryVersion $objectToUpdate CategoryVersion details
-	 * @return KalturaCategoryVersion
-	 */
-	function update($id, KalturaCategoryVersion $objectToUpdate)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
-		$this->client->queueServiceActionCall("categoryversion", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryVersion");
-		return $resultObject;
-	}
-
-	/**
-	 * Remove category version
-	 * 
-	 * @param bigint $id Category version identifier
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("categoryversion", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * Gets all category versions
-	 * 
-	 * @param KalturaCategoryVersionFilter $filter Request filter
-	 * @param KalturaFilterPager $pager Request pager
-	 * @return KalturaCategoryVersionListResponse
-	 */
-	function listAction(KalturaCategoryVersionFilter $filter, KalturaFilterPager $pager = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("categoryversion", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryVersionListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Acreate new tree for this categoryItem
-	 * 
-	 * @param bigint $categoryItemId The categoryItemId to create the tree accordingly
-	 * @param string $name Name of version
-	 * @param string $comment Comment of version
-	 * @return KalturaCategoryVersion
-	 */
-	function createTree($categoryItemId, $name, $comment)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "categoryItemId", $categoryItemId);
-		$this->client->addParam($kparams, "name", $name);
-		$this->client->addParam($kparams, "comment", $comment);
-		$this->client->queueServiceActionCall("categoryversion", "createTree", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCategoryVersion");
-		return $resultObject;
-	}
-
-	/**
-	 * Set new default category version
-	 * 
-	 * @param bigint $id Category version id to set as default
-	 * @param bool $force Force to set even if version is older then currenct version
-	 */
-	function setDefault($id, $force = false)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "force", $force);
-		$this->client->queueServiceActionCall("categoryversion", "setDefault", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
 }
 
 /**
@@ -11412,12 +11260,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaCategoryVersionService
-	 */
-	public $categoryVersion = null;
-
-	/**
-	 * 
 	 * @var KalturaCdnAdapterProfileService
 	 */
 	public $cdnAdapterProfile = null;
@@ -12109,8 +11951,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-02-02');
-		$this->setApiVersion('6.1.0.28832');
+		$this->setClientTag('php5:21-02-06');
+		$this->setApiVersion('6.0.0.28827');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -12130,7 +11972,6 @@ class KalturaClient extends KalturaClientBase
 		$this->campaign = new KalturaCampaignService($this);
 		$this->categoryItem = new KalturaCategoryItemService($this);
 		$this->categoryTree = new KalturaCategoryTreeService($this);
-		$this->categoryVersion = new KalturaCategoryVersionService($this);
 		$this->cdnAdapterProfile = new KalturaCdnAdapterProfileService($this);
 		$this->cdnPartnerSettings = new KalturaCdnPartnerSettingsService($this);
 		$this->cDVRAdapterProfile = new KalturaCDVRAdapterProfileService($this);
