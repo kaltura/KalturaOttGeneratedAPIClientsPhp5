@@ -491,38 +491,6 @@ class KalturaCategoryItemAncestorsFilter extends KalturaCategoryItemFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCategoryVersionFilter extends KalturaCrudFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryVersionFilterByTree extends KalturaCategoryVersionFilter
-{
-	/**
-	 * Category version tree identifier
-	 *
-	 * @var int
-	 */
-	public $treeIdEqual = null;
-
-	/**
-	 * Category version state
-	 *
-	 * @var KalturaCategoryVersionState
-	 */
-	public $stateEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCampaignFilter extends KalturaCrudFilter
 {
 
@@ -853,13 +821,6 @@ class KalturaOTTUserFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $roleIdsIn = null;
-
-	/**
-	 * User email
-	 *
-	 * @var string
-	 */
-	public $emailEqual = null;
 
 
 }
@@ -3991,13 +3952,6 @@ class KalturaMediaImage extends KalturaObjectBase
 	 */
 	public $isDefault = null;
 
-	/**
-	 * Image type identifier
-	 *
-	 * @var int
-	 */
-	public $imageTypeId = null;
-
 
 }
 
@@ -6369,22 +6323,6 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 */
 	public $type = null;
 
-	/**
-	 * Unique identifier for the category version
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $versionId = null;
-
-	/**
-	 * Virtual asset id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $virtualAssetId = null;
-
 
 }
 
@@ -6414,101 +6352,6 @@ class KalturaUnifiedChannelInfo extends KalturaUnifiedChannel
 	 * @var int
 	 */
 	public $endDateInSeconds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryVersion extends KalturaCrudObject
-{
-	/**
-	 * Unique identifier for the category version
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Category version name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Category tree identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $treeId = null;
-
-	/**
-	 * The category version state
-	 *
-	 * @var KalturaCategoryVersionState
-	 * @readonly
-	 */
-	public $state = null;
-
-	/**
-	 * The version id that this version was created from
-	 *
-	 * @var int
-	 * @insertonly
-	 */
-	public $baseVersionId = null;
-
-	/**
-	 * The root of category item id that was created for this version
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $categoryRootId = null;
-
-	/**
-	 * The date that this version became default represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $defaultDate = null;
-
-	/**
-	 * Last updater user id.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updaterId = null;
-
-	/**
-	 * Comment.
-	 *
-	 * @var string
-	 */
-	public $comment = null;
-
-	/**
-	 * The date that this version was created represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * The date that this version was last updated represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
 
 
 }
@@ -9493,29 +9336,6 @@ class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCategoryManagement extends KalturaObjectBase
-{
-	/**
-	 * Default CategoryVersion tree id
-	 *
-	 * @var int
-	 */
-	public $defaultTreeId = null;
-
-	/**
-	 * Device family to Category TreeId mapping
-	 *
-	 * @var map
-	 */
-	public $deviceFamilyToCategoryTree;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 {
 	/**
@@ -9524,13 +9344,6 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $singleMultilingualMode = null;
-
-	/**
-	 * Category management
-	 *
-	 * @var KalturaCategoryManagement
-	 */
-	public $categoryManagement;
 
 
 }
@@ -9600,13 +9413,6 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 	 * @var int
 	 */
 	public $concurrencyThresholdInSeconds = null;
-
-	/**
-	 * Revoke on device delete
-	 *
-	 * @var bool
-	 */
-	public $revokeOnDeviceDelete = null;
 
 
 }
@@ -9790,75 +9596,6 @@ class KalturaObjectVirtualAssetPartnerConfig extends KalturaPartnerConfiguration
 	 * @var array of KalturaObjectVirtualAssetInfo
 	 */
 	public $objectVirtualAssets;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaResetPasswordPartnerConfigTemplate extends KalturaObjectBase
-{
-	/**
-	 * id
-	 *
-	 * @var string
-	 */
-	public $id = null;
-
-	/**
-	 * label
-	 *
-	 * @var string
-	 */
-	public $label = null;
-
-	/**
-	 * is Default
-	 *
-	 * @var bool
-	 */
-	public $isDefault = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaResetPasswordPartnerConfig extends KalturaObjectBase
-{
-	/**
-	 * template List Label
-	 *
-	 * @var string
-	 */
-	public $templateListLabel = null;
-
-	/**
-	 * templates
-	 *
-	 * @var array of KalturaResetPasswordPartnerConfigTemplate
-	 */
-	public $templates;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaOpcPartnerConfiguration extends KalturaPartnerConfiguration
-{
-	/**
-	 * Reset Password
-	 *
-	 * @var KalturaResetPasswordPartnerConfig
-	 */
-	public $resetPassword;
 
 
 }
@@ -12931,8 +12668,6 @@ class KalturaLiveAsset extends KalturaMediaAsset
 
 	/**
 	 * Is CDVR enabled for this asset
-	 *             Please, note that value of this property is strictly connected with CDV-R setting on Partner level.
-	 *             In order to enable CDV-R for KalturaLiveAsset, Partner CDV-R setting should be enabled.
 	 *
 	 * @var bool
 	 * @readonly
@@ -12941,8 +12676,6 @@ class KalturaLiveAsset extends KalturaMediaAsset
 
 	/**
 	 * Is catch-up enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Catch Up setting on Partner level.
-	 *             In order to enable Catch Up for KalturaLiveAsset, Partner Catch Up setting should be enabled.
 	 *
 	 * @var bool
 	 * @readonly
@@ -12951,8 +12684,6 @@ class KalturaLiveAsset extends KalturaMediaAsset
 
 	/**
 	 * Is start over enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Start Over setting on Partner level.
-	 *             In order to enable Start Over for KalturaLiveAsset, Partner Start Over setting should be enabled.
 	 *
 	 * @var bool
 	 * @readonly
@@ -12985,8 +12716,6 @@ class KalturaLiveAsset extends KalturaMediaAsset
 
 	/**
 	 * Is trick-play enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Trick Play setting on Partner level.
-	 *             In order to enable Trick Play for KalturaLiveAsset, Partner Trick Play setting should be enabled.
 	 *
 	 * @var bool
 	 * @readonly
@@ -13049,8 +12778,6 @@ class KalturaProgramAsset extends KalturaAsset
 
 	/**
 	 * Is CDVR enabled for this asset
-	 *             Please, note that value of this property is strictly connected with CDV-R setting on Partner and KalturaLiveAsset levels.
-	 *             In order to enable CDV-R for KalturaProgramAsset, Partner and KalturaLiveAsset CDV-R settings should be enabled.
 	 *
 	 * @var bool
 	 */
@@ -13058,8 +12785,6 @@ class KalturaProgramAsset extends KalturaAsset
 
 	/**
 	 * Is catch-up enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Catch Up setting on Partner and KalturaLiveAsset levels.
-	 *             In order to enable Catch Up for KalturaProgramAsset, Partner and KalturaLiveAsset Catch Up settings should be enabled.
 	 *
 	 * @var bool
 	 */
@@ -13067,8 +12792,6 @@ class KalturaProgramAsset extends KalturaAsset
 
 	/**
 	 * Is start over enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Start Over setting on Partner and KalturaLiveAsset levels.
-	 *             In order to enable Start Over for KalturaProgramAsset, Partner and KalturaLiveAsset Start Over settings should be enabled.
 	 *
 	 * @var bool
 	 */
@@ -13076,8 +12799,6 @@ class KalturaProgramAsset extends KalturaAsset
 
 	/**
 	 * Is trick-play enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Trick Play setting on Partner and KalturaLiveAsset levels.
-	 *             In order to enable Trick Play for KalturaProgramAsset, Partner and KalturaLiveAsset Trick Play settings should be enabled.
 	 *
 	 * @var bool
 	 */
@@ -16389,14 +16110,6 @@ class KalturaBulkUploadIngestJobData extends KalturaBulkUploadJobData
 	 */
 	public $ingestProfileId = null;
 
-	/**
-	 * By default, after the successful ingest, devices will be notified about changes in epg channels.
-	 *             This parameter disables this notification.
-	 *
-	 * @var bool
-	 */
-	public $disableEpgNotification = null;
-
 
 }
 
@@ -16718,38 +16431,6 @@ class KalturaCategoryTree extends KalturaObjectBase
 	 * @insertonly
 	 */
 	public $type = null;
-
-	/**
-	 * Unique identifier for the category version
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $versionId = null;
-
-	/**
-	 * Virtual asset id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $virtualAssetId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCategoryVersionListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of objects
-	 *
-	 * @var array of KalturaCategoryVersion
-	 */
-	public $objects;
 
 
 }
@@ -17814,13 +17495,6 @@ class KalturaIotClientConfiguration extends KalturaObjectBase
 	 */
 	public $json = null;
 
-	/**
-	 * topics
-	 *
-	 * @var string
-	 */
-	public $topics = null;
-
 
 }
 
@@ -18082,44 +17756,6 @@ class KalturaPushMessage extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEpgNotificationSettings extends KalturaObjectBase
-{
-	/**
-	 * EPG notification capability is enabled for the account
-	 *
-	 * @var bool
-	 */
-	public $enabled = null;
-
-	/**
-	 * Specify which devices should receive notifications
-	 *
-	 * @var string
-	 */
-	public $deviceFamilyIds = null;
-
-	/**
-	 * Specify which live assets should fire notifications
-	 *
-	 * @var string
-	 */
-	public $liveAssetIds = null;
-
-	/**
-	 * The range (in hours), in which, EPG updates triggers a notification,
-	 *             every program that is updated and it’s starts time falls within this range shall trigger a notification
-	 *
-	 * @var int
-	 */
-	public $timeRange = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 {
 	/**
@@ -18247,13 +17883,6 @@ class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $iotEnabled = null;
-
-	/**
-	 * Settings for epg notifications
-	 *
-	 * @var KalturaEpgNotificationSettings
-	 */
-	public $epgNotification;
 
 
 }
