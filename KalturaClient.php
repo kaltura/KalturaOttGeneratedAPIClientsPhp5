@@ -9980,23 +9980,6 @@ class KalturaSystemService extends KalturaServiceBase
 	}
 
 	/**
-	 * Gets the current level of the KLogger
-	 * 
-	 * @return string
-	 */
-	function getLogLevel()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("system", "getLogLevel", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "string");
-		return $resultObject;
-	}
-
-	/**
 	 * Returns current server timestamp
 	 * 
 	 * @return bigint
@@ -10058,25 +10041,6 @@ class KalturaSystemService extends KalturaServiceBase
 	{
 		$kparams = array();
 		$this->client->queueServiceActionCall("system", "ping", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
-	 * Sets the current level of the KLogger
-	 * 
-	 * @param string $level Possible levels: trace, debug, info, warning, error, all
-	 * @return bool
-	 */
-	function setLogLevel($level)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "level", $level);
-		$this->client->queueServiceActionCall("system", "setLogLevel", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -12109,8 +12073,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-02-02');
-		$this->setApiVersion('6.1.0.28832');
+		$this->setClientTag('php5:21-02-10');
+		$this->setApiVersion('6.1.0.28856');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

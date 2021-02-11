@@ -1202,20 +1202,6 @@ class KalturaLinearChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaLogLevel extends KalturaEnumBase
-{
-	const TRACE = "TRACE";
-	const DEBUG = "DEBUG";
-	const INFO = "INFO";
-	const WARN = "WARN";
-	const ERROR = "ERROR";
-	const ALL = "ALL";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaMathemticalOperatorType extends KalturaEnumBase
 {
 	const COUNT = "count";
