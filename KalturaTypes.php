@@ -3426,7 +3426,16 @@ class KalturaParentalRuleFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPermissionFilter extends KalturaFilter
+class KalturaBasePermissionFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionFilter extends KalturaBasePermissionFilter
 {
 	/**
 	 * Indicates whether the results should be filtered by userId using the current
@@ -3441,6 +3450,22 @@ class KalturaPermissionFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $roleIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPermissionByIdInFilter extends KalturaBasePermissionFilter
+{
+	/**
+	 * Category item identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
 
 
 }
@@ -15408,14 +15433,14 @@ class KalturaPermission extends KalturaObjectBase
 	 * Comma separated permissions names from type SPECIAL_FEATURE
 	 *
 	 * @var KalturaPermissionType
+	 * @insertonly
 	 */
 	public $type = null;
 
 	/**
-	 * Comma separated assosiated permission items IDs
+	 * Comma separated associated permission items IDs
 	 *
 	 * @var string
-	 * @readonly
 	 */
 	public $permissionItemsIds = null;
 
