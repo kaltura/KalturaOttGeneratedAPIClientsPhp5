@@ -825,6 +825,14 @@ class KalturaEntityReferenceBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEpgOrderBy extends KalturaEnumBase
+{
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEventNotificationOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";

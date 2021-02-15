@@ -3738,6 +3738,29 @@ class KalturaUserRoleFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEpgFilter extends KalturaFilter
+{
+	/**
+	 * date in unix timestamp, e.g. 1610928000(January 18, 2021 0:00:00), 1611014400(January 19, 2021 0:00:00)
+	 *
+	 * @var int
+	 */
+	public $dateEqual = null;
+
+	/**
+	 * EPG live asset identifier
+	 *
+	 * @var int
+	 */
+	public $liveAssetIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSkipOnErrorCondition extends KalturaSkipCondition
 {
 	/**
@@ -13138,6 +13161,15 @@ class KalturaRecordingAsset extends KalturaProgramAsset
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEpg extends KalturaAsset
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetStatisticsListResponse extends KalturaListResponse
 {
 	/**
@@ -15984,6 +16016,22 @@ class KalturaUserRoleListResponse extends KalturaListResponse
 	 * A list of generic rules
 	 *
 	 * @var array of KalturaUserRole
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEpgListResponse extends KalturaListResponse
+{
+	/**
+	 * Assets
+	 *
+	 * @var array of KalturaEpg
 	 */
 	public $objects;
 
