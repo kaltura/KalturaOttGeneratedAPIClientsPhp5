@@ -3738,29 +3738,6 @@ class KalturaUserRoleFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEpgFilter extends KalturaFilter
-{
-	/**
-	 * date in unix timestamp, e.g. 1610928000(January 18, 2021 0:00:00), 1611014400(January 19, 2021 0:00:00)
-	 *
-	 * @var int
-	 */
-	public $dateEqual = null;
-
-	/**
-	 * EPG live asset identifier
-	 *
-	 * @var int
-	 */
-	public $liveAssetIdEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaSkipOnErrorCondition extends KalturaSkipCondition
 {
 	/**
@@ -13161,15 +13138,6 @@ class KalturaRecordingAsset extends KalturaProgramAsset
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEpg extends KalturaAsset
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetStatisticsListResponse extends KalturaListResponse
 {
 	/**
@@ -16026,22 +15994,6 @@ class KalturaUserRoleListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEpgListResponse extends KalturaListResponse
-{
-	/**
-	 * Assets
-	 *
-	 * @var array of KalturaEpg
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAppToken extends KalturaObjectBase
 {
 	/**
@@ -16956,22 +16908,6 @@ class KalturaCoupon extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $couponCode = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCouponListResponse extends KalturaListResponse
-{
-	/**
-	 * Coupons
-	 *
-	 * @var array of KalturaCoupon
-	 */
-	public $objects;
 
 
 }

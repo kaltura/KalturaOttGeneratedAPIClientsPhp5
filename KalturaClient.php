@@ -2797,25 +2797,6 @@ class KalturaCouponService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaCoupon");
 		return $resultObject;
 	}
-
-	/**
-	 * Lists coupon codes.
-	 * 
-	 * @param KalturaCouponFilter $filter Filter options
-	 * @return KalturaCouponListResponse
-	 */
-	function listAction(KalturaCouponFilter $filter)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("coupon", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCouponListResponse");
-		return $resultObject;
-	}
 }
 
 /**
@@ -3779,38 +3760,6 @@ class KalturaEntitlementService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaEntitlement");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEpgService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Returns EPG assets.
-	 * 
-	 * @param KalturaEpgFilter $filter Filters by EPG live asset identifier and date in unix timestamp, e.g. 1610928000(January 18, 2021 0:00:00), 1611014400(January 19, 2021 0:00:00)
-	 * @return KalturaEpgListResponse
-	 */
-	function listAction(KalturaEpgFilter $filter = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("epg", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEpgListResponse");
 		return $resultObject;
 	}
 }
@@ -11579,12 +11528,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaEpgService
-	 */
-	public $epg = null;
-
-	/**
-	 * 
 	 * @var KalturaEventNotificationActionService
 	 */
 	public $eventNotificationAction = null;
@@ -12132,8 +12075,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-02-15');
-		$this->setApiVersion('6.1.0.28847');
+		$this->setClientTag('php5:21-02-22');
+		$this->setApiVersion('6.1.0.28905');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -12178,7 +12121,6 @@ class KalturaClient extends KalturaClientBase
 		$this->engagementAdapter = new KalturaEngagementAdapterService($this);
 		$this->engagement = new KalturaEngagementService($this);
 		$this->entitlement = new KalturaEntitlementService($this);
-		$this->epg = new KalturaEpgService($this);
 		$this->eventNotificationAction = new KalturaEventNotificationActionService($this);
 		$this->eventNotification = new KalturaEventNotificationService($this);
 		$this->exportTask = new KalturaExportTaskService($this);
