@@ -2797,25 +2797,6 @@ class KalturaCouponService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaCoupon");
 		return $resultObject;
 	}
-
-	/**
-	 * Lists coupon codes.
-	 * 
-	 * @param KalturaCouponFilter $filter Filter options
-	 * @return KalturaCouponListResponse
-	 */
-	function listAction(KalturaCouponFilter $filter)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("coupon", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCouponListResponse");
-		return $resultObject;
-	}
 }
 
 /**
@@ -12132,8 +12113,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-02-15');
-		$this->setApiVersion('6.1.0.28847');
+		$this->setClientTag('php5:21-02-24');
+		$this->setApiVersion('6.1.0.28923');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

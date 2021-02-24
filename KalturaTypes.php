@@ -13161,7 +13161,7 @@ class KalturaRecordingAsset extends KalturaProgramAsset
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEpg extends KalturaAsset
+class KalturaEpg extends KalturaProgramAsset
 {
 
 }
@@ -16956,22 +16956,6 @@ class KalturaCoupon extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $couponCode = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCouponListResponse extends KalturaListResponse
-{
-	/**
-	 * Coupons
-	 *
-	 * @var array of KalturaCoupon
-	 */
-	public $objects;
 
 
 }
