@@ -3738,6 +3738,29 @@ class KalturaUserRoleFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEpgFilter extends KalturaFilter
+{
+	/**
+	 * date in unix timestamp, e.g. 1610928000(January 18, 2021 0:00:00), 1611014400(January 19, 2021 0:00:00)
+	 *
+	 * @var int
+	 */
+	public $dateEqual = null;
+
+	/**
+	 * EPG live asset identifier
+	 *
+	 * @var int
+	 */
+	public $liveAssetIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSkipOnErrorCondition extends KalturaSkipCondition
 {
 	/**
@@ -7389,6 +7412,13 @@ class KalturaHouseholdDevice extends KalturaOTTObjectSupportNullable
 	public $macAddress = null;
 
 	/**
+	 * Dynamic data
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
+	/**
 	 * model
 	 *
 	 * @var string
@@ -9556,6 +9586,13 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 	 * @var KalturaCategoryManagement
 	 */
 	public $categoryManagement;
+
+	/**
+	 * EPG Multilingual Fallback Support
+	 *
+	 * @var bool
+	 */
+	public $epgMultilingualFallbackSupport = null;
 
 
 }
@@ -13138,6 +13175,15 @@ class KalturaRecordingAsset extends KalturaProgramAsset
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEpg extends KalturaProgramAsset
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetStatisticsListResponse extends KalturaListResponse
 {
 	/**
@@ -15154,6 +15200,13 @@ class KalturaMeta extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
+	/**
+	 * Dynamic data
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
 
 }
 
@@ -15430,10 +15483,9 @@ class KalturaPermission extends KalturaObjectBase
 	public $dependsOnPermissionNames = null;
 
 	/**
-	 * Comma separated permissions names from type SPECIAL_FEATURE
+	 * Permission type
 	 *
 	 * @var KalturaPermissionType
-	 * @insertonly
 	 */
 	public $type = null;
 
@@ -15984,6 +16036,22 @@ class KalturaUserRoleListResponse extends KalturaListResponse
 	 * A list of generic rules
 	 *
 	 * @var array of KalturaUserRole
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEpgListResponse extends KalturaListResponse
+{
+	/**
+	 * Assets
+	 *
+	 * @var array of KalturaEpg
 	 */
 	public $objects;
 
