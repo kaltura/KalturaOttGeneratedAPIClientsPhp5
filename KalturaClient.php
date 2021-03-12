@@ -7568,10 +7568,10 @@ class KalturaPermissionService extends KalturaServiceBase
 	/**
 	 * Retrieving permissions by identifiers, if filter is empty, returns all partner permissions
 	 * 
-	 * @param KalturaBasePermissionFilter $filter Filter for permissions
+	 * @param KalturaPermissionFilter $filter Filter for permissions
 	 * @return KalturaPermissionListResponse
 	 */
-	function listAction(KalturaBasePermissionFilter $filter = null)
+	function listAction(KalturaPermissionFilter $filter = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
@@ -7602,27 +7602,6 @@ class KalturaPermissionService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * Update an existing permission.
-	 * 
-	 * @param bigint $id Permission  Identifier
-	 * @param KalturaPermission $permission Permission object
-	 * @return KalturaPermission
-	 */
-	function update($id, KalturaPermission $permission)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "permission", $permission->toParams());
-		$this->client->queueServiceActionCall("permission", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPermission");
-		return $resultObject;
 	}
 }
 
@@ -12075,8 +12054,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-02-24');
-		$this->setApiVersion('6.1.0.28909');
+		$this->setClientTag('php5:21-03-12');
+		$this->setApiVersion('6.1.0.28881');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
