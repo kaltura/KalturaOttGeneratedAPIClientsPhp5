@@ -2430,6 +2430,13 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 	 */
 	public $daysLessThanOrEqual = null;
 
+	/**
+	 * KSQL expression
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
 
 }
 
