@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -10014,6 +10014,25 @@ class KalturaSystemService extends KalturaServiceBase
 	}
 
 	/**
+	 * Returns the current layered cache group config of the sent groupId. You need to send groupId only if you wish to get it for a specific groupId and not the one the KS belongs to.
+	 * 
+	 * @param int $groupId GroupId
+	 * @return KalturaStringValue
+	 */
+	function getLayeredCacheGroupConfig($groupId = 0)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "groupId", $groupId);
+		$this->client->queueServiceActionCall("system", "getLayeredCacheGroupConfig", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaStringValue");
+		return $resultObject;
+	}
+
+	/**
 	 * Returns current server timestamp
 	 * 
 	 * @return bigint
@@ -10058,6 +10077,25 @@ class KalturaSystemService extends KalturaServiceBase
 		$kparams = array();
 		$this->client->addParam($kparams, "groupId", $groupId);
 		$this->client->queueServiceActionCall("system", "incrementLayeredCacheGroupConfigVersion", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Returns true if the invalidation key was invalidated successfully or false otherwise.
+	 * 
+	 * @param string $key The invalidation key to invalidate
+	 * @return bool
+	 */
+	function invalidateLayeredCacheInvalidationKey($key)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "key", $key);
+		$this->client->queueServiceActionCall("system", "invalidateLayeredCacheInvalidationKey", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -12113,8 +12151,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-03-15');
-		$this->setApiVersion('6.2.0.28984');
+		$this->setClientTag('php5:21-03-25');
+		$this->setApiVersion('6.2.0.29023');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
