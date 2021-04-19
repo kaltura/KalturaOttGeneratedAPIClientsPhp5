@@ -868,6 +868,22 @@ class KalturaOTTUserFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPartnerFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated discount codes
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadFilter extends KalturaFilter
 {
 	/**
@@ -4148,13 +4164,6 @@ class KalturaMediaFile extends KalturaAssetFile
 	public $typeId = null;
 
 	/**
-	 * URL of the media file to be played
-	 *
-	 * @var string
-	 */
-	public $altUrl = null;
-
-	/**
 	 * Duration of the media file
 	 *
 	 * @var int
@@ -4568,6 +4577,59 @@ class KalturaOTTUserListResponse extends KalturaListResponse
 	 * A list of users
 	 *
 	 * @var array of KalturaOTTUser
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPartner extends KalturaObjectBase
+{
+	/**
+	 * PartnerId
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+	/**
+	 * PartnerName
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Creat date represented as epoch
+	 *
+	 * @var int
+	 */
+	public $creatDate = null;
+
+	/**
+	 * Update date represented as epoch
+	 *
+	 * @var int
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPartnerListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of Partners
+	 *
+	 * @var array of KalturaPartner
 	 */
 	public $objects;
 
@@ -9539,6 +9601,134 @@ class KalturaPartnerConfigurationListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBasePartnerConfiguration extends KalturaPartnerConfiguration
+{
+	/**
+	 * UseStartDate
+	 *
+	 * @var bool
+	 */
+	public $useStartDate = null;
+
+	/**
+	 * GetOnlyActiveAssets
+	 *
+	 * @var bool
+	 */
+	public $getOnlyActiveAssets = null;
+
+	/**
+	 * ShouldSupportSingleLogin
+	 *
+	 * @var bool
+	 */
+	public $shouldSupportSingleLogin = null;
+
+	/**
+	 * KSExpirationSeconds
+	 *
+	 * @var int
+	 */
+	public $ksExpirationSeconds = null;
+
+	/**
+	 * AnonymousKSExpirationSeconds
+	 *
+	 * @var int
+	 */
+	public $anonymousKSExpirationSeconds = null;
+
+	/**
+	 * RefreshTokenExpirationSeconds
+	 *
+	 * @var int
+	 */
+	public $refreshTokenExpirationSeconds = null;
+
+	/**
+	 * IsRefreshTokenExtendable
+	 *
+	 * @var bool
+	 */
+	public $isRefreshTokenExtendable = null;
+
+	/**
+	 * RefreshExpirationForPinLoginSeconds
+	 *
+	 * @var int
+	 */
+	public $refreshExpirationForPinLoginSeconds = null;
+
+	/**
+	 * IsSwitchingUsersAllowed
+	 *
+	 * @var bool
+	 */
+	public $isSwitchingUsersAllowed = null;
+
+	/**
+	 * TokenKeyFormat
+	 *
+	 * @var string
+	 */
+	public $tokenKeyFormat = null;
+
+	/**
+	 * AppTokenKeyFormat
+	 *
+	 * @var string
+	 */
+	public $appTokenKeyFormat = null;
+
+	/**
+	 * AppTokenSessionMaxDurationSeconds
+	 *
+	 * @var int
+	 */
+	public $appTokenSessionMaxDurationSeconds = null;
+
+	/**
+	 * AppTokenMaxExpirySeconds
+	 *
+	 * @var int
+	 */
+	public $appTokenMaxExpirySeconds = null;
+
+	/**
+	 * UserSessionsKeyFormat
+	 *
+	 * @var string
+	 */
+	public $userSessionsKeyFormat = null;
+
+	/**
+	 * RevokedKsMaxTtlSeconds
+	 *
+	 * @var int
+	 */
+	public $revokedKsMaxTtlSeconds = null;
+
+	/**
+	 * MediaPrepAccountId
+	 *
+	 * @var int
+	 */
+	public $mediaPrepAccountId = null;
+
+	/**
+	 * FairplayCertificate
+	 *
+	 * @var string
+	 */
+	public $fairplayCertificate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBillingPartnerConfig extends KalturaPartnerConfiguration
 {
 	/**
@@ -9813,13 +10003,6 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 * @var int
 	 */
 	public $finishedPercentThreshold = null;
-
-	/**
-	 * Suspension Profile Inheritance
-	 *
-	 * @var KalturaSuspensionProfileInheritanceType
-	 */
-	public $suspensionProfileInheritanceType = null;
 
 
 }
@@ -18420,6 +18603,36 @@ class KalturaOTTUserDynamicData extends KalturaObjectBase
 	 * @var KalturaStringValue
 	 */
 	public $value;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPartnerSetup extends KalturaObjectBase
+{
+	/**
+	 * admin Username
+	 *
+	 * @var string
+	 */
+	public $adminUsername = null;
+
+	/**
+	 * admin Password
+	 *
+	 * @var string
+	 */
+	public $adminPassword = null;
+
+	/**
+	 * basePartnerConfiguration
+	 *
+	 * @var KalturaBasePartnerConfiguration
+	 */
+	public $basePartnerConfiguration;
 
 
 }

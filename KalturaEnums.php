@@ -1407,6 +1407,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const CATALOG = "Catalog";
 	const SECURITY = "Security";
 	const OPC = "Opc";
+	const BASE = "Base";
 }
 
 /**
@@ -2086,17 +2087,6 @@ class KalturaSubscriptionTriggerType extends KalturaEnumBase
 {
 	const START_DATE = "START_DATE";
 	const END_DATE = "END_DATE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSuspensionProfileInheritanceType extends KalturaEnumBase
-{
-	const ALWAYS = "ALWAYS";
-	const NEVER = "NEVER";
-	const DEFAULT = "DEFAULT";
 }
 
 /**
