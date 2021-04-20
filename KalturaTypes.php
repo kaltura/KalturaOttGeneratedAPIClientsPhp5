@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -18219,12 +18219,20 @@ class KalturaEpgNotificationSettings extends KalturaObjectBase
 	public $liveAssetIds = null;
 
 	/**
-	 * The range (in hours), in which, EPG updates triggers a notification,
+	 * The backward range (in hours), in which, EPG updates triggers a notification,
 	 *             every program that is updated and it’s starts time falls within this range shall trigger a notification
 	 *
 	 * @var int
 	 */
-	public $timeRange = null;
+	public $backwardTimeRange = null;
+
+	/**
+	 * The forward range (in hours), in which, EPG updates triggers a notification,
+	 *             every program that is updated and it’s starts time falls within this range shall trigger a notification
+	 *
+	 * @var int
+	 */
+	public $forwardTimeRange = null;
 
 
 }
