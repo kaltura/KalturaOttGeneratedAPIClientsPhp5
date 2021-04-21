@@ -936,6 +936,9 @@ class KalturaFollowTvSeriesOrderBy extends KalturaEnumBase
 class KalturaGroupByField extends KalturaEnumBase
 {
 	const MEDIA_TYPE_ID = "media_type_id";
+	const SUPPRESSED = "suppressed";
+	const CRID = "crid";
+	const LINEAR_MEDIA_ID = "linear_media_id";
 }
 
 /**
@@ -949,6 +952,16 @@ class KalturaGroupByOrder extends KalturaEnumBase
 	const COUNT_DESC = "count_desc";
 	const VALUE_ASC = "value_asc";
 	const VALUE_DESC = "value_desc";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGroupingOption extends KalturaEnumBase
+{
+	const OMIT = "Omit";
+	const INCLUDE = "Include";
 }
 
 /**

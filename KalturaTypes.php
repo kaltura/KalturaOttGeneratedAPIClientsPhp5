@@ -1669,6 +1669,13 @@ abstract class KalturaBaseSearchAssetFilter extends KalturaAssetFilter
 	 */
 	public $groupOrderBy = null;
 
+	/**
+	 * Grouping Option, Omit if not specified otherwise
+	 *
+	 * @var KalturaGroupingOption
+	 */
+	public $groupingOptionEqual = null;
+
 
 }
 
@@ -13416,6 +13423,13 @@ class KalturaAssetStructMeta extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $isLocationTag = null;
+
+	/**
+	 * suppressed Order, ascending
+	 *
+	 * @var int
+	 */
+	public $suppressedOrder = null;
 
 
 }
