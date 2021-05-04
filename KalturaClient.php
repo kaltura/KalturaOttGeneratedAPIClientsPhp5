@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platforms allow them to do with
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -621,10 +621,9 @@ class KalturaAssetFileService extends KalturaServiceBase
 	 * @param string $contextType Playback context type
 	 * @param string $ks Kaltura session for the user, not mandatory for anonymous user
 	 * @param string $tokenizedUrl Tokenized Url, not mandatory
-	 * @param bool $isAltUrl Is alternative url
 	 * @return KalturaAssetFile
 	 */
-	function playManifest($partnerId, $assetId, $assetType, $assetFileId, $contextType, $ks = null, $tokenizedUrl = null, $isAltUrl = false)
+	function playManifest($partnerId, $assetId, $assetType, $assetFileId, $contextType, $ks = null, $tokenizedUrl = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "partnerId", $partnerId);
@@ -634,7 +633,6 @@ class KalturaAssetFileService extends KalturaServiceBase
 		$this->client->addParam($kparams, "contextType", $contextType);
 		$this->client->addParam($kparams, "ks", $ks);
 		$this->client->addParam($kparams, "tokenizedUrl", $tokenizedUrl);
-		$this->client->addParam($kparams, "isAltUrl", $isAltUrl);
 		$this->client->queueServiceActionCall("assetfile", "playManifest", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -8575,6 +8573,51 @@ class KalturaRegionService extends KalturaServiceBase
 	}
 
 	/**
+	 * Adds a linear channel to the list of regions.
+	 * 
+	 * @param bigint $linearChannelId The identifier of the linear channel
+	 * @param array $regionChannelNumbers List of regions and number of linear channel in it.
+	 * @return bool
+	 */
+	function linearchannelbulkadd($linearChannelId, array $regionChannelNumbers)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "linearChannelId", $linearChannelId);
+		foreach($regionChannelNumbers as $index => $obj)
+		{
+			$this->client->addParam($kparams, "regionChannelNumbers:$index", $obj->toParams());
+		}
+		$this->client->queueServiceActionCall("region", "linearchannelbulkadd", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Deletes a linear channel from the list of regions.
+	 * 
+	 * @param bigint $linearChannelId The identifier of the linear channel
+	 * @param string $regionIds List of identifiers of regions.
+	 * @return bool
+	 */
+	function linearchannelbulkdelete($linearChannelId, $regionIds)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "linearChannelId", $linearChannelId);
+		$this->client->addParam($kparams, "regionIds", $regionIds);
+		$this->client->queueServiceActionCall("region", "linearchannelbulkdelete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Delete an existing region
 	 * 
 	 * @param int $id Region ID to delete
@@ -10016,48 +10059,6 @@ class KalturaSystemService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns the epoch value of an invalidation key if it was found
-	 * 
-	 * @param string $invalidationKey The invalidation key to fetch it's value
-	 * @param string $layeredCacheConfigName The layered cache config name of the invalidation key
-	 * @param int $groupId GroupId
-	 * @return KalturaLongValue
-	 */
-	function getInvalidationKeyValue($invalidationKey, $layeredCacheConfigName = null, $groupId = 0)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "invalidationKey", $invalidationKey);
-		$this->client->addParam($kparams, "layeredCacheConfigName", $layeredCacheConfigName);
-		$this->client->addParam($kparams, "groupId", $groupId);
-		$this->client->queueServiceActionCall("system", "getInvalidationKeyValue", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaLongValue");
-		return $resultObject;
-	}
-
-	/**
-	 * Returns the current layered cache group config of the sent groupId. You need to send groupId only if you wish to get it for a specific groupId and not the one the KS belongs to.
-	 * 
-	 * @param int $groupId GroupId
-	 * @return KalturaStringValue
-	 */
-	function getLayeredCacheGroupConfig($groupId = 0)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "groupId", $groupId);
-		$this->client->queueServiceActionCall("system", "getLayeredCacheGroupConfig", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaStringValue");
-		return $resultObject;
-	}
-
-	/**
 	 * Returns current server timestamp
 	 * 
 	 * @return bigint
@@ -10102,25 +10103,6 @@ class KalturaSystemService extends KalturaServiceBase
 		$kparams = array();
 		$this->client->addParam($kparams, "groupId", $groupId);
 		$this->client->queueServiceActionCall("system", "incrementLayeredCacheGroupConfigVersion", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
-	 * Returns true if the invalidation key was invalidated successfully or false otherwise.
-	 * 
-	 * @param string $key The invalidation key to invalidate
-	 * @return bool
-	 */
-	function invalidateLayeredCacheInvalidationKey($key)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "key", $key);
-		$this->client->queueServiceActionCall("system", "invalidateLayeredCacheInvalidationKey", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -12176,8 +12158,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-04-19');
-		$this->setApiVersion('6.3.0.29047');
+		$this->setClientTag('php5:21-05-04');
+		$this->setApiVersion('6.2.0.29003');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
