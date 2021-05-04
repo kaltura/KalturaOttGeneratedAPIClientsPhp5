@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platforms allow them to do with
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -8423,6 +8423,26 @@ class KalturaRecordingService extends KalturaServiceBase
 	}
 
 	/**
+	 * Delete list of user&#39;s recordings. Recording can be deleted only in status Recorded.
+            Possible error codes for each recording: RecordingNotFound = 3039, RecordingStatusNotValid = 3043, Error = 1
+	 * 
+	 * @param string $recordingIds Recording identifiers. Up to 40 private copies and up to 100 shared copies can be deleted withing a call.
+	 * @return array
+	 */
+	function bulkdelete($recordingIds)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "recordingIds", $recordingIds);
+		$this->client->queueServiceActionCall("recording", "bulkdelete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "array");
+		return $resultObject;
+	}
+
+	/**
 	 * Cancel a previously requested recording. Cancel recording can be called for recording in status Scheduled or Recording Only
 	 * 
 	 * @param bigint $id Recording identifier
@@ -8571,6 +8591,51 @@ class KalturaRegionService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaRegion");
+		return $resultObject;
+	}
+
+	/**
+	 * Adds a linear channel to the list of regions.
+	 * 
+	 * @param bigint $linearChannelId The identifier of the linear channel
+	 * @param array $regionChannelNumbers List of regions and number of linear channel in it.
+	 * @return bool
+	 */
+	function linearchannelbulkadd($linearChannelId, array $regionChannelNumbers)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "linearChannelId", $linearChannelId);
+		foreach($regionChannelNumbers as $index => $obj)
+		{
+			$this->client->addParam($kparams, "regionChannelNumbers:$index", $obj->toParams());
+		}
+		$this->client->queueServiceActionCall("region", "linearchannelbulkadd", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Deletes a linear channel from the list of regions.
+	 * 
+	 * @param bigint $linearChannelId The identifier of the linear channel
+	 * @param string $regionIds List of identifiers of regions.
+	 * @return bool
+	 */
+	function linearchannelbulkdelete($linearChannelId, $regionIds)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "linearChannelId", $linearChannelId);
+		$this->client->addParam($kparams, "regionIds", $regionIds);
+		$this->client->queueServiceActionCall("region", "linearchannelbulkdelete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
 		return $resultObject;
 	}
 
@@ -12176,8 +12241,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-04-19');
-		$this->setApiVersion('6.3.0.29047');
+		$this->setClientTag('php5:21-05-03');
+		$this->setApiVersion('6.4.0.29129');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

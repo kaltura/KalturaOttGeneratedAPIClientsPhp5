@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platforms allow them to do with
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -1668,6 +1668,13 @@ abstract class KalturaBaseSearchAssetFilter extends KalturaAssetFilter
 	 * @var KalturaGroupByOrder
 	 */
 	public $groupOrderBy = null;
+
+	/**
+	 * Grouping Option, Omit if not specified otherwise
+	 *
+	 * @var KalturaGroupingOption
+	 */
+	public $groupingOptionEqual = null;
 
 
 }
@@ -3645,6 +3652,15 @@ class KalturaRegionFilter extends KalturaBaseRegionFilter
  * @subpackage Client
  */
 class KalturaDefaultRegionFilter extends KalturaBaseRegionFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAddDefaultIfEmptyResponseProfile extends KalturaRelatedObjectFilter
 {
 
 }
@@ -6446,6 +6462,13 @@ class KalturaCategoryItem extends KalturaCrudObject
 	 * @readonly
 	 */
 	public $virtualAssetId = null;
+
+	/**
+	 * Category reference identifier
+	 *
+	 * @var string
+	 */
+	public $referenceId = null;
 
 
 }
@@ -13318,6 +13341,13 @@ class KalturaAssetStruct extends KalturaObjectBase
 	 */
 	public $connectedParentMetaId = null;
 
+	/**
+	 * Dynamic data
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
 
 }
 
@@ -13409,6 +13439,13 @@ class KalturaAssetStructMeta extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $isLocationTag = null;
+
+	/**
+	 * suppressed Order, ascending
+	 *
+	 * @var int
+	 */
+	public $suppressedOrder = null;
 
 
 }
@@ -16244,7 +16281,7 @@ class KalturaPlaybackContextOptions extends KalturaObjectBase
 	public $mediaProtocol = null;
 
 	/**
-	 * Playback streamer type: applehttp, mpegdash, url, smothstreaming, none
+	 * Playback streamer type: applehttp, mpegdash, url, smothstreaming, multicast, none
 	 *
 	 * @var string
 	 */
@@ -16848,6 +16885,14 @@ class KalturaCategoryTree extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $virtualAssetId = null;
+
+	/**
+	 * Category reference identifier
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $referenceId = null;
 
 
 }
@@ -18204,12 +18249,20 @@ class KalturaEpgNotificationSettings extends KalturaObjectBase
 	public $liveAssetIds = null;
 
 	/**
-	 * The range (in hours), in which, EPG updates triggers a notification,
+	 * The backward range (in hours), in which, EPG updates triggers a notification,
 	 *             every program that is updated and it’s starts time falls within this range shall trigger a notification
 	 *
 	 * @var int
 	 */
-	public $timeRange = null;
+	public $backwardTimeRange = null;
+
+	/**
+	 * The forward range (in hours), in which, EPG updates triggers a notification,
+	 *             every program that is updated and it’s starts time falls within this range shall trigger a notification
+	 *
+	 * @var int
+	 */
+	public $forwardTimeRange = null;
 
 
 }
@@ -18635,6 +18688,54 @@ class KalturaPurchaseSettings extends KalturaPin
 	 * @var KalturaPurchaseSettingsType
 	 */
 	public $permission = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaActionResult extends KalturaObjectBase
+{
+	/**
+	 * Identifier of entity
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Identifier of entity
+	 *
+	 * @var KalturaMessage
+	 * @readonly
+	 */
+	public $result;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRegionChannelNumber extends KalturaObjectBase
+{
+	/**
+	 * The identifier of the region
+	 *
+	 * @var int
+	 */
+	public $regionId = null;
+
+	/**
+	 * The number of channel
+	 *
+	 * @var int
+	 */
+	public $channelNumber = null;
 
 
 }
