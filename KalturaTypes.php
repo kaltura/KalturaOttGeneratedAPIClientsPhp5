@@ -16659,6 +16659,14 @@ class KalturaAssetFileContext extends KalturaObjectBase
 	 */
 	public $isOfflinePlayBack = null;
 
+	/**
+	 * Is Live PlayBack
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isLivePlayBack = null;
+
 
 }
 
