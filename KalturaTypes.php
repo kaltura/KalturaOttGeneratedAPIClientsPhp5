@@ -868,22 +868,6 @@ class KalturaOTTUserFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPartnerFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated discount codes
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaBulkUploadFilter extends KalturaFilter
 {
 	/**
@@ -4610,59 +4594,6 @@ class KalturaOTTUserListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPartner extends KalturaObjectBase
-{
-	/**
-	 * PartnerId
-	 *
-	 * @var int
-	 */
-	public $id = null;
-
-	/**
-	 * PartnerName
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Creat date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $createDate = null;
-
-	/**
-	 * Update date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $updateDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPartnerListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of Partners
-	 *
-	 * @var array of KalturaPartner
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaSSOAdapterProfile extends KalturaObjectBase
 {
 	/**
@@ -7567,6 +7498,7 @@ class KalturaBaseChannel extends KalturaOTTObjectSupportNullable
 	 * Unique identifier for the channel
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $id = null;
 
@@ -8261,13 +8193,6 @@ class KalturaTvmGeoRule extends KalturaTvmRule
 class KalturaDiscountModule extends KalturaObjectBase
 {
 	/**
-	 * Discount module identifier
-	 *
-	 * @var int
-	 */
-	public $id = null;
-
-	/**
 	 * The discount percentage
 	 *
 	 * @var float
@@ -8301,6 +8226,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * Usage module identifier
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $id = null;
 
@@ -8308,7 +8234,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * Usage module name
 	 *
 	 * @var string
-	 * @insertonly
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -8316,7 +8242,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The maximum number of times an item in this usage module can be viewed
 	 *
 	 * @var int
-	 * @insertonly
+	 * @readonly
 	 */
 	public $maxViewsNumber = null;
 
@@ -8324,7 +8250,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing since a user started watching the item
 	 *
 	 * @var int
-	 * @insertonly
+	 * @readonly
 	 */
 	public $viewLifeCycle = null;
 
@@ -8332,7 +8258,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing
 	 *
 	 * @var int
-	 * @insertonly
+	 * @readonly
 	 */
 	public $fullLifeCycle = null;
 
@@ -8381,6 +8307,7 @@ class KalturaCouponsGroup extends KalturaObjectBase
 	 * Coupon group identifier
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $id = null;
 
@@ -8601,7 +8528,7 @@ class KalturaPricePlan extends KalturaUsageModule
 	 * Denotes whether or not this object can be renewed
 	 *
 	 * @var bool
-	 * @insertonly
+	 * @readonly
 	 */
 	public $isRenewable = null;
 
@@ -8609,7 +8536,7 @@ class KalturaPricePlan extends KalturaUsageModule
 	 * Defines the number of times the module will be renewed (for the life_cycle period)
 	 *
 	 * @var int
-	 * @insertonly
+	 * @readonly
 	 */
 	public $renewalsNumber = null;
 
@@ -8617,7 +8544,7 @@ class KalturaPricePlan extends KalturaUsageModule
 	 * The discount module identifier of the price plan
 	 *
 	 * @var int
-	 * @insertonly
+	 * @readonly
 	 */
 	public $discountId = null;
 
@@ -8694,6 +8621,7 @@ class KalturaDiscount extends KalturaPrice
 	 * The discount percentage
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $percentage = null;
 
@@ -8741,20 +8669,6 @@ class KalturaDiscountDetails extends KalturaObjectBase
 	 * @var int
 	 */
 	public $endDate = null;
-
-	/**
-	 * End date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $whenAlgoTimes = null;
-
-	/**
-	 * End date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $whenAlgoType = null;
 
 
 }
@@ -9140,60 +9054,6 @@ class KalturaPpvListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPreviewModule extends KalturaObjectBase
-{
-	/**
-	 * Preview module identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Preview module name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Preview module life cycle - for how long the preview module is active
-	 *
-	 * @var int
-	 */
-	public $lifeCycle = null;
-
-	/**
-	 * The time you can&#39;t buy the item to which the preview module is assigned to again
-	 *
-	 * @var int
-	 */
-	public $nonRenewablePeriod = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPreviewModuleListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of Preview Module
-	 *
-	 * @var array of KalturaPreviewModule
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPriceDetailsListResponse extends KalturaListResponse
 {
 	/**
@@ -9250,6 +9110,44 @@ class KalturaProductsPriceListResponse extends KalturaListResponse
 	 * @var array of KalturaProductPrice
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPreviewModule extends KalturaObjectBase
+{
+	/**
+	 * Preview module identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Preview module name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Preview module life cycle - for how long the preview module is active
+	 *
+	 * @var int
+	 */
+	public $lifeCycle = null;
+
+	/**
+	 * The time you can&#39;t buy the item to which the preview module is assigned to again
+	 *
+	 * @var int
+	 */
+	public $nonRenewablePeriod = null;
 
 
 }
@@ -9639,22 +9537,6 @@ class KalturaSubscriptionSwitchSet extends KalturaSubscriptionSet
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaUsageModuleListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of usage modules
-	 *
-	 * @var array of KalturaUsageModule
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaPartnerConfiguration extends KalturaObjectBase
 {
 
@@ -9672,64 +9554,6 @@ class KalturaPartnerConfigurationListResponse extends KalturaListResponse
 	 * @var array of KalturaPartnerConfiguration
 	 */
 	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBasePartnerConfiguration extends KalturaPartnerConfiguration
-{
-	/**
-	 * KSExpirationSeconds
-	 *
-	 * @var int
-	 */
-	public $ksExpirationSeconds = null;
-
-	/**
-	 * AppTokenSessionMaxDurationSeconds
-	 *
-	 * @var int
-	 */
-	public $appTokenSessionMaxDurationSeconds = null;
-
-	/**
-	 * AnonymousKSExpirationSeconds
-	 *
-	 * @var int
-	 */
-	public $anonymousKSExpirationSeconds = null;
-
-	/**
-	 * RefreshExpirationForPinLoginSeconds
-	 *
-	 * @var int
-	 */
-	public $refreshExpirationForPinLoginSeconds = null;
-
-	/**
-	 * AppTokenMaxExpirySeconds
-	 *
-	 * @var int
-	 */
-	public $appTokenMaxExpirySeconds = null;
-
-	/**
-	 * uploadTokenExpirySeconds
-	 *
-	 * @var int
-	 */
-	public $uploadTokenExpirySeconds = null;
-
-	/**
-	 * apptokenUserValidationDisabled
-	 *
-	 * @var bool
-	 */
-	public $apptokenUserValidationDisabled = null;
 
 
 }
@@ -18657,36 +18481,6 @@ class KalturaOTTUserDynamicData extends KalturaObjectBase
 	 * @var KalturaStringValue
 	 */
 	public $value;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPartnerSetup extends KalturaObjectBase
-{
-	/**
-	 * admin Username
-	 *
-	 * @var string
-	 */
-	public $adminUsername = null;
-
-	/**
-	 * admin Password
-	 *
-	 * @var string
-	 */
-	public $adminPassword = null;
-
-	/**
-	 * basePartnerConfiguration
-	 *
-	 * @var KalturaBasePartnerConfiguration
-	 */
-	public $basePartnerConfiguration;
 
 
 }
