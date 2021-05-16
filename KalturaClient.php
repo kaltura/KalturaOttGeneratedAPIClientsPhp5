@@ -7187,27 +7187,6 @@ class KalturaPartnerService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add a partner with default user
-	 * 
-	 * @param KalturaPartner $partner Partner
-	 * @param KalturaPartnerSetup $partnerSetup Mandatory parameters to create partner
-	 * @return KalturaPartner
-	 */
-	function add(KalturaPartner $partner, KalturaPartnerSetup $partnerSetup)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "partner", $partner->toParams());
-		$this->client->addParam($kparams, "partnerSetup", $partnerSetup->toParams());
-		$this->client->queueServiceActionCall("partner", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPartner");
-		return $resultObject;
-	}
-
-	/**
 	 * Returns a login session for external system (like OVP)
 	 * 
 	 * @return KalturaLoginSession
@@ -7221,26 +7200,6 @@ class KalturaPartnerService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaLoginSession");
-		return $resultObject;
-	}
-
-	/**
-	 * Internal API !!! Returns the list of active Partners
-	 * 
-	 * @param KalturaPartnerFilter $filter Filter
-	 * @return KalturaPartnerListResponse
-	 */
-	function listAction(KalturaPartnerFilter $filter = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("partner", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPartnerListResponse");
 		return $resultObject;
 	}
 }
@@ -12282,8 +12241,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-05-13');
-		$this->setApiVersion('6.4.0.29137');
+		$this->setClientTag('php5:21-05-16');
+		$this->setApiVersion('6.4.0.29140');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

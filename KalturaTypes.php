@@ -868,22 +868,6 @@ class KalturaOTTUserFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPartnerFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated discount codes
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaBulkUploadFilter extends KalturaFilter
 {
 	/**
@@ -4600,59 +4584,6 @@ class KalturaOTTUserListResponse extends KalturaListResponse
 	 * A list of users
 	 *
 	 * @var array of KalturaOTTUser
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPartner extends KalturaObjectBase
-{
-	/**
-	 * PartnerId
-	 *
-	 * @var int
-	 */
-	public $id = null;
-
-	/**
-	 * PartnerName
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * Creat date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $createDate = null;
-
-	/**
-	 * Update date represented as epoch
-	 *
-	 * @var int
-	 */
-	public $updateDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPartnerListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of Partners
-	 *
-	 * @var array of KalturaPartner
 	 */
 	public $objects;
 
@@ -9623,64 +9554,6 @@ class KalturaPartnerConfigurationListResponse extends KalturaListResponse
 	 * @var array of KalturaPartnerConfiguration
 	 */
 	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBasePartnerConfiguration extends KalturaPartnerConfiguration
-{
-	/**
-	 * KSExpirationSeconds
-	 *
-	 * @var int
-	 */
-	public $ksExpirationSeconds = null;
-
-	/**
-	 * AppTokenSessionMaxDurationSeconds
-	 *
-	 * @var int
-	 */
-	public $appTokenSessionMaxDurationSeconds = null;
-
-	/**
-	 * AnonymousKSExpirationSeconds
-	 *
-	 * @var int
-	 */
-	public $anonymousKSExpirationSeconds = null;
-
-	/**
-	 * RefreshExpirationForPinLoginSeconds
-	 *
-	 * @var int
-	 */
-	public $refreshExpirationForPinLoginSeconds = null;
-
-	/**
-	 * AppTokenMaxExpirySeconds
-	 *
-	 * @var int
-	 */
-	public $appTokenMaxExpirySeconds = null;
-
-	/**
-	 * uploadTokenExpirySeconds
-	 *
-	 * @var int
-	 */
-	public $uploadTokenExpirySeconds = null;
-
-	/**
-	 * apptokenUserValidationDisabled
-	 *
-	 * @var bool
-	 */
-	public $apptokenUserValidationDisabled = null;
 
 
 }
@@ -18608,36 +18481,6 @@ class KalturaOTTUserDynamicData extends KalturaObjectBase
 	 * @var KalturaStringValue
 	 */
 	public $value;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPartnerSetup extends KalturaObjectBase
-{
-	/**
-	 * admin Username
-	 *
-	 * @var string
-	 */
-	public $adminUsername = null;
-
-	/**
-	 * admin Password
-	 *
-	 * @var string
-	 */
-	public $adminPassword = null;
-
-	/**
-	 * basePartnerConfiguration
-	 *
-	 * @var KalturaBasePartnerConfiguration
-	 */
-	public $basePartnerConfiguration;
 
 
 }
