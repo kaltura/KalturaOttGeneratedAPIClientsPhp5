@@ -1249,7 +1249,6 @@ class KalturaMediaFileStreamerType extends KalturaEnumBase
 	const MPEG_DASH = "MPEG_DASH";
 	const URL = "URL";
 	const SMOOTH_STREAMING = "SMOOTH_STREAMING";
-	const MULTICAST = "MULTICAST";
 	const NONE = "NONE";
 }
 
@@ -1421,7 +1420,6 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const CATALOG = "Catalog";
 	const SECURITY = "Security";
 	const OPC = "Opc";
-	const BASE = "Base";
 }
 
 /**
