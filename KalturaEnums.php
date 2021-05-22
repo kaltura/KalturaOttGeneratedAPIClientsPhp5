@@ -1421,7 +1421,6 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const CATALOG = "Catalog";
 	const SECURITY = "Security";
 	const OPC = "Opc";
-	const BASE = "Base";
 }
 
 /**
