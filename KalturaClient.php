@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platforms allow them to do with
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -2228,6 +2228,44 @@ class KalturaCollectionService extends KalturaServiceBase
 	}
 
 	/**
+	 * Internal API !!! Insert new collection for partner
+	 * 
+	 * @param KalturaCollection $collection Collection object
+	 * @return KalturaCollection
+	 */
+	function add(KalturaCollection $collection)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "collection", $collection->toParams());
+		$this->client->queueServiceActionCall("collection", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCollection");
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Delete collection
+	 * 
+	 * @param bigint $id Collection id
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("collection", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Returns a list of subscriptions requested by Subscription ID or file ID
 	 * 
 	 * @param KalturaCollectionFilter $filter Filter request
@@ -3121,6 +3159,44 @@ class KalturaDiscountDetailsService extends KalturaServiceBase
 	}
 
 	/**
+	 * Internal API !!! Insert new DiscountDetails for partner
+	 * 
+	 * @param KalturaDiscountDetails $discountDetails Discount details Object
+	 * @return KalturaDiscountDetails
+	 */
+	function add(KalturaDiscountDetails $discountDetails)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "discountDetails", $discountDetails->toParams());
+		$this->client->queueServiceActionCall("discountdetails", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDiscountDetails");
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Delete DiscountDetails
+	 * 
+	 * @param bigint $id DiscountDetails id
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("discountdetails", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Returns the list of available discounts details, can be filtered by discount codes
 	 * 
 	 * @param KalturaDiscountDetailsFilter $filter Filter
@@ -3150,6 +3226,44 @@ class KalturaDrmProfileService extends KalturaServiceBase
 	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
+	}
+
+	/**
+	 * Internal API !!! Insert new DrmProfile
+	 * 
+	 * @param KalturaDrmProfile $drmProfile Drm adapter Object
+	 * @return KalturaDrmProfile
+	 */
+	function add(KalturaDrmProfile $drmProfile)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "drmProfile", $drmProfile->toParams());
+		$this->client->queueServiceActionCall("drmprofile", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDrmProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Delete DrmProfile
+	 * 
+	 * @param bigint $id Drm adapter id
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("drmprofile", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
 	}
 
 	/**
@@ -8092,11 +8206,116 @@ class KalturaPpvService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPreviewModuleService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Internal API !!! Insert new PreviewModule for partner
+	 * 
+	 * @param KalturaPreviewModule $previewModule Preview module object
+	 * @return KalturaPreviewModule
+	 */
+	function add(KalturaPreviewModule $previewModule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "previewModule", $previewModule->toParams());
+		$this->client->queueServiceActionCall("previewmodule", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPreviewModule");
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Delete PreviewModule
+	 * 
+	 * @param bigint $id PreviewModule id
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("previewmodule", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Returns all PreviewModule
+	 * 
+	 * @return KalturaPreviewModuleListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("previewmodule", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPreviewModuleListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPriceDetailsService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
+	}
+
+	/**
+	 * Internal API !!! Insert new PriceDetails for partner
+	 * 
+	 * @param KalturaPriceDetails $priceDetails PriceDetails Object
+	 * @return KalturaPriceDetails
+	 */
+	function add(KalturaPriceDetails $priceDetails)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "priceDetails", $priceDetails->toParams());
+		$this->client->queueServiceActionCall("pricedetails", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPriceDetails");
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Delete PriceDetails
+	 * 
+	 * @param bigint $id PriceDetails identifier
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("pricedetails", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
 	}
 
 	/**
@@ -8129,6 +8348,44 @@ class KalturaPricePlanService extends KalturaServiceBase
 	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
+	}
+
+	/**
+	 * Internal API !!!  Insert new PriceDetails for partner
+	 * 
+	 * @param KalturaPricePlan $pricePlan Price plan Object
+	 * @return KalturaPricePlan
+	 */
+	function add(KalturaPricePlan $pricePlan)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "pricePlan", $pricePlan->toParams());
+		$this->client->queueServiceActionCall("priceplan", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPricePlan");
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Delete PricePlan
+	 * 
+	 * @param bigint $id PricePlan identifier
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("priceplan", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
 	}
 
 	/**
@@ -11011,6 +11268,73 @@ class KalturaUploadTokenService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUsageModuleService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Internal API !!! Insert new UsageModule
+	 * 
+	 * @param KalturaUsageModule $usageModule Usage module Object
+	 * @return KalturaUsageModule
+	 */
+	function add(KalturaUsageModule $usageModule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "usageModule", $usageModule->toParams());
+		$this->client->queueServiceActionCall("usagemodule", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUsageModule");
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Delete UsageModule
+	 * 
+	 * @param bigint $id UsageModule id
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("usagemodule", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Returns the list of available usage module
+	 * 
+	 * @return KalturaUsageModuleListResponse
+	 */
+	function listAction()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("usagemodule", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUsageModuleListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserAssetRuleService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -12029,6 +12353,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaPreviewModuleService
+	 */
+	public $previewModule = null;
+
+	/**
+	 * 
 	 * @var KalturaPriceDetailsService
 	 */
 	public $priceDetails = null;
@@ -12239,6 +12569,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaUsageModuleService
+	 */
+	public $usageModule = null;
+
+	/**
+	 * 
 	 * @var KalturaUserAssetRuleService
 	 */
 	public $userAssetRule = null;
@@ -12282,8 +12618,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-05-13');
-		$this->setApiVersion('6.4.0.29137');
+		$this->setClientTag('php5:21-05-24');
+		$this->setApiVersion('6.4.0.29304');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -12378,6 +12714,7 @@ class KalturaClient extends KalturaClientBase
 		$this->pin = new KalturaPinService($this);
 		$this->playbackProfile = new KalturaPlaybackProfileService($this);
 		$this->ppv = new KalturaPpvService($this);
+		$this->previewModule = new KalturaPreviewModuleService($this);
 		$this->priceDetails = new KalturaPriceDetailsService($this);
 		$this->pricePlan = new KalturaPricePlanService($this);
 		$this->productPrice = new KalturaProductPriceService($this);
@@ -12413,6 +12750,7 @@ class KalturaClient extends KalturaClientBase
 		$this->tvmRule = new KalturaTvmRuleService($this);
 		$this->unifiedPayment = new KalturaUnifiedPaymentService($this);
 		$this->uploadToken = new KalturaUploadTokenService($this);
+		$this->usageModule = new KalturaUsageModuleService($this);
 		$this->userAssetRule = new KalturaUserAssetRuleService($this);
 		$this->userAssetsListItem = new KalturaUserAssetsListItemService($this);
 		$this->userInterest = new KalturaUserInterestService($this);
