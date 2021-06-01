@@ -4797,6 +4797,44 @@ class KalturaHouseholdLimitationsService extends KalturaServiceBase
 	}
 
 	/**
+	 * Add household limitation
+	 * 
+	 * @param KalturaHouseholdLimitations $householdLimitations Household limitations
+	 * @return KalturaHouseholdLimitations
+	 */
+	function add(KalturaHouseholdLimitations $householdLimitations)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "householdLimitations", $householdLimitations->toParams());
+		$this->client->queueServiceActionCall("householdlimitations", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitations");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete household limitation
+	 * 
+	 * @param int $householdLimitationsId Id of household limitation
+	 * @return bool
+	 */
+	function delete($householdLimitationsId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "householdLimitationsId", $householdLimitationsId);
+		$this->client->queueServiceActionCall("householdlimitations", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Get the limitation module by id
 	 * 
 	 * @param int $id Household limitations module identifier
@@ -12282,8 +12320,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-05-13');
-		$this->setApiVersion('6.4.0.29137');
+		$this->setClientTag('php5:21-06-01');
+		$this->setApiVersion('6.4.0.29151');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
