@@ -11396,7 +11396,6 @@ class KalturaDeviceFamilyBase extends KalturaObjectBase
 	 * Device family identifier
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $id = null;
 
@@ -11404,6 +11403,7 @@ class KalturaDeviceFamilyBase extends KalturaObjectBase
 	 * Device family name
 	 *
 	 * @var string
+	 * @readonly
 	 */
 	public $name = null;
 
@@ -11458,7 +11458,6 @@ class KalturaHouseholdLimitations extends KalturaObjectBase
 	 * Household limitation module name
 	 *
 	 * @var string
-	 * @readonly
 	 */
 	public $name = null;
 
@@ -11466,7 +11465,6 @@ class KalturaHouseholdLimitations extends KalturaObjectBase
 	 * Max number of streams allowed for the household
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $concurrentLimit = null;
 
@@ -11474,7 +11472,6 @@ class KalturaHouseholdLimitations extends KalturaObjectBase
 	 * Max number of devices allowed for the household
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $deviceLimit = null;
 
@@ -11482,7 +11479,6 @@ class KalturaHouseholdLimitations extends KalturaObjectBase
 	 * Allowed device change frequency code
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $deviceFrequency = null;
 
@@ -11498,7 +11494,6 @@ class KalturaHouseholdLimitations extends KalturaObjectBase
 	 * Allowed user change frequency code
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $userFrequency = null;
 
@@ -11522,7 +11517,6 @@ class KalturaHouseholdLimitations extends KalturaObjectBase
 	 * Max number of users allowed for the household
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $usersLimit = null;
 
@@ -11530,7 +11524,6 @@ class KalturaHouseholdLimitations extends KalturaObjectBase
 	 * Device families limitations
 	 *
 	 * @var array of KalturaHouseholdDeviceFamilyLimitations
-	 * @readonly
 	 */
 	public $deviceFamiliesLimitations;
 
@@ -17919,6 +17912,29 @@ class KalturaLoginResponse extends KalturaObjectBase
 	 * @var KalturaLoginSession
 	 */
 	public $loginSession;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDynamicData extends KalturaObjectBase
+{
+	/**
+	 * Key
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+	/**
+	 * Value
+	 *
+	 * @var KalturaValue
+	 */
+	public $value;
 
 
 }
