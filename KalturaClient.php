@@ -4660,6 +4660,27 @@ class KalturaHouseholdDeviceService extends KalturaServiceBase
 	}
 
 	/**
+	 * Deletes dynamic data item with key  for device with identifier .
+	 * 
+	 * @param string $udid Unique identifier of device.
+	 * @param string $key Key of dynamic data item.
+	 * @return bool
+	 */
+	function deleteDynamicData($udid, $key)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "udid", $udid);
+		$this->client->addParam($kparams, "key", $key);
+		$this->client->queueServiceActionCall("householddevice", "deleteDynamicData", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Generates device pin to use when adding a device to household by pin
 	 * 
 	 * @param string $udid Device UDID
@@ -4783,6 +4804,29 @@ class KalturaHouseholdDeviceService extends KalturaServiceBase
 		$resultObject = (bool) $resultObject;
 		return $resultObject;
 	}
+
+	/**
+	 * Adds or updates dynamic data item for device with identifier udid. If it is needed to update several items, use a multi-request to avoid race conditions.
+	 * 
+	 * @param string $udid Unique identifier of device.
+	 * @param string $key Key of dynamic data item. Max length of key is 125 characters.
+	 * @param KalturaStringValue $value Value of dynamic data item. Max length of value is 255 characters.
+	 * @return KalturaDynamicData
+	 */
+	function upsertDynamicData($udid, $key, KalturaStringValue $value)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "udid", $udid);
+		$this->client->addParam($kparams, "key", $key);
+		$this->client->addParam($kparams, "value", $value->toParams());
+		$this->client->queueServiceActionCall("householddevice", "upsertDynamicData", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDynamicData");
+		return $resultObject;
+	}
 }
 
 /**
@@ -4794,6 +4838,44 @@ class KalturaHouseholdLimitationsService extends KalturaServiceBase
 	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
+	}
+
+	/**
+	 * Add household limitation
+	 * 
+	 * @param KalturaHouseholdLimitations $householdLimitations Household limitations
+	 * @return KalturaHouseholdLimitations
+	 */
+	function add(KalturaHouseholdLimitations $householdLimitations)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "householdLimitations", $householdLimitations->toParams());
+		$this->client->queueServiceActionCall("householdlimitations", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitations");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete household limitation
+	 * 
+	 * @param int $householdLimitationsId Id of household limitation
+	 * @return bool
+	 */
+	function delete($householdLimitationsId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "householdLimitationsId", $householdLimitationsId);
+		$this->client->queueServiceActionCall("householdlimitations", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
 	}
 
 	/**
@@ -6653,6 +6735,25 @@ class KalturaOttUserService extends KalturaServiceBase
 	}
 
 	/**
+	 * Deletes dynamic data item for a user.
+	 * 
+	 * @param string $key Key of dynamic data item.
+	 * @return bool
+	 */
+	function deleteDynamicData($key)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "key", $key);
+		$this->client->queueServiceActionCall("ottuser", "deleteDynamicData", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Retrieving users&#39; data
 	 * 
 	 * @return KalturaOTTUser
@@ -6891,10 +6992,11 @@ class KalturaOttUserService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update user dynamic data
+	 * Update user dynamic data. If it is needed to update several items, use a multi-request to avoid race conditions.
+            This API endpoint will deprecated soon. Please use UpsertDynamicData instead of it.
 	 * 
-	 * @param string $key Type of dynamicData
-	 * @param KalturaStringValue $value Value of dynamicData
+	 * @param string $key Type of dynamicData. Max length of key is 50 characters.
+	 * @param KalturaStringValue $value Value of dynamicData. Max length of value is 512 characters.
 	 * @return KalturaOTTUserDynamicData
 	 */
 	function updateDynamicData($key, KalturaStringValue $value)
@@ -6951,6 +7053,27 @@ class KalturaOttUserService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Adds or updates dynamic data item for a user. If it is needed to update several items, use a multi-request to avoid race conditions.
+	 * 
+	 * @param string $key Key of dynamic data item. Max length of key is 50 characters.
+	 * @param KalturaStringValue $value Value of dynamic data item. Max length of value is 512 characters.
+	 * @return KalturaDynamicData
+	 */
+	function upsertDynamicData($key, KalturaStringValue $value)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "key", $key);
+		$this->client->addParam($kparams, "value", $value->toParams());
+		$this->client->queueServiceActionCall("ottuser", "upsertDynamicData", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDynamicData");
+		return $resultObject;
 	}
 }
 
@@ -9238,6 +9361,25 @@ class KalturaSeriesRecordingService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaSeriesRecordingListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Enable EPG recording that was canceled as part of series
+	 * 
+	 * @param bigint $epgId EPG program identifies
+	 * @return KalturaSeriesRecording
+	 */
+	function rebookCanceledByEpgId($epgId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "epgId", $epgId);
+		$this->client->queueServiceActionCall("seriesrecording", "rebookCanceledByEpgId", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSeriesRecording");
 		return $resultObject;
 	}
 }
@@ -12282,8 +12424,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-05-13');
-		$this->setApiVersion('6.4.0.29137');
+		$this->setClientTag('php5:21-06-03');
+		$this->setApiVersion('6.5.0.29155');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
