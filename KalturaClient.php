@@ -9658,6 +9658,25 @@ class KalturaSeriesRecordingService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaSeriesRecordingListResponse");
 		return $resultObject;
 	}
+
+	/**
+	 * Enable EPG recording that was canceled as part of series
+	 * 
+	 * @param bigint $epgId EPG program identifies
+	 * @return KalturaSeriesRecording
+	 */
+	function rebookCanceledByEpgId($epgId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "epgId", $epgId);
+		$this->client->queueServiceActionCall("seriesrecording", "rebookCanceledByEpgId", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSeriesRecording");
+		return $resultObject;
+	}
 }
 
 /**
@@ -12779,8 +12798,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-06-09');
-		$this->setApiVersion('6.5.0.29360');
+		$this->setClientTag('php5:21-06-14');
+		$this->setApiVersion('6.5.0.29374');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
