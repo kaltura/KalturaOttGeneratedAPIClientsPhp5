@@ -1421,7 +1421,6 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const CATALOG = "Catalog";
 	const SECURITY = "Security";
 	const OPC = "Opc";
-	const BASE = "Base";
 }
 
 /**
@@ -1870,6 +1869,17 @@ class KalturaScheduledRecordingAssetType extends KalturaEnumBase
 class KalturaSearchHistoryOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSeriesRecordingOption extends KalturaEnumBase
+{
+	const FUTURE = "FUTURE";
+	const ORIGINAL_BROADCAST = "ORIGINAL_BROADCAST";
+	const ALL = "ALL";
 }
 
 /**
