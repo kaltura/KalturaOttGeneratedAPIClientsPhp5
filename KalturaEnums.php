@@ -551,6 +551,8 @@ class KalturaChannelsOrderBy extends KalturaEnumBase
 	const NAME_DESC = "NAME_DESC";
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
 }
 
 /**
@@ -1421,6 +1423,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const CATALOG = "Catalog";
 	const SECURITY = "Security";
 	const OPC = "Opc";
+	const BASE = "Base";
 }
 
 /**
@@ -1869,17 +1872,6 @@ class KalturaScheduledRecordingAssetType extends KalturaEnumBase
 class KalturaSearchHistoryOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSeriesRecordingOption extends KalturaEnumBase
-{
-	const FUTURE = "FUTURE";
-	const ORIGINAL_BROADCAST = "ORIGINAL_BROADCAST";
-	const ALL = "ALL";
 }
 
 /**
