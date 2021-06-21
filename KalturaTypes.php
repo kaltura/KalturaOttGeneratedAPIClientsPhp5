@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -12695,29 +12695,6 @@ class KalturaRecordingListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSeriesRecordingOption extends KalturaObjectBase
-{
-	/**
-	 * min Season Number
-	 *
-	 * @var int
-	 */
-	public $minSeasonNumber = null;
-
-	/**
-	 * min Season Number
-	 *
-	 * @var int
-	 */
-	public $minEpisodeNumber = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaSeriesRecording extends KalturaObjectBase
 {
 	/**
@@ -12786,13 +12763,6 @@ class KalturaSeriesRecording extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $excludedSeasons;
-
-	/**
-	 * Series Recording Option
-	 *
-	 * @var KalturaSeriesRecordingOption
-	 */
-	public $seriesRecordingOption;
 
 
 }

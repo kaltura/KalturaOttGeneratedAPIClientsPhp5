@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -7445,6 +7445,25 @@ class KalturaPartnerService extends KalturaServiceBase
 	}
 
 	/**
+	 * Internal API !!! Delete Partner
+	 * 
+	 * @param int $id Partner id
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("partner", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Returns a login session for external system (like OVP)
 	 * 
 	 * @return KalturaLoginSession
@@ -12761,7 +12780,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:21-06-21');
-		$this->setApiVersion('6.5.0.29187');
+		$this->setApiVersion('6.5.0.29174');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
