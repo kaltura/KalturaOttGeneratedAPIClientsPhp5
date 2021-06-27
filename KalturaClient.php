@@ -7445,6 +7445,23 @@ class KalturaPartnerService extends KalturaServiceBase
 	}
 
 	/**
+	 * Internal API !!! create ElasticSearch indexes for partner
+	 * 
+	 * @return bool
+	 */
+	function createIndexes()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("partner", "createIndexes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Internal API !!! Delete Partner
 	 * 
 	 * @param int $id Partner id
@@ -10353,44 +10370,6 @@ class KalturaSubscriptionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Insert new subscription for partner
-	 * 
-	 * @param KalturaSubscriptionInternal $subscription Subscription object
-	 * @return KalturaSubscriptionInternal
-	 */
-	function add(KalturaSubscriptionInternal $subscription)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "subscription", $subscription->toParams());
-		$this->client->queueServiceActionCall("subscription", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSubscriptionInternal");
-		return $resultObject;
-	}
-
-	/**
-	 * Internal API !!! Delete subscription
-	 * 
-	 * @param bigint $id Subscription id
-	 * @return bool
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("subscription", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
 	 * Returns a list of subscriptions requested by Subscription ID or file ID
 	 * 
 	 * @param KalturaSubscriptionFilter $filter Filter request
@@ -12818,7 +12797,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:21-06-27');
-		$this->setApiVersion('6.5.0.29176');
+		$this->setApiVersion('6.5.0.29180');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
