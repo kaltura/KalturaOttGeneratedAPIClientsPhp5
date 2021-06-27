@@ -7445,6 +7445,23 @@ class KalturaPartnerService extends KalturaServiceBase
 	}
 
 	/**
+	 * Internal API !!! create ElasticSearch indexes for partner
+	 * 
+	 * @return bool
+	 */
+	function createIndexes()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("partner", "createIndexes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Internal API !!! Delete Partner
 	 * 
 	 * @param int $id Partner id
@@ -12779,8 +12796,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-06-24');
-		$this->setApiVersion('6.5.0.29177');
+		$this->setClientTag('php5:21-06-27');
+		$this->setApiVersion('6.5.0.29179');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
