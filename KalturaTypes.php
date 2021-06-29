@@ -19383,34 +19383,6 @@ class KalturaSubscriptionInternal extends KalturaObjectBase
 	public $premiumServices;
 
 	/**
-	 * The maximum number of times an item in this usage module can be viewed
-	 *
-	 * @var int
-	 */
-	public $maxViewsNumber = null;
-
-	/**
-	 * The amount time an item is available for viewing since a user started watching the item
-	 *
-	 * @var int
-	 */
-	public $viewLifeCycle = null;
-
-	/**
-	 * Time period during which the end user can waive his rights to cancel a purchase. When the time period is passed, the purchase can no longer be cancelled
-	 *
-	 * @var int
-	 */
-	public $waiverPeriod = null;
-
-	/**
-	 * Indicates whether or not the end user has the right to waive his rights to cancel a purchase
-	 *
-	 * @var bool
-	 */
-	public $isWaiverEnabled = null;
-
-	/**
 	 * List of Coupons group
 	 *
 	 * @var array of KalturaSubscriptionCouponGroup
@@ -19465,6 +19437,13 @@ class KalturaSubscriptionInternal extends KalturaObjectBase
 	 * @var string
 	 */
 	public $adsParam = null;
+
+	/**
+	 * Is active subscription
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
 
 
 }
