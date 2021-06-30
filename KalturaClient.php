@@ -10375,11 +10375,11 @@ class KalturaSubscriptionService extends KalturaServiceBase
 	 * @param KalturaSubscriptionInternal $subscription Subscription object
 	 * @return KalturaSubscriptionInternal
 	 */
-	function add(KalturaSubscriptionInternal $subscription)
+	function addInternal(KalturaSubscriptionInternal $subscription)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "subscription", $subscription->toParams());
-		$this->client->queueServiceActionCall("subscription", "add", $kparams);
+		$this->client->queueServiceActionCall("subscription", "addInternal", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -12834,8 +12834,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-06-29');
-		$this->setApiVersion('6.5.0.29194');
+		$this->setClientTag('php5:21-06-30');
+		$this->setApiVersion('6.5.0.29195');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
