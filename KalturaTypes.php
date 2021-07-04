@@ -9282,6 +9282,36 @@ class KalturaPremiumService extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSubscriptionCouponGroup extends KalturaObjectBase
+{
+	/**
+	 * Coupon group identifier
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+	/**
+	 * The first date the coupons in this coupons group are valid
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The last date the coupons in this coupons group are valid
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSubscription extends KalturaObjectBase
 {
 	/**
@@ -9295,8 +9325,16 @@ class KalturaSubscription extends KalturaObjectBase
 	 * A list of channels associated with this subscription
 	 *
 	 * @var array of KalturaBaseChannel
+	 * @readonly
 	 */
 	public $channels;
+
+	/**
+	 * Comma separated channels Ids associated with this subscription
+	 *
+	 * @var string
+	 */
+	public $channelsIds = null;
 
 	/**
 	 * The first date the subscription is available for purchasing
@@ -9316,13 +9354,22 @@ class KalturaSubscription extends KalturaObjectBase
 	 * A list of file types identifiers that are supported in this subscription
 	 *
 	 * @var array of KalturaIntegerValue
+	 * @readonly
 	 */
 	public $fileTypes;
+
+	/**
+	 * Comma separated file types identifiers that are supported in this subscription
+	 *
+	 * @var string
+	 */
+	public $fileTypesIds = null;
 
 	/**
 	 * Denotes whether or not this subscription can be renewed
 	 *
 	 * @var bool
+	 * @readonly
 	 */
 	public $isRenewable = null;
 
@@ -9330,6 +9377,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * Defines the number of times this subscription will be renewed
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $renewalsNumber = null;
 
@@ -9337,6 +9385,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * Indicates whether the subscription will renew forever
 	 *
 	 * @var bool
+	 * @readonly
 	 */
 	public $isInfiniteRenewal = null;
 
@@ -9344,6 +9393,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * The price of the subscription
 	 *
 	 * @var KalturaPriceDetails
+	 * @readonly
 	 */
 	public $price;
 
@@ -9351,8 +9401,16 @@ class KalturaSubscription extends KalturaObjectBase
 	 * The internal discount module for the subscription
 	 *
 	 * @var KalturaDiscountModule
+	 * @readonly
 	 */
 	public $discountModule;
+
+	/**
+	 * The internal discount module identifier for the subscription
+	 *
+	 * @var int
+	 */
+	public $internalDiscountModuleId = null;
 
 	/**
 	 * Name of the subscription
@@ -9388,6 +9446,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * Identifier of the media associated with the subscription
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $mediaId = null;
 
@@ -9409,8 +9468,16 @@ class KalturaSubscription extends KalturaObjectBase
 	 * Subscription preview module
 	 *
 	 * @var KalturaPreviewModule
+	 * @readonly
 	 */
 	public $previewModule;
+
+	/**
+	 * Subscription preview module identifier
+	 *
+	 * @var int
+	 */
+	public $previewModuleId = null;
 
 	/**
 	 * The household limitation module identifier associated with this subscription
@@ -9437,6 +9504,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * The maximum number of times an item in this usage module can be viewed
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $maxViewsNumber = null;
 
@@ -9444,6 +9512,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * The amount time an item is available for viewing since a user started watching the item
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $viewLifeCycle = null;
 
@@ -9451,6 +9520,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * Time period during which the end user can waive his rights to cancel a purchase. When the time period is passed, the purchase can no longer be cancelled
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $waiverPeriod = null;
 
@@ -9458,6 +9528,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * Indicates whether or not the end user has the right to waive his rights to cancel a purchase
 	 *
 	 * @var bool
+	 * @readonly
 	 */
 	public $isWaiverEnabled = null;
 
@@ -9465,6 +9536,7 @@ class KalturaSubscription extends KalturaObjectBase
 	 * List of permitted user types for the subscription
 	 *
 	 * @var array of KalturaOTTUserType
+	 * @readonly
 	 */
 	public $userTypes;
 
@@ -9474,6 +9546,13 @@ class KalturaSubscription extends KalturaObjectBase
 	 * @var array of KalturaCouponsGroup
 	 */
 	public $couponsGroups;
+
+	/**
+	 * List of subscription Coupons group
+	 *
+	 * @var array of KalturaSubscriptionCouponGroup
+	 */
+	public $subscriptionCouponGroup;
 
 	/**
 	 * List of Subscription product codes
@@ -9509,6 +9588,27 @@ class KalturaSubscription extends KalturaObjectBase
 	 * @var int
 	 */
 	public $preSaleDate = null;
+
+	/**
+	 * Ads policy
+	 *
+	 * @var KalturaAdsPolicy
+	 */
+	public $adsPolicy = null;
+
+	/**
+	 * The parameters to pass to the ads server
+	 *
+	 * @var string
+	 */
+	public $adsParam = null;
+
+	/**
+	 * Is active subscription
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
 
 
 }
@@ -19235,215 +19335,6 @@ class KalturaSSOAdapterProfileInvoke extends KalturaObjectBase
 	 * @var string
 	 */
 	public $message = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionCouponGroup extends KalturaObjectBase
-{
-	/**
-	 * Coupon group identifier
-	 *
-	 * @var int
-	 */
-	public $id = null;
-
-	/**
-	 * The first date the coupons in this coupons group are valid
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * The last date the coupons in this coupons group are valid
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSubscriptionInternal extends KalturaObjectBase
-{
-	/**
-	 * Comma separated channels Ids associated with this subscription
-	 *
-	 * @var string
-	 */
-	public $channelsIds = null;
-
-	/**
-	 * The first date the subscription is available for purchasing
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * The last date the subscription is available for purchasing
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-	/**
-	 * Comma separated file types identifiers that are supported in this subscription
-	 *
-	 * @var string
-	 */
-	public $fileTypesIds = null;
-
-	/**
-	 * The internal discount module identifier for the subscription
-	 *
-	 * @var int
-	 */
-	public $internalDiscountModuleId = null;
-
-	/**
-	 * Name of the subscription
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $name = null;
-
-	/**
-	 * Name of the subscription
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualName;
-
-	/**
-	 * description of the subscription
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $description = null;
-
-	/**
-	 * description of the subscription
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualDescription;
-
-	/**
-	 * Subscription order (when returned in methods that retrieve subscriptions)
-	 *
-	 * @var int
-	 */
-	public $prorityInOrder = null;
-
-	/**
-	 * Comma separated subscription price plan identifiers
-	 *
-	 * @var string
-	 */
-	public $pricePlanIds = null;
-
-	/**
-	 * Subscription preview module identifier
-	 *
-	 * @var int
-	 */
-	public $previewModuleId = null;
-
-	/**
-	 * The household limitation module identifier associated with this subscription
-	 *
-	 * @var int
-	 */
-	public $householdLimitationsId = null;
-
-	/**
-	 * The subscription grace period in minutes
-	 *
-	 * @var int
-	 */
-	public $gracePeriodMinutes = null;
-
-	/**
-	 * List of premium services included in the subscription
-	 *
-	 * @var array of KalturaPremiumService
-	 */
-	public $premiumServices;
-
-	/**
-	 * List of Coupons group
-	 *
-	 * @var array of KalturaSubscriptionCouponGroup
-	 */
-	public $couponsGroups;
-
-	/**
-	 * List of Subscription product codes
-	 *
-	 * @var array of KalturaProductCode
-	 */
-	public $productCodes;
-
-	/**
-	 * Dependency Type
-	 *
-	 * @var KalturaSubscriptionDependencyType
-	 */
-	public $dependencyType = null;
-
-	/**
-	 * External ID
-	 *
-	 * @var string
-	 */
-	public $externalId = null;
-
-	/**
-	 * Is cancellation blocked for the subscription
-	 *
-	 * @var bool
-	 */
-	public $isCancellationBlocked = null;
-
-	/**
-	 * The Pre-Sale date the subscription is available for purchasing
-	 *
-	 * @var int
-	 */
-	public $preSaleDate = null;
-
-	/**
-	 * Ads policy
-	 *
-	 * @var KalturaAdsPolicy
-	 */
-	public $adsPolicy = null;
-
-	/**
-	 * The parameters to pass to the ads server
-	 *
-	 * @var string
-	 */
-	public $adsParam = null;
-
-	/**
-	 * Is active subscription
-	 *
-	 * @var bool
-	 */
-	public $isActive = null;
 
 
 }
