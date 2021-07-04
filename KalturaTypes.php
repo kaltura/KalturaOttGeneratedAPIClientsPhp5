@@ -12695,6 +12695,29 @@ class KalturaRecordingListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSeriesRecordingOption extends KalturaObjectBase
+{
+	/**
+	 * min Season Number
+	 *
+	 * @var int
+	 */
+	public $minSeasonNumber = null;
+
+	/**
+	 * min Season Number
+	 *
+	 * @var int
+	 */
+	public $minEpisodeNumber = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecording extends KalturaObjectBase
 {
 	/**
@@ -12763,6 +12786,13 @@ class KalturaSeriesRecording extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $excludedSeasons;
+
+	/**
+	 * Series Recording Option
+	 *
+	 * @var KalturaSeriesRecordingOption
+	 */
+	public $seriesRecordingOption;
 
 
 }
