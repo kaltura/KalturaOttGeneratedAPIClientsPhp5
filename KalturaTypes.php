@@ -10020,6 +10020,13 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 */
 	public $suspensionProfileInheritanceType = null;
 
+	/**
+	 * Allow Device Mobility
+	 *
+	 * @var bool
+	 */
+	public $allowDeviceMobility = null;
+
 
 }
 
