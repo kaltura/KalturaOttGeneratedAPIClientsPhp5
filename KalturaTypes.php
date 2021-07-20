@@ -9990,6 +9990,13 @@ class KalturaCommercePartnerConfig extends KalturaPartnerConfiguration
 	 */
 	public $bookmarkEventThresholds;
 
+	/**
+	 * configuration for keep add-ons after subscription deletion
+	 *
+	 * @var bool
+	 */
+	public $keepSubscriptionAddOns = null;
+
 
 }
 
@@ -10163,6 +10170,13 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 * @var KalturaSuspensionProfileInheritanceType
 	 */
 	public $suspensionProfileInheritanceType = null;
+
+	/**
+	 * Allow Device Mobility
+	 *
+	 * @var bool
+	 */
+	public $allowDeviceMobility = null;
 
 
 }

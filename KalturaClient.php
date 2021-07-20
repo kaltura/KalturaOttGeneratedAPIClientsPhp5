@@ -4301,7 +4301,6 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
 
 	/**
 	 * Delete a user&#39;s tv series follow.
-            Possible status codes: UserNotFollowing = 8012, NotFound = 500007, InvalidAssetId = 4024, AnnouncementNotFound = 8006
 	 * 
 	 * @param int $assetId Asset identifier
 	 * @return bool
@@ -12936,7 +12935,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:21-07-20');
-		$this->setApiVersion('6.6.0.29202');
+		$this->setApiVersion('6.6.0.29205');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
