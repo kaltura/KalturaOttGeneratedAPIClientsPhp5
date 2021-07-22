@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platforms allow them to do with
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -8496,6 +8496,27 @@ class KalturaPriceDetailsService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaPriceDetailsListResponse");
 		return $resultObject;
 	}
+
+	/**
+	 * Update existing PriceDetails
+	 * 
+	 * @param bigint $id Id of priceDetails
+	 * @param KalturaPriceDetails $priceDetails PriceDetails to update
+	 * @return KalturaPriceDetails
+	 */
+	function update($id, KalturaPriceDetails $priceDetails)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "priceDetails", $priceDetails->toParams());
+		$this->client->queueServiceActionCall("pricedetails", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPriceDetails");
+		return $resultObject;
+	}
 }
 
 /**
@@ -10367,6 +10388,44 @@ class KalturaSubscriptionService extends KalturaServiceBase
 	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
+	}
+
+	/**
+	 * Internal API !!! Insert new subscription for partner
+	 * 
+	 * @param KalturaSubscription $subscription Subscription object
+	 * @return KalturaSubscription
+	 */
+	function add(KalturaSubscription $subscription)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "subscription", $subscription->toParams());
+		$this->client->queueServiceActionCall("subscription", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSubscription");
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Delete subscription
+	 * 
+	 * @param bigint $id Subscription id
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("subscription", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
 	}
 
 	/**
@@ -12796,8 +12855,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-06-30');
-		$this->setApiVersion('6.5.0.29184');
+		$this->setClientTag('php5:21-07-22');
+		$this->setApiVersion('6.6.0.29237');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
