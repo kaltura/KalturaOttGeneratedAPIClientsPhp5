@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platforms allow them to do with
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -817,6 +817,15 @@ class KalturaEntitlementOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEntityAttribute extends KalturaEnumBase
+{
+	const MEDIA_FILE_LABELS = "MEDIA_FILE_LABELS";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEntityReferenceBy extends KalturaEnumBase
 {
 	const USER = "user";
@@ -1192,6 +1201,15 @@ class KalturaIotOrderBy extends KalturaEnumBase
  * @subpackage Client
  */
 class KalturaIotProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLabelOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
 }
