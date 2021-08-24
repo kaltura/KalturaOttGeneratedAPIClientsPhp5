@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -4875,23 +4875,8 @@ class KalturaUserInterestListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaCondition extends KalturaObjectBase
+abstract class KalturaUserSessionProfileExpression extends KalturaObjectBase
 {
-	/**
-	 * The type of the condition
-	 *
-	 * @var KalturaRuleConditionType
-	 * @readonly
-	 */
-	public $type = null;
-
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
 
 }
 
@@ -4946,8 +4931,87 @@ class KalturaUserSessionProfileListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaUserSessionProfileExpression extends KalturaCondition
+class KalturaExpressionAnd extends KalturaUserSessionProfileExpression
 {
+	/**
+	 * expressions with and relation between them
+	 *
+	 * @var array of KalturaUserSessionProfileExpression
+	 */
+	public $expressions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExpressionNot extends KalturaUserSessionProfileExpression
+{
+	/**
+	 * expression
+	 *
+	 * @var KalturaUserSessionProfileExpression
+	 */
+	public $expression;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExpressionOr extends KalturaUserSessionProfileExpression
+{
+	/**
+	 * expressions with or relation between them
+	 *
+	 * @var array of KalturaUserSessionProfileExpression
+	 */
+	public $expressions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaCondition extends KalturaObjectBase
+{
+	/**
+	 * The type of the condition
+	 *
+	 * @var KalturaRuleConditionType
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSessionCondition extends KalturaUserSessionProfileExpression
+{
+	/**
+	 * expression
+	 *
+	 * @var KalturaCondition
+	 */
+	public $condition;
+
 
 }
 
