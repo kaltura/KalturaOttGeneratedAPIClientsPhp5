@@ -1692,12 +1692,14 @@ class KalturaCategoryTreeService extends KalturaServiceBase
 	 * Retrieve default category tree of deviceFamilyId by KS or specific one if versionId is set.
 	 * 
 	 * @param bigint $versionId Category version id of tree
+	 * @param int $deviceFamilyId DeviceFamilyId related to category tree
 	 * @return KalturaCategoryTree
 	 */
-	function getByVersion($versionId = null)
+	function getByVersion($versionId = null, $deviceFamilyId = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "versionId", $versionId);
+		$this->client->addParam($kparams, "deviceFamilyId", $deviceFamilyId);
 		$this->client->queueServiceActionCall("categorytree", "getByVersion", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -4299,7 +4301,6 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
 
 	/**
 	 * Delete a user&#39;s tv series follow.
-            Possible status codes: UserNotFollowing = 8012, NotFound = 500007, InvalidAssetId = 4024, AnnouncementNotFound = 8006
 	 * 
 	 * @param int $assetId Asset identifier
 	 * @return bool
@@ -5967,6 +5968,99 @@ class KalturaIotProfileService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLabelService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Create a new label associated with a predefined entity attribute. Currently supports only labels on KalturaMediaFile.
+	 * 
+	 * @param KalturaLabel $label KalturaLabel object with defined Value.
+	 * @return KalturaLabel
+	 */
+	function add(KalturaLabel $label)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "label", $label->toParams());
+		$this->client->queueServiceActionCall("label", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLabel");
+		return $resultObject;
+	}
+
+	/**
+	 * Deletes the existing label by its identifier.
+	 * 
+	 * @param bigint $id The identifier of label.
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("label", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Gets list of labels which meet the filter criteria.
+	 * 
+	 * @param KalturaLabelFilter $filter Filter.
+	 * @param KalturaFilterPager $pager Page size and index.
+	 * @return KalturaLabelListResponse
+	 */
+	function listAction(KalturaLabelFilter $filter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("label", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLabelListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Updates the existing label with a new value.
+	 * 
+	 * @param bigint $id The identifier of label.
+	 * @param KalturaLabel $label KalturaLabel object with new Value.
+	 * @return KalturaLabel
+	 */
+	function update($id, KalturaLabel $label)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "label", $label->toParams());
+		$this->client->queueServiceActionCall("label", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLabel");
 		return $resultObject;
 	}
 }
@@ -10370,6 +10464,44 @@ class KalturaSubscriptionService extends KalturaServiceBase
 	}
 
 	/**
+	 * Internal API !!! Insert new subscription for partner
+	 * 
+	 * @param KalturaSubscription $subscription Subscription object
+	 * @return KalturaSubscription
+	 */
+	function add(KalturaSubscription $subscription)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "subscription", $subscription->toParams());
+		$this->client->queueServiceActionCall("subscription", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSubscription");
+		return $resultObject;
+	}
+
+	/**
+	 * Internal API !!! Delete subscription
+	 * 
+	 * @param bigint $id Subscription id
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("subscription", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Returns a list of subscriptions requested by Subscription ID or file ID
 	 * 
 	 * @param KalturaSubscriptionFilter $filter Filter request
@@ -12375,6 +12507,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaLabelService
+	 */
+	public $label = null;
+
+	/**
+	 * 
 	 * @var KalturaLanguageService
 	 */
 	public $language = null;
@@ -12796,8 +12934,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-06-30');
-		$this->setApiVersion('6.5.0.29184');
+		$this->setClientTag('php5:21-08-24');
+		$this->setApiVersion('6.6.0.29208');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -12866,6 +13004,7 @@ class KalturaClient extends KalturaClientBase
 		$this->IngestProfile = new KalturaIngestProfileService($this);
 		$this->iot = new KalturaIotService($this);
 		$this->iotProfile = new KalturaIotProfileService($this);
+		$this->label = new KalturaLabelService($this);
 		$this->language = new KalturaLanguageService($this);
 		$this->licensedUrl = new KalturaLicensedUrlService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);

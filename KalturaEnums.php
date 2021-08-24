@@ -817,6 +817,15 @@ class KalturaEntitlementOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEntityAttribute extends KalturaEnumBase
+{
+	const MEDIA_FILE_LABELS = "MEDIA_FILE_LABELS";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEntityReferenceBy extends KalturaEnumBase
 {
 	const USER = "user";
@@ -1192,6 +1201,15 @@ class KalturaIotOrderBy extends KalturaEnumBase
  * @subpackage Client
  */
 class KalturaIotProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLabelOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
 }
