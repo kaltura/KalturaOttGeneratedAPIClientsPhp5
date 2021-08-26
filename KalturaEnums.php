@@ -1822,10 +1822,10 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const FILTERASSETBYKSQL = "FilterAssetByKsql";
 	const FILTERFILEBYQUALITYINDISCOVERY = "FilterFileByQualityInDiscovery";
 	const FILTERFILEBYQUALITYINPLAYBACK = "FilterFileByQualityInPlayback";
-	const FILTERFILEBYFILETYPEFORASSETTYPEINDISCOVERY = "FilterFileByFileTypeForAssetTypeInDiscovery";
-	const FILTERFILEBYFILETYPEFORASSETTYPEINPLAYBACK = "FilterFileByFileTypeForAssetTypeInPlayback";
-	const FILTERFILEBYFILETYPEINDISCOVERY = "FilterFileByFileTypeInDiscovery";
-	const FILTERFILEBYFILETYPEINPLAYBACK = "FilterFileByFileTypeInPlayback";
+	const FILTERFILEBYASSETTYPEINDISCOVERY = "FilterFileByAssetTypeInDiscovery";
+	const FILTERFILEBYASSETTYPEINPLAYBACK = "FilterFileByAssetTypeInPlayback";
+	const FILTERFILEBYFILETYPEIDINDISCOVERY = "FilterFileByFileTypeIdInDiscovery";
+	const FILTERFILEBYFILETYPEIDINPLAYBACK = "FilterFileByFileTypeIdInPlayback";
 	const FILTERFILEBYAUDIOCODECINDISCOVERY = "FilterFileByAudioCodecInDiscovery";
 	const FILTERFILEBYAUDIOCODECINPLAYBACK = "FilterFileByAudioCodecInPlayback";
 	const FILTERFILEBYVIDEOCODECINDISCOVERY = "FilterFileByVideoCodecInDiscovery";

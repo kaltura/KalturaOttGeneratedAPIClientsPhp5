@@ -8295,7 +8295,254 @@ class KalturaAssetLifeCycleBuisnessModuleTransitionAction extends KalturaAssetLi
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaFilterAssetByKsql extends KalturaAssetRuleAction
+abstract class KalturaFilterAction extends KalturaAssetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByFileTypeIdAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated fileTypesIds
+	 *
+	 * @var string
+	 */
+	public $fileTypeIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByAssetTypeAction extends KalturaFilterFileByFileTypeIdAction
+{
+	/**
+	 * List of comma separated assetTypes
+	 *
+	 * @var string
+	 */
+	public $assetTypeIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByAssetTypeInDiscoveryAction extends KalturaFilterFileByAssetTypeAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByAssetTypeInPlaybackAction extends KalturaFilterFileByAssetTypeAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdInDiscoveryAction extends KalturaFilterFileByFileTypeIdAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdInPlaybackAction extends KalturaFilterFileByFileTypeIdAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByAudioCodecAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated audioCodecs
+	 *
+	 * @var string
+	 */
+	public $audioCodecIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByAudioCodecInDiscoveryAction extends KalturaFilterFileByAudioCodecAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByAudioCodecInPlaybackAction extends KalturaFilterFileByAudioCodecAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByLabelAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated labels
+	 *
+	 * @var string
+	 */
+	public $labelIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByLabelInDiscoveryAction extends KalturaFilterFileByLabelAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByLabelInPlaybackAction extends KalturaFilterFileByLabelAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByQualityAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated qualities
+	 *
+	 * @var string
+	 */
+	public $typeQualityIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByQualityInDiscoveryAction extends KalturaFilterFileByQualityAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByQualityInPlaybackAction extends KalturaFilterFileByQualityAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByStreamerTypeAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated streamerTypes
+	 *
+	 * @var string
+	 */
+	public $streamerTypeIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByStreamerTypeInDiscovery extends KalturaFilterFileByStreamerTypeAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByStreamerTypeInPlayback extends KalturaFilterFileByStreamerTypeAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByVideoCodecAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated videoCodecs
+	 *
+	 * @var string
+	 */
+	public $videoCodecIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByVideoCodecInDiscoveryAction extends KalturaFilterFileByVideoCodecAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByVideoCodecInPlayback extends KalturaFilterFileByVideoCodecAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterAssetByKsqlAction extends KalturaFilterAction
 {
 	/**
 	 * ksql to filter assets by
@@ -8304,244 +8551,6 @@ class KalturaFilterAssetByKsql extends KalturaAssetRuleAction
 	 */
 	public $ksql = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaFilterFileByAudioCodec extends KalturaAssetRuleAction
-{
-	/**
-	 * List of comma separated audioCodecs
-	 *
-	 * @var string
-	 */
-	public $audioCodecs = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByAudioCodecInDiscovery extends KalturaFilterFileByAudioCodec
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByAudioCodecInPlayback extends KalturaFilterFileByAudioCodec
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaFilterFileByFileType extends KalturaAssetRuleAction
-{
-	/**
-	 * List of comma separated fileTypesIds
-	 *
-	 * @var string
-	 */
-	public $fileTypesIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByFileTypeInDiscovery extends KalturaFilterFileByFileType
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByFileTypeInPlayback extends KalturaFilterFileByFileType
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaFilterFileByFileTypeForAssetType extends KalturaFilterFileByFileType
-{
-	/**
-	 * List of comma separated assetTypes
-	 *
-	 * @var string
-	 */
-	public $assetTypes = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByFileTypeForAssetTypeInDiscovery extends KalturaFilterFileByFileTypeForAssetType
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByFileTypeForAssetTypeInPlayback extends KalturaFilterFileByFileTypeForAssetType
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaFilterFileByLabel extends KalturaAssetRuleAction
-{
-	/**
-	 * List of comma separated labels
-	 *
-	 * @var string
-	 */
-	public $labels = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByLabelInDiscovery extends KalturaFilterFileByLabel
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByLabelInPlayback extends KalturaFilterFileByLabel
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaFilterFileByQuality extends KalturaAssetRuleAction
-{
-	/**
-	 * List of comma separated qualities
-	 *
-	 * @var string
-	 */
-	public $qualities = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByQualityInDiscovery extends KalturaFilterFileByQuality
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByQualityInPlayback extends KalturaFilterFileByQuality
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaFilterFileByStreamerType extends KalturaAssetRuleAction
-{
-	/**
-	 * List of comma separated streamerTypes
-	 *
-	 * @var string
-	 */
-	public $streamerTypes = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByStreamerTypeInDiscovery extends KalturaFilterFileByStreamerType
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByStreamerTypeInPlayback extends KalturaFilterFileByStreamerType
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaFilterFileByVideoCodec extends KalturaAssetRuleAction
-{
-	/**
-	 * List of comma separated videoCodecs
-	 *
-	 * @var string
-	 */
-	public $videoCodecs = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByVideoCodecInDiscovery extends KalturaFilterFileByVideoCodec
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByVideoCodecInPlayback extends KalturaFilterFileByVideoCodec
-{
 
 }
 
