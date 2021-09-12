@@ -247,9 +247,10 @@ class KalturaAppTokenService extends KalturaServiceBase
 	 * @param string $userId Session user id, will be ignored if a different user id already defined on the application token
 	 * @param int $expiry Session expiry (in seconds), could be overwritten by shorter expiry of the application token and the session-expiry that defined on the application token
 	 * @param string $udid Device UDID
+	 * @param map $extraParams Extra params
 	 * @return KalturaSessionInfo
 	 */
-	function startSession($id, $tokenHash, $userId = null, $expiry = null, $udid = null)
+	function startSession($id, $tokenHash, $userId = null, $expiry = null, $udid = null, array $extraParams = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "id", $id);
@@ -257,6 +258,8 @@ class KalturaAppTokenService extends KalturaServiceBase
 		$this->client->addParam($kparams, "userId", $userId);
 		$this->client->addParam($kparams, "expiry", $expiry);
 		$this->client->addParam($kparams, "udid", $udid);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
 		$this->client->queueServiceActionCall("apptoken", "startSession", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -3217,6 +3220,27 @@ class KalturaDiscountDetailsService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaDiscountDetailsListResponse");
 		return $resultObject;
 	}
+
+	/**
+	 * Update discount details
+	 * 
+	 * @param bigint $id DiscountDetails id
+	 * @param KalturaDiscountDetails $discountDetails Discount details Object
+	 * @return KalturaDiscountDetails
+	 */
+	function update($id, KalturaDiscountDetails $discountDetails)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "discountDetails", $discountDetails->toParams());
+		$this->client->queueServiceActionCall("discountdetails", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDiscountDetails");
+		return $resultObject;
+	}
 }
 
 /**
@@ -4890,14 +4914,17 @@ class KalturaHouseholdDeviceService extends KalturaServiceBase
 	 * @param int $partnerId Partner Identifier
 	 * @param string $pin Pin code
 	 * @param string $udid Device UDID
+	 * @param map $extraParams Extra params
 	 * @return KalturaLoginResponse
 	 */
-	function loginWithPin($partnerId, $pin, $udid = null)
+	function loginWithPin($partnerId, $pin, $udid = null, array $extraParams = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "partnerId", $partnerId);
 		$this->client->addParam($kparams, "pin", $pin);
 		$this->client->addParam($kparams, "udid", $udid);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
 		$this->client->queueServiceActionCall("householddevice", "loginWithPin", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -5042,6 +5069,25 @@ class KalturaHouseholdLimitationsService extends KalturaServiceBase
 	}
 
 	/**
+	 * Checks if the DLM is used
+	 * 
+	 * @param int $dlmId Household limitations module identifier
+	 * @return bool
+	 */
+	function isUsed($dlmId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "dlmId", $dlmId);
+		$this->client->queueServiceActionCall("householdlimitations", "isUsed", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Get the list of PartnerConfiguration
 	 * 
 	 * @return KalturaHouseholdLimitationsListResponse
@@ -5055,6 +5101,27 @@ class KalturaHouseholdLimitationsService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitationsListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Updates household limitation
+	 * 
+	 * @param int $dlmId Id of household limitation
+	 * @param KalturaHouseholdLimitations $householdLimitation Household limitation
+	 * @return KalturaHouseholdLimitations
+	 */
+	function update($dlmId, KalturaHouseholdLimitations $householdLimitation)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "dlmId", $dlmId);
+		$this->client->addParam($kparams, "householdLimitation", $householdLimitation->toParams());
+		$this->client->queueServiceActionCall("householdlimitations", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitations");
 		return $resultObject;
 	}
 }
@@ -6938,13 +7005,16 @@ class KalturaOttUserService extends KalturaServiceBase
 	 * 
 	 * @param int $partnerId The partner ID
 	 * @param string $udid The caller device's UDID
+	 * @param map $extraParams Extra params
 	 * @return KalturaLoginSession
 	 */
-	function anonymousLogin($partnerId, $udid = null)
+	function anonymousLogin($partnerId, $udid = null, array $extraParams = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "partnerId", $partnerId);
 		$this->client->addParam($kparams, "udid", $udid);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
 		$this->client->queueServiceActionCall("ottuser", "anonymousLogin", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -7079,15 +7149,18 @@ class KalturaOttUserService extends KalturaServiceBase
 	 * @param string $pin Pin code
 	 * @param string $udid Device UDID
 	 * @param string $secret Additional security parameter to validate the login
+	 * @param map $extraParams Extra params
 	 * @return KalturaLoginResponse
 	 */
-	function loginWithPin($partnerId, $pin, $udid = null, $secret = null)
+	function loginWithPin($partnerId, $pin, $udid = null, $secret = null, array $extraParams = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "partnerId", $partnerId);
 		$this->client->addParam($kparams, "pin", $pin);
 		$this->client->addParam($kparams, "udid", $udid);
 		$this->client->addParam($kparams, "secret", $secret);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
 		$this->client->queueServiceActionCall("ottuser", "loginWithPin", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -7637,6 +7710,54 @@ class KalturaPartnerService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaPartnerListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPartnerPremiumServicesService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Returns list of services
+	 * 
+	 * @return KalturaPartnerPremiumServices
+	 */
+	function get()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("partnerpremiumservices", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPartnerPremiumServices");
+		return $resultObject;
+	}
+
+	/**
+	 * Update partnerPremiumServices
+	 * 
+	 * @param KalturaPartnerPremiumServices $partnerPremiumServices PartnerPremiumServices to update
+	 * @return KalturaPartnerPremiumServices
+	 */
+	function update(KalturaPartnerPremiumServices $partnerPremiumServices)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "partnerPremiumServices", $partnerPremiumServices->toParams());
+		$this->client->queueServiceActionCall("partnerpremiumservices", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPartnerPremiumServices");
 		return $resultObject;
 	}
 }
@@ -8496,7 +8617,7 @@ class KalturaPreviewModuleService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Insert new PreviewModule for partner
+	 * Insert new PreviewModule for partner
 	 * 
 	 * @param KalturaPreviewModule $previewModule Preview module object
 	 * @return KalturaPreviewModule
@@ -8534,19 +8655,43 @@ class KalturaPreviewModuleService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Returns all PreviewModule
+	 * Returns all PreviewModule
 	 * 
+	 * @param KalturaPreviewModuleFilter $filter Filter
 	 * @return KalturaPreviewModuleListResponse
 	 */
-	function listAction()
+	function listAction(KalturaPreviewModuleFilter $filter = null)
 	{
 		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("previewmodule", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaPreviewModuleListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update PreviewModule
+	 * 
+	 * @param bigint $id PreviewModule id
+	 * @param KalturaPreviewModule $previewModule PreviewModule
+	 * @return KalturaPreviewModule
+	 */
+	function update($id, KalturaPreviewModule $previewModule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "previewModule", $previewModule->toParams());
+		$this->client->queueServiceActionCall("previewmodule", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPreviewModule");
 		return $resultObject;
 	}
 }
@@ -8619,6 +8764,27 @@ class KalturaPriceDetailsService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaPriceDetailsListResponse");
 		return $resultObject;
 	}
+
+	/**
+	 * Update existing PriceDetails
+	 * 
+	 * @param bigint $id Id of priceDetails
+	 * @param KalturaPriceDetails $priceDetails PriceDetails to update
+	 * @return KalturaPriceDetails
+	 */
+	function update($id, KalturaPriceDetails $priceDetails)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "priceDetails", $priceDetails->toParams());
+		$this->client->queueServiceActionCall("pricedetails", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPriceDetails");
+		return $resultObject;
+	}
 }
 
 /**
@@ -8633,7 +8799,7 @@ class KalturaPricePlanService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!!  Insert new PriceDetails for partner
+	 * Insert new PricePlan
 	 * 
 	 * @param KalturaPricePlan $pricePlan Price plan Object
 	 * @return KalturaPricePlan
@@ -8652,7 +8818,7 @@ class KalturaPricePlanService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Delete PricePlan
+	 * Delete PricePlan
 	 * 
 	 * @param bigint $id PricePlan identifier
 	 * @return bool
@@ -9812,6 +9978,36 @@ class KalturaSessionService extends KalturaServiceBase
 	}
 
 	/**
+	 * Create session characteristic
+	 * 
+	 * @param string $userId User identifier
+	 * @param int $householdId Household identifier
+	 * @param string $udid Device UDID
+	 * @param bigint $expiration Relative expiration(TTL) in seconds, should be equal or greater than KS expiration
+	 * @param int $regionId Region identifier
+	 * @param map $sessionCharacteristicParams Session characteristic dynamic params
+	 * @return KalturaSessionCharacteristic
+	 */
+	function createSessionCharacteristic($userId, $householdId, $udid, $expiration, $regionId = null, array $sessionCharacteristicParams = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "userId", $userId);
+		$this->client->addParam($kparams, "householdId", $householdId);
+		$this->client->addParam($kparams, "udid", $udid);
+		$this->client->addParam($kparams, "expiration", $expiration);
+		$this->client->addParam($kparams, "regionId", $regionId);
+		if ($sessionCharacteristicParams !== null)
+			$this->client->addParam($kparams, "sessionCharacteristicParams", $sessionCharacteristicParams->toParams());
+		$this->client->queueServiceActionCall("session", "createSessionCharacteristic", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSessionCharacteristic");
+		return $resultObject;
+	}
+
+	/**
 	 * Parses KS
 	 * 
 	 * @param string $session Additional KS to parse, if not passed the user's KS will be parsed
@@ -10180,15 +10376,18 @@ class KalturaSocialService extends KalturaServiceBase
 	 * @param string $token Social token
 	 * @param string $type Social network
 	 * @param string $udid Device UDID
+	 * @param map $extraParams Extra params
 	 * @return KalturaLoginResponse
 	 */
-	function login($partnerId, $token, $type, $udid = null)
+	function login($partnerId, $token, $type, $udid = null, array $extraParams = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "partnerId", $partnerId);
 		$this->client->addParam($kparams, "token", $token);
 		$this->client->addParam($kparams, "type", $type);
 		$this->client->addParam($kparams, "udid", $udid);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
 		$this->client->queueServiceActionCall("social", "login", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10550,6 +10749,27 @@ class KalturaSubscriptionService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaSubscriptionListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update Subscription
+	 * 
+	 * @param bigint $id Subscription id
+	 * @param KalturaSubscription $subscription Subscription
+	 * @return KalturaSubscription
+	 */
+	function update($id, KalturaSubscription $subscription)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "subscription", $subscription->toParams());
+		$this->client->queueServiceActionCall("subscription", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSubscription");
 		return $resultObject;
 	}
 
@@ -12130,6 +12350,98 @@ class KalturaUserSegmentService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUserSessionProfileService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add new UserSessionProfile
+	 * 
+	 * @param KalturaUserSessionProfile $userSessionProfile UserSessionProfile Object to add
+	 * @return KalturaUserSessionProfile
+	 */
+	function add(KalturaUserSessionProfile $userSessionProfile)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "userSessionProfile", $userSessionProfile->toParams());
+		$this->client->queueServiceActionCall("usersessionprofile", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUserSessionProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete existing UserSessionProfile
+	 * 
+	 * @param bigint $id UserSessionProfile identifier
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("usersessionprofile", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Returns the list of available UserSessionProfiles
+	 * 
+	 * @param KalturaUserSessionProfileFilter $filter Filter
+	 * @param KalturaFilterPager $pager Pager
+	 * @return KalturaUserSessionProfileListResponse
+	 */
+	function listAction(KalturaUserSessionProfileFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("usersessionprofile", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUserSessionProfileListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update existing UserSessionProfile
+	 * 
+	 * @param bigint $id Id of userSessionProfile to update
+	 * @param KalturaUserSessionProfile $userSessionProfile UserSessionProfile Object to update
+	 * @return KalturaUserSessionProfile
+	 */
+	function update($id, KalturaUserSessionProfile $userSessionProfile)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "userSessionProfile", $userSessionProfile->toParams());
+		$this->client->queueServiceActionCall("usersessionprofile", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUserSessionProfile");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaClient extends KalturaClientBase
 {
 	/**
@@ -12644,6 +12956,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaPartnerPremiumServicesService
+	 */
+	public $partnerPremiumServices = null;
+
+	/**
+	 * 
 	 * @var KalturaPasswordPolicyService
 	 */
 	public $passwordPolicy = null;
@@ -12961,6 +13279,12 @@ class KalturaClient extends KalturaClientBase
 	public $userSegment = null;
 
 	/**
+	 * 
+	 * @var KalturaUserSessionProfileService
+	 */
+	public $userSessionProfile = null;
+
+	/**
 	 * Kaltura client constructor
 	 *
 	 * @param KalturaConfiguration $config
@@ -12969,8 +13293,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-08-24');
-		$this->setApiVersion('6.7.0.29255');
+		$this->setClientTag('php5:21-09-12');
+		$this->setApiVersion('6.8.0.29606');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13057,6 +13381,7 @@ class KalturaClient extends KalturaClientBase
 		$this->parentalRule = new KalturaParentalRuleService($this);
 		$this->partnerConfiguration = new KalturaPartnerConfigurationService($this);
 		$this->partner = new KalturaPartnerService($this);
+		$this->partnerPremiumServices = new KalturaPartnerPremiumServicesService($this);
 		$this->passwordPolicy = new KalturaPasswordPolicyService($this);
 		$this->paymentGatewayProfile = new KalturaPaymentGatewayProfileService($this);
 		$this->paymentMethodProfile = new KalturaPaymentMethodProfileService($this);
@@ -13110,6 +13435,7 @@ class KalturaClient extends KalturaClientBase
 		$this->userLoginPin = new KalturaUserLoginPinService($this);
 		$this->userRole = new KalturaUserRoleService($this);
 		$this->userSegment = new KalturaUserSegmentService($this);
+		$this->userSessionProfile = new KalturaUserSessionProfileService($this);
 	}
 	
 	/**

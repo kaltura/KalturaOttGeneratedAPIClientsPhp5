@@ -1610,6 +1610,15 @@ class KalturaPpvOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPreviewModuleOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPriceDetailsOrderBy extends KalturaEnumBase
 {
 	const NAME_ASC = "NAME_ASC";
@@ -1819,6 +1828,21 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const FILTER = "FILTER";
 	const ASSET_LIFE_CYCLE_TRANSITION = "ASSET_LIFE_CYCLE_TRANSITION";
 	const APPLY_FREE_PLAYBACK = "APPLY_FREE_PLAYBACK";
+	const FILTERASSETBYKSQL = "FilterAssetByKsql";
+	const FILTERFILEBYQUALITYINDISCOVERY = "FilterFileByQualityInDiscovery";
+	const FILTERFILEBYQUALITYINPLAYBACK = "FilterFileByQualityInPlayback";
+	const FILTERFILEBYASSETTYPEINDISCOVERY = "FilterFileByAssetTypeInDiscovery";
+	const FILTERFILEBYASSETTYPEINPLAYBACK = "FilterFileByAssetTypeInPlayback";
+	const FILTERFILEBYFILETYPEIDINDISCOVERY = "FilterFileByFileTypeIdInDiscovery";
+	const FILTERFILEBYFILETYPEIDINPLAYBACK = "FilterFileByFileTypeIdInPlayback";
+	const FILTERFILEBYAUDIOCODECINDISCOVERY = "FilterFileByAudioCodecInDiscovery";
+	const FILTERFILEBYAUDIOCODECINPLAYBACK = "FilterFileByAudioCodecInPlayback";
+	const FILTERFILEBYVIDEOCODECINDISCOVERY = "FilterFileByVideoCodecInDiscovery";
+	const FILTERFILEBYVIDEOCODECINPLAYBACK = "FilterFileByVideoCodecInPlayback";
+	const FILTERFILEBYSTREAMERTYPEINDISCOVERY = "FilterFileByStreamerTypeInDiscovery";
+	const FILTERFILEBYSTREAMERTYPEINPLAYBACK = "FilterFileByStreamerTypeInPlayback";
+	const FILTERFILEBYLABELINDISCOVERY = "FilterFileByLabelInDiscovery";
+	const FILTERFILEBYLABELINPLAYBACK = "FilterFileByLabelInPlayback";
 }
 
 /**
@@ -1844,6 +1868,8 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const DEVICE_MANUFACTURER = "DEVICE_MANUFACTURER";
 	const DEVICE_MODEL = "DEVICE_MODEL";
 	const DEVICE_UDID_DYNAMIC_LIST = "DEVICE_UDID_DYNAMIC_LIST";
+	const DYNAMIC_KEYS = "DYNAMIC_KEYS";
+	const USER_SESSION_PROFILE = "USER_SESSION_PROFILE";
 }
 
 /**
@@ -2091,6 +2117,12 @@ class KalturaSubscriptionOrderBy extends KalturaEnumBase
 {
 	const START_DATE_ASC = "START_DATE_ASC";
 	const START_DATE_DESC = "START_DATE_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
 }
 
 /**
