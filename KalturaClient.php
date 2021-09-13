@@ -6,7 +6,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -5063,6 +5063,25 @@ class KalturaHouseholdLimitationsService extends KalturaServiceBase
 	}
 
 	/**
+	 * Checks if the DLM is used
+	 * 
+	 * @param int $dlmId Household limitations module identifier
+	 * @return bool
+	 */
+	function isUsed($dlmId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "dlmId", $dlmId);
+		$this->client->queueServiceActionCall("householdlimitations", "isUsed", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Get the list of PartnerConfiguration
 	 * 
 	 * @return KalturaHouseholdLimitationsListResponse
@@ -5076,6 +5095,27 @@ class KalturaHouseholdLimitationsService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitationsListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Updates household limitation
+	 * 
+	 * @param int $dlmId Id of household limitation
+	 * @param KalturaHouseholdLimitations $householdLimitation Household limitation
+	 * @return KalturaHouseholdLimitations
+	 */
+	function update($dlmId, KalturaHouseholdLimitations $householdLimitation)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "dlmId", $dlmId);
+		$this->client->addParam($kparams, "householdLimitation", $householdLimitation->toParams());
+		$this->client->queueServiceActionCall("householdlimitations", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitations");
 		return $resultObject;
 	}
 }
@@ -13110,8 +13150,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-09-01');
-		$this->setApiVersion('6.7.0.29282');
+		$this->setClientTag('php5:21-09-13');
+		$this->setApiVersion('6.8.0.29303');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
