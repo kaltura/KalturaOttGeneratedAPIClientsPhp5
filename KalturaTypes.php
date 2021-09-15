@@ -8497,6 +8497,31 @@ class KalturaDynamicChannel extends KalturaChannel
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaManualCollectionAsset extends KalturaObjectBase
+{
+	/**
+	 * Internal identifier of the asset
+	 *
+	 * @var string
+	 * @insertonly
+	 */
+	public $id = null;
+
+	/**
+	 * The type of the asset. Possible values: media, epg
+	 *
+	 * @var KalturaManualCollectionAssetType
+	 * @insertonly
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaManualChannel extends KalturaChannel
 {
 	/**
@@ -8505,6 +8530,13 @@ class KalturaManualChannel extends KalturaChannel
 	 * @var string
 	 */
 	public $mediaIds = null;
+
+	/**
+	 * List of assets identifier
+	 *
+	 * @var array of KalturaManualCollectionAsset
+	 */
+	public $assets;
 
 
 }
