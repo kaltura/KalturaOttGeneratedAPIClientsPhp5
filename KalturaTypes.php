@@ -5421,11 +5421,41 @@ class KalturaUdidDynamicListCondition extends KalturaCondition
 class KalturaDynamicKeysCondition extends KalturaCondition
 {
 	/**
-	 * DynamicKeysCondition
+	 * key
 	 *
-	 * @var map
+	 * @var string
 	 */
-	public $keyValues;
+	public $key = null;
+
+	/**
+	 * comma-separated values
+	 *
+	 * @var string
+	 */
+	public $values = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceDynamicDataCondition extends KalturaCondition
+{
+	/**
+	 * key
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+	/**
+	 * value
+	 *
+	 * @var string
+	 */
+	public $value = null;
 
 
 }
@@ -9157,74 +9187,6 @@ abstract class KalturaFilterAction extends KalturaAssetRuleAction
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaFilterFileByFileTypeIdAction extends KalturaFilterAction
-{
-	/**
-	 * List of comma separated fileTypesIds
-	 *
-	 * @var string
-	 */
-	public $fileTypeIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaFilterFileByAssetTypeAction extends KalturaFilterFileByFileTypeIdAction
-{
-	/**
-	 * List of comma separated assetTypes
-	 *
-	 * @var string
-	 */
-	public $assetTypeIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByAssetTypeInDiscoveryAction extends KalturaFilterFileByAssetTypeAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByAssetTypeInPlaybackAction extends KalturaFilterFileByAssetTypeAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByFileTypeIdInDiscoveryAction extends KalturaFilterFileByFileTypeIdAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByFileTypeIdInPlaybackAction extends KalturaFilterFileByFileTypeIdAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaFilterFileByAudioCodecAction extends KalturaFilterAction
 {
 	/**
@@ -9251,6 +9213,74 @@ class KalturaFilterFileByAudioCodecInDiscoveryAction extends KalturaFilterFileBy
  * @subpackage Client
  */
 class KalturaFilterFileByAudioCodecInPlaybackAction extends KalturaFilterFileByAudioCodecAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByFileTypeIdAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated fileTypesIds
+	 *
+	 * @var string
+	 */
+	public $fileTypeIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdInDiscoveryAction extends KalturaFilterFileByFileTypeIdAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdInPlaybackAction extends KalturaFilterFileByFileTypeIdAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByFileTypeIdForAssetTypeAction extends KalturaFilterFileByFileTypeIdAction
+{
+	/**
+	 * List of comma separated assetTypes
+	 *
+	 * @var string
+	 */
+	public $assetTypeIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdForAssetTypeInDiscoveryAction extends KalturaFilterFileByFileTypeIdForAssetTypeAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdForAssetTypeInPlaybackAction extends KalturaFilterFileByFileTypeIdForAssetTypeAction
 {
 
 }
@@ -9300,7 +9330,7 @@ abstract class KalturaFilterFileByQualityAction extends KalturaFilterAction
 	 *
 	 * @var string
 	 */
-	public $typeQualityIn = null;
+	public $qualityIn = null;
 
 
 }
