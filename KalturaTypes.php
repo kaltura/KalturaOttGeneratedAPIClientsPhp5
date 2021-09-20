@@ -8503,7 +8503,6 @@ class KalturaManualCollectionAsset extends KalturaObjectBase
 	 * Internal identifier of the asset
 	 *
 	 * @var string
-	 * @insertonly
 	 */
 	public $id = null;
 
@@ -8511,7 +8510,6 @@ class KalturaManualCollectionAsset extends KalturaObjectBase
 	 * The type of the asset. Possible values: media, epg
 	 *
 	 * @var KalturaManualCollectionAssetType
-	 * @insertonly
 	 */
 	public $type = null;
 
