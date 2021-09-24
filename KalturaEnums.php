@@ -1243,6 +1243,16 @@ class KalturaLinearChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaManualCollectionAssetType extends KalturaEnumBase
+{
+	const MEDIA = "media";
+	const EPG = "epg";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMathemticalOperatorType extends KalturaEnumBase
 {
 	const COUNT = "count";
@@ -1604,6 +1614,15 @@ class KalturaPpvOrderBy extends KalturaEnumBase
 {
 	const NAME_ASC = "NAME_ASC";
 	const NAME_DESC = "NAME_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPreviewModuleOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
 }
 
 /**
@@ -2091,6 +2110,12 @@ class KalturaSubscriptionOrderBy extends KalturaEnumBase
 {
 	const START_DATE_ASC = "START_DATE_ASC";
 	const START_DATE_DESC = "START_DATE_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
 }
 
 /**
