@@ -2536,16 +2536,7 @@ class KalturaAssetImagePerRatioFilter extends KalturaRelatedObjectFilter
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaBaseAssetStructFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetStructFilter extends KalturaBaseAssetStructFilter
+class KalturaAssetStructFilter extends KalturaFilter
 {
 	/**
 	 * Comma separated identifiers, id = 0 is identified as program AssetStruct
@@ -2575,15 +2566,6 @@ class KalturaAssetStructFilter extends KalturaBaseAssetStructFilter
 	 */
 	public $objectVirtualAssetInfoTypeEqual = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLinearAssetStructFilter extends KalturaBaseAssetStructFilter
-{
 
 }
 
@@ -4197,13 +4179,6 @@ class KalturaMediaImage extends KalturaObjectBase
 	 * @var int
 	 */
 	public $imageTypeId = null;
-
-	/**
-	 * Image type Name
-	 *
-	 * @var string
-	 */
-	public $imageTypeName = null;
 
 
 }
@@ -8515,31 +8490,6 @@ class KalturaDynamicChannel extends KalturaChannel
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaManualCollectionAsset extends KalturaObjectBase
-{
-	/**
-	 * Internal identifier of the asset
-	 *
-	 * @var string
-	 * @insertonly
-	 */
-	public $id = null;
-
-	/**
-	 * The type of the asset. Possible values: media, epg
-	 *
-	 * @var KalturaManualCollectionAssetType
-	 * @insertonly
-	 */
-	public $type = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaManualChannel extends KalturaChannel
 {
 	/**
@@ -8548,13 +8498,6 @@ class KalturaManualChannel extends KalturaChannel
 	 * @var string
 	 */
 	public $mediaIds = null;
-
-	/**
-	 * List of assets identifier
-	 *
-	 * @var array of KalturaManualCollectionAsset
-	 */
-	public $assets;
 
 
 }
@@ -9990,13 +9933,6 @@ class KalturaBasePartnerConfiguration extends KalturaPartnerConfiguration
 	public $appTokenMaxExpirySeconds = null;
 
 	/**
-	 * AutoRefreshAppToken
-	 *
-	 * @var bool
-	 */
-	public $autoRefreshAppToken = null;
-
-	/**
 	 * uploadTokenExpirySeconds
 	 *
 	 * @var int
@@ -10183,6 +10119,22 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaCustomFieldsPartnerConfiguration extends KalturaPartnerConfiguration
+{
+	/**
+	 * Array of clientTag values
+	 *
+	 * @var string
+	 */
+	public $metaSystemNameInsteadOfAliasList = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaRollingDeviceRemovalData extends KalturaObjectBase
 {
 	/**
@@ -10298,13 +10250,6 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 * @var KalturaRollingDeviceRemovalData
 	 */
 	public $rollingDeviceData;
-
-	/**
-	 * minimum bookmark position of a linear channel to be included in a watch history
-	 *
-	 * @var int
-	 */
-	public $linearWatchHistoryThreshold = null;
 
 	/**
 	 * Finished PercentThreshold
@@ -11857,20 +11802,6 @@ class KalturaHouseholdLimitations extends KalturaObjectBase
 	 * @var array of KalturaHouseholdDeviceFamilyLimitations
 	 */
 	public $deviceFamiliesLimitations;
-
-	/**
-	 * Allowed device change frequency description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-	/**
-	 * Associated Device Families ids
-	 *
-	 * @var string
-	 */
-	public $associatedDeviceFamiliesIdsIn = null;
 
 
 }
@@ -13991,6 +13922,13 @@ class KalturaAssetStructMeta extends KalturaObjectBase
 	 */
 	public $suppressedOrder = null;
 
+	/**
+	 * Case sensitive alias value
+	 *
+	 * @var string
+	 */
+	public $aliasName = null;
+
 
 }
 
@@ -14070,13 +14008,6 @@ class KalturaImage extends KalturaObjectBase
 	 * @var int
 	 */
 	public $imageTypeId = null;
-
-	/**
-	 * Image type Name
-	 *
-	 * @var string
-	 */
-	public $imageTypeName = null;
 
 	/**
 	 * ID of the object the image is related to
@@ -18942,22 +18873,6 @@ class KalturaEpgNotificationSettings extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaLineupNotificationSettings extends KalturaObjectBase
-{
-	/**
-	 * if lineup notifications are enabled.
-	 *
-	 * @var bool
-	 */
-	public $enabled = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 {
 	/**
@@ -19092,13 +19007,6 @@ class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 	 * @var KalturaEpgNotificationSettings
 	 */
 	public $epgNotification;
-
-	/**
-	 * Settings for lineup notifications
-	 *
-	 * @var KalturaLineupNotificationSettings
-	 */
-	public $lineupNotification;
 
 
 }

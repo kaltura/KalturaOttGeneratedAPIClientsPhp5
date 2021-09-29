@@ -1243,16 +1243,6 @@ class KalturaLinearChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaManualCollectionAssetType extends KalturaEnumBase
-{
-	const MEDIA = "media";
-	const EPG = "epg";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaMathemticalOperatorType extends KalturaEnumBase
 {
 	const COUNT = "count";
@@ -1452,6 +1442,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const SECURITY = "Security";
 	const OPC = "Opc";
 	const BASE = "Base";
+	const CUSTOMFIELDS = "CustomFields";
 }
 
 /**
