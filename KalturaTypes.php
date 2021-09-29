@@ -13657,22 +13657,6 @@ class KalturaLiveAsset extends KalturaMediaAsset
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaLineupChannelAsset extends KalturaLiveAsset
-{
-	/**
-	 * Lineup channel number (LCN) - A logical linear channel number. This number is unique in the region context.
-	 *
-	 * @var int
-	 */
-	public $lcn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaProgramAsset extends KalturaAsset
 {
 	/**
@@ -18751,22 +18735,6 @@ class KalturaLicensedUrlRecordingRequest extends KalturaLicensedUrlBaseRequest
 	 * @var string
 	 */
 	public $fileType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLineupChannelAssetListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of objects
-	 *
-	 * @var array of KalturaLineupChannelAsset
-	 */
-	public $objects;
 
 
 }
