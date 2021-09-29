@@ -6221,6 +6221,39 @@ class KalturaLicensedUrlService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLineupService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Return regional lineup (list of lineup channel asset objects) based on the requester session characteristics and his region.
+	 * 
+	 * @param int $pageIndex Page index - The page index to retrieve, (if it is not sent the default page size is 1).
+	 * @param int $pageSize Page size - The page size to retrieve. Must be one of the follow numbers: 100, 200, 800, 1200, 1600 (if it is not sent the default page size is 500).
+	 * @return KalturaLineupChannelAssetListResponse
+	 */
+	function get($pageIndex, $pageSize)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "pageIndex", $pageIndex);
+		$this->client->addParam($kparams, "pageSize", $pageSize);
+		$this->client->queueServiceActionCall("lineup", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLineupChannelAssetListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaConcurrencyRuleService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -12735,6 +12768,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaLineupService
+	 */
+	public $lineup = null;
+
+	/**
+	 * 
 	 * @var KalturaMediaConcurrencyRuleService
 	 */
 	public $mediaConcurrencyRule = null;
@@ -13150,8 +13189,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-09-27');
-		$this->setApiVersion('6.8.0.29532');
+		$this->setClientTag('php5:21-09-29');
+		$this->setApiVersion('6.8.0.29561');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13224,6 +13263,7 @@ class KalturaClient extends KalturaClientBase
 		$this->label = new KalturaLabelService($this);
 		$this->language = new KalturaLanguageService($this);
 		$this->licensedUrl = new KalturaLicensedUrlService($this);
+		$this->lineup = new KalturaLineupService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);
 		$this->mediaFile = new KalturaMediaFileService($this);
 		$this->mediaFileType = new KalturaMediaFileTypeService($this);
