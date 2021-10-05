@@ -1004,10 +1004,10 @@ class KalturaAssetStructService extends KalturaServiceBase
 	/**
 	 * Return a list of asset structs for the account with optional filter
 	 * 
-	 * @param KalturaAssetStructFilter $filter Filter parameters for filtering out the result
+	 * @param KalturaBaseAssetStructFilter $filter Filter parameters for filtering out the result
 	 * @return KalturaAssetStructListResponse
 	 */
-	function listAction(KalturaAssetStructFilter $filter = null)
+	function listAction(KalturaBaseAssetStructFilter $filter = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
@@ -2176,11 +2176,11 @@ class KalturaChannelService extends KalturaServiceBase
 	/**
 	 * Get the list of tags for the partner
 	 * 
-	 * @param KalturaChannelsFilter $filter Filter
+	 * @param KalturaChannelsBaseFilter $filter Filter
 	 * @param KalturaFilterPager $pager Page size and index
 	 * @return KalturaChannelListResponse
 	 */
-	function listAction(KalturaChannelsFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(KalturaChannelsBaseFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
@@ -3968,6 +3968,52 @@ class KalturaEpgService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaEpgServicePartnerConfigurationService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Returns EPG cache service partner configurations
+	 * 
+	 * @return KalturaEpgServicePartnerConfiguration
+	 */
+	function get()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("epgservicepartnerconfiguration", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaEpgServicePartnerConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns EPG cache service partner configurations
+	 * 
+	 * @param KalturaEpgServicePartnerConfiguration $config The partner config updates
+	 */
+	function update(KalturaEpgServicePartnerConfiguration $config)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "config", $config->toParams());
+		$this->client->queueServiceActionCall("epgservicepartnerconfiguration", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEventNotificationActionService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -5063,6 +5109,25 @@ class KalturaHouseholdLimitationsService extends KalturaServiceBase
 	}
 
 	/**
+	 * Checks if the DLM is used
+	 * 
+	 * @param int $dlmId Household limitations module identifier
+	 * @return bool
+	 */
+	function isUsed($dlmId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "dlmId", $dlmId);
+		$this->client->queueServiceActionCall("householdlimitations", "isUsed", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Get the list of PartnerConfiguration
 	 * 
 	 * @return KalturaHouseholdLimitationsListResponse
@@ -5076,6 +5141,27 @@ class KalturaHouseholdLimitationsService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitationsListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Updates household limitation
+	 * 
+	 * @param int $dlmId Id of household limitation
+	 * @param KalturaHouseholdLimitations $householdLimitation Household limitation
+	 * @return KalturaHouseholdLimitations
+	 */
+	function update($dlmId, KalturaHouseholdLimitations $householdLimitation)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "dlmId", $dlmId);
+		$this->client->addParam($kparams, "householdLimitation", $householdLimitation->toParams());
+		$this->client->queueServiceActionCall("householdlimitations", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaHouseholdLimitations");
 		return $resultObject;
 	}
 }
@@ -12539,6 +12625,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaEpgServicePartnerConfigurationService
+	 */
+	public $epgServicePartnerConfiguration = null;
+
+	/**
+	 * 
 	 * @var KalturaEventNotificationActionService
 	 */
 	public $eventNotificationAction = null;
@@ -13110,8 +13202,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-09-29');
-		$this->setApiVersion('6.7.0.29302');
+		$this->setClientTag('php5:21-10-05');
+		$this->setApiVersion('6.9.0.29587');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13158,6 +13250,7 @@ class KalturaClient extends KalturaClientBase
 		$this->engagement = new KalturaEngagementService($this);
 		$this->entitlement = new KalturaEntitlementService($this);
 		$this->epg = new KalturaEpgService($this);
+		$this->epgServicePartnerConfiguration = new KalturaEpgServicePartnerConfigurationService($this);
 		$this->eventNotificationAction = new KalturaEventNotificationActionService($this);
 		$this->eventNotification = new KalturaEventNotificationService($this);
 		$this->exportTask = new KalturaExportTaskService($this);
