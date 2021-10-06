@@ -559,6 +559,16 @@ class KalturaChannelsOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaChannelStruct extends KalturaEnumBase
+{
+	const MANUAL = "Manual";
+	const DYNAMIC = "Dynamic";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaChannelType extends KalturaEnumBase
 {
 	const INTERNAL = "Internal";
@@ -1452,6 +1462,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const SECURITY = "Security";
 	const OPC = "Opc";
 	const BASE = "Base";
+	const CUSTOMFIELDS = "CustomFields";
 }
 
 /**
