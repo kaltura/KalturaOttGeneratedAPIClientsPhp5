@@ -2176,11 +2176,11 @@ class KalturaChannelService extends KalturaServiceBase
 	/**
 	 * Get the list of tags for the partner
 	 * 
-	 * @param KalturaChannelsFilter $filter Filter
+	 * @param KalturaChannelsBaseFilter $filter Filter
 	 * @param KalturaFilterPager $pager Page size and index
 	 * @return KalturaChannelListResponse
 	 */
-	function listAction(KalturaChannelsFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(KalturaChannelsBaseFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
@@ -3961,6 +3961,52 @@ class KalturaEpgService extends KalturaServiceBase
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaEpgListResponse");
 		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEpgServicePartnerConfigurationService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Returns EPG cache service partner configurations
+	 * 
+	 * @return KalturaEpgServicePartnerConfiguration
+	 */
+	function get()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("epgservicepartnerconfiguration", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaEpgServicePartnerConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns EPG cache service partner configurations
+	 * 
+	 * @param KalturaEpgServicePartnerConfiguration $config The partner config updates
+	 */
+	function update(KalturaEpgServicePartnerConfiguration $config)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "config", $config->toParams());
+		$this->client->queueServiceActionCall("epgservicepartnerconfiguration", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
 	}
 }
 
@@ -12579,6 +12625,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaEpgServicePartnerConfigurationService
+	 */
+	public $epgServicePartnerConfiguration = null;
+
+	/**
+	 * 
 	 * @var KalturaEventNotificationActionService
 	 */
 	public $eventNotificationAction = null;
@@ -13150,8 +13202,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-09-29');
-		$this->setApiVersion('6.8.0.29534');
+		$this->setClientTag('php5:21-10-11');
+		$this->setApiVersion('6.8.0.29552');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13198,6 +13250,7 @@ class KalturaClient extends KalturaClientBase
 		$this->engagement = new KalturaEngagementService($this);
 		$this->entitlement = new KalturaEntitlementService($this);
 		$this->epg = new KalturaEpgService($this);
+		$this->epgServicePartnerConfiguration = new KalturaEpgServicePartnerConfigurationService($this);
 		$this->eventNotificationAction = new KalturaEventNotificationActionService($this);
 		$this->eventNotification = new KalturaEventNotificationService($this);
 		$this->exportTask = new KalturaExportTaskService($this);
