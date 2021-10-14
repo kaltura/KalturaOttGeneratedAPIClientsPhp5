@@ -2536,16 +2536,7 @@ class KalturaAssetImagePerRatioFilter extends KalturaRelatedObjectFilter
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaBaseAssetStructFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetStructFilter extends KalturaBaseAssetStructFilter
+class KalturaAssetStructFilter extends KalturaFilter
 {
 	/**
 	 * Comma separated identifiers, id = 0 is identified as program AssetStruct
@@ -2575,15 +2566,6 @@ class KalturaAssetStructFilter extends KalturaBaseAssetStructFilter
 	 */
 	public $objectVirtualAssetInfoTypeEqual = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLinearAssetStructFilter extends KalturaBaseAssetStructFilter
-{
 
 }
 
@@ -3054,16 +3036,7 @@ class KalturaBookmark extends KalturaSlimAsset
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaChannelsBaseFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaChannelsFilter extends KalturaChannelsBaseFilter
+class KalturaChannelsFilter extends KalturaFilter
 {
 	/**
 	 * channel identifier to filter by
@@ -3099,29 +3072,6 @@ class KalturaChannelsFilter extends KalturaChannelsBaseFilter
 	 * @var string
 	 */
 	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaChannelSearchByKsqlFilter extends KalturaChannelsBaseFilter
-{
-	/**
-	 * KSQL expression
-	 *
-	 * @var string
-	 */
-	public $kSql = null;
-
-	/**
-	 * channel struct
-	 *
-	 * @var KalturaChannelStruct
-	 */
-	public $channelStructEqual = null;
 
 
 }
@@ -17920,29 +17870,6 @@ class KalturaEntitlementRenewal extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEpgServicePartnerConfiguration extends KalturaObjectBase
-{
-	/**
-	 * The number of slots (NOS) that are supported (1, 2, 3, 4, 6, 8, 12, 24)
-	 *
-	 * @var int
-	 */
-	public $numberOfSlots = null;
-
-	/**
-	 * The offset of the first slot from 00:00 UTC
-	 *
-	 * @var int
-	 */
-	public $firstSlotOffset = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaEventNotificationScope extends KalturaObjectBase
 {
 
@@ -18995,22 +18922,6 @@ class KalturaEpgNotificationSettings extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaLineupNotificationSettings extends KalturaObjectBase
-{
-	/**
-	 * if lineup notifications are enabled.
-	 *
-	 * @var bool
-	 */
-	public $enabled = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 {
 	/**
@@ -19145,13 +19056,6 @@ class KalturaNotificationsPartnerSettings extends KalturaObjectBase
 	 * @var KalturaEpgNotificationSettings
 	 */
 	public $epgNotification;
-
-	/**
-	 * Settings for lineup notifications
-	 *
-	 * @var KalturaLineupNotificationSettings
-	 */
-	public $lineupNotification;
 
 
 }

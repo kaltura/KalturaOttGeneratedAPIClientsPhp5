@@ -559,16 +559,6 @@ class KalturaChannelsOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaChannelStruct extends KalturaEnumBase
-{
-	const MANUAL = "Manual";
-	const DYNAMIC = "Dynamic";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaChannelType extends KalturaEnumBase
 {
 	const INTERNAL = "Internal";
