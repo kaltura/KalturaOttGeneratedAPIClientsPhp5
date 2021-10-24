@@ -4616,7 +4616,7 @@ class KalturaHouseholdService extends KalturaServiceBase
 	}
 
 	/**
-	 * Get recently watched media for user, ordered by recently watched first.
+	 * Retrive household for the partner filter by external identifier
 	 * 
 	 * @param KalturaHouseholdFilter $filter Filter parameters for filtering out the result
 	 * @param KalturaFilterPager $pager Page size and index. Number of assets to return per page. Possible range 5 ≤ size ≥ 50. If omitted - will be set to 25. If a value > 50 provided – will set to 50
@@ -4957,14 +4957,17 @@ class KalturaHouseholdDeviceService extends KalturaServiceBase
 	 * @param int $partnerId Partner Identifier
 	 * @param string $pin Pin code
 	 * @param string $udid Device UDID
+	 * @param map $extraParams Extra params
 	 * @return KalturaLoginResponse
 	 */
-	function loginWithPin($partnerId, $pin, $udid = null)
+	function loginWithPin($partnerId, $pin, $udid = null, array $extraParams = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "partnerId", $partnerId);
 		$this->client->addParam($kparams, "pin", $pin);
 		$this->client->addParam($kparams, "udid", $udid);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
 		$this->client->queueServiceActionCall("householddevice", "loginWithPin", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -6267,6 +6270,39 @@ class KalturaLicensedUrlService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLineupService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Return regional lineup (list of lineup channel asset objects) based on the requester session characteristics and his region.
+	 * 
+	 * @param int $pageIndex Page index - The page index to retrieve, (if it is not sent the default page size is 1).
+	 * @param int $pageSize Page size - The page size to retrieve. Must be one of the follow numbers: 100, 200, 800, 1200, 1600 (if it is not sent the default page size is 500).
+	 * @return KalturaLineupChannelAssetListResponse
+	 */
+	function get($pageIndex, $pageSize)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "pageIndex", $pageIndex);
+		$this->client->addParam($kparams, "pageSize", $pageSize);
+		$this->client->queueServiceActionCall("lineup", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLineupChannelAssetListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaConcurrencyRuleService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -7186,15 +7222,18 @@ class KalturaOttUserService extends KalturaServiceBase
 	 * @param string $pin Pin code
 	 * @param string $udid Device UDID
 	 * @param string $secret Additional security parameter to validate the login
+	 * @param map $extraParams Extra params
 	 * @return KalturaLoginResponse
 	 */
-	function loginWithPin($partnerId, $pin, $udid = null, $secret = null)
+	function loginWithPin($partnerId, $pin, $udid = null, $secret = null, array $extraParams = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "partnerId", $partnerId);
 		$this->client->addParam($kparams, "pin", $pin);
 		$this->client->addParam($kparams, "udid", $udid);
 		$this->client->addParam($kparams, "secret", $secret);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
 		$this->client->queueServiceActionCall("ottuser", "loginWithPin", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -10012,6 +10051,36 @@ class KalturaSessionService extends KalturaServiceBase
 	}
 
 	/**
+	 * Create session characteristic
+	 * 
+	 * @param string $userId User identifier
+	 * @param bigint $householdId Household identifier
+	 * @param string $udid Device UDID
+	 * @param bigint $expiration Relative expiration(TTL) in seconds, should be equal or greater than KS expiration
+	 * @param int $regionId Region identifier
+	 * @param map $sessionCharacteristicParams Session characteristic dynamic params
+	 * @return KalturaSessionCharacteristic
+	 */
+	function createSessionCharacteristic($userId, $householdId, $udid, $expiration, $regionId = null, array $sessionCharacteristicParams = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "userId", $userId);
+		$this->client->addParam($kparams, "householdId", $householdId);
+		$this->client->addParam($kparams, "udid", $udid);
+		$this->client->addParam($kparams, "expiration", $expiration);
+		$this->client->addParam($kparams, "regionId", $regionId);
+		if ($sessionCharacteristicParams !== null)
+			$this->client->addParam($kparams, "sessionCharacteristicParams", $sessionCharacteristicParams->toParams());
+		$this->client->queueServiceActionCall("session", "createSessionCharacteristic", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSessionCharacteristic");
+		return $resultObject;
+	}
+
+	/**
 	 * Parses KS
 	 * 
 	 * @param string $session Additional KS to parse, if not passed the user's KS will be parsed
@@ -12351,6 +12420,98 @@ class KalturaUserSegmentService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUserSessionProfileService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add new UserSessionProfile
+	 * 
+	 * @param KalturaUserSessionProfile $userSessionProfile UserSessionProfile Object to add
+	 * @return KalturaUserSessionProfile
+	 */
+	function add(KalturaUserSessionProfile $userSessionProfile)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "userSessionProfile", $userSessionProfile->toParams());
+		$this->client->queueServiceActionCall("usersessionprofile", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUserSessionProfile");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete existing UserSessionProfile
+	 * 
+	 * @param bigint $id UserSessionProfile identifier
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("usersessionprofile", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
+	}
+
+	/**
+	 * Returns the list of available UserSessionProfiles
+	 * 
+	 * @param KalturaUserSessionProfileFilter $filter Filter
+	 * @param KalturaFilterPager $pager Pager
+	 * @return KalturaUserSessionProfileListResponse
+	 */
+	function listAction(KalturaUserSessionProfileFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("usersessionprofile", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUserSessionProfileListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update existing UserSessionProfile
+	 * 
+	 * @param bigint $id Id of userSessionProfile to update
+	 * @param KalturaUserSessionProfile $userSessionProfile UserSessionProfile Object to update
+	 * @return KalturaUserSessionProfile
+	 */
+	function update($id, KalturaUserSessionProfile $userSessionProfile)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "userSessionProfile", $userSessionProfile->toParams());
+		$this->client->queueServiceActionCall("usersessionprofile", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUserSessionProfile");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaClient extends KalturaClientBase
 {
 	/**
@@ -12787,6 +12948,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaLineupService
+	 */
+	public $lineup = null;
+
+	/**
+	 * 
 	 * @var KalturaMediaConcurrencyRuleService
 	 */
 	public $mediaConcurrencyRule = null;
@@ -13194,6 +13361,12 @@ class KalturaClient extends KalturaClientBase
 	public $userSegment = null;
 
 	/**
+	 * 
+	 * @var KalturaUserSessionProfileService
+	 */
+	public $userSessionProfile = null;
+
+	/**
 	 * Kaltura client constructor
 	 *
 	 * @param KalturaConfiguration $config
@@ -13202,8 +13375,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-10-11');
-		$this->setApiVersion('6.8.0.29552');
+		$this->setClientTag('php5:21-10-24');
+		$this->setApiVersion('6.8.0.29566');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13277,6 +13450,7 @@ class KalturaClient extends KalturaClientBase
 		$this->label = new KalturaLabelService($this);
 		$this->language = new KalturaLanguageService($this);
 		$this->licensedUrl = new KalturaLicensedUrlService($this);
+		$this->lineup = new KalturaLineupService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);
 		$this->mediaFile = new KalturaMediaFileService($this);
 		$this->mediaFileType = new KalturaMediaFileTypeService($this);
@@ -13345,6 +13519,7 @@ class KalturaClient extends KalturaClientBase
 		$this->userLoginPin = new KalturaUserLoginPinService($this);
 		$this->userRole = new KalturaUserRoleService($this);
 		$this->userSegment = new KalturaUserSegmentService($this);
+		$this->userSessionProfile = new KalturaUserSessionProfileService($this);
 	}
 	
 	/**

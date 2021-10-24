@@ -884,6 +884,22 @@ class KalturaPartnerFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUserSessionProfileFilter extends KalturaFilter
+{
+	/**
+	 * UserSessionProfile identifier to filter by
+	 *
+	 * @var int
+	 */
+	public $idEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadFilter extends KalturaFilter
 {
 	/**
@@ -4753,6 +4769,22 @@ class KalturaCustomDrmPlaybackPluginData extends KalturaDrmPlaybackPluginData
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDiscoveryMediaFile extends KalturaMediaFile
+{
+	/**
+	 * show, if file could be played
+	 *
+	 * @var bool
+	 */
+	public $isPlaybackable = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaOTTUserListResponse extends KalturaListResponse
 {
 	/**
@@ -4959,6 +4991,537 @@ class KalturaUserInterestListResponse extends KalturaListResponse
 	 * @var array of KalturaUserInterest
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaUserSessionProfileExpression extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSessionProfile extends KalturaObjectBase
+{
+	/**
+	 * The user session profile id.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * The user session profile name for presentation.
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * expression
+	 *
+	 * @var KalturaUserSessionProfileExpression
+	 */
+	public $expression;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSessionProfileListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of KalturaUserSessionProfile
+	 *
+	 * @var array of KalturaUserSessionProfile
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExpressionAnd extends KalturaUserSessionProfileExpression
+{
+	/**
+	 * expressions with and relation between them
+	 *
+	 * @var array of KalturaUserSessionProfileExpression
+	 */
+	public $expressions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExpressionNot extends KalturaUserSessionProfileExpression
+{
+	/**
+	 * expression
+	 *
+	 * @var KalturaUserSessionProfileExpression
+	 */
+	public $expression;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaExpressionOr extends KalturaUserSessionProfileExpression
+{
+	/**
+	 * expressions with or relation between them
+	 *
+	 * @var array of KalturaUserSessionProfileExpression
+	 */
+	public $expressions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaCondition extends KalturaObjectBase
+{
+	/**
+	 * The type of the condition
+	 *
+	 * @var KalturaRuleConditionType
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSessionCondition extends KalturaUserSessionProfileExpression
+{
+	/**
+	 * expression
+	 *
+	 * @var KalturaCondition
+	 */
+	public $condition;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaNotCondition extends KalturaCondition
+{
+	/**
+	 * Indicates whether to apply not on the other properties in the condition
+	 *
+	 * @var bool
+	 */
+	public $not = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaOrCondition extends KalturaNotCondition
+{
+	/**
+	 * List of conditions with or between them
+	 *
+	 * @var array of KalturaCondition
+	 */
+	public $conditions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCountryCondition extends KalturaNotCondition
+{
+	/**
+	 * Comma separated countries IDs list
+	 *
+	 * @var string
+	 */
+	public $countries = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDateCondition extends KalturaNotCondition
+{
+	/**
+	 * Start date
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * End date
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHeaderCondition extends KalturaNotCondition
+{
+	/**
+	 * Header key
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+	/**
+	 * Header value
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetCondition extends KalturaCondition
+{
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaConcurrencyCondition extends KalturaAssetCondition
+{
+	/**
+	 * Concurrency limitation
+	 *
+	 * @var int
+	 */
+	public $limit = null;
+
+	/**
+	 * Concurrency limitation type
+	 *
+	 * @var KalturaConcurrencyLimitationType
+	 */
+	public $concurrencyLimitationType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIpRangeCondition extends KalturaCondition
+{
+	/**
+	 * From IP address range
+	 *
+	 * @var string
+	 */
+	public $fromIP = null;
+
+	/**
+	 * TO IP address range
+	 *
+	 * @var string
+	 */
+	public $toIP = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBusinessModuleCondition extends KalturaCondition
+{
+	/**
+	 * Business module type
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $businessModuleType = null;
+
+	/**
+	 * Business module ID
+	 *
+	 * @var int
+	 */
+	public $businessModuleId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentsCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated segments IDs list
+	 *
+	 * @var string
+	 */
+	public $segmentsIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaSubscriptionCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated subscription IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSubscriptionCondition extends KalturaSubscriptionCondition
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetSubscriptionCondition extends KalturaSubscriptionCondition
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserRoleCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated user role IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceBrandCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated Device Brand IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated Device Family IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceManufacturerCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated Device Manufacturer IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceModelCondition extends KalturaCondition
+{
+	/**
+	 * regex of device model that is compared to
+	 *
+	 * @var string
+	 */
+	public $regexEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUdidDynamicListCondition extends KalturaCondition
+{
+	/**
+	 * KalturaUdidDynamicList.id
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDynamicKeysCondition extends KalturaCondition
+{
+	/**
+	 * key
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+	/**
+	 * comma-separated values
+	 *
+	 * @var string
+	 */
+	public $values = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceDynamicDataCondition extends KalturaCondition
+{
+	/**
+	 * key
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+	/**
+	 * value
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSessionProfileCondition extends KalturaCondition
+{
+	/**
+	 * UserSessionProfile id
+	 *
+	 * @var int
+	 */
+	public $id = null;
 
 
 }
@@ -6830,30 +7393,6 @@ class KalturaCategoryVersion extends KalturaCrudObject
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaCondition extends KalturaObjectBase
-{
-	/**
-	 * The type of the condition
-	 *
-	 * @var KalturaRuleConditionType
-	 * @readonly
-	 */
-	public $type = null;
-
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPromotion extends KalturaObjectBase
 {
 	/**
@@ -7019,331 +7558,6 @@ class KalturaTriggerCampaign extends KalturaCampaign
 	 * @var array of KalturaCondition
 	 */
 	public $triggerConditions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaNotCondition extends KalturaCondition
-{
-	/**
-	 * Indicates whether to apply not on the other properties in the condition
-	 *
-	 * @var bool
-	 */
-	public $not = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaOrCondition extends KalturaNotCondition
-{
-	/**
-	 * List of conditions with or between them
-	 *
-	 * @var array of KalturaCondition
-	 */
-	public $conditions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCountryCondition extends KalturaNotCondition
-{
-	/**
-	 * Comma separated countries IDs list
-	 *
-	 * @var string
-	 */
-	public $countries = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDateCondition extends KalturaNotCondition
-{
-	/**
-	 * Start date
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * End date
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHeaderCondition extends KalturaNotCondition
-{
-	/**
-	 * Header key
-	 *
-	 * @var string
-	 */
-	public $key = null;
-
-	/**
-	 * Header value
-	 *
-	 * @var string
-	 */
-	public $value = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetCondition extends KalturaCondition
-{
-	/**
-	 * KSQL
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaConcurrencyCondition extends KalturaAssetCondition
-{
-	/**
-	 * Concurrency limitation
-	 *
-	 * @var int
-	 */
-	public $limit = null;
-
-	/**
-	 * Concurrency limitation type
-	 *
-	 * @var KalturaConcurrencyLimitationType
-	 */
-	public $concurrencyLimitationType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIpRangeCondition extends KalturaCondition
-{
-	/**
-	 * From IP address range
-	 *
-	 * @var string
-	 */
-	public $fromIP = null;
-
-	/**
-	 * TO IP address range
-	 *
-	 * @var string
-	 */
-	public $toIP = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBusinessModuleCondition extends KalturaCondition
-{
-	/**
-	 * Business module type
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $businessModuleType = null;
-
-	/**
-	 * Business module ID
-	 *
-	 * @var int
-	 */
-	public $businessModuleId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentsCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated segments IDs list
-	 *
-	 * @var string
-	 */
-	public $segmentsIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaSubscriptionCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated subscription IDs list
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserSubscriptionCondition extends KalturaSubscriptionCondition
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetSubscriptionCondition extends KalturaSubscriptionCondition
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserRoleCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated user role IDs list
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceBrandCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated Device Brand IDs list
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceFamilyCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated Device Family IDs list
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceManufacturerCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated Device Manufacturer IDs list
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceModelCondition extends KalturaCondition
-{
-	/**
-	 * regex of device model that is compared to
-	 *
-	 * @var string
-	 */
-	public $regexEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUdidDynamicListCondition extends KalturaCondition
-{
-	/**
-	 * KalturaUdidDynamicList.id
-	 *
-	 * @var int
-	 */
-	public $id = null;
 
 
 }
@@ -9044,6 +9258,269 @@ class KalturaAssetLifeCycleBuisnessModuleTransitionAction extends KalturaAssetLi
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaFilterAction extends KalturaAssetRuleAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByAudioCodecAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated audioCodecs
+	 *
+	 * @var string
+	 */
+	public $audioCodecIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByAudioCodecInDiscoveryAction extends KalturaFilterFileByAudioCodecAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByAudioCodecInPlaybackAction extends KalturaFilterFileByAudioCodecAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByFileTypeIdAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated fileTypesIds
+	 *
+	 * @var string
+	 */
+	public $fileTypeIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdInDiscoveryAction extends KalturaFilterFileByFileTypeIdAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdInPlaybackAction extends KalturaFilterFileByFileTypeIdAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByFileTypeIdForAssetTypeAction extends KalturaFilterFileByFileTypeIdAction
+{
+	/**
+	 * List of comma separated assetTypes
+	 *
+	 * @var string
+	 */
+	public $assetTypeIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdForAssetTypeInDiscoveryAction extends KalturaFilterFileByFileTypeIdForAssetTypeAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByFileTypeIdForAssetTypeInPlaybackAction extends KalturaFilterFileByFileTypeIdForAssetTypeAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByLabelAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated labels
+	 *
+	 * @var string
+	 */
+	public $labelIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByLabelInDiscoveryAction extends KalturaFilterFileByLabelAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByLabelInPlaybackAction extends KalturaFilterFileByLabelAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByQualityAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated qualities
+	 *
+	 * @var string
+	 */
+	public $qualityIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByQualityInDiscoveryAction extends KalturaFilterFileByQualityAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByQualityInPlaybackAction extends KalturaFilterFileByQualityAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByStreamerTypeAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated streamerTypes
+	 *
+	 * @var string
+	 */
+	public $streamerTypeIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByStreamerTypeInDiscovery extends KalturaFilterFileByStreamerTypeAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByStreamerTypeInPlayback extends KalturaFilterFileByStreamerTypeAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaFilterFileByVideoCodecAction extends KalturaFilterAction
+{
+	/**
+	 * List of comma separated videoCodecs
+	 *
+	 * @var string
+	 */
+	public $videoCodecIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByVideoCodecInDiscoveryAction extends KalturaFilterFileByVideoCodecAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByVideoCodecInPlayback extends KalturaFilterFileByVideoCodecAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterAssetByKsqlAction extends KalturaFilterAction
+{
+	/**
+	 * ksql to filter assets by
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetUserRuleBlockAction extends KalturaAssetUserRuleAction
 {
 
@@ -10205,6 +10682,66 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $revokeOnDeviceDelete = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCustomFieldsPartnerConfiguration extends KalturaPartnerConfiguration
+{
+	/**
+	 * Array of clientTag values
+	 *
+	 * @var string
+	 */
+	public $metaSystemNameInsteadOfAliasList = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDefaultParentalSettingsPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * defaultTvSeriesParentalRuleId
+	 *
+	 * @var int
+	 */
+	public $defaultMoviesParentalRuleId = null;
+
+	/**
+	 * defaultTvSeriesParentalRuleId
+	 *
+	 * @var int
+	 */
+	public $defaultTvSeriesParentalRuleId = null;
+
+	/**
+	 * defaultParentalPin
+	 *
+	 * @var int
+	 */
+	public $defaultParentalPin = null;
+
+	/**
+	 * defaultPurchasePin
+	 *
+	 * @var int
+	 */
+	public $defaultPurchasePin = null;
+
+	/**
+	 * defaultPurchaseSettings
+	 *
+	 * @var int
+	 */
+	public $defaultPurchaseSettings = null;
 
 
 }
@@ -13086,6 +13623,13 @@ class KalturaSeriesRecordingOption extends KalturaObjectBase
 	 */
 	public $minEpisodeNumber = null;
 
+	/**
+	 * Record future only from selected value
+	 *
+	 * @var KalturaChronologicalRecordStartTime
+	 */
+	public $chronologicalRecordStartTime = null;
+
 
 }
 
@@ -13687,6 +14231,22 @@ class KalturaLiveAsset extends KalturaMediaAsset
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLineupChannelAsset extends KalturaLiveAsset
+{
+	/**
+	 * Lineup channel number (LCN) - A logical linear channel number. This number is unique in the region context.
+	 *
+	 * @var int
+	 */
+	public $lcn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaProgramAsset extends KalturaAsset
 {
 	/**
@@ -14020,6 +14580,13 @@ class KalturaAssetStructMeta extends KalturaObjectBase
 	 * @var int
 	 */
 	public $suppressedOrder = null;
+
+	/**
+	 * Case sensitive alias value
+	 *
+	 * @var string
+	 */
+	public $aliasName = null;
 
 
 }
@@ -18796,6 +19363,22 @@ class KalturaLicensedUrlRecordingRequest extends KalturaLicensedUrlBaseRequest
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLineupChannelAssetListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaLineupChannelAsset
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMessageTemplate extends KalturaObjectBase
 {
 	/**
@@ -19560,6 +20143,55 @@ class KalturaRegionChannelNumber extends KalturaObjectBase
 	 * @var int
 	 */
 	public $channelNumber = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSessionCharacteristic extends KalturaObjectBase
+{
+	/**
+	 * Session characteristic identifier
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Region identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $regionId = null;
+
+	/**
+	 * Comma-separated list of user segments identifiers
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $userSegmentsIds = null;
+
+	/**
+	 * Comma-separated list of user roles identifiers
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $userRolesIds = null;
+
+	/**
+	 * Comma-separated list of user session profiles identifiers
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $userSessionProfilesIds = null;
 
 
 }
