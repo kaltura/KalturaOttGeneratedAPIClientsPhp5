@@ -3054,16 +3054,7 @@ class KalturaBookmark extends KalturaSlimAsset
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaChannelsBaseFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaChannelsFilter extends KalturaChannelsBaseFilter
+class KalturaChannelsFilter extends KalturaFilter
 {
 	/**
 	 * channel identifier to filter by
@@ -3099,29 +3090,6 @@ class KalturaChannelsFilter extends KalturaChannelsBaseFilter
 	 * @var string
 	 */
 	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaChannelSearchByKsqlFilter extends KalturaChannelsBaseFilter
-{
-	/**
-	 * KSQL expression
-	 *
-	 * @var string
-	 */
-	public $kSql = null;
-
-	/**
-	 * channel struct
-	 *
-	 * @var KalturaChannelStruct
-	 */
-	public $channelStructEqual = null;
 
 
 }
@@ -8553,6 +8521,7 @@ class KalturaManualCollectionAsset extends KalturaObjectBase
 	 * Internal identifier of the asset
 	 *
 	 * @var string
+	 * @insertonly
 	 */
 	public $id = null;
 
@@ -8560,6 +8529,7 @@ class KalturaManualCollectionAsset extends KalturaObjectBase
 	 * The type of the asset. Possible values: media, epg
 	 *
 	 * @var KalturaManualCollectionAssetType
+	 * @insertonly
 	 */
 	public $type = null;
 
@@ -17912,29 +17882,6 @@ class KalturaEntitlementRenewal extends KalturaObjectBase
 	 * @var int
 	 */
 	public $userId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEpgServicePartnerConfiguration extends KalturaObjectBase
-{
-	/**
-	 * The number of slots (NOS) that are supported (1, 2, 3, 4, 6, 8, 12, 24)
-	 *
-	 * @var int
-	 */
-	public $numberOfSlots = null;
-
-	/**
-	 * The offset of the first slot from 00:00 UTC
-	 *
-	 * @var int
-	 */
-	public $firstSlotOffset = null;
 
 
 }
