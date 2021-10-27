@@ -1473,8 +1473,8 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const SECURITY = "Security";
 	const OPC = "Opc";
 	const BASE = "Base";
-	const DEFAULTPARENTALSETTINGS = "DefaultParentalSettings";
 	const CUSTOMFIELDS = "CustomFields";
+	const DEFAULTPARENTALSETTINGS = "DefaultParentalSettings";
 }
 
 /**

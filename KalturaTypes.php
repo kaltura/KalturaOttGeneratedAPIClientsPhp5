@@ -10725,14 +10725,14 @@ class KalturaDefaultParentalSettingsPartnerConfig extends KalturaPartnerConfigur
 	/**
 	 * defaultParentalPin
 	 *
-	 * @var int
+	 * @var string
 	 */
 	public $defaultParentalPin = null;
 
 	/**
 	 * defaultPurchasePin
 	 *
-	 * @var int
+	 * @var string
 	 */
 	public $defaultPurchasePin = null;
 
