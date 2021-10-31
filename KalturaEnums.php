@@ -579,6 +579,17 @@ class KalturaChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaChronologicalRecordStartTime extends KalturaEnumBase
+{
+	const NONE = "NONE";
+	const NOW = "NOW";
+	const EPG_START_TIME = "EPG_START_TIME";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCollectionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1462,6 +1473,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const SECURITY = "Security";
 	const OPC = "Opc";
 	const BASE = "Base";
+	const CUSTOMFIELDS = "CustomFields";
 }
 
 /**
@@ -1848,6 +1860,21 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const FILTER = "FILTER";
 	const ASSET_LIFE_CYCLE_TRANSITION = "ASSET_LIFE_CYCLE_TRANSITION";
 	const APPLY_FREE_PLAYBACK = "APPLY_FREE_PLAYBACK";
+	const FILTERASSETBYKSQL = "FilterAssetByKsql";
+	const FILTERFILEBYQUALITYINDISCOVERY = "FilterFileByQualityInDiscovery";
+	const FILTERFILEBYQUALITYINPLAYBACK = "FilterFileByQualityInPlayback";
+	const FILTERFILEBYFILETYPEIDFORASSETTYPEINDISCOVERY = "FilterFileByFileTypeIdForAssetTypeInDiscovery";
+	const FILTERFILEBYFILETYPEIDFORASSETTYPEINPLAYBACK = "FilterFileByFileTypeIdForAssetTypeInPlayback";
+	const FILTERFILEBYFILETYPEIDINDISCOVERY = "FilterFileByFileTypeIdInDiscovery";
+	const FILTERFILEBYFILETYPEIDINPLAYBACK = "FilterFileByFileTypeIdInPlayback";
+	const FILTERFILEBYAUDIOCODECINDISCOVERY = "FilterFileByAudioCodecInDiscovery";
+	const FILTERFILEBYAUDIOCODECINPLAYBACK = "FilterFileByAudioCodecInPlayback";
+	const FILTERFILEBYVIDEOCODECINDISCOVERY = "FilterFileByVideoCodecInDiscovery";
+	const FILTERFILEBYVIDEOCODECINPLAYBACK = "FilterFileByVideoCodecInPlayback";
+	const FILTERFILEBYSTREAMERTYPEINDISCOVERY = "FilterFileByStreamerTypeInDiscovery";
+	const FILTERFILEBYSTREAMERTYPEINPLAYBACK = "FilterFileByStreamerTypeInPlayback";
+	const FILTERFILEBYLABELINDISCOVERY = "FilterFileByLabelInDiscovery";
+	const FILTERFILEBYLABELINPLAYBACK = "FilterFileByLabelInPlayback";
 }
 
 /**
@@ -1873,6 +1900,9 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const DEVICE_MANUFACTURER = "DEVICE_MANUFACTURER";
 	const DEVICE_MODEL = "DEVICE_MODEL";
 	const DEVICE_UDID_DYNAMIC_LIST = "DEVICE_UDID_DYNAMIC_LIST";
+	const DYNAMIC_KEYS = "DYNAMIC_KEYS";
+	const USER_SESSION_PROFILE = "USER_SESSION_PROFILE";
+	const DEVICE_DYNAMIC_DATA = "DEVICE_DYNAMIC_DATA";
 }
 
 /**
