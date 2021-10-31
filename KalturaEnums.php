@@ -579,6 +579,17 @@ class KalturaChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaChronologicalRecordStartTime extends KalturaEnumBase
+{
+	const NONE = "NONE";
+	const NOW = "NOW";
+	const EPG_START_TIME = "EPG_START_TIME";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCollectionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1462,6 +1473,8 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const SECURITY = "Security";
 	const OPC = "Opc";
 	const BASE = "Base";
+	const CUSTOMFIELDS = "CustomFields";
+	const DEFAULTPARENTALSETTINGS = "DefaultParentalSettings";
 }
 
 /**

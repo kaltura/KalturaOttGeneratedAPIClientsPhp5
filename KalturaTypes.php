@@ -1389,7 +1389,7 @@ class KalturaSubscriptionFilter extends KalturaFilter
 class KalturaUsageModuleFilter extends KalturaFilter
 {
 	/**
-	 * Comma separated discount codes
+	 * Comma separated usageModule ids
 	 *
 	 * @var int
 	 */
@@ -10279,7 +10279,7 @@ class KalturaPpv extends KalturaObjectBase
 	public $updateDate = null;
 
 	/**
-	 * Specifies when was the Subscription created. Date and time represented as epoch.
+	 * Specifies when was the ppv created. Date and time represented as epoch.
 	 *
 	 * @var int
 	 * @readonly
@@ -10749,6 +10749,66 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $revokeOnDeviceDelete = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCustomFieldsPartnerConfiguration extends KalturaPartnerConfiguration
+{
+	/**
+	 * Array of clientTag values
+	 *
+	 * @var string
+	 */
+	public $metaSystemNameInsteadOfAliasList = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDefaultParentalSettingsPartnerConfig extends KalturaPartnerConfiguration
+{
+	/**
+	 * defaultTvSeriesParentalRuleId
+	 *
+	 * @var int
+	 */
+	public $defaultMoviesParentalRuleId = null;
+
+	/**
+	 * defaultTvSeriesParentalRuleId
+	 *
+	 * @var int
+	 */
+	public $defaultTvSeriesParentalRuleId = null;
+
+	/**
+	 * defaultParentalPin
+	 *
+	 * @var string
+	 */
+	public $defaultParentalPin = null;
+
+	/**
+	 * defaultPurchasePin
+	 *
+	 * @var string
+	 */
+	public $defaultPurchasePin = null;
+
+	/**
+	 * defaultPurchaseSettings
+	 *
+	 * @var int
+	 */
+	public $defaultPurchaseSettings = null;
 
 
 }
@@ -13630,6 +13690,13 @@ class KalturaSeriesRecordingOption extends KalturaObjectBase
 	 */
 	public $minEpisodeNumber = null;
 
+	/**
+	 * Record future only from selected value
+	 *
+	 * @var KalturaChronologicalRecordStartTime
+	 */
+	public $chronologicalRecordStartTime = null;
+
 
 }
 
@@ -14231,6 +14298,22 @@ class KalturaLiveAsset extends KalturaMediaAsset
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLineupChannelAsset extends KalturaLiveAsset
+{
+	/**
+	 * Lineup channel number (LCN) - A logical linear channel number. This number is unique in the region context.
+	 *
+	 * @var int
+	 */
+	public $lcn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaProgramAsset extends KalturaAsset
 {
 	/**
@@ -14564,6 +14647,13 @@ class KalturaAssetStructMeta extends KalturaObjectBase
 	 * @var int
 	 */
 	public $suppressedOrder = null;
+
+	/**
+	 * Case sensitive alias value
+	 *
+	 * @var string
+	 */
+	public $aliasName = null;
 
 
 }
@@ -19332,6 +19422,22 @@ class KalturaLicensedUrlRecordingRequest extends KalturaLicensedUrlBaseRequest
 	 * @var string
 	 */
 	public $fileType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLineupChannelAssetListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of objects
+	 *
+	 * @var array of KalturaLineupChannelAsset
+	 */
+	public $objects;
 
 
 }
