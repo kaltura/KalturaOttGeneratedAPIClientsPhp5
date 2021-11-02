@@ -1206,13 +1206,6 @@ class KalturaPpvFilter extends KalturaFilter
 	 */
 	public $couponGroupIdEqual = null;
 
-	/**
-	 * return also inactive
-	 *
-	 * @var bool
-	 */
-	public $alsoInactive = null;
-
 
 }
 
@@ -1378,22 +1371,6 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $alsoInactive = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUsageModuleFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated usageModule ids
-	 *
-	 * @var int
-	 */
-	public $idEqual = null;
 
 
 }
@@ -7896,6 +7873,7 @@ class KalturaPriceDetails extends KalturaObjectBase
 	 * The price code identifier
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $id = null;
 
@@ -10193,13 +10171,6 @@ class KalturaPpv extends KalturaObjectBase
 	public $fileTypes;
 
 	/**
-	 * Comma separated file types identifiers that are supported in this subscription
-	 *
-	 * @var string
-	 */
-	public $fileTypesIds = null;
-
-	/**
 	 * The internal discount module for the ppv
 	 *
 	 * @var KalturaDiscountModule
@@ -10224,7 +10195,6 @@ class KalturaPpv extends KalturaObjectBase
 	 * Product code for the ppv
 	 *
 	 * @var string
-	 * @readonly
 	 */
 	public $productCode = null;
 
@@ -10248,51 +10218,6 @@ class KalturaPpv extends KalturaObjectBase
 	 * @var KalturaUsageModule
 	 */
 	public $usageModule;
-
-	/**
-	 * External ID
-	 *
-	 * @var string
-	 */
-	public $externalId = null;
-
-	/**
-	 * adsPolicy
-	 *
-	 * @var KalturaAdsPolicy
-	 */
-	public $adsPolicy = null;
-
-	/**
-	 * Is active ppv
-	 *
-	 * @var bool
-	 */
-	public $isActive = null;
-
-	/**
-	 * Specifies when was the ppv last updated. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-	/**
-	 * Specifies when was the ppv created. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Virtual asset id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $virtualAssetId = null;
 
 
 }
