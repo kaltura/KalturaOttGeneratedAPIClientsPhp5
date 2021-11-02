@@ -1414,6 +1414,8 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 	const SUBSCRIPTION = "Subscription";
 	const SEGMENT = "Segment";
 	const CATEGORY = "Category";
+	const TVOD = "Tvod";
+	const BOXSET = "Boxset";
 }
 
 /**

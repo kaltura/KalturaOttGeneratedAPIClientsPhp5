@@ -10286,6 +10286,14 @@ class KalturaPpv extends KalturaObjectBase
 	 */
 	public $createDate = null;
 
+	/**
+	 * Virtual asset id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $virtualAssetId = null;
+
 
 }
 
