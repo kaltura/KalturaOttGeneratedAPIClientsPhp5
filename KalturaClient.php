@@ -6297,6 +6297,25 @@ class KalturaLineupService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaLineupChannelAssetListResponse");
 		return $resultObject;
 	}
+
+	/**
+	 * Sends lineup update requested notification.
+	 * 
+	 * @param string $regionIds Region IDs separated by commas.
+	 * @return bool
+	 */
+	function sendUpdatedNotification($regionIds)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "regionIds", $regionIds);
+		$this->client->queueServiceActionCall("lineup", "sendUpdatedNotification", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
 }
 
 /**
@@ -13461,8 +13480,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-11-03');
-		$this->setApiVersion('6.8.0.29608');
+		$this->setClientTag('php5:21-11-08');
+		$this->setApiVersion('6.8.0.29620');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

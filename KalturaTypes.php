@@ -1389,7 +1389,7 @@ class KalturaSubscriptionFilter extends KalturaFilter
 class KalturaUsageModuleFilter extends KalturaFilter
 {
 	/**
-	 * Comma separated usageModule ids
+	 * usageModule id
 	 *
 	 * @var int
 	 */
@@ -7896,6 +7896,7 @@ class KalturaPriceDetails extends KalturaObjectBase
 	 * The price code identifier
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $id = null;
 
@@ -10179,16 +10180,25 @@ class KalturaPpv extends KalturaObjectBase
 	public $name = null;
 
 	/**
-	 * The price of the ppv
+	 * This property will deprecated soon. Please use PriceId instead of it.
 	 *
 	 * @var KalturaPriceDetails
+	 * @readonly
 	 */
 	public $price;
 
 	/**
-	 * A list of file types identifiers that are supported in this ppv
+	 * The price if of the ppv
+	 *
+	 * @var int
+	 */
+	public $priceDetailsId = null;
+
+	/**
+	 * This property will deprecated soon. Please use fileTypesIds instead of it.
 	 *
 	 * @var array of KalturaIntegerValue
+	 * @readonly
 	 */
 	public $fileTypes;
 
@@ -10200,18 +10210,34 @@ class KalturaPpv extends KalturaObjectBase
 	public $fileTypesIds = null;
 
 	/**
-	 * The internal discount module for the ppv
+	 * This property will deprecated soon. Please use DiscountId instead of it.
 	 *
 	 * @var KalturaDiscountModule
+	 * @readonly
 	 */
 	public $discountModule;
 
 	/**
-	 * Coupons group for the ppv
+	 * The discount id for the ppv
+	 *
+	 * @var int
+	 */
+	public $discountId = null;
+
+	/**
+	 * This property will deprecated soon. Please use CouponsGroupId instead of it.
 	 *
 	 * @var KalturaCouponsGroup
+	 * @readonly
 	 */
 	public $couponsGroup;
+
+	/**
+	 * Coupons group id for the ppv
+	 *
+	 * @var int
+	 */
+	public $couponsGroupId = null;
 
 	/**
 	 * A list of the descriptions of the ppv on different languages (language code and translation)
@@ -10224,7 +10250,6 @@ class KalturaPpv extends KalturaObjectBase
 	 * Product code for the ppv
 	 *
 	 * @var string
-	 * @readonly
 	 */
 	public $productCode = null;
 
@@ -10243,18 +10268,19 @@ class KalturaPpv extends KalturaObjectBase
 	public $firstDeviceLimitation = null;
 
 	/**
-	 * PPV usage module
+	 * This property will deprecated soon. Please use UsageModuleId instead of it.
 	 *
 	 * @var KalturaUsageModule
+	 * @readonly
 	 */
 	public $usageModule;
 
 	/**
-	 * External ID
+	 * PPV usage module Id
 	 *
-	 * @var string
+	 * @var int
 	 */
-	public $externalId = null;
+	public $usageModuleId = null;
 
 	/**
 	 * adsPolicy
