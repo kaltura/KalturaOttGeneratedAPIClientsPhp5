@@ -2036,6 +2036,13 @@ class KalturaScheduledRecordingProgramFilter extends KalturaAssetFilter
 	 */
 	public $endDateLessThanOrNull = null;
 
+	/**
+	 * Series to filter by
+	 *
+	 * @var string
+	 */
+	public $seriesIdsIn = null;
+
 
 }
 
@@ -10698,50 +10705,6 @@ class KalturaCustomFieldsPartnerConfiguration extends KalturaPartnerConfiguratio
 	 * @var string
 	 */
 	public $metaSystemNameInsteadOfAliasList = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDefaultParentalSettingsPartnerConfig extends KalturaPartnerConfiguration
-{
-	/**
-	 * defaultTvSeriesParentalRuleId
-	 *
-	 * @var int
-	 */
-	public $defaultMoviesParentalRuleId = null;
-
-	/**
-	 * defaultTvSeriesParentalRuleId
-	 *
-	 * @var int
-	 */
-	public $defaultTvSeriesParentalRuleId = null;
-
-	/**
-	 * defaultParentalPin
-	 *
-	 * @var string
-	 */
-	public $defaultParentalPin = null;
-
-	/**
-	 * defaultPurchasePin
-	 *
-	 * @var string
-	 */
-	public $defaultPurchasePin = null;
-
-	/**
-	 * defaultPurchaseSettings
-	 *
-	 * @var int
-	 */
-	public $defaultPurchaseSettings = null;
 
 
 }
