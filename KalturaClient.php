@@ -2230,7 +2230,7 @@ class KalturaCollectionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Insert new collection for partner
+	 * Internal API !!! Insert new collection for partner
 	 * 
 	 * @param KalturaCollection $collection Collection object
 	 * @return KalturaCollection
@@ -2249,7 +2249,7 @@ class KalturaCollectionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Delete collection
+	 * Internal API !!! Delete collection
 	 * 
 	 * @param bigint $id Collection id
 	 * @return bool
@@ -2268,7 +2268,7 @@ class KalturaCollectionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns a list of collections requested by Collection IDs or file identifier or coupon group identifier
+	 * Returns a list of subscriptions requested by Subscription ID or file ID
 	 * 
 	 * @param KalturaCollectionFilter $filter Filter request
 	 * @param KalturaFilterPager $pager Page size and index
@@ -2287,27 +2287,6 @@ class KalturaCollectionService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaCollectionListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Update Collection
-	 * 
-	 * @param bigint $id Collection id
-	 * @param KalturaCollection $collection Collection
-	 * @return KalturaCollection
-	 */
-	function update($id, KalturaCollection $collection)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "collection", $collection->toParams());
-		$this->client->queueServiceActionCall("collection", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCollection");
 		return $resultObject;
 	}
 }
@@ -8679,44 +8658,6 @@ class KalturaPpvService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add new ppv
-	 * 
-	 * @param KalturaPpv $ppv Ppv objec
-	 * @return KalturaPpv
-	 */
-	function add(KalturaPpv $ppv)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "ppv", $ppv->toParams());
-		$this->client->queueServiceActionCall("ppv", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPpv");
-		return $resultObject;
-	}
-
-	/**
-	 * Delete Ppv
-	 * 
-	 * @param bigint $id Ppv id
-	 * @return bool
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("ppv", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
 	 * Returns ppv object by internal identifier
 	 * 
 	 * @param bigint $id Ppv identifier
@@ -8739,43 +8680,19 @@ class KalturaPpvService extends KalturaServiceBase
 	 * Returns all ppv objects
 	 * 
 	 * @param KalturaPpvFilter $filter Filter parameters for filtering out the result
-	 * @param KalturaFilterPager $pager Page size and index
 	 * @return KalturaPpvListResponse
 	 */
-	function listAction(KalturaPpvFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(KalturaPpvFilter $filter = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
 			$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("ppv", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaPpvListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Update ppv
-	 * 
-	 * @param int $id Ppv id
-	 * @param KalturaPpv $ppv Ppv Object
-	 * @return KalturaPpv
-	 */
-	function update($id, KalturaPpv $ppv)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "ppv", $ppv->toParams());
-		$this->client->queueServiceActionCall("ppv", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPpv");
 		return $resultObject;
 	}
 }
@@ -8883,7 +8800,7 @@ class KalturaPriceDetailsService extends KalturaServiceBase
 	}
 
 	/**
-	 * Insert new PriceDetails for partner
+	 * Internal API !!! Insert new PriceDetails for partner
 	 * 
 	 * @param KalturaPriceDetails $priceDetails PriceDetails Object
 	 * @return KalturaPriceDetails
@@ -8902,7 +8819,7 @@ class KalturaPriceDetailsService extends KalturaServiceBase
 	}
 
 	/**
-	 * Delete PriceDetails
+	 * Internal API !!! Delete PriceDetails
 	 * 
 	 * @param bigint $id PriceDetails identifier
 	 * @return bool
@@ -10864,7 +10781,7 @@ class KalturaSubscriptionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Insert new subscription for partner
+	 * Internal API !!! Insert new subscription for partner
 	 * 
 	 * @param KalturaSubscription $subscription Subscription object
 	 * @return KalturaSubscription
@@ -10883,7 +10800,7 @@ class KalturaSubscriptionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Delete subscription
+	 * Internal API !!! Delete subscription
 	 * 
 	 * @param bigint $id Subscription id
 	 * @return bool
@@ -12007,7 +11924,7 @@ class KalturaUsageModuleService extends KalturaServiceBase
 	}
 
 	/**
-	 * Insert new UsageModule
+	 * Internal API !!! Insert new UsageModule
 	 * 
 	 * @param KalturaUsageModule $usageModule Usage module Object
 	 * @return KalturaUsageModule
@@ -12026,7 +11943,7 @@ class KalturaUsageModuleService extends KalturaServiceBase
 	}
 
 	/**
-	 * Delete UsageModule
+	 * Internal API !!! Delete UsageModule
 	 * 
 	 * @param bigint $id UsageModule id
 	 * @return bool
@@ -12045,43 +11962,19 @@ class KalturaUsageModuleService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns the list of available usage module
+	 * Internal API !!! Returns the list of available usage module
 	 * 
-	 * @param KalturaUsageModuleFilter $filter Filter request
 	 * @return KalturaUsageModuleListResponse
 	 */
-	function listAction(KalturaUsageModuleFilter $filter = null)
+	function listAction()
 	{
 		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("usagemodule", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaUsageModuleListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Update usage module
-	 * 
-	 * @param int $id Usage module id
-	 * @param KalturaUsageModule $usageModule Usage module Object
-	 * @return KalturaUsageModule
-	 */
-	function update($id, KalturaUsageModule $usageModule)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "usageModule", $usageModule->toParams());
-		$this->client->queueServiceActionCall("usagemodule", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUsageModule");
 		return $resultObject;
 	}
 }
@@ -13501,8 +13394,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-11-09');
-		$this->setApiVersion('6.8.0.29668');
+		$this->setClientTag('php5:21-11-10');
+		$this->setApiVersion('7.0.0.29605');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
