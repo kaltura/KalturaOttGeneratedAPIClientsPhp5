@@ -3363,6 +3363,29 @@ class KalturaTagFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSearchPriorityGroupFilter extends KalturaFilter
+{
+	/**
+	 * Return only search priority groups that are in use
+	 *
+	 * @var bool
+	 */
+	public $activeOnlyEqual = null;
+
+	/**
+	 * Identifier of search priority group to return
+	 *
+	 * @var int
+	 */
+	public $idEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPaymentMethodProfileFilter extends KalturaFilter
 {
 	/**
@@ -15438,6 +15461,85 @@ class KalturaAssetHistoryListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSearchPriorityCriteria extends KalturaObjectBase
+{
+	/**
+	 * Criterion type
+	 *
+	 * @var KalturaSearchPriorityCriteriaType
+	 */
+	public $type = null;
+
+	/**
+	 * Condition
+	 *             KSQL has to have no more than 10 conditions. Text, boolean, enum and tag fields can be used only with = operator, numeric and datetime fields - only with &lt;, = and &gt; operators.
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchPriorityGroup extends KalturaObjectBase
+{
+	/**
+	 * Identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Name
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * Search criterion
+	 *
+	 * @var KalturaSearchPriorityCriteria
+	 */
+	public $criteria;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchPriorityGroupListResponse extends KalturaListResponse
+{
+	/**
+	 * List of search priority groups
+	 *
+	 * @var array of KalturaSearchPriorityGroup
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSuspendSettings extends KalturaObjectBase
 {
 	/**
@@ -20348,6 +20450,22 @@ class KalturaRegionChannelNumber extends KalturaObjectBase
 	 * @var int
 	 */
 	public $channelNumber = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchPriorityGroupOrderedIdsSet extends KalturaObjectBase
+{
+	/**
+	 * The order and effectively the priority of each group.
+	 *
+	 * @var string
+	 */
+	public $priorityGroupIds = null;
 
 
 }

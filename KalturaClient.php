@@ -9880,6 +9880,147 @@ class KalturaSearchHistoryService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSearchPriorityGroupService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add a new priority group.
+	 * 
+	 * @param KalturaSearchPriorityGroup $searchPriorityGroup Search priority group.
+	 * @return KalturaSearchPriorityGroup
+	 */
+	function add(KalturaSearchPriorityGroup $searchPriorityGroup)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "searchPriorityGroup", $searchPriorityGroup->toParams());
+		$this->client->queueServiceActionCall("searchprioritygroup", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroup");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete the existing priority group by its identifier.
+	 * 
+	 * @param int $id The identifier of a search priority group.
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("searchprioritygroup", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Gets list of search priority groups which meet the filter criteria.
+	 * 
+	 * @param KalturaSearchPriorityGroupFilter $filter Filter.
+	 * @param KalturaFilterPager $pager Page size and index.
+	 * @return KalturaSearchPriorityGroupListResponse
+	 */
+	function listAction(KalturaSearchPriorityGroupFilter $filter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("searchprioritygroup", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroupListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an existing priority group.
+	 * 
+	 * @param bigint $id Identifier of search priority group.
+	 * @param KalturaSearchPriorityGroup $searchPriorityGroup Search priority group.
+	 * @return KalturaSearchPriorityGroup
+	 */
+	function update($id, KalturaSearchPriorityGroup $searchPriorityGroup)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "searchPriorityGroup", $searchPriorityGroup->toParams());
+		$this->client->queueServiceActionCall("searchprioritygroup", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroup");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchPriorityGroupOrderedIdsSetService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Return the current ordering of priority groups for the partner.
+	 * 
+	 * @return KalturaSearchPriorityGroupOrderedIdsSet
+	 */
+	function get()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("searchprioritygrouporderedidsset", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroupOrderedIdsSet");
+		return $resultObject;
+	}
+
+	/**
+	 * Set the ordering of priority groups for the partner.
+	 * 
+	 * @param KalturaSearchPriorityGroupOrderedIdsSet $orderedList List with ordered search priority groups.
+	 * @return KalturaSearchPriorityGroupOrderedIdsSet
+	 */
+	function set(KalturaSearchPriorityGroupOrderedIdsSet $orderedList)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "orderedList", $orderedList->toParams());
+		$this->client->queueServiceActionCall("searchprioritygrouporderedidsset", "set", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroupOrderedIdsSet");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSegmentationTypeService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -13308,6 +13449,18 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaSearchPriorityGroupService
+	 */
+	public $searchPriorityGroup = null;
+
+	/**
+	 * 
+	 * @var KalturaSearchPriorityGroupOrderedIdsSetService
+	 */
+	public $searchPriorityGroupOrderedIdsSet = null;
+
+	/**
+	 * 
 	 * @var KalturaSegmentationTypeService
 	 */
 	public $segmentationType = null;
@@ -13501,8 +13654,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-11-09');
-		$this->setApiVersion('6.8.0.29668');
+		$this->setClientTag('php5:21-11-14');
+		$this->setApiVersion('7.0.0.29708');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13615,6 +13768,8 @@ class KalturaClient extends KalturaClientBase
 		$this->reminder = new KalturaReminderService($this);
 		$this->report = new KalturaReportService($this);
 		$this->searchHistory = new KalturaSearchHistoryService($this);
+		$this->searchPriorityGroup = new KalturaSearchPriorityGroupService($this);
+		$this->searchPriorityGroupOrderedIdsSet = new KalturaSearchPriorityGroupOrderedIdsSetService($this);
 		$this->segmentationType = new KalturaSegmentationTypeService($this);
 		$this->seriesRecording = new KalturaSeriesRecordingService($this);
 		$this->session = new KalturaSessionService($this);

@@ -1964,6 +1964,26 @@ class KalturaSearchHistoryOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSearchPriorityCriteriaType extends KalturaEnumBase
+{
+	const KSQL = "KSql";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchPriorityGroupOrderBy extends KalturaEnumBase
+{
+	const PRIORITY_DESC = "PRIORITY_DESC";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecordingOrderBy extends KalturaEnumBase
 {
 	const START_DATE_ASC = "START_DATE_ASC";
