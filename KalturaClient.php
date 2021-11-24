@@ -2230,7 +2230,7 @@ class KalturaCollectionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Insert new collection for partner
+	 * Insert new collection for partner
 	 * 
 	 * @param KalturaCollection $collection Collection object
 	 * @return KalturaCollection
@@ -2249,7 +2249,7 @@ class KalturaCollectionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Delete collection
+	 * Delete collection
 	 * 
 	 * @param bigint $id Collection id
 	 * @return bool
@@ -2268,7 +2268,7 @@ class KalturaCollectionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns a list of subscriptions requested by Subscription ID or file ID
+	 * Returns a list of collections requested by Collection IDs or file identifier or coupon group identifier
 	 * 
 	 * @param KalturaCollectionFilter $filter Filter request
 	 * @param KalturaFilterPager $pager Page size and index
@@ -2287,6 +2287,27 @@ class KalturaCollectionService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaCollectionListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update Collection
+	 * 
+	 * @param bigint $id Collection id
+	 * @param KalturaCollection $collection Collection
+	 * @return KalturaCollection
+	 */
+	function update($id, KalturaCollection $collection)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "collection", $collection->toParams());
+		$this->client->queueServiceActionCall("collection", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCollection");
 		return $resultObject;
 	}
 }
@@ -8658,6 +8679,44 @@ class KalturaPpvService extends KalturaServiceBase
 	}
 
 	/**
+	 * Add new ppv
+	 * 
+	 * @param KalturaPpv $ppv Ppv objec
+	 * @return KalturaPpv
+	 */
+	function add(KalturaPpv $ppv)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "ppv", $ppv->toParams());
+		$this->client->queueServiceActionCall("ppv", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPpv");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete Ppv
+	 * 
+	 * @param bigint $id Ppv id
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("ppv", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Returns ppv object by internal identifier
 	 * 
 	 * @param bigint $id Ppv identifier
@@ -8680,19 +8739,43 @@ class KalturaPpvService extends KalturaServiceBase
 	 * Returns all ppv objects
 	 * 
 	 * @param KalturaPpvFilter $filter Filter parameters for filtering out the result
+	 * @param KalturaFilterPager $pager Page size and index
 	 * @return KalturaPpvListResponse
 	 */
-	function listAction(KalturaPpvFilter $filter = null)
+	function listAction(KalturaPpvFilter $filter = null, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		if ($filter !== null)
 			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("ppv", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaPpvListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update ppv
+	 * 
+	 * @param int $id Ppv id
+	 * @param KalturaPpv $ppv Ppv Object
+	 * @return KalturaPpv
+	 */
+	function update($id, KalturaPpv $ppv)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "ppv", $ppv->toParams());
+		$this->client->queueServiceActionCall("ppv", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPpv");
 		return $resultObject;
 	}
 }
@@ -8800,7 +8883,7 @@ class KalturaPriceDetailsService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Insert new PriceDetails for partner
+	 * Insert new PriceDetails for partner
 	 * 
 	 * @param KalturaPriceDetails $priceDetails PriceDetails Object
 	 * @return KalturaPriceDetails
@@ -8819,7 +8902,7 @@ class KalturaPriceDetailsService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Delete PriceDetails
+	 * Delete PriceDetails
 	 * 
 	 * @param bigint $id PriceDetails identifier
 	 * @return bool
@@ -9789,6 +9872,147 @@ class KalturaSearchHistoryService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaSearchHistoryListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchPriorityGroupService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add a new priority group.
+	 * 
+	 * @param KalturaSearchPriorityGroup $searchPriorityGroup Search priority group.
+	 * @return KalturaSearchPriorityGroup
+	 */
+	function add(KalturaSearchPriorityGroup $searchPriorityGroup)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "searchPriorityGroup", $searchPriorityGroup->toParams());
+		$this->client->queueServiceActionCall("searchprioritygroup", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroup");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete the existing priority group by its identifier.
+	 * 
+	 * @param int $id The identifier of a search priority group.
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("searchprioritygroup", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Gets list of search priority groups which meet the filter criteria.
+	 * 
+	 * @param KalturaSearchPriorityGroupFilter $filter Filter.
+	 * @param KalturaFilterPager $pager Page size and index.
+	 * @return KalturaSearchPriorityGroupListResponse
+	 */
+	function listAction(KalturaSearchPriorityGroupFilter $filter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("searchprioritygroup", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroupListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an existing priority group.
+	 * 
+	 * @param bigint $id Identifier of search priority group.
+	 * @param KalturaSearchPriorityGroup $searchPriorityGroup Search priority group.
+	 * @return KalturaSearchPriorityGroup
+	 */
+	function update($id, KalturaSearchPriorityGroup $searchPriorityGroup)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "searchPriorityGroup", $searchPriorityGroup->toParams());
+		$this->client->queueServiceActionCall("searchprioritygroup", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroup");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchPriorityGroupOrderedIdsSetService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Return the current ordering of priority groups for the partner.
+	 * 
+	 * @return KalturaSearchPriorityGroupOrderedIdsSet
+	 */
+	function get()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("searchprioritygrouporderedidsset", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroupOrderedIdsSet");
+		return $resultObject;
+	}
+
+	/**
+	 * Set the ordering of priority groups for the partner.
+	 * 
+	 * @param KalturaSearchPriorityGroupOrderedIdsSet $orderedList List with ordered search priority groups.
+	 * @return KalturaSearchPriorityGroupOrderedIdsSet
+	 */
+	function set(KalturaSearchPriorityGroupOrderedIdsSet $orderedList)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "orderedList", $orderedList->toParams());
+		$this->client->queueServiceActionCall("searchprioritygrouporderedidsset", "set", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchPriorityGroupOrderedIdsSet");
 		return $resultObject;
 	}
 }
@@ -10781,7 +11005,7 @@ class KalturaSubscriptionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Insert new subscription for partner
+	 * Insert new subscription for partner
 	 * 
 	 * @param KalturaSubscription $subscription Subscription object
 	 * @return KalturaSubscription
@@ -10800,7 +11024,7 @@ class KalturaSubscriptionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Delete subscription
+	 * Delete subscription
 	 * 
 	 * @param bigint $id Subscription id
 	 * @return bool
@@ -11924,7 +12148,7 @@ class KalturaUsageModuleService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Insert new UsageModule
+	 * Insert new UsageModule
 	 * 
 	 * @param KalturaUsageModule $usageModule Usage module Object
 	 * @return KalturaUsageModule
@@ -11943,7 +12167,7 @@ class KalturaUsageModuleService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Delete UsageModule
+	 * Delete UsageModule
 	 * 
 	 * @param bigint $id UsageModule id
 	 * @return bool
@@ -11962,19 +12186,43 @@ class KalturaUsageModuleService extends KalturaServiceBase
 	}
 
 	/**
-	 * Internal API !!! Returns the list of available usage module
+	 * Returns the list of available usage module
 	 * 
+	 * @param KalturaUsageModuleFilter $filter Filter request
 	 * @return KalturaUsageModuleListResponse
 	 */
-	function listAction()
+	function listAction(KalturaUsageModuleFilter $filter = null)
 	{
 		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
 		$this->client->queueServiceActionCall("usagemodule", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaUsageModuleListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update usage module
+	 * 
+	 * @param int $id Usage module id
+	 * @param KalturaUsageModule $usageModule Usage module Object
+	 * @return KalturaUsageModule
+	 */
+	function update($id, KalturaUsageModule $usageModule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "usageModule", $usageModule->toParams());
+		$this->client->queueServiceActionCall("usagemodule", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUsageModule");
 		return $resultObject;
 	}
 }
@@ -13201,6 +13449,18 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaSearchPriorityGroupService
+	 */
+	public $searchPriorityGroup = null;
+
+	/**
+	 * 
+	 * @var KalturaSearchPriorityGroupOrderedIdsSetService
+	 */
+	public $searchPriorityGroupOrderedIdsSet = null;
+
+	/**
+	 * 
 	 * @var KalturaSegmentationTypeService
 	 */
 	public $segmentationType = null;
@@ -13394,8 +13654,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-11-10');
-		$this->setApiVersion('7.0.0.29605');
+		$this->setClientTag('php5:21-11-24');
+		$this->setApiVersion('7.0.0.29593');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13508,6 +13768,8 @@ class KalturaClient extends KalturaClientBase
 		$this->reminder = new KalturaReminderService($this);
 		$this->report = new KalturaReportService($this);
 		$this->searchHistory = new KalturaSearchHistoryService($this);
+		$this->searchPriorityGroup = new KalturaSearchPriorityGroupService($this);
+		$this->searchPriorityGroupOrderedIdsSet = new KalturaSearchPriorityGroupOrderedIdsSetService($this);
 		$this->segmentationType = new KalturaSegmentationTypeService($this);
 		$this->seriesRecording = new KalturaSeriesRecordingService($this);
 		$this->session = new KalturaSessionService($this);

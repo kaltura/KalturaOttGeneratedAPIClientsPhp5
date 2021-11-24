@@ -593,6 +593,10 @@ class KalturaChronologicalRecordStartTime extends KalturaEnumBase
 class KalturaCollectionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
 }
 
 /**
@@ -1414,6 +1418,8 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 	const SUBSCRIPTION = "Subscription";
 	const SEGMENT = "Segment";
 	const CATEGORY = "Category";
+	const TVOD = "Tvod";
+	const BOXSET = "Boxset";
 }
 
 /**
@@ -1637,6 +1643,8 @@ class KalturaPpvOrderBy extends KalturaEnumBase
 {
 	const NAME_ASC = "NAME_ASC";
 	const NAME_DESC = "NAME_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
 }
 
 /**
@@ -1950,6 +1958,26 @@ class KalturaScheduledRecordingAssetType extends KalturaEnumBase
 class KalturaSearchHistoryOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchPriorityCriteriaType extends KalturaEnumBase
+{
+	const KSQL = "KSql";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchPriorityGroupOrderBy extends KalturaEnumBase
+{
+	const PRIORITY_DESC = "PRIORITY_DESC";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
 }
 
 /**
