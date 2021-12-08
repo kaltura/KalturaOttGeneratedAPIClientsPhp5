@@ -551,18 +551,6 @@ class KalturaChannelsOrderBy extends KalturaEnumBase
 	const NAME_DESC = "NAME_DESC";
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
-	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaChannelStruct extends KalturaEnumBase
-{
-	const MANUAL = "Manual";
-	const DYNAMIC = "Dynamic";
 }
 
 /**
@@ -579,24 +567,9 @@ class KalturaChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaChronologicalRecordStartTime extends KalturaEnumBase
-{
-	const NONE = "NONE";
-	const NOW = "NOW";
-	const EPG_START_TIME = "EPG_START_TIME";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCollectionOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
-	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
-	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
 }
 
 /**
@@ -842,15 +815,6 @@ class KalturaEntitlementOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEntityAttribute extends KalturaEnumBase
-{
-	const MEDIA_FILE_LABELS = "MEDIA_FILE_LABELS";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaEntityReferenceBy extends KalturaEnumBase
 {
 	const USER = "user";
@@ -972,9 +936,6 @@ class KalturaFollowTvSeriesOrderBy extends KalturaEnumBase
 class KalturaGroupByField extends KalturaEnumBase
 {
 	const MEDIA_TYPE_ID = "media_type_id";
-	const SUPPRESSED = "suppressed";
-	const CRID = "crid";
-	const LINEAR_MEDIA_ID = "linear_media_id";
 }
 
 /**
@@ -988,16 +949,6 @@ class KalturaGroupByOrder extends KalturaEnumBase
 	const COUNT_DESC = "count_desc";
 	const VALUE_ASC = "value_asc";
 	const VALUE_DESC = "value_desc";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaGroupingOption extends KalturaEnumBase
-{
-	const OMIT = "Omit";
-	const INCLUDE = "Include";
 }
 
 /**
@@ -1234,15 +1185,6 @@ class KalturaIotProfileOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaLabelOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaLanguageOrderBy extends KalturaEnumBase
 {
 	const SYSTEM_NAME_ASC = "SYSTEM_NAME_ASC";
@@ -1262,16 +1204,6 @@ class KalturaLinearChannelType extends KalturaEnumBase
 	const OTT = "OTT";
 	const DTT_AND_OTT = "DTT_AND_OTT";
 	const VRM_EXPORT = "VRM_EXPORT";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaManualCollectionAssetType extends KalturaEnumBase
-{
-	const MEDIA = "media";
-	const EPG = "epg";
 }
 
 /**
@@ -1304,7 +1236,6 @@ class KalturaMediaFileStreamerType extends KalturaEnumBase
 	const MPEG_DASH = "MPEG_DASH";
 	const URL = "URL";
 	const SMOOTH_STREAMING = "SMOOTH_STREAMING";
-	const MULTICAST = "MULTICAST";
 	const NONE = "NONE";
 }
 
@@ -1418,8 +1349,6 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 	const SUBSCRIPTION = "Subscription";
 	const SEGMENT = "Segment";
 	const CATEGORY = "Category";
-	const TVOD = "Tvod";
-	const BOXSET = "Boxset";
 }
 
 /**
@@ -1478,9 +1407,6 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const CATALOG = "Catalog";
 	const SECURITY = "Security";
 	const OPC = "Opc";
-	const BASE = "Base";
-	const CUSTOMFIELDS = "CustomFields";
-	const DEFAULTPARENTALSETTINGS = "DefaultParentalSettings";
 }
 
 /**
@@ -1643,17 +1569,6 @@ class KalturaPpvOrderBy extends KalturaEnumBase
 {
 	const NAME_ASC = "NAME_ASC";
 	const NAME_DESC = "NAME_DESC";
-	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
-	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPreviewModuleOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
 }
 
 /**
@@ -1869,21 +1784,6 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const FILTER = "FILTER";
 	const ASSET_LIFE_CYCLE_TRANSITION = "ASSET_LIFE_CYCLE_TRANSITION";
 	const APPLY_FREE_PLAYBACK = "APPLY_FREE_PLAYBACK";
-	const FILTERASSETBYKSQL = "FilterAssetByKsql";
-	const FILTERFILEBYQUALITYINDISCOVERY = "FilterFileByQualityInDiscovery";
-	const FILTERFILEBYQUALITYINPLAYBACK = "FilterFileByQualityInPlayback";
-	const FILTERFILEBYFILETYPEIDFORASSETTYPEINDISCOVERY = "FilterFileByFileTypeIdForAssetTypeInDiscovery";
-	const FILTERFILEBYFILETYPEIDFORASSETTYPEINPLAYBACK = "FilterFileByFileTypeIdForAssetTypeInPlayback";
-	const FILTERFILEBYFILETYPEIDINDISCOVERY = "FilterFileByFileTypeIdInDiscovery";
-	const FILTERFILEBYFILETYPEIDINPLAYBACK = "FilterFileByFileTypeIdInPlayback";
-	const FILTERFILEBYAUDIOCODECINDISCOVERY = "FilterFileByAudioCodecInDiscovery";
-	const FILTERFILEBYAUDIOCODECINPLAYBACK = "FilterFileByAudioCodecInPlayback";
-	const FILTERFILEBYVIDEOCODECINDISCOVERY = "FilterFileByVideoCodecInDiscovery";
-	const FILTERFILEBYVIDEOCODECINPLAYBACK = "FilterFileByVideoCodecInPlayback";
-	const FILTERFILEBYSTREAMERTYPEINDISCOVERY = "FilterFileByStreamerTypeInDiscovery";
-	const FILTERFILEBYSTREAMERTYPEINPLAYBACK = "FilterFileByStreamerTypeInPlayback";
-	const FILTERFILEBYLABELINDISCOVERY = "FilterFileByLabelInDiscovery";
-	const FILTERFILEBYLABELINPLAYBACK = "FilterFileByLabelInPlayback";
 }
 
 /**
@@ -1909,9 +1809,6 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const DEVICE_MANUFACTURER = "DEVICE_MANUFACTURER";
 	const DEVICE_MODEL = "DEVICE_MODEL";
 	const DEVICE_UDID_DYNAMIC_LIST = "DEVICE_UDID_DYNAMIC_LIST";
-	const DYNAMIC_KEYS = "DYNAMIC_KEYS";
-	const USER_SESSION_PROFILE = "USER_SESSION_PROFILE";
-	const DEVICE_DYNAMIC_DATA = "DEVICE_DYNAMIC_DATA";
 }
 
 /**
@@ -1958,26 +1855,6 @@ class KalturaScheduledRecordingAssetType extends KalturaEnumBase
 class KalturaSearchHistoryOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSearchPriorityCriteriaType extends KalturaEnumBase
-{
-	const KSQL = "KSql";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSearchPriorityGroupOrderBy extends KalturaEnumBase
-{
-	const PRIORITY_DESC = "PRIORITY_DESC";
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
 }
 
 /**
@@ -2179,12 +2056,6 @@ class KalturaSubscriptionOrderBy extends KalturaEnumBase
 {
 	const START_DATE_ASC = "START_DATE_ASC";
 	const START_DATE_DESC = "START_DATE_DESC";
-	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
-	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
-	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
 }
 
 /**
@@ -2215,17 +2086,6 @@ class KalturaSubscriptionTriggerType extends KalturaEnumBase
 {
 	const START_DATE = "START_DATE";
 	const END_DATE = "END_DATE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSuspensionProfileInheritanceType extends KalturaEnumBase
-{
-	const ALWAYS = "ALWAYS";
-	const NEVER = "NEVER";
-	const DEFAULT = "DEFAULT";
 }
 
 /**
