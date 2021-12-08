@@ -1730,6 +1730,13 @@ class KalturaAssetFilter extends KalturaPersistedFilter
 	 */
 	public $trendingDaysEqual = null;
 
+	/**
+	 * Should apply priority groups filter or not.
+	 *
+	 * @var bool
+	 */
+	public $shouldApplyPriorityGroupsEqual = null;
+
 
 }
 
@@ -2105,6 +2112,15 @@ class KalturaSearchExternalFilter extends KalturaAssetFilter
 	 */
 	public $typeIn = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPriorityGroupFilter extends KalturaRelatedObjectFilter
+{
 
 }
 
