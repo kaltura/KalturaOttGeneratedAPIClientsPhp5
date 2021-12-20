@@ -1730,6 +1730,13 @@ class KalturaAssetFilter extends KalturaPersistedFilter
 	 */
 	public $trendingDaysEqual = null;
 
+	/**
+	 * Should apply priority groups filter or not.
+	 *
+	 * @var bool
+	 */
+	public $shouldApplyPriorityGroupsEqual = null;
+
 
 }
 
@@ -2105,6 +2112,15 @@ class KalturaSearchExternalFilter extends KalturaAssetFilter
 	 */
 	public $typeIn = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPriorityGroupFilter extends KalturaRelatedObjectFilter
+{
 
 }
 
@@ -11129,6 +11145,13 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 */
 	public $allowDeviceMobility = null;
 
+	/**
+	 * Enable multi LCNs per linear channel
+	 *
+	 * @var bool
+	 */
+	public $enableMultiLcns = null;
+
 
 }
 
@@ -17370,6 +17393,22 @@ class KalturaRegionListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaRegionalChannelMultiLcns extends KalturaRegionalChannel
+{
+	/**
+	 * Linear channel numbers
+	 *
+	 * @var string
+	 */
+	public $lcns = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaRegistrySettings extends KalturaObjectBase
 {
 	/**
@@ -20475,11 +20514,27 @@ class KalturaRegionChannelNumber extends KalturaObjectBase
 	public $regionId = null;
 
 	/**
-	 * The number of channel
+	 * The number of the channel
 	 *
 	 * @var int
 	 */
 	public $channelNumber = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRegionChannelNumberMultiLcns extends KalturaRegionChannelNumber
+{
+	/**
+	 * Linear channel numbers
+	 *
+	 * @var string
+	 */
+	public $lcns = null;
 
 
 }
