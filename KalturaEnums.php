@@ -1216,6 +1216,19 @@ class KalturaIngestProfileOverlapPolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestStatus extends KalturaEnumBase
+{
+	const TOTAL_FAILURE = "TOTAL_FAILURE";
+	const PARTIAL_FAILURE = "PARTIAL_FAILURE";
+	const WARNING = "WARNING";
+	const IN_PROGRESS = "IN_PROGRESS";
+	const SUCCESS = "SUCCESS";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaIotOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";

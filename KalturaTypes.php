@@ -1666,6 +1666,66 @@ class KalturaTopicNotificationMessageFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestByCompoundFilter extends KalturaFilter
+{
+	/**
+	 * A string that is included in the ingest file name
+	 *
+	 * @var string
+	 */
+	public $ingestNameContains = null;
+
+	/**
+	 * Comma seperated user ids
+	 *
+	 * @var string
+	 */
+	public $ingestedByUserIdIn = null;
+
+	/**
+	 * Comma seperated valid stutuses
+	 *
+	 * @var string
+	 */
+	public $ingestStatusIn = null;
+
+	/**
+	 * Ingest created date greater then this value. . Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $createdDateGreaterThan = null;
+
+	/**
+	 * Ingest created date smaller than this value. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $createdDateSmallerThan = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestByIdsFilter extends KalturaFilter
+{
+	/**
+	 * Comma seperated ingest profile ids
+	 *
+	 * @var string
+	 */
+	public $ingestIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
 {
 
@@ -4200,6 +4260,13 @@ class KalturaAnnouncement extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $includeIot = null;
+
+	/**
+	 * Should add to user inbox
+	 *
+	 * @var bool
+	 */
+	public $includeUserInbox = null;
 
 
 }
@@ -19508,6 +19575,127 @@ class KalturaUrlResource extends KalturaContentResource
 	 * @var string
 	 */
 	public $url = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestStatusEpgConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Defines whether partner in question enabled core ingest status service.
+	 *
+	 * @var bool
+	 */
+	public $isSupported = null;
+
+	/**
+	 * Defines the time in seconds that the service retain information about ingest status.
+	 *
+	 * @var int
+	 */
+	public $retainingPeriod = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Defines the epg configuration of the partner.
+	 *
+	 * @var KalturaIngestStatusEpgConfiguration
+	 */
+	public $epg;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestEpg extends KalturaObjectBase
+{
+	/**
+	 * Unique id of the ingest job in question
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $ingestId = null;
+
+	/**
+	 * The ingested file name without its extention
+	 *
+	 * @var string
+	 */
+	public $ingestName = null;
+
+	/**
+	 * The ingested file name extention
+	 *
+	 * @var string
+	 */
+	public $ingestFilenameExtension = null;
+
+	/**
+	 * The ingest job created date and time. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $createdDate = null;
+
+	/**
+	 * The user id of the addFromBulkUpload caller.
+	 *
+	 * @var int
+	 */
+	public $ingestedByUserId = null;
+
+	/**
+	 * The ingest job completed date and time. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $completedDate = null;
+
+	/**
+	 * The ingest profile id that of the ingest job.
+	 *
+	 * @var int
+	 */
+	public $ingestProfileId = null;
+
+	/**
+	 * The ingest profile id that of the ingest job.
+	 *
+	 * @var KalturaIngestStatus
+	 */
+	public $status = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestStatusEpgListResponse extends KalturaListResponse
+{
+	/**
+	 * IngestStatus
+	 *
+	 * @var array of KalturaIngestEpg
+	 */
+	public $objects;
 
 
 }
