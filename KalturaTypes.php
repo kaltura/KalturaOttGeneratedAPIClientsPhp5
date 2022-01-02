@@ -1275,6 +1275,38 @@ class KalturaPricePlanFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProgramAssetGroupOfferFilter extends KalturaFilter
+{
+	/**
+	 * return also inactive
+	 *
+	 * @var bool
+	 */
+	public $alsoInactive = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramAssetGroupOfferIdInFilter extends KalturaProgramAssetGroupOfferFilter
+{
+	/**
+	 * Program asset group offer identifiers
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSubscriptionSetFilter extends KalturaFilter
 {
 	/**
@@ -1666,6 +1698,66 @@ class KalturaTopicNotificationMessageFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestByCompoundFilter extends KalturaFilter
+{
+	/**
+	 * A string that is included in the ingest file name
+	 *
+	 * @var string
+	 */
+	public $ingestNameContains = null;
+
+	/**
+	 * Comma seperated user ids
+	 *
+	 * @var string
+	 */
+	public $ingestedByUserIdIn = null;
+
+	/**
+	 * Comma seperated valid stutuses
+	 *
+	 * @var string
+	 */
+	public $ingestStatusIn = null;
+
+	/**
+	 * Ingest created date greater then this value. . Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $createdDateGreaterThan = null;
+
+	/**
+	 * Ingest created date smaller than this value. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $createdDateSmallerThan = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestByIdsFilter extends KalturaFilter
+{
+	/**
+	 * Comma seperated ingest profile ids
+	 *
+	 * @var string
+	 */
+	public $ingestIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
 {
 
@@ -1729,6 +1821,13 @@ class KalturaAssetFilter extends KalturaPersistedFilter
 	 * @var int
 	 */
 	public $trendingDaysEqual = null;
+
+	/**
+	 * Should apply priority groups filter or not.
+	 *
+	 * @var bool
+	 */
+	public $shouldApplyPriorityGroupsEqual = null;
 
 
 }
@@ -2105,6 +2204,15 @@ class KalturaSearchExternalFilter extends KalturaAssetFilter
 	 */
 	public $typeIn = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPriorityGroupFilter extends KalturaRelatedObjectFilter
+{
 
 }
 
@@ -4184,6 +4292,13 @@ class KalturaAnnouncement extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $includeIot = null;
+
+	/**
+	 * Should add to user inbox
+	 *
+	 * @var bool
+	 */
+	public $includeUserInbox = null;
 
 
 }
@@ -8577,6 +8692,149 @@ class KalturaPricePlan extends KalturaUsageModule
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProgramAssetGroupOffer extends KalturaOTTObjectSupportNullable
+{
+	/**
+	 * Unique Kaltura internal identifier for the module
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+	/**
+	 * Name of the Program asset group offer
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Name of the Program asset group offer
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * ID of the KalturaPriceDetails object which contains details of the price to be paid for purchasing this KalturaProgramAssetGroupOffer.
+	 *
+	 * @var int
+	 */
+	public $priceDetailsId = null;
+
+	/**
+	 * Comma separated file types identifiers that are supported in this Program asset group offer.
+	 *             The subset of KalturaMediaFiles of the live linear channel on which the associated Program Assets are carried to which households entitled to this
+	 *             Program Asset Group Offer are entitled to view E.g.may be used to restrict entitlement only to HD flavour of the Program Asset(and not the UHD flavour)
+	 *             If this parameter is empty, the Household shall be entitled to all KalturaMediaFiles associated with the KalturaLiveAsset.
+	 *
+	 * @var string
+	 */
+	public $fileTypesIds = null;
+
+	/**
+	 * The internal discount module identifier for the Program asset group offer
+	 *
+	 * @var int
+	 */
+	public $discountModuleId = null;
+
+	/**
+	 * Coupons group id for the Program asset group offer
+	 *
+	 * @var int
+	 */
+	public $couponsGroupId = null;
+
+	/**
+	 * A list of the descriptions of the Program asset group offer on different languages (language code and translation)
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $description = null;
+
+	/**
+	 * A list of the descriptions of the Program asset group offer on different languages (language code and translation)
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualDescription;
+
+	/**
+	 * The id of the paired asset
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $virtualAssetId = null;
+
+	/**
+	 * Indicates whether the PAGO is active or not (includes whether the PAGO can be purchased and whether it is returned in list API response for regular users)
+	 *
+	 * @var bool
+	 */
+	public $isActive = null;
+
+	/**
+	 * Specifies when was the pago created. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Specifies when was the pago last updated. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * he date/time at which the Program Asset Group Offer is first purchasable by households. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The date/time at which the Program Asset Group Offer is last purchasable by households.Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+	/**
+	 * The last date/time at which the system will attempt to locate Program Assets that may be associated with this offer.Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $expiryDate = null;
+
+	/**
+	 * External identifier
+	 *
+	 * @var string
+	 */
+	public $externalId = null;
+
+	/**
+	 * Identifies the Program Assets which will be entitled by Households that purchase this offer. Must be a unique value in the context of an account.
+	 *
+	 * @var string
+	 */
+	public $externalOfferId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPrice extends KalturaObjectBase
 {
 	/**
@@ -10557,6 +10815,22 @@ class KalturaProductsPriceListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProgramAssetGroupOfferListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of collections
+	 *
+	 * @var array of KalturaProgramAssetGroupOffer
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSubscriptionListResponse extends KalturaListResponse
 {
 	/**
@@ -11128,6 +11402,13 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $allowDeviceMobility = null;
+
+	/**
+	 * Enable multi LCNs per linear channel
+	 *
+	 * @var bool
+	 */
+	public $enableMultiLcns = null;
 
 
 }
@@ -17370,6 +17651,22 @@ class KalturaRegionListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaRegionalChannelMultiLcns extends KalturaRegionalChannel
+{
+	/**
+	 * Linear channel numbers
+	 *
+	 * @var string
+	 */
+	public $lcns = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaRegistrySettings extends KalturaObjectBase
 {
 	/**
@@ -19477,6 +19774,127 @@ class KalturaUrlResource extends KalturaContentResource
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestStatusEpgConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Defines whether partner in question enabled core ingest status service.
+	 *
+	 * @var bool
+	 */
+	public $isSupported = null;
+
+	/**
+	 * Defines the time in seconds that the service retain information about ingest status.
+	 *
+	 * @var int
+	 */
+	public $retainingPeriod = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Defines the epg configuration of the partner.
+	 *
+	 * @var KalturaIngestStatusEpgConfiguration
+	 */
+	public $epg;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestEpg extends KalturaObjectBase
+{
+	/**
+	 * Unique id of the ingest job in question
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $ingestId = null;
+
+	/**
+	 * The ingested file name without its extention
+	 *
+	 * @var string
+	 */
+	public $ingestName = null;
+
+	/**
+	 * The ingested file name extention
+	 *
+	 * @var string
+	 */
+	public $ingestFilenameExtension = null;
+
+	/**
+	 * The ingest job created date and time. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $createdDate = null;
+
+	/**
+	 * The user id of the addFromBulkUpload caller.
+	 *
+	 * @var int
+	 */
+	public $ingestedByUserId = null;
+
+	/**
+	 * The ingest job completed date and time. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $completedDate = null;
+
+	/**
+	 * The ingest profile id that of the ingest job.
+	 *
+	 * @var int
+	 */
+	public $ingestProfileId = null;
+
+	/**
+	 * The ingest profile id that of the ingest job.
+	 *
+	 * @var KalturaIngestStatus
+	 */
+	public $status = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestStatusEpgListResponse extends KalturaListResponse
+{
+	/**
+	 * IngestStatus
+	 *
+	 * @var array of KalturaIngestEpg
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaIotDefault extends KalturaObjectBase
 {
 	/**
@@ -20475,11 +20893,27 @@ class KalturaRegionChannelNumber extends KalturaObjectBase
 	public $regionId = null;
 
 	/**
-	 * The number of channel
+	 * The number of the channel
 	 *
 	 * @var int
 	 */
 	public $channelNumber = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRegionChannelNumberMultiLcns extends KalturaRegionChannelNumber
+{
+	/**
+	 * Linear channel numbers
+	 *
+	 * @var string
+	 */
+	public $lcns = null;
 
 
 }
