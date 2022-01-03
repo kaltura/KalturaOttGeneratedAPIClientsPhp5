@@ -1730,6 +1730,13 @@ class KalturaAssetFilter extends KalturaPersistedFilter
 	 */
 	public $trendingDaysEqual = null;
 
+	/**
+	 * Should apply priority groups filter or not.
+	 *
+	 * @var bool
+	 */
+	public $shouldApplyPriorityGroupsEqual = null;
+
 
 }
 
@@ -2105,6 +2112,15 @@ class KalturaSearchExternalFilter extends KalturaAssetFilter
 	 */
 	public $typeIn = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPriorityGroupFilter extends KalturaRelatedObjectFilter
+{
 
 }
 
@@ -12569,6 +12585,22 @@ class KalturaHouseholdDeviceFamilyLimitations extends KalturaDeviceFamilyBase
 	 * @var int
 	 */
 	public $concurrentLimit = null;
+
+	/**
+	 * Is the Max number of devices allowed for this family is default value or not
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isDefaultDeviceLimit = null;
+
+	/**
+	 * Is the Max number of streams allowed for this family is default value or not
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isDefaultConcurrentLimit  = null;
 
 
 }
