@@ -9,7 +9,7 @@
 // to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2021  Kaltura Inc.
+// Copyright (C) 2006-2022  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -6012,6 +6012,78 @@ class KalturaIngestProfileService extends KalturaServiceBase
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaIngestProfile");
 		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestStatusService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Response with list of ingest jobs.
+	 * 
+	 * @param KalturaIngestByIdsFilter $idsFilter Filter pager
+	 * @param KalturaIngestByCompoundFilter $filter Filter pager
+	 * @param KalturaFilterPager $pager Filter pager
+	 * @return KalturaIngestStatusEpgListResponse
+	 */
+	function getEpgList(KalturaIngestByIdsFilter $idsFilter = null, KalturaIngestByCompoundFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($idsFilter !== null)
+			$this->client->addParam($kparams, "idsFilter", $idsFilter->toParams());
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("ingeststatus", "getEpgList", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIngestStatusEpgListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns Core Ingest service partner configurations
+	 * 
+	 * @return KalturaIngestStatusPartnerConfiguration
+	 */
+	function getPartnerConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("ingeststatus", "getPartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaIngestStatusPartnerConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns Core Ingest service partner configurations
+	 * 
+	 * @param KalturaIngestStatusPartnerConfiguration $config The partner config updates
+	 */
+	function updatePartnerConfiguration(KalturaIngestStatusPartnerConfiguration $config)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "config", $config->toParams());
+		$this->client->queueServiceActionCall("ingeststatus", "updatePartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "null");
 	}
 }
 
@@ -13185,6 +13257,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaIngestStatusService
+	 */
+	public $ingestStatus = null;
+
+	/**
+	 * 
 	 * @var KalturaIotService
 	 */
 	public $iot = null;
@@ -13654,8 +13732,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:21-12-06');
-		$this->setApiVersion('7.0.0.29627');
+		$this->setClientTag('php5:22-01-12');
+		$this->setApiVersion('7.2.0.29662');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13724,6 +13802,7 @@ class KalturaClient extends KalturaClientBase
 		$this->imageType = new KalturaImageTypeService($this);
 		$this->inboxMessage = new KalturaInboxMessageService($this);
 		$this->IngestProfile = new KalturaIngestProfileService($this);
+		$this->ingestStatus = new KalturaIngestStatusService($this);
 		$this->iot = new KalturaIotService($this);
 		$this->iotProfile = new KalturaIotProfileService($this);
 		$this->label = new KalturaLabelService($this);
