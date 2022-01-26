@@ -524,6 +524,22 @@ class KalturaChannelEnrichment extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaChannelFieldOrderByType extends KalturaEnumBase
+{
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+	const START_DATE_DESC = "START_DATE_DESC";
+	const START_DATE_ASC = "START_DATE_ASC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const RELEVANCY_DESC = "RELEVANCY_DESC";
+	const ORDER_NUM = "ORDER_NUM";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaChannelOrderBy extends KalturaEnumBase
 {
 	const ORDER_NUM = "ORDER_NUM";
@@ -538,6 +554,18 @@ class KalturaChannelOrderBy extends KalturaEnumBase
 	const LIKES_DESC = "LIKES_DESC";
 	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
 	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaChannelSlidingWindowOrderByType extends KalturaEnumBase
+{
+	const LIKES_DESC = "LIKES_DESC";
+	const RATINGS_DESC = "RATINGS_DESC";
+	const VOTES_DESC = "VOTES_DESC";
+	const VIEWS_DESC = "VIEWS_DESC";
 }
 
 /**
@@ -763,6 +791,7 @@ class KalturaDowngradePolicy extends KalturaEnumBase
 {
 	const LIFO = "LIFO";
 	const FIFO = "FIFO";
+	const ACTIVE_DATE = "ACTIVE_DATE";
 }
 
 /**
@@ -1210,6 +1239,19 @@ class KalturaIngestProfileOverlapPolicy extends KalturaEnumBase
 	const REJECT = "REJECT";
 	const CUT_SOURCE = "CUT_SOURCE";
 	const CUT_TARGET = "CUT_TARGET";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestStatus extends KalturaEnumBase
+{
+	const TOTAL_FAILURE = "TOTAL_FAILURE";
+	const PARTIAL_FAILURE = "PARTIAL_FAILURE";
+	const WARNING = "WARNING";
+	const IN_PROGRESS = "IN_PROGRESS";
+	const SUCCESS = "SUCCESS";
 }
 
 /**
