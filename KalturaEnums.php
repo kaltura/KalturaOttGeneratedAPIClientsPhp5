@@ -239,6 +239,33 @@ class KalturaAssetOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetOrderByStatistics extends KalturaEnumBase
+{
+	const VIEWS_DESC = "VIEWS_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetOrderByType extends KalturaEnumBase
+{
+	const RELEVANCY_DESC = "RELEVANCY_DESC";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+	const RATINGS_DESC = "RATINGS_DESC";
+	const VOTES_DESC = "VOTES_DESC";
+	const START_DATE_DESC = "START_DATE_DESC";
+	const START_DATE_ASC = "START_DATE_ASC";
+	const LIKES_DESC = "LIKES_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetReferenceType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -1462,6 +1489,7 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 	const CATEGORY = "Category";
 	const TVOD = "Tvod";
 	const BOXSET = "Boxset";
+	const PAGO = "PAGO";
 }
 
 /**

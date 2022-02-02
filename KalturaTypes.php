@@ -1783,6 +1783,15 @@ abstract class KalturaPersistedFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaBaseAssetOrder extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDynamicOrderBy extends KalturaObjectBase
 {
 	/**
@@ -1814,6 +1823,13 @@ class KalturaAssetFilter extends KalturaPersistedFilter
 	 * @var KalturaDynamicOrderBy
 	 */
 	public $dynamicOrderBy;
+
+	/**
+	 * Parameters for asset list sorting.
+	 *
+	 * @var array of KalturaBaseAssetOrder
+	 */
+	public $orderingParameters;
 
 	/**
 	 * Trending Days Equal
@@ -1910,6 +1926,68 @@ class KalturaChannelFilter extends KalturaBaseSearchAssetFilter
 	 * @var bool
 	 */
 	public $excludeWatched = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetDynamicOrder extends KalturaBaseAssetOrder
+{
+	/**
+	 * order by name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * order by meta asc/desc
+	 *
+	 * @var KalturaMetaTagOrderBy
+	 */
+	public $orderBy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetOrder extends KalturaBaseAssetOrder
+{
+	/**
+	 * Order By
+	 *
+	 * @var KalturaAssetOrderByType
+	 */
+	public $orderBy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetStatisticsOrder extends KalturaBaseAssetOrder
+{
+	/**
+	 * Trending Days Equal
+	 *
+	 * @var int
+	 */
+	public $trendingDaysEqual = null;
+
+	/**
+	 * order by meta asc/desc
+	 *
+	 * @var KalturaAssetOrderByStatistics
+	 */
+	public $orderBy = null;
 
 
 }
@@ -12950,7 +13028,7 @@ class KalturaHouseholdDeviceFamilyLimitations extends KalturaDeviceFamilyBase
 	 * @var bool
 	 * @readonly
 	 */
-	public $isDefaultConcurrentLimit  = null;
+	public $isDefaultConcurrentLimit = null;
 
 
 }
