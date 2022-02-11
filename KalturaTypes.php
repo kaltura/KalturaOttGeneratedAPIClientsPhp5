@@ -9,7 +9,7 @@
 // to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2021  Kaltura Inc.
+// Copyright (C) 2006-2022  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -1666,6 +1666,66 @@ class KalturaTopicNotificationMessageFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestByCompoundFilter extends KalturaFilter
+{
+	/**
+	 * A string that is included in the ingest file name
+	 *
+	 * @var string
+	 */
+	public $ingestNameContains = null;
+
+	/**
+	 * Comma seperated user ids
+	 *
+	 * @var string
+	 */
+	public $ingestedByUserIdIn = null;
+
+	/**
+	 * Comma seperated valid stutuses
+	 *
+	 * @var string
+	 */
+	public $ingestStatusIn = null;
+
+	/**
+	 * Ingest created date greater then this value. . Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $createdDateGreaterThan = null;
+
+	/**
+	 * Ingest created date smaller than this value. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $createdDateSmallerThan = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestByIdsFilter extends KalturaFilter
+{
+	/**
+	 * Comma seperated ingest profile ids
+	 *
+	 * @var string
+	 */
+	public $ingestIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
 {
 
@@ -1684,6 +1744,15 @@ abstract class KalturaPersistedFilter extends KalturaFilter
 	 */
 	public $name = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaBaseAssetOrder extends KalturaObjectBase
+{
 
 }
 
@@ -1724,11 +1793,25 @@ class KalturaAssetFilter extends KalturaPersistedFilter
 	public $dynamicOrderBy;
 
 	/**
+	 * Parameters for asset list sorting.
+	 *
+	 * @var array of KalturaBaseAssetOrder
+	 */
+	public $orderingParameters;
+
+	/**
 	 * Trending Days Equal
 	 *
 	 * @var int
 	 */
 	public $trendingDaysEqual = null;
+
+	/**
+	 * Should apply priority groups filter or not.
+	 *
+	 * @var bool
+	 */
+	public $shouldApplyPriorityGroupsEqual = null;
 
 
 }
@@ -1811,6 +1894,68 @@ class KalturaChannelFilter extends KalturaBaseSearchAssetFilter
 	 * @var bool
 	 */
 	public $excludeWatched = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetDynamicOrder extends KalturaBaseAssetOrder
+{
+	/**
+	 * order by name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * order by meta asc/desc
+	 *
+	 * @var KalturaMetaTagOrderBy
+	 */
+	public $orderBy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetOrder extends KalturaBaseAssetOrder
+{
+	/**
+	 * Order By
+	 *
+	 * @var KalturaAssetOrderByType
+	 */
+	public $orderBy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetStatisticsOrder extends KalturaBaseAssetOrder
+{
+	/**
+	 * Trending Days Equal
+	 *
+	 * @var int
+	 */
+	public $trendingDaysEqual = null;
+
+	/**
+	 * order by meta asc/desc
+	 *
+	 * @var KalturaAssetOrderByStatistics
+	 */
+	public $orderBy = null;
 
 
 }
@@ -2105,6 +2250,15 @@ class KalturaSearchExternalFilter extends KalturaAssetFilter
 	 */
 	public $typeIn = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPriorityGroupFilter extends KalturaRelatedObjectFilter
+{
 
 }
 
@@ -4184,6 +4338,13 @@ class KalturaAnnouncement extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $includeIot = null;
+
+	/**
+	 * Should add to user inbox
+	 *
+	 * @var bool
+	 */
+	public $includeUserInbox = null;
 
 
 }
@@ -8331,6 +8492,15 @@ class KalturaChannelOrder extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaBaseChannelOrder extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaChannel extends KalturaBaseChannel
 {
 	/**
@@ -8397,6 +8567,13 @@ class KalturaChannel extends KalturaBaseChannel
 	 * @var KalturaChannelOrder
 	 */
 	public $orderBy;
+
+	/**
+	 * Parameters for asset list sorting.
+	 *
+	 * @var array of KalturaBaseChannelOrder
+	 */
+	public $orderingParametersEqual;
 
 	/**
 	 * Specifies when was the Channel was created. Date and time represented as epoch.
@@ -8532,6 +8709,68 @@ class KalturaManualChannel extends KalturaChannel
 	 * @var array of KalturaManualCollectionAsset
 	 */
 	public $assets;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaChannelDynamicOrder extends KalturaBaseChannelOrder
+{
+	/**
+	 * Value
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Order By
+	 *
+	 * @var KalturaMetaTagOrderBy
+	 */
+	public $orderBy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaChannelFieldOrder extends KalturaBaseChannelOrder
+{
+	/**
+	 * Order By
+	 *
+	 * @var KalturaChannelFieldOrderByType
+	 */
+	public $orderBy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaChannelSlidingWindowOrder extends KalturaBaseChannelOrder
+{
+	/**
+	 * Sliding window period in minutes
+	 *
+	 * @var int
+	 */
+	public $period = null;
+
+	/**
+	 * Order By
+	 *
+	 * @var KalturaChannelSlidingWindowOrderByType
+	 */
+	public $orderBy = null;
 
 
 }
@@ -11060,6 +11299,13 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	public $downgradePolicy = null;
 
 	/**
+	 * Priority Family Ids to remove devices on downgrade (first in the list first to remove)
+	 *
+	 * @var string
+	 */
+	public $downgradePriorityFamilyIds = null;
+
+	/**
 	 * Mail settings
 	 *
 	 * @var string
@@ -11128,6 +11374,13 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $allowDeviceMobility = null;
+
+	/**
+	 * Enable multi LCNs per linear channel
+	 *
+	 * @var bool
+	 */
+	public $enableMultiLcns = null;
 
 
 }
@@ -12584,7 +12837,7 @@ class KalturaHouseholdDeviceFamilyLimitations extends KalturaDeviceFamilyBase
 	 * @var bool
 	 * @readonly
 	 */
-	public $isDefaultConcurrentLimit  = null;
+	public $isDefaultConcurrentLimit = null;
 
 
 }
@@ -14573,6 +14826,13 @@ class KalturaProgramAsset extends KalturaAsset
 	 * @var bool
 	 */
 	public $enableTrickPlay = null;
+
+	/**
+	 * Contains comma separate list of KalturaProgramAssetGroupOffer.externalOfferId values indicating the PAGOs to which the Program Asset is bound.
+	 *
+	 * @var string
+	 */
+	public $externalOfferIds = null;
 
 
 }
@@ -17370,6 +17630,22 @@ class KalturaRegionListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaRegionalChannelMultiLcns extends KalturaRegionalChannel
+{
+	/**
+	 * Linear channel numbers
+	 *
+	 * @var string
+	 */
+	public $lcns = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaRegistrySettings extends KalturaObjectBase
 {
 	/**
@@ -19477,6 +19753,127 @@ class KalturaUrlResource extends KalturaContentResource
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestStatusEpgConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Defines whether partner in question enabled core ingest status service.
+	 *
+	 * @var bool
+	 */
+	public $isSupported = null;
+
+	/**
+	 * Defines the time in seconds that the service retain information about ingest status.
+	 *
+	 * @var int
+	 */
+	public $retainingPeriod = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Defines the epg configuration of the partner.
+	 *
+	 * @var KalturaIngestStatusEpgConfiguration
+	 */
+	public $epg;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestEpg extends KalturaObjectBase
+{
+	/**
+	 * Unique id of the ingest job in question
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $ingestId = null;
+
+	/**
+	 * The ingested file name without its extention
+	 *
+	 * @var string
+	 */
+	public $ingestName = null;
+
+	/**
+	 * The ingested file name extention
+	 *
+	 * @var string
+	 */
+	public $ingestFilenameExtension = null;
+
+	/**
+	 * The ingest job created date and time. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $createdDate = null;
+
+	/**
+	 * The user id of the addFromBulkUpload caller.
+	 *
+	 * @var int
+	 */
+	public $ingestedByUserId = null;
+
+	/**
+	 * The ingest job completed date and time. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $completedDate = null;
+
+	/**
+	 * The ingest profile id that of the ingest job.
+	 *
+	 * @var int
+	 */
+	public $ingestProfileId = null;
+
+	/**
+	 * The ingest profile id that of the ingest job.
+	 *
+	 * @var KalturaIngestStatus
+	 */
+	public $status = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIngestStatusEpgListResponse extends KalturaListResponse
+{
+	/**
+	 * IngestStatus
+	 *
+	 * @var array of KalturaIngestEpg
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaIotDefault extends KalturaObjectBase
 {
 	/**
@@ -20475,11 +20872,27 @@ class KalturaRegionChannelNumber extends KalturaObjectBase
 	public $regionId = null;
 
 	/**
-	 * The number of channel
+	 * The number of the channel
 	 *
 	 * @var int
 	 */
 	public $channelNumber = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRegionChannelNumberMultiLcns extends KalturaRegionChannelNumber
+{
+	/**
+	 * Linear channel numbers
+	 *
+	 * @var string
+	 */
+	public $lcns = null;
 
 
 }
