@@ -9,7 +9,7 @@
 // to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2021  Kaltura Inc.
+// Copyright (C) 2006-2022  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -1489,7 +1489,6 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 	const CATEGORY = "Category";
 	const TVOD = "Tvod";
 	const BOXSET = "Boxset";
-	const PAGO = "PAGO";
 }
 
 /**
@@ -1752,18 +1751,6 @@ class KalturaProductPriceOrderBy extends KalturaEnumBase
 {
 	const PRODUCT_ID_ASC = "PRODUCT_ID_ASC";
 	const PRODUCT_ID_DESC = "PRODUCT_ID_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProgramAssetGroupOfferOrderBy extends KalturaEnumBase
-{
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
-	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
-	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
 }
 
 /**

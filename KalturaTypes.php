@@ -9,7 +9,7 @@
 // to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2021  Kaltura Inc.
+// Copyright (C) 2006-2022  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -1263,38 +1263,6 @@ class KalturaPricePlanFilter extends KalturaFilter
 {
 	/**
 	 * Comma separated price plans identifiers
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProgramAssetGroupOfferFilter extends KalturaFilter
-{
-	/**
-	 * return also inactive
-	 *
-	 * @var bool
-	 */
-	public $alsoInactive = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProgramAssetGroupOfferIdInFilter extends KalturaProgramAssetGroupOfferFilter
-{
-	/**
-	 * Program asset group offer identifiers
 	 *
 	 * @var string
 	 */
@@ -8848,149 +8816,6 @@ class KalturaPricePlan extends KalturaUsageModule
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaProgramAssetGroupOffer extends KalturaOTTObjectSupportNullable
-{
-	/**
-	 * Unique Kaltura internal identifier for the module
-	 *
-	 * @var int
-	 */
-	public $id = null;
-
-	/**
-	 * Name of the Program asset group offer
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $name = null;
-
-	/**
-	 * Name of the Program asset group offer
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualName;
-
-	/**
-	 * ID of the KalturaPriceDetails object which contains details of the price to be paid for purchasing this KalturaProgramAssetGroupOffer.
-	 *
-	 * @var int
-	 */
-	public $priceDetailsId = null;
-
-	/**
-	 * Comma separated file types identifiers that are supported in this Program asset group offer.
-	 *             The subset of KalturaMediaFiles of the live linear channel on which the associated Program Assets are carried to which households entitled to this
-	 *             Program Asset Group Offer are entitled to view E.g.may be used to restrict entitlement only to HD flavour of the Program Asset(and not the UHD flavour)
-	 *             If this parameter is empty, the Household shall be entitled to all KalturaMediaFiles associated with the KalturaLiveAsset.
-	 *
-	 * @var string
-	 */
-	public $fileTypesIds = null;
-
-	/**
-	 * The internal discount module identifier for the Program asset group offer
-	 *
-	 * @var int
-	 */
-	public $discountModuleId = null;
-
-	/**
-	 * Coupons group id for the Program asset group offer
-	 *
-	 * @var int
-	 */
-	public $couponsGroupId = null;
-
-	/**
-	 * A list of the descriptions of the Program asset group offer on different languages (language code and translation)
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $description = null;
-
-	/**
-	 * A list of the descriptions of the Program asset group offer on different languages (language code and translation)
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualDescription;
-
-	/**
-	 * The id of the paired asset
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $virtualAssetId = null;
-
-	/**
-	 * Indicates whether the PAGO is active or not (includes whether the PAGO can be purchased and whether it is returned in list API response for regular users)
-	 *
-	 * @var bool
-	 */
-	public $isActive = null;
-
-	/**
-	 * Specifies when was the pago created. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Specifies when was the pago last updated. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-	/**
-	 * he date/time at which the Program Asset Group Offer is first purchasable by households. Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * The date/time at which the Program Asset Group Offer is last purchasable by households.Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-	/**
-	 * The last date/time at which the system will attempt to locate Program Assets that may be associated with this offer.Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $expiryDate = null;
-
-	/**
-	 * External identifier
-	 *
-	 * @var string
-	 */
-	public $externalId = null;
-
-	/**
-	 * Identifies the Program Assets which will be entitled by Households that purchase this offer. Must be a unique value in the context of an account.
-	 *
-	 * @var string
-	 */
-	public $externalOfferId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPrice extends KalturaObjectBase
 {
 	/**
@@ -10961,22 +10786,6 @@ class KalturaProductsPriceListResponse extends KalturaListResponse
 	 * A list of prices
 	 *
 	 * @var array of KalturaProductPrice
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProgramAssetGroupOfferListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of collections
-	 *
-	 * @var array of KalturaProgramAssetGroupOffer
 	 */
 	public $objects;
 
