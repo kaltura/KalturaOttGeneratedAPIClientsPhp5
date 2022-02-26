@@ -8819,6 +8819,14 @@ class KalturaPricePlan extends KalturaUsageModule
 class KalturaPrice extends KalturaObjectBase
 {
 	/**
+	 * Currency ID
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $currencyId = null;
+
+	/**
 	 * Price
 	 *
 	 * @var float
@@ -21390,6 +21398,13 @@ class KalturaTimeShiftedTvPartnerSettings extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $privateCopyEnabled = null;
+
+	/**
+	 * Quota in seconds
+	 *
+	 * @var int
+	 */
+	public $defaultQuota = null;
 
 
 }
