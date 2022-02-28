@@ -239,33 +239,6 @@ class KalturaAssetOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetOrderByStatistics extends KalturaEnumBase
-{
-	const VIEWS_DESC = "VIEWS_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetOrderByType extends KalturaEnumBase
-{
-	const RELEVANCY_DESC = "RELEVANCY_DESC";
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
-	const RATINGS_DESC = "RATINGS_DESC";
-	const VOTES_DESC = "VOTES_DESC";
-	const START_DATE_DESC = "START_DATE_DESC";
-	const START_DATE_ASC = "START_DATE_ASC";
-	const LIKES_DESC = "LIKES_DESC";
-	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
-	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetReferenceType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -382,6 +355,7 @@ class KalturaBillingItemsType extends KalturaEnumBase
 	const PRE_PAID = "pre_paid";
 	const PRE_PAID_EXPIRED = "pre_paid_expired";
 	const COLLECTION = "collection";
+	const PROGRAMASSETGROUPOFFER = "programAssetGroupOffer";
 }
 
 /**
@@ -1489,6 +1463,7 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 	const CATEGORY = "Category";
 	const TVOD = "Tvod";
 	const BOXSET = "Boxset";
+	const PAGO = "PAGO";
 }
 
 /**
@@ -1751,6 +1726,18 @@ class KalturaProductPriceOrderBy extends KalturaEnumBase
 {
 	const PRODUCT_ID_ASC = "PRODUCT_ID_ASC";
 	const PRODUCT_ID_DESC = "PRODUCT_ID_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramAssetGroupOfferOrderBy extends KalturaEnumBase
+{
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
 }
 
 /**
@@ -2385,6 +2372,7 @@ class KalturaTransactionType extends KalturaEnumBase
 	const PPV = "ppv";
 	const SUBSCRIPTION = "subscription";
 	const COLLECTION = "collection";
+	const PROGRAMASSETGROUPOFFER = "programAssetGroupOffer";
 }
 
 /**
