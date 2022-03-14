@@ -11412,6 +11412,20 @@ class KalturaCommercePartnerConfig extends KalturaPartnerConfiguration
 	 */
 	public $keepSubscriptionAddOns = null;
 
+	/**
+	 * configuration for asset start entitlement padding e.g. asset start time - padding still relevant for asset
+	 *
+	 * @var int
+	 */
+	public $programAssetEntitlementPaddingStart = null;
+
+	/**
+	 * configuration for asset end entitlement padding e.g. asset end time + padding still relevant for asset
+	 *
+	 * @var int
+	 */
+	public $programAssetEntitlementPaddingEnd = null;
+
 
 }
 
