@@ -5751,6 +5751,29 @@ class KalturaUserSessionProfileCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIpV6RangeCondition extends KalturaCondition
+{
+	/**
+	 * From IP address range
+	 *
+	 * @var string
+	 */
+	public $fromIP = null;
+
+	/**
+	 * TO IP address range
+	 *
+	 * @var string
+	 */
+	public $toIP = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMessage extends KalturaObjectBase
 {
 	/**
