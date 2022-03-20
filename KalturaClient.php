@@ -6027,25 +6027,6 @@ class KalturaIngestStatusService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns information about specific Ingest job
-	 * 
-	 * @param bigint $ingestId The id of the requested ingest job
-	 * @return KalturaIngestEpgDetails
-	 */
-	function getEpgDetails($ingestId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "ingestId", $ingestId);
-		$this->client->queueServiceActionCall("ingeststatus", "getEpgDetails", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIngestEpgDetails");
-		return $resultObject;
-	}
-
-	/**
 	 * Response with list of ingest jobs.
 	 * 
 	 * @param KalturaIngestByIdsFilter $idsFilter Filter pager
@@ -6068,31 +6049,6 @@ class KalturaIngestStatusService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaIngestStatusEpgListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Get as input ingest job id, filter and pager and response with page of filtered detailed ingest job results.
-	 * 
-	 * @param bigint $ingestId The id of the requested ingest job
-	 * @param KalturaIngestEpgProgramResultFilter $filter Filter for Ingest program, results
-	 * @param KalturaFilterPager $pager Paging the request
-	 * @return KalturaIngestStatusEpgProgramResultListResponse
-	 */
-	function getEpgProgramResultList($ingestId, KalturaIngestEpgProgramResultFilter $filter = null, KalturaFilterPager $pager = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "ingestId", $ingestId);
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("ingeststatus", "getEpgProgramResultList", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIngestStatusEpgProgramResultListResponse");
 		return $resultObject;
 	}
 
@@ -9196,100 +9152,6 @@ class KalturaProductPriceService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaProductPriceListResponse");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProgramAssetGroupOfferService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Insert new ProgramAssetGroupOffer for partner
-	 * 
-	 * @param KalturaProgramAssetGroupOffer $programAssetGroupOffer ProgramAssetGroupOffer object
-	 * @return KalturaProgramAssetGroupOffer
-	 */
-	function add(KalturaProgramAssetGroupOffer $programAssetGroupOffer)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "programAssetGroupOffer", $programAssetGroupOffer->toParams());
-		$this->client->queueServiceActionCall("programassetgroupoffer", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaProgramAssetGroupOffer");
-		return $resultObject;
-	}
-
-	/**
-	 * Delete programAssetGroupOffer
-	 * 
-	 * @param bigint $id ProgramAssetGroupOffer id
-	 * @return bool
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("programassetgroupoffer", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
-	 * Gets all Program asset group offer
-	 * 
-	 * @param KalturaProgramAssetGroupOfferFilter $filter Filter
-	 * @param KalturaFilterPager $pager Pager
-	 * @return KalturaProgramAssetGroupOfferListResponse
-	 */
-	function listAction(KalturaProgramAssetGroupOfferFilter $filter = null, KalturaFilterPager $pager = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("programassetgroupoffer", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaProgramAssetGroupOfferListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Update ProgramAssetGroupOffer
-	 * 
-	 * @param bigint $id ProgramAssetGroupOffer id
-	 * @param KalturaProgramAssetGroupOffer $programAssetGroupOffer ProgramAssetGroupOffer
-	 * @return KalturaProgramAssetGroupOffer
-	 */
-	function update($id, KalturaProgramAssetGroupOffer $programAssetGroupOffer)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "programAssetGroupOffer", $programAssetGroupOffer->toParams());
-		$this->client->queueServiceActionCall("programassetgroupoffer", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaProgramAssetGroupOffer");
 		return $resultObject;
 	}
 }
@@ -13611,12 +13473,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaProgramAssetGroupOfferService
-	 */
-	public $programAssetGroupOffer = null;
-
-	/**
-	 * 
 	 * @var KalturaPurchaseSettingsService
 	 */
 	public $purchaseSettings = null;
@@ -13876,8 +13732,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-03-02');
-		$this->setApiVersion('7.3.0.29794');
+		$this->setClientTag('php5:22-03-20');
+		$this->setApiVersion('7.3.0.29810');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13982,7 +13838,6 @@ class KalturaClient extends KalturaClientBase
 		$this->priceDetails = new KalturaPriceDetailsService($this);
 		$this->pricePlan = new KalturaPricePlanService($this);
 		$this->productPrice = new KalturaProductPriceService($this);
-		$this->programAssetGroupOffer = new KalturaProgramAssetGroupOfferService($this);
 		$this->purchaseSettings = new KalturaPurchaseSettingsService($this);
 		$this->ratio = new KalturaRatioService($this);
 		$this->recommendationProfile = new KalturaRecommendationProfileService($this);
