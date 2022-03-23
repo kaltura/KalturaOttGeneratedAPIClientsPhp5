@@ -794,6 +794,46 @@ class KalturaDeleteMediaPolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaDeviceBrandOrderBy extends KalturaEnumBase
+{
+	const ID_ASC = "ID_ASC";
+	const ID_DESC = "ID_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceBrandType extends KalturaEnumBase
+{
+	const SYSTEM = "System";
+	const CUSTOM = "Custom";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyOrderBy extends KalturaEnumBase
+{
+	const ID_ASC = "ID_ASC";
+	const ID_DESC = "ID_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyType extends KalturaEnumBase
+{
+	const SYSTEM = "System";
+	const CUSTOM = "Custom";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDeviceReferenceDataOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
