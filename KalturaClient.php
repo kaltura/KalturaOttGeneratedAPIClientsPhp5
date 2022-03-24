@@ -815,6 +815,37 @@ class KalturaAssetHistoryService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetPersonalMarkupService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Response with list of assetPersonalMarkup.
+	 * 
+	 * @param KalturaAssetPersonalMarkupSearchFilter $filter Filter pager
+	 * @return KalturaAssetPersonalMarkupListResponse
+	 */
+	function listAction(KalturaAssetPersonalMarkupSearchFilter $filter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("assetpersonalmarkup", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetPersonalMarkupListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetRuleService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -3748,7 +3779,7 @@ class KalturaEntitlementService extends KalturaServiceBase
 	}
 
 	/**
-	 * Immediately cancel a subscription, PPV or collection. Cancel is possible only if within cancellation window and content not already consumed
+	 * Immediately cancel a subscription, PPV, collection or programAssetGroupOffer. Cancel is possible only if within cancellation window and content not already consumed
 	 * 
 	 * @param int $assetId The mediaFileID to cancel
 	 * @param string $productType The product type for the cancelation
@@ -3822,7 +3853,7 @@ class KalturaEntitlementService extends KalturaServiceBase
 	}
 
 	/**
-	 * Immediately cancel a subscription, PPV or collection. Cancel applies regardless of cancellation window and content consumption status
+	 * Immediately cancel a subscription, PPV, collection or programAssetGroupOffer. Cancel applies regardless of cancellation window and content consumption status
 	 * 
 	 * @param int $assetId The mediaFileID to cancel
 	 * @param string $productType The product type for the cancelation
@@ -3862,7 +3893,7 @@ class KalturaEntitlementService extends KalturaServiceBase
 	}
 
 	/**
-	 * Grant household for an entitlement for a PPV or Subscription.
+	 * Grant household for an entitlement for a PPV, Subscription or programAssetGroupOffer.
 	 * 
 	 * @param int $productId Identifier for the product package from which this content is offered
 	 * @param string $productType Product package type. Possible values: PPV, Subscription, Collection
@@ -3889,11 +3920,11 @@ class KalturaEntitlementService extends KalturaServiceBase
 	/**
 	 * Gets all the entitled media items for a household
 	 * 
-	 * @param KalturaEntitlementFilter $filter Request filter
+	 * @param KalturaBaseEntitlementFilter $filter Request filter
 	 * @param KalturaFilterPager $pager Request pager
 	 * @return KalturaEntitlementListResponse
 	 */
-	function listAction(KalturaEntitlementFilter $filter, KalturaFilterPager $pager = null)
+	function listAction(KalturaBaseEntitlementFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "filter", $filter->toParams());
@@ -12093,7 +12124,7 @@ class KalturaTransactionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Purchase specific product or subscription for a household. Upon successful charge entitlements to use the requested product or subscription are granted.
+	 * Purchase specific product, subscription or Program asset group offer (PAGO) for a household. Upon successful charge entitlements to use the requested product or subscription are granted.
 	 * 
 	 * @param KalturaPurchase $purchase Purchase properties
 	 * @return KalturaTransaction
@@ -13035,6 +13066,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaAssetPersonalMarkupService
+	 */
+	public $assetPersonalMarkup = null;
+
+	/**
+	 * 
 	 * @var KalturaAssetRuleService
 	 */
 	public $assetRule = null;
@@ -13876,8 +13913,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-03-02');
-		$this->setApiVersion('7.3.0.29794');
+		$this->setClientTag('php5:22-03-24');
+		$this->setApiVersion('7.4.0.29816');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13886,6 +13923,7 @@ class KalturaClient extends KalturaClientBase
 		$this->assetFile = new KalturaAssetFileService($this);
 		$this->assetFilePpv = new KalturaAssetFilePpvService($this);
 		$this->assetHistory = new KalturaAssetHistoryService($this);
+		$this->assetPersonalMarkup = new KalturaAssetPersonalMarkupService($this);
 		$this->assetRule = new KalturaAssetRuleService($this);
 		$this->assetStatistics = new KalturaAssetStatisticsService($this);
 		$this->assetStruct = new KalturaAssetStructService($this);

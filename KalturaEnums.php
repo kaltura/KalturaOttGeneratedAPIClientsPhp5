@@ -266,6 +266,16 @@ class KalturaAssetOrderByType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetPersonalMarkupSearchOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+	const REQUEST_ORDER = "REQUEST_ORDER";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetReferenceType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -382,6 +392,7 @@ class KalturaBillingItemsType extends KalturaEnumBase
 	const PRE_PAID = "pre_paid";
 	const PRE_PAID_EXPIRED = "pre_paid_expired";
 	const COLLECTION = "collection";
+	const PROGRAM_ASSET_GROUP_OFFER = "program_asset_group_offer";
 }
 
 /**
@@ -1839,6 +1850,7 @@ class KalturaPurchaseStatus extends KalturaEnumBase
 	const INVALID_CURRENCY = "invalid_currency";
 	const CURRENCY_NOT_DEFINED_ON_PRICE_CODE = "currency_not_defined_on_price_code";
 	const PENDING_ENTITLEMENT = "pending_entitlement";
+	const PROGRAM_ASSET_GROUP_OFFER_PURCHASED = "program_asset_group_offer_purchased";
 }
 
 /**
@@ -2428,6 +2440,7 @@ class KalturaTransactionType extends KalturaEnumBase
 	const PPV = "ppv";
 	const SUBSCRIPTION = "subscription";
 	const COLLECTION = "collection";
+	const PROGRAMASSETGROUPOFFER = "programAssetGroupOffer";
 }
 
 /**
