@@ -2549,6 +2549,54 @@ class KalturaConfigurationsFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBaseEntitlementFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlementFilter extends KalturaBaseEntitlementFilter
+{
+	/**
+	 * The type of the entitlements to return
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $productTypeEqual = null;
+
+	/**
+	 * Reference type to filter by
+	 *
+	 * @var KalturaEntityReferenceBy
+	 */
+	public $entityReferenceEqual = null;
+
+	/**
+	 * Is expired
+	 *
+	 * @var bool
+	 */
+	public $isExpiredEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramAssetGroupOfferEntitlementFilter extends KalturaBaseEntitlementFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaRecordingFilter extends KalturaFilter
 {
 	/**
@@ -2636,36 +2684,6 @@ class KalturaCloudSeriesRecordingFilter extends KalturaSeriesRecordingFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaEntitlementFilter extends KalturaFilter
-{
-	/**
-	 * The type of the entitlements to return
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $productTypeEqual = null;
-
-	/**
-	 * Reference type to filter by
-	 *
-	 * @var KalturaEntityReferenceBy
-	 */
-	public $entityReferenceEqual = null;
-
-	/**
-	 * Is expired
-	 *
-	 * @var bool
-	 */
-	public $isExpiredEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaExternalRecordingResponseProfileFilter extends KalturaRelatedObjectFilter
 {
 
@@ -2711,6 +2729,13 @@ class KalturaProductPriceFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $couponCodeEqual = null;
+
+	/**
+	 * Comma separated ProgramAssetGroupOffer identifiers
+	 *
+	 * @var string
+	 */
+	public $programAssetGroupOfferIdIn = null;
 
 
 }
@@ -3702,6 +3727,22 @@ class KalturaPaymentMethodProfileFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetPersonalMarkupSearchFilter extends KalturaFilter
+{
+	/**
+	 * all assets to search their personal markups
+	 *
+	 * @var array of KalturaSlimAsset
+	 */
+	public $assetsIn;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetRuleFilter extends KalturaFilter
 {
 	/**
@@ -3845,6 +3886,73 @@ class KalturaCurrencyFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $excludePartner = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceBrandFilter extends KalturaFilter
+{
+	/**
+	 * Filter the device brand with this identifier.
+	 *
+	 * @var int
+	 */
+	public $idEqual = null;
+
+	/**
+	 * Filter the device brands with this device family&#39;s identifier.
+	 *
+	 * @var int
+	 */
+	public $deviceFamilyIdEqual = null;
+
+	/**
+	 * Filter the device brand with this name.
+	 *
+	 * @var string
+	 */
+	public $nameEqual = null;
+
+	/**
+	 * Filter device brands of this type
+	 *
+	 * @var KalturaDeviceBrandType
+	 */
+	public $typeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyFilter extends KalturaFilter
+{
+	/**
+	 * Filter the device family with this identifier.
+	 *
+	 * @var int
+	 */
+	public $idEqual = null;
+
+	/**
+	 * Filter the device family with this name.
+	 *
+	 * @var string
+	 */
+	public $nameEqual = null;
+
+	/**
+	 * Filter device families of this type
+	 *
+	 * @var KalturaDeviceFamilyType
+	 */
+	public $typeEqual = null;
 
 
 }
@@ -10796,6 +10904,15 @@ class KalturaPpvPrice extends KalturaProductPrice
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProgramAssetGroupOfferPrice extends KalturaProductPrice
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSubscriptionPrice extends KalturaProductPrice
 {
 	/**
@@ -11411,6 +11528,20 @@ class KalturaCommercePartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $keepSubscriptionAddOns = null;
+
+	/**
+	 * configuration for asset start entitlement padding e.g. asset start time - padding still relevant for asset
+	 *
+	 * @var int
+	 */
+	public $programAssetEntitlementPaddingStart = null;
+
+	/**
+	 * configuration for asset end entitlement padding e.g. asset end time + padding still relevant for asset
+	 *
+	 * @var int
+	 */
+	public $programAssetEntitlementPaddingEnd = null;
 
 
 }
@@ -13081,9 +13212,18 @@ class KalturaDeviceFamilyBase extends KalturaObjectBase
 	 * Device family name
 	 *
 	 * @var string
-	 * @readonly
 	 */
 	public $name = null;
+
+	/**
+	 * Type of device family.
+	 *              if this device family belongs only to this group,
+	 *              otherwise.
+	 *
+	 * @var KalturaDeviceFamilyType
+	 * @readonly
+	 */
+	public $type = null;
 
 
 }
@@ -14038,6 +14178,15 @@ class KalturaPpvEntitlement extends KalturaEntitlement
 	 */
 	public $mediaId = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramAssetGroupOfferEntitlement extends KalturaEntitlement
+{
 
 }
 
@@ -16492,6 +16641,87 @@ class KalturaPaymentMethodProfileListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProductMarkup extends KalturaObjectBase
+{
+	/**
+	 * Product Id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $productId = null;
+
+	/**
+	 * Product Type
+	 *
+	 * @var KalturaTransactionType
+	 * @readonly
+	 */
+	public $productType = null;
+
+	/**
+	 * Is Entitled to this product
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isEntitled = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetPersonalMarkup extends KalturaObjectBase
+{
+	/**
+	 * Asset Id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $assetId = null;
+
+	/**
+	 * Asset Type
+	 *
+	 * @var KalturaAssetType
+	 * @readonly
+	 */
+	public $assetType = null;
+
+	/**
+	 * all related asset&#39;s Product Markups
+	 *
+	 * @var array of KalturaProductMarkup
+	 */
+	public $products;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetPersonalMarkupListResponse extends KalturaListResponse
+{
+	/**
+	 * Adapters
+	 *
+	 * @var array of KalturaAssetPersonalMarkup
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetRuleListResponse extends KalturaListResponse
 {
 	/**
@@ -16705,7 +16935,6 @@ class KalturaDeviceBrand extends KalturaObjectBase
 	 * Device brand identifier
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $id = null;
 
@@ -16720,9 +16949,18 @@ class KalturaDeviceBrand extends KalturaObjectBase
 	 * Device family identifier
 	 *
 	 * @var int
+	 */
+	public $deviceFamilyId = null;
+
+	/**
+	 * Type of device family.
+	 *              if this device family belongs only to this group,
+	 *              otherwise.
+	 *
+	 * @var KalturaDeviceBrandType
 	 * @readonly
 	 */
-	public $deviceFamilyid = null;
+	public $type = null;
 
 
 }
