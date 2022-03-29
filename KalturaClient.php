@@ -3064,19 +3064,65 @@ class KalturaDeviceBrandService extends KalturaServiceBase
 	}
 
 	/**
-	 * Return a list of the available device brands.
+	 * Adds a new device brand which belongs to a specific group.
 	 * 
-	 * @return KalturaDeviceBrandListResponse
+	 * @param KalturaDeviceBrand $deviceBrand Device brand.
+	 * @return KalturaDeviceBrand
 	 */
-	function listAction()
+	function add(KalturaDeviceBrand $deviceBrand)
 	{
 		$kparams = array();
+		$this->client->addParam($kparams, "deviceBrand", $deviceBrand->toParams());
+		$this->client->queueServiceActionCall("devicebrand", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDeviceBrand");
+		return $resultObject;
+	}
+
+	/**
+	 * Return a list of the available device brands.
+	 * 
+	 * @param KalturaDeviceBrandFilter $filter Filter with no more than one condition specified.
+	 * @param KalturaFilterPager $pager Page size and index.
+	 * @return KalturaDeviceBrandListResponse
+	 */
+	function listAction(KalturaDeviceBrandFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("devicebrand", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaDeviceBrandListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Updates an existing device brand which belongs to a specific group.
+	 * 
+	 * @param bigint $id Device brand's identifier.
+	 * @param KalturaDeviceBrand $deviceBrand Device brand.
+	 * @return KalturaDeviceBrand
+	 */
+	function update($id, KalturaDeviceBrand $deviceBrand)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "deviceBrand", $deviceBrand->toParams());
+		$this->client->queueServiceActionCall("devicebrand", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDeviceBrand");
 		return $resultObject;
 	}
 }
@@ -3093,19 +3139,65 @@ class KalturaDeviceFamilyService extends KalturaServiceBase
 	}
 
 	/**
-	 * Return a list of the available device families.
+	 * Adds a new device family which belongs to a specific group.
 	 * 
-	 * @return KalturaDeviceFamilyListResponse
+	 * @param KalturaDeviceFamily $deviceFamily Device family.
+	 * @return KalturaDeviceFamily
 	 */
-	function listAction()
+	function add(KalturaDeviceFamily $deviceFamily)
 	{
 		$kparams = array();
+		$this->client->addParam($kparams, "deviceFamily", $deviceFamily->toParams());
+		$this->client->queueServiceActionCall("devicefamily", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDeviceFamily");
+		return $resultObject;
+	}
+
+	/**
+	 * Return a list of the available device families.
+	 * 
+	 * @param KalturaDeviceFamilyFilter $filter Filter with no more than one condition specified.
+	 * @param KalturaFilterPager $pager Page size and index.
+	 * @return KalturaDeviceFamilyListResponse
+	 */
+	function listAction(KalturaDeviceFamilyFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("devicefamily", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaDeviceFamilyListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Updates an existing device family which belongs to a specific group.
+	 * 
+	 * @param bigint $id Device family's identifier.
+	 * @param KalturaDeviceFamily $deviceFamily Device family.
+	 * @return KalturaDeviceFamily
+	 */
+	function update($id, KalturaDeviceFamily $deviceFamily)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "deviceFamily", $deviceFamily->toParams());
+		$this->client->queueServiceActionCall("devicefamily", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDeviceFamily");
 		return $resultObject;
 	}
 }
@@ -13913,8 +14005,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-03-24');
-		$this->setApiVersion('7.4.0.29816');
+		$this->setClientTag('php5:22-03-29');
+		$this->setApiVersion('7.4.0.29819');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

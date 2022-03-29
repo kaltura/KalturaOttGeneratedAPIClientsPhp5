@@ -495,6 +495,7 @@ class KalturaBundleType extends KalturaEnumBase
 {
 	const SUBSCRIPTION = "subscription";
 	const COLLECTION = "collection";
+	const PAGO = "pago";
 }
 
 /**
@@ -799,6 +800,46 @@ class KalturaDeleteMediaPolicy extends KalturaEnumBase
 {
 	const DISABLE = "Disable";
 	const DELETE = "Delete";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceBrandOrderBy extends KalturaEnumBase
+{
+	const ID_ASC = "ID_ASC";
+	const ID_DESC = "ID_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceBrandType extends KalturaEnumBase
+{
+	const SYSTEM = "System";
+	const CUSTOM = "Custom";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyOrderBy extends KalturaEnumBase
+{
+	const ID_ASC = "ID_ASC";
+	const ID_DESC = "ID_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyType extends KalturaEnumBase
+{
+	const SYSTEM = "System";
+	const CUSTOM = "Custom";
 }
 
 /**

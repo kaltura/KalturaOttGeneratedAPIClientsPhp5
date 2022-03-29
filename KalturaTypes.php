@@ -2229,7 +2229,7 @@ class KalturaBundleFilter extends KalturaAssetFilter
 	public $idEqual = null;
 
 	/**
-	 * Comma separated list of asset types to search within. 
+	 * Comma separated list of asset types to search within.
 	 *             Possible values: 0 – EPG linear programs entries, any media type ID (according to media type IDs defined dynamically in the system).
 	 *             If omitted – all types should be included.
 	 *
@@ -2238,7 +2238,7 @@ class KalturaBundleFilter extends KalturaAssetFilter
 	public $typeIn = null;
 
 	/**
-	 * bundleType - possible values: Subscription or Collection
+	 * bundleType - possible values: Subscription, Collection or PAGO
 	 *
 	 * @var KalturaBundleType
 	 */
@@ -3886,6 +3886,73 @@ class KalturaCurrencyFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $excludePartner = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceBrandFilter extends KalturaFilter
+{
+	/**
+	 * Filter the device brand with this identifier.
+	 *
+	 * @var int
+	 */
+	public $idEqual = null;
+
+	/**
+	 * Filter the device brands with this device family&#39;s identifier.
+	 *
+	 * @var int
+	 */
+	public $deviceFamilyIdEqual = null;
+
+	/**
+	 * Filter the device brand with this name.
+	 *
+	 * @var string
+	 */
+	public $nameEqual = null;
+
+	/**
+	 * Filter device brands of this type
+	 *
+	 * @var KalturaDeviceBrandType
+	 */
+	public $typeEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyFilter extends KalturaFilter
+{
+	/**
+	 * Filter the device family with this identifier.
+	 *
+	 * @var int
+	 */
+	public $idEqual = null;
+
+	/**
+	 * Filter the device family with this name.
+	 *
+	 * @var string
+	 */
+	public $nameEqual = null;
+
+	/**
+	 * Filter device families of this type
+	 *
+	 * @var KalturaDeviceFamilyType
+	 */
+	public $typeEqual = null;
 
 
 }
@@ -13145,9 +13212,18 @@ class KalturaDeviceFamilyBase extends KalturaObjectBase
 	 * Device family name
 	 *
 	 * @var string
-	 * @readonly
 	 */
 	public $name = null;
+
+	/**
+	 * Type of device family.
+	 *              if this device family belongs only to this group,
+	 *              otherwise.
+	 *
+	 * @var KalturaDeviceFamilyType
+	 * @readonly
+	 */
+	public $type = null;
 
 
 }
@@ -16859,7 +16935,6 @@ class KalturaDeviceBrand extends KalturaObjectBase
 	 * Device brand identifier
 	 *
 	 * @var int
-	 * @readonly
 	 */
 	public $id = null;
 
@@ -16874,9 +16949,18 @@ class KalturaDeviceBrand extends KalturaObjectBase
 	 * Device family identifier
 	 *
 	 * @var int
+	 */
+	public $deviceFamilyId = null;
+
+	/**
+	 * Type of device family.
+	 *              if this device family belongs only to this group,
+	 *              otherwise.
+	 *
+	 * @var KalturaDeviceBrandType
 	 * @readonly
 	 */
-	public $deviceFamilyid = null;
+	public $type = null;
 
 
 }
