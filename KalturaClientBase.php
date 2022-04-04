@@ -9,7 +9,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2022  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -369,9 +369,9 @@ class KalturaClientBase
 			foreach ($this->responseHeaders as $curHeader)
 			{
 				$splittedHeader = explode(':', $curHeader, 2);
-				if ($splittedHeader[0] == 'X-Me')
+				if (strtolower($splittedHeader[0]) == 'x-me')
 					$serverName = trim($splittedHeader[1]);
-				else if ($splittedHeader[0] == 'X-Kaltura-Session')
+				else if (strtolower($splittedHeader[0]) == 'x-kaltura-session')
 					$serverSession = trim($splittedHeader[1]);
 			}
 			if (!is_null($serverName) || !is_null($serverSession))
@@ -444,7 +444,7 @@ class KalturaClientBase
 	 * @param int $flags
 	 * @return boolean
 	 */
-	protected function ksortRecursive(&$array, $flags = null) 
+	protected function ksortRecursive(&$array, $flags = SORT_REGULAR) 
 	{
 		ksort($array, $flags);
 		foreach($array as &$arr) {
