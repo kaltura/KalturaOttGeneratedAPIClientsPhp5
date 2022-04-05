@@ -815,6 +815,37 @@ class KalturaAssetHistoryService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetPersonalMarkupService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Response with list of assetPersonalMarkup.
+	 * 
+	 * @param KalturaAssetPersonalMarkupSearchFilter $filter Filter pager
+	 * @return KalturaAssetPersonalMarkupListResponse
+	 */
+	function listAction(KalturaAssetPersonalMarkupSearchFilter $filter)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("assetpersonalmarkup", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetPersonalMarkupListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetRuleService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -3033,19 +3064,65 @@ class KalturaDeviceBrandService extends KalturaServiceBase
 	}
 
 	/**
-	 * Return a list of the available device brands.
+	 * Adds a new device brand which belongs to a specific group.
 	 * 
-	 * @return KalturaDeviceBrandListResponse
+	 * @param KalturaDeviceBrand $deviceBrand Device brand.
+	 * @return KalturaDeviceBrand
 	 */
-	function listAction()
+	function add(KalturaDeviceBrand $deviceBrand)
 	{
 		$kparams = array();
+		$this->client->addParam($kparams, "deviceBrand", $deviceBrand->toParams());
+		$this->client->queueServiceActionCall("devicebrand", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDeviceBrand");
+		return $resultObject;
+	}
+
+	/**
+	 * Return a list of the available device brands.
+	 * 
+	 * @param KalturaDeviceBrandFilter $filter Filter with no more than one condition specified.
+	 * @param KalturaFilterPager $pager Page size and index.
+	 * @return KalturaDeviceBrandListResponse
+	 */
+	function listAction(KalturaDeviceBrandFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("devicebrand", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaDeviceBrandListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Updates an existing device brand which belongs to a specific group.
+	 * 
+	 * @param bigint $id Device brand's identifier.
+	 * @param KalturaDeviceBrand $deviceBrand Device brand.
+	 * @return KalturaDeviceBrand
+	 */
+	function update($id, KalturaDeviceBrand $deviceBrand)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "deviceBrand", $deviceBrand->toParams());
+		$this->client->queueServiceActionCall("devicebrand", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDeviceBrand");
 		return $resultObject;
 	}
 }
@@ -3062,19 +3139,65 @@ class KalturaDeviceFamilyService extends KalturaServiceBase
 	}
 
 	/**
-	 * Return a list of the available device families.
+	 * Adds a new device family which belongs to a specific group.
 	 * 
-	 * @return KalturaDeviceFamilyListResponse
+	 * @param KalturaDeviceFamily $deviceFamily Device family.
+	 * @return KalturaDeviceFamily
 	 */
-	function listAction()
+	function add(KalturaDeviceFamily $deviceFamily)
 	{
 		$kparams = array();
+		$this->client->addParam($kparams, "deviceFamily", $deviceFamily->toParams());
+		$this->client->queueServiceActionCall("devicefamily", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDeviceFamily");
+		return $resultObject;
+	}
+
+	/**
+	 * Return a list of the available device families.
+	 * 
+	 * @param KalturaDeviceFamilyFilter $filter Filter with no more than one condition specified.
+	 * @param KalturaFilterPager $pager Page size and index.
+	 * @return KalturaDeviceFamilyListResponse
+	 */
+	function listAction(KalturaDeviceFamilyFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("devicefamily", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaDeviceFamilyListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Updates an existing device family which belongs to a specific group.
+	 * 
+	 * @param bigint $id Device family's identifier.
+	 * @param KalturaDeviceFamily $deviceFamily Device family.
+	 * @return KalturaDeviceFamily
+	 */
+	function update($id, KalturaDeviceFamily $deviceFamily)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "deviceFamily", $deviceFamily->toParams());
+		$this->client->queueServiceActionCall("devicefamily", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaDeviceFamily");
 		return $resultObject;
 	}
 }
@@ -3748,7 +3871,7 @@ class KalturaEntitlementService extends KalturaServiceBase
 	}
 
 	/**
-	 * Immediately cancel a subscription, PPV or collection. Cancel is possible only if within cancellation window and content not already consumed
+	 * Immediately cancel a subscription, PPV, collection or programAssetGroupOffer. Cancel is possible only if within cancellation window and content not already consumed
 	 * 
 	 * @param int $assetId The mediaFileID to cancel
 	 * @param string $productType The product type for the cancelation
@@ -3822,7 +3945,7 @@ class KalturaEntitlementService extends KalturaServiceBase
 	}
 
 	/**
-	 * Immediately cancel a subscription, PPV or collection. Cancel applies regardless of cancellation window and content consumption status
+	 * Immediately cancel a subscription, PPV, collection or programAssetGroupOffer. Cancel applies regardless of cancellation window and content consumption status
 	 * 
 	 * @param int $assetId The mediaFileID to cancel
 	 * @param string $productType The product type for the cancelation
@@ -3862,7 +3985,7 @@ class KalturaEntitlementService extends KalturaServiceBase
 	}
 
 	/**
-	 * Grant household for an entitlement for a PPV or Subscription.
+	 * Grant household for an entitlement for a PPV, Subscription or programAssetGroupOffer.
 	 * 
 	 * @param int $productId Identifier for the product package from which this content is offered
 	 * @param string $productType Product package type. Possible values: PPV, Subscription, Collection
@@ -3889,11 +4012,11 @@ class KalturaEntitlementService extends KalturaServiceBase
 	/**
 	 * Gets all the entitled media items for a household
 	 * 
-	 * @param KalturaEntitlementFilter $filter Request filter
+	 * @param KalturaBaseEntitlementFilter $filter Request filter
 	 * @param KalturaFilterPager $pager Request pager
 	 * @return KalturaEntitlementListResponse
 	 */
-	function listAction(KalturaEntitlementFilter $filter, KalturaFilterPager $pager = null)
+	function listAction(KalturaBaseEntitlementFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "filter", $filter->toParams());
@@ -12094,7 +12217,7 @@ class KalturaTransactionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Purchase specific product or subscription for a household. Upon successful charge entitlements to use the requested product or subscription are granted.
+	 * Purchase specific product, subscription or Program asset group offer (PAGO) for a household. Upon successful charge entitlements to use the requested product or subscription are granted.
 	 * 
 	 * @param KalturaPurchase $purchase Purchase properties
 	 * @return KalturaTransaction
@@ -13036,6 +13159,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaAssetPersonalMarkupService
+	 */
+	public $assetPersonalMarkup = null;
+
+	/**
+	 * 
 	 * @var KalturaAssetRuleService
 	 */
 	public $assetRule = null;
@@ -13877,8 +14006,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-03-31');
-		$this->setApiVersion('7.4.0.29857');
+		$this->setClientTag('php5:22-04-05');
+		$this->setApiVersion('7.4.0.29865');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -13887,6 +14016,7 @@ class KalturaClient extends KalturaClientBase
 		$this->assetFile = new KalturaAssetFileService($this);
 		$this->assetFilePpv = new KalturaAssetFilePpvService($this);
 		$this->assetHistory = new KalturaAssetHistoryService($this);
+		$this->assetPersonalMarkup = new KalturaAssetPersonalMarkupService($this);
 		$this->assetRule = new KalturaAssetRuleService($this);
 		$this->assetStatistics = new KalturaAssetStatisticsService($this);
 		$this->assetStruct = new KalturaAssetStructService($this);
