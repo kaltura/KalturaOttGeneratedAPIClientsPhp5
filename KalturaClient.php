@@ -6336,11 +6336,11 @@ class KalturaIotProfileService extends KalturaServiceBase
 	 * @param bigint $id KalturaIotProfile identifier
 	 * @return KalturaIotProfile
 	 */
-	function delete($id)
+	function get($id)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("iotprofile", "delete", $kparams);
+		$this->client->queueServiceActionCall("iotprofile", "get", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -13976,8 +13976,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-04-18');
-		$this->setApiVersion('7.5.0.29872');
+		$this->setClientTag('php5:22-04-19');
+		$this->setApiVersion('7.5.0.29873');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
