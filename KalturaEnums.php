@@ -266,6 +266,16 @@ class KalturaAssetOrderByType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetPersonalMarkupSearchOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+	const REQUEST_ORDER = "REQUEST_ORDER";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetReferenceType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -382,6 +392,7 @@ class KalturaBillingItemsType extends KalturaEnumBase
 	const PRE_PAID = "pre_paid";
 	const PRE_PAID_EXPIRED = "pre_paid_expired";
 	const COLLECTION = "collection";
+	const PROGRAM_ASSET_GROUP_OFFER = "program_asset_group_offer";
 }
 
 /**
@@ -484,6 +495,7 @@ class KalturaBundleType extends KalturaEnumBase
 {
 	const SUBSCRIPTION = "subscription";
 	const COLLECTION = "collection";
+	const PAGO = "pago";
 }
 
 /**
@@ -788,6 +800,46 @@ class KalturaDeleteMediaPolicy extends KalturaEnumBase
 {
 	const DISABLE = "Disable";
 	const DELETE = "Delete";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceBrandOrderBy extends KalturaEnumBase
+{
+	const ID_ASC = "ID_ASC";
+	const ID_DESC = "ID_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceBrandType extends KalturaEnumBase
+{
+	const SYSTEM = "System";
+	const CUSTOM = "Custom";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyOrderBy extends KalturaEnumBase
+{
+	const ID_ASC = "ID_ASC";
+	const ID_DESC = "ID_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceFamilyType extends KalturaEnumBase
+{
+	const SYSTEM = "System";
+	const CUSTOM = "Custom";
 }
 
 /**
@@ -1839,6 +1891,7 @@ class KalturaPurchaseStatus extends KalturaEnumBase
 	const INVALID_CURRENCY = "invalid_currency";
 	const CURRENCY_NOT_DEFINED_ON_PRICE_CODE = "currency_not_defined_on_price_code";
 	const PENDING_ENTITLEMENT = "pending_entitlement";
+	const PROGRAM_ASSET_GROUP_OFFER_PURCHASED = "program_asset_group_offer_purchased";
 }
 
 /**
@@ -2024,6 +2077,7 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const DYNAMIC_KEYS = "DYNAMIC_KEYS";
 	const USER_SESSION_PROFILE = "USER_SESSION_PROFILE";
 	const DEVICE_DYNAMIC_DATA = "DEVICE_DYNAMIC_DATA";
+	const ASSET_SHOP = "ASSET_SHOP";
 }
 
 /**
@@ -2428,6 +2482,7 @@ class KalturaTransactionType extends KalturaEnumBase
 	const PPV = "ppv";
 	const SUBSCRIPTION = "subscription";
 	const COLLECTION = "collection";
+	const PROGRAMASSETGROUPOFFER = "programAssetGroupOffer";
 }
 
 /**
