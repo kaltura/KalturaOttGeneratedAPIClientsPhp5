@@ -7558,6 +7558,29 @@ class KalturaUserSessionProfileCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIpV6RangeCondition extends KalturaCondition
+{
+	/**
+	 * From IP address range
+	 *
+	 * @var string
+	 */
+	public $fromIP = null;
+
+	/**
+	 * TO IP address range
+	 *
+	 * @var string
+	 */
+	public $toIP = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAccessControlBlockAction extends KalturaAssetRuleAction
 {
 
@@ -11609,6 +11632,13 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $uploadExportDatalake = null;
+
+	/**
+	 * Shop Marker&#39;s identifier
+	 *
+	 * @var int
+	 */
+	public $shopMarkerMetaId = null;
 
 
 }
@@ -15780,20 +15810,6 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	public $bufferCatchUpSetting = null;
 
 	/**
-	 * padding before program starts in seconds, configuration only
-	 *
-	 * @var int
-	 */
-	public $paddingBeforeProgramStartsSetting = null;
-
-	/**
-	 * padding after program ends in seconds, configuration only
-	 *
-	 * @var int
-	 */
-	public $paddingAfterProgramEndsSetting = null;
-
-	/**
 	 * buffer Trick-play, configuration only
 	 *
 	 * @var int
@@ -15865,24 +15881,6 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @readonly
 	 */
 	public $catchUpBuffer = null;
-
-	/**
-	 * Returns padding before program starts in seconds from a live asset if configured,
-	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $paddingBeforeProgramStarts = null;
-
-	/**
-	 * Returns padding after program ends in seconds from a live asset if configured,
-	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $paddingAfterProgramEnds = null;
 
 	/**
 	 * summed Trick-play buffer, the TimeShiftedTvPartnerSettings are also taken into consideration
@@ -21143,104 +21141,6 @@ class KalturaLicensedUrlRecordingRequest extends KalturaLicensedUrlBaseRequest
 	 * @var string
 	 */
 	public $fileType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLiveToVodLinearAssetConfiguration extends KalturaObjectBase
-{
-	/**
-	 * Linear asset&#39;s identifier.
-	 *
-	 * @var int
-	 */
-	public $linearAssetId = null;
-
-	/**
-	 * Enable/disable the feature per linear channel. Considered only if the flag is enabled on the account level.
-	 *
-	 * @var bool
-	 */
-	public $isL2vEnabled = null;
-
-	/**
-	 * Number of days the L2V asset is retained in the system.
-	 *             Optional - if configured, overriding the account level value.
-	 *
-	 * @var int
-	 */
-	public $retentionPeriodDays = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLiveToVodFullConfiguration extends KalturaObjectBase
-{
-	/**
-	 * Enable/disable the feature globally. If disabled, then all linear assets are not enabled.
-	 *
-	 * @var bool
-	 */
-	public $isL2vEnabled = null;
-
-	/**
-	 * Number of days the L2V asset is retained in the system.
-	 *
-	 * @var int
-	 */
-	public $retentionPeriodDays = null;
-
-	/**
-	 * The name (label) of the metadata field marking the program asset to be duplicated as a L2V asset.
-	 *
-	 * @var string
-	 */
-	public $metadataClassifier = null;
-
-	/**
-	 * Configuring isL2vEnabled/retentionPeriodDays per each channel, overriding the defaults set in the global isL2vEnabled and retentionPeriodDays parameters.
-	 *
-	 * @var array of KalturaLiveToVodLinearAssetConfiguration
-	 */
-	public $linearAssets;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLiveToVodPartnerConfiguration extends KalturaObjectBase
-{
-	/**
-	 * Enable/disable the feature globally. If disabled, then all linear assets are not enabled.
-	 *
-	 * @var bool
-	 */
-	public $isL2vEnabled = null;
-
-	/**
-	 * Number of days the L2V asset is retained in the system.
-	 *
-	 * @var int
-	 */
-	public $retentionPeriodDays = null;
-
-	/**
-	 * The name (label) of the metadata field marking the program asset to be duplicated as a L2V asset.
-	 *
-	 * @var string
-	 */
-	public $metadataClassifier = null;
 
 
 }
