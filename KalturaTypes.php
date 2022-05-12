@@ -3660,6 +3660,13 @@ class KalturaAssetUserRuleFilter extends KalturaFilter
 	 */
 	public $actionsContainType = null;
 
+	/**
+	 * Indicates that only asset rules are returned that have exactly one and not more associated condition.
+	 *
+	 * @var KalturaRuleConditionType
+	 */
+	public $conditionsContainType = null;
+
 
 }
 
@@ -7107,15 +7114,8 @@ class KalturaAssetRule extends KalturaAssetRuleBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetCondition extends KalturaCondition
+abstract class KalturaAssetConditionBase extends KalturaCondition
 {
-	/**
-	 * KSQL
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
-
 
 }
 
@@ -7135,9 +7135,9 @@ abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
 class KalturaAssetUserRule extends KalturaAssetRuleBase
 {
 	/**
-	 * List of Ksql conditions for the user rule
+	 * List of conditions for the user rule
 	 *
-	 * @var array of KalturaAssetCondition
+	 * @var array of KalturaAssetConditionBase
 	 */
 	public $conditions;
 
@@ -7147,6 +7147,22 @@ class KalturaAssetUserRule extends KalturaAssetRuleBase
 	 * @var array of KalturaAssetUserRuleAction
 	 */
 	public $actions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetShopCondition extends KalturaAssetConditionBase
+{
+	/**
+	 * Shop marker&#39;s value
+	 *
+	 * @var string
+	 */
+	public $value = null;
 
 
 }
@@ -7241,6 +7257,22 @@ class KalturaHeaderCondition extends KalturaNotCondition
 	 * @var string
 	 */
 	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetCondition extends KalturaAssetConditionBase
+{
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
 
 
 }
@@ -7518,6 +7550,29 @@ class KalturaUserSessionProfileCondition extends KalturaCondition
 	 * @var int
 	 */
 	public $id = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIpV6RangeCondition extends KalturaCondition
+{
+	/**
+	 * From IP address range
+	 *
+	 * @var string
+	 */
+	public $fromIP = null;
+
+	/**
+	 * TO IP address range
+	 *
+	 * @var string
+	 */
+	public $toIP = null;
 
 
 }
@@ -11577,6 +11632,13 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $uploadExportDatalake = null;
+
+	/**
+	 * Shop Marker&#39;s identifier
+	 *
+	 * @var int
+	 */
+	public $shopMarkerMetaId = null;
 
 
 }
