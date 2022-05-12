@@ -3660,13 +3660,6 @@ class KalturaAssetUserRuleFilter extends KalturaFilter
 	 */
 	public $actionsContainType = null;
 
-	/**
-	 * Indicates that only asset rules are returned that have exactly one and not more associated condition.
-	 *
-	 * @var KalturaRuleConditionType
-	 */
-	public $conditionsContainType = null;
-
 
 }
 
@@ -7114,8 +7107,15 @@ class KalturaAssetRule extends KalturaAssetRuleBase
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaAssetConditionBase extends KalturaCondition
+class KalturaAssetCondition extends KalturaCondition
 {
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
+
 
 }
 
@@ -7135,9 +7135,9 @@ abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
 class KalturaAssetUserRule extends KalturaAssetRuleBase
 {
 	/**
-	 * List of conditions for the user rule
+	 * List of Ksql conditions for the user rule
 	 *
-	 * @var array of KalturaAssetConditionBase
+	 * @var array of KalturaAssetCondition
 	 */
 	public $conditions;
 
@@ -7147,22 +7147,6 @@ class KalturaAssetUserRule extends KalturaAssetRuleBase
 	 * @var array of KalturaAssetUserRuleAction
 	 */
 	public $actions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetShopCondition extends KalturaAssetConditionBase
-{
-	/**
-	 * Shop marker&#39;s value
-	 *
-	 * @var string
-	 */
-	public $value = null;
 
 
 }
@@ -7257,22 +7241,6 @@ class KalturaHeaderCondition extends KalturaNotCondition
 	 * @var string
 	 */
 	public $value = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetCondition extends KalturaAssetConditionBase
-{
-	/**
-	 * KSQL
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
 
 
 }
@@ -7550,29 +7518,6 @@ class KalturaUserSessionProfileCondition extends KalturaCondition
 	 * @var int
 	 */
 	public $id = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIpV6RangeCondition extends KalturaCondition
-{
-	/**
-	 * From IP address range
-	 *
-	 * @var string
-	 */
-	public $fromIP = null;
-
-	/**
-	 * TO IP address range
-	 *
-	 * @var string
-	 */
-	public $toIP = null;
 
 
 }
@@ -11632,13 +11577,6 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $uploadExportDatalake = null;
-
-	/**
-	 * Shop Marker&#39;s identifier
-	 *
-	 * @var int
-	 */
-	public $shopMarkerMetaId = null;
 
 
 }
@@ -15810,6 +15748,20 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	public $bufferCatchUpSetting = null;
 
 	/**
+	 * padding before program starts in seconds, configuration only
+	 *
+	 * @var int
+	 */
+	public $paddingBeforeProgramStartsSetting = null;
+
+	/**
+	 * padding after program ends in seconds, configuration only
+	 *
+	 * @var int
+	 */
+	public $paddingAfterProgramEndsSetting = null;
+
+	/**
 	 * buffer Trick-play, configuration only
 	 *
 	 * @var int
@@ -15881,6 +15833,24 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @readonly
 	 */
 	public $catchUpBuffer = null;
+
+	/**
+	 * Returns padding before program starts in seconds from a live asset if configured,
+	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $paddingBeforeProgramStarts = null;
+
+	/**
+	 * Returns padding after program ends in seconds from a live asset if configured,
+	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $paddingAfterProgramEnds = null;
 
 	/**
 	 * summed Trick-play buffer, the TimeShiftedTvPartnerSettings are also taken into consideration
