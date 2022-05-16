@@ -7558,6 +7558,29 @@ class KalturaUserSessionProfileCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIpV6RangeCondition extends KalturaCondition
+{
+	/**
+	 * From IP address range
+	 *
+	 * @var string
+	 */
+	public $fromIP = null;
+
+	/**
+	 * TO IP address range
+	 *
+	 * @var string
+	 */
+	public $toIP = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAccessControlBlockAction extends KalturaAssetRuleAction
 {
 
@@ -11609,6 +11632,13 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $uploadExportDatalake = null;
+
+	/**
+	 * Shop Marker&#39;s identifier
+	 *
+	 * @var int
+	 */
+	public $shopMarkerMetaId = null;
 
 
 }
