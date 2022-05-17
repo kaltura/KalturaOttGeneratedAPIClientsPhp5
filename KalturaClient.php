@@ -6336,11 +6336,11 @@ class KalturaIotProfileService extends KalturaServiceBase
 	 * @param bigint $id KalturaIotProfile identifier
 	 * @return KalturaIotProfile
 	 */
-	function get($id)
+	function delete($id)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("iotprofile", "get", $kparams);
+		$this->client->queueServiceActionCall("iotprofile", "delete", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -6574,6 +6574,109 @@ class KalturaLineupService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveToVodService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Get existing L2V configuration for both the partner level and all channels level.
+	 * 
+	 * @return KalturaLiveToVodFullConfiguration
+	 */
+	function getConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("livetovod", "getConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLiveToVodFullConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Get existing L2V configuration for a specific linear asset.
+	 * 
+	 * @param bigint $linearAssetId Linear asset's identifier.
+	 * @return KalturaLiveToVodLinearAssetConfiguration
+	 */
+	function getLinearAssetConfiguration($linearAssetId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "linearAssetId", $linearAssetId);
+		$this->client->queueServiceActionCall("livetovod", "getLinearAssetConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLiveToVodLinearAssetConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Get existing L2V partner configuration.
+	 * 
+	 * @return KalturaLiveToVodPartnerConfiguration
+	 */
+	function getPartnerConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("livetovod", "getPartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLiveToVodPartnerConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Set L2V configuration for a specific Linear channel.
+	 * 
+	 * @param KalturaLiveToVodLinearAssetConfiguration $configuration Live to VOD linear asset (live channel) configuration object.
+	 * @return KalturaLiveToVodLinearAssetConfiguration
+	 */
+	function updateLinearAssetConfiguration(KalturaLiveToVodLinearAssetConfiguration $configuration)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "configuration", $configuration->toParams());
+		$this->client->queueServiceActionCall("livetovod", "updateLinearAssetConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLiveToVodLinearAssetConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Set L2V configuration on the partner level.
+	 * 
+	 * @param KalturaLiveToVodPartnerConfiguration $configuration Live to VOD configuration object.
+	 * @return KalturaLiveToVodPartnerConfiguration
+	 */
+	function updatePartnerConfiguration(KalturaLiveToVodPartnerConfiguration $configuration)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "configuration", $configuration->toParams());
+		$this->client->queueServiceActionCall("livetovod", "updatePartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLiveToVodPartnerConfiguration");
 		return $resultObject;
 	}
 }
@@ -13537,6 +13640,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaLiveToVodService
+	 */
+	public $liveToVod = null;
+
+	/**
+	 * 
 	 * @var KalturaMediaConcurrencyRuleService
 	 */
 	public $mediaConcurrencyRule = null;
@@ -13976,8 +14085,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-05-01');
-		$this->setApiVersion('7.4.0.29874');
+		$this->setClientTag('php5:22-05-17');
+		$this->setApiVersion('7.4.0.29933');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -14054,6 +14163,7 @@ class KalturaClient extends KalturaClientBase
 		$this->language = new KalturaLanguageService($this);
 		$this->licensedUrl = new KalturaLicensedUrlService($this);
 		$this->lineup = new KalturaLineupService($this);
+		$this->liveToVod = new KalturaLiveToVodService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);
 		$this->mediaFile = new KalturaMediaFileService($this);
 		$this->mediaFileType = new KalturaMediaFileTypeService($this);

@@ -3660,13 +3660,6 @@ class KalturaAssetUserRuleFilter extends KalturaFilter
 	 */
 	public $actionsContainType = null;
 
-	/**
-	 * Indicates that only asset rules are returned that have exactly one and not more associated condition.
-	 *
-	 * @var KalturaRuleConditionType
-	 */
-	public $conditionsContainType = null;
-
 
 }
 
@@ -7114,8 +7107,15 @@ class KalturaAssetRule extends KalturaAssetRuleBase
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaAssetConditionBase extends KalturaCondition
+class KalturaAssetCondition extends KalturaCondition
 {
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
+
 
 }
 
@@ -7135,9 +7135,9 @@ abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
 class KalturaAssetUserRule extends KalturaAssetRuleBase
 {
 	/**
-	 * List of conditions for the user rule
+	 * List of Ksql conditions for the user rule
 	 *
-	 * @var array of KalturaAssetConditionBase
+	 * @var array of KalturaAssetCondition
 	 */
 	public $conditions;
 
@@ -7147,22 +7147,6 @@ class KalturaAssetUserRule extends KalturaAssetRuleBase
 	 * @var array of KalturaAssetUserRuleAction
 	 */
 	public $actions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetShopCondition extends KalturaAssetConditionBase
-{
-	/**
-	 * Shop marker&#39;s value
-	 *
-	 * @var string
-	 */
-	public $value = null;
 
 
 }
@@ -7257,22 +7241,6 @@ class KalturaHeaderCondition extends KalturaNotCondition
 	 * @var string
 	 */
 	public $value = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetCondition extends KalturaAssetConditionBase
-{
-	/**
-	 * KSQL
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
 
 
 }
@@ -7550,29 +7518,6 @@ class KalturaUserSessionProfileCondition extends KalturaCondition
 	 * @var int
 	 */
 	public $id = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIpV6RangeCondition extends KalturaCondition
-{
-	/**
-	 * From IP address range
-	 *
-	 * @var string
-	 */
-	public $fromIP = null;
-
-	/**
-	 * TO IP address range
-	 *
-	 * @var string
-	 */
-	public $toIP = null;
 
 
 }
@@ -11632,13 +11577,6 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $uploadExportDatalake = null;
-
-	/**
-	 * Shop Marker&#39;s identifier
-	 *
-	 * @var int
-	 */
-	public $shopMarkerMetaId = null;
 
 
 }
@@ -21141,6 +21079,104 @@ class KalturaLicensedUrlRecordingRequest extends KalturaLicensedUrlBaseRequest
 	 * @var string
 	 */
 	public $fileType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveToVodLinearAssetConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Linear asset&#39;s identifier.
+	 *
+	 * @var int
+	 */
+	public $linearAssetId = null;
+
+	/**
+	 * Enable/disable the feature per linear channel. Considered only if the flag is enabled on the account level.
+	 *
+	 * @var bool
+	 */
+	public $isL2vEnabled = null;
+
+	/**
+	 * Number of days the L2V asset is retained in the system.
+	 *             Optional - if configured, overriding the account level value.
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveToVodFullConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Enable/disable the feature globally. If disabled, then all linear assets are not enabled.
+	 *
+	 * @var bool
+	 */
+	public $isL2vEnabled = null;
+
+	/**
+	 * Number of days the L2V asset is retained in the system.
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
+
+	/**
+	 * The name (label) of the metadata field marking the program asset to be duplicated as a L2V asset.
+	 *
+	 * @var string
+	 */
+	public $metadataClassifier = null;
+
+	/**
+	 * Configuring isL2vEnabled/retentionPeriodDays per each channel, overriding the defaults set in the global isL2vEnabled and retentionPeriodDays parameters.
+	 *
+	 * @var array of KalturaLiveToVodLinearAssetConfiguration
+	 */
+	public $linearAssets;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveToVodPartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Enable/disable the feature globally. If disabled, then all linear assets are not enabled.
+	 *
+	 * @var bool
+	 */
+	public $isL2vEnabled = null;
+
+	/**
+	 * Number of days the L2V asset is retained in the system.
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
+
+	/**
+	 * The name (label) of the metadata field marking the program asset to be duplicated as a L2V asset.
+	 *
+	 * @var string
+	 */
+	public $metadataClassifier = null;
 
 
 }
