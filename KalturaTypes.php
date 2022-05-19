@@ -15810,22 +15810,6 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	public $bufferCatchUpSetting = null;
 
 	/**
-	 * Returns padding before program starts in seconds from a live asset if configured,
-	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
-	 *
-	 * @var int
-	 */
-	public $paddingBeforeProgramStarts = null;
-
-	/**
-	 * Returns padding after program ends in seconds from a live asset if configured,
-	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
-	 *
-	 * @var int
-	 */
-	public $paddingAfterProgramEnds = null;
-
-	/**
 	 * buffer Trick-play, configuration only
 	 *
 	 * @var int
