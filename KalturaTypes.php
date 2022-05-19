@@ -15810,18 +15810,20 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	public $bufferCatchUpSetting = null;
 
 	/**
-	 * padding before program starts in seconds, configuration only
+	 * Returns padding before program starts in seconds from a live asset if configured,
+	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
 	 *
 	 * @var int
 	 */
-	public $paddingBeforeProgramStartsSetting = null;
+	public $paddingBeforeProgramStarts = null;
 
 	/**
-	 * padding after program ends in seconds, configuration only
+	 * Returns padding after program ends in seconds from a live asset if configured,
+	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
 	 *
 	 * @var int
 	 */
-	public $paddingAfterProgramEndsSetting = null;
+	public $paddingAfterProgramEnds = null;
 
 	/**
 	 * buffer Trick-play, configuration only
@@ -15895,24 +15897,6 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	 * @readonly
 	 */
 	public $catchUpBuffer = null;
-
-	/**
-	 * Returns padding before program starts in seconds from a live asset if configured,
-	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $paddingBeforeProgramStarts = null;
-
-	/**
-	 * Returns padding after program ends in seconds from a live asset if configured,
-	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $paddingAfterProgramEnds = null;
 
 	/**
 	 * summed Trick-play buffer, the TimeShiftedTvPartnerSettings are also taken into consideration
