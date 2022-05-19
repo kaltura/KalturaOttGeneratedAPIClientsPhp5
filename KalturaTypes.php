@@ -3660,13 +3660,6 @@ class KalturaAssetUserRuleFilter extends KalturaFilter
 	 */
 	public $actionsContainType = null;
 
-	/**
-	 * Indicates that only asset rules are returned that have exactly one and not more associated condition.
-	 *
-	 * @var KalturaRuleConditionType
-	 */
-	public $conditionsContainType = null;
-
 
 }
 
@@ -7114,8 +7107,15 @@ class KalturaAssetRule extends KalturaAssetRuleBase
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaAssetConditionBase extends KalturaCondition
+class KalturaAssetCondition extends KalturaCondition
 {
+	/**
+	 * KSQL
+	 *
+	 * @var string
+	 */
+	public $ksql = null;
+
 
 }
 
@@ -7135,9 +7135,9 @@ abstract class KalturaAssetUserRuleAction extends KalturaRuleAction
 class KalturaAssetUserRule extends KalturaAssetRuleBase
 {
 	/**
-	 * List of conditions for the user rule
+	 * List of Ksql conditions for the user rule
 	 *
-	 * @var array of KalturaAssetConditionBase
+	 * @var array of KalturaAssetCondition
 	 */
 	public $conditions;
 
@@ -7147,22 +7147,6 @@ class KalturaAssetUserRule extends KalturaAssetRuleBase
 	 * @var array of KalturaAssetUserRuleAction
 	 */
 	public $actions;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetShopCondition extends KalturaAssetConditionBase
-{
-	/**
-	 * Shop marker&#39;s value
-	 *
-	 * @var string
-	 */
-	public $value = null;
 
 
 }
@@ -7257,22 +7241,6 @@ class KalturaHeaderCondition extends KalturaNotCondition
 	 * @var string
 	 */
 	public $value = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetCondition extends KalturaAssetConditionBase
-{
-	/**
-	 * KSQL
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
 
 
 }
@@ -11632,13 +11600,6 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $uploadExportDatalake = null;
-
-	/**
-	 * Shop Marker&#39;s identifier
-	 *
-	 * @var int
-	 */
-	public $shopMarkerMetaId = null;
 
 
 }
@@ -17687,7 +17648,7 @@ class KalturaDeviceBrand extends KalturaObjectBase
 	 *
 	 * @var int
 	 */
-	public $deviceFamilyId = null;
+	public $deviceFamilyid = null;
 
 	/**
 	 * Type of device family.
