@@ -17648,7 +17648,7 @@ class KalturaDeviceBrand extends KalturaObjectBase
 	 *
 	 * @var int
 	 */
-	public $deviceFamilyId = null;
+	public $deviceFamilyid = null;
 
 	/**
 	 * Type of device family.
