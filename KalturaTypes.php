@@ -3491,6 +3491,22 @@ class KalturaMediaFileFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPersonalAssetSelectionFilter extends KalturaFilter
+{
+	/**
+	 * selected assets for specific slot number
+	 *
+	 * @var int
+	 */
+	public $slotNumberEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStreamingDeviceFilter extends KalturaFilter
 {
 	/**
@@ -15810,6 +15826,22 @@ class KalturaLiveAsset extends KalturaMediaAsset
 	public $bufferCatchUpSetting = null;
 
 	/**
+	 * Returns padding before program starts in seconds from a live asset if configured,
+	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
+	 *
+	 * @var int
+	 */
+	public $paddingBeforeProgramStarts = null;
+
+	/**
+	 * Returns padding after program ends in seconds from a live asset if configured,
+	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
+	 *
+	 * @var int
+	 */
+	public $paddingAfterProgramEnds = null;
+
+	/**
 	 * buffer Trick-play, configuration only
 	 *
 	 * @var int
@@ -17687,7 +17719,7 @@ class KalturaDeviceBrand extends KalturaObjectBase
 	 *
 	 * @var int
 	 */
-	public $deviceFamilyId = null;
+	public $deviceFamilyid = null;
 
 	/**
 	 * Type of device family.
@@ -19951,6 +19983,39 @@ class KalturaAssetFileContext extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetPersonalSelection extends KalturaObjectBase
+{
+	/**
+	 * Asset Id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $assetId = null;
+
+	/**
+	 * Asset Type
+	 *
+	 * @var KalturaAssetType
+	 * @readonly
+	 */
+	public $assetType = null;
+
+	/**
+	 * Update Date
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetStatisticsQuery extends KalturaObjectBase
 {
 	/**
@@ -21141,6 +21206,104 @@ class KalturaLicensedUrlRecordingRequest extends KalturaLicensedUrlBaseRequest
 	 * @var string
 	 */
 	public $fileType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveToVodLinearAssetConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Linear asset&#39;s identifier.
+	 *
+	 * @var int
+	 */
+	public $linearAssetId = null;
+
+	/**
+	 * Enable/disable the feature per linear channel. Considered only if the flag is enabled on the account level.
+	 *
+	 * @var bool
+	 */
+	public $isL2vEnabled = null;
+
+	/**
+	 * Number of days the L2V asset is retained in the system.
+	 *             Optional - if configured, overriding the account level value.
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveToVodFullConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Enable/disable the feature globally. If disabled, then all linear assets are not enabled.
+	 *
+	 * @var bool
+	 */
+	public $isL2vEnabled = null;
+
+	/**
+	 * Number of days the L2V asset is retained in the system.
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
+
+	/**
+	 * The name (label) of the metadata field marking the program asset to be duplicated as a L2V asset.
+	 *
+	 * @var string
+	 */
+	public $metadataClassifier = null;
+
+	/**
+	 * Configuring isL2vEnabled/retentionPeriodDays per each channel, overriding the defaults set in the global isL2vEnabled and retentionPeriodDays parameters.
+	 *
+	 * @var array of KalturaLiveToVodLinearAssetConfiguration
+	 */
+	public $linearAssets;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveToVodPartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Enable/disable the feature globally. If disabled, then all linear assets are not enabled.
+	 *
+	 * @var bool
+	 */
+	public $isL2vEnabled = null;
+
+	/**
+	 * Number of days the L2V asset is retained in the system.
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
+
+	/**
+	 * The name (label) of the metadata field marking the program asset to be duplicated as a L2V asset.
+	 *
+	 * @var string
+	 */
+	public $metadataClassifier = null;
 
 
 }

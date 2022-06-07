@@ -1708,6 +1708,15 @@ class KalturaPermissionType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPersonalAssetSelectionOrderBy extends KalturaEnumBase
+{
+	const ASSET_SELECTION_DATE_DESC = "ASSET_SELECTION_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPersonalFeedOrderBy extends KalturaEnumBase
 {
 	const RELEVANCY_DESC = "RELEVANCY_DESC";
