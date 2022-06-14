@@ -505,6 +505,11 @@ class KalturaBundleType extends KalturaEnumBase
 class KalturaCampaignOrderBy extends KalturaEnumBase
 {
 	const START_DATE_DESC = "START_DATE_DESC";
+	const START_DATE_ASC = "START_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const END_DATE_DESC = "END_DATE_DESC";
+	const END_DATE_ASC = "END_DATE_ASC";
 }
 
 /**
@@ -1708,6 +1713,15 @@ class KalturaPermissionType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPersonalAssetSelectionOrderBy extends KalturaEnumBase
+{
+	const ASSET_SELECTION_DATE_DESC = "ASSET_SELECTION_DATE_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPersonalFeedOrderBy extends KalturaEnumBase
 {
 	const RELEVANCY_DESC = "RELEVANCY_DESC";
@@ -2079,6 +2093,8 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const DEVICE_DYNAMIC_DATA = "DEVICE_DYNAMIC_DATA";
 	const IP_V6_RANGE = "IP_V6_RANGE";
 	const ASSET_SHOP = "ASSET_SHOP";
+	const CHANNEL = "CHANNEL";
+	const FILE_TYPE = "FILE_TYPE";
 }
 
 /**
