@@ -15744,6 +15744,71 @@ class KalturaAssetListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLiveToVodInfoAsset extends KalturaObjectBase
+{
+	/**
+	 * Linear Asset Id
+	 *
+	 * @var int
+	 */
+	public $linearAssetId = null;
+
+	/**
+	 * EPG Id
+	 *
+	 * @var string
+	 */
+	public $epgId = null;
+
+	/**
+	 * EPG Channel Id
+	 *
+	 * @var int
+	 */
+	public $epgChannelId = null;
+
+	/**
+	 * Crid
+	 *
+	 * @var string
+	 */
+	public $crid = null;
+
+	/**
+	 * Original Start Date
+	 *
+	 * @var int
+	 */
+	public $originalStartDate = null;
+
+	/**
+	 * Original End Date
+	 *
+	 * @var int
+	 */
+	public $originalEndDate = null;
+
+	/**
+	 * Padding before program starts
+	 *
+	 * @var int
+	 */
+	public $paddingBeforeProgramStarts = null;
+
+	/**
+	 * Padding after program ends
+	 *
+	 * @var int
+	 */
+	public $paddingAfterProgramEnds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaAsset extends KalturaAsset
 {
 	/**
@@ -15787,6 +15852,13 @@ class KalturaMediaAsset extends KalturaAsset
 	 * @var KalturaAssetInheritancePolicy
 	 */
 	public $inheritancePolicy = null;
+
+	/**
+	 * Live to VOD (if present)
+	 *
+	 * @var KalturaLiveToVodInfoAsset
+	 */
+	public $liveToVod;
 
 
 }
