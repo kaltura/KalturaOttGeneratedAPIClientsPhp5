@@ -3178,6 +3178,13 @@ class KalturaBookmark extends KalturaSlimAsset
 	 */
 	public $isReportingMode = null;
 
+	/**
+	 * Playback context type
+	 *
+	 * @var KalturaPlaybackContextType
+	 */
+	public $context = null;
+
 
 }
 
