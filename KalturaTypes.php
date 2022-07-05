@@ -3729,6 +3729,27 @@ class KalturaCampaignSearchFilter extends KalturaCampaignFilter
 	 */
 	public $hasPromotion = null;
 
+	/**
+	 * Filter the Campaign with this name.
+	 *
+	 * @var string
+	 */
+	public $nameEqual = null;
+
+	/**
+	 * A string that is included in the Campaign name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
+
+	/**
+	 * Comma separated Campaign State list
+	 *
+	 * @var string
+	 */
+	public $stateIn = null;
+
 
 }
 
@@ -7187,6 +7208,22 @@ class KalturaAssetShopCondition extends KalturaAssetConditionBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaChannelCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated channel IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaNotCondition extends KalturaCondition
 {
 	/**
@@ -7566,6 +7603,22 @@ class KalturaUserSessionProfileCondition extends KalturaCondition
 	 * @var int
 	 */
 	public $id = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFileTypeCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated filetype IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
 
 
 }
@@ -8197,28 +8250,14 @@ class KalturaTvmGeoRule extends KalturaTvmRule
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPromotion extends KalturaObjectBase
+abstract class KalturaBasePromotion extends KalturaObjectBase
 {
-	/**
-	 * The discount module id that is promoted to the user
-	 *
-	 * @var int
-	 */
-	public $discountModuleId = null;
-
 	/**
 	 * These conditions define the Promotion that applies on
 	 *
 	 * @var array of KalturaCondition
 	 */
 	public $conditions;
-
-	/**
-	 * the numer of recurring for this promotion
-	 *
-	 * @var int
-	 */
-	public $numberOfRecurring = null;
 
 
 }
@@ -8299,7 +8338,7 @@ class KalturaCampaign extends KalturaOTTObjectSupportNullable
 	/**
 	 * The Promotion that is promoted to the user
 	 *
-	 * @var KalturaPromotion
+	 * @var KalturaBasePromotion
 	 */
 	public $promotion;
 
@@ -8362,6 +8401,45 @@ class KalturaTriggerCampaign extends KalturaCampaign
 	 * @var array of KalturaCondition
 	 */
 	public $triggerConditions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponPromotion extends KalturaBasePromotion
+{
+	/**
+	 * CouponGroup identifier
+	 *
+	 * @var int
+	 */
+	public $couponGroupId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPromotion extends KalturaBasePromotion
+{
+	/**
+	 * The discount module id that is promoted to the user
+	 *
+	 * @var int
+	 */
+	public $discountModuleId = null;
+
+	/**
+	 * the numer of recurring for this promotion
+	 *
+	 * @var int
+	 */
+	public $numberOfRecurring = null;
 
 
 }
