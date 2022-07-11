@@ -505,6 +505,11 @@ class KalturaBundleType extends KalturaEnumBase
 class KalturaCampaignOrderBy extends KalturaEnumBase
 {
 	const START_DATE_DESC = "START_DATE_DESC";
+	const START_DATE_ASC = "START_DATE_ASC";
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const END_DATE_DESC = "END_DATE_DESC";
+	const END_DATE_ASC = "END_DATE_ASC";
 }
 
 /**

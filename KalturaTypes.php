@@ -3178,6 +3178,13 @@ class KalturaBookmark extends KalturaSlimAsset
 	 */
 	public $isReportingMode = null;
 
+	/**
+	 * Playback context type
+	 *
+	 * @var KalturaPlaybackContextType
+	 */
+	public $context = null;
+
 
 }
 
@@ -3728,6 +3735,27 @@ class KalturaCampaignSearchFilter extends KalturaCampaignFilter
 	 * @var bool
 	 */
 	public $hasPromotion = null;
+
+	/**
+	 * Filter the Campaign with this name.
+	 *
+	 * @var string
+	 */
+	public $nameEqual = null;
+
+	/**
+	 * A string that is included in the Campaign name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
+
+	/**
+	 * Comma separated Campaign State list
+	 *
+	 * @var string
+	 */
+	public $stateIn = null;
 
 
 }
@@ -4942,6 +4970,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * Usage module name
 	 *
 	 * @var string
+	 * @insertonly
 	 */
 	public $name = null;
 
@@ -4949,6 +4978,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The maximum number of times an item in this usage module can be viewed
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $maxViewsNumber = null;
 
@@ -4956,6 +4986,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing since a user started watching the item
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $viewLifeCycle = null;
 
@@ -4963,6 +4994,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $fullLifeCycle = null;
 
@@ -8229,7 +8261,7 @@ class KalturaTvmGeoRule extends KalturaTvmRule
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBasePromotion extends KalturaObjectBase
+abstract class KalturaBasePromotion extends KalturaObjectBase
 {
 	/**
 	 * These conditions define the Promotion that applies on
@@ -15801,6 +15833,71 @@ class KalturaAssetListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLiveToVodInfoAsset extends KalturaObjectBase
+{
+	/**
+	 * Linear Asset Id
+	 *
+	 * @var int
+	 */
+	public $linearAssetId = null;
+
+	/**
+	 * EPG Id
+	 *
+	 * @var string
+	 */
+	public $epgId = null;
+
+	/**
+	 * EPG Channel Id
+	 *
+	 * @var int
+	 */
+	public $epgChannelId = null;
+
+	/**
+	 * Crid
+	 *
+	 * @var string
+	 */
+	public $crid = null;
+
+	/**
+	 * Original Start Date
+	 *
+	 * @var int
+	 */
+	public $originalStartDate = null;
+
+	/**
+	 * Original End Date
+	 *
+	 * @var int
+	 */
+	public $originalEndDate = null;
+
+	/**
+	 * Padding before program starts
+	 *
+	 * @var int
+	 */
+	public $paddingBeforeProgramStarts = null;
+
+	/**
+	 * Padding after program ends
+	 *
+	 * @var int
+	 */
+	public $paddingAfterProgramEnds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaAsset extends KalturaAsset
 {
 	/**
@@ -15844,6 +15941,13 @@ class KalturaMediaAsset extends KalturaAsset
 	 * @var KalturaAssetInheritancePolicy
 	 */
 	public $inheritancePolicy = null;
+
+	/**
+	 * Live to VOD (if present)
+	 *
+	 * @var KalturaLiveToVodInfoAsset
+	 */
+	public $liveToVod;
 
 
 }
