@@ -4942,6 +4942,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * Usage module name
 	 *
 	 * @var string
+	 * @insertonly
 	 */
 	public $name = null;
 
@@ -4949,6 +4950,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The maximum number of times an item in this usage module can be viewed
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $maxViewsNumber = null;
 
@@ -4956,6 +4958,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing since a user started watching the item
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $viewLifeCycle = null;
 
@@ -4963,6 +4966,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $fullLifeCycle = null;
 
@@ -11752,6 +11756,13 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $revokeOnDeviceDelete = null;
+
+	/**
+	 * If set to true then for all concurrency checks in all APIs, system shall exclude free content from counting towards the use of a concurrency slot
+	 *
+	 * @var bool
+	 */
+	public $excludeFreeContentFromConcurrency = null;
 
 
 }
@@ -22523,22 +22534,6 @@ class KalturaPurchase extends KalturaPurchaseBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPurchaseSession extends KalturaPurchase
-{
-	/**
-	 * Preview module identifier (relevant only for subscription)
-	 *
-	 * @var int
-	 */
-	public $previewModuleId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaExternalReceipt extends KalturaPurchaseBase
 {
 	/**
@@ -22554,6 +22549,22 @@ class KalturaExternalReceipt extends KalturaPurchaseBase
 	 * @var string
 	 */
 	public $paymentGatewayName = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPurchaseSession extends KalturaPurchase
+{
+	/**
+	 * Preview module identifier (relevant only for subscription)
+	 *
+	 * @var int
+	 */
+	public $previewModuleId = null;
 
 
 }
