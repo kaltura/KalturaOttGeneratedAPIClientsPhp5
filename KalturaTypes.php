@@ -3178,6 +3178,13 @@ class KalturaBookmark extends KalturaSlimAsset
 	 */
 	public $isReportingMode = null;
 
+	/**
+	 * Playback context type
+	 *
+	 * @var KalturaPlaybackContextType
+	 */
+	public $context = null;
+
 
 }
 
@@ -4942,6 +4949,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * Usage module name
 	 *
 	 * @var string
+	 * @insertonly
 	 */
 	public $name = null;
 
@@ -4949,6 +4957,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The maximum number of times an item in this usage module can be viewed
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $maxViewsNumber = null;
 
@@ -4956,6 +4965,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing since a user started watching the item
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $viewLifeCycle = null;
 
@@ -4963,6 +4973,7 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $fullLifeCycle = null;
 
@@ -6368,7 +6379,7 @@ class KalturaDiscount extends KalturaPrice
 	/**
 	 * The discount percentage
 	 *
-	 * @var int
+	 * @var float
 	 */
 	public $percentage = null;
 
