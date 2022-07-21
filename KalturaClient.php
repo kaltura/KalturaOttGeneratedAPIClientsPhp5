@@ -11472,29 +11472,6 @@ class KalturaStreamingDeviceService extends KalturaServiceBase
 	}
 
 	/**
-	 * Reserves a concurrency slot for the given asset-device combination
-	 * 
-	 * @param string $mediaFileId KalturaMediaFile.id media file belonging to the asset for which a concurrency slot is being reserved
-	 * @param string $assetId KalturaAsset.id - asset for which a concurrency slot is being reserved
-	 * @param string $assetType Identifies the type of asset for which the concurrency slot is being reserved
-	 * @return bool
-	 */
-	function bookPlaybackSession($mediaFileId, $assetId, $assetType)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "mediaFileId", $mediaFileId);
-		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "assetType", $assetType);
-		$this->client->queueServiceActionCall("streamingdevice", "bookPlaybackSession", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
 	 * Lists of devices that are streaming at that moment
 	 * 
 	 * @param KalturaStreamingDeviceFilter $filter Segmentation type filter - basically empty
@@ -14206,8 +14183,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-07-19');
-		$this->setApiVersion('7.8.0.29957');
+		$this->setClientTag('php5:22-07-21');
+		$this->setApiVersion('7.8.1.29972');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

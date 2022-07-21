@@ -3178,6 +3178,13 @@ class KalturaBookmark extends KalturaSlimAsset
 	 */
 	public $isReportingMode = null;
 
+	/**
+	 * Playback context type
+	 *
+	 * @var KalturaPlaybackContextType
+	 */
+	public $context = null;
+
 
 }
 
@@ -6372,7 +6379,7 @@ class KalturaDiscount extends KalturaPrice
 	/**
 	 * The discount percentage
 	 *
-	 * @var int
+	 * @var float
 	 */
 	public $percentage = null;
 
@@ -11756,13 +11763,6 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $revokeOnDeviceDelete = null;
-
-	/**
-	 * If set to true then for all concurrency checks in all APIs, system shall exclude free content from counting towards the use of a concurrency slot
-	 *
-	 * @var bool
-	 */
-	public $excludeFreeContentFromConcurrency = null;
 
 
 }
