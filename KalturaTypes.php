@@ -3178,13 +3178,6 @@ class KalturaBookmark extends KalturaSlimAsset
 	 */
 	public $isReportingMode = null;
 
-	/**
-	 * Playback context type
-	 *
-	 * @var KalturaPlaybackContextType
-	 */
-	public $context = null;
-
 
 }
 
@@ -5307,6 +5300,21 @@ class KalturaCollection extends KalturaOTTObjectSupportNullable
 	 */
 	public $virtualAssetId = null;
 
+	/**
+	 * A list of file types identifiers that are supported in this collection
+	 *
+	 * @var array of KalturaIntegerValue
+	 * @readonly
+	 */
+	public $fileTypes;
+
+	/**
+	 * Comma separated file types identifiers that are supported in this collection
+	 *
+	 * @var string
+	 */
+	public $fileTypesIds = null;
+
 
 }
 
@@ -6379,7 +6387,7 @@ class KalturaDiscount extends KalturaPrice
 	/**
 	 * The discount percentage
 	 *
-	 * @var float
+	 * @var int
 	 */
 	public $percentage = null;
 
