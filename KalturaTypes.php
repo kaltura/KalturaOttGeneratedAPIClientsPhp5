@@ -3178,6 +3178,13 @@ class KalturaBookmark extends KalturaSlimAsset
 	 */
 	public $isReportingMode = null;
 
+	/**
+	 * Playback context type
+	 *
+	 * @var KalturaPlaybackContextType
+	 */
+	public $context = null;
+
 
 }
 
@@ -6372,7 +6379,7 @@ class KalturaDiscount extends KalturaPrice
 	/**
 	 * The discount percentage
 	 *
-	 * @var int
+	 * @var float
 	 */
 	public $percentage = null;
 
