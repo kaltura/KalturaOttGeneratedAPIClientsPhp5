@@ -8606,29 +8606,6 @@ class KalturaIotProfileAws extends KalturaOTTObjectSupportNullable
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIotProfile extends KalturaOTTObjectSupportNullable
-{
-	/**
-	 * adapterUrl
-	 *
-	 * @var string
-	 */
-	public $adapterUrl = null;
-
-	/**
-	 * kalturaIotProfileAws
-	 *
-	 * @var KalturaIotProfileAws
-	 */
-	public $iotProfileAws;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetFile extends KalturaObjectBase
 {
 	/**
@@ -18252,22 +18229,6 @@ class KalturaIotListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIotProfileListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of objects
-	 *
-	 * @var array of KalturaIotProfile
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaLanguage extends KalturaObjectBase
 {
 	/**
@@ -21074,120 +21035,98 @@ class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIotDefault extends KalturaObjectBase
+class KalturaIotClientConfiguration extends KalturaObjectBase
 {
 	/**
-	 * PoolId
+	 * IdentityPoolId
 	 *
 	 * @var string
 	 */
-	public $poolId = null;
+	public $identityPoolId = null;
 
 	/**
-	 * Region
+	 * UserPoolId
 	 *
 	 * @var string
 	 */
-	public $region = null;
+	public $userPoolId = null;
 
 	/**
-	 * AppClientId
+	 * AwsRegion
+	 *
+	 * @var string
+	 */
+	public $awsRegion = null;
+
+	/**
+	 * appClientId
 	 *
 	 * @var string
 	 */
 	public $appClientId = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCognitoIdentity extends KalturaObjectBase
-{
 	/**
-	 * Default
-	 *
-	 * @var KalturaIotDefault
-	 */
-	public $iotDefault;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCredentialsProvider extends KalturaObjectBase
-{
-	/**
-	 * KalturaCognitoIdentity
-	 *
-	 * @var KalturaCognitoIdentity
-	 */
-	public $cognitoIdentity;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCognitoUserPool extends KalturaObjectBase
-{
-	/**
-	 * Default
-	 *
-	 * @var KalturaIotDefault
-	 */
-	public $iotDefault;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIotClientConfiguration extends KalturaObjectBase
-{
-	/**
-	 * announcementTopic
+	 * endPoint
 	 *
 	 * @var string
 	 */
-	public $announcementTopic = null;
+	public $endPoint = null;
 
 	/**
-	 * KalturaCredentialsProvider
-	 *
-	 * @var KalturaCredentialsProvider
-	 */
-	public $credentialsProvider;
-
-	/**
-	 * CognitoUserPool
-	 *
-	 * @var KalturaCognitoUserPool
-	 */
-	public $cognitoUserPool;
-
-	/**
-	 * json
+	 * thingName
 	 *
 	 * @var string
 	 */
-	public $json = null;
+	public $thingName = null;
+
+	/**
+	 * thingArn
+	 *
+	 * @var string
+	 */
+	public $thingArn = null;
+
+	/**
+	 * thingId
+	 *
+	 * @var string
+	 */
+	public $thingId = null;
+
+	/**
+	 * username
+	 *
+	 * @var string
+	 */
+	public $username = null;
+
+	/**
+	 * password
+	 *
+	 * @var string
+	 */
+	public $password = null;
 
 	/**
 	 * topics
 	 *
+	 * @var array of KalturaStringValue
+	 */
+	public $topics;
+
+	/**
+	 * status
+	 *
 	 * @var string
 	 */
-	public $topics = null;
+	public $status = null;
+
+	/**
+	 * message
+	 *
+	 * @var string
+	 */
+	public $message = null;
 
 
 }

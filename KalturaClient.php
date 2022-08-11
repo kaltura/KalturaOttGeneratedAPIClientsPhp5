@@ -6377,7 +6377,7 @@ class KalturaIotService extends KalturaServiceBase
 	/**
 	 * Register IOT device
 	 * 
-	 * @return KalturaIot
+	 * @return bool
 	 */
 	function register()
 	{
@@ -6387,7 +6387,7 @@ class KalturaIotService extends KalturaServiceBase
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIot");
+		$resultObject = (bool) $resultObject;
 		return $resultObject;
 	}
 }
@@ -6404,61 +6404,19 @@ class KalturaIotProfileService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add new KalturaIotProfile
+	 * Add new new environment in aws
 	 * 
-	 * @param KalturaIotProfile $objectToAdd KalturaIotProfile Object to add
-	 * @return KalturaIotProfile
+	 * @return bool
 	 */
-	function add(KalturaIotProfile $objectToAdd)
+	function add()
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "objectToAdd", $objectToAdd->toParams());
 		$this->client->queueServiceActionCall("iotprofile", "add", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
-		return $resultObject;
-	}
-
-	/**
-	 * Get existing KalturaIotProfile
-	 * 
-	 * @param bigint $id KalturaIotProfile identifier
-	 * @return KalturaIotProfile
-	 */
-	function get($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("iotprofile", "get", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
-		return $resultObject;
-	}
-
-	/**
-	 * Update existing KalturaIotProfile
-	 * 
-	 * @param bigint $id Id of KalturaIotProfile to update
-	 * @param KalturaIotProfile $objectToUpdate KalturaIotProfile Object to update
-	 * @return KalturaIotProfile
-	 */
-	function update($id, KalturaIotProfile $objectToUpdate)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "objectToUpdate", $objectToUpdate->toParams());
-		$this->client->queueServiceActionCall("iotprofile", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaIotProfile");
+		$resultObject = (bool) $resultObject;
 		return $resultObject;
 	}
 }
@@ -14183,8 +14141,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-07-21');
-		$this->setApiVersion('7.8.1.29972');
+		$this->setClientTag('php5:22-08-11');
+		$this->setApiVersion('7.8.1.30053');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
