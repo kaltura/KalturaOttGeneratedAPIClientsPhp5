@@ -700,6 +700,13 @@ class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
 	 */
 	public $kSql = null;
 
+	/**
+	 * Name of segment contains specific string value
+	 *
+	 * @var string
+	 */
+	public $nameContain = null;
+
 
 }
 
@@ -715,6 +722,13 @@ class KalturaSegmentValueFilter extends KalturaBaseSegmentationTypeFilter
 	 * @var string
 	 */
 	public $idIn = null;
+
+	/**
+	 * Name of segment contains specific string value
+	 *
+	 * @var string
+	 */
+	public $nameContain = null;
 
 
 }
@@ -3736,6 +3750,27 @@ class KalturaCampaignSearchFilter extends KalturaCampaignFilter
 	 */
 	public $hasPromotion = null;
 
+	/**
+	 * Filter the Campaign with this name.
+	 *
+	 * @var string
+	 */
+	public $nameEqual = null;
+
+	/**
+	 * A string that is included in the Campaign name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
+
+	/**
+	 * Comma separated Campaign State list
+	 *
+	 * @var string
+	 */
+	public $stateIn = null;
+
 
 }
 
@@ -5306,6 +5341,21 @@ class KalturaCollection extends KalturaOTTObjectSupportNullable
 	 * @readonly
 	 */
 	public $virtualAssetId = null;
+
+	/**
+	 * A list of file types identifiers that are supported in this collection
+	 *
+	 * @var array of KalturaIntegerValue
+	 * @readonly
+	 */
+	public $fileTypes;
+
+	/**
+	 * Comma separated file types identifiers that are supported in this collection
+	 *
+	 * @var string
+	 */
+	public $fileTypesIds = null;
 
 
 }
@@ -7198,6 +7248,22 @@ class KalturaAssetShopCondition extends KalturaAssetConditionBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaChannelCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated channel IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaNotCondition extends KalturaCondition
 {
 	/**
@@ -7577,6 +7643,22 @@ class KalturaUserSessionProfileCondition extends KalturaCondition
 	 * @var int
 	 */
 	public $id = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFileTypeCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated filetype IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
 
 
 }
@@ -8208,28 +8290,14 @@ class KalturaTvmGeoRule extends KalturaTvmRule
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPromotion extends KalturaObjectBase
+abstract class KalturaBasePromotion extends KalturaObjectBase
 {
-	/**
-	 * The discount module id that is promoted to the user
-	 *
-	 * @var int
-	 */
-	public $discountModuleId = null;
-
 	/**
 	 * These conditions define the Promotion that applies on
 	 *
 	 * @var array of KalturaCondition
 	 */
 	public $conditions;
-
-	/**
-	 * the numer of recurring for this promotion
-	 *
-	 * @var int
-	 */
-	public $numberOfRecurring = null;
 
 
 }
@@ -8310,7 +8378,7 @@ class KalturaCampaign extends KalturaOTTObjectSupportNullable
 	/**
 	 * The Promotion that is promoted to the user
 	 *
-	 * @var KalturaPromotion
+	 * @var KalturaBasePromotion
 	 */
 	public $promotion;
 
@@ -8373,6 +8441,45 @@ class KalturaTriggerCampaign extends KalturaCampaign
 	 * @var array of KalturaCondition
 	 */
 	public $triggerConditions;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponPromotion extends KalturaBasePromotion
+{
+	/**
+	 * CouponGroup identifier
+	 *
+	 * @var int
+	 */
+	public $couponGroupId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPromotion extends KalturaBasePromotion
+{
+	/**
+	 * The discount module id that is promoted to the user
+	 *
+	 * @var int
+	 */
+	public $discountModuleId = null;
+
+	/**
+	 * the numer of recurring for this promotion
+	 *
+	 * @var int
+	 */
+	public $numberOfRecurring = null;
 
 
 }
@@ -10078,6 +10185,13 @@ class KalturaSegmentationType extends KalturaObjectBase
 	public $conditions;
 
 	/**
+	 * Boolean operator between segmentation type&#39;s conditions - defaults to &quot;And&quot;
+	 *
+	 * @var KalturaBooleanOperator
+	 */
+	public $conditionsOperator = null;
+
+	/**
 	 * Segmentation conditions - can be empty
 	 *
 	 * @var array of KalturaBaseSegmentAction
@@ -10098,6 +10212,22 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $createDate = null;
+
+	/**
+	 * Update date of segmentation type
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * Last date of execution of segmentation type
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $executeDate = null;
 
 	/**
 	 * Segmentation type version
@@ -10262,6 +10392,13 @@ class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 	 * @var string
 	 */
 	public $businessModuleIdIn = null;
+
+	/**
+	 * Which currency code should be taken into consideration
+	 *
+	 * @var string
+	 */
+	public $currencyCode = null;
 
 
 }
@@ -10649,6 +10786,14 @@ class KalturaSingleSegmentValue extends KalturaBaseSegmentValue
 	 * @readonly
 	 */
 	public $affectedUsers = null;
+
+	/**
+	 * The amount of households that are being affected by this Segmentation type
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $affectedHouseholds = null;
 
 
 }
@@ -11763,6 +11908,13 @@ class KalturaConcurrencyPartnerConfig extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $revokeOnDeviceDelete = null;
+
+	/**
+	 * If set to true then for all concurrency checks in all APIs, system shall exclude free content from counting towards the use of a concurrency slot
+	 *
+	 * @var bool
+	 */
+	public $excludeFreeContentFromConcurrency = null;
 
 
 }
