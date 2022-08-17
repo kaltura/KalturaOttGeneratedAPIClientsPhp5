@@ -266,16 +266,6 @@ class KalturaAssetOrderByType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetPersonalMarkupSearchOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-	const REQUEST_ORDER = "REQUEST_ORDER";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetReferenceType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -392,7 +382,6 @@ class KalturaBillingItemsType extends KalturaEnumBase
 	const PRE_PAID = "pre_paid";
 	const PRE_PAID_EXPIRED = "pre_paid_expired";
 	const COLLECTION = "collection";
-	const PROGRAM_ASSET_GROUP_OFFER = "program_asset_group_offer";
 }
 
 /**
@@ -495,7 +484,6 @@ class KalturaBundleType extends KalturaEnumBase
 {
 	const SUBSCRIPTION = "subscription";
 	const COLLECTION = "collection";
-	const PAGO = "pago";
 }
 
 /**
@@ -800,46 +788,6 @@ class KalturaDeleteMediaPolicy extends KalturaEnumBase
 {
 	const DISABLE = "Disable";
 	const DELETE = "Delete";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceBrandOrderBy extends KalturaEnumBase
-{
-	const ID_ASC = "ID_ASC";
-	const ID_DESC = "ID_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceBrandType extends KalturaEnumBase
-{
-	const SYSTEM = "System";
-	const CUSTOM = "Custom";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceFamilyOrderBy extends KalturaEnumBase
-{
-	const ID_ASC = "ID_ASC";
-	const ID_DESC = "ID_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceFamilyType extends KalturaEnumBase
-{
-	const SYSTEM = "System";
-	const CUSTOM = "Custom";
 }
 
 /**
@@ -1302,36 +1250,6 @@ class KalturaInboxMessageType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIngestEpgProgramResultOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-	const EXTERNAL_PROGRAM_ID_DESC = "EXTERNAL_PROGRAM_ID_DESC";
-	const EXTERNAL_PROGRAM_ID_ASC = "EXTERNAL_PROGRAM_ID_ASC";
-	const LINEAR_CHANNEL_ID_DESC = "LINEAR_CHANNEL_ID_DESC";
-	const LINEAR_CHANNEL_ID_ASC = "LINEAR_CHANNEL_ID_ASC";
-	const INDEX_IN_FILE_DESC = "INDEX_IN_FILE_DESC";
-	const INDEX_IN_FILE_ASC = "INDEX_IN_FILE_ASC";
-	const START_DATE_DESC = "START_DATE_DESC";
-	const START_DATE_ASC = "START_DATE_ASC";
-	const SEVERITY_DESC = "SEVERITY_DESC";
-	const SEVERITY_ASC = "SEVERITY_ASC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIngestEpgProgramStatus extends KalturaEnumBase
-{
-	const FAILURE = "FAILURE";
-	const WARNING = "WARNING";
-	const SUCCESS = "SUCCESS";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaIngestProfileAutofillPolicy extends KalturaEnumBase
 {
 	const REJECT = "REJECT";
@@ -1571,7 +1489,6 @@ class KalturaObjectVirtualAssetInfoType extends KalturaEnumBase
 	const CATEGORY = "Category";
 	const TVOD = "Tvod";
 	const BOXSET = "Boxset";
-	const PAGO = "PAGO";
 }
 
 /**
@@ -1702,15 +1619,6 @@ class KalturaPermissionType extends KalturaEnumBase
 	const NORMAL = "NORMAL";
 	const GROUP = "GROUP";
 	const SPECIAL_FEATURE = "SPECIAL_FEATURE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPersonalAssetSelectionOrderBy extends KalturaEnumBase
-{
-	const ASSET_SELECTION_DATE_DESC = "ASSET_SELECTION_DATE_DESC";
 }
 
 /**
@@ -1849,18 +1757,6 @@ class KalturaProductPriceOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaProgramAssetGroupOfferOrderBy extends KalturaEnumBase
-{
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
-	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
-	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaProtectionPolicy extends KalturaEnumBase
 {
 	const EXTENDINGRECORDINGLIFETIME = "ExtendingRecordingLifetime";
@@ -1900,7 +1796,6 @@ class KalturaPurchaseStatus extends KalturaEnumBase
 	const INVALID_CURRENCY = "invalid_currency";
 	const CURRENCY_NOT_DEFINED_ON_PRICE_CODE = "currency_not_defined_on_price_code";
 	const PENDING_ENTITLEMENT = "pending_entitlement";
-	const PROGRAM_ASSET_GROUP_OFFER_PURCHASED = "program_asset_group_offer_purchased";
 }
 
 /**
@@ -2087,7 +1982,6 @@ class KalturaRuleConditionType extends KalturaEnumBase
 	const USER_SESSION_PROFILE = "USER_SESSION_PROFILE";
 	const DEVICE_DYNAMIC_DATA = "DEVICE_DYNAMIC_DATA";
 	const IP_V6_RANGE = "IP_V6_RANGE";
-	const ASSET_SHOP = "ASSET_SHOP";
 }
 
 /**
@@ -2492,7 +2386,6 @@ class KalturaTransactionType extends KalturaEnumBase
 	const PPV = "ppv";
 	const SUBSCRIPTION = "subscription";
 	const COLLECTION = "collection";
-	const PROGRAMASSETGROUPOFFER = "programAssetGroupOffer";
 }
 
 /**
