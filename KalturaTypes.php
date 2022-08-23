@@ -700,13 +700,6 @@ class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
 	 */
 	public $kSql = null;
 
-	/**
-	 * Name of segment contains specific string value
-	 *
-	 * @var string
-	 */
-	public $nameContain = null;
-
 
 }
 
@@ -722,13 +715,6 @@ class KalturaSegmentValueFilter extends KalturaBaseSegmentationTypeFilter
 	 * @var string
 	 */
 	public $idIn = null;
-
-	/**
-	 * Name of segment contains specific string value
-	 *
-	 * @var string
-	 */
-	public $nameContain = null;
 
 
 }
@@ -8713,29 +8699,6 @@ class KalturaIotProfileAws extends KalturaOTTObjectSupportNullable
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIotProfile extends KalturaOTTObjectSupportNullable
-{
-	/**
-	 * adapterUrl
-	 *
-	 * @var string
-	 */
-	public $adapterUrl = null;
-
-	/**
-	 * kalturaIotProfileAws
-	 *
-	 * @var KalturaIotProfileAws
-	 */
-	public $iotProfileAws;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetFile extends KalturaObjectBase
 {
 	/**
@@ -10185,13 +10148,6 @@ class KalturaSegmentationType extends KalturaObjectBase
 	public $conditions;
 
 	/**
-	 * Boolean operator between segmentation type&#39;s conditions - defaults to &quot;And&quot;
-	 *
-	 * @var KalturaBooleanOperator
-	 */
-	public $conditionsOperator = null;
-
-	/**
 	 * Segmentation conditions - can be empty
 	 *
 	 * @var array of KalturaBaseSegmentAction
@@ -10212,22 +10168,6 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $createDate = null;
-
-	/**
-	 * Update date of segmentation type
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-	/**
-	 * Last date of execution of segmentation type
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $executeDate = null;
 
 	/**
 	 * Segmentation type version
@@ -10392,13 +10332,6 @@ class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 	 * @var string
 	 */
 	public $businessModuleIdIn = null;
-
-	/**
-	 * Which currency code should be taken into consideration
-	 *
-	 * @var string
-	 */
-	public $currencyCode = null;
 
 
 }
@@ -10786,14 +10719,6 @@ class KalturaSingleSegmentValue extends KalturaBaseSegmentValue
 	 * @readonly
 	 */
 	public $affectedUsers = null;
-
-	/**
-	 * The amount of households that are being affected by this Segmentation type
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $affectedHouseholds = null;
 
 
 }
@@ -18404,22 +18329,6 @@ class KalturaIotListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIotProfileListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of objects
-	 *
-	 * @var array of KalturaIotProfile
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaLanguage extends KalturaObjectBase
 {
 	/**
@@ -21226,120 +21135,105 @@ class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIotDefault extends KalturaObjectBase
+class KalturaIotClientConfiguration extends KalturaObjectBase
 {
 	/**
-	 * PoolId
+	 * IdentityPoolId
 	 *
 	 * @var string
 	 */
-	public $poolId = null;
+	public $identityPoolId = null;
 
 	/**
-	 * Region
+	 * UserPoolId
 	 *
 	 * @var string
 	 */
-	public $region = null;
+	public $userPoolId = null;
 
 	/**
-	 * AppClientId
+	 * AwsRegion
+	 *
+	 * @var string
+	 */
+	public $awsRegion = null;
+
+	/**
+	 * appClientId
 	 *
 	 * @var string
 	 */
 	public $appClientId = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCognitoIdentity extends KalturaObjectBase
-{
 	/**
-	 * Default
-	 *
-	 * @var KalturaIotDefault
-	 */
-	public $iotDefault;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCredentialsProvider extends KalturaObjectBase
-{
-	/**
-	 * KalturaCognitoIdentity
-	 *
-	 * @var KalturaCognitoIdentity
-	 */
-	public $cognitoIdentity;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCognitoUserPool extends KalturaObjectBase
-{
-	/**
-	 * Default
-	 *
-	 * @var KalturaIotDefault
-	 */
-	public $iotDefault;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaIotClientConfiguration extends KalturaObjectBase
-{
-	/**
-	 * announcementTopic
+	 * legacyEndPoint
 	 *
 	 * @var string
 	 */
-	public $announcementTopic = null;
+	public $legacyEndPoint = null;
 
 	/**
-	 * KalturaCredentialsProvider
-	 *
-	 * @var KalturaCredentialsProvider
-	 */
-	public $credentialsProvider;
-
-	/**
-	 * CognitoUserPool
-	 *
-	 * @var KalturaCognitoUserPool
-	 */
-	public $cognitoUserPool;
-
-	/**
-	 * json
+	 * endPoint
 	 *
 	 * @var string
 	 */
-	public $json = null;
+	public $endPoint = null;
+
+	/**
+	 * thingName
+	 *
+	 * @var string
+	 */
+	public $thingName = null;
+
+	/**
+	 * thingArn
+	 *
+	 * @var string
+	 */
+	public $thingArn = null;
+
+	/**
+	 * thingId
+	 *
+	 * @var string
+	 */
+	public $thingId = null;
+
+	/**
+	 * username
+	 *
+	 * @var string
+	 */
+	public $username = null;
+
+	/**
+	 * password
+	 *
+	 * @var string
+	 */
+	public $password = null;
 
 	/**
 	 * topics
 	 *
+	 * @var array of KalturaStringValue
+	 */
+	public $topics;
+
+	/**
+	 * status
+	 *
 	 * @var string
 	 */
-	public $topics = null;
+	public $status = null;
+
+	/**
+	 * message
+	 *
+	 * @var string
+	 */
+	public $message = null;
 
 
 }

@@ -441,16 +441,6 @@ class KalturaBookmarkOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBooleanOperator extends KalturaEnumBase
-{
-	const AND = "And";
-	const OR = "Or";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaBulkUploadJobAction extends KalturaEnumBase
 {
 	const UPSERT = "Upsert";
