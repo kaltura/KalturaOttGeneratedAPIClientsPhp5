@@ -10553,6 +10553,23 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
+	 * Get existing segmentation partner configuration
+	 * 
+	 * @return KalturaSegmentationPartnerConfiguration
+	 */
+	function getPartnerConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("segmentationtype", "getPartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSegmentationPartnerConfiguration");
+		return $resultObject;
+	}
+
+	/**
 	 * Lists all segmentation types in group
 	 * 
 	 * @param KalturaBaseSegmentationTypeFilter $filter Segmentation type filter - basically empty
@@ -10593,6 +10610,25 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaSegmentationType");
+		return $resultObject;
+	}
+
+	/**
+	 * Set segmentation configuration on partner level
+	 * 
+	 * @param KalturaSegmentationPartnerConfiguration $configuration New configuration to set
+	 * @return KalturaSegmentationPartnerConfiguration
+	 */
+	function updatePartnerConfiguration(KalturaSegmentationPartnerConfiguration $configuration)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "configuration", $configuration->toParams());
+		$this->client->queueServiceActionCall("segmentationtype", "updatePartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSegmentationPartnerConfiguration");
 		return $resultObject;
 	}
 }
@@ -14164,8 +14200,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-08-23');
-		$this->setApiVersion('7.9.0.30000');
+		$this->setClientTag('php5:22-09-03');
+		$this->setApiVersion('8.0.0.30023');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

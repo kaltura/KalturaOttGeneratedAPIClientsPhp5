@@ -441,6 +441,16 @@ class KalturaBookmarkOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBooleanOperator extends KalturaEnumBase
+{
+	const AND = "And";
+	const OR = "Or";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadJobAction extends KalturaEnumBase
 {
 	const UPSERT = "Upsert";
@@ -1540,6 +1550,8 @@ class KalturaMonetizationType extends KalturaEnumBase
 	const PPV = "ppv";
 	const SUBSCRIPTION = "subscription";
 	const BOXSET = "boxset";
+	const ANY = "any";
+	const PPV_LIVE = "ppv_live";
 }
 
 /**
@@ -2161,6 +2173,22 @@ class KalturaSearchPriorityGroupOrderBy extends KalturaEnumBase
 	const PRIORITY_DESC = "PRIORITY_DESC";
 	const NAME_ASC = "NAME_ASC";
 	const NAME_DESC = "NAME_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentationTypeOrderBy extends KalturaEnumBase
+{
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const EXECUTE_DATE_DESC = "EXECUTE_DATE_DESC";
+	const EXECUTE_DATE_ASC = "EXECUTE_DATE_ASC";
+	const AFFECTED_USERS_DESC = "AFFECTED_USERS_DESC";
+	const AFFECTED_USERS_ASC = "AFFECTED_USERS_ASC";
 }
 
 /**
