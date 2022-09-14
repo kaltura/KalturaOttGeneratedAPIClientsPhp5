@@ -3799,11 +3799,11 @@ class KalturaCampaignIdInFilter extends KalturaCampaignFilter
 class KalturaCampaignSegmentFilter extends KalturaCampaignSearchFilter
 {
 	/**
-	 * comma separeted segment ids to be searched inside campaigns
+	 * segment id to be searched inside campaigns
 	 *
-	 * @var string
+	 * @var int
 	 */
-	public $segmentIdIn = null;
+	public $segmentIdEqual = null;
 
 
 }
