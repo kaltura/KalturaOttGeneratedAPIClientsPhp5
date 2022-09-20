@@ -21217,7 +21217,7 @@ class KalturaIotClientConfiguration extends KalturaObjectBase
 	/**
 	 * topics
 	 *
-	 * @var array of KalturaStringValue
+	 * @var array of KalturaKeyValue
 	 */
 	public $topics;
 
