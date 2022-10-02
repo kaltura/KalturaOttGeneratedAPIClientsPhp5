@@ -10553,7 +10553,7 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
-	 * Get existing segmentation partner configuration
+	 * Gets existing partner segmentation configuration
 	 * 
 	 * @return KalturaSegmentationPartnerConfiguration
 	 */
@@ -10614,9 +10614,13 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
-	 * Set segmentation configuration on partner level
+	 * Sets partner configuration for segments configuration
 	 * 
-	 * @param KalturaSegmentationPartnerConfiguration $configuration New configuration to set
+	 * @param KalturaSegmentationPartnerConfiguration $configuration 1. maxDynamicSegments - how many dynamic segments (segments with conditions) the operator is allowed to have.
+            Displayed in the OPC as *'Maximum Number of Dynamic Segments' 
+            *maxCalculatedPeriod - 
+            the maximum number of past days to be calculated for dynamic segments. e.g. the last 60 days, the last 90 days etc.
+            Displayed in OPC as *'Maximum of Dynamic Segments period'*
 	 * @return KalturaSegmentationPartnerConfiguration
 	 */
 	function updatePartnerConfiguration(KalturaSegmentationPartnerConfiguration $configuration)
@@ -14200,8 +14204,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-09-14');
-		$this->setApiVersion('8.0.0.30035');
+		$this->setClientTag('php5:22-10-02');
+		$this->setApiVersion('8.0.0.30045');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
