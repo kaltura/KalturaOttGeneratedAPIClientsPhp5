@@ -10553,23 +10553,6 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
-	 * Gets existing partner segmentation configuration
-	 * 
-	 * @return KalturaSegmentationPartnerConfiguration
-	 */
-	function getPartnerConfiguration()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("segmentationtype", "getPartnerConfiguration", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSegmentationPartnerConfiguration");
-		return $resultObject;
-	}
-
-	/**
 	 * Lists all segmentation types in group
 	 * 
 	 * @param KalturaBaseSegmentationTypeFilter $filter Segmentation type filter - basically empty
@@ -10610,29 +10593,6 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaSegmentationType");
-		return $resultObject;
-	}
-
-	/**
-	 * Sets partner configuration for segments configuration
-	 * 
-	 * @param KalturaSegmentationPartnerConfiguration $configuration 1. maxDynamicSegments - how many dynamic segments (segments with conditions) the operator is allowed to have.
-            Displayed in the OPC as *'Maximum Number of Dynamic Segments' 
-            *maxCalculatedPeriod - 
-            the maximum number of past days to be calculated for dynamic segments. e.g. the last 60 days, the last 90 days etc.
-            Displayed in OPC as *'Maximum of Dynamic Segments period'*
-	 * @return KalturaSegmentationPartnerConfiguration
-	 */
-	function updatePartnerConfiguration(KalturaSegmentationPartnerConfiguration $configuration)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "configuration", $configuration->toParams());
-		$this->client->queueServiceActionCall("segmentationtype", "updatePartnerConfiguration", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSegmentationPartnerConfiguration");
 		return $resultObject;
 	}
 }
@@ -14205,7 +14165,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:22-10-06');
-		$this->setApiVersion('8.0.0.30045');
+		$this->setApiVersion('8.1.0.30026');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

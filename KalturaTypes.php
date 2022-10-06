@@ -700,13 +700,6 @@ class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
 	 */
 	public $kSql = null;
 
-	/**
-	 * Name of segment contains specific string value
-	 *
-	 * @var string
-	 */
-	public $nameContain = null;
-
 
 }
 
@@ -3788,22 +3781,6 @@ class KalturaCampaignIdInFilter extends KalturaCampaignFilter
 	 * @var string
 	 */
 	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCampaignSegmentFilter extends KalturaCampaignSearchFilter
-{
-	/**
-	 * segment id to be searched inside campaigns
-	 *
-	 * @var int
-	 */
-	public $segmentIdEqual = null;
 
 
 }
@@ -9718,40 +9695,6 @@ class KalturaBulkUploadListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBaseBulkUploadSegmentsResult extends KalturaBulkUploadResult
-{
-	/**
-	 * Segment Id
-	 *
-	 * @var int
-	 */
-	public $segmentId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkSegmentedHouseholdsResult extends KalturaBaseBulkUploadSegmentsResult
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkSegmentedUsersResult extends KalturaBaseBulkUploadSegmentsResult
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 abstract class KalturaBulkUploadAssetResult extends KalturaBulkUploadResult
 {
 	/**
@@ -10205,13 +10148,6 @@ class KalturaSegmentationType extends KalturaObjectBase
 	public $conditions;
 
 	/**
-	 * Boolean operator between segmentation type&#39;s conditions - defaults to &quot;And&quot;
-	 *
-	 * @var KalturaBooleanOperator
-	 */
-	public $conditionsOperator = null;
-
-	/**
 	 * Segmentation conditions - can be empty
 	 *
 	 * @var array of KalturaBaseSegmentAction
@@ -10232,22 +10168,6 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $createDate = null;
-
-	/**
-	 * Update date of segmentation type
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-	/**
-	 * Last date of execution of segmentation type
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $executeDate = null;
 
 	/**
 	 * Segmentation type version
@@ -10412,13 +10332,6 @@ class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 	 * @var string
 	 */
 	public $businessModuleIdIn = null;
-
-	/**
-	 * Which currency code should be taken into consideration
-	 *
-	 * @var string
-	 */
-	public $currencyCode = null;
 
 
 }
@@ -10806,14 +10719,6 @@ class KalturaSingleSegmentValue extends KalturaBaseSegmentValue
 	 * @readonly
 	 */
 	public $affectedUsers = null;
-
-	/**
-	 * The amount of households that are being affected by this Segmentation type
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $affectedHouseholds = null;
 
 
 }
@@ -11741,6 +11646,15 @@ class KalturaBasePartnerConfiguration extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $apptokenUserValidationDisabled = null;
+
+	/**
+	 * epgFeatureVersion
+	 *             defines the epg feature version from version 1 to version 3
+	 *             if not provided v2 will be used
+	 *
+	 * @var int
+	 */
+	public $epgFeatureVersion = null;
 
 
 }
@@ -20105,13 +20019,6 @@ class KalturaBulkUploadIngestJobData extends KalturaBulkUploadJobData
  */
 abstract class KalturaBulkUploadObjectData extends KalturaObjectBase
 {
-	/**
-	 * defaults to upsert
-	 *
-	 * @var KalturaBulkUploadJobAction
-	 */
-	public $action = null;
-
 
 }
 
@@ -20129,40 +20036,6 @@ abstract class KalturaBulkUploadAssetData extends KalturaBulkUploadObjectData
 	 */
 	public $typeId = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaBaseBulkSegments extends KalturaBulkUploadObjectData
-{
-	/**
-	 * Segment Id to update
-	 *
-	 * @var int
-	 */
-	public $segmentId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkSegmentedHouseholdsData extends KalturaBaseBulkSegments
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkSegmentedusersData extends KalturaBaseBulkSegments
-{
 
 }
 
@@ -22204,29 +22077,6 @@ class KalturaSearchPriorityGroupOrderedIdsSet extends KalturaObjectBase
 	 * @var string
 	 */
 	public $priorityGroupIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentationPartnerConfiguration extends KalturaObjectBase
-{
-	/**
-	 * The maximum number of past days to be calculated for dynamic segments, default=180
-	 *
-	 * @var int
-	 */
-	public $maxCalculatedPeriod = null;
-
-	/**
-	 * How many dynamic segments (segments with conditions) the operator is allowed to have, default=50
-	 *
-	 * @var int
-	 */
-	public $maxDynamicSegments = null;
 
 
 }
