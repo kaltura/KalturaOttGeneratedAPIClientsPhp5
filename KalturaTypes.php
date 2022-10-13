@@ -11647,15 +11647,6 @@ class KalturaBasePartnerConfiguration extends KalturaPartnerConfiguration
 	 */
 	public $apptokenUserValidationDisabled = null;
 
-	/**
-	 * epgFeatureVersion
-	 *             defines the epg feature version from version 1 to version 3
-	 *             if not provided v2 will be used
-	 *
-	 * @var int
-	 */
-	public $epgFeatureVersion = null;
-
 
 }
 
@@ -21226,7 +21217,7 @@ class KalturaIotClientConfiguration extends KalturaObjectBase
 	/**
 	 * topics
 	 *
-	 * @var array of KalturaStringValue
+	 * @var array of KalturaKeyValue
 	 */
 	public $topics;
 
