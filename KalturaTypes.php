@@ -3597,6 +3597,22 @@ class KalturaSearchPriorityGroupFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaListGroupsRepresentativesFilter extends KalturaFilter
+{
+	/**
+	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPaymentMethodProfileFilter extends KalturaFilter
 {
 	/**
@@ -11646,15 +11662,6 @@ class KalturaBasePartnerConfiguration extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $apptokenUserValidationDisabled = null;
-
-	/**
-	 * epgFeatureVersion
-	 *             defines the epg feature version from version 1 to version 3
-	 *             if not provided v2 will be used
-	 *
-	 * @var int
-	 */
-	public $epgFeatureVersion = null;
 
 
 }
@@ -19726,6 +19733,47 @@ class KalturaSession extends KalturaObjectBase
  */
 class KalturaSessionInfo extends KalturaSession
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaRepresentativeSelectionPolicy extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopSubscriptionEntitledRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
 
 }
 

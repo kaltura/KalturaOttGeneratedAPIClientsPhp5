@@ -1424,6 +1424,15 @@ class KalturaLinearChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaListGroupsRepresentativesOrderBy extends KalturaEnumBase
+{
+	const NONE = "None";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaManualCollectionAssetType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -2519,6 +2528,17 @@ class KalturaTvmRuleType extends KalturaEnumBase
 {
 	const GEO = "Geo";
 	const DEVICE = "Device";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUnmatchedItemsPolicy extends KalturaEnumBase
+{
+	const OMIT = "Omit";
+	const GROUP = "Group";
+	const INCLUDE = "Include";
 }
 
 /**
