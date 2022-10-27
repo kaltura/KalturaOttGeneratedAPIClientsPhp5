@@ -7218,6 +7218,22 @@ class KalturaAssetUserRule extends KalturaAssetRuleBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaStringValueArray extends KalturaObjectBase
+{
+	/**
+	 * List of string values
+	 *
+	 * @var array of KalturaStringValue
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetShopCondition extends KalturaAssetConditionBase
 {
 	/**
@@ -7226,6 +7242,13 @@ class KalturaAssetShopCondition extends KalturaAssetConditionBase
 	 * @var string
 	 */
 	public $value = null;
+
+	/**
+	 * Shop marker&#39;s values
+	 *
+	 * @var KalturaStringValueArray
+	 */
+	public $values;
 
 
 }
@@ -8707,22 +8730,6 @@ class KalturaAssetFile extends KalturaObjectBase
 	 * @var string
 	 */
 	public $url = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaStringValueArray extends KalturaObjectBase
-{
-	/**
-	 * List of string values
-	 *
-	 * @var array of KalturaStringValue
-	 */
-	public $objects;
 
 
 }
@@ -11646,15 +11653,6 @@ class KalturaBasePartnerConfiguration extends KalturaPartnerConfiguration
 	 * @var bool
 	 */
 	public $apptokenUserValidationDisabled = null;
-
-	/**
-	 * epgFeatureVersion
-	 *             defines the epg feature version from version 1 to version 3
-	 *             if not provided v2 will be used
-	 *
-	 * @var int
-	 */
-	public $epgFeatureVersion = null;
 
 
 }
