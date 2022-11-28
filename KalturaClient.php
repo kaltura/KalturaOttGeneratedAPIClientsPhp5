@@ -511,6 +511,39 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
+	 * Returns assets deduplicated by asset metadata (or supported asset&#39;s property).
+	 * 
+	 * @param KalturaAssetGroupBy $groupBy A metadata (or supported asset's property) to group by the assets
+	 * @param string $unmatchedItemsPolicy Defines the policy to handle assets that don't have groupBy property
+	 * @param KalturaBaseAssetOrder $orderBy A metadata or supported asset's property to sort by
+	 * @param KalturaListGroupsRepresentativesFilter $filter Filtering the assets request
+	 * @param KalturaRepresentativeSelectionPolicy $selectionPolicy A policy that implements a well defined parametric process to select an asset out of group
+	 * @param KalturaFilterPager $pager Paging the request
+	 * @return KalturaAssetListResponse
+	 */
+	function groupRepresentativeList(KalturaAssetGroupBy $groupBy, $unmatchedItemsPolicy, KalturaBaseAssetOrder $orderBy = null, KalturaListGroupsRepresentativesFilter $filter = null, KalturaRepresentativeSelectionPolicy $selectionPolicy = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "groupBy", $groupBy->toParams());
+		$this->client->addParam($kparams, "unmatchedItemsPolicy", $unmatchedItemsPolicy);
+		if ($orderBy !== null)
+			$this->client->addParam($kparams, "orderBy", $orderBy->toParams());
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($selectionPolicy !== null)
+			$this->client->addParam($kparams, "selectionPolicy", $selectionPolicy->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("asset", "groupRepresentativeList", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetListResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Returns media or EPG assets. Filters by media identifiers or by EPG internal or external identifier.
 	 * 
 	 * @param KalturaAssetFilter $filter Filtering the assets request
@@ -1444,6 +1477,39 @@ class KalturaBulkUploadService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaBulkUploadListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkUploadStatisticsService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Get BulkUploadStatistics count summary by status
+	 * 
+	 * @param string $bulkObjectTypeEqual BulkUploadObject for status summary
+	 * @param bigint $createDateGreaterThanOrEqual Date created filter
+	 * @return KalturaBulkUploadStatistics
+	 */
+	function get($bulkObjectTypeEqual, $createDateGreaterThanOrEqual)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "bulkObjectTypeEqual", $bulkObjectTypeEqual);
+		$this->client->addParam($kparams, "createDateGreaterThanOrEqual", $createDateGreaterThanOrEqual);
+		$this->client->queueServiceActionCall("bulkuploadstatistics", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaBulkUploadStatistics");
 		return $resultObject;
 	}
 }
@@ -10553,6 +10619,23 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
+	 * Gets existing partner segmentation configuration
+	 * 
+	 * @return KalturaSegmentationPartnerConfiguration
+	 */
+	function getPartnerConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("segmentationtype", "getPartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSegmentationPartnerConfiguration");
+		return $resultObject;
+	}
+
+	/**
 	 * Lists all segmentation types in group
 	 * 
 	 * @param KalturaBaseSegmentationTypeFilter $filter Segmentation type filter - basically empty
@@ -10593,6 +10676,29 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaSegmentationType");
+		return $resultObject;
+	}
+
+	/**
+	 * Sets partner configuration for segments configuration
+	 * 
+	 * @param KalturaSegmentationPartnerConfiguration $configuration 1. maxDynamicSegments - how many dynamic segments (segments with conditions) the operator is allowed to have.
+            Displayed in the OPC as *'Maximum Number of Dynamic Segments' 
+            *maxCalculatedPeriod - 
+            the maximum number of past days to be calculated for dynamic segments. e.g. the last 60 days, the last 90 days etc.
+            Displayed in OPC as *'Maximum of Dynamic Segments period'*
+	 * @return bool
+	 */
+	function updatePartnerConfiguration(KalturaSegmentationPartnerConfiguration $configuration)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "configuration", $configuration->toParams());
+		$this->client->queueServiceActionCall("segmentationtype", "updatePartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
 		return $resultObject;
 	}
 }
@@ -13359,6 +13465,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaBulkUploadStatisticsService
+	 */
+	public $bulkUploadStatistics = null;
+
+	/**
+	 * 
 	 * @var KalturaBusinessModuleRuleService
 	 */
 	public $businessModuleRule = null;
@@ -14164,8 +14276,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-10-06');
-		$this->setApiVersion('8.1.0.30026');
+		$this->setClientTag('php5:22-11-28');
+		$this->setApiVersion('8.2.0.30080');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -14183,6 +14295,7 @@ class KalturaClient extends KalturaClientBase
 		$this->assetUserRule = new KalturaAssetUserRuleService($this);
 		$this->bookmark = new KalturaBookmarkService($this);
 		$this->bulkUpload = new KalturaBulkUploadService($this);
+		$this->bulkUploadStatistics = new KalturaBulkUploadStatisticsService($this);
 		$this->businessModuleRule = new KalturaBusinessModuleRuleService($this);
 		$this->campaign = new KalturaCampaignService($this);
 		$this->categoryItem = new KalturaCategoryItemService($this);
