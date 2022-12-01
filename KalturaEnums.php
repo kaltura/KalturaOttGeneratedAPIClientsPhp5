@@ -441,6 +441,16 @@ class KalturaBookmarkOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBooleanOperator extends KalturaEnumBase
+{
+	const AND = "And";
+	const OR = "Or";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadJobAction extends KalturaEnumBase
 {
 	const UPSERT = "Upsert";
@@ -1088,6 +1098,7 @@ class KalturaGroupByField extends KalturaEnumBase
 	const SUPPRESSED = "suppressed";
 	const CRID = "crid";
 	const LINEAR_MEDIA_ID = "linear_media_id";
+	const NAME = "name";
 }
 
 /**
@@ -1424,6 +1435,15 @@ class KalturaLinearChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaListGroupsRepresentativesOrderBy extends KalturaEnumBase
+{
+	const NONE = "None";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaManualCollectionAssetType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -1540,6 +1560,8 @@ class KalturaMonetizationType extends KalturaEnumBase
 	const PPV = "ppv";
 	const SUBSCRIPTION = "subscription";
 	const BOXSET = "boxset";
+	const ANY = "any";
+	const PPV_LIVE = "ppv_live";
 }
 
 /**
@@ -2167,6 +2189,24 @@ class KalturaSearchPriorityGroupOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSegmentationTypeOrderBy extends KalturaEnumBase
+{
+	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";
+	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const CREATE_DATE_ASC = "CREATE_DATE_ASC";
+	const EXECUTE_DATE_DESC = "EXECUTE_DATE_DESC";
+	const EXECUTE_DATE_ASC = "EXECUTE_DATE_ASC";
+	const AFFECTED_USERS_DESC = "AFFECTED_USERS_DESC";
+	const AFFECTED_USERS_ASC = "AFFECTED_USERS_ASC";
+	const AFFECTED_HOUSEHOLDS_DESC = "AFFECTED_HOUSEHOLDS_DESC";
+	const AFFECTED_HOUSEHOLDS_ASC = "AFFECTED_HOUSEHOLDS_ASC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecordingOrderBy extends KalturaEnumBase
 {
 	const START_DATE_ASC = "START_DATE_ASC";
@@ -2519,6 +2559,17 @@ class KalturaTvmRuleType extends KalturaEnumBase
 {
 	const GEO = "Geo";
 	const DEVICE = "Device";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUnmatchedItemsPolicy extends KalturaEnumBase
+{
+	const OMIT = "OMIT";
+	const GROUP = "GROUP";
+	const INCLUDE_AND_MERGE = "INCLUDE_AND_MERGE";
 }
 
 /**
