@@ -1452,6 +1452,39 @@ class KalturaBulkUploadService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBulkUploadStatisticsService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Get BulkUploadStatistics count summary by status
+	 * 
+	 * @param string $bulkObjectTypeEqual BulkUploadObject for status summary
+	 * @param bigint $createDateGreaterThanOrEqual Date created filter
+	 * @return KalturaBulkUploadStatistics
+	 */
+	function get($bulkObjectTypeEqual, $createDateGreaterThanOrEqual)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "bulkObjectTypeEqual", $bulkObjectTypeEqual);
+		$this->client->addParam($kparams, "createDateGreaterThanOrEqual", $createDateGreaterThanOrEqual);
+		$this->client->queueServiceActionCall("bulkuploadstatistics", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaBulkUploadStatistics");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBusinessModuleRuleService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -9950,6 +9983,29 @@ class KalturaRecordingService extends KalturaServiceBase
 	}
 
 	/**
+	 * Stop current recording
+	 * 
+	 * @param bigint $programId Program identifier
+	 * @param bigint $epgChannelId Epg channel identifier
+	 * @param bigint $householdRecordingId Household recording identifier
+	 * @return KalturaRecording
+	 */
+	function stop($programId, $epgChannelId, $householdRecordingId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "programId", $programId);
+		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
+		$this->client->addParam($kparams, "householdRecordingId", $householdRecordingId);
+		$this->client->queueServiceActionCall("recording", "stop", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaRecording");
+		return $resultObject;
+	}
+
+	/**
 	 * Update an existing recording with is protected field
 	 * 
 	 * @param bigint $id Recording identifier
@@ -10553,6 +10609,23 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 	}
 
 	/**
+	 * Gets existing partner segmentation configuration
+	 * 
+	 * @return KalturaSegmentationPartnerConfiguration
+	 */
+	function getPartnerConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("segmentationtype", "getPartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSegmentationPartnerConfiguration");
+		return $resultObject;
+	}
+
+	/**
 	 * Lists all segmentation types in group
 	 * 
 	 * @param KalturaBaseSegmentationTypeFilter $filter Segmentation type filter - basically empty
@@ -10593,6 +10666,29 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaSegmentationType");
+		return $resultObject;
+	}
+
+	/**
+	 * Sets partner configuration for segments configuration
+	 * 
+	 * @param KalturaSegmentationPartnerConfiguration $configuration 1. maxDynamicSegments - how many dynamic segments (segments with conditions) the operator is allowed to have.
+            Displayed in the OPC as *'Maximum Number of Dynamic Segments' 
+            *maxCalculatedPeriod - 
+            the maximum number of past days to be calculated for dynamic segments. e.g. the last 60 days, the last 90 days etc.
+            Displayed in OPC as *'Maximum of Dynamic Segments period'*
+	 * @return bool
+	 */
+	function updatePartnerConfiguration(KalturaSegmentationPartnerConfiguration $configuration)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "configuration", $configuration->toParams());
+		$this->client->queueServiceActionCall("segmentationtype", "updatePartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
 		return $resultObject;
 	}
 }
@@ -13359,6 +13455,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaBulkUploadStatisticsService
+	 */
+	public $bulkUploadStatistics = null;
+
+	/**
+	 * 
 	 * @var KalturaBusinessModuleRuleService
 	 */
 	public $businessModuleRule = null;
@@ -14164,8 +14266,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-10-06');
-		$this->setApiVersion('8.1.0.30026');
+		$this->setClientTag('php5:22-12-06');
+		$this->setApiVersion('8.2.0.30126');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -14183,6 +14285,7 @@ class KalturaClient extends KalturaClientBase
 		$this->assetUserRule = new KalturaAssetUserRuleService($this);
 		$this->bookmark = new KalturaBookmarkService($this);
 		$this->bulkUpload = new KalturaBulkUploadService($this);
+		$this->bulkUploadStatistics = new KalturaBulkUploadStatisticsService($this);
 		$this->businessModuleRule = new KalturaBusinessModuleRuleService($this);
 		$this->campaign = new KalturaCampaignService($this);
 		$this->categoryItem = new KalturaCategoryItemService($this);

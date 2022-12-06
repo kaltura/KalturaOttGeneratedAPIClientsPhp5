@@ -700,6 +700,13 @@ class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
 	 */
 	public $kSql = null;
 
+	/**
+	 * Name of segment contains specific string value
+	 *
+	 * @var string
+	 */
+	public $nameContain = null;
+
 
 }
 
@@ -3135,6 +3142,7 @@ class KalturaBookmark extends KalturaSlimAsset
 
 	/**
 	 * The position of the user in the specific asset (in seconds)
+	 *             For external recordings will always be &#39;0&#39;
 	 *
 	 * @var int
 	 * @insertonly
@@ -3151,6 +3159,7 @@ class KalturaBookmark extends KalturaSlimAsset
 
 	/**
 	 * Specifies whether the user&#39;s current position exceeded 95% of the duration
+	 *             For external recordings will always be &#39;True&#39;
 	 *
 	 * @var bool
 	 * @readonly
@@ -3781,6 +3790,22 @@ class KalturaCampaignIdInFilter extends KalturaCampaignFilter
 	 * @var string
 	 */
 	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCampaignSegmentFilter extends KalturaCampaignSearchFilter
+{
+	/**
+	 * segment id to be searched inside campaigns
+	 *
+	 * @var int
+	 */
+	public $segmentIdEqual = null;
 
 
 }
@@ -4986,7 +5011,6 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing since a user started watching the item
 	 *
 	 * @var int
-	 * @insertonly
 	 */
 	public $viewLifeCycle = null;
 
@@ -4994,7 +5018,6 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The amount time an item is available for viewing
 	 *
 	 * @var int
-	 * @insertonly
 	 */
 	public $fullLifeCycle = null;
 
@@ -5342,6 +5365,13 @@ class KalturaCollection extends KalturaOTTObjectSupportNullable
 	 * @var string
 	 */
 	public $fileTypesIds = null;
+
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 */
+	public $assetUserRuleId = null;
 
 
 }
@@ -7218,6 +7248,22 @@ class KalturaAssetUserRule extends KalturaAssetRuleBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaStringValueArray extends KalturaObjectBase
+{
+	/**
+	 * List of string values
+	 *
+	 * @var array of KalturaStringValue
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetShopCondition extends KalturaAssetConditionBase
 {
 	/**
@@ -7226,6 +7272,13 @@ class KalturaAssetShopCondition extends KalturaAssetConditionBase
 	 * @var string
 	 */
 	public $value = null;
+
+	/**
+	 * Shop marker&#39;s values
+	 *
+	 * @var KalturaStringValueArray
+	 */
+	public $values;
 
 
 }
@@ -8715,22 +8768,6 @@ class KalturaAssetFile extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaStringValueArray extends KalturaObjectBase
-{
-	/**
-	 * List of string values
-	 *
-	 * @var array of KalturaStringValue
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaBusinessModuleDetails extends KalturaObjectBase
 {
 	/**
@@ -10148,6 +10185,13 @@ class KalturaSegmentationType extends KalturaObjectBase
 	public $conditions;
 
 	/**
+	 * Boolean operator between segmentation type&#39;s conditions - defaults to &quot;And&quot;
+	 *
+	 * @var KalturaBooleanOperator
+	 */
+	public $conditionsOperator = null;
+
+	/**
 	 * Segmentation conditions - can be empty
 	 *
 	 * @var array of KalturaBaseSegmentAction
@@ -10168,6 +10212,22 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $createDate = null;
+
+	/**
+	 * Update date of segmentation type
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * Last date of execution of segmentation type
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $executeDate = null;
 
 	/**
 	 * Segmentation type version
@@ -10332,6 +10392,13 @@ class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 	 * @var string
 	 */
 	public $businessModuleIdIn = null;
+
+	/**
+	 * Which currency code should be taken into consideration
+	 *
+	 * @var string
+	 */
+	public $currencyCode = null;
 
 
 }
@@ -10719,6 +10786,14 @@ class KalturaSingleSegmentValue extends KalturaBaseSegmentValue
 	 * @readonly
 	 */
 	public $affectedUsers = null;
+
+	/**
+	 * The amount of households that are being affected by this Segmentation type
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $affectedHouseholds = null;
 
 
 }
@@ -11332,6 +11407,13 @@ class KalturaPpv extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $virtualAssetId = null;
+
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 */
+	public $assetUserRuleId = null;
 
 
 }
@@ -15283,6 +15365,20 @@ class KalturaRecording extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
+	/**
+	 * Household specific start time of the recording
+	 *
+	 * @var int
+	 */
+	public $householdSpecificStartTimeOffset = null;
+
+	/**
+	 * Household specific end time of the recording
+	 *
+	 * @var int
+	 */
+	public $householdSpecificEndTimeOffset = null;
+
 
 }
 
@@ -15443,6 +15539,20 @@ class KalturaSeriesRecording extends KalturaObjectBase
 	 * @var KalturaSeriesRecordingOption
 	 */
 	public $seriesRecordingOption;
+
+	/**
+	 * Household specific start time of the recording
+	 *
+	 * @var int
+	 */
+	public $householdSpecificSeriesStartTimeOffset = null;
+
+	/**
+	 * Household specific end time of the recording
+	 *
+	 * @var int
+	 */
+	public $householdSpecificSeriesEndTimeOffset = null;
 
 
 }
@@ -20206,6 +20316,85 @@ class KalturaAssetStatisticsQuery extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBulkUploadStatistics extends KalturaObjectBase
+{
+	/**
+	 * count of bulk upload in pending status
+	 *
+	 * @var int
+	 */
+	public $pending = null;
+
+	/**
+	 * count of bulk Uploaded in uploaded status
+	 *
+	 * @var int
+	 */
+	public $uploaded = null;
+
+	/**
+	 * count of bulk upload in queued status
+	 *
+	 * @var int
+	 */
+	public $queued = null;
+
+	/**
+	 * count of bulk upload in parsing status
+	 *
+	 * @var int
+	 */
+	public $parsing = null;
+
+	/**
+	 * count of bulk upload in processing status
+	 *
+	 * @var int
+	 */
+	public $processing = null;
+
+	/**
+	 * count of bulk upload in processed status
+	 *
+	 * @var int
+	 */
+	public $processed = null;
+
+	/**
+	 * count of bulk upload in success status
+	 *
+	 * @var int
+	 */
+	public $success = null;
+
+	/**
+	 * count of bulk upload in partial status
+	 *
+	 * @var int
+	 */
+	public $partial = null;
+
+	/**
+	 * count of bulk upload in failed status
+	 *
+	 * @var int
+	 */
+	public $failed = null;
+
+	/**
+	 * count of bulk upload in fatal status
+	 *
+	 * @var int
+	 */
+	public $fatal = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaOTTCategory extends KalturaObjectBase
 {
 	/**
@@ -21226,7 +21415,7 @@ class KalturaIotClientConfiguration extends KalturaObjectBase
 	/**
 	 * topics
 	 *
-	 * @var array of KalturaStringValue
+	 * @var array of KalturaKeyValue
 	 */
 	public $topics;
 
@@ -22085,6 +22274,29 @@ class KalturaSearchPriorityGroupOrderedIdsSet extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSegmentationPartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * The maximum number of past days to be calculated for dynamic segments, default=180
+	 *
+	 * @var int
+	 */
+	public $maxCalculatedPeriod = null;
+
+	/**
+	 * How many dynamic segments (segments with conditions) the operator is allowed to have, default=50
+	 *
+	 * @var int
+	 */
+	public $maxDynamicSegments = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaNetworkActionStatus extends KalturaObjectBase
 {
 	/**
@@ -22500,6 +22712,20 @@ class KalturaTimeShiftedTvPartnerSettings extends KalturaObjectBase
 	 * @var int
 	 */
 	public $defaultQuota = null;
+
+	/**
+	 * Define whatever the partner enables the Personal Padding and Immediate / Stop recording services to the partner. Default value should be FALSE
+	 *
+	 * @var bool
+	 */
+	public $personalizedRecording = null;
+
+	/**
+	 * Define the max allowed number of parallel recordings. Default NULL unlimited
+	 *
+	 * @var int
+	 */
+	public $maxRecordingConcurrency = null;
 
 
 }
