@@ -1098,6 +1098,7 @@ class KalturaGroupByField extends KalturaEnumBase
 	const SUPPRESSED = "suppressed";
 	const CRID = "crid";
 	const LINEAR_MEDIA_ID = "linear_media_id";
+	const NAME = "name";
 }
 
 /**
@@ -1428,6 +1429,15 @@ class KalturaLinearChannelType extends KalturaEnumBase
 	const OTT = "OTT";
 	const DTT_AND_OTT = "DTT_AND_OTT";
 	const VRM_EXPORT = "VRM_EXPORT";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaListGroupsRepresentativesOrderBy extends KalturaEnumBase
+{
+	const NONE = "None";
 }
 
 /**
@@ -2549,6 +2559,17 @@ class KalturaTvmRuleType extends KalturaEnumBase
 {
 	const GEO = "Geo";
 	const DEVICE = "Device";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUnmatchedItemsPolicy extends KalturaEnumBase
+{
+	const OMIT = "OMIT";
+	const GROUP = "GROUP";
+	const INCLUDE_AND_MERGE = "INCLUDE_AND_MERGE";
 }
 
 /**

@@ -511,6 +511,39 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
+	 * Returns assets deduplicated by asset metadata (or supported asset&#39;s property).
+	 * 
+	 * @param KalturaAssetGroupBy $groupBy A metadata (or supported asset's property) to group by the assets
+	 * @param string $unmatchedItemsPolicy Defines the policy to handle assets that don't have groupBy property
+	 * @param KalturaBaseAssetOrder $orderBy A metadata or supported asset's property to sort by
+	 * @param KalturaListGroupsRepresentativesFilter $filter Filtering the assets request
+	 * @param KalturaRepresentativeSelectionPolicy $selectionPolicy A policy that implements a well defined parametric process to select an asset out of group
+	 * @param KalturaFilterPager $pager Paging the request
+	 * @return KalturaAssetListResponse
+	 */
+	function groupRepresentativeList(KalturaAssetGroupBy $groupBy, $unmatchedItemsPolicy, KalturaBaseAssetOrder $orderBy = null, KalturaListGroupsRepresentativesFilter $filter = null, KalturaRepresentativeSelectionPolicy $selectionPolicy = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "groupBy", $groupBy->toParams());
+		$this->client->addParam($kparams, "unmatchedItemsPolicy", $unmatchedItemsPolicy);
+		if ($orderBy !== null)
+			$this->client->addParam($kparams, "orderBy", $orderBy->toParams());
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($selectionPolicy !== null)
+			$this->client->addParam($kparams, "selectionPolicy", $selectionPolicy->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("asset", "groupRepresentativeList", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetListResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Returns media or EPG assets. Filters by media identifiers or by EPG internal or external identifier.
 	 * 
 	 * @param KalturaAssetFilter $filter Filtering the assets request
@@ -14266,8 +14299,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-12-06');
-		$this->setApiVersion('8.2.0.30126');
+		$this->setClientTag('php5:22-12-13');
+		$this->setApiVersion('8.3.0.30156');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

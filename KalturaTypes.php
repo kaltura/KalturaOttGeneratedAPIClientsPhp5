@@ -3606,6 +3606,22 @@ class KalturaSearchPriorityGroupFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaListGroupsRepresentativesFilter extends KalturaFilter
+{
+	/**
+	 * Search assets using dynamic criteria. Provided collection of nested expressions with key, comparison operators, value, and logical conjunction.
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPaymentMethodProfileFilter extends KalturaFilter
 {
 	/**
@@ -15365,20 +15381,6 @@ class KalturaRecording extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
-	/**
-	 * Household specific start time of the recording
-	 *
-	 * @var int
-	 */
-	public $householdSpecificStartTimeOffset = null;
-
-	/**
-	 * Household specific end time of the recording
-	 *
-	 * @var int
-	 */
-	public $householdSpecificEndTimeOffset = null;
-
 
 }
 
@@ -15410,6 +15412,52 @@ class KalturaExternalRecording extends KalturaRecording
 	 * @readonly
 	 */
 	public $expiryDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaImmediateRecording extends KalturaRecording
+{
+	/**
+	 * Household specific end padding of the recording
+	 *
+	 * @var int
+	 */
+	public $endPadding = null;
+
+	/**
+	 * Household absolute start time of the immediate recording
+	 *
+	 * @var int
+	 */
+	public $absoluteStart = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPaddedRecording extends KalturaRecording
+{
+	/**
+	 * Household specific start padding of the recording
+	 *
+	 * @var int
+	 */
+	public $startPadding = null;
+
+	/**
+	 * Household specific end padding of the recording
+	 *
+	 * @var int
+	 */
+	public $endPadding = null;
 
 
 }
@@ -19836,6 +19884,47 @@ class KalturaSession extends KalturaObjectBase
  */
 class KalturaSessionInfo extends KalturaSession
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaRepresentativeSelectionPolicy extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopSubscriptionEntitledRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
 
 }
 
