@@ -15436,6 +15436,13 @@ class KalturaImmediateRecording extends KalturaRecording
 	 */
 	public $absoluteStart = null;
 
+	/**
+	 * Household absolute end time of the immediate recording, empty if till end of program
+	 *
+	 * @var int
+	 */
+	public $absoluteEnd = null;
+
 
 }
 
@@ -22815,6 +22822,13 @@ class KalturaTimeShiftedTvPartnerSettings extends KalturaObjectBase
 	 * @var int
 	 */
 	public $maxRecordingConcurrency = null;
+
+	/**
+	 * Define the max grace margin time for overlapping recording. Default NULL 0 margin
+	 *
+	 * @var int
+	 */
+	public $maxConcurrencyMargin = null;
 
 
 }
