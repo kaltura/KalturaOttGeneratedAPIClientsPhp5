@@ -16417,6 +16417,13 @@ class KalturaRecordingAsset extends KalturaProgramAsset
 	 */
 	public $viewableUntilDate = null;
 
+	/**
+	 * When TRUE indicates that there are multiple KalturaImmediateRecording instances for the event.
+	 *
+	 * @var bool
+	 */
+	public $multiRecord = null;
+
 
 }
 
