@@ -15426,6 +15426,7 @@ class KalturaImmediateRecording extends KalturaRecording
 	 * Household specific end padding of the recording
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $endPadding = null;
 
@@ -15433,6 +15434,7 @@ class KalturaImmediateRecording extends KalturaRecording
 	 * Household absolute start time of the immediate recording
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $absoluteStart = null;
 
@@ -15440,6 +15442,7 @@ class KalturaImmediateRecording extends KalturaRecording
 	 * Household absolute end time of the immediate recording, empty if till end of program
 	 *
 	 * @var int
+	 * @readonly
 	 */
 	public $absoluteEnd = null;
 
