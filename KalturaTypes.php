@@ -829,22 +829,6 @@ class KalturaCollectionFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCouponFilter extends KalturaFilter
-{
-	/**
-	 * Comma separated list of coupon codes.
-	 *
-	 * @var string
-	 */
-	public $couponCodesIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaDiscountDetailsFilter extends KalturaFilter
 {
 	/**

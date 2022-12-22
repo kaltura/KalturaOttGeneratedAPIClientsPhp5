@@ -9975,15 +9975,15 @@ class KalturaRecordingService extends KalturaServiceBase
 	/**
 	 * Immediate Record
 	 * 
-	 * @param bigint $programId Program identifier
+	 * @param bigint $assetId Asset identifier
 	 * @param bigint $epgChannelId Epg channel identifier
 	 * @param int $endPadding End padding offset
 	 * @return KalturaImmediateRecording
 	 */
-	function immediateRecord($programId, $epgChannelId, $endPadding)
+	function immediateRecord($assetId, $epgChannelId, $endPadding)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "programId", $programId);
+		$this->client->addParam($kparams, "assetId", $assetId);
 		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
 		$this->client->addParam($kparams, "endPadding", $endPadding);
 		$this->client->queueServiceActionCall("recording", "immediateRecord", $kparams);
@@ -10041,15 +10041,15 @@ class KalturaRecordingService extends KalturaServiceBase
 	/**
 	 * Stop current recording
 	 * 
-	 * @param bigint $programId Program identifier
+	 * @param bigint $assetId Asset identifier
 	 * @param bigint $epgChannelId Epg channel identifier
 	 * @param bigint $householdRecordingId Household recording identifier
 	 * @return KalturaRecording
 	 */
-	function stop($programId, $epgChannelId, $householdRecordingId)
+	function stop($assetId, $epgChannelId, $householdRecordingId)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "programId", $programId);
+		$this->client->addParam($kparams, "assetId", $assetId);
 		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
 		$this->client->addParam($kparams, "householdRecordingId", $householdRecordingId);
 		$this->client->queueServiceActionCall("recording", "stop", $kparams);
@@ -14323,7 +14323,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:22-12-22');
-		$this->setApiVersion('8.3.0.30198');
+		$this->setApiVersion('8.3.1.30229');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
