@@ -9973,29 +9973,6 @@ class KalturaRecordingService extends KalturaServiceBase
 	}
 
 	/**
-	 * Immediate Record
-	 * 
-	 * @param bigint $assetId Asset identifier
-	 * @param bigint $epgChannelId Epg channel identifier
-	 * @param int $endPadding End padding offset
-	 * @return KalturaImmediateRecording
-	 */
-	function immediateRecord($assetId, $epgChannelId, $endPadding)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
-		$this->client->addParam($kparams, "endPadding", $endPadding);
-		$this->client->queueServiceActionCall("recording", "immediateRecord", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaImmediateRecording");
-		return $resultObject;
-	}
-
-	/**
 	 * Return a list of recordings for the household with optional filter by status and KSQL.
 	 * 
 	 * @param KalturaRecordingFilter $filter Filter parameters for filtering out the result
@@ -10030,29 +10007,6 @@ class KalturaRecordingService extends KalturaServiceBase
 		$kparams = array();
 		$this->client->addParam($kparams, "id", $id);
 		$this->client->queueServiceActionCall("recording", "protect", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaRecording");
-		return $resultObject;
-	}
-
-	/**
-	 * Stop current recording
-	 * 
-	 * @param bigint $assetId Asset identifier
-	 * @param bigint $epgChannelId Epg channel identifier
-	 * @param bigint $householdRecordingId Household recording identifier
-	 * @return KalturaRecording
-	 */
-	function stop($assetId, $epgChannelId, $householdRecordingId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
-		$this->client->addParam($kparams, "householdRecordingId", $householdRecordingId);
-		$this->client->queueServiceActionCall("recording", "stop", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -14322,8 +14276,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-12-22');
-		$this->setApiVersion('8.3.1.30231');
+		$this->setClientTag('php5:22-12-23');
+		$this->setApiVersion('8.3.1.30102');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

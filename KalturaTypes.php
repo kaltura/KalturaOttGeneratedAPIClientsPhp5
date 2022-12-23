@@ -15404,62 +15404,6 @@ class KalturaExternalRecording extends KalturaRecording
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaImmediateRecording extends KalturaRecording
-{
-	/**
-	 * Household specific end padding of the recording
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $endPadding = null;
-
-	/**
-	 * Household absolute start time of the immediate recording
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $absoluteStart = null;
-
-	/**
-	 * Household absolute end time of the immediate recording, empty if till end of program
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $absoluteEnd = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPaddedRecording extends KalturaRecording
-{
-	/**
-	 * Household specific start padding of the recording
-	 *
-	 * @var int
-	 */
-	public $startPadding = null;
-
-	/**
-	 * Household specific end padding of the recording
-	 *
-	 * @var int
-	 */
-	public $endPadding = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaRecordingListResponse extends KalturaListResponse
 {
 	/**
@@ -15581,20 +15525,6 @@ class KalturaSeriesRecording extends KalturaObjectBase
 	 * @var KalturaSeriesRecordingOption
 	 */
 	public $seriesRecordingOption;
-
-	/**
-	 * Household specific start time of the recording
-	 *
-	 * @var int
-	 */
-	public $householdSpecificSeriesStartTimeOffset = null;
-
-	/**
-	 * Household specific end time of the recording
-	 *
-	 * @var int
-	 */
-	public $householdSpecificSeriesEndTimeOffset = null;
 
 
 }
@@ -16403,13 +16333,6 @@ class KalturaRecordingAsset extends KalturaProgramAsset
 	 * @var int
 	 */
 	public $viewableUntilDate = null;
-
-	/**
-	 * When TRUE indicates that there are multiple KalturaImmediateRecording instances for the event.
-	 *
-	 * @var bool
-	 */
-	public $multiRecord = null;
 
 
 }
@@ -22802,27 +22725,6 @@ class KalturaTimeShiftedTvPartnerSettings extends KalturaObjectBase
 	 * @var int
 	 */
 	public $defaultQuota = null;
-
-	/**
-	 * Define whatever the partner enables the Personal Padding and Immediate / Stop recording services to the partner. Default value should be FALSE
-	 *
-	 * @var bool
-	 */
-	public $personalizedRecording = null;
-
-	/**
-	 * Define the max allowed number of parallel recordings. Default NULL unlimited
-	 *
-	 * @var int
-	 */
-	public $maxRecordingConcurrency = null;
-
-	/**
-	 * Define the max grace margin time for overlapping recording. Default NULL 0 margin
-	 *
-	 * @var int
-	 */
-	public $maxConcurrencyMargin = null;
 
 
 }
