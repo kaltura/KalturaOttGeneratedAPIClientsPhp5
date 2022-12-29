@@ -824,12 +824,19 @@ class KalturaAssetHistoryService extends KalturaServiceBase
 	 * Get next episode by last watch asset in given assetId
 	 * 
 	 * @param bigint $assetId Asset Id of series to search for next episode
+	 * @param KalturaSeriesIdArguments $seriesIdArguments Series Id arguments
+	 * @param string $notWatchedReturnStrategy Not watched any episode strategy
+	 * @param string $watchedAllReturnStrategy Watched all series episodes strategy
 	 * @return KalturaAssetHistory
 	 */
-	function getNextEpisode($assetId)
+	function getNextEpisode($assetId = null, KalturaSeriesIdArguments $seriesIdArguments = null, $notWatchedReturnStrategy = null, $watchedAllReturnStrategy = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "assetId", $assetId);
+		if ($seriesIdArguments !== null)
+			$this->client->addParam($kparams, "seriesIdArguments", $seriesIdArguments->toParams());
+		$this->client->addParam($kparams, "notWatchedReturnStrategy", $notWatchedReturnStrategy);
+		$this->client->addParam($kparams, "watchedAllReturnStrategy", $watchedAllReturnStrategy);
 		$this->client->queueServiceActionCall("assethistory", "getNextEpisode", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -14276,8 +14283,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-12-25');
-		$this->setApiVersion('8.3.1.30102');
+		$this->setClientTag('php5:22-12-28');
+		$this->setApiVersion('8.3.1.30104');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

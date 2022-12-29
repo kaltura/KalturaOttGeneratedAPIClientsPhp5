@@ -20259,6 +20259,50 @@ class KalturaAssetFileContext extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSeriesIdArguments extends KalturaObjectBase
+{
+	/**
+	 * Comma separated asset type IDs
+	 *
+	 * @var string
+	 */
+	public $assetTypeIdIn = null;
+
+	/**
+	 * Series ID
+	 *
+	 * @var string
+	 */
+	public $seriesId = null;
+
+	/**
+	 * Series ID meta name.
+	 *
+	 * @var string
+	 */
+	public $seriesIdMetaName = null;
+
+	/**
+	 * Season number meta name
+	 *
+	 * @var string
+	 */
+	public $seasonNumberMetaName = null;
+
+	/**
+	 * Episode number meta name
+	 *
+	 * @var string
+	 */
+	public $episodeNumberMetaName = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetPersonalSelection extends KalturaObjectBase
 {
 	/**
