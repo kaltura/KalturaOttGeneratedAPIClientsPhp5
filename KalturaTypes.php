@@ -19163,6 +19163,13 @@ class KalturaPlaybackProfile extends KalturaObjectBase
 	public $isActive = null;
 
 	/**
+	 * Playback profile Grpc address
+	 *
+	 * @var string
+	 */
+	public $adapterGrpcAddress = null;
+
+	/**
 	 * Playback profile URL
 	 *
 	 * @var string
