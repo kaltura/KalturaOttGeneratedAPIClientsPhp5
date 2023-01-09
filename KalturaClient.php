@@ -9977,17 +9977,17 @@ class KalturaRecordingService extends KalturaServiceBase
 	 * 
 	 * @param bigint $assetId Asset identifier
 	 * @param bigint $epgChannelId Epg channel identifier
-	 * @param string $crid Crid
 	 * @param int $endPadding End padding offset
+	 * @param string $crid Crid
 	 * @return KalturaImmediateRecording
 	 */
-	function immediateRecord($assetId, $epgChannelId, $crid, $endPadding)
+	function immediateRecord($assetId, $epgChannelId, $endPadding, $crid = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "assetId", $assetId);
 		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
-		$this->client->addParam($kparams, "crid", $crid);
 		$this->client->addParam($kparams, "endPadding", $endPadding);
+		$this->client->addParam($kparams, "crid", $crid);
 		$this->client->queueServiceActionCall("recording", "immediateRecord", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -14325,7 +14325,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:23-01-09');
-		$this->setApiVersion('8.4.3.30333');
+		$this->setApiVersion('8.4.3.30334');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
