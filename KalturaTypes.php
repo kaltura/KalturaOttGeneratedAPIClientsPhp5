@@ -1066,6 +1066,13 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 */
 	public $alsoInactive = null;
 
+	/**
+	 * return subscriptions associated by their subscription sets dependency Type
+	 *
+	 * @var KalturaSubscriptionDependencyType
+	 */
+	public $dependencyTypeEqual = null;
+
 
 }
 
