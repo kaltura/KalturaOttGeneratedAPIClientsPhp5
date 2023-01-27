@@ -9,7 +9,7 @@
 // to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2022  Kaltura Inc.
+// Copyright (C) 2006-2023  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -6913,6 +6913,100 @@ class KalturaMediaFileService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaMediaFile");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaFileDynamicDataService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add a dynamicData value to the values list of a specific key name in a specific mediaFileTypeId
+	 * 
+	 * @param KalturaMediaFileDynamicData $dynamicData DynamicData value
+	 * @return KalturaMediaFileDynamicData
+	 */
+	function add(KalturaMediaFileDynamicData $dynamicData)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "dynamicData", $dynamicData->toParams());
+		$this->client->queueServiceActionCall("mediafiledynamicdata", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMediaFileDynamicData");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an existing DynamicData value
+	 * 
+	 * @param bigint $id DynamicData identifier
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("mediafiledynamicdata", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * List and filter existing mediaFile dynamicData values
+	 * 
+	 * @param KalturaMediaFileDynamicDataFilter $filter Filter
+	 * @param KalturaFilterPager $pager Pager
+	 * @return KalturaMediaFileDynamicDataListResponse
+	 */
+	function listAction(KalturaMediaFileDynamicDataFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("mediafiledynamicdata", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMediaFileDynamicDataListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an existing dynamicData value
+	 * 
+	 * @param bigint $id DynamicData identifier
+	 * @param KalturaMediaFileDynamicData $dynamicData DynamicData value
+	 * @return KalturaMediaFileDynamicData
+	 */
+	function update($id, KalturaMediaFileDynamicData $dynamicData)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "dynamicData", $dynamicData->toParams());
+		$this->client->queueServiceActionCall("mediafiledynamicdata", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMediaFileDynamicData");
 		return $resultObject;
 	}
 }
@@ -13849,6 +13943,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaMediaFileDynamicDataService
+	 */
+	public $mediaFileDynamicData = null;
+
+	/**
+	 * 
 	 * @var KalturaMediaFileTypeService
 	 */
 	public $mediaFileType = null;
@@ -14276,8 +14376,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:22-12-25');
-		$this->setApiVersion('8.3.1.30102');
+		$this->setClientTag('php5:23-01-27');
+		$this->setApiVersion('8.4.0.30117');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -14359,6 +14459,7 @@ class KalturaClient extends KalturaClientBase
 		$this->liveToVod = new KalturaLiveToVodService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);
 		$this->mediaFile = new KalturaMediaFileService($this);
+		$this->mediaFileDynamicData = new KalturaMediaFileDynamicDataService($this);
 		$this->mediaFileType = new KalturaMediaFileTypeService($this);
 		$this->messageTemplate = new KalturaMessageTemplateService($this);
 		$this->meta = new KalturaMetaService($this);
