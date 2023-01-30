@@ -1067,11 +1067,12 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	public $alsoInactive = null;
 
 	/**
-	 * return subscriptions associated by their subscription sets dependency Type
+	 * comma separated values of KalturaSubscriptionDependencyType 
+	 *             return subscriptions associated by their subscription sets dependency Type
 	 *
-	 * @var KalturaSubscriptionDependencyType
+	 * @var string
 	 */
-	public $dependencyTypeEqual = null;
+	public $dependencyTypeIn = null;
 
 
 }
@@ -15419,6 +15420,61 @@ class KalturaExternalRecording extends KalturaRecording
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaImmediateRecording extends KalturaRecording
+{
+	/**
+	 * Household specific end padding of the recording
+	 *
+	 * @var int
+	 */
+	public $endPadding = null;
+
+	/**
+	 * Household absolute start time of the immediate recording
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $absoluteStart = null;
+
+	/**
+	 * Household absolute end time of the immediate recording, empty if till end of program
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $absoluteEnd = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPaddedRecording extends KalturaRecording
+{
+	/**
+	 * Household specific start padding of the recording
+	 *
+	 * @var int
+	 */
+	public $startPadding = null;
+
+	/**
+	 * Household specific end padding of the recording
+	 *
+	 * @var int
+	 */
+	public $endPadding = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaRecordingListResponse extends KalturaListResponse
 {
 	/**
@@ -16348,6 +16404,13 @@ class KalturaRecordingAsset extends KalturaProgramAsset
 	 * @var int
 	 */
 	public $viewableUntilDate = null;
+
+	/**
+	 * When TRUE indicates that there are multiple KalturaImmediateRecording instances for the event.
+	 *
+	 * @var bool
+	 */
+	public $multiRecord = null;
 
 
 }
@@ -19162,6 +19225,13 @@ class KalturaPlaybackProfile extends KalturaObjectBase
 	public $isActive = null;
 
 	/**
+	 * Playback profile Grpc address
+	 *
+	 * @var string
+	 */
+	public $adapterGrpcAddress = null;
+
+	/**
 	 * Playback profile URL
 	 *
 	 * @var string
@@ -20266,6 +20336,50 @@ class KalturaAssetFileContext extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $isLivePlayBack = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSeriesIdArguments extends KalturaObjectBase
+{
+	/**
+	 * Comma separated asset type IDs
+	 *
+	 * @var string
+	 */
+	public $assetTypeIdIn = null;
+
+	/**
+	 * Series ID
+	 *
+	 * @var string
+	 */
+	public $seriesId = null;
+
+	/**
+	 * Series ID meta name.
+	 *
+	 * @var string
+	 */
+	public $seriesIdMetaName = null;
+
+	/**
+	 * Season number meta name
+	 *
+	 * @var string
+	 */
+	public $seasonNumberMetaName = null;
+
+	/**
+	 * Episode number meta name
+	 *
+	 * @var string
+	 */
+	public $episodeNumberMetaName = null;
 
 
 }
