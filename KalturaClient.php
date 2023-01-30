@@ -14276,8 +14276,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:23-01-23');
-		$this->setApiVersion('8.4.0.30114');
+		$this->setClientTag('php5:23-01-29');
+		$this->setApiVersion('8.4.0.30115');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

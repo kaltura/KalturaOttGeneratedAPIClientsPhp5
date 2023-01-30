@@ -7919,6 +7919,47 @@ class KalturaFilterFileByAudioCodecInPlaybackAction extends KalturaFilterFileByA
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaFilterFileByDynamicDataAction extends KalturaFilterAction
+{
+	/**
+	 * Key to be searched
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+	/**
+	 * Comma separated values to be searched
+	 *
+	 * @var string
+	 */
+	public $values = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByDynamicDataInDiscoveryAction extends KalturaFilterFileByDynamicDataAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByDynamicDataInPlaybackAction extends KalturaFilterFileByDynamicDataAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaFilterFileByFileTypeIdAction extends KalturaFilterAction
 {
 	/**
