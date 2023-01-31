@@ -9987,7 +9987,7 @@ class KalturaRecordingService extends KalturaServiceBase
 	 * @param int $endPadding End padding offset
 	 * @return KalturaImmediateRecording
 	 */
-	function immediateRecord($assetId, $epgChannelId, $endPadding)
+	function immediateRecord($assetId, $epgChannelId, $endPadding = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "assetId", $assetId);
@@ -14330,7 +14330,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:23-01-31');
-		$this->setApiVersion('8.4.12.30135');
+		$this->setApiVersion('8.4.12.30136');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
