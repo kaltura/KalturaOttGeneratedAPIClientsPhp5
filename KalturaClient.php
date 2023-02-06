@@ -4177,11 +4177,11 @@ class KalturaEntitlementService extends KalturaServiceBase
 	/**
 	 * Gets all the entitled media items for a household
 	 * 
-	 * @param KalturaBaseEntitlementFilter $filter Request filter
+	 * @param KalturaEntitlementFilter $filter Request filter
 	 * @param KalturaFilterPager $pager Request pager
 	 * @return KalturaEntitlementListResponse
 	 */
-	function listAction(KalturaBaseEntitlementFilter $filter, KalturaFilterPager $pager = null)
+	function listAction(KalturaEntitlementFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "filter", $filter->toParams());
@@ -14329,8 +14329,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:23-02-02');
-		$this->setApiVersion('8.5.0.30174');
+		$this->setClientTag('php5:23-02-06');
+		$this->setApiVersion('8.5.0.30179');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
