@@ -9,7 +9,7 @@
 // to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2022  Kaltura Inc.
+// Copyright (C) 2006-2023  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -821,6 +821,22 @@ class KalturaCollectionFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $alsoInactive = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponFilter extends KalturaFilter
+{
+	/**
+	 * Comma separated list of coupon codes.
+	 *
+	 * @var string
+	 */
+	public $couponCodesIn = null;
 
 
 }
@@ -2300,54 +2316,6 @@ class KalturaConfigurationsFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBaseEntitlementFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEntitlementFilter extends KalturaBaseEntitlementFilter
-{
-	/**
-	 * The type of the entitlements to return
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $productTypeEqual = null;
-
-	/**
-	 * Reference type to filter by
-	 *
-	 * @var KalturaEntityReferenceBy
-	 */
-	public $entityReferenceEqual = null;
-
-	/**
-	 * Is expired
-	 *
-	 * @var bool
-	 */
-	public $isExpiredEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProgramAssetGroupOfferEntitlementFilter extends KalturaBaseEntitlementFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaRecordingFilter extends KalturaFilter
 {
 	/**
@@ -2428,6 +2396,45 @@ class KalturaCloudSeriesRecordingFilter extends KalturaSeriesRecordingFilter
 	 */
 	public $adapterData;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlementFilter extends KalturaFilter
+{
+	/**
+	 * The type of the entitlements to return
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $productTypeEqual = null;
+
+	/**
+	 * Reference type to filter by
+	 *
+	 * @var KalturaEntityReferenceBy
+	 */
+	public $entityReferenceEqual = null;
+
+	/**
+	 * Is expired
+	 *
+	 * @var bool
+	 */
+	public $isExpiredEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramAssetGroupOfferEntitlementFilter extends KalturaEntitlementFilter
+{
 
 }
 
