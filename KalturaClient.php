@@ -824,12 +824,19 @@ class KalturaAssetHistoryService extends KalturaServiceBase
 	 * Get next episode by last watch asset in given assetId
 	 * 
 	 * @param bigint $assetId Asset Id of series to search for next episode
+	 * @param KalturaSeriesIdArguments $seriesIdArguments Series Id arguments
+	 * @param string $notWatchedReturnStrategy Not watched any episode strategy
+	 * @param string $watchedAllReturnStrategy Watched all series episodes strategy
 	 * @return KalturaAssetHistory
 	 */
-	function getNextEpisode($assetId)
+	function getNextEpisode($assetId = null, KalturaSeriesIdArguments $seriesIdArguments = null, $notWatchedReturnStrategy = null, $watchedAllReturnStrategy = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "assetId", $assetId);
+		if ($seriesIdArguments !== null)
+			$this->client->addParam($kparams, "seriesIdArguments", $seriesIdArguments->toParams());
+		$this->client->addParam($kparams, "notWatchedReturnStrategy", $notWatchedReturnStrategy);
+		$this->client->addParam($kparams, "watchedAllReturnStrategy", $watchedAllReturnStrategy);
 		$this->client->queueServiceActionCall("assethistory", "getNextEpisode", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -4170,11 +4177,11 @@ class KalturaEntitlementService extends KalturaServiceBase
 	/**
 	 * Gets all the entitled media items for a household
 	 * 
-	 * @param KalturaBaseEntitlementFilter $filter Request filter
+	 * @param KalturaEntitlementFilter $filter Request filter
 	 * @param KalturaFilterPager $pager Request pager
 	 * @return KalturaEntitlementListResponse
 	 */
-	function listAction(KalturaBaseEntitlementFilter $filter, KalturaFilterPager $pager = null)
+	function listAction(KalturaEntitlementFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "filter", $filter->toParams());
@@ -6973,11 +6980,10 @@ class KalturaMediaFileDynamicDataService extends KalturaServiceBase
 	 * @param KalturaFilterPager $pager Pager
 	 * @return KalturaMediaFileDynamicDataListResponse
 	 */
-	function listAction(KalturaMediaFileDynamicDataFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(KalturaMediaFileDynamicDataFilter $filter, KalturaFilterPager $pager = null)
 	{
 		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->addParam($kparams, "filter", $filter->toParams());
 		if ($pager !== null)
 			$this->client->addParam($kparams, "pager", $pager->toParams());
 		$this->client->queueServiceActionCall("mediafiledynamicdata", "list", $kparams);
@@ -10046,6 +10052,29 @@ class KalturaRecordingService extends KalturaServiceBase
 	}
 
 	/**
+	 * Immediate Record
+	 * 
+	 * @param bigint $assetId Asset identifier
+	 * @param bigint $epgChannelId Epg channel identifier
+	 * @param int $endPadding End padding offset
+	 * @return KalturaImmediateRecording
+	 */
+	function immediateRecord($assetId, $epgChannelId, $endPadding = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetId", $assetId);
+		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
+		$this->client->addParam($kparams, "endPadding", $endPadding);
+		$this->client->queueServiceActionCall("recording", "immediateRecord", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaImmediateRecording");
+		return $resultObject;
+	}
+
+	/**
 	 * Return a list of recordings for the household with optional filter by status and KSQL.
 	 * 
 	 * @param KalturaRecordingFilter $filter Filter parameters for filtering out the result
@@ -10080,6 +10109,29 @@ class KalturaRecordingService extends KalturaServiceBase
 		$kparams = array();
 		$this->client->addParam($kparams, "id", $id);
 		$this->client->queueServiceActionCall("recording", "protect", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaRecording");
+		return $resultObject;
+	}
+
+	/**
+	 * Stop ongoing household recording
+	 * 
+	 * @param bigint $assetId Asset identifier
+	 * @param bigint $epgChannelId Epg channel identifier
+	 * @param bigint $householdRecordingId Household recording identifier
+	 * @return KalturaRecording
+	 */
+	function stop($assetId, $epgChannelId, $householdRecordingId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetId", $assetId);
+		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
+		$this->client->addParam($kparams, "householdRecordingId", $householdRecordingId);
+		$this->client->queueServiceActionCall("recording", "stop", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -14355,8 +14407,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:23-02-07');
-		$this->setApiVersion('8.4.0.30119');
+		$this->setClientTag('php5:23-02-12');
+		$this->setApiVersion('8.5.1.30200');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

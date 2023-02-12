@@ -2300,54 +2300,6 @@ class KalturaConfigurationsFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBaseEntitlementFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEntitlementFilter extends KalturaBaseEntitlementFilter
-{
-	/**
-	 * The type of the entitlements to return
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $productTypeEqual = null;
-
-	/**
-	 * Reference type to filter by
-	 *
-	 * @var KalturaEntityReferenceBy
-	 */
-	public $entityReferenceEqual = null;
-
-	/**
-	 * Is expired
-	 *
-	 * @var bool
-	 */
-	public $isExpiredEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProgramAssetGroupOfferEntitlementFilter extends KalturaBaseEntitlementFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaRecordingFilter extends KalturaFilter
 {
 	/**
@@ -2428,6 +2380,45 @@ class KalturaCloudSeriesRecordingFilter extends KalturaSeriesRecordingFilter
 	 */
 	public $adapterData;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlementFilter extends KalturaFilter
+{
+	/**
+	 * The type of the entitlements to return
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $productTypeEqual = null;
+
+	/**
+	 * Reference type to filter by
+	 *
+	 * @var KalturaEntityReferenceBy
+	 */
+	public $entityReferenceEqual = null;
+
+	/**
+	 * Is expired
+	 *
+	 * @var bool
+	 */
+	public $isExpiredEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramAssetGroupOfferEntitlementFilter extends KalturaEntitlementFilter
+{
 
 }
 
@@ -15466,6 +15457,14 @@ class KalturaRecording extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
+	/**
+	 * Duration in seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $duration = null;
+
 
 }
 
@@ -15497,6 +15496,61 @@ class KalturaExternalRecording extends KalturaRecording
 	 * @readonly
 	 */
 	public $expiryDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaImmediateRecording extends KalturaRecording
+{
+	/**
+	 * Household specific end padding of the recording
+	 *
+	 * @var int
+	 */
+	public $endPadding = null;
+
+	/**
+	 * Household absolute start time of the immediate recording
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $absoluteStart = null;
+
+	/**
+	 * Household absolute end time of the immediate recording, empty if till end of program
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $absoluteEnd = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPaddedRecording extends KalturaRecording
+{
+	/**
+	 * Household specific start padding of the recording
+	 *
+	 * @var int
+	 */
+	public $startPadding = null;
+
+	/**
+	 * Household specific end padding of the recording
+	 *
+	 * @var int
+	 */
+	public $endPadding = null;
 
 
 }
@@ -16434,6 +16488,13 @@ class KalturaRecordingAsset extends KalturaProgramAsset
 	 * @var int
 	 */
 	public $viewableUntilDate = null;
+
+	/**
+	 * When TRUE indicates that there are multiple KalturaImmediateRecording instances for the event.
+	 *
+	 * @var bool
+	 */
+	public $multiRecord = null;
 
 
 }
@@ -19309,6 +19370,13 @@ class KalturaPlaybackProfile extends KalturaObjectBase
 	public $isActive = null;
 
 	/**
+	 * Playback profile Grpc address
+	 *
+	 * @var string
+	 */
+	public $adapterGrpcAddress = null;
+
+	/**
 	 * Playback profile URL
 	 *
 	 * @var string
@@ -20413,6 +20481,50 @@ class KalturaAssetFileContext extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $isLivePlayBack = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSeriesIdArguments extends KalturaObjectBase
+{
+	/**
+	 * Comma separated asset type IDs
+	 *
+	 * @var string
+	 */
+	public $assetTypeIdIn = null;
+
+	/**
+	 * Series ID
+	 *
+	 * @var string
+	 */
+	public $seriesId = null;
+
+	/**
+	 * Series ID meta name.
+	 *
+	 * @var string
+	 */
+	public $seriesIdMetaName = null;
+
+	/**
+	 * Season number meta name
+	 *
+	 * @var string
+	 */
+	public $seasonNumberMetaName = null;
+
+	/**
+	 * Episode number meta name
+	 *
+	 * @var string
+	 */
+	public $episodeNumberMetaName = null;
 
 
 }
