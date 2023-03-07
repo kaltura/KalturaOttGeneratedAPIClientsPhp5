@@ -707,21 +707,12 @@ class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
 	 */
 	public $nameContain = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentationTypeShopFilter extends KalturaBaseSegmentationTypeFilter
-{
 	/**
 	 * comma-separated list of KalturaSegmentationType.assetUserRuleId values
 	 *
 	 * @var string
 	 */
-	public $idIn = null;
+	public $assetUserRuleIdIn = null;
 
 
 }
