@@ -1467,6 +1467,15 @@ class KalturaMathemticalOperatorType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMediaFileDynamicDataOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaFileOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -2097,6 +2106,8 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const FILTERFILEBYSTREAMERTYPEINPLAYBACK = "FilterFileByStreamerTypeInPlayback";
 	const FILTERFILEBYLABELINDISCOVERY = "FilterFileByLabelInDiscovery";
 	const FILTERFILEBYLABELINPLAYBACK = "FilterFileByLabelInPlayback";
+	const FILTERFILEBYDYNAMICDATAINDISCOVERY = "FilterFileByDynamicDataInDiscovery";
+	const FILTERFILEBYDYNAMICDATAINPLAYBACK = "FilterFileByDynamicDataInPlayback";
 }
 
 /**

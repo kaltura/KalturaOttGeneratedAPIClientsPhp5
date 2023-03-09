@@ -6928,6 +6928,78 @@ class KalturaMediaFileService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMediaFileDynamicDataService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add a dynamicData value to the values list of a specific key name in a specific mediaFileTypeId
+	 * 
+	 * @param KalturaMediaFileDynamicData $dynamicData DynamicData value
+	 * @return KalturaMediaFileDynamicData
+	 */
+	function add(KalturaMediaFileDynamicData $dynamicData)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "dynamicData", $dynamicData->toParams());
+		$this->client->queueServiceActionCall("mediafiledynamicdata", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMediaFileDynamicData");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete an existing DynamicData value
+	 * 
+	 * @param bigint $id DynamicData identifier
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("mediafiledynamicdata", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * List and filter existing mediaFile dynamicData values
+	 * 
+	 * @param KalturaMediaFileDynamicDataFilter $filter Filter
+	 * @param KalturaFilterPager $pager Pager
+	 * @return KalturaMediaFileDynamicDataListResponse
+	 */
+	function listAction(KalturaMediaFileDynamicDataFilter $filter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("mediafiledynamicdata", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMediaFileDynamicDataListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaFileTypeService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -9983,15 +10055,13 @@ class KalturaRecordingService extends KalturaServiceBase
 	 * Immediate Record
 	 * 
 	 * @param bigint $assetId Asset identifier
-	 * @param bigint $epgChannelId Epg channel identifier
 	 * @param int $endPadding End padding offset
 	 * @return KalturaImmediateRecording
 	 */
-	function immediateRecord($assetId, $epgChannelId, $endPadding = null)
+	function immediateRecord($assetId, $endPadding = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
 		$this->client->addParam($kparams, "endPadding", $endPadding);
 		$this->client->queueServiceActionCall("recording", "immediateRecord", $kparams);
 		if ($this->client->isMultiRequest())
@@ -10049,16 +10119,14 @@ class KalturaRecordingService extends KalturaServiceBase
 	 * Stop ongoing household recording
 	 * 
 	 * @param bigint $assetId Asset identifier
-	 * @param bigint $epgChannelId Epg channel identifier
-	 * @param bigint $householdRecordingId Household recording identifier
+	 * @param bigint $id Household recording identifier
 	 * @return KalturaRecording
 	 */
-	function stop($assetId, $epgChannelId, $householdRecordingId)
+	function stop($assetId, $id)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "epgChannelId", $epgChannelId);
-		$this->client->addParam($kparams, "householdRecordingId", $householdRecordingId);
+		$this->client->addParam($kparams, "id", $id);
 		$this->client->queueServiceActionCall("recording", "stop", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -13902,6 +13970,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaMediaFileDynamicDataService
+	 */
+	public $mediaFileDynamicData = null;
+
+	/**
+	 * 
 	 * @var KalturaMediaFileTypeService
 	 */
 	public $mediaFileType = null;
@@ -14329,8 +14403,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:23-03-06');
-		$this->setApiVersion('8.5.1.30231');
+		$this->setClientTag('php5:23-03-09');
+		$this->setApiVersion('8.6.2.30269');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -14412,6 +14486,7 @@ class KalturaClient extends KalturaClientBase
 		$this->liveToVod = new KalturaLiveToVodService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);
 		$this->mediaFile = new KalturaMediaFileService($this);
+		$this->mediaFileDynamicData = new KalturaMediaFileDynamicDataService($this);
 		$this->mediaFileType = new KalturaMediaFileTypeService($this);
 		$this->messageTemplate = new KalturaMessageTemplateService($this);
 		$this->meta = new KalturaMetaService($this);

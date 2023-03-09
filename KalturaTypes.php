@@ -4098,6 +4098,51 @@ class KalturaLanguageFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMediaFileDynamicDataFilter extends KalturaFilter
+{
+	/**
+	 * A comma-separated list of KalturaMediaFileDynamicData.Id to be searched.
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+	/**
+	 * An integer representing the the mediaFileType holding the keys for which the values should be stored.
+	 *
+	 * @var int
+	 */
+	public $mediaFileTypeId = null;
+
+	/**
+	 * A string representing the key name within the mediaFileType that identifies the list corresponding
+	 *             to that key name.
+	 *
+	 * @var string
+	 */
+	public $mediaFileTypeKeyName = null;
+
+	/**
+	 * A string representing a specific value to be searched.
+	 *
+	 * @var string
+	 */
+	public $valueEqual = null;
+
+	/**
+	 * A string representing the beginning of multiple (zero or more) matching values.
+	 *
+	 * @var string
+	 */
+	public $valueStartsWith = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetaFilter extends KalturaFilter
 {
 	/**
@@ -7941,6 +7986,47 @@ class KalturaFilterFileByAudioCodecInPlaybackAction extends KalturaFilterFileByA
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaFilterFileByDynamicDataAction extends KalturaFilterAction
+{
+	/**
+	 * Key to be searched
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+	/**
+	 * Comma separated values to be searched
+	 *
+	 * @var string
+	 */
+	public $values = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByDynamicDataInDiscoveryAction extends KalturaFilterFileByDynamicDataAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilterFileByDynamicDataInPlaybackAction extends KalturaFilterFileByDynamicDataAction
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaFilterFileByFileTypeIdAction extends KalturaFilterAction
 {
 	/**
@@ -9024,6 +9110,13 @@ class KalturaMediaFile extends KalturaAssetFile
 	 * @var string
 	 */
 	public $labels = null;
+
+	/**
+	 * List of KalturaMediaFile&#39;s dynamic data keys
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
 
 
 }
@@ -17021,6 +17114,60 @@ class KalturaLineupChannelAssetListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMediaFileDynamicData extends KalturaObjectBase
+{
+	/**
+	 * An integer representing the identifier of the value.
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+	/**
+	 * An integer representing the the mediaFileType holding the keys for which the values should be stored.
+	 *
+	 * @var int
+	 */
+	public $mediaFileTypeId = null;
+
+	/**
+	 * A string representing the key name within the mediaFileType that identifies the list corresponding
+	 *             to that key name.
+	 *
+	 * @var string
+	 */
+	public $mediaFileTypeKeyName = null;
+
+	/**
+	 * Dynamic data value
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaFileDynamicDataListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of media-file types
+	 *
+	 * @var array of KalturaMediaFileDynamicData
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaFileListResponse extends KalturaListResponse
 {
 	/**
@@ -17128,6 +17275,13 @@ class KalturaMediaFileType extends KalturaObjectBase
 	 * @var string
 	 */
 	public $audioCodecs = null;
+
+	/**
+	 * List of comma separated keys allowed to be used as KalturaMediaFile&#39;s dynamic data keys
+	 *
+	 * @var string
+	 */
+	public $dynamicDataKeys = null;
 
 
 }
