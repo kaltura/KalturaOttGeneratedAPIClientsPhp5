@@ -22612,6 +22612,22 @@ class KalturaPartnerPremiumServices extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaPersonalActivityCleanupConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Retention Period Days
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPin extends KalturaObjectBase
 {
 	/**
