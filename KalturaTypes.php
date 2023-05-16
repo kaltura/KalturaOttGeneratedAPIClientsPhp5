@@ -836,6 +836,13 @@ class KalturaCollectionFilter extends KalturaFilter
 	 */
 	public $assetUserRuleIdIn = null;
 
+	/**
+	 * A string that is included in the collection name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
+
 
 }
 
@@ -881,6 +888,13 @@ class KalturaPpvFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $alsoInactive = null;
+
+	/**
+	 * A string that is included in the ppv name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
 
 	/**
 	 * comma-separated list of KalturaPpv.assetUserRuleId values.  Matching KalturaPpv objects will be returned by the filter.
@@ -952,6 +966,13 @@ class KalturaProgramAssetGroupOfferFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $alsoInactive = null;
+
+	/**
+	 * A string that is included in the PAGO name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
 
 
 }
@@ -1095,6 +1116,13 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 */
 	public $dependencyTypeIn = null;
 
+	/**
+	 * A string that is included in the subscription name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
+
 
 }
 
@@ -1143,6 +1171,22 @@ class KalturaPersonalListFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $partnerListTypeIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAnnouncementFilter extends KalturaFilter
+{
+	/**
+	 * A list of comma separated announcement ids.
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
 
 
 }
@@ -1276,22 +1320,6 @@ class KalturaInboxMessageFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $createdAtLessThanOrEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAnnouncementFilter extends KalturaFilter
-{
-	/**
-	 * A list of comma separated announcement ids.
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
 
 
 }
@@ -2016,6 +2044,13 @@ class KalturaChannelExternalFilter extends KalturaAssetFilter
 	 * @var string
 	 */
 	public $freeText = null;
+
+	/**
+	 * Alias for External Channel Id.
+	 *
+	 * @var string
+	 */
+	public $alias = null;
 
 
 }
@@ -3617,6 +3652,50 @@ class KalturaSearchPriorityGroupFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLineupRegionalChannelFilter extends KalturaFilter
+{
+	/**
+	 * Region ID filter
+	 *
+	 * @var int
+	 */
+	public $regionIdEqual = null;
+
+	/**
+	 * Should include lineup from parent region into response
+	 *
+	 * @var bool
+	 */
+	public $parentRegionIncluded = null;
+
+	/**
+	 * A valid KSQL statement - Only linear channels that satisfies the KSQL statement will be included in the results
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+	/**
+	 * Filter only LCNs that greater or equals to the provided number
+	 *
+	 * @var int
+	 */
+	public $lcnGreaterThanOrEqual = null;
+
+	/**
+	 * Filter only LCNs that less or equals to the provided number
+	 *
+	 * @var int
+	 */
+	public $lcnLessThanOrEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaListGroupsRepresentativesFilter extends KalturaFilter
 {
 	/**
@@ -3695,6 +3774,13 @@ class KalturaAssetRuleFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $assetRuleIdEqual = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
 
 
 }
@@ -5074,7 +5160,6 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * Usage module name
 	 *
 	 * @var string
-	 * @insertonly
 	 */
 	public $name = null;
 
@@ -5082,7 +5167,6 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The maximum number of times an item in this usage module can be viewed
 	 *
 	 * @var int
-	 * @insertonly
 	 */
 	public $maxViewsNumber = null;
 
@@ -7955,8 +8039,24 @@ class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaBasePreActionCondition extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaFilterAction extends KalturaAssetRuleAction
 {
+	/**
+	 * PreAction condition
+	 *
+	 * @var KalturaBasePreActionCondition
+	 */
+	public $preActionCondition;
+
 
 }
 
@@ -8251,6 +8351,31 @@ class KalturaFilterAssetByKsqlAction extends KalturaFilterAction
 	 * @var string
 	 */
 	public $ksql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaNoShopPreActionCondition extends KalturaBasePreActionCondition
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaShopPreActionCondition extends KalturaBasePreActionCondition
+{
+	/**
+	 * Asset user rule ID with shop condition
+	 *
+	 * @var int
+	 */
+	public $shopAssetUserRuleId = null;
 
 
 }
@@ -22484,6 +22609,22 @@ class KalturaPartnerPremiumServices extends KalturaObjectBase
 	 * @var array of KalturaPartnerPremiumService
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPersonalActivityCleanupConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Retention Period Days
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
 
 
 }
