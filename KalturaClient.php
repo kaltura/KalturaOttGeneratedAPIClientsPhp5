@@ -6683,6 +6683,28 @@ class KalturaLineupService extends KalturaServiceBase
 	}
 
 	/**
+	 * Returns list of lineup regional linear channels associated with one LCN and its region information. Allows to apply sorting and filtering by LCN and linear channels.
+	 * 
+	 * @param KalturaLineupRegionalChannelFilter $filter Request filter
+	 * @param KalturaFilterPager $pager Paging the request
+	 * @return KalturaLineupChannelAssetListResponse
+	 */
+	function listAction(KalturaLineupRegionalChannelFilter $filter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("lineup", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLineupChannelAssetListResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Sends lineup update requested notification.
 	 * 
 	 * @param string $regionIds Region IDs separated by commas.
@@ -8900,6 +8922,54 @@ class KalturaPermissionItemService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaPermissionItemListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPersonalActivityCleanupService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * PersonalActivityCleanupConfiguration get
+	 * 
+	 * @return KalturaPersonalActivityCleanupConfiguration
+	 */
+	function getPartnerConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("personalactivitycleanup", "getPartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPersonalActivityCleanupConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * PersonalActivityCleanupConfiguration Update
+	 * 
+	 * @param KalturaPersonalActivityCleanupConfiguration $personalActivityCleanupConfiguration PersonalActivityCleanupConfiguration details
+	 * @return KalturaPersonalActivityCleanupConfiguration
+	 */
+	function updatePartnerConfiguration(KalturaPersonalActivityCleanupConfiguration $personalActivityCleanupConfiguration)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "personalActivityCleanupConfiguration", $personalActivityCleanupConfiguration->toParams());
+		$this->client->queueServiceActionCall("personalactivitycleanup", "updatePartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaPersonalActivityCleanupConfiguration");
 		return $resultObject;
 	}
 }
@@ -14085,6 +14155,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaPersonalActivityCleanupService
+	 */
+	public $personalActivityCleanup = null;
+
+	/**
+	 * 
 	 * @var KalturaPersonalFeedService
 	 */
 	public $personalFeed = null;
@@ -14404,8 +14480,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:23-05-16');
-		$this->setApiVersion('8.6.12.30274');
+		$this->setClientTag('php5:23-05-24');
+		$this->setApiVersion('8.8.1.30345');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -14506,6 +14582,7 @@ class KalturaClient extends KalturaClientBase
 		$this->paymentMethodProfile = new KalturaPaymentMethodProfileService($this);
 		$this->permission = new KalturaPermissionService($this);
 		$this->permissionItem = new KalturaPermissionItemService($this);
+		$this->personalActivityCleanup = new KalturaPersonalActivityCleanupService($this);
 		$this->personalFeed = new KalturaPersonalFeedService($this);
 		$this->personalList = new KalturaPersonalListService($this);
 		$this->pin = new KalturaPinService($this);
