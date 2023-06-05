@@ -308,6 +308,8 @@ class KalturaAssetReminderOrderBy extends KalturaEnumBase
 class KalturaAssetRuleOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
 }
 
 /**
@@ -1429,6 +1431,18 @@ class KalturaLinearChannelType extends KalturaEnumBase
 	const OTT = "OTT";
 	const DTT_AND_OTT = "DTT_AND_OTT";
 	const VRM_EXPORT = "VRM_EXPORT";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLineupRegionalChannelOrderBy extends KalturaEnumBase
+{
+	const LCN_ASC = "LCN_ASC";
+	const LCN_DESC = "LCN_DESC";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
 }
 
 /**
@@ -2665,6 +2679,7 @@ class KalturaUserRoleProfile extends KalturaEnumBase
 	const PARTNER = "PARTNER";
 	const PROFILE = "PROFILE";
 	const SYSTEM = "SYSTEM";
+	const PERMISSION_EMBEDDED = "PERMISSION_EMBEDDED";
 }
 
 /**
