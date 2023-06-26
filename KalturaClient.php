@@ -6403,6 +6403,29 @@ class KalturaIngestStatusService extends KalturaServiceBase
 	}
 
 	/**
+	 * List detailed results of ingested assets.
+	 * 
+	 * @param KalturaVodIngestAssetResultFilter $filter Filter object with parameters to filter selected ingest processes and assets
+	 * @param KalturaFilterPager $pager Paging the request
+	 * @return KalturaVodIngestAssetResultResponse
+	 */
+	function getVodAssetResult(KalturaVodIngestAssetResultFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("ingeststatus", "getVodAssetResult", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaVodIngestAssetResultResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Returns Core Ingest service partner configurations
 	 * 
 	 * @param KalturaIngestStatusPartnerConfiguration $config The partner config updates
@@ -14481,7 +14504,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:23-06-26');
-		$this->setApiVersion('8.9.1.30379');
+		$this->setApiVersion('8.9.1.30380');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
