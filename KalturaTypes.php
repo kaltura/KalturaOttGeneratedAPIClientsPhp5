@@ -15900,6 +15900,22 @@ class KalturaPaddedRecording extends KalturaRecording
 	 */
 	public $endPadding = null;
 
+	/**
+	 * Indicates whether startPadding value is personal padding (counts towards HH quota) or system padding (does not count towards HH quota).
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $startPaddingIsPersonal = null;
+
+	/**
+	 * Indicates whether endPadding value is personal padding (counts towards HH quota) or system padding (does not count towards HH quota).
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $endPaddingIsPersonal = null;
+
 
 }
 
