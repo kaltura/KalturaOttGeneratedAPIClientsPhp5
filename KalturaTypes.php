@@ -836,6 +836,13 @@ class KalturaCollectionFilter extends KalturaFilter
 	 */
 	public $assetUserRuleIdIn = null;
 
+	/**
+	 * A string that is included in the collection name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
+
 
 }
 
@@ -881,6 +888,13 @@ class KalturaPpvFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $alsoInactive = null;
+
+	/**
+	 * A string that is included in the ppv name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
 
 	/**
 	 * comma-separated list of KalturaPpv.assetUserRuleId values.  Matching KalturaPpv objects will be returned by the filter.
@@ -952,6 +966,13 @@ class KalturaProgramAssetGroupOfferFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $alsoInactive = null;
+
+	/**
+	 * A string that is included in the PAGO name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
 
 
 }
@@ -1095,6 +1116,13 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 */
 	public $dependencyTypeIn = null;
 
+	/**
+	 * A string that is included in the subscription name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
+
 
 }
 
@@ -1143,6 +1171,22 @@ class KalturaPersonalListFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $partnerListTypeIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAnnouncementFilter extends KalturaFilter
+{
+	/**
+	 * A list of comma separated announcement ids.
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
 
 
 }
@@ -1276,22 +1320,6 @@ class KalturaInboxMessageFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $createdAtLessThanOrEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAnnouncementFilter extends KalturaFilter
-{
-	/**
-	 * A list of comma separated announcement ids.
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
 
 
 }
@@ -1551,6 +1579,64 @@ class KalturaIngestProgramResultsByProgramIdsFilter extends KalturaIngestEpgProg
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaVodIngestAssetResultFilter extends KalturaFilter
+{
+	/**
+	 * Filter KalturaVodIngestAssetResult elements based on the ingest XML file name or partial name.
+	 *
+	 * @var string
+	 */
+	public $fileNameContains = null;
+
+	/**
+	 * Filter KalturaVodIngestAssetResult elements based on the asset name or partial name.
+	 *
+	 * @var string
+	 */
+	public $assetNameContains = null;
+
+	/**
+	 * Comma separated values, representing multiple selection of ingest status state (\&quot;SUCCESS\&quot;,\&quot;FAIL\&quot;,\&quot;SUCCESS_WARNING\&quot;EXTERNAL_FAIL\&quot;).
+	 *
+	 * @var string
+	 */
+	public $ingestStatusIn = null;
+
+	/**
+	 * Filter assets ingested after the greater than value. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $ingestDateGreaterThan = null;
+
+	/**
+	 * Filter assets ingested before the smaller than value. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $ingestDateSmallerThan = null;
+
+	/**
+	 * Comma separated asset types, representing multiple selection of VOD asset types (e.g. \&quot;MOVIE\&quot;,\&quot;SERIES\&quot;,\&quot;SEASON\&quot;,\&quot;EPISODE\&quot;...).
+	 *
+	 * @var string
+	 */
+	public $vodTypeSystemNameIn = null;
+
+	/**
+	 * Comma separated Ids, pointing to AssetUserRules which hold the shop markers (shop provider values)
+	 *
+	 * @var string
+	 */
+	public $shopAssetUserRuleIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
 {
 
@@ -1633,15 +1719,6 @@ abstract class KalturaPersistedFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaBaseAssetOrder extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaDynamicOrderBy extends KalturaObjectBase
 {
 	/**
@@ -1658,6 +1735,15 @@ class KalturaDynamicOrderBy extends KalturaObjectBase
 	 */
 	public $orderBy = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaBaseAssetOrder extends KalturaObjectBase
+{
 
 }
 
@@ -1720,7 +1806,7 @@ abstract class KalturaBaseSearchAssetFilter extends KalturaAssetFilter
 	 *             geo_block - only valid value is &quot;true&quot;: When enabled, only assets that are not restricted to the user by geo-block rules will return.
 	 *             parental_rules - only valid value is &quot;true&quot;: When enabled, only assets that the user doesn&#39;t need to provide PIN code will return.
 	 *             user_interests - only valid value is &quot;true&quot;. When enabled, only assets that the user defined as his interests (by tags and metas) will return.
-	 *             epg_channel_id – the channel identifier of the EPG program.
+	 *             epg_channel_id - the channel identifier of the EPG program.
 	 *             entitled_assets - valid values: &quot;free&quot;, &quot;entitled&quot;, &quot;not_entitled&quot;, &quot;both&quot;. free - gets only free to watch assets. entitled - only those that the user is implicitly entitled to watch.
 	 *             asset_type - valid values: &quot;media&quot;, &quot;epg&quot;, &quot;recording&quot; or any number that represents media type in group.
 	 *             Comparison operators: for numerical fields =, &gt;, &gt;=, &lt;, &lt;=, : (in). 
@@ -1784,73 +1870,11 @@ class KalturaChannelFilter extends KalturaBaseSearchAssetFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetDynamicOrder extends KalturaBaseAssetOrder
-{
-	/**
-	 * order by name
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * order by meta asc/desc
-	 *
-	 * @var KalturaMetaTagOrderBy
-	 */
-	public $orderBy = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetOrder extends KalturaBaseAssetOrder
-{
-	/**
-	 * Order By
-	 *
-	 * @var KalturaAssetOrderByType
-	 */
-	public $orderBy = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetStatisticsOrder extends KalturaBaseAssetOrder
-{
-	/**
-	 * Trending Days Equal
-	 *
-	 * @var int
-	 */
-	public $trendingDaysEqual = null;
-
-	/**
-	 * order by meta asc/desc
-	 *
-	 * @var KalturaAssetOrderByStatistics
-	 */
-	public $orderBy = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPersonalListSearchFilter extends KalturaBaseSearchAssetFilter
 {
 	/**
 	 * Comma separated list of partner list types to search within. 
-	 *             If omitted – all types should be included.
+	 *             If omitted - all types should be included.
 	 *
 	 * @var string
 	 */
@@ -1875,7 +1899,7 @@ class KalturaRelatedFilter extends KalturaBaseSearchAssetFilter
 	/**
 	 * Comma separated list of asset types to search within. 
 	 *             Possible values: any media type ID (according to media type IDs defined dynamically in the system).
-	 *             If omitted – same type as the provided asset.
+	 *             If omitted - same type as the provided asset.
 	 *
 	 * @var string
 	 */
@@ -1900,8 +1924,8 @@ class KalturaSearchAssetFilter extends KalturaBaseSearchAssetFilter
 	/**
 	 * (Deprecated - use KalturaBaseSearchAssetFilter.kSql)
 	 *             Comma separated list of asset types to search within. 
-	 *             Possible values: 0 – EPG linear programs entries; 1 - Recordings; Any media type ID (according to media type IDs defined dynamically in the system).
-	 *             If omitted – all types should be included.
+	 *             Possible values: 0 - EPG linear programs entries; 1 - Recordings; Any media type ID (according to media type IDs defined dynamically in the system).
+	 *             If omitted - all types should be included.
 	 *
 	 * @var string
 	 */
@@ -1930,12 +1954,12 @@ class KalturaSearchAssetListFilter extends KalturaSearchAssetFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetMetaOrTagGroupBy extends KalturaAssetGroupBy
+class KalturaAssetFieldGroupBy extends KalturaAssetGroupBy
 {
 	/**
-	 * Group by a tag or meta - according to the name that appears in the system (similar to KSQL)
+	 * Group by a specific field that is defined in enum
 	 *
-	 * @var string
+	 * @var KalturaGroupByField
 	 */
 	public $value = null;
 
@@ -1946,12 +1970,12 @@ class KalturaAssetMetaOrTagGroupBy extends KalturaAssetGroupBy
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetFieldGroupBy extends KalturaAssetGroupBy
+class KalturaAssetMetaOrTagGroupBy extends KalturaAssetGroupBy
 {
 	/**
-	 * Group by a specific field that is defined in enum
+	 * Group by a tag or meta - according to the name that appears in the system (similar to KSQL)
 	 *
-	 * @var KalturaGroupByField
+	 * @var string
 	 */
 	public $value = null;
 
@@ -1972,9 +1996,9 @@ class KalturaBundleFilter extends KalturaAssetFilter
 	public $idEqual = null;
 
 	/**
-	 * Comma separated list of asset types to search within. 
-	 *             Possible values: 0 – EPG linear programs entries, any media type ID (according to media type IDs defined dynamically in the system).
-	 *             If omitted – all types should be included.
+	 * Comma separated list of asset types to search within.
+	 *             Possible values: 0 - EPG linear programs entries, any media type ID (according to media type IDs defined dynamically in the system).
+	 *             If omitted - all types should be included.
 	 *
 	 * @var string
 	 */
@@ -2017,6 +2041,13 @@ class KalturaChannelExternalFilter extends KalturaAssetFilter
 	 */
 	public $freeText = null;
 
+	/**
+	 * Alias for External Channel Id.
+	 *
+	 * @var string
+	 */
+	public $alias = null;
+
 
 }
 
@@ -2035,8 +2066,8 @@ class KalturaRelatedExternalFilter extends KalturaAssetFilter
 
 	/**
 	 * Comma separated list of asset types to search within. 
-	 *             Possible values: 0 – EPG linear programs entries, any media type ID (according to media type IDs defined dynamically in the system).
-	 *             If omitted – all types should be included.
+	 *             Possible values: 0 - EPG linear programs entries, any media type ID (according to media type IDs defined dynamically in the system).
+	 *             If omitted - all types should be included.
 	 *
 	 * @var string
 	 */
@@ -2125,12 +2156,74 @@ class KalturaSearchExternalFilter extends KalturaAssetFilter
 
 	/**
 	 * Comma separated list of asset types to search within. 
-	 *             Possible values: 0 – EPG linear programs entries, any media type ID (according to media type IDs defined dynamically in the system).
-	 *             If omitted – all types should be included.
+	 *             Possible values: 0 - EPG linear programs entries, any media type ID (according to media type IDs defined dynamically in the system).
+	 *             If omitted - all types should be included.
 	 *
 	 * @var string
 	 */
 	public $typeIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetDynamicOrder extends KalturaBaseAssetOrder
+{
+	/**
+	 * order by name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * order by meta asc/desc
+	 *
+	 * @var KalturaMetaTagOrderBy
+	 */
+	public $orderBy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetOrder extends KalturaBaseAssetOrder
+{
+	/**
+	 * Order By
+	 *
+	 * @var KalturaAssetOrderByType
+	 */
+	public $orderBy = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetStatisticsOrder extends KalturaBaseAssetOrder
+{
+	/**
+	 * Trending Days Equal
+	 *
+	 * @var int
+	 */
+	public $trendingDaysEqual = null;
+
+	/**
+	 * order by meta asc/desc
+	 *
+	 * @var KalturaAssetOrderByStatistics
+	 */
+	public $orderBy = null;
 
 
 }
@@ -2616,8 +2709,8 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 {
 	/**
 	 * Comma separated list of asset types to search within.
-	 *             Possible values: 0 – EPG linear programs entries, any media type ID (according to media type IDs defined dynamically in the system).
-	 *             If omitted – all types should be included.
+	 *             Possible values: 0 - EPG linear programs entries, any media type ID (according to media type IDs defined dynamically in the system).
+	 *             If omitted - all types should be included.
 	 *
 	 * @var string
 	 */
@@ -2631,9 +2724,9 @@ class KalturaAssetHistoryFilter extends KalturaFilter
 	public $assetIdIn = null;
 
 	/**
-	 * Which type of recently watched media to include in the result – those that finished watching, those that are in progress or both.
-	 *             If omitted or specified filter = all – return all types.
-	 *             Allowed values: progress – return medias that are in-progress, done – return medias that finished watching.
+	 * Which type of recently watched media to include in the result - those that finished watching, those that are in progress or both.
+	 *             If omitted or specified filter = all - return all types.
+	 *             Allowed values: progress - return medias that are in-progress, done - return medias that finished watching.
 	 *
 	 * @var KalturaWatchStatus
 	 */
@@ -3617,6 +3710,50 @@ class KalturaSearchPriorityGroupFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLineupRegionalChannelFilter extends KalturaFilter
+{
+	/**
+	 * Region ID filter
+	 *
+	 * @var int
+	 */
+	public $regionIdEqual = null;
+
+	/**
+	 * Should include lineup from parent region into response
+	 *
+	 * @var bool
+	 */
+	public $parentRegionIncluded = null;
+
+	/**
+	 * A valid KSQL statement - Only linear channels that satisfies the KSQL statement will be included in the results
+	 *
+	 * @var string
+	 */
+	public $kSql = null;
+
+	/**
+	 * Filter only LCNs that greater or equals to the provided number
+	 *
+	 * @var int
+	 */
+	public $lcnGreaterThanOrEqual = null;
+
+	/**
+	 * Filter only LCNs that less or equals to the provided number
+	 *
+	 * @var int
+	 */
+	public $lcnLessThanOrEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaListGroupsRepresentativesFilter extends KalturaFilter
 {
 	/**
@@ -3695,6 +3832,13 @@ class KalturaAssetRuleFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $assetRuleIdEqual = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
 
 
 }
@@ -5074,7 +5218,6 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * Usage module name
 	 *
 	 * @var string
-	 * @insertonly
 	 */
 	public $name = null;
 
@@ -5082,7 +5225,6 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * The maximum number of times an item in this usage module can be viewed
 	 *
 	 * @var int
-	 * @insertonly
 	 */
 	public $maxViewsNumber = null;
 
@@ -6668,29 +6810,6 @@ class KalturaUdidDynamicList extends KalturaDynamicList
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaHouseholdCoupon extends KalturaOTTObjectSupportNullable
-{
-	/**
-	 * Coupon code
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-	/**
-	 * Last Usage Date
-	 *
-	 * @var int
-	 */
-	public $lastUsageDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPluginData extends KalturaObjectBase
 {
 
@@ -6874,6 +6993,29 @@ class KalturaFairPlayPlaybackPluginData extends KalturaDrmPlaybackPluginData
 	 * @var string
 	 */
 	public $certificate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdCoupon extends KalturaOTTObjectSupportNullable
+{
+	/**
+	 * Coupon code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+	/**
+	 * Last Usage Date
+	 *
+	 * @var int
+	 */
+	public $lastUsageDate = null;
 
 
 }
@@ -7955,8 +8097,24 @@ class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaBasePreActionCondition extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaFilterAction extends KalturaAssetRuleAction
 {
+	/**
+	 * PreAction condition
+	 *
+	 * @var KalturaBasePreActionCondition
+	 */
+	public $preActionCondition;
+
 
 }
 
@@ -8251,6 +8409,31 @@ class KalturaFilterAssetByKsqlAction extends KalturaFilterAction
 	 * @var string
 	 */
 	public $ksql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaNoShopPreActionCondition extends KalturaBasePreActionCondition
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaShopPreActionCondition extends KalturaBasePreActionCondition
+{
+	/**
+	 * Asset user rule ID with shop condition
+	 *
+	 * @var int
+	 */
+	public $shopAssetUserRuleId = null;
 
 
 }
@@ -13790,6 +13973,114 @@ class KalturaIngestStatusEpgProgramResultListResponse extends KalturaListRespons
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaVodIngestAssetResultErrorMessage extends KalturaObjectBase
+{
+	/**
+	 * The message description with arguments place holders
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * The message code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVodIngestAssetResult extends KalturaObjectBase
+{
+	/**
+	 * Ingested asset name. Absent only in case of NameRequired error
+	 *
+	 * @var string
+	 */
+	public $assetName = null;
+
+	/**
+	 * The shop ID the asset is assigned to. Omitted if the asset is not associated to any shop.
+	 *
+	 * @var int
+	 */
+	public $shopAssetUserRuleId = null;
+
+	/**
+	 * The XML file name used at the ingest gateway. Referred to as process name
+	 *
+	 * @var string
+	 */
+	public $fileName = null;
+
+	/**
+	 * Date and time the asset was ingested. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $ingestDate = null;
+
+	/**
+	 * The status result for the asset ingest.
+	 *             FAILURE - the asset ingest was failed after the ingest process started, specify the error for it.
+	 *             SUCCESS - the asset was succeeded to be ingested.
+	 *             SUCCESS_WARNING - the asset was succeeded to be ingested with warnings that do not prevent the ingest.
+	 *             EXTERNAL_FAILURE - the asset ingest was failed before the ingest process started, specify the error for it.
+	 *
+	 * @var KalturaVodIngestAssetResultStatus
+	 */
+	public $status = null;
+
+	/**
+	 * VOD asset type (assetStruct.systemName).
+	 *
+	 * @var string
+	 */
+	public $vodTypeSystemName = null;
+
+	/**
+	 * Errors which prevent the asset from being ingested
+	 *
+	 * @var array of KalturaVodIngestAssetResultErrorMessage
+	 */
+	public $errors;
+
+	/**
+	 * Errors which do not prevent the asset from being ingested
+	 *
+	 * @var array of KalturaVodIngestAssetResultErrorMessage
+	 */
+	public $warnings;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVodIngestAssetResultListResponse extends KalturaListResponse
+{
+	/**
+	 * list of KalturaVodIngestAssetResult
+	 *
+	 * @var array of KalturaVodIngestAssetResult
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDurationListResponse extends KalturaListResponse
 {
 	/**
@@ -15609,6 +15900,22 @@ class KalturaPaddedRecording extends KalturaRecording
 	 */
 	public $endPadding = null;
 
+	/**
+	 * Indicates whether startPadding value is personal padding (counts towards HH quota) or system padding (does not count towards HH quota).
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $startPaddingIsPersonal = null;
+
+	/**
+	 * Indicates whether endPadding value is personal padding (counts towards HH quota) or system padding (does not count towards HH quota).
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $endPaddingIsPersonal = null;
+
 
 }
 
@@ -15993,7 +16300,7 @@ abstract class KalturaAsset extends KalturaObjectBase
 
 	/**
 	 * Identifies the asset type (EPG, Recording, Movie, TV Series, etc). 
-	 *             Possible values: 0 – EPG linear programs, 1 - Recording; or any asset type ID according to the asset types IDs defined in the system.
+	 *             Possible values: 0 - EPG linear programs, 1 - Recording; or any asset type ID according to the asset types IDs defined in the system.
 	 *
 	 * @var int
 	 * @insertonly
@@ -16068,14 +16375,14 @@ abstract class KalturaAsset extends KalturaObjectBase
 	public $relatedEntities;
 
 	/**
-	 * Date and time represented as epoch. For VOD – since when the asset is available in the catalog. For EPG/Linear – when the program is aired (can be in the future).
+	 * Date and time represented as epoch. For VOD - since when the asset is available in the catalog. For EPG/Linear - when the program is aired (can be in the future).
 	 *
 	 * @var int
 	 */
 	public $startDate = null;
 
 	/**
-	 * Date and time represented as epoch. For VOD – till when the asset be available in the catalog. For EPG/Linear – program end time and date
+	 * Date and time represented as epoch. For VOD - till when the asset be available in the catalog. For EPG/Linear - program end time and date
 	 *
 	 * @var int
 	 */
@@ -17107,6 +17414,20 @@ class KalturaLineupChannelAssetListResponse extends KalturaListResponse
 	 * @var array of KalturaLineupChannelAsset
 	 */
 	public $objects;
+
+	/**
+	 * Lineup External Id
+	 *
+	 * @var string
+	 */
+	public $lineupExternalId = null;
+
+	/**
+	 * Parent Lineup External Id
+	 *
+	 * @var string
+	 */
+	public $parentLineupExternalId = null;
 
 
 }
@@ -20440,7 +20761,7 @@ abstract class KalturaBulkUploadAssetData extends KalturaBulkUploadObjectData
 {
 	/**
 	 * Identifies the asset type (EPG, Recording, Movie, TV Series, etc). 
-	 *             Possible values: 0 – EPG linear programs, 1 - Recording; or any asset type ID according to the asset types IDs defined in the system.
+	 *             Possible values: 0 - EPG linear programs, 1 - Recording; or any asset type ID according to the asset types IDs defined in the system.
 	 *
 	 * @var int
 	 */
@@ -21661,6 +21982,29 @@ class KalturaIngestStatusEpgConfiguration extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaIngestStatusVodConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Defines whether partner in question enabled core ingest status service.
+	 *
+	 * @var bool
+	 */
+	public $isSupported = null;
+
+	/**
+	 * Defines the time in seconds that the service retain information about ingest status.
+	 *
+	 * @var int
+	 */
+	public $retainingPeriod = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
 {
 	/**
@@ -21669,6 +22013,87 @@ class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
 	 * @var KalturaIngestStatusEpgConfiguration
 	 */
 	public $epg;
+
+	/**
+	 * Defines the vod configuration of the partner.
+	 *
+	 * @var KalturaIngestStatusVodConfiguration
+	 */
+	public $vod;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVodIngestAssetResultAggregation extends KalturaObjectBase
+{
+	/**
+	 * Ingest date of the first asset in the response list. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $ingestDateFrom = null;
+
+	/**
+	 * Ingest date of the last asset in the response list. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $ingestDateTo = null;
+
+	/**
+	 * Number of assets which failed ingest. Calculated on the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $failureCount = null;
+
+	/**
+	 * Number of assets which succeeded ingest without any warning. Calculated on the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $successCount = null;
+
+	/**
+	 * Number of files (not assets) which failed ingest and are reported by external none-WS_ingest entity. Calculated on the failed files returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $externalFailureCount = null;
+
+	/**
+	 * Number of assets which succeeded ingest, but with warnings. Calculated on the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $successWithWarningCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVodIngestAssetResultResponse extends KalturaObjectBase
+{
+	/**
+	 * Errors
+	 *
+	 * @var KalturaVodIngestAssetResultListResponse
+	 */
+	public $result;
+
+	/**
+	 * Aggregated counters
+	 *
+	 * @var KalturaVodIngestAssetResultAggregation
+	 */
+	public $aggregations;
 
 
 }
@@ -22484,6 +22909,22 @@ class KalturaPartnerPremiumServices extends KalturaObjectBase
 	 * @var array of KalturaPartnerPremiumService
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPersonalActivityCleanupConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Retention Period Days
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
 
 
 }
