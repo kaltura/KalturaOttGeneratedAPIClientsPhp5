@@ -707,13 +707,6 @@ class KalturaSegmentationTypeFilter extends KalturaBaseSegmentationTypeFilter
 	 */
 	public $nameContain = null;
 
-	/**
-	 * comma-separated list of KalturaSegmentationType.assetUserRuleId values
-	 *
-	 * @var string
-	 */
-	public $assetUserRuleIdIn = null;
-
 
 }
 
@@ -829,12 +822,21 @@ class KalturaCollectionFilter extends KalturaFilter
 	 */
 	public $alsoInactive = null;
 
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponFilter extends KalturaFilter
+{
 	/**
-	 * comma-separated list of KalturaCollection.assetUserRuleId values.  Matching KalturaCollection objects will be returned by the filter.
+	 * Comma separated list of coupon codes.
 	 *
 	 * @var string
 	 */
-	public $assetUserRuleIdIn = null;
+	public $couponCodesIn = null;
 
 
 }
@@ -881,13 +883,6 @@ class KalturaPpvFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $alsoInactive = null;
-
-	/**
-	 * comma-separated list of KalturaPpv.assetUserRuleId values.  Matching KalturaPpv objects will be returned by the filter.
-	 *
-	 * @var string
-	 */
-	public $assetUserRuleIdIn = null;
 
 
 }
@@ -1087,14 +1082,6 @@ class KalturaSubscriptionFilter extends KalturaFilter
 	 */
 	public $alsoInactive = null;
 
-	/**
-	 * comma separated values of KalturaSubscriptionDependencyType 
-	 *             return subscriptions associated by their subscription sets dependency Type
-	 *
-	 * @var string
-	 */
-	public $dependencyTypeIn = null;
-
 
 }
 
@@ -1143,77 +1130,6 @@ class KalturaPersonalListFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $partnerListTypeIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaReminderFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetReminderFilter extends KalturaReminderFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSeasonsReminderFilter extends KalturaReminderFilter
-{
-	/**
-	 * Series ID
-	 *
-	 * @var string
-	 */
-	public $seriesIdEqual = null;
-
-	/**
-	 * Comma separated season numbers
-	 *
-	 * @var string
-	 */
-	public $seasonNumberIn = null;
-
-	/**
-	 * EPG channel ID
-	 *
-	 * @var int
-	 */
-	public $epgChannelIdEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSeriesReminderFilter extends KalturaReminderFilter
-{
-	/**
-	 * Comma separated series IDs
-	 *
-	 * @var string
-	 */
-	public $seriesIdIn = null;
-
-	/**
-	 * EPG channel ID
-	 *
-	 * @var int
-	 */
-	public $epgChannelIdEqual = null;
 
 
 }
@@ -1302,6 +1218,77 @@ class KalturaAnnouncementFilter extends KalturaFilter
  */
 class KalturaPersonalFeedFilter extends KalturaFilter
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaReminderFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetReminderFilter extends KalturaReminderFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSeriesReminderFilter extends KalturaReminderFilter
+{
+	/**
+	 * Comma separated series IDs
+	 *
+	 * @var string
+	 */
+	public $seriesIdIn = null;
+
+	/**
+	 * EPG channel ID
+	 *
+	 * @var int
+	 */
+	public $epgChannelIdEqual = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSeasonsReminderFilter extends KalturaReminderFilter
+{
+	/**
+	 * Series ID
+	 *
+	 * @var string
+	 */
+	public $seriesIdEqual = null;
+
+	/**
+	 * Comma separated season numbers
+	 *
+	 * @var string
+	 */
+	public $seasonNumberIn = null;
+
+	/**
+	 * EPG channel ID
+	 *
+	 * @var int
+	 */
+	public $epgChannelIdEqual = null;
+
 
 }
 
@@ -2016,6 +2003,13 @@ class KalturaChannelExternalFilter extends KalturaAssetFilter
 	 * @var string
 	 */
 	public $freeText = null;
+
+	/**
+	 * Alias for External Channel Id.
+	 *
+	 * @var string
+	 */
+	public $alias = null;
 
 
 }
@@ -3354,13 +3348,6 @@ class KalturaChannelsFilter extends KalturaChannelsBaseFilter
 	 */
 	public $idIn = null;
 
-	/**
-	 * comma-separated list of KalturaChannel.assetUserRuleId values.  Matching KalturaChannel objects will be returned by the filter.
-	 *
-	 * @var string
-	 */
-	public $assetUserRuleIdIn = null;
-
 
 }
 
@@ -3793,13 +3780,6 @@ class KalturaCampaignSearchFilter extends KalturaCampaignFilter
 	 */
 	public $stateIn = null;
 
-	/**
-	 * Comma separated AssetUserRule Ids to filter by
-	 *
-	 * @var string
-	 */
-	public $assetUserRuleIdIn = null;
-
 
 }
 
@@ -4118,51 +4098,6 @@ class KalturaLanguageFilter extends KalturaFilter
 	 * @var bool
 	 */
 	public $excludePartner = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaMediaFileDynamicDataFilter extends KalturaFilter
-{
-	/**
-	 * A comma-separated list of KalturaMediaFileDynamicData.Id to be searched.
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-	/**
-	 * An integer representing the the mediaFileType holding the keys for which the values should be stored.
-	 *
-	 * @var int
-	 */
-	public $mediaFileTypeId = null;
-
-	/**
-	 * A string representing the key name within the mediaFileType that identifies the list corresponding
-	 *             to that key name.
-	 *
-	 * @var string
-	 */
-	public $mediaFileTypeKeyName = null;
-
-	/**
-	 * A string representing a specific value to be searched.
-	 *
-	 * @var string
-	 */
-	public $valueEqual = null;
-
-	/**
-	 * A string representing the beginning of multiple (zero or more) matching values.
-	 *
-	 * @var string
-	 */
-	public $valueStartsWith = null;
 
 
 }
@@ -4568,6 +4503,22 @@ class KalturaEpgFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSkipOnErrorCondition extends KalturaSkipCondition
+{
+	/**
+	 * Indicates which error should be considered to skip the current request
+	 *
+	 * @var KalturaSkipOptions
+	 */
+	public $condition = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPropertySkipCondition extends KalturaSkipCondition
 {
 	/**
@@ -4606,22 +4557,6 @@ class KalturaAggregatedPropertySkipCondition extends KalturaPropertySkipConditio
 	 * @var KalturaAggregationType
 	 */
 	public $aggregationType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSkipOnErrorCondition extends KalturaSkipCondition
-{
-	/**
-	 * Indicates which error should be considered to skip the current request
-	 *
-	 * @var KalturaSkipOptions
-	 */
-	public $condition = null;
 
 
 }
@@ -7327,45 +7262,6 @@ class KalturaAssetUserRule extends KalturaAssetRuleBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetCondition extends KalturaAssetConditionBase
-{
-	/**
-	 * KSQL
-	 *
-	 * @var string
-	 */
-	public $ksql = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaConcurrencyCondition extends KalturaAssetCondition
-{
-	/**
-	 * Concurrency limitation
-	 *
-	 * @var int
-	 */
-	public $limit = null;
-
-	/**
-	 * Concurrency limitation type
-	 *
-	 * @var KalturaConcurrencyLimitationType
-	 */
-	public $concurrencyLimitationType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaStringValueArray extends KalturaObjectBase
 {
 	/**
@@ -7405,63 +7301,6 @@ class KalturaAssetShopCondition extends KalturaAssetConditionBase
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaSubscriptionCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated subscription IDs list
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetSubscriptionCondition extends KalturaSubscriptionCondition
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserSubscriptionCondition extends KalturaSubscriptionCondition
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBusinessModuleCondition extends KalturaCondition
-{
-	/**
-	 * Business module type
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $businessModuleType = null;
-
-	/**
-	 * Business module ID
-	 *
-	 * @var int
-	 */
-	public $businessModuleId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaChannelCondition extends KalturaCondition
 {
 	/**
@@ -7486,6 +7325,22 @@ abstract class KalturaNotCondition extends KalturaCondition
 	 * @var bool
 	 */
 	public $not = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaOrCondition extends KalturaNotCondition
+{
+	/**
+	 * List of conditions with or between them
+	 *
+	 * @var array of KalturaCondition
+	 */
+	public $conditions;
 
 
 }
@@ -7556,14 +7411,149 @@ class KalturaHeaderCondition extends KalturaNotCondition
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaOrCondition extends KalturaNotCondition
+class KalturaAssetCondition extends KalturaAssetConditionBase
 {
 	/**
-	 * List of conditions with or between them
+	 * KSQL
 	 *
-	 * @var array of KalturaCondition
+	 * @var string
 	 */
-	public $conditions;
+	public $ksql = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaConcurrencyCondition extends KalturaAssetCondition
+{
+	/**
+	 * Concurrency limitation
+	 *
+	 * @var int
+	 */
+	public $limit = null;
+
+	/**
+	 * Concurrency limitation type
+	 *
+	 * @var KalturaConcurrencyLimitationType
+	 */
+	public $concurrencyLimitationType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaIpRangeCondition extends KalturaCondition
+{
+	/**
+	 * From IP address range
+	 *
+	 * @var string
+	 */
+	public $fromIP = null;
+
+	/**
+	 * TO IP address range
+	 *
+	 * @var string
+	 */
+	public $toIP = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBusinessModuleCondition extends KalturaCondition
+{
+	/**
+	 * Business module type
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $businessModuleType = null;
+
+	/**
+	 * Business module ID
+	 *
+	 * @var int
+	 */
+	public $businessModuleId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSegmentsCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated segments IDs list
+	 *
+	 * @var string
+	 */
+	public $segmentsIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaSubscriptionCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated subscription IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSubscriptionCondition extends KalturaSubscriptionCondition
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetSubscriptionCondition extends KalturaSubscriptionCondition
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserRoleCondition extends KalturaCondition
+{
+	/**
+	 * Comma separated user role IDs list
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
 
 
 }
@@ -7580,29 +7570,6 @@ class KalturaDeviceBrandCondition extends KalturaCondition
 	 * @var string
 	 */
 	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDeviceDynamicDataCondition extends KalturaCondition
-{
-	/**
-	 * key
-	 *
-	 * @var string
-	 */
-	public $key = null;
-
-	/**
-	 * value
-	 *
-	 * @var string
-	 */
-	public $value = null;
 
 
 }
@@ -7659,6 +7626,22 @@ class KalturaDeviceModelCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUdidDynamicListCondition extends KalturaCondition
+{
+	/**
+	 * KalturaUdidDynamicList.id
+	 *
+	 * @var int
+	 */
+	public $id = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDynamicKeysCondition extends KalturaCondition
 {
 	/**
@@ -7674,6 +7657,45 @@ class KalturaDynamicKeysCondition extends KalturaCondition
 	 * @var string
 	 */
 	public $values = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDeviceDynamicDataCondition extends KalturaCondition
+{
+	/**
+	 * key
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+	/**
+	 * value
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserSessionProfileCondition extends KalturaCondition
+{
+	/**
+	 * UserSessionProfile id
+	 *
+	 * @var int
+	 */
+	public $id = null;
 
 
 }
@@ -7698,29 +7720,6 @@ class KalturaFileTypeCondition extends KalturaCondition
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIpRangeCondition extends KalturaCondition
-{
-	/**
-	 * From IP address range
-	 *
-	 * @var string
-	 */
-	public $fromIP = null;
-
-	/**
-	 * TO IP address range
-	 *
-	 * @var string
-	 */
-	public $toIP = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaIpV6RangeCondition extends KalturaCondition
 {
 	/**
@@ -7736,70 +7735,6 @@ class KalturaIpV6RangeCondition extends KalturaCondition
 	 * @var string
 	 */
 	public $toIP = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSegmentsCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated segments IDs list
-	 *
-	 * @var string
-	 */
-	public $segmentsIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUdidDynamicListCondition extends KalturaCondition
-{
-	/**
-	 * KalturaUdidDynamicList.id
-	 *
-	 * @var int
-	 */
-	public $id = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserRoleCondition extends KalturaCondition
-{
-	/**
-	 * Comma separated user role IDs list
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaUserSessionProfileCondition extends KalturaCondition
-{
-	/**
-	 * UserSessionProfile id
-	 *
-	 * @var int
-	 */
-	public $id = null;
 
 
 }
@@ -7990,47 +7925,6 @@ class KalturaFilterFileByAudioCodecInDiscoveryAction extends KalturaFilterFileBy
  * @subpackage Client
  */
 class KalturaFilterFileByAudioCodecInPlaybackAction extends KalturaFilterFileByAudioCodecAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaFilterFileByDynamicDataAction extends KalturaFilterAction
-{
-	/**
-	 * Key to be searched
-	 *
-	 * @var string
-	 */
-	public $key = null;
-
-	/**
-	 * Comma separated values to be searched
-	 *
-	 * @var string
-	 */
-	public $values = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByDynamicDataInDiscoveryAction extends KalturaFilterFileByDynamicDataAction
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFilterFileByDynamicDataInPlaybackAction extends KalturaFilterFileByDynamicDataAction
 {
 
 }
@@ -8555,13 +8449,6 @@ class KalturaCampaign extends KalturaOTTObjectSupportNullable
 	 */
 	public $collectionIdIn = null;
 
-	/**
-	 * Asset user rule identifier
-	 *
-	 * @var int
-	 */
-	public $assetUserRuleId = null;
-
 
 }
 
@@ -8646,14 +8533,6 @@ class KalturaPromotion extends KalturaBasePromotion
 	 * @var int
 	 */
 	public $numberOfRecurring = null;
-
-	/**
-	 * The number of times a household can use the discount module in this campaign.
-	 *             If omitted than no limitation is enforced on the number of usages.
-	 *
-	 * @var int
-	 */
-	public $maxDiscountUsages = null;
 
 
 }
@@ -9104,13 +8983,6 @@ class KalturaMediaFile extends KalturaAssetFile
 	 * @var string
 	 */
 	public $labels = null;
-
-	/**
-	 * List of KalturaMediaFile&#39;s dynamic data keys
-	 *
-	 * @var map
-	 */
-	public $dynamicData;
 
 
 }
@@ -10137,6 +10009,15 @@ class KalturaSocialNetworkComment extends KalturaSocialComment
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTwitterTwit extends KalturaSocialNetworkComment
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFacebookPost extends KalturaSocialNetworkComment
 {
 	/**
@@ -10153,15 +10034,6 @@ class KalturaFacebookPost extends KalturaSocialNetworkComment
 	 */
 	public $link = null;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaTwitterTwit extends KalturaSocialNetworkComment
-{
 
 }
 
@@ -10378,13 +10250,6 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $version = null;
-
-	/**
-	 * Asset User Rule Id
-	 *
-	 * @var int
-	 */
-	public $assetUserRuleId = null;
 
 
 }
@@ -12863,6 +12728,84 @@ class KalturaEngagementListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaInboxMessage extends KalturaObjectBase
+{
+	/**
+	 * message id
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * message
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Status
+	 *
+	 * @var KalturaInboxMessageStatus
+	 * @readonly
+	 */
+	public $status = null;
+
+	/**
+	 * Type
+	 *
+	 * @var KalturaInboxMessageType
+	 */
+	public $type = null;
+
+	/**
+	 * Created at
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createdAt = null;
+
+	/**
+	 * url
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+	/**
+	 * campaignId
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $campaignId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaInboxMessageListResponse extends KalturaListResponse
+{
+	/**
+	 * Follow data list
+	 *
+	 * @var array of KalturaInboxMessage
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaFollowDataBase extends KalturaObjectBase
 {
 	/**
@@ -12934,84 +12877,6 @@ class KalturaFollowTvSeriesListResponse extends KalturaListResponse
 	 * Follow data list
 	 *
 	 * @var array of KalturaFollowTvSeries
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaInboxMessage extends KalturaObjectBase
-{
-	/**
-	 * message id
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * message
-	 *
-	 * @var string
-	 */
-	public $message = null;
-
-	/**
-	 * Status
-	 *
-	 * @var KalturaInboxMessageStatus
-	 * @readonly
-	 */
-	public $status = null;
-
-	/**
-	 * Type
-	 *
-	 * @var KalturaInboxMessageType
-	 */
-	public $type = null;
-
-	/**
-	 * Created at
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createdAt = null;
-
-	/**
-	 * url
-	 *
-	 * @var string
-	 */
-	public $url = null;
-
-	/**
-	 * campaignId
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $campaignId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaInboxMessageListResponse extends KalturaListResponse
-{
-	/**
-	 * Follow data list
-	 *
-	 * @var array of KalturaInboxMessage
 	 */
 	public $objects;
 
@@ -15514,14 +15379,6 @@ class KalturaRecording extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
-	/**
-	 * Duration in seconds
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $duration = null;
-
 
 }
 
@@ -15553,61 +15410,6 @@ class KalturaExternalRecording extends KalturaRecording
 	 * @readonly
 	 */
 	public $expiryDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaImmediateRecording extends KalturaRecording
-{
-	/**
-	 * Household specific end padding of the recording
-	 *
-	 * @var int
-	 */
-	public $endPadding = null;
-
-	/**
-	 * Household absolute start time of the immediate recording
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $absoluteStart = null;
-
-	/**
-	 * Household absolute end time of the immediate recording, empty if till end of program
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $absoluteEnd = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPaddedRecording extends KalturaRecording
-{
-	/**
-	 * Household specific start padding of the recording
-	 *
-	 * @var int
-	 */
-	public $startPadding = null;
-
-	/**
-	 * Household specific end padding of the recording
-	 *
-	 * @var int
-	 */
-	public $endPadding = null;
 
 
 }
@@ -16546,13 +16348,6 @@ class KalturaRecordingAsset extends KalturaProgramAsset
 	 */
 	public $viewableUntilDate = null;
 
-	/**
-	 * When TRUE indicates that there are multiple KalturaImmediateRecording instances for the event.
-	 *
-	 * @var bool
-	 */
-	public $multiRecord = null;
-
 
 }
 
@@ -17115,60 +16910,6 @@ class KalturaLineupChannelAssetListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaMediaFileDynamicData extends KalturaObjectBase
-{
-	/**
-	 * An integer representing the identifier of the value.
-	 *
-	 * @var int
-	 */
-	public $id = null;
-
-	/**
-	 * An integer representing the the mediaFileType holding the keys for which the values should be stored.
-	 *
-	 * @var int
-	 */
-	public $mediaFileTypeId = null;
-
-	/**
-	 * A string representing the key name within the mediaFileType that identifies the list corresponding
-	 *             to that key name.
-	 *
-	 * @var string
-	 */
-	public $mediaFileTypeKeyName = null;
-
-	/**
-	 * Dynamic data value
-	 *
-	 * @var string
-	 */
-	public $value = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaMediaFileDynamicDataListResponse extends KalturaListResponse
-{
-	/**
-	 * A list of media-file types
-	 *
-	 * @var array of KalturaMediaFileDynamicData
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaMediaFileListResponse extends KalturaListResponse
 {
 	/**
@@ -17276,13 +17017,6 @@ class KalturaMediaFileType extends KalturaObjectBase
 	 * @var string
 	 */
 	public $audioCodecs = null;
-
-	/**
-	 * List of comma separated keys allowed to be used as KalturaMediaFile&#39;s dynamic data keys
-	 *
-	 * @var string
-	 */
-	public $dynamicDataKeys = null;
 
 
 }
@@ -19427,13 +19161,6 @@ class KalturaPlaybackProfile extends KalturaObjectBase
 	public $isActive = null;
 
 	/**
-	 * Playback profile Grpc address
-	 *
-	 * @var string
-	 */
-	public $adapterGrpcAddress = null;
-
-	/**
 	 * Playback profile URL
 	 *
 	 * @var string
@@ -20538,50 +20265,6 @@ class KalturaAssetFileContext extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $isLivePlayBack = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSeriesIdArguments extends KalturaObjectBase
-{
-	/**
-	 * Comma separated asset type IDs
-	 *
-	 * @var string
-	 */
-	public $assetTypeIdIn = null;
-
-	/**
-	 * Series ID
-	 *
-	 * @var string
-	 */
-	public $seriesId = null;
-
-	/**
-	 * Series ID meta name.
-	 *
-	 * @var string
-	 */
-	public $seriesIdMetaName = null;
-
-	/**
-	 * Season number meta name
-	 *
-	 * @var string
-	 */
-	public $seasonNumberMetaName = null;
-
-	/**
-	 * Episode number meta name
-	 *
-	 * @var string
-	 */
-	public $episodeNumberMetaName = null;
 
 
 }
@@ -23056,27 +22739,6 @@ class KalturaTimeShiftedTvPartnerSettings extends KalturaObjectBase
 	 * @var int
 	 */
 	public $defaultQuota = null;
-
-	/**
-	 * Define whatever the partner enables the Personal Padding and Immediate / Stop recording services to the partner. Default value should be FALSE
-	 *
-	 * @var bool
-	 */
-	public $personalizedRecording = null;
-
-	/**
-	 * Define the max allowed number of parallel recordings. Default NULL unlimited
-	 *
-	 * @var int
-	 */
-	public $maxRecordingConcurrency = null;
-
-	/**
-	 * Define the max grace margin time for overlapping recording. Default NULL 0 margin
-	 *
-	 * @var int
-	 */
-	public $maxConcurrencyMargin = null;
 
 
 }

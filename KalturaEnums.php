@@ -1465,15 +1465,6 @@ class KalturaMathemticalOperatorType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaMediaFileDynamicDataOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaMediaFileOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1583,16 +1574,6 @@ class KalturaNotificationType extends KalturaEnumBase
 	const SYSTEM = "system";
 	const REMINDER = "Reminder";
 	const SERIES_REMINDER = "series_reminder";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaNotWatchedReturnStrategy extends KalturaEnumBase
-{
-	const RETURN_NO_NEXT_EPISODE = "RETURN_NO_NEXT_EPISODE";
-	const RETURN_FIRST_EPISODE = "RETURN_FIRST_EPISODE";
 }
 
 /**
@@ -2104,8 +2085,6 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const FILTERFILEBYSTREAMERTYPEINPLAYBACK = "FilterFileByStreamerTypeInPlayback";
 	const FILTERFILEBYLABELINDISCOVERY = "FilterFileByLabelInDiscovery";
 	const FILTERFILEBYLABELINPLAYBACK = "FilterFileByLabelInPlayback";
-	const FILTERFILEBYDYNAMICDATAINDISCOVERY = "FilterFileByDynamicDataInDiscovery";
-	const FILTERFILEBYDYNAMICDATAINPLAYBACK = "FilterFileByDynamicDataInPlayback";
 }
 
 /**
@@ -2665,6 +2644,7 @@ class KalturaUserRoleProfile extends KalturaEnumBase
 	const PARTNER = "PARTNER";
 	const PROFILE = "PROFILE";
 	const SYSTEM = "SYSTEM";
+	const PERMISSION_EMBEDDED = "PERMISSION_EMBEDDED";
 }
 
 /**
@@ -2687,17 +2667,6 @@ class KalturaUserState extends KalturaEnumBase
 	const USER_WITH_NO_HOUSEHOLD = "user_with_no_household";
 	const USER_CREATED_WITH_NO_ROLE = "user_created_with_no_role";
 	const USER_NOT_ACTIVATED = "user_not_activated";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchedAllReturnStrategy extends KalturaEnumBase
-{
-	const RETURN_NO_NEXT_EPISODE = "RETURN_NO_NEXT_EPISODE";
-	const RETURN_FIRST_EPISODE = "RETURN_FIRST_EPISODE";
-	const RETURN_LAST_EPISODE = "RETURN_LAST_EPISODE";
 }
 
 /**
