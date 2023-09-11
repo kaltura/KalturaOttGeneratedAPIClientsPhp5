@@ -6403,29 +6403,6 @@ class KalturaIngestStatusService extends KalturaServiceBase
 	}
 
 	/**
-	 * List detailed results of ingested assets.
-	 * 
-	 * @param KalturaVodIngestAssetResultFilter $filter Filter object with parameters to filter selected ingest processes and assets
-	 * @param KalturaFilterPager $pager Paging the request
-	 * @return KalturaVodIngestAssetResultResponse
-	 */
-	function getVodAssetResult(KalturaVodIngestAssetResultFilter $filter = null, KalturaFilterPager $pager = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("ingeststatus", "getVodAssetResult", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVodIngestAssetResultResponse");
-		return $resultObject;
-	}
-
-	/**
 	 * Returns Core Ingest service partner configurations
 	 * 
 	 * @param KalturaIngestStatusPartnerConfiguration $config The partner config updates
@@ -6685,9 +6662,7 @@ class KalturaLineupService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns regional lineup (list of lineup channel asset objects) based on the requester session characteristics and his region.
-            NOTE: Calling lineup.get action using HTTP POST is supported only for tests (non production environment) and is rate limited or blocked.
-            For production, HTTP GET shall be used: GET https://{Host_IP}/{build version}/api_v3/service/lineup/action/get
+	 * Return regional lineup (list of lineup channel asset objects) based on the requester session characteristics and his region.
 	 * 
 	 * @param int $pageIndex Page index - The page index to retrieve, (if it is not sent the default page size is 1).
 	 * @param int $pageSize Page size - The page size to retrieve. Must be one of the follow numbers: 100, 200, 800, 1200, 1600 (if it is not sent the default page size is 500).
@@ -14505,8 +14480,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:23-09-06');
-		$this->setApiVersion('9.2.0.1');
+		$this->setClientTag('php5:23-09-11');
+		$this->setApiVersion('8.9.6.30374');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
