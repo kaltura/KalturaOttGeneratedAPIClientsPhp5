@@ -2708,34 +2708,6 @@ class KalturaUserState extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaVodIngestAssetResultOrderBy extends KalturaEnumBase
-{
-	const FILE_NAME_ASC = "FILE_NAME_ASC";
-	const FILE_NAME_DESC = "FILE_NAME_DESC";
-	const ASSET_NAME_ASC = "ASSET_NAME_ASC";
-	const ASSET_NAME_DESC = "ASSET_NAME_DESC";
-	const INGEST_DATE_ASC = "INGEST_DATE_ASC";
-	const INGEST_DATE_DESC = "INGEST_DATE_DESC";
-	const STATUS_ASC = "STATUS_ASC";
-	const STATUS_DESC = "STATUS_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResultStatus extends KalturaEnumBase
-{
-	const FAILURE = "FAILURE";
-	const EXTERNAL_FAILURE = "EXTERNAL_FAILURE";
-	const SUCCESS_WARNING = "SUCCESS_WARNING";
-	const SUCCESS = "SUCCESS";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaWatchedAllReturnStrategy extends KalturaEnumBase
 {
 	const RETURN_NO_NEXT_EPISODE = "RETURN_NO_NEXT_EPISODE";

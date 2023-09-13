@@ -1579,64 +1579,6 @@ class KalturaIngestProgramResultsByProgramIdsFilter extends KalturaIngestEpgProg
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaVodIngestAssetResultFilter extends KalturaFilter
-{
-	/**
-	 * Filter KalturaVodIngestAssetResult elements based on the ingest XML file name or partial name.
-	 *
-	 * @var string
-	 */
-	public $fileNameContains = null;
-
-	/**
-	 * Filter KalturaVodIngestAssetResult elements based on the asset name or partial name.
-	 *
-	 * @var string
-	 */
-	public $assetNameContains = null;
-
-	/**
-	 * Comma separated values, representing multiple selection of ingest status state (\&quot;SUCCESS\&quot;,\&quot;FAIL\&quot;,\&quot;SUCCESS_WARNING\&quot;EXTERNAL_FAIL\&quot;).
-	 *
-	 * @var string
-	 */
-	public $ingestStatusIn = null;
-
-	/**
-	 * Filter assets ingested after the greater than value. Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $ingestDateGreaterThan = null;
-
-	/**
-	 * Filter assets ingested before the smaller than value. Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $ingestDateSmallerThan = null;
-
-	/**
-	 * Comma separated asset types, representing multiple selection of VOD asset types (e.g. \&quot;MOVIE\&quot;,\&quot;SERIES\&quot;,\&quot;SEASON\&quot;,\&quot;EPISODE\&quot;...).
-	 *
-	 * @var string
-	 */
-	public $vodTypeSystemNameIn = null;
-
-	/**
-	 * Comma separated Ids, pointing to AssetUserRules which hold the shop markers (shop provider values)
-	 *
-	 * @var string
-	 */
-	public $shopAssetUserRuleIdIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
 {
 
@@ -15792,22 +15734,6 @@ class KalturaPaddedRecording extends KalturaRecording
 	 */
 	public $endPadding = null;
 
-	/**
-	 * Indicates whether startPadding value is personal padding (counts towards HH quota) or system padding (does not count towards HH quota).
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $startPaddingIsPersonal = null;
-
-	/**
-	 * Indicates whether endPadding value is personal padding (counts towards HH quota) or system padding (does not count towards HH quota).
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $endPaddingIsPersonal = null;
-
 
 }
 
@@ -17306,20 +17232,6 @@ class KalturaLineupChannelAssetListResponse extends KalturaListResponse
 	 * @var array of KalturaLineupChannelAsset
 	 */
 	public $objects;
-
-	/**
-	 * Lineup External Id
-	 *
-	 * @var string
-	 */
-	public $lineupExternalId = null;
-
-	/**
-	 * Parent Lineup External Id
-	 *
-	 * @var string
-	 */
-	public $parentLineupExternalId = null;
 
 
 }
@@ -21874,29 +21786,6 @@ class KalturaIngestStatusEpgConfiguration extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaIngestStatusVodConfiguration extends KalturaObjectBase
-{
-	/**
-	 * Defines whether partner in question enabled core ingest status service.
-	 *
-	 * @var bool
-	 */
-	public $isSupported = null;
-
-	/**
-	 * Defines the time in seconds that the service retain information about ingest status.
-	 *
-	 * @var int
-	 */
-	public $retainingPeriod = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
 {
 	/**
@@ -21905,202 +21794,6 @@ class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
 	 * @var KalturaIngestStatusEpgConfiguration
 	 */
 	public $epg;
-
-	/**
-	 * Defines the vod configuration of the partner.
-	 *
-	 * @var KalturaIngestStatusVodConfiguration
-	 */
-	public $vod;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResultErrorMessage extends KalturaObjectBase
-{
-	/**
-	 * The message description with arguments place holders
-	 *
-	 * @var string
-	 */
-	public $message = null;
-
-	/**
-	 * The message code
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResult extends KalturaObjectBase
-{
-	/**
-	 * Ingested asset name. Absent only in case of NameRequired error
-	 *
-	 * @var string
-	 */
-	public $assetName = null;
-
-	/**
-	 * The shop ID the asset is assigned to. Omitted if the asset is not associated to any shop.
-	 *
-	 * @var int
-	 */
-	public $shopAssetUserRuleId = null;
-
-	/**
-	 * The XML file name used at the ingest gateway. Referred to as process name
-	 *
-	 * @var string
-	 */
-	public $fileName = null;
-
-	/**
-	 * Date and time the asset was ingested. Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $ingestDate = null;
-
-	/**
-	 * The status result for the asset ingest.
-	 *             FAILURE - the asset ingest was failed after the ingest process started, specify the error for it.
-	 *             SUCCESS - the asset was succeeded to be ingested.
-	 *             SUCCESS_WARNING - the asset was succeeded to be ingested with warnings that do not prevent the ingest.
-	 *             EXTERNAL_FAILURE - the asset ingest was failed before the ingest process started, specify the error for it.
-	 *
-	 * @var KalturaVodIngestAssetResultStatus
-	 */
-	public $status = null;
-
-	/**
-	 * VOD asset type (assetStruct.systemName).
-	 *
-	 * @var string
-	 */
-	public $vodTypeSystemName = null;
-
-	/**
-	 * Errors which prevent the asset from being ingested
-	 *
-	 * @var array of KalturaVodIngestAssetResultErrorMessage
-	 */
-	public $errors;
-
-	/**
-	 * Errors which do not prevent the asset from being ingested
-	 *
-	 * @var array of KalturaVodIngestAssetResultErrorMessage
-	 */
-	public $warnings;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResultList extends KalturaObjectBase
-{
-	/**
-	 * list of KalturaVodIngestAssetResult
-	 *
-	 * @var array of KalturaVodIngestAssetResult
-	 */
-	public $objects;
-
-	/**
-	 * Total items
-	 *
-	 * @var int
-	 */
-	public $totalCount = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResultAggregation extends KalturaObjectBase
-{
-	/**
-	 * Ingest date of the first asset in the response list. Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $ingestDateFrom = null;
-
-	/**
-	 * Ingest date of the last asset in the response list. Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $ingestDateTo = null;
-
-	/**
-	 * Number of assets which failed ingest. Calculated on the assets returned according to the applied filters.
-	 *
-	 * @var int
-	 */
-	public $failureCount = null;
-
-	/**
-	 * Number of assets which succeeded ingest without any warning. Calculated on the assets returned according to the applied filters.
-	 *
-	 * @var int
-	 */
-	public $successCount = null;
-
-	/**
-	 * Number of files (not assets) which failed ingest and are reported by external none-WS_ingest entity. Calculated on the failed files returned according to the applied filters.
-	 *
-	 * @var int
-	 */
-	public $externalFailureCount = null;
-
-	/**
-	 * Number of assets which succeeded ingest, but with warnings. Calculated on the assets returned according to the applied filters.
-	 *
-	 * @var int
-	 */
-	public $successWithWarningCount = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResultResponse extends KalturaObjectBase
-{
-	/**
-	 * Errors
-	 *
-	 * @var KalturaVodIngestAssetResultList
-	 */
-	public $result;
-
-	/**
-	 * Aggregated counters
-	 *
-	 * @var KalturaVodIngestAssetResultAggregation
-	 */
-	public $aggregations;
 
 
 }
