@@ -9652,6 +9652,13 @@ class KalturaSSOAdapterProfile extends KalturaObjectBase
 	 */
 	public $sharedSecret = null;
 
+	/**
+	 * Adapter GRPC Address, without protocol, i.e: &#39;adapter-hostname:9090&#39;
+	 *
+	 * @var string
+	 */
+	public $adapterGrpcAddress = null;
+
 
 }
 
