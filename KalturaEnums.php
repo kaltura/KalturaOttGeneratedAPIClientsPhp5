@@ -1693,6 +1693,7 @@ class KalturaPartnerConfigurationType extends KalturaEnumBase
 	const BASE = "Base";
 	const CUSTOMFIELDS = "CustomFields";
 	const DEFAULTPARENTALSETTINGS = "DefaultParentalSettings";
+	const UPLOADSETTINGS = "UploadSettings";
 }
 
 /**

@@ -12796,6 +12796,22 @@ class KalturaSecurityPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUploadSettingsConfiguration extends KalturaPartnerConfiguration
+{
+	/**
+	 * comma separated Allowed File Extensions
+	 *
+	 * @var string
+	 */
+	public $allowedFileExtensions = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPersonalList extends KalturaObjectBase
 {
 	/**
