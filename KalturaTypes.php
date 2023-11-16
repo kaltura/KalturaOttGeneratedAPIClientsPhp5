@@ -9652,6 +9652,13 @@ class KalturaSSOAdapterProfile extends KalturaObjectBase
 	 */
 	public $sharedSecret = null;
 
+	/**
+	 * Adapter GRPC Address, without protocol, i.e: &#39;adapter-hostname:9090&#39;
+	 *
+	 * @var string
+	 */
+	public $adapterGrpcAddress = null;
+
 
 }
 
@@ -11195,6 +11202,22 @@ class KalturaCollectionListResponse extends KalturaListResponse
 	 * A list of collections
 	 *
 	 * @var array of KalturaCollection
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponFilesLinks extends KalturaListResponse
+{
+	/**
+	 * A pre-signed URL pointing to a coupon codes file
+	 *
+	 * @var array of KalturaStringValue
 	 */
 	public $objects;
 
