@@ -11212,22 +11212,6 @@ class KalturaCollectionListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCouponFilesLinks extends KalturaListResponse
-{
-	/**
-	 * A pre-signed URL pointing to a coupon codes file
-	 *
-	 * @var array of KalturaStringValue
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCoupon extends KalturaObjectBase
 {
 	/**
@@ -21217,6 +21201,29 @@ class KalturaCompensation extends KalturaObjectBase
 	 * @var int
 	 */
 	public $purchaseId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCouponFilesLinks extends KalturaObjectBase
+{
+	/**
+	 * Total count of coupons code files
+	 *
+	 * @var int
+	 */
+	public $totalCount = null;
+
+	/**
+	 * A pre-signed URL pointing to a coupon codes file
+	 *
+	 * @var array of KalturaStringValue
+	 */
+	public $objects;
 
 
 }
