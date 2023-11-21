@@ -13973,6 +13973,114 @@ class KalturaIngestStatusEpgProgramResultListResponse extends KalturaListRespons
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaVodIngestAssetResultErrorMessage extends KalturaObjectBase
+{
+	/**
+	 * The message description with arguments place holders
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * The message code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVodIngestAssetResult extends KalturaObjectBase
+{
+	/**
+	 * Ingested asset name. Absent only in case of NameRequired error
+	 *
+	 * @var string
+	 */
+	public $assetName = null;
+
+	/**
+	 * The shop ID the asset is assigned to. Omitted if the asset is not associated to any shop.
+	 *
+	 * @var int
+	 */
+	public $shopAssetUserRuleId = null;
+
+	/**
+	 * The XML file name used at the ingest gateway. Referred to as process name
+	 *
+	 * @var string
+	 */
+	public $fileName = null;
+
+	/**
+	 * Date and time the asset was ingested. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $ingestDate = null;
+
+	/**
+	 * The status result for the asset ingest.
+	 *             FAILURE - the asset ingest was failed after the ingest process started, specify the error for it.
+	 *             SUCCESS - the asset was succeeded to be ingested.
+	 *             SUCCESS_WARNING - the asset was succeeded to be ingested with warnings that do not prevent the ingest.
+	 *             EXTERNAL_FAILURE - the asset ingest was failed before the ingest process started, specify the error for it.
+	 *
+	 * @var KalturaVodIngestAssetResultStatus
+	 */
+	public $status = null;
+
+	/**
+	 * VOD asset type (assetStruct.systemName).
+	 *
+	 * @var string
+	 */
+	public $vodTypeSystemName = null;
+
+	/**
+	 * Errors which prevent the asset from being ingested
+	 *
+	 * @var array of KalturaVodIngestAssetResultErrorMessage
+	 */
+	public $errors;
+
+	/**
+	 * Errors which do not prevent the asset from being ingested
+	 *
+	 * @var array of KalturaVodIngestAssetResultErrorMessage
+	 */
+	public $warnings;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVodIngestAssetResultListResponse extends KalturaListResponse
+{
+	/**
+	 * list of KalturaVodIngestAssetResult
+	 *
+	 * @var array of KalturaVodIngestAssetResult
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDurationListResponse extends KalturaListResponse
 {
 	/**
@@ -17306,20 +17414,6 @@ class KalturaLineupChannelAssetListResponse extends KalturaListResponse
 	 * @var array of KalturaLineupChannelAsset
 	 */
 	public $objects;
-
-	/**
-	 * Lineup External Id
-	 *
-	 * @var string
-	 */
-	public $lineupExternalId = null;
-
-	/**
-	 * Parent Lineup External Id
-	 *
-	 * @var string
-	 */
-	public $parentLineupExternalId = null;
 
 
 }
@@ -21920,121 +22014,6 @@ class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaVodIngestAssetResultErrorMessage extends KalturaObjectBase
-{
-	/**
-	 * The message description with arguments place holders
-	 *
-	 * @var string
-	 */
-	public $message = null;
-
-	/**
-	 * The message code
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResult extends KalturaObjectBase
-{
-	/**
-	 * Ingested asset name. Absent only in case of NameRequired error
-	 *
-	 * @var string
-	 */
-	public $assetName = null;
-
-	/**
-	 * The shop ID the asset is assigned to. Omitted if the asset is not associated to any shop.
-	 *
-	 * @var int
-	 */
-	public $shopAssetUserRuleId = null;
-
-	/**
-	 * The XML file name used at the ingest gateway. Referred to as process name
-	 *
-	 * @var string
-	 */
-	public $fileName = null;
-
-	/**
-	 * Date and time the asset was ingested. Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $ingestDate = null;
-
-	/**
-	 * The status result for the asset ingest.
-	 *             FAILURE - the asset ingest was failed after the ingest process started, specify the error for it.
-	 *             SUCCESS - the asset was succeeded to be ingested.
-	 *             SUCCESS_WARNING - the asset was succeeded to be ingested with warnings that do not prevent the ingest.
-	 *             EXTERNAL_FAILURE - the asset ingest was failed before the ingest process started, specify the error for it.
-	 *
-	 * @var KalturaVodIngestAssetResultStatus
-	 */
-	public $status = null;
-
-	/**
-	 * VOD asset type (assetStruct.systemName).
-	 *
-	 * @var string
-	 */
-	public $vodTypeSystemName = null;
-
-	/**
-	 * Errors which prevent the asset from being ingested
-	 *
-	 * @var array of KalturaVodIngestAssetResultErrorMessage
-	 */
-	public $errors;
-
-	/**
-	 * Errors which do not prevent the asset from being ingested
-	 *
-	 * @var array of KalturaVodIngestAssetResultErrorMessage
-	 */
-	public $warnings;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResultList extends KalturaObjectBase
-{
-	/**
-	 * list of KalturaVodIngestAssetResult
-	 *
-	 * @var array of KalturaVodIngestAssetResult
-	 */
-	public $objects;
-
-	/**
-	 * Total items
-	 *
-	 * @var int
-	 */
-	public $totalCount = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaVodIngestAssetResultAggregation extends KalturaObjectBase
 {
 	/**
@@ -22091,7 +22070,7 @@ class KalturaVodIngestAssetResultResponse extends KalturaObjectBase
 	/**
 	 * Errors
 	 *
-	 * @var KalturaVodIngestAssetResultList
+	 * @var KalturaVodIngestAssetResultListResponse
 	 */
 	public $result;
 
