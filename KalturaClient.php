@@ -417,8 +417,7 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns media or EPG asset by media / EPG internal or external identifier.
-            Note: OPC accounts asset.get for internal identifier doesn&#39;t take under consideration personalized aspects neither shop limitations.
+	 * Returns media or EPG asset by media / EPG internal or external identifier
 	 * 
 	 * @param string $id Asset identifier
 	 * @param string $assetReferenceType Asset type
@@ -825,19 +824,12 @@ class KalturaAssetHistoryService extends KalturaServiceBase
 	 * Get next episode by last watch asset in given assetId
 	 * 
 	 * @param bigint $assetId Asset Id of series to search for next episode
-	 * @param KalturaSeriesIdArguments $seriesIdArguments Series Id arguments
-	 * @param string $notWatchedReturnStrategy Not watched any episode strategy
-	 * @param string $watchedAllReturnStrategy Watched all series episodes strategy
 	 * @return KalturaAssetHistory
 	 */
-	function getNextEpisode($assetId = null, KalturaSeriesIdArguments $seriesIdArguments = null, $notWatchedReturnStrategy = null, $watchedAllReturnStrategy = null)
+	function getNextEpisode($assetId)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "assetId", $assetId);
-		if ($seriesIdArguments !== null)
-			$this->client->addParam($kparams, "seriesIdArguments", $seriesIdArguments->toParams());
-		$this->client->addParam($kparams, "notWatchedReturnStrategy", $notWatchedReturnStrategy);
-		$this->client->addParam($kparams, "watchedAllReturnStrategy", $watchedAllReturnStrategy);
 		$this->client->queueServiceActionCall("assethistory", "getNextEpisode", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -4969,7 +4961,7 @@ class KalturaHouseholdService extends KalturaServiceBase
 	/**
 	 * Reset a household’s time limitation for removing user or device
 	 * 
-	 * @param string $frequencyType Possible values: devices – reset the device change frequency.
+	 * @param string $frequencyType Possible values: devices – reset the device change frequency. 
             users – reset the user add/remove frequency
 	 * @return KalturaHousehold
 	 */
@@ -6403,29 +6395,6 @@ class KalturaIngestStatusService extends KalturaServiceBase
 	}
 
 	/**
-	 * List detailed results of ingested assets.
-	 * 
-	 * @param KalturaVodIngestAssetResultFilter $filter Filter object with parameters to filter selected ingest processes and assets
-	 * @param KalturaFilterPager $pager Paging the request
-	 * @return KalturaVodIngestAssetResultResponse
-	 */
-	function getVodAssetResult(KalturaVodIngestAssetResultFilter $filter = null, KalturaFilterPager $pager = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("ingeststatus", "getVodAssetResult", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVodIngestAssetResultResponse");
-		return $resultObject;
-	}
-
-	/**
 	 * Returns Core Ingest service partner configurations
 	 * 
 	 * @param KalturaIngestStatusPartnerConfiguration $config The partner config updates
@@ -6685,9 +6654,7 @@ class KalturaLineupService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns regional lineup (list of lineup channel asset objects) based on the requester session characteristics and his region.
-            NOTE: Calling lineup.get action using HTTP POST is supported only for tests (non production environment) and is rate limited or blocked.
-            For production, HTTP GET shall be used: GET https://{Host_IP}/{build version}/api_v3/service/lineup/action/get
+	 * Return regional lineup (list of lineup channel asset objects) based on the requester session characteristics and his region.
 	 * 
 	 * @param int $pageIndex Page index - The page index to retrieve, (if it is not sent the default page size is 1).
 	 * @param int $pageSize Page size - The page size to retrieve. Must be one of the follow numbers: 100, 200, 800, 1200, 1600 (if it is not sent the default page size is 500).
@@ -6699,28 +6666,6 @@ class KalturaLineupService extends KalturaServiceBase
 		$this->client->addParam($kparams, "pageIndex", $pageIndex);
 		$this->client->addParam($kparams, "pageSize", $pageSize);
 		$this->client->queueServiceActionCall("lineup", "get", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaLineupChannelAssetListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Returns list of lineup regional linear channels associated with one LCN and its region information. Allows to apply sorting and filtering by LCN and linear channels.
-	 * 
-	 * @param KalturaLineupRegionalChannelFilter $filter Request filter
-	 * @param KalturaFilterPager $pager Paging the request
-	 * @return KalturaLineupChannelAssetListResponse
-	 */
-	function listAction(KalturaLineupRegionalChannelFilter $filter, KalturaFilterPager $pager = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("lineup", "list", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -6968,78 +6913,6 @@ class KalturaMediaFileService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaMediaFile");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaMediaFileDynamicDataService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Add a dynamicData value to the values list of a specific key name in a specific mediaFileTypeId
-	 * 
-	 * @param KalturaMediaFileDynamicData $dynamicData DynamicData value
-	 * @return KalturaMediaFileDynamicData
-	 */
-	function add(KalturaMediaFileDynamicData $dynamicData)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dynamicData", $dynamicData->toParams());
-		$this->client->queueServiceActionCall("mediafiledynamicdata", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMediaFileDynamicData");
-		return $resultObject;
-	}
-
-	/**
-	 * Delete an existing DynamicData value
-	 * 
-	 * @param bigint $id DynamicData identifier
-	 * @return bool
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("mediafiledynamicdata", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$resultObject = (bool) $resultObject;
-		return $resultObject;
-	}
-
-	/**
-	 * List and filter existing mediaFile dynamicData values
-	 * 
-	 * @param KalturaMediaFileDynamicDataFilter $filter Filter
-	 * @param KalturaFilterPager $pager Pager
-	 * @return KalturaMediaFileDynamicDataListResponse
-	 */
-	function listAction(KalturaMediaFileDynamicDataFilter $filter, KalturaFilterPager $pager = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
-		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("mediafiledynamicdata", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMediaFileDynamicDataListResponse");
 		return $resultObject;
 	}
 }
@@ -8955,54 +8828,6 @@ class KalturaPermissionItemService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPersonalActivityCleanupService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * PersonalActivityCleanupConfiguration get
-	 * 
-	 * @return KalturaPersonalActivityCleanupConfiguration
-	 */
-	function getPartnerConfiguration()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("personalactivitycleanup", "getPartnerConfiguration", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPersonalActivityCleanupConfiguration");
-		return $resultObject;
-	}
-
-	/**
-	 * PersonalActivityCleanupConfiguration Update
-	 * 
-	 * @param KalturaPersonalActivityCleanupConfiguration $personalActivityCleanupConfiguration PersonalActivityCleanupConfiguration details
-	 * @return KalturaPersonalActivityCleanupConfiguration
-	 */
-	function updatePartnerConfiguration(KalturaPersonalActivityCleanupConfiguration $personalActivityCleanupConfiguration)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "personalActivityCleanupConfiguration", $personalActivityCleanupConfiguration->toParams());
-		$this->client->queueServiceActionCall("personalactivitycleanup", "updatePartnerConfiguration", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPersonalActivityCleanupConfiguration");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPersonalFeedService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -10148,27 +9973,6 @@ class KalturaRecordingService extends KalturaServiceBase
 	}
 
 	/**
-	 * Immediate Record
-	 * 
-	 * @param bigint $assetId Asset identifier
-	 * @param int $endPadding End padding offset
-	 * @return KalturaImmediateRecording
-	 */
-	function immediateRecord($assetId, $endPadding = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "endPadding", $endPadding);
-		$this->client->queueServiceActionCall("recording", "immediateRecord", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaImmediateRecording");
-		return $resultObject;
-	}
-
-	/**
 	 * Return a list of recordings for the household with optional filter by status and KSQL.
 	 * 
 	 * @param KalturaRecordingFilter $filter Filter parameters for filtering out the result
@@ -10203,27 +10007,6 @@ class KalturaRecordingService extends KalturaServiceBase
 		$kparams = array();
 		$this->client->addParam($kparams, "id", $id);
 		$this->client->queueServiceActionCall("recording", "protect", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaRecording");
-		return $resultObject;
-	}
-
-	/**
-	 * Stop ongoing household recording
-	 * 
-	 * @param bigint $assetId Asset identifier
-	 * @param bigint $id Household recording identifier
-	 * @return KalturaRecording
-	 */
-	function stop($assetId, $id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "assetId", $assetId);
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("recording", "stop", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -14066,12 +13849,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaMediaFileDynamicDataService
-	 */
-	public $mediaFileDynamicData = null;
-
-	/**
-	 * 
 	 * @var KalturaMediaFileTypeService
 	 */
 	public $mediaFileType = null;
@@ -14177,12 +13954,6 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaPermissionItemService
 	 */
 	public $permissionItem = null;
-
-	/**
-	 * 
-	 * @var KalturaPersonalActivityCleanupService
-	 */
-	public $personalActivityCleanup = null;
 
 	/**
 	 * 
@@ -14505,8 +14276,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:23-09-06');
-		$this->setApiVersion('9.2.0.1');
+		$this->setClientTag('php5:23-11-22');
+		$this->setApiVersion('8.3.2.5');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -14588,7 +14359,6 @@ class KalturaClient extends KalturaClientBase
 		$this->liveToVod = new KalturaLiveToVodService($this);
 		$this->mediaConcurrencyRule = new KalturaMediaConcurrencyRuleService($this);
 		$this->mediaFile = new KalturaMediaFileService($this);
-		$this->mediaFileDynamicData = new KalturaMediaFileDynamicDataService($this);
 		$this->mediaFileType = new KalturaMediaFileTypeService($this);
 		$this->messageTemplate = new KalturaMessageTemplateService($this);
 		$this->meta = new KalturaMetaService($this);
@@ -14607,7 +14377,6 @@ class KalturaClient extends KalturaClientBase
 		$this->paymentMethodProfile = new KalturaPaymentMethodProfileService($this);
 		$this->permission = new KalturaPermissionService($this);
 		$this->permissionItem = new KalturaPermissionItemService($this);
-		$this->personalActivityCleanup = new KalturaPersonalActivityCleanupService($this);
 		$this->personalFeed = new KalturaPersonalFeedService($this);
 		$this->personalList = new KalturaPersonalListService($this);
 		$this->pin = new KalturaPinService($this);
