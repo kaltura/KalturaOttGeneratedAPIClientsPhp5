@@ -3057,6 +3057,25 @@ class KalturaCouponService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaCoupon");
 		return $resultObject;
 	}
+
+	/**
+	 * Get all coupon codes of a specific couponGroup
+	 * 
+	 * @param bigint $couponsGroupId The couponsGroup ID for which its file links will be listed
+	 * @return KalturaCouponFilesLinks
+	 */
+	function getFilesLinks($couponsGroupId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "couponsGroupId", $couponsGroupId);
+		$this->client->queueServiceActionCall("coupon", "getFilesLinks", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaCouponFilesLinks");
+		return $resultObject;
+	}
 }
 
 /**
@@ -14591,7 +14610,7 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:23-12-14');
-		$this->setApiVersion('9.4.1.0');
+		$this->setApiVersion('9.5.0.2');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
