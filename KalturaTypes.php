@@ -9652,6 +9652,13 @@ class KalturaSSOAdapterProfile extends KalturaObjectBase
 	 */
 	public $sharedSecret = null;
 
+	/**
+	 * Adapter GRPC Address, without protocol, i.e: &#39;adapter-hostname:9090&#39;
+	 *
+	 * @var string
+	 */
+	public $adapterGrpcAddress = null;
+
 
 }
 
@@ -21668,6 +21675,45 @@ class KalturaTriggerCampaignEvent extends KalturaEventObject
 	 * @readonly
 	 */
 	public $householdId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRetryDeleteRequest extends KalturaObjectBase
+{
+	/**
+	 * The first date (epoch) to start the retryDelete from - by default {now} - {30 days in second}
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The last date (epoch) to do the retryDelete - by default {now} (should be greater than startDate)
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaHouseholdPartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Retention period in days.
+	 *
+	 * @var int
+	 */
+	public $retentionPeriodDays = null;
 
 
 }
