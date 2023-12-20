@@ -308,8 +308,6 @@ class KalturaAssetReminderOrderBy extends KalturaEnumBase
 class KalturaAssetRuleOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
 }
 
 /**
@@ -1437,18 +1435,6 @@ class KalturaLinearChannelType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaLineupRegionalChannelOrderBy extends KalturaEnumBase
-{
-	const LCN_ASC = "LCN_ASC";
-	const LCN_DESC = "LCN_DESC";
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaListGroupsRepresentativesOrderBy extends KalturaEnumBase
 {
 	const NONE = "None";
@@ -1473,15 +1459,6 @@ class KalturaMathemticalOperatorType extends KalturaEnumBase
 	const COUNT = "count";
 	const SUM = "sum";
 	const AVG = "avg";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaMediaFileDynamicDataOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
 }
 
 /**
@@ -1597,16 +1574,6 @@ class KalturaNotificationType extends KalturaEnumBase
 	const SYSTEM = "system";
 	const REMINDER = "Reminder";
 	const SERIES_REMINDER = "series_reminder";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaNotWatchedReturnStrategy extends KalturaEnumBase
-{
-	const RETURN_NO_NEXT_EPISODE = "RETURN_NO_NEXT_EPISODE";
-	const RETURN_FIRST_EPISODE = "RETURN_FIRST_EPISODE";
 }
 
 /**
@@ -2118,8 +2085,6 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const FILTERFILEBYSTREAMERTYPEINPLAYBACK = "FilterFileByStreamerTypeInPlayback";
 	const FILTERFILEBYLABELINDISCOVERY = "FilterFileByLabelInDiscovery";
 	const FILTERFILEBYLABELINPLAYBACK = "FilterFileByLabelInPlayback";
-	const FILTERFILEBYDYNAMICDATAINDISCOVERY = "FilterFileByDynamicDataInDiscovery";
-	const FILTERFILEBYDYNAMICDATAINPLAYBACK = "FilterFileByDynamicDataInPlayback";
 }
 
 /**
@@ -2679,7 +2644,6 @@ class KalturaUserRoleProfile extends KalturaEnumBase
 	const PARTNER = "PARTNER";
 	const PROFILE = "PROFILE";
 	const SYSTEM = "SYSTEM";
-	const PERMISSION_EMBEDDED = "PERMISSION_EMBEDDED";
 }
 
 /**
@@ -2702,45 +2666,6 @@ class KalturaUserState extends KalturaEnumBase
 	const USER_WITH_NO_HOUSEHOLD = "user_with_no_household";
 	const USER_CREATED_WITH_NO_ROLE = "user_created_with_no_role";
 	const USER_NOT_ACTIVATED = "user_not_activated";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResultOrderBy extends KalturaEnumBase
-{
-	const FILE_NAME_ASC = "FILE_NAME_ASC";
-	const FILE_NAME_DESC = "FILE_NAME_DESC";
-	const ASSET_NAME_ASC = "ASSET_NAME_ASC";
-	const ASSET_NAME_DESC = "ASSET_NAME_DESC";
-	const INGEST_DATE_ASC = "INGEST_DATE_ASC";
-	const INGEST_DATE_DESC = "INGEST_DATE_DESC";
-	const STATUS_ASC = "STATUS_ASC";
-	const STATUS_DESC = "STATUS_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResultStatus extends KalturaEnumBase
-{
-	const FAILURE = "FAILURE";
-	const EXTERNAL_FAILURE = "EXTERNAL_FAILURE";
-	const SUCCESS_WARNING = "SUCCESS_WARNING";
-	const SUCCESS = "SUCCESS";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchedAllReturnStrategy extends KalturaEnumBase
-{
-	const RETURN_NO_NEXT_EPISODE = "RETURN_NO_NEXT_EPISODE";
-	const RETURN_FIRST_EPISODE = "RETURN_FIRST_EPISODE";
-	const RETURN_LAST_EPISODE = "RETURN_LAST_EPISODE";
 }
 
 /**
