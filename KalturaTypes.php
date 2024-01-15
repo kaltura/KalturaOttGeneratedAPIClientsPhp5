@@ -20376,39 +20376,7 @@ abstract class KalturaRepresentativeSelectionPolicy extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaTopEntitledOrFreeRsp extends KalturaRepresentativeSelectionPolicy
-{
-	/**
-	 * order by
-	 *
-	 * @var KalturaBaseAssetOrder
-	 */
-	public $orderBy;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaTopRsp extends KalturaRepresentativeSelectionPolicy
-{
-	/**
-	 * order by
-	 *
-	 * @var KalturaBaseAssetOrder
-	 */
-	public $orderBy;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaTopSubscriptionEntitledOrFreeRsp extends KalturaRepresentativeSelectionPolicy
 {
 	/**
 	 * order by
