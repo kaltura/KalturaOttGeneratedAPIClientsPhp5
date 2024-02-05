@@ -3057,25 +3057,6 @@ class KalturaCouponService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaCoupon");
 		return $resultObject;
 	}
-
-	/**
-	 * Get all coupon codes of a specific couponGroup
-	 * 
-	 * @param bigint $couponsGroupId The couponsGroup ID for which its file links will be listed
-	 * @return KalturaCouponFilesLinks
-	 */
-	function getFilesLinks($couponsGroupId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "couponsGroupId", $couponsGroupId);
-		$this->client->queueServiceActionCall("coupon", "getFilesLinks", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCouponFilesLinks");
-		return $resultObject;
-	}
 }
 
 /**
@@ -4945,23 +4926,6 @@ class KalturaHouseholdService extends KalturaServiceBase
 	}
 
 	/**
-	 * Get household partner configuration
-	 * 
-	 * @return KalturaHouseholdPartnerConfiguration
-	 */
-	function getPartnerConfiguration()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("household", "getPartnerConfiguration", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaHouseholdPartnerConfiguration");
-		return $resultObject;
-	}
-
-	/**
 	 * Retrive household for the partner filter by external identifier
 	 * 
 	 * @param KalturaHouseholdFilter $filter Filter parameters for filtering out the result
@@ -5040,23 +5004,6 @@ class KalturaHouseholdService extends KalturaServiceBase
 	}
 
 	/**
-	 * Retry delete household entities by retention.
-	 * 
-	 * @param KalturaRetryDeleteRequest $request Request data
-	 */
-	function retryDelete(KalturaRetryDeleteRequest $request)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "request", $request->toParams());
-		$this->client->queueServiceActionCall("household", "retryDelete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
 	 * Suspend a given household service. Sets the household status to “suspended&quot;.The household service settings are maintained for later resume
 	 * 
 	 * @param int $roleId RoleId
@@ -5092,23 +5039,6 @@ class KalturaHouseholdService extends KalturaServiceBase
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaHousehold");
 		return $resultObject;
-	}
-
-	/**
-	 * Update household partner configuration
-	 * 
-	 * @param KalturaHouseholdPartnerConfiguration $configuration Household partner configuration details
-	 */
-	function updatePartnerConfiguration(KalturaHouseholdPartnerConfiguration $configuration)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "configuration", $configuration->toParams());
-		$this->client->queueServiceActionCall("household", "updatePartnerConfiguration", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
 	}
 }
 
@@ -5355,23 +5285,6 @@ class KalturaHouseholdDeviceService extends KalturaServiceBase
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaLoginResponse");
 		return $resultObject;
-	}
-
-	/**
-	 * Retry delete household device entities by retention.
-	 * 
-	 * @param KalturaRetryDeleteRequest $request Request data
-	 */
-	function retryDelete(KalturaRetryDeleteRequest $request)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "request", $request->toParams());
-		$this->client->queueServiceActionCall("householddevice", "retryDelete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
 	}
 
 	/**
@@ -8040,23 +7953,6 @@ class KalturaOttUserService extends KalturaServiceBase
 		$this->client->throwExceptionIfError($resultObject);
 		$resultObject = (bool) $resultObject;
 		return $resultObject;
-	}
-
-	/**
-	 * Retry delete OTT user entities by retention.
-	 * 
-	 * @param KalturaRetryDeleteRequest $request Request data
-	 */
-	function retryDelete(KalturaRetryDeleteRequest $request)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "request", $request->toParams());
-		$this->client->queueServiceActionCall("ottuser", "retryDelete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
 	}
 
 	/**
@@ -14609,8 +14505,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:24-01-15');
-		$this->setApiVersion('9.6.0.0');
+		$this->setClientTag('php5:24-02-05');
+		$this->setApiVersion('9.0.0.17');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

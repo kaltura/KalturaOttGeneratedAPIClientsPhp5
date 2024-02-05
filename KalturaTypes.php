@@ -9652,13 +9652,6 @@ class KalturaSSOAdapterProfile extends KalturaObjectBase
 	 */
 	public $sharedSecret = null;
 
-	/**
-	 * Adapter GRPC Address, without protocol, i.e: &#39;adapter-hostname:9090&#39;
-	 *
-	 * @var string
-	 */
-	public $adapterGrpcAddress = null;
-
 
 }
 
@@ -12174,47 +12167,6 @@ class KalturaCatalogPartnerConfig extends KalturaPartnerConfiguration
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCloudUploadSettingsConfiguration extends KalturaPartnerConfiguration
-{
-	/**
-	 * Comma seperated list of file extensions that allowed to all partners
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $defaultAllowedFileExtensions = null;
-
-	/**
-	 * Comma seperated list of file extensions that allowed to partner in question
-	 *             {&quot;jpeg&quot;,&quot;image/jpeg&quot;},
-	 *             {&quot;jpg&quot;,&quot;image/jpeg&quot;},
-	 *             {&quot;png&quot;,&quot;image/png&quot;},
-	 *             {&quot;tif&quot;,&quot;image/tiff&quot;},
-	 *             {&quot;tiff&quot;,&quot;image/tiff&quot;},
-	 *             {&quot;gif&quot;,&quot;image/gif&quot;},
-	 *             {&quot;xls&quot;,&quot;application/vnd.ms-excel&quot;},
-	 *             {&quot;xlsx&quot;,&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;},
-	 *             {&quot;csv&quot;,&quot;text/csv&quot;},
-	 *             {&quot;xml&quot;,&quot;text/xml&quot;},
-	 *             {&quot;txt&quot;,&quot;text/plain&quot;},
-	 *             {&quot;doc&quot;,&quot;application/msword&quot;},
-	 *             {&quot;docx&quot;,&quot;application/vnd.openxmlformats-officedocument.wordprocessingml.document&quot;},
-	 *             {&quot;bmp&quot;,&quot;image/bmp&quot;},
-	 *             {&quot;ico&quot;,&quot;image/x-icon&quot;},
-	 *             {&quot;mp3&quot;,&quot;audio/mpeg&quot;},
-	 *             {&quot;pdf&quot;,&quot;application/pdf&quot;}}
-	 *
-	 * @var string
-	 */
-	public $customAllowedFileExtensions = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaBookmarkEventThreshold extends KalturaObjectBase
 {
 	/**
@@ -12475,7 +12427,7 @@ class KalturaGeneralPartnerConfig extends KalturaPartnerConfiguration
 	public $dateFormat = null;
 
 	/**
-	 * Household limitation module
+	 * Household limitation&#160;module
 	 *
 	 * @var int
 	 */
@@ -14021,6 +13973,114 @@ class KalturaIngestStatusEpgProgramResultListResponse extends KalturaListRespons
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaVodIngestAssetResultErrorMessage extends KalturaObjectBase
+{
+	/**
+	 * The message description with arguments place holders
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * The message code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVodIngestAssetResult extends KalturaObjectBase
+{
+	/**
+	 * Ingested asset name. Absent only in case of NameRequired error
+	 *
+	 * @var string
+	 */
+	public $assetName = null;
+
+	/**
+	 * The shop ID the asset is assigned to. Omitted if the asset is not associated to any shop.
+	 *
+	 * @var int
+	 */
+	public $shopAssetUserRuleId = null;
+
+	/**
+	 * The XML file name used at the ingest gateway. Referred to as process name
+	 *
+	 * @var string
+	 */
+	public $fileName = null;
+
+	/**
+	 * Date and time the asset was ingested. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $ingestDate = null;
+
+	/**
+	 * The status result for the asset ingest.
+	 *             FAILURE - the asset ingest was failed after the ingest process started, specify the error for it.
+	 *             SUCCESS - the asset was succeeded to be ingested.
+	 *             SUCCESS_WARNING - the asset was succeeded to be ingested with warnings that do not prevent the ingest.
+	 *             EXTERNAL_FAILURE - the asset ingest was failed before the ingest process started, specify the error for it.
+	 *
+	 * @var KalturaVodIngestAssetResultStatus
+	 */
+	public $status = null;
+
+	/**
+	 * VOD asset type (assetStruct.systemName).
+	 *
+	 * @var string
+	 */
+	public $vodTypeSystemName = null;
+
+	/**
+	 * Errors which prevent the asset from being ingested
+	 *
+	 * @var array of KalturaVodIngestAssetResultErrorMessage
+	 */
+	public $errors;
+
+	/**
+	 * Errors which do not prevent the asset from being ingested
+	 *
+	 * @var array of KalturaVodIngestAssetResultErrorMessage
+	 */
+	public $warnings;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVodIngestAssetResultListResponse extends KalturaListResponse
+{
+	/**
+	 * list of KalturaVodIngestAssetResult
+	 *
+	 * @var array of KalturaVodIngestAssetResult
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDurationListResponse extends KalturaListResponse
 {
 	/**
@@ -15048,10 +15108,6 @@ class KalturaBillingTransaction extends KalturaObjectBase
 
 	/**
 	 * Billing Action
-	 *             Note: when purchasing subscription that is “ENTITLED_TO_PREVIEW_MODULE”:
-	 *              the first BillingTransaction.billingAction will be “unknown”, 
-	 *              the second BillingTransaction.billingAction will be “purchase”, 
-	 *              and the rest of them will be “renew_payment&quot;.
 	 *
 	 * @var KalturaBillingAction
 	 * @readonly
@@ -17358,20 +17414,6 @@ class KalturaLineupChannelAssetListResponse extends KalturaListResponse
 	 * @var array of KalturaLineupChannelAsset
 	 */
 	public $objects;
-
-	/**
-	 * Lineup External Id
-	 *
-	 * @var string
-	 */
-	public $lineupExternalId = null;
-
-	/**
-	 * Parent Lineup External Id
-	 *
-	 * @var string
-	 */
-	public $parentLineupExternalId = null;
 
 
 }
@@ -21254,29 +21296,6 @@ class KalturaCompensation extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCouponFilesLinks extends KalturaObjectBase
-{
-	/**
-	 * Total count of coupons code files
-	 *
-	 * @var int
-	 */
-	public $totalCount = null;
-
-	/**
-	 * A pre-signed URL pointing to a coupon codes file
-	 *
-	 * @var array of KalturaStringValue
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCouponGenerationOptions extends KalturaObjectBase
 {
 
@@ -21751,45 +21770,6 @@ class KalturaTriggerCampaignEvent extends KalturaEventObject
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaRetryDeleteRequest extends KalturaObjectBase
-{
-	/**
-	 * The first date (epoch) to start the retryDelete from - by default {now} - {30 days in second}
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * The last date (epoch) to do the retryDelete - by default {now} (should be greater than startDate)
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaHouseholdPartnerConfiguration extends KalturaObjectBase
-{
-	/**
-	 * Retention period in days.
-	 *
-	 * @var int
-	 */
-	public $retentionPeriodDays = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaDevicePin extends KalturaObjectBase
 {
 	/**
@@ -22034,121 +22014,6 @@ class KalturaIngestStatusPartnerConfiguration extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaVodIngestAssetResultErrorMessage extends KalturaObjectBase
-{
-	/**
-	 * The message description with arguments place holders
-	 *
-	 * @var string
-	 */
-	public $message = null;
-
-	/**
-	 * The message code
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResult extends KalturaObjectBase
-{
-	/**
-	 * Ingested asset name. Absent only in case of NameRequired error
-	 *
-	 * @var string
-	 */
-	public $assetName = null;
-
-	/**
-	 * The shop ID the asset is assigned to. Omitted if the asset is not associated to any shop.
-	 *
-	 * @var int
-	 */
-	public $shopAssetUserRuleId = null;
-
-	/**
-	 * The XML file name used at the ingest gateway. Referred to as process name
-	 *
-	 * @var string
-	 */
-	public $fileName = null;
-
-	/**
-	 * Date and time the asset was ingested. Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $ingestDate = null;
-
-	/**
-	 * The status result for the asset ingest.
-	 *             FAILURE - the asset ingest was failed after the ingest process started, specify the error for it.
-	 *             SUCCESS - the asset was succeeded to be ingested.
-	 *             SUCCESS_WARNING - the asset was succeeded to be ingested with warnings that do not prevent the ingest.
-	 *             EXTERNAL_FAILURE - the asset ingest was failed before the ingest process started, specify the error for it.
-	 *
-	 * @var KalturaVodIngestAssetResultStatus
-	 */
-	public $status = null;
-
-	/**
-	 * VOD asset type (assetStruct.systemName).
-	 *
-	 * @var string
-	 */
-	public $vodTypeSystemName = null;
-
-	/**
-	 * Errors which prevent the asset from being ingested
-	 *
-	 * @var array of KalturaVodIngestAssetResultErrorMessage
-	 */
-	public $errors;
-
-	/**
-	 * Errors which do not prevent the asset from being ingested
-	 *
-	 * @var array of KalturaVodIngestAssetResultErrorMessage
-	 */
-	public $warnings;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaVodIngestAssetResultList extends KalturaObjectBase
-{
-	/**
-	 * list of KalturaVodIngestAssetResult
-	 *
-	 * @var array of KalturaVodIngestAssetResult
-	 */
-	public $objects;
-
-	/**
-	 * Total items
-	 *
-	 * @var int
-	 */
-	public $totalCount = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaVodIngestAssetResultAggregation extends KalturaObjectBase
 {
 	/**
@@ -22205,7 +22070,7 @@ class KalturaVodIngestAssetResultResponse extends KalturaObjectBase
 	/**
 	 * Errors
 	 *
-	 * @var KalturaVodIngestAssetResultList
+	 * @var KalturaVodIngestAssetResultListResponse
 	 */
 	public $result;
 
