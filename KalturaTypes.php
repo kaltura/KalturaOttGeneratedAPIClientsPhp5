@@ -850,6 +850,30 @@ class KalturaCollectionFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssociatedShopEntities extends KalturaObjectBase
+{
+	/**
+	 * comma-separated list of assetUserRuleId values. Matching entities will be returned by the filter.
+	 *
+	 * @var string
+	 */
+	public $assetUserRuleIdIn = null;
+
+	/**
+	 * If true, filter will return entities with null/empty assetUserRuleId value, in addition to any entities whose assetUserRuleId value matches the assetUserRuleIdIn parameter.
+	 *             If false (or field is not specified) filter will return only entities whose assetUserRuleId value matches the assetUserRuleIdIn parameter.
+	 *
+	 * @var bool
+	 */
+	public $includeNullAssetUserRuleId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDiscountDetailsFilter extends KalturaFilter
 {
 	/**
@@ -858,6 +882,13 @@ class KalturaDiscountDetailsFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $idIn = null;
+
+	/**
+	 * filter all discountDetails by associate shop entities
+	 *
+	 * @var KalturaAssociatedShopEntities
+	 */
+	public $associatedShopEntities;
 
 
 }
@@ -1138,6 +1169,13 @@ class KalturaUsageModuleFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $idEqual = null;
+
+	/**
+	 * filter all usageModules by associate shop entities
+	 *
+	 * @var KalturaAssociatedShopEntities
+	 */
+	public $associatedShopEntities;
 
 
 }
@@ -2047,6 +2085,22 @@ class KalturaChannelExternalFilter extends KalturaAssetFilter
 	 * @var string
 	 */
 	public $alias = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveAssetHasRecordingsFilter extends KalturaAssetFilter
+{
+	/**
+	 * KalturaLiveAsset.id value of the live linear channel to be examined for associated recordings
+	 *
+	 * @var int
+	 */
+	public $liveAssetIdEqual = null;
 
 
 }
@@ -5198,6 +5252,13 @@ class KalturaDiscountModule extends KalturaObjectBase
 	 */
 	public $endDate = null;
 
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 */
+	public $assetUserRuleId = null;
+
 
 }
 
@@ -5270,6 +5331,14 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $isOfflinePlayback = null;
+
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 * @insertonly
+	 */
+	public $assetUserRuleId = null;
 
 
 }
@@ -5413,7 +5482,7 @@ class KalturaCollection extends KalturaOTTObjectSupportNullable
 	public $id = null;
 
 	/**
-	 * A list of channels associated with this collection 
+	 * A list of channels associated with this collection
 	 *             This property will deprecated soon. Please use ChannelsIds instead of it.
 	 *
 	 * @var array of KalturaBaseChannel
@@ -11345,6 +11414,14 @@ class KalturaDiscountDetails extends KalturaObjectBase
 	 */
 	public $whenAlgoType = null;
 
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 * @insertonly
+	 */
+	public $assetUserRuleId = null;
+
 
 }
 
@@ -12186,14 +12263,14 @@ class KalturaCloudUploadSettingsConfiguration extends KalturaPartnerConfiguratio
 
 	/**
 	 * Comma seperated list of file extensions that allowed to partner in question
-	 *             {&quot;jpeg&quot;,&quot;image/jpeg&quot;},
+	 *             {&quot;jpeg&quot;, &quot;image/jpeg&quot; },
 	 *             {&quot;jpg&quot;,&quot;image/jpeg&quot;},
-	 *             {&quot;png&quot;,&quot;image/png&quot;},
-	 *             {&quot;tif&quot;,&quot;image/tiff&quot;},
-	 *             {&quot;tiff&quot;,&quot;image/tiff&quot;},
-	 *             {&quot;gif&quot;,&quot;image/gif&quot;},
-	 *             {&quot;xls&quot;,&quot;application/vnd.ms-excel&quot;},
-	 *             {&quot;xlsx&quot;,&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;},
+	 *             {&quot;jpg&quot;,&quot;image/png&quot;},
+	 *             { &quot;tif&quot;,&quot;image/tiff&quot;},
+	 *             { &quot;tiff&quot;, &quot;image/tiff&quot;},
+	 *             {&quot;gif&quot;,  &quot;image/gif&quot;},
+	 *             {&quot;xls&quot;,  &quot;application/vnd.ms-excel&quot;},
+	 *             {&quot;xlsx&quot;,&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot; },
 	 *             {&quot;csv&quot;,&quot;text/csv&quot;},
 	 *             {&quot;xml&quot;,&quot;text/xml&quot;},
 	 *             {&quot;txt&quot;,&quot;text/plain&quot;},
@@ -20376,7 +20453,39 @@ abstract class KalturaRepresentativeSelectionPolicy extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTopEntitledOrFreeRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTopRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopSubscriptionEntitledOrFreeRsp extends KalturaRepresentativeSelectionPolicy
 {
 	/**
 	 * order by
