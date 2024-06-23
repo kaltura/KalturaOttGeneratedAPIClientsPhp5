@@ -14449,6 +14449,14 @@ class KalturaHouseholdDeviceFamilyLimitations extends KalturaDeviceFamilyBase
 	 */
 	public $isDefaultConcurrentLimit = null;
 
+	/**
+	 * Is the Allowed device change frequency code for this family is default value or not
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isDefaultFrequencyLimit = null;
+
 
 }
 
@@ -15593,6 +15601,38 @@ class KalturaEntitlementPriceDetails extends KalturaObjectBase
  */
 class KalturaSubscriptionEntitlement extends KalturaEntitlement
 {
+	/**
+	 * The date of the next renewal (only for subscription)
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $nextRenewalDate = null;
+
+	/**
+	 * Indicates whether the subscription is renewable in this purchase (only for subscription)
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isRenewableForPurchase = null;
+
+	/**
+	 * Indicates whether a subscription is renewable (only for subscription)
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isRenewable = null;
+
+	/**
+	 * Indicates whether the user is currently in his grace period entitlement
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isInGracePeriod = null;
+
 	/**
 	 * Payment Gateway identifier
 	 *
