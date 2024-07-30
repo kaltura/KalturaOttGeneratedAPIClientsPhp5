@@ -352,7 +352,7 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add new bulk upload batch job Conversion profile id can be specified in the API.
+	 * Add new bulk upload batch job Conversion profile id can be specified in the API (note that the total request body size is limited to 10MB).
 	 * 
 	 * @param file $fileData FileData
 	 * @param KalturaBulkUploadJobData $bulkUploadJobData BulkUploadJobData
@@ -3696,7 +3696,7 @@ class KalturaDynamicListService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add new bulk upload batch job Conversion profile id can be specified in the API.
+	 * Add new bulk upload batch job Conversion profile id can be specified in the API (note that the total request body size is limited to 10MB).
 	 * 
 	 * @param file $fileData FileData
 	 * @param KalturaBulkUploadExcelJobData $jobData JobData
@@ -14609,8 +14609,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:24-01-15');
-		$this->setApiVersion('9.6.0.0');
+		$this->setClientTag('php5:24-07-30');
+		$this->setApiVersion('10.2.0.5');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
