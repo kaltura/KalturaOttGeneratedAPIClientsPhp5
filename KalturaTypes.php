@@ -850,6 +850,30 @@ class KalturaCollectionFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssociatedShopEntities extends KalturaObjectBase
+{
+	/**
+	 * comma-separated list of assetUserRuleId values. Matching entities will be returned by the filter.
+	 *
+	 * @var string
+	 */
+	public $assetUserRuleIdIn = null;
+
+	/**
+	 * If true, filter will return entities with null/empty assetUserRuleId value, in addition to any entities whose assetUserRuleId value matches the assetUserRuleIdIn parameter.
+	 *             If false (or field is not specified) filter will return only entities whose assetUserRuleId value matches the assetUserRuleIdIn parameter.
+	 *
+	 * @var bool
+	 */
+	public $includeNullAssetUserRuleId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDiscountDetailsFilter extends KalturaFilter
 {
 	/**
@@ -858,6 +882,13 @@ class KalturaDiscountDetailsFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $idIn = null;
+
+	/**
+	 * filter all discountDetails by associate shop entities
+	 *
+	 * @var KalturaAssociatedShopEntities
+	 */
+	public $associatedShopEntities;
 
 
 }
@@ -1138,6 +1169,13 @@ class KalturaUsageModuleFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $idEqual = null;
+
+	/**
+	 * filter all usageModules by associate shop entities
+	 *
+	 * @var KalturaAssociatedShopEntities
+	 */
+	public $associatedShopEntities;
 
 
 }
@@ -2047,6 +2085,22 @@ class KalturaChannelExternalFilter extends KalturaAssetFilter
 	 * @var string
 	 */
 	public $alias = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveAssetHasRecordingsFilter extends KalturaAssetFilter
+{
+	/**
+	 * KalturaLiveAsset.id value of the live linear channel to be examined for associated recordings
+	 *
+	 * @var int
+	 */
+	public $liveAssetIdEqual = null;
 
 
 }
@@ -5198,6 +5252,13 @@ class KalturaDiscountModule extends KalturaObjectBase
 	 */
 	public $endDate = null;
 
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 */
+	public $assetUserRuleId = null;
+
 
 }
 
@@ -5270,6 +5331,14 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $isOfflinePlayback = null;
+
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 * @insertonly
+	 */
+	public $assetUserRuleId = null;
 
 
 }
@@ -5413,7 +5482,7 @@ class KalturaCollection extends KalturaOTTObjectSupportNullable
 	public $id = null;
 
 	/**
-	 * A list of channels associated with this collection 
+	 * A list of channels associated with this collection
 	 *             This property will deprecated soon. Please use ChannelsIds instead of it.
 	 *
 	 * @var array of KalturaBaseChannel
@@ -5591,6 +5660,7 @@ class KalturaCollection extends KalturaOTTObjectSupportNullable
 	 * Asset user rule identifier
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $assetUserRuleId = null;
 
@@ -10573,6 +10643,7 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * Asset User Rule Id
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $assetUserRuleId = null;
 
@@ -10691,20 +10762,6 @@ class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
 class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 {
 	/**
-	 * The minimum value to be met
-	 *
-	 * @var int
-	 */
-	public $minValue = null;
-
-	/**
-	 * The maximum value to be met
-	 *
-	 * @var int
-	 */
-	public $maxValue = null;
-
-	/**
 	 * How many days back should the actions be considered
 	 *
 	 * @var int
@@ -10738,6 +10795,20 @@ class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 	 * @var string
 	 */
 	public $currencyCode = null;
+
+	/**
+	 * The minimum value to be met
+	 *
+	 * @var int
+	 */
+	public $minValue = null;
+
+	/**
+	 * The maximum value to be met
+	 *
+	 * @var int
+	 */
+	public $maxValue = null;
 
 
 }
@@ -11345,6 +11416,14 @@ class KalturaDiscountDetails extends KalturaObjectBase
 	 */
 	public $whenAlgoType = null;
 
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 * @insertonly
+	 */
+	public $assetUserRuleId = null;
+
 
 }
 
@@ -11751,6 +11830,7 @@ class KalturaPpv extends KalturaObjectBase
 	 * Asset user rule identifier
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $assetUserRuleId = null;
 
@@ -12186,14 +12266,14 @@ class KalturaCloudUploadSettingsConfiguration extends KalturaPartnerConfiguratio
 
 	/**
 	 * Comma seperated list of file extensions that allowed to partner in question
-	 *             {&quot;jpeg&quot;,&quot;image/jpeg&quot;},
+	 *             {&quot;jpeg&quot;, &quot;image/jpeg&quot; },
 	 *             {&quot;jpg&quot;,&quot;image/jpeg&quot;},
-	 *             {&quot;png&quot;,&quot;image/png&quot;},
-	 *             {&quot;tif&quot;,&quot;image/tiff&quot;},
-	 *             {&quot;tiff&quot;,&quot;image/tiff&quot;},
-	 *             {&quot;gif&quot;,&quot;image/gif&quot;},
-	 *             {&quot;xls&quot;,&quot;application/vnd.ms-excel&quot;},
-	 *             {&quot;xlsx&quot;,&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;},
+	 *             {&quot;jpg&quot;,&quot;image/png&quot;},
+	 *             { &quot;tif&quot;,&quot;image/tiff&quot;},
+	 *             { &quot;tiff&quot;, &quot;image/tiff&quot;},
+	 *             {&quot;gif&quot;,  &quot;image/gif&quot;},
+	 *             {&quot;xls&quot;,  &quot;application/vnd.ms-excel&quot;},
+	 *             {&quot;xlsx&quot;,&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot; },
 	 *             {&quot;csv&quot;,&quot;text/csv&quot;},
 	 *             {&quot;xml&quot;,&quot;text/xml&quot;},
 	 *             {&quot;txt&quot;,&quot;text/plain&quot;},
@@ -14361,6 +14441,14 @@ class KalturaHouseholdDeviceFamilyLimitations extends KalturaDeviceFamilyBase
 	 * @readonly
 	 */
 	public $isDefaultConcurrentLimit = null;
+
+	/**
+	 * Is the Allowed device change frequency code for this family is default value or not
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isDefaultFrequencyLimit = null;
 
 
 }
@@ -19842,6 +19930,13 @@ class KalturaRegionalChannel extends KalturaObjectBase
 	 */
 	public $channelNumber = null;
 
+	/**
+	 * The dynamic data of a channel
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
 
 }
 
@@ -20376,7 +20471,39 @@ abstract class KalturaRepresentativeSelectionPolicy extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTopEntitledOrFreeRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTopRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopSubscriptionEntitledOrFreeRsp extends KalturaRepresentativeSelectionPolicy
 {
 	/**
 	 * order by
@@ -23135,11 +23262,18 @@ class KalturaRegionChannelNumber extends KalturaObjectBase
 	public $regionId = null;
 
 	/**
-	 * The number of the channel
+	 * The LCN of a channel
 	 *
 	 * @var int
 	 */
 	public $channelNumber = null;
+
+	/**
+	 * The dynamic data of a channel
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
 
 
 }
