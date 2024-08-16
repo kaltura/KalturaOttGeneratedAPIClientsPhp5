@@ -352,7 +352,7 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add new bulk upload batch job Conversion profile id can be specified in the API.
+	 * Add new bulk upload batch job Conversion profile id can be specified in the API (note that the total request body size is limited to 10MB).
 	 * 
 	 * @param file $fileData FileData
 	 * @param KalturaBulkUploadJobData $bulkUploadJobData BulkUploadJobData
@@ -1078,7 +1078,8 @@ class KalturaAssetStatisticsService extends KalturaServiceBase
 	}
 
 	/**
-	 * Returns statistics for given list of assets by type and / or time period
+	 * Returns statistics for given list of assets by type and / or time period.
+            Supported values for KalturaAssetStatisticsQuery.assetTypeEqual : KalturaAssetType.media, KalturaAssetType.epg.
 	 * 
 	 * @param KalturaAssetStatisticsQuery $query Query for assets statistics
 	 * @return KalturaAssetStatisticsListResponse
@@ -3696,7 +3697,7 @@ class KalturaDynamicListService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add new bulk upload batch job Conversion profile id can be specified in the API.
+	 * Add new bulk upload batch job Conversion profile id can be specified in the API (note that the total request body size is limited to 10MB).
 	 * 
 	 * @param file $fileData FileData
 	 * @param KalturaBulkUploadExcelJobData $jobData JobData
@@ -6795,6 +6796,23 @@ class KalturaLineupService extends KalturaServiceBase
 	}
 
 	/**
+	 * Sends lineup requested invalidation
+	 * 
+	 * @return bool
+	 */
+	function invalidate()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("lineup", "invalidate", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
 	 * Returns list of lineup regional linear channels associated with one LCN and its region information. Allows to apply sorting and filtering by LCN and linear channels.
 	 * 
 	 * @param KalturaLineupRegionalChannelFilter $filter Request filter
@@ -7358,6 +7376,54 @@ class KalturaMetaService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaMeta");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMfaPartnerConfigurationService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Get MFA partner configuration.
+	 * 
+	 * @return KalturaMultifactorAuthenticationPartnerConfiguration
+	 */
+	function get()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("mfapartnerconfiguration", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMultifactorAuthenticationPartnerConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Update MFA partner configuration.
+	 * 
+	 * @param KalturaMultifactorAuthenticationPartnerConfiguration $configuration MFA configuration
+	 * @return KalturaMultifactorAuthenticationPartnerConfiguration
+	 */
+	function update(KalturaMultifactorAuthenticationPartnerConfiguration $configuration)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "configuration", $configuration->toParams());
+		$this->client->queueServiceActionCall("mfapartnerconfiguration", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMultifactorAuthenticationPartnerConfiguration");
 		return $resultObject;
 	}
 }
@@ -14194,6 +14260,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaMfaPartnerConfigurationService
+	 */
+	public $mfaPartnerConfiguration = null;
+
+	/**
+	 * 
 	 * @var KalturaNotificationService
 	 */
 	public $notification = null;
@@ -14609,8 +14681,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:24-01-15');
-		$this->setApiVersion('9.6.0.0');
+		$this->setClientTag('php5:24-08-16');
+		$this->setApiVersion('10.3.1.1');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -14696,6 +14768,7 @@ class KalturaClient extends KalturaClientBase
 		$this->mediaFileType = new KalturaMediaFileTypeService($this);
 		$this->messageTemplate = new KalturaMessageTemplateService($this);
 		$this->meta = new KalturaMetaService($this);
+		$this->mfaPartnerConfiguration = new KalturaMfaPartnerConfigurationService($this);
 		$this->notification = new KalturaNotificationService($this);
 		$this->notificationsPartnerSettings = new KalturaNotificationsPartnerSettingsService($this);
 		$this->notificationsSettings = new KalturaNotificationsSettingsService($this);
