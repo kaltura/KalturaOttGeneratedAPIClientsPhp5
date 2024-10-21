@@ -776,6 +776,47 @@ class KalturaUserSegmentFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+abstract class KalturaWatchBasedRecommendationsProfileFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchBasedRecommendationsProfileByIdsFilter extends KalturaWatchBasedRecommendationsProfileFilter
+{
+	/**
+	 * Comma seperated watch based recommendation profile ids
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchBasedRecommendationsProfileByNameFilter extends KalturaWatchBasedRecommendationsProfileFilter
+{
+	/**
+	 * A string that is included in the profile name
+	 *
+	 * @var string
+	 */
+	public $nameContains = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetFilePpvFilter extends KalturaFilter
 {
 	/**
@@ -850,6 +891,30 @@ class KalturaCollectionFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssociatedShopEntities extends KalturaObjectBase
+{
+	/**
+	 * comma-separated list of assetUserRuleId values. Matching entities will be returned by the filter.
+	 *
+	 * @var string
+	 */
+	public $assetUserRuleIdIn = null;
+
+	/**
+	 * If true, filter will return entities with null/empty assetUserRuleId value, in addition to any entities whose assetUserRuleId value matches the assetUserRuleIdIn parameter.
+	 *             If false (or field is not specified) filter will return only entities whose assetUserRuleId value matches the assetUserRuleIdIn parameter.
+	 *
+	 * @var bool
+	 */
+	public $includeNullAssetUserRuleId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDiscountDetailsFilter extends KalturaFilter
 {
 	/**
@@ -858,6 +923,13 @@ class KalturaDiscountDetailsFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $idIn = null;
+
+	/**
+	 * filter all discountDetails by associate shop entities
+	 *
+	 * @var KalturaAssociatedShopEntities
+	 */
+	public $associatedShopEntities;
 
 
 }
@@ -1138,6 +1210,13 @@ class KalturaUsageModuleFilter extends KalturaFilter
 	 * @var int
 	 */
 	public $idEqual = null;
+
+	/**
+	 * filter all usageModules by associate shop entities
+	 *
+	 * @var KalturaAssociatedShopEntities
+	 */
+	public $associatedShopEntities;
 
 
 }
@@ -2047,6 +2126,22 @@ class KalturaChannelExternalFilter extends KalturaAssetFilter
 	 * @var string
 	 */
 	public $alias = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveAssetHasRecordingsFilter extends KalturaAssetFilter
+{
+	/**
+	 * KalturaLiveAsset.id value of the live linear channel to be examined for associated recordings
+	 *
+	 * @var int
+	 */
+	public $liveAssetIdEqual = null;
 
 
 }
@@ -5198,6 +5293,13 @@ class KalturaDiscountModule extends KalturaObjectBase
 	 */
 	public $endDate = null;
 
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 */
+	public $assetUserRuleId = null;
+
 
 }
 
@@ -5270,6 +5372,14 @@ class KalturaUsageModule extends KalturaObjectBase
 	 * @var bool
 	 */
 	public $isOfflinePlayback = null;
+
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 * @insertonly
+	 */
+	public $assetUserRuleId = null;
 
 
 }
@@ -5413,7 +5523,7 @@ class KalturaCollection extends KalturaOTTObjectSupportNullable
 	public $id = null;
 
 	/**
-	 * A list of channels associated with this collection 
+	 * A list of channels associated with this collection
 	 *             This property will deprecated soon. Please use ChannelsIds instead of it.
 	 *
 	 * @var array of KalturaBaseChannel
@@ -5591,6 +5701,7 @@ class KalturaCollection extends KalturaOTTObjectSupportNullable
 	 * Asset user rule identifier
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $assetUserRuleId = null;
 
@@ -6490,6 +6601,13 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	 * @var string
 	 */
 	public $pricePlanIds = null;
+
+	/**
+	 * Optional: If the subscription has a flexible price plan. Represents an initial none-recurring discounted period which is charged immediately (no unified billing), followed by a recuring price plan which should be aligned with the unified billing cycle
+	 *
+	 * @var int
+	 */
+	public $flexiblePricePlanId = null;
 
 	/**
 	 * Subscription preview module
@@ -10573,6 +10691,7 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * Asset User Rule Id
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $assetUserRuleId = null;
 
@@ -10691,20 +10810,6 @@ class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
 class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 {
 	/**
-	 * The minimum value to be met
-	 *
-	 * @var int
-	 */
-	public $minValue = null;
-
-	/**
-	 * The maximum value to be met
-	 *
-	 * @var int
-	 */
-	public $maxValue = null;
-
-	/**
 	 * How many days back should the actions be considered
 	 *
 	 * @var int
@@ -10738,6 +10843,20 @@ class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 	 * @var string
 	 */
 	public $currencyCode = null;
+
+	/**
+	 * The minimum value to be met
+	 *
+	 * @var int
+	 */
+	public $minValue = null;
+
+	/**
+	 * The maximum value to be met
+	 *
+	 * @var int
+	 */
+	public $maxValue = null;
 
 
 }
@@ -11180,6 +11299,146 @@ class KalturaUserSegmentListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSeriesInfo extends KalturaObjectBase
+{
+	/**
+	 * Series ID meta name
+	 *
+	 * @var string
+	 */
+	public $seriesIdMetadataName = null;
+
+	/**
+	 * Series asset type ID
+	 *
+	 * @var int
+	 */
+	public $seriesTypeId = null;
+
+	/**
+	 * Episode asset type ID
+	 *
+	 * @var int
+	 */
+	public $episodeTypeId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchBasedRecommendationsProfile extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the profile
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Friendly name for the profile
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * List of comma seperated topic ids considered for recommendations calculation.
+	 *
+	 * @var string
+	 */
+	public $topicIds = null;
+
+	/**
+	 * List of comma seperated type ids considered for recommendations calculation.
+	 *
+	 * @var string
+	 */
+	public $analysisMediaTypeIds = null;
+
+	/**
+	 * The minimum coverage in percentages that media is considered viewed.
+	 *
+	 * @var int
+	 */
+	public $userInterestPlayThresholdInPercentages = null;
+
+	/**
+	 * The number of interests that will be selected per user.
+	 *
+	 * @var int
+	 */
+	public $numberOfInterests = null;
+
+	/**
+	 * Reference to partner default recommendations (first 30 assets that are included in the referred KalturaChannel).
+	 *
+	 * @var int
+	 */
+	public $fallbackChannelId = null;
+
+	/**
+	 * Minimum number of media assets that user shall watch to trigger user interests calculation.
+	 *
+	 * @var int
+	 */
+	public $minPlaybacks = null;
+
+	/**
+	 * Maximum number of assets that watched by a user and will be considered for recommendations calculation (the last maxPlaybacks shall be used in the analysis).
+	 *
+	 * @var int
+	 */
+	public $maxPlaybacks = null;
+
+	/**
+	 * A kSql is used to filter the “user interests“ recommendations. Only asset properties, metas, or tags are allowed ti be included in this ksql.
+	 *
+	 * @var string
+	 */
+	public $allowedRecommendationsKsql = null;
+
+	/**
+	 * List of comma seperated media type ids that will be included in the recommendations.
+	 *
+	 * @var string
+	 */
+	public $recommendationsMediaTypeIds = null;
+
+	/**
+	 * Series info ror recommendations calculation
+	 *
+	 * @var KalturaSeriesInfo
+	 */
+	public $recommendationsSeriesInfo;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchBasedRecommendationsProfileListResponse extends KalturaListResponse
+{
+	/**
+	 * Assets
+	 *
+	 * @var array of KalturaWatchBasedRecommendationsProfile
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetFilePpvListResponse extends KalturaListResponse
 {
 	/**
@@ -11344,6 +11603,14 @@ class KalturaDiscountDetails extends KalturaObjectBase
 	 * @var int
 	 */
 	public $whenAlgoType = null;
+
+	/**
+	 * Asset user rule identifier
+	 *
+	 * @var int
+	 * @insertonly
+	 */
+	public $assetUserRuleId = null;
 
 
 }
@@ -11751,6 +12018,7 @@ class KalturaPpv extends KalturaObjectBase
 	 * Asset user rule identifier
 	 *
 	 * @var int
+	 * @insertonly
 	 */
 	public $assetUserRuleId = null;
 
@@ -12186,14 +12454,14 @@ class KalturaCloudUploadSettingsConfiguration extends KalturaPartnerConfiguratio
 
 	/**
 	 * Comma seperated list of file extensions that allowed to partner in question
-	 *             {&quot;jpeg&quot;,&quot;image/jpeg&quot;},
+	 *             {&quot;jpeg&quot;, &quot;image/jpeg&quot; },
 	 *             {&quot;jpg&quot;,&quot;image/jpeg&quot;},
-	 *             {&quot;png&quot;,&quot;image/png&quot;},
-	 *             {&quot;tif&quot;,&quot;image/tiff&quot;},
-	 *             {&quot;tiff&quot;,&quot;image/tiff&quot;},
-	 *             {&quot;gif&quot;,&quot;image/gif&quot;},
-	 *             {&quot;xls&quot;,&quot;application/vnd.ms-excel&quot;},
-	 *             {&quot;xlsx&quot;,&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;},
+	 *             {&quot;jpg&quot;,&quot;image/png&quot;},
+	 *             { &quot;tif&quot;,&quot;image/tiff&quot;},
+	 *             { &quot;tiff&quot;, &quot;image/tiff&quot;},
+	 *             {&quot;gif&quot;,  &quot;image/gif&quot;},
+	 *             {&quot;xls&quot;,  &quot;application/vnd.ms-excel&quot;},
+	 *             {&quot;xlsx&quot;,&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot; },
 	 *             {&quot;csv&quot;,&quot;text/csv&quot;},
 	 *             {&quot;xml&quot;,&quot;text/xml&quot;},
 	 *             {&quot;txt&quot;,&quot;text/plain&quot;},
@@ -14362,6 +14630,14 @@ class KalturaHouseholdDeviceFamilyLimitations extends KalturaDeviceFamilyBase
 	 */
 	public $isDefaultConcurrentLimit = null;
 
+	/**
+	 * Is the Allowed device change frequency code for this family is default value or not
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isDefaultFrequencyLimit = null;
+
 
 }
 
@@ -15583,6 +15859,14 @@ class KalturaSubscriptionEntitlement extends KalturaEntitlement
 	 * @readonly
 	 */
 	public $priceDetails;
+
+	/**
+	 * Indicates whether the subscription is now within the flexible price plan lifecycle or not
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $isFlexiblePricePlan = null;
 
 
 }
@@ -19842,6 +20126,13 @@ class KalturaRegionalChannel extends KalturaObjectBase
 	 */
 	public $channelNumber = null;
 
+	/**
+	 * The dynamic data of a channel
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
 
 }
 
@@ -20293,6 +20584,14 @@ class KalturaAppToken extends KalturaObjectBase
 	 */
 	public $updateDate = null;
 
+	/**
+	 * The region identifier of the KS used to create the appToken. Value is presented only for partners with the enabled feature.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $regionId = null;
+
 
 }
 
@@ -20376,7 +20675,39 @@ abstract class KalturaRepresentativeSelectionPolicy extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTopEntitledOrFreeRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTopRsp extends KalturaRepresentativeSelectionPolicy
+{
+	/**
+	 * order by
+	 *
+	 * @var KalturaBaseAssetOrder
+	 */
+	public $orderBy;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTopSubscriptionEntitledOrFreeRsp extends KalturaRepresentativeSelectionPolicy
 {
 	/**
 	 * order by
@@ -22601,6 +22932,43 @@ class KalturaMessageTemplate extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMultifactorAuthenticationPartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Is MFA Enabled for partner
+	 *
+	 * @var bool
+	 */
+	public $isEnabled = null;
+
+	/**
+	 * Roles
+	 *
+	 * @var string
+	 */
+	public $roles = null;
+
+	/**
+	 * Token expiration in seconds
+	 *
+	 * @var int
+	 */
+	public $tokenExpirationInSeconds = null;
+
+	/**
+	 * Token delivery method
+	 *
+	 * @var KalturaTokenDeliveryMethod
+	 */
+	public $tokenDeliveryMethod = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaRegistryResponse extends KalturaObjectBase
 {
 	/**
@@ -22961,6 +23329,22 @@ class KalturaOTTUserDynamicData extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaResendMfaTokenResponse extends KalturaObjectBase
+{
+	/**
+	 * Result of resend MFA token operation
+	 *
+	 * @var bool
+	 */
+	public $result = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPartnerSetup extends KalturaObjectBase
 {
 	/**
@@ -23135,11 +23519,18 @@ class KalturaRegionChannelNumber extends KalturaObjectBase
 	public $regionId = null;
 
 	/**
-	 * The number of the channel
+	 * The LCN of a channel
 	 *
 	 * @var int
 	 */
 	public $channelNumber = null;
+
+	/**
+	 * The dynamic data of a channel
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
 
 
 }
@@ -23640,6 +24031,14 @@ class KalturaTimeShiftedTvPartnerSettings extends KalturaObjectBase
 	 */
 	public $maxConcurrencyMargin = null;
 
+	/**
+	 * When using padded and immediate recordings, define if end date of recording should be rounded by the minute or by the second.
+	 *             Default by minutes, FALSE.
+	 *
+	 * @var bool
+	 */
+	public $shouldRoundStopRecordingsBySeconds = null;
+
 
 }
 
@@ -24057,6 +24456,43 @@ class KalturaUserLoginPin extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $userId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchBasedRecommendationsAdminConfiguration extends KalturaObjectBase
+{
+	/**
+	 * The maximum number of profiles.
+	 *
+	 * @var int
+	 */
+	public $maxProfiles = null;
+
+	/**
+	 * The duration that a user is considered active after his last playback.
+	 *
+	 * @var int
+	 */
+	public $activeUserDurationDays = null;
+
+	/**
+	 * The number of days the recommendations will be cached.
+	 *
+	 * @var int
+	 */
+	public $recommendationsCachingTimeDays = null;
+
+	/**
+	 * The number of days the user interests are considered to be up-to-date.
+	 *
+	 * @var int
+	 */
+	public $playbackInterestsCalculationPeriodDays = null;
 
 
 }
