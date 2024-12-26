@@ -2511,6 +2511,16 @@ class KalturaTimeShiftedTvState extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaTokenDeliveryMethod extends KalturaEnumBase
+{
+	const EMAIL = "Email";
+	const SSO = "Sso";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTopicAutomaticIssueNotification extends KalturaEnumBase
 {
 	const INHERIT = "Inherit";
@@ -2731,6 +2741,15 @@ class KalturaVodIngestAssetResultStatus extends KalturaEnumBase
 	const EXTERNAL_FAILURE = "EXTERNAL_FAILURE";
 	const SUCCESS_WARNING = "SUCCESS_WARNING";
 	const SUCCESS = "SUCCESS";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchBasedRecommendationsProfileOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
 }
 
 /**
