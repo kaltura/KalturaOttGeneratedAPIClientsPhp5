@@ -152,6 +152,17 @@ class KalturaAssetCommentOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAssetEnrichCaptionType extends KalturaEnumBase
+{
+	const SRT = "SRT";
+	const WEBTTV = "WebTTV";
+	const TEXT_ONLY = "Text_Only";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetFilePpvOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -522,6 +533,19 @@ class KalturaCampaignOrderBy extends KalturaEnumBase
 	const UPDATE_DATE_ASC = "UPDATE_DATE_ASC";
 	const END_DATE_DESC = "END_DATE_DESC";
 	const END_DATE_ASC = "END_DATE_ASC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCaptionUploadStatus extends KalturaEnumBase
+{
+	const PENDING = "Pending";
+	const UPLOADED = "Uploaded";
+	const PROCESSING = "Processing";
+	const SUCCESS = "Success";
+	const FAILED = "Failed";
 }
 
 /**
