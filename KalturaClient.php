@@ -40,6 +40,120 @@ require_once(dirname(__FILE__) . "/KalturaTypes.php");
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAiMetadataGeneratorService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Initiate the the process of metadata generation based on the subtitles file.
+	 * 
+	 * @param bigint $subtitlesFileId He subtitles file ID returned when uploaded the subtitles file by the subtitles service.
+            Represents also the job ID used by the generate metadata process
+	 * @param array $externalAssetIds A list of external asset IDs to be populated with the generated metadata
+	 * @param string $targetDisplayLanguage The language used for the generated results.
+            Must be a valid existing KalturaLanguage systemName.\nIf not provided then the subtitles language will be used
+	 * @return KalturaGenerateMetadataBySubtitlesJob
+	 */
+	function generateMetadataBySubtitles($subtitlesFileId, array $externalAssetIds, $targetDisplayLanguage)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "subtitlesFileId", $subtitlesFileId);
+		foreach($externalAssetIds as $index => $obj)
+		{
+			$this->client->addParam($kparams, "externalAssetIds:$index", $obj->toParams());
+		}
+		$this->client->addParam($kparams, "targetDisplayLanguage", $targetDisplayLanguage);
+		$this->client->queueServiceActionCall("aimetadatagenerator", "generateMetadataBySubtitles", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataBySubtitlesJob");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve the generated metadata
+	 * 
+	 * @param bigint $jobId The job ID (equals the subtitles file ID returned by the subtitles.uploadFile service)
+	 * @return KalturaGenerateMetadataResult
+	 */
+	function getGeneratedMetadata($jobId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "jobId", $jobId);
+		$this->client->queueServiceActionCall("aimetadatagenerator", "getGeneratedMetadata", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataResult");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve the status of the metadata generation job, identified by the subtitles file ID.
+	 * 
+	 * @param bigint $id The file (job) ID as received from subtitles.uploadFile response"
+	 * @return KalturaGenerateMetadataBySubtitlesJob
+	 */
+	function getGenerateMetadataJob($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("aimetadatagenerator", "getGenerateMetadataJob", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataBySubtitlesJob");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve feature configuration
+	 * 
+	 * @return KalturaAiMetadataGeneratorConfiguration
+	 */
+	function getPartnerConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("aimetadatagenerator", "getPartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAiMetadataGeneratorConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Update feature configuration
+	 * 
+	 * @param KalturaAiMetadataGeneratorConfiguration $configuration The partner configuration to be set
+	 * @return KalturaAiMetadataGeneratorConfiguration
+	 */
+	function setPartnerConfiguration(KalturaAiMetadataGeneratorConfiguration $configuration)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "configuration", $configuration->toParams());
+		$this->client->queueServiceActionCall("aimetadatagenerator", "setPartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAiMetadataGeneratorConfiguration");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnouncementService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -12406,6 +12520,80 @@ class KalturaSubscriptionSetService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSubtitlesService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Return a subtitles file
+	 * 
+	 * @param bigint $id A subtitles file ID to be retrieved
+	 * @return KalturaSubtitles
+	 */
+	function get($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("subtitles", "get", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSubtitles");
+		return $resultObject;
+	}
+
+	/**
+	 * Return a list of available subtitles files
+	 * 
+	 * @param KalturaSubtitlesFilter $filter Filter
+	 * @param KalturaFilterPager $pager Pager
+	 * @return KalturaSubtitlesListResponse
+	 */
+	function listAction(KalturaSubtitlesFilter $filter, KalturaFilterPager $pager)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filter", $filter->toParams());
+		$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("subtitles", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSubtitlesListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Upload a subtitles file for a later analysis.
+	 * 
+	 * @param KalturaSubtitles $subtitles Subtitle metadata
+	 * @param file $file The subtitles text file to upload. The file must be in UTF-8 encoding.
+	 * @return KalturaSubtitles
+	 */
+	function uploadFile(KalturaSubtitles $subtitles, $file)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "subtitles", $subtitles->toParams());
+		$kfiles = array();
+		$this->client->addParam($kfiles, "file", $file);
+		$this->client->queueServiceActionCall("subtitles", "uploadFile", $kparams, $kfiles);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSubtitles");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSystemService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -14122,6 +14310,12 @@ class KalturaClient extends KalturaClientBase
 {
 	/**
 	 * 
+	 * @var KalturaAiMetadataGeneratorService
+	 */
+	public $aiMetadataGenerator = null;
+
+	/**
+	 * 
 	 * @var KalturaAnnouncementService
 	 */
 	public $announcement = null;
@@ -14932,6 +15126,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaSubtitlesService
+	 */
+	public $subtitles = null;
+
+	/**
+	 * 
 	 * @var KalturaSystemService
 	 */
 	public $system = null;
@@ -15065,9 +15265,10 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-01-07');
+		$this->setClientTag('php5:25-01-08');
 		$this->setApiVersion('10.8.0.0');
 		
+		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
 		$this->assetComment = new KalturaAssetCommentService($this);
@@ -15203,6 +15404,7 @@ class KalturaClient extends KalturaClientBase
 		$this->streamingDevice = new KalturaStreamingDeviceService($this);
 		$this->subscription = new KalturaSubscriptionService($this);
 		$this->subscriptionSet = new KalturaSubscriptionSetService($this);
+		$this->subtitles = new KalturaSubtitlesService($this);
 		$this->system = new KalturaSystemService($this);
 		$this->tag = new KalturaTagService($this);
 		$this->timeShiftedTvPartnerSettings = new KalturaTimeShiftedTvPartnerSettingsService($this);
