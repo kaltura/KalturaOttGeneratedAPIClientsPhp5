@@ -4969,6 +4969,57 @@ class KalturaGenerateMetadataResult extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaMetaFieldNameMap extends KalturaObjectBase
+{
+	/**
+	 * Genre
+	 *
+	 * @var string
+	 */
+	public $genre = null;
+
+	/**
+	 * Sentiment
+	 *
+	 * @var string
+	 */
+	public $sentiment = null;
+
+	/**
+	 * Short Description
+	 *
+	 * @var string
+	 */
+	public $shortDescription = null;
+
+	/**
+	 * Long Description
+	 *
+	 * @var string
+	 */
+	public $longDescription = null;
+
+	/**
+	 * One Liner
+	 *
+	 * @var string
+	 */
+	public $oneLiner = null;
+
+	/**
+	 * Keywords
+	 *
+	 * @var string
+	 */
+	public $keywords = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
 {
 	/**
@@ -4979,13 +5030,13 @@ class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
 	public $isEnabled = null;
 
 	/**
-	 * A type of dictionary defined as [KalturaLlmMetadataKeysEnum,Integer]. 
-	 *             This property is used to correlate the newly generated metadata to existing metadata IDs which are available in the asset’s struct. 
-	 *             That is, per each generated metadata key (name), to which metadata ID on the asset it is mapped and stored.
+	 * A type of dictionary defined as [long,KalturaMetaFieldNameMap]. 
+	 *             This property is used to correlate the newly generated metadata to
+	 *             existing metadata IDs which are available in the asset’s struct.
 	 *
 	 * @var map
 	 */
-	public $metaFieldNameMap;
+	public $assetStructMetaNameMap;
 
 	/**
 	 * a String type holding a comma separated list of metadata IDs. 
@@ -10457,7 +10508,6 @@ class KalturaSubtitles extends KalturaObjectBase
 	 *             (note that the metadata keys are always in English). It includes a KalturaLanguage systemName.
 	 *
 	 * @var string
-	 * @readonly
 	 */
 	public $subtitlesLanguage = null;
 
