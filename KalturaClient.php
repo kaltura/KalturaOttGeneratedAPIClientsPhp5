@@ -462,6 +462,34 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
+	 * Gets the bulk playback context for assets.
+	 * 
+	 * @param array $fileTypes The types of files to include in the playback context.
+	 * @param string $streamerType The type of streamer to use.
+	 * @param string $context The context for the playback.
+	 * @param string $urlType The type of URL to generate.
+	 * @return KalturaBulkPlaybackContext
+	 */
+	function getBulkPlaybackContext(array $fileTypes, $streamerType, $context, $urlType)
+	{
+		$kparams = array();
+		foreach($fileTypes as $index => $obj)
+		{
+			$this->client->addParam($kparams, "fileTypes:$index", $obj->toParams());
+		}
+		$this->client->addParam($kparams, "streamerType", $streamerType);
+		$this->client->addParam($kparams, "context", $context);
+		$this->client->addParam($kparams, "urlType", $urlType);
+		$this->client->queueServiceActionCall("asset", "getBulkPlaybackContext", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaBulkPlaybackContext");
+		return $resultObject;
+	}
+
+	/**
 	 * This action delivers all data relevant for player
 	 * 
 	 * @param string $assetId Asset identifier
@@ -14925,8 +14953,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-01-07');
-		$this->setApiVersion('10.7.1.4');
+		$this->setClientTag('php5:25-01-15');
+		$this->setApiVersion('10.8.0.0');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);

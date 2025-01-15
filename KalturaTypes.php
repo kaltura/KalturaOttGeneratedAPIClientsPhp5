@@ -20702,49 +20702,21 @@ class KalturaTopSubscriptionEntitledRsp extends KalturaRepresentativeSelectionPo
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPlaybackContextOptions extends KalturaObjectBase
+class KalturaKeyValue extends KalturaObjectBase
 {
 	/**
-	 * Protocol of the specific media object (http / https).
+	 * Key
 	 *
 	 * @var string
 	 */
-	public $mediaProtocol = null;
+	public $key = null;
 
 	/**
-	 * Playback streamer type: applehttp, mpegdash, url, smothstreaming, multicast, none
+	 * Value
 	 *
 	 * @var string
 	 */
-	public $streamerType = null;
-
-	/**
-	 * List of comma separated media file IDs
-	 *
-	 * @var string
-	 */
-	public $assetFileIds = null;
-
-	/**
-	 * key/value map field for extra data
-	 *
-	 * @var map
-	 */
-	public $adapterData;
-
-	/**
-	 * Playback context type
-	 *
-	 * @var KalturaPlaybackContextType
-	 */
-	public $context = null;
-
-	/**
-	 * Url type
-	 *
-	 * @var KalturaUrlType
-	 */
-	public $urlType = null;
+	public $value = null;
 
 
 }
@@ -20866,6 +20838,22 @@ class KalturaPlaybackContext extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBulkPlaybackContext extends KalturaObjectBase
+{
+	/**
+	 * List of playback contexts
+	 *
+	 * @var array of KalturaPlaybackContext
+	 */
+	public $playbackContexts;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBumpersPlaybackPluginData extends KalturaPlaybackPluginData
 {
 	/**
@@ -20881,6 +20869,57 @@ class KalturaBumpersPlaybackPluginData extends KalturaPlaybackPluginData
 	 * @var string
 	 */
 	public $streamertype = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackContextOptions extends KalturaObjectBase
+{
+	/**
+	 * Protocol of the specific media object (http / https).
+	 *
+	 * @var string
+	 */
+	public $mediaProtocol = null;
+
+	/**
+	 * Playback streamer type: applehttp, mpegdash, url, smothstreaming, multicast, none
+	 *
+	 * @var string
+	 */
+	public $streamerType = null;
+
+	/**
+	 * List of comma separated media file IDs
+	 *
+	 * @var string
+	 */
+	public $assetFileIds = null;
+
+	/**
+	 * key/value map field for extra data
+	 *
+	 * @var map
+	 */
+	public $adapterData;
+
+	/**
+	 * Playback context type
+	 *
+	 * @var KalturaPlaybackContextType
+	 */
+	public $context = null;
+
+	/**
+	 * Url type
+	 *
+	 * @var KalturaUrlType
+	 */
+	public $urlType = null;
 
 
 }
@@ -21625,29 +21664,6 @@ class KalturaRandomCouponGenerationOptions extends KalturaCouponGenerationOption
 	 * @var bool
 	 */
 	public $useSpecialCharacters = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaKeyValue extends KalturaObjectBase
-{
-	/**
-	 * Key
-	 *
-	 * @var string
-	 */
-	public $key = null;
-
-	/**
-	 * Value
-	 *
-	 * @var string
-	 */
-	public $value = null;
 
 
 }
