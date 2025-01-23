@@ -1271,6 +1271,7 @@ class KalturaImageStatus extends KalturaEnumBase
 {
 	const PENDING = "PENDING";
 	const READY = "READY";
+	const FAILED = "FAILED";
 }
 
 /**
