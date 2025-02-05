@@ -114,6 +114,23 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	}
 
 	/**
+	 * Get metadata mapping structure and available generated metadata fields
+	 * 
+	 * @return KalturaMetaFieldNameMap
+	 */
+	function getMetadataFieldDefinitions()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("aimetadatagenerator", "getMetadataFieldDefinitions", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMetaFieldNameMap");
+		return $resultObject;
+	}
+
+	/**
 	 * Retrieve feature configuration
 	 * 
 	 * @return KalturaAiMetadataGeneratorConfiguration
@@ -136,11 +153,11 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	 * @param KalturaAiMetadataGeneratorConfiguration $configuration The partner configuration to be set
 	 * @return KalturaAiMetadataGeneratorConfiguration
 	 */
-	function setPartnerConfiguration(KalturaAiMetadataGeneratorConfiguration $configuration)
+	function updatePartnerConfiguration(KalturaAiMetadataGeneratorConfiguration $configuration)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "configuration", $configuration->toParams());
-		$this->client->queueServiceActionCall("aimetadatagenerator", "setPartnerConfiguration", $kparams);
+		$this->client->queueServiceActionCall("aimetadatagenerator", "updatePartnerConfiguration", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -15265,8 +15282,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-01-23');
-		$this->setApiVersion('10.8.0.0');
+		$this->setClientTag('php5:25-02-05');
+		$this->setApiVersion('10.9.0.0');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
 		$this->announcement = new KalturaAnnouncementService($this);
