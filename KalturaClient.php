@@ -53,11 +53,9 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	 * @param bigint $subtitlesFileId He subtitles file ID returned when uploaded the subtitles file by the subtitles service.
             Represents also the job ID used by the generate metadata process
 	 * @param array $externalAssetIds A list of external asset IDs to be populated with the generated metadata
-	 * @param string $targetDisplayLanguage The language used for the generated results.
-            Must be a valid existing KalturaLanguage systemName.\nIf not provided then the subtitles language will be used
 	 * @return KalturaGenerateMetadataBySubtitlesJob
 	 */
-	function generateMetadataBySubtitles($subtitlesFileId, array $externalAssetIds, $targetDisplayLanguage)
+	function generateMetadataBySubtitles($subtitlesFileId, array $externalAssetIds)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "subtitlesFileId", $subtitlesFileId);
@@ -65,7 +63,6 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 		{
 			$this->client->addParam($kparams, "externalAssetIds:$index", $obj->toParams());
 		}
-		$this->client->addParam($kparams, "targetDisplayLanguage", $targetDisplayLanguage);
 		$this->client->queueServiceActionCall("aimetadatagenerator", "generateMetadataBySubtitles", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -778,140 +775,6 @@ class KalturaAssetService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaAssetListResponse");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetEnrichService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Initiate the process of metadata generation
-	 * 
-	 * @param bigint $captionUploadJobId Job id to generate metadata for
-	 * @param array $externalAssetIds External asset ids
-	 * @param string $targetDisplayLanguage Relevant language
-	 * @return KalturaCaptionUploadJob
-	 */
-	function generateMetadata($captionUploadJobId, array $externalAssetIds, $targetDisplayLanguage)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "captionUploadJobId", $captionUploadJobId);
-		foreach($externalAssetIds as $index => $obj)
-		{
-			$this->client->addParam($kparams, "externalAssetIds:$index", $obj->toParams());
-		}
-		$this->client->addParam($kparams, "targetDisplayLanguage", $targetDisplayLanguage);
-		$this->client->queueServiceActionCall("assetenrich", "generateMetadata", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionUploadJob");
-		return $resultObject;
-	}
-
-	/**
-	 * Retrieve the status of the metadata generation job
-	 * 
-	 * @param bigint $captionUploadJobId Job id to get
-	 * @return KalturaCaptionUploadJob
-	 */
-	function getCaptionUploadJob($captionUploadJobId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "captionUploadJobId", $captionUploadJobId);
-		$this->client->queueServiceActionCall("assetenrich", "getCaptionUploadJob", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionUploadJob");
-		return $resultObject;
-	}
-
-	/**
-	 * Retrieve the generated metadata
-	 * 
-	 * @param bigint $captionUploadJobId Job id
-	 * @return KalturaEnrichedMetadataResult
-	 */
-	function getGeneratedMetadata($captionUploadJobId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "captionUploadJobId", $captionUploadJobId);
-		$this->client->queueServiceActionCall("assetenrich", "getGeneratedMetadata", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEnrichedMetadataResult");
-		return $resultObject;
-	}
-
-	/**
-	 * Retrieve feature configuration
-	 * 
-	 * @return KalturaMetaEnrichConfiguration
-	 */
-	function getPartnerConfiguration()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("assetenrich", "getPartnerConfiguration", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetaEnrichConfiguration");
-		return $resultObject;
-	}
-
-	/**
-	 * Update feature configuration
-	 * 
-	 * @param KalturaMetaEnrichConfiguration $configuration The partner configuration to be set
-	 * @return KalturaMetaEnrichConfiguration
-	 */
-	function updatePartnerConfiguration(KalturaMetaEnrichConfiguration $configuration)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "configuration", $configuration->toParams());
-		$this->client->queueServiceActionCall("assetenrich", "updatePartnerConfiguration", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetaEnrichConfiguration");
-		return $resultObject;
-	}
-
-	/**
-	 * Add a file to be used for enriching the assets&#39; metadata
-	 * 
-	 * @param KalturaCaptionUploadData $json Properties of the caption file to be uploaded
-	 * @param file $fileName The caption text file to upload. The file must be in UTF-8 encoding.
-	 * @return KalturaCaptionUploadJob
-	 */
-	function uploadCaptionFile(KalturaCaptionUploadData $json, $fileName)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "json", $json->toParams());
-		$kfiles = array();
-		$this->client->addParam($kfiles, "fileName", $fileName);
-		$this->client->queueServiceActionCall("assetenrich", "uploadCaptionFile", $kparams, $kfiles);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionUploadJob");
 		return $resultObject;
 	}
 }
@@ -14357,12 +14220,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaAssetEnrichService
-	 */
-	public $assetEnrich = null;
-
-	/**
-	 * 
 	 * @var KalturaAssetFileService
 	 */
 	public $assetFile = null;
@@ -15282,7 +15139,7 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-02-05');
+		$this->setClientTag('php5:25-02-12');
 		$this->setApiVersion('10.9.0.0');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
@@ -15290,7 +15147,6 @@ class KalturaClient extends KalturaClientBase
 		$this->appToken = new KalturaAppTokenService($this);
 		$this->assetComment = new KalturaAssetCommentService($this);
 		$this->asset = new KalturaAssetService($this);
-		$this->assetEnrich = new KalturaAssetEnrichService($this);
 		$this->assetFile = new KalturaAssetFileService($this);
 		$this->assetFilePpv = new KalturaAssetFilePpvService($this);
 		$this->assetHistory = new KalturaAssetHistoryService($this);
