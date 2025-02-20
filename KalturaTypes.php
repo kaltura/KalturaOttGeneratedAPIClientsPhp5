@@ -4979,6 +4979,13 @@ class KalturaMetaFieldNameMap extends KalturaObjectBase
 	public $genre = null;
 
 	/**
+	 * Sub-Genre
+	 *
+	 * @var string
+	 */
+	public $subGenre = null;
+
+	/**
 	 * Sentiment
 	 *
 	 * @var string
@@ -4986,18 +4993,18 @@ class KalturaMetaFieldNameMap extends KalturaObjectBase
 	public $sentiment = null;
 
 	/**
-	 * Short Description
+	 * Suggested Title
 	 *
 	 * @var string
 	 */
-	public $shortDescription = null;
+	public $suggestedTitle = null;
 
 	/**
-	 * Long Description
+	 * Description
 	 *
 	 * @var string
 	 */
-	public $longDescription = null;
+	public $description = null;
 
 	/**
 	 * One Liner
@@ -5012,6 +5019,13 @@ class KalturaMetaFieldNameMap extends KalturaObjectBase
 	 * @var string
 	 */
 	public $keywords = null;
+
+	/**
+	 * Sensitive Content
+	 *
+	 * @var string
+	 */
+	public $sensitiveContent = null;
 
 
 }
