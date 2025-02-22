@@ -2494,9 +2494,9 @@ class KalturaSubscriptionTriggerType extends KalturaEnumBase
  */
 class KalturaSubtitlesType extends KalturaEnumBase
 {
+	const TEXT = "Text";
 	const SRT = "SRT";
-	const WEBTTV = "WebTTV";
-	const TEXT_ONLY = "Text_Only";
+	const WEBVTT = "WebVTT";
 }
 
 /**

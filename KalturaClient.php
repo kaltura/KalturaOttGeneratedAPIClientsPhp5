@@ -12451,15 +12451,15 @@ class KalturaSubtitlesService extends KalturaServiceBase
 	 * Upload a subtitles file for a later analysis.
 	 * 
 	 * @param KalturaSubtitles $subtitles Subtitle metadata
-	 * @param file $file The subtitles text file to upload. The file must be in UTF-8 encoding.
+	 * @param file $fileData The subtitles text file to upload. Must be in UTF-8 encoding.
 	 * @return KalturaSubtitles
 	 */
-	function uploadFile(KalturaSubtitles $subtitles, $file)
+	function uploadFile(KalturaSubtitles $subtitles, $fileData)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "subtitles", $subtitles->toParams());
 		$kfiles = array();
-		$this->client->addParam($kfiles, "file", $file);
+		$this->client->addParam($kfiles, "fileData", $fileData);
 		$this->client->queueServiceActionCall("subtitles", "uploadFile", $kparams, $kfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -15139,7 +15139,7 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-02-20');
+		$this->setClientTag('php5:25-02-22');
 		$this->setApiVersion('10.9.0.0');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
