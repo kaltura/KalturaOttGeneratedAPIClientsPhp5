@@ -610,6 +610,29 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
+	 * This API provides search capabilities for assets using semantic similarity based on the provided query.
+	 * 
+	 * @param string $query The search query text used to find semantically similar assets
+	 * @param bool $refineQuery When true, the search query is refined using LLM before vector search
+	 * @param int $size The maximum number of results to return. Must be between 1 and 100
+	 * @return KalturaAssetListResponse
+	 */
+	function semanticSearch($query, $refineQuery = false, $size = 10)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "query", $query);
+		$this->client->addParam($kparams, "refineQuery", $refineQuery);
+		$this->client->addParam($kparams, "size", $size);
+		$this->client->queueServiceActionCall("asset", "semanticSearch", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetListResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Update an existing asset.
             For metas of type bool-&gt; use kalturaBoolValue, type number-&gt; KalturaDoubleValue, type date -&gt; KalturaLongValue, type string -&gt; KalturaStringValue
 	 * 
@@ -11171,6 +11194,92 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Retrieves the filtering condition applied to asset searches.
+	 * 
+	 * @return KalturaFilteringCondition
+	 */
+	function getFilteringCondition()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "getFilteringCondition", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieves the searchable attributes associated with a specific asset structure.
+	 * 
+	 * @param string $assetStructId The unique identifier of the asset structure.
+	 * @return KalturaSearchableAttributes
+	 */
+	function getSearchableAttributes($assetStructId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetStructId", $assetStructId);
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "getSearchableAttributes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchableAttributes");
+		return $resultObject;
+	}
+
+	/**
+	 * Adds or updates a filtering condition for asset searches.
+	 * 
+	 * @param KalturaFilteringCondition $filteringCondition The filtering condition to be applied to asset searches.
+	 * @return KalturaFilteringCondition
+	 */
+	function upsertFilteringCondition(KalturaFilteringCondition $filteringCondition)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filteringCondition", $filteringCondition->toParams());
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "upsertFilteringCondition", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Adds or updates searchable attributes for a given asset.
+	 * 
+	 * @param KalturaSearchableAttributes $attributes The searchable attributes to be added or updated.
+	 * @return KalturaSearchableAttributes
+	 */
+	function upsertSearchableAttributes(KalturaSearchableAttributes $attributes)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "attributes", $attributes->toParams());
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "upsertSearchableAttributes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchableAttributes");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecordingService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -14726,6 +14835,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaSemanticAssetSearchPartnerConfigService
+	 */
+	public $semanticAssetSearchPartnerConfig = null;
+
+	/**
+	 * 
 	 * @var KalturaSeriesRecordingService
 	 */
 	public $seriesRecording = null;
@@ -14925,8 +15040,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-01-07');
-		$this->setApiVersion('10.7.1.4');
+		$this->setClientTag('php5:25-02-24');
+		$this->setApiVersion('10.9.0.0');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -15051,6 +15166,7 @@ class KalturaClient extends KalturaClientBase
 		$this->searchPriorityGroup = new KalturaSearchPriorityGroupService($this);
 		$this->searchPriorityGroupOrderedIdsSet = new KalturaSearchPriorityGroupOrderedIdsSetService($this);
 		$this->segmentationType = new KalturaSegmentationTypeService($this);
+		$this->semanticAssetSearchPartnerConfig = new KalturaSemanticAssetSearchPartnerConfigService($this);
 		$this->seriesRecording = new KalturaSeriesRecordingService($this);
 		$this->session = new KalturaSessionService($this);
 		$this->smsAdapterProfile = new KalturaSmsAdapterProfileService($this);

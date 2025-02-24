@@ -23557,6 +23557,75 @@ class KalturaSegmentationPartnerConfiguration extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSearchableAttribute extends KalturaObjectBase
+{
+	/**
+	 * The unique identifier for the asset structure associated with the searchable attribute.
+	 *
+	 * @var string
+	 */
+	public $assetStructId = null;
+
+	/**
+	 * The specific attributes that define the searchable aspect of the asset.
+	 *
+	 * @var string
+	 */
+	public $attributes = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchableAttributes extends KalturaObjectBase
+{
+	/**
+	 * A list of searchable attributes associated with an asset structure.
+	 *
+	 * @var array of KalturaSearchableAttribute
+	 */
+	public $items;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilteringCondition extends KalturaObjectBase
+{
+	/**
+	 * The name of the metadata attribute to apply the filtering condition on.
+	 *
+	 * @var string
+	 */
+	public $metaName = null;
+
+	/**
+	 * The operator defining how the value should be compared (e.g., Equal, NotEqual).
+	 *
+	 * @var KalturaConditionOperator
+	 */
+	public $operator = null;
+
+	/**
+	 * The value to compare against the metadata attribute using the specified operator.
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaNetworkActionStatus extends KalturaObjectBase
 {
 	/**

@@ -707,6 +707,16 @@ class KalturaConcurrencyLimitationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaConditionOperator extends KalturaEnumBase
+{
+	const EQUAL = "Equal";
+	const NOTEQUAL = "NotEqual";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConfigurationGroupDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
