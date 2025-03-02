@@ -971,7 +971,7 @@ class KalturaAssetPersonalSelectionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add or update asset selection in slot
+	 * Upsert manages asset selections within slots.  It adds a new asset ID if it doesn&#39;t exist, or updates the timestamp if it does.  Slots are limited to 30 unique IDs.  When a slot is full, the oldest entry is removed (FIFO).  Inactive assets are automatically removed after 90 days.
 	 * 
 	 * @param bigint $assetId Asset id
 	 * @param string $assetType Asset type: media/epg
@@ -13476,6 +13476,41 @@ class KalturaUserInterestService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUserLogService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Retrieves a list of user log entries matching the specified filter criteria.
+	 * 
+	 * @param KalturaUserLogFilter $filter Filters user logs by user ID(s), message content, and creation date.
+	 * @param KalturaFilterPager $pager Specify the requested page.
+	 * @return KalturaUserLogListResponse
+	 */
+	function listAction(KalturaUserLogFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("userlog", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaUserLogListResponse");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserLoginPinService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -14882,6 +14917,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaUserLogService
+	 */
+	public $userLog = null;
+
+	/**
+	 * 
 	 * @var KalturaUserLoginPinService
 	 */
 	public $userLoginPin = null;
@@ -14925,8 +14966,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-01-07');
-		$this->setApiVersion('10.7.1.4');
+		$this->setClientTag('php5:25-03-02');
+		$this->setApiVersion('11.0.0.0');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -15077,6 +15118,7 @@ class KalturaClient extends KalturaClientBase
 		$this->userAssetRule = new KalturaUserAssetRuleService($this);
 		$this->userAssetsListItem = new KalturaUserAssetsListItemService($this);
 		$this->userInterest = new KalturaUserInterestService($this);
+		$this->userLog = new KalturaUserLogService($this);
 		$this->userLoginPin = new KalturaUserLoginPinService($this);
 		$this->userRole = new KalturaUserRoleService($this);
 		$this->userSegment = new KalturaUserSegmentService($this);

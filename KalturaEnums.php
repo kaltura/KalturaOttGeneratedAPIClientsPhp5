@@ -2674,6 +2674,15 @@ class KalturaUserAssetsListType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUserLogOrderBy extends KalturaEnumBase
+{
+	const NONE = "NONE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserRoleOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";

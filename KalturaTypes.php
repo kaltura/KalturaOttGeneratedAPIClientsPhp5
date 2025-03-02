@@ -1716,6 +1716,39 @@ class KalturaVodIngestAssetResultFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUserLogFilter extends KalturaFilter
+{
+	/**
+	 * A comma-separated list of up to 15 positive integer user IDs (greater than zero) used to filter log entries. An empty list is not permitted;
+	 *             Valid IDs: Only log entries associated with valid, existing user IDs are returned; 
+	 *             Invalid IDs: Specifying a non-existent user ID will result in no log entries being returned for that specific ID; 
+	 *             Users: Log entries associated with a deleted user will be returned unless the log entry itself has also been deleted;
+	 *
+	 * @var string
+	 */
+	public $userIdIn = null;
+
+	/**
+	 * The start date for filtering (Epoch format). Only logs created on or after this date are returned. If omitted, no start date filter is applied.
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The end date for filtering (Epoch format). Only logs created on or before this date are returned. If omitted, no end date filter is applied.
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
 {
 
@@ -3709,7 +3742,7 @@ class KalturaMediaFileFilter extends KalturaFilter
 class KalturaPersonalAssetSelectionFilter extends KalturaFilter
 {
 	/**
-	 * selected assets for specific slot number
+	 * Filters the results of asset.listPersonalSelection by slot number.  Takes a slot number as input and returns only those assets from the personal selection that are assigned to that slot.
 	 *
 	 * @var int
 	 */
@@ -14242,6 +14275,63 @@ class KalturaIngestStatusEpgProgramResultListResponse extends KalturaListRespons
 	 * list of KalturaIngestEpgProgramResult
 	 *
 	 * @var array of KalturaIngestEpgProgramResult
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserLog extends KalturaObjectBase
+{
+	/**
+	 * UserLog entry unique identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * The log created date in epoch
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * A valid user unique identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $userId = null;
+
+	/**
+	 * Log message
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $message = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserLogListResponse extends KalturaListResponse
+{
+	/**
+	 * KalturaUserLog list response
+	 *
+	 * @var array of KalturaUserLog
 	 */
 	public $objects;
 
