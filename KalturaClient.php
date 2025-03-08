@@ -50,19 +50,21 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	/**
 	 * Initiate the the process of metadata generation based on the subtitles file.
 	 * 
-	 * @param bigint $subtitlesFileId He subtitles file ID returned when uploaded the subtitles file by the subtitles service.
+	 * @param bigint $subtitlesFileId The subtitles file ID returned when uploaded the subtitles file by the subtitles service.
             Represents also the job ID used by the generate metadata process
 	 * @param array $externalAssetIds A list of external asset IDs to be populated with the generated metadata
+            Must be a valid existing KalturaLanguage systemName.\nIf not provided then the subtitles language will be used
 	 * @return KalturaGenerateMetadataBySubtitlesJob
 	 */
-	function generateMetadataBySubtitles($subtitlesFileId, array $externalAssetIds)
+	function generateMetadataBySubtitles($subtitlesFileId, array $externalAssetIds = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "subtitlesFileId", $subtitlesFileId);
-		foreach($externalAssetIds as $index => $obj)
-		{
-			$this->client->addParam($kparams, "externalAssetIds:$index", $obj->toParams());
-		}
+		if ($externalAssetIds !== null)
+			foreach($externalAssetIds as $index => $obj)
+			{
+				$this->client->addParam($kparams, "externalAssetIds:$index", $obj->toParams());
+			}
 		$this->client->queueServiceActionCall("aimetadatagenerator", "generateMetadataBySubtitles", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -15139,8 +15141,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-02-22');
-		$this->setApiVersion('10.9.0.0');
+		$this->setClientTag('php5:25-03-08');
+		$this->setApiVersion('11.0.0.1');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
 		$this->announcement = new KalturaAnnouncementService($this);
