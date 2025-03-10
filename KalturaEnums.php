@@ -2492,6 +2492,17 @@ class KalturaSubscriptionTriggerType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSubtitlesType extends KalturaEnumBase
+{
+	const TEXT = "Text";
+	const SRT = "SRT";
+	const WEBVTT = "WebVTT";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSuspensionProfileInheritanceType extends KalturaEnumBase
 {
 	const ALWAYS = "ALWAYS";

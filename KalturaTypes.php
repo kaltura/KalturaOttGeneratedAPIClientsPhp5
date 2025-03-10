@@ -10510,12 +10510,19 @@ class KalturaSubtitles extends KalturaObjectBase
 	public $fileName = null;
 
 	/**
-	 * Mandatory. The language in which the subtitles are written.
-	 *             It is used in the LLM prompt to inform it what is the language it needs to analyze.
+	 * Mandatory. The detected type of the subtitles file. Supported - Text, SRT, WebVTT.
+	 *
+	 * @var KalturaSubtitlesType
+	 */
+	public $detectedType = null;
+
+	/**
+	 * Mandatory. The detected language in which the subtitles are written.
+	 *             It is used in the LLM prompt to inform it what language it needs to analyze.
 	 *
 	 * @var string
 	 */
-	public $language = null;
+	public $detectedLanguage = null;
 
 
 }
@@ -24057,6 +24064,29 @@ class KalturaSSOAdapterProfileInvoke extends KalturaObjectBase
 	 * @var string
 	 */
 	public $message = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUploadSubtitles extends KalturaObjectBase
+{
+	/**
+	 * Mandatory. The name that will be associated with the uploaded file.
+	 *
+	 * @var string
+	 */
+	public $fileName = null;
+
+	/**
+	 * Mandatory. The content of the subtitles file as a string.
+	 *
+	 * @var string
+	 */
+	public $content = null;
 
 
 }

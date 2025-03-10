@@ -12410,53 +12410,13 @@ class KalturaSubtitlesService extends KalturaServiceBase
 	}
 
 	/**
-	 * Return a subtitles file
-	 * 
-	 * @param bigint $id A subtitles file ID to be retrieved
-	 * @return KalturaSubtitles
-	 */
-	function get($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("subtitles", "get", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSubtitles");
-		return $resultObject;
-	}
-
-	/**
-	 * Return a list of available subtitles files
-	 * 
-	 * @param KalturaSubtitlesFilter $filter Filter
-	 * @param KalturaFilterPager $pager Pager
-	 * @return KalturaSubtitlesListResponse
-	 */
-	function listAction(KalturaSubtitlesFilter $filter, KalturaFilterPager $pager)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("subtitles", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSubtitlesListResponse");
-		return $resultObject;
-	}
-
-	/**
 	 * Upload a subtitles file for a later analysis.
 	 * 
-	 * @param KalturaSubtitles $subtitles Subtitle metadata
+	 * @param KalturaUploadSubtitles $subtitles Subtitle metadata
 	 * @param file $fileData The subtitles text file to upload. Must be in UTF-8 encoding.
 	 * @return KalturaSubtitles
 	 */
-	function uploadFile(KalturaSubtitles $subtitles, $fileData)
+	function uploadFile(KalturaUploadSubtitles $subtitles, $fileData)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "subtitles", $subtitles->toParams());
