@@ -2676,7 +2676,7 @@ class KalturaUserAssetsListType extends KalturaEnumBase
  */
 class KalturaUserLogOrderBy extends KalturaEnumBase
 {
-	const NONE = "NONE";
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 }
 
 /**
