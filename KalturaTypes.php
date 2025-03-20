@@ -6252,6 +6252,13 @@ class KalturaManualCollectionAsset extends KalturaObjectBase
 class KalturaManualChannel extends KalturaChannel
 {
 	/**
+	 * A list of comma separated media ids associated with this channel, according to the order of the medias in the channel.
+	 *
+	 * @var string
+	 */
+	public $mediaIds = null;
+
+	/**
 	 * List of assets identifier
 	 *
 	 * @var array of KalturaManualCollectionAsset
