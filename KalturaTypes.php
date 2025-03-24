@@ -10517,12 +10517,12 @@ class KalturaSubtitles extends KalturaObjectBase
 	public $detectedType = null;
 
 	/**
-	 * Mandatory. The detected language in which the subtitles are written.
+	 * Mandatory. The language in which the subtitles are written.
 	 *             It is used in the LLM prompt to inform it what language it needs to analyze.
 	 *
 	 * @var string
 	 */
-	public $detectedLanguage = null;
+	public $language = null;
 
 
 }
@@ -24080,6 +24080,14 @@ class KalturaUploadSubtitles extends KalturaObjectBase
 	 * @var string
 	 */
 	public $fileName = null;
+
+	/**
+	 * Mandatory. The language in which the subtitles are written.
+	 *             It is used in the LLM prompt to inform it what language it needs to analyze.
+	 *
+	 * @var string
+	 */
+	public $language = null;
 
 
 }
