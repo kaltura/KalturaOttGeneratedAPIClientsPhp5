@@ -707,6 +707,16 @@ class KalturaConcurrencyLimitationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaConditionOperator extends KalturaEnumBase
+{
+	const EQUAL = "Equal";
+	const NOTEQUAL = "NotEqual";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConfigurationGroupDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1088,6 +1098,19 @@ class KalturaFollowTvSeriesOrderBy extends KalturaEnumBase
 {
 	const START_DATE_DESC = "START_DATE_DESC";
 	const START_DATE_ASC = "START_DATE_ASC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenerateMetadataStatus extends KalturaEnumBase
+{
+	const PROCESSING = "Processing";
+	const PARTIALSUCCESS = "PartialSuccess";
+	const SUCCESSPENDINGASSETS = "SuccessPendingAssets";
+	const SUCCESS = "Success";
+	const FAILED = "Failed";
 }
 
 /**
@@ -2473,6 +2496,17 @@ class KalturaSubscriptionTriggerType extends KalturaEnumBase
 {
 	const START_DATE = "START_DATE";
 	const END_DATE = "END_DATE";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubtitlesType extends KalturaEnumBase
+{
+	const TEXT = "Text";
+	const SRT = "SRT";
+	const WEBVTT = "WebVTT";
 }
 
 /**

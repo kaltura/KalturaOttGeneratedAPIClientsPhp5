@@ -40,6 +40,136 @@ require_once(dirname(__FILE__) . "/KalturaTypes.php");
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAiMetadataGeneratorService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Initiate the the process of metadata generation based on the subtitles file.
+	 * 
+	 * @param bigint $subtitlesFileId The subtitles file ID returned when uploaded the subtitles file by the subtitles service.
+            Represents also the job ID used by the generate metadata process
+	 * @param array $externalAssetIds A list of external asset IDs to be populated with the generated metadata
+            Must be a valid existing KalturaLanguage systemName.\nIf not provided then the subtitles language will be used
+	 * @return KalturaGenerateMetadataBySubtitlesJob
+	 */
+	function generateMetadataBySubtitles($subtitlesFileId, array $externalAssetIds = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "subtitlesFileId", $subtitlesFileId);
+		if ($externalAssetIds !== null)
+			foreach($externalAssetIds as $index => $obj)
+			{
+				$this->client->addParam($kparams, "externalAssetIds:$index", $obj->toParams());
+			}
+		$this->client->queueServiceActionCall("aimetadatagenerator", "generateMetadataBySubtitles", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataBySubtitlesJob");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve the generated metadata
+	 * 
+	 * @param bigint $jobId The job ID (equals the subtitles file ID returned by the subtitles.uploadFile service)
+	 * @return KalturaGenerateMetadataResult
+	 */
+	function getGeneratedMetadata($jobId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "jobId", $jobId);
+		$this->client->queueServiceActionCall("aimetadatagenerator", "getGeneratedMetadata", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataResult");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve the status of the metadata generation job, identified by the subtitles file ID.
+	 * 
+	 * @param bigint $id The file (job) ID as received from subtitles.uploadFile response"
+	 * @return KalturaGenerateMetadataBySubtitlesJob
+	 */
+	function getGenerateMetadataJob($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("aimetadatagenerator", "getGenerateMetadataJob", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataBySubtitlesJob");
+		return $resultObject;
+	}
+
+	/**
+	 * Get metadata mapping structure and available generated metadata fields
+	 * 
+	 * @return KalturaMetaFieldNameMap
+	 */
+	function getMetadataFieldDefinitions()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("aimetadatagenerator", "getMetadataFieldDefinitions", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaMetaFieldNameMap");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve feature configuration
+	 * 
+	 * @return KalturaAiMetadataGeneratorConfiguration
+	 */
+	function getPartnerConfiguration()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("aimetadatagenerator", "getPartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAiMetadataGeneratorConfiguration");
+		return $resultObject;
+	}
+
+	/**
+	 * Update feature configuration
+	 * 
+	 * @param KalturaAiMetadataGeneratorConfiguration $configuration The partner configuration to be set
+	 * @return KalturaAiMetadataGeneratorConfiguration
+	 */
+	function updatePartnerConfiguration(KalturaAiMetadataGeneratorConfiguration $configuration)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "configuration", $configuration->toParams());
+		$this->client->queueServiceActionCall("aimetadatagenerator", "updatePartnerConfiguration", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAiMetadataGeneratorConfiguration");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnouncementService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -610,6 +740,29 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
+	 * This API provides search capabilities for assets using semantic similarity based on the provided query.
+	 * 
+	 * @param string $query The search query text used to find semantically similar assets
+	 * @param bool $refineQuery When true, the search query is refined using LLM before vector search
+	 * @param int $size The maximum number of results to return. Must be between 1 and 100
+	 * @return KalturaAssetListResponse
+	 */
+	function semanticSearch($query, $refineQuery = false, $size = 10)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "query", $query);
+		$this->client->addParam($kparams, "refineQuery", $refineQuery);
+		$this->client->addParam($kparams, "size", $size);
+		$this->client->queueServiceActionCall("asset", "semanticSearch", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaAssetListResponse");
+		return $resultObject;
+	}
+
+	/**
 	 * Update an existing asset.
             For metas of type bool-&gt; use kalturaBoolValue, type number-&gt; KalturaDoubleValue, type date -&gt; KalturaLongValue, type string -&gt; KalturaStringValue
 	 * 
@@ -971,7 +1124,7 @@ class KalturaAssetPersonalSelectionService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add or update asset selection in slot
+	 * Upsert manages asset selections within slots.  It adds a new asset ID if it doesn&#39;t exist, or updates the timestamp if it does.  Slots are limited to 30 unique IDs.  When a slot is full, the oldest entry is removed (FIFO).  Inactive assets are automatically removed after 90 days.
 	 * 
 	 * @param bigint $assetId Asset id
 	 * @param string $assetType Asset type: media/epg
@@ -11171,6 +11324,92 @@ class KalturaSegmentationTypeService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Retrieves the filtering condition applied to asset searches.
+	 * 
+	 * @return KalturaFilteringCondition
+	 */
+	function getFilteringCondition()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "getFilteringCondition", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieves the searchable attributes associated with a specific asset structure.
+	 * 
+	 * @param int $assetStructId The unique identifier of the asset structure.
+	 * @return KalturaSearchableAttributes
+	 */
+	function getSearchableAttributes($assetStructId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "assetStructId", $assetStructId);
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "getSearchableAttributes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchableAttributes");
+		return $resultObject;
+	}
+
+	/**
+	 * Adds or updates a filtering condition for asset searches.
+	 * 
+	 * @param KalturaFilteringCondition $filteringCondition The filtering condition to be applied to asset searches.
+	 * @return KalturaFilteringCondition
+	 */
+	function upsertFilteringCondition(KalturaFilteringCondition $filteringCondition)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filteringCondition", $filteringCondition->toParams());
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "upsertFilteringCondition", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Adds or updates searchable attributes for a given asset structure.
+	 * 
+	 * @param KalturaSearchableAttributes $attributes The searchable attributes to be added or updated.
+	 * @return KalturaSearchableAttributes
+	 */
+	function upsertSearchableAttributes(KalturaSearchableAttributes $attributes)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "attributes", $attributes->toParams());
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "upsertSearchableAttributes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSearchableAttributes");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSeriesRecordingService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -12264,6 +12503,40 @@ class KalturaSubscriptionSetService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaSubscriptionSet");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubtitlesService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Upload a subtitles file for a later analysis.
+	 * 
+	 * @param KalturaUploadSubtitles $subtitles Subtitle metadata
+	 * @param file $fileData The subtitles text file to upload. Must be in UTF-8 encoding.
+	 * @return KalturaSubtitles
+	 */
+	function uploadFile(KalturaUploadSubtitles $subtitles, $fileData)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "subtitles", $subtitles->toParams());
+		$kfiles = array();
+		$this->client->addParam($kfiles, "fileData", $fileData);
+		$this->client->queueServiceActionCall("subtitles", "uploadFile", $kparams, $kfiles);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSubtitles");
 		return $resultObject;
 	}
 }
@@ -13988,6 +14261,12 @@ class KalturaClient extends KalturaClientBase
 {
 	/**
 	 * 
+	 * @var KalturaAiMetadataGeneratorService
+	 */
+	public $aiMetadataGenerator = null;
+
+	/**
+	 * 
 	 * @var KalturaAnnouncementService
 	 */
 	public $announcement = null;
@@ -14726,6 +15005,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaSemanticAssetSearchPartnerConfigService
+	 */
+	public $semanticAssetSearchPartnerConfig = null;
+
+	/**
+	 * 
 	 * @var KalturaSeriesRecordingService
 	 */
 	public $seriesRecording = null;
@@ -14789,6 +15074,12 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaSubscriptionSetService
 	 */
 	public $subscriptionSet = null;
+
+	/**
+	 * 
+	 * @var KalturaSubtitlesService
+	 */
+	public $subtitles = null;
 
 	/**
 	 * 
@@ -14925,9 +15216,10 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-01-07');
-		$this->setApiVersion('10.7.1.4');
+		$this->setClientTag('php5:25-03-25');
+		$this->setApiVersion('11.1.0.0');
 		
+		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
 		$this->assetComment = new KalturaAssetCommentService($this);
@@ -15051,6 +15343,7 @@ class KalturaClient extends KalturaClientBase
 		$this->searchPriorityGroup = new KalturaSearchPriorityGroupService($this);
 		$this->searchPriorityGroupOrderedIdsSet = new KalturaSearchPriorityGroupOrderedIdsSetService($this);
 		$this->segmentationType = new KalturaSegmentationTypeService($this);
+		$this->semanticAssetSearchPartnerConfig = new KalturaSemanticAssetSearchPartnerConfigService($this);
 		$this->seriesRecording = new KalturaSeriesRecordingService($this);
 		$this->session = new KalturaSessionService($this);
 		$this->smsAdapterProfile = new KalturaSmsAdapterProfileService($this);
@@ -15062,6 +15355,7 @@ class KalturaClient extends KalturaClientBase
 		$this->streamingDevice = new KalturaStreamingDeviceService($this);
 		$this->subscription = new KalturaSubscriptionService($this);
 		$this->subscriptionSet = new KalturaSubscriptionSetService($this);
+		$this->subtitles = new KalturaSubtitlesService($this);
 		$this->system = new KalturaSystemService($this);
 		$this->tag = new KalturaTagService($this);
 		$this->timeShiftedTvPartnerSettings = new KalturaTimeShiftedTvPartnerSettingsService($this);
