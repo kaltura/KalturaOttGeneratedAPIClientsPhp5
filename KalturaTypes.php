@@ -1739,6 +1739,39 @@ class KalturaVodIngestAssetResultFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUserLogFilter extends KalturaFilter
+{
+	/**
+	 * A comma-separated list of up to 15 positive integer user IDs (greater than zero) used to filter log entries. An empty list is not permitted;
+	 *             Valid IDs: Only log entries associated with valid, existing user IDs are returned; 
+	 *             Invalid IDs: Specifying a non-existent user ID will result in no log entries being returned for that specific ID; 
+	 *             Users: Log entries associated with a deleted user will be returned unless the log entry itself has also been deleted;
+	 *
+	 * @var string
+	 */
+	public $userIdIn = null;
+
+	/**
+	 * The start date for filtering (Epoch format). Only logs created on or after this date are returned. If omitted, no start date filter is applied.
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The end date for filtering (Epoch format). Only logs created on or before this date are returned. If omitted, no end date filter is applied.
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAggregationCountFilter extends KalturaRelatedObjectFilter
 {
 
@@ -14514,6 +14547,63 @@ class KalturaIngestStatusEpgProgramResultListResponse extends KalturaListRespons
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaUserLog extends KalturaObjectBase
+{
+	/**
+	 * UserLog entry unique identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * The log created date in epoch
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * A valid user unique identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $userId = null;
+
+	/**
+	 * Log message
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $message = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserLogListResponse extends KalturaListResponse
+{
+	/**
+	 * KalturaUserLog list response
+	 *
+	 * @var array of KalturaUserLog
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDurationListResponse extends KalturaListResponse
 {
 	/**
@@ -23811,6 +23901,75 @@ class KalturaSegmentationPartnerConfiguration extends KalturaObjectBase
 	 * @var int
 	 */
 	public $maxDynamicSegments = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchableAttribute extends KalturaObjectBase
+{
+	/**
+	 * The unique identifier for the asset structure associated with the searchable attribute.
+	 *
+	 * @var int
+	 */
+	public $assetStructId = null;
+
+	/**
+	 * The specific attributes that define the searchable aspect of the asset.
+	 *
+	 * @var string
+	 */
+	public $attributes = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchableAttributes extends KalturaObjectBase
+{
+	/**
+	 * A list of searchable attributes associated with an asset structure.
+	 *
+	 * @var array of KalturaSearchableAttribute
+	 */
+	public $items;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilteringCondition extends KalturaObjectBase
+{
+	/**
+	 * The name of the metadata attribute to apply the filtering condition on.
+	 *
+	 * @var string
+	 */
+	public $metaName = null;
+
+	/**
+	 * The operator defining how the value should be compared (e.g., Equal, NotEqual).
+	 *
+	 * @var KalturaConditionOperator
+	 */
+	public $operator = null;
+
+	/**
+	 * The value to compare against the metadata attribute using the specified operator.
+	 *
+	 * @var string
+	 */
+	public $value = null;
 
 
 }

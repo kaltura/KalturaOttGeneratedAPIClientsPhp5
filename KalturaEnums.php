@@ -707,6 +707,16 @@ class KalturaConcurrencyLimitationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaConditionOperator extends KalturaEnumBase
+{
+	const EQUAL = "Equal";
+	const NOTEQUAL = "NotEqual";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConfigurationGroupDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -2692,6 +2702,15 @@ class KalturaUserAssetsListType extends KalturaEnumBase
 	const WATCH = "watch";
 	const PURCHASE = "purchase";
 	const LIBRARY = "library";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserLogOrderBy extends KalturaEnumBase
+{
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 }
 
 /**
