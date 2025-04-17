@@ -776,47 +776,6 @@ class KalturaUserSegmentFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaWatchBasedRecommendationsProfileFilter extends KalturaFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchBasedRecommendationsProfileByIdsFilter extends KalturaWatchBasedRecommendationsProfileFilter
-{
-	/**
-	 * Comma seperated watch based recommendation profile ids
-	 *
-	 * @var string
-	 */
-	public $idIn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchBasedRecommendationsProfileByNameFilter extends KalturaWatchBasedRecommendationsProfileFilter
-{
-	/**
-	 * A string that is included in the profile name
-	 *
-	 * @var string
-	 */
-	public $nameContains = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetFilePpvFilter extends KalturaFilter
 {
 	/**
@@ -6019,13 +5978,6 @@ class KalturaManualCollectionAsset extends KalturaObjectBase
  */
 class KalturaManualChannel extends KalturaChannel
 {
-	/**
-	 * A list of comma separated media ids associated with this channel, according to the order of the medias in the channel.
-	 *
-	 * @var string
-	 */
-	public $mediaIds = null;
-
 	/**
 	 * List of assets identifier
 	 *
@@ -11289,109 +11241,6 @@ class KalturaUserSegmentListResponse extends KalturaListResponse
 	 * Segmentation Types
 	 *
 	 * @var array of KalturaUserSegment
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchBasedRecommendationsProfile extends KalturaObjectBase
-{
-	/**
-	 * Unique identifier for the profile
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Friendly name for the profile
-	 *
-	 * @var string
-	 */
-	public $name = null;
-
-	/**
-	 * List of comma seperated topic ids considered for recommendations calculation.
-	 *
-	 * @var string
-	 */
-	public $topicIds = null;
-
-	/**
-	 * List of comma seperated type ids considered for recommendations calculation.
-	 *
-	 * @var string
-	 */
-	public $analysisMediaTypeIds = null;
-
-	/**
-	 * The minimum coverage in percentages that media is considered viewed.
-	 *
-	 * @var int
-	 */
-	public $userInterestPlayThresholdInPercentages = null;
-
-	/**
-	 * The number of interests that will be selected per user.
-	 *
-	 * @var int
-	 */
-	public $numberOfInterests = null;
-
-	/**
-	 * Reference to partner default recommendations (first 30 assets that are included in the referred KalturaChannel).
-	 *
-	 * @var int
-	 */
-	public $fallbackChannelId = null;
-
-	/**
-	 * Minimum number of media assets that user shall watch to trigger user interests calculation.
-	 *
-	 * @var int
-	 */
-	public $minPlaybacks = null;
-
-	/**
-	 * Maximum number of assets that watched by a user and will be considered for recommendations calculation (the last maxPlaybacks shall be used in the analysis).
-	 *
-	 * @var int
-	 */
-	public $maxPlaybacks = null;
-
-	/**
-	 * A kSql is used to filter the “user interests“ recommendations. Only asset properties, metas, or tags are allowed ti be included in this ksql.
-	 *
-	 * @var string
-	 */
-	public $allowedRecommendationsKsql = null;
-
-	/**
-	 * The number of days the user interests are considered to be up-to-date.
-	 *
-	 * @var int
-	 */
-	public $playbackInterestsCalculationPeriodDays = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchBasedRecommendationsProfileListResponse extends KalturaListResponse
-{
-	/**
-	 * Assets
-	 *
-	 * @var array of KalturaWatchBasedRecommendationsProfile
 	 */
 	public $objects;
 
@@ -24419,36 +24268,6 @@ class KalturaUserLoginPin extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $userId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchBasedRecommendationsAdminConfiguration extends KalturaObjectBase
-{
-	/**
-	 * The maximum number of profiles.
-	 *
-	 * @var int
-	 */
-	public $maxProfiles = null;
-
-	/**
-	 * The duration that a user is considered active after his last playback.
-	 *
-	 * @var int
-	 */
-	public $activeUserDurationDays = null;
-
-	/**
-	 * The number of days the recommendations will be cached.
-	 *
-	 * @var int
-	 */
-	public $recommendationsCachingTimeDays = null;
 
 
 }

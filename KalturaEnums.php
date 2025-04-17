@@ -1271,6 +1271,7 @@ class KalturaImageStatus extends KalturaEnumBase
 {
 	const PENDING = "PENDING";
 	const READY = "READY";
+	const FAILED = "FAILED";
 }
 
 /**
@@ -2740,15 +2741,6 @@ class KalturaVodIngestAssetResultStatus extends KalturaEnumBase
 	const EXTERNAL_FAILURE = "EXTERNAL_FAILURE";
 	const SUCCESS_WARNING = "SUCCESS_WARNING";
 	const SUCCESS = "SUCCESS";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchBasedRecommendationsProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
 }
 
 /**
