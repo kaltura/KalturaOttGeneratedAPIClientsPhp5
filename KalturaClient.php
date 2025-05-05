@@ -11435,16 +11435,28 @@ class KalturaSemanticQueryService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaSemanticQuery");
 		return $resultObject;
 	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSemanticQueryPartnerConfigurationService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
 
 	/**
 	 * Retrieves the current partner configuration for semantic query.
 	 * 
 	 * @return KalturaSemanticQueryPartnerConfiguration
 	 */
-	function getPartnerConfiguration()
+	function get()
 	{
 		$kparams = array();
-		$this->client->queueServiceActionCall("semanticquery", "getPartnerConfiguration", $kparams);
+		$this->client->queueServiceActionCall("semanticquerypartnerconfiguration", "get", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -11459,11 +11471,11 @@ class KalturaSemanticQueryService extends KalturaServiceBase
 	 * @param KalturaSemanticQueryPartnerConfiguration $configuration The configuration parameters for semantic query generation.
 	 * @return KalturaSemanticQueryPartnerConfiguration
 	 */
-	function updatePartnerConfiguration(KalturaSemanticQueryPartnerConfiguration $configuration)
+	function update(KalturaSemanticQueryPartnerConfiguration $configuration)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "configuration", $configuration->toParams());
-		$this->client->queueServiceActionCall("semanticquery", "updatePartnerConfiguration", $kparams);
+		$this->client->queueServiceActionCall("semanticquerypartnerconfiguration", "update", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -15118,6 +15130,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaSemanticQueryPartnerConfigurationService
+	 */
+	public $semanticQueryPartnerConfiguration = null;
+
+	/**
+	 * 
 	 * @var KalturaSeriesRecordingService
 	 */
 	public $seriesRecording = null;
@@ -15329,7 +15347,7 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-04-24');
+		$this->setClientTag('php5:25-05-05');
 		$this->setApiVersion('11.1.0.1');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
@@ -15458,6 +15476,7 @@ class KalturaClient extends KalturaClientBase
 		$this->segmentationType = new KalturaSegmentationTypeService($this);
 		$this->semanticAssetSearchPartnerConfig = new KalturaSemanticAssetSearchPartnerConfigService($this);
 		$this->semanticQuery = new KalturaSemanticQueryService($this);
+		$this->semanticQueryPartnerConfiguration = new KalturaSemanticQueryPartnerConfigurationService($this);
 		$this->seriesRecording = new KalturaSeriesRecordingService($this);
 		$this->session = new KalturaSessionService($this);
 		$this->smsAdapterProfile = new KalturaSmsAdapterProfileService($this);
