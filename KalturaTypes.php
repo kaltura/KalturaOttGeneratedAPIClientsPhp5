@@ -23985,7 +23985,7 @@ class KalturaGenerateSemanticQuery extends KalturaObjectBase
 	 *
 	 * @var string
 	 */
-	public $query = null;
+	public $text = null;
 
 
 }
