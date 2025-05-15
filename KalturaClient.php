@@ -630,25 +630,6 @@ class KalturaAssetService extends KalturaServiceBase
 		$this->client->validateObjectType($resultObject, "KalturaAsset");
 		return $resultObject;
 	}
-
-	/**
-	 * Return list of assets - assets are personal recommendations for the caller.
-	 * 
-	 * @param bigint $profileId WatchBasedRecommendations profile id
-	 * @return KalturaAssetListResponse
-	 */
-	function watchBasedRecommendationsList($profileId)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "profileId", $profileId);
-		$this->client->queueServiceActionCall("asset", "watchBasedRecommendationsList", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetListResponse");
-		return $resultObject;
-	}
 }
 
 /**
@@ -12555,8 +12536,7 @@ class KalturaTimeShiftedTvPartnerSettingsService extends KalturaServiceBase
 	}
 
 	/**
-	 * Configure the account’s time-shifted TV settings (catch-up and C-DVR, Trick-play, Start-over).
-            When updating the timeshiftedtvpartnersettings, user must provide values for all the setting fields. If any field is omitted, its value may reset to the default configuration, potentially overwriting the current settings.
+	 * Configure the account’s time-shifted TV settings (catch-up and C-DVR, Trick-play, Start-over)
 	 * 
 	 * @param KalturaTimeShiftedTvPartnerSettings $settings Time shifted TV settings
 	 * @return bool
@@ -13830,160 +13810,6 @@ class KalturaUserSessionProfileService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaWatchBasedRecommendationsAdminConfigurationService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Get partner&#39;s watch based recommendations admin configuration.
-	 * 
-	 * @return KalturaWatchBasedRecommendationsAdminConfiguration
-	 */
-	function get()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("watchbasedrecommendationsadminconfiguration", "get", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaWatchBasedRecommendationsAdminConfiguration");
-		return $resultObject;
-	}
-
-	/**
-	 * Updates partner&#39;s watch based recommendations admin configuration.
-	 * 
-	 * @param KalturaWatchBasedRecommendationsAdminConfiguration $configuration Watch based recommendations admin configuration
-	 * @return KalturaWatchBasedRecommendationsAdminConfiguration
-	 */
-	function update(KalturaWatchBasedRecommendationsAdminConfiguration $configuration)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "configuration", $configuration->toParams());
-		$this->client->queueServiceActionCall("watchbasedrecommendationsadminconfiguration", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaWatchBasedRecommendationsAdminConfiguration");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchBasedRecommendationsProfileService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Add partner&#39;s watch based recommendations profile.
-	 * 
-	 * @param KalturaWatchBasedRecommendationsProfile $profile Watch based recommendations profile to add
-	 * @return KalturaWatchBasedRecommendationsProfile
-	 */
-	function add(KalturaWatchBasedRecommendationsProfile $profile)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "profile", $profile->toParams());
-		$this->client->queueServiceActionCall("watchbasedrecommendationsprofile", "add", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaWatchBasedRecommendationsProfile");
-		return $resultObject;
-	}
-
-	/**
-	 * Delete partner&#39;s watch based recommendations profile.
-	 * 
-	 * @param bigint $id Profile id to update
-	 */
-	function delete($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("watchbasedrecommendationsprofile", "delete", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * Delete all recommendations that were calculated based on specific profile.
-	 * 
-	 * @param bigint $id Profile id
-	 */
-	function deleteWatchBasedRecommendationsOfProfile($id)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("watchbasedrecommendationsprofile", "deleteWatchBasedRecommendationsOfProfile", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "null");
-	}
-
-	/**
-	 * Get partner&#39;s watch based recommendations profiles.
-	 * 
-	 * @param KalturaWatchBasedRecommendationsProfileFilter $filter Filtering parameters for watch based recommendations profiles
-	 * @return KalturaWatchBasedRecommendationsProfileListResponse
-	 */
-	function listAction(KalturaWatchBasedRecommendationsProfileFilter $filter = null)
-	{
-		$kparams = array();
-		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("watchbasedrecommendationsprofile", "list", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaWatchBasedRecommendationsProfileListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Update partner&#39;s watch based recommendations profile.
-	 * 
-	 * @param bigint $id Profile id to update
-	 * @param KalturaWatchBasedRecommendationsProfile $profile Watch based recommendations profile to add
-	 * @return KalturaWatchBasedRecommendationsProfile
-	 */
-	function update($id, KalturaWatchBasedRecommendationsProfile $profile)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "profile", $profile->toParams());
-		$this->client->queueServiceActionCall("watchbasedrecommendationsprofile", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaWatchBasedRecommendationsProfile");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaClient extends KalturaClientBase
 {
 	/**
@@ -14905,18 +14731,6 @@ class KalturaClient extends KalturaClientBase
 	public $userSessionProfile = null;
 
 	/**
-	 * 
-	 * @var KalturaWatchBasedRecommendationsAdminConfigurationService
-	 */
-	public $watchBasedRecommendationsAdminConfiguration = null;
-
-	/**
-	 * 
-	 * @var KalturaWatchBasedRecommendationsProfileService
-	 */
-	public $watchBasedRecommendationsProfile = null;
-
-	/**
 	 * Kaltura client constructor
 	 *
 	 * @param KalturaConfiguration $config
@@ -14925,8 +14739,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-01-07');
-		$this->setApiVersion('10.7.1.4');
+		$this->setClientTag('php5:25-05-15');
+		$this->setApiVersion('10.6.0.12');
 		
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
@@ -15081,8 +14895,6 @@ class KalturaClient extends KalturaClientBase
 		$this->userRole = new KalturaUserRoleService($this);
 		$this->userSegment = new KalturaUserSegmentService($this);
 		$this->userSessionProfile = new KalturaUserSessionProfileService($this);
-		$this->watchBasedRecommendationsAdminConfiguration = new KalturaWatchBasedRecommendationsAdminConfigurationService($this);
-		$this->watchBasedRecommendationsProfile = new KalturaWatchBasedRecommendationsProfileService($this);
 	}
 	
 	/**
