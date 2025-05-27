@@ -578,6 +578,29 @@ class KalturaBulkUploadFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSubtitlesFilter extends KalturaFilter
+{
+	/**
+	 * A comma separated list of IDs indicating the KalturaSubtitles objects&#39; IDs.
+	 *
+	 * @var string
+	 */
+	public $idIn = null;
+
+	/**
+	 * Contains a name or a partial name of the subtitles file.
+	 *
+	 * @var string
+	 */
+	public $fileNameContains = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSocialActionFilter extends KalturaFilter
 {
 	/**
@@ -1708,6 +1731,39 @@ class KalturaVodIngestAssetResultFilter extends KalturaFilter
 	 * @var string
 	 */
 	public $shopAssetUserRuleIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserLogFilter extends KalturaFilter
+{
+	/**
+	 * A comma-separated list of up to 15 positive integer user IDs (greater than zero) used to filter log entries. An empty list is not permitted;
+	 *             Valid IDs: Only log entries associated with valid, existing user IDs are returned; 
+	 *             Invalid IDs: Specifying a non-existent user ID will result in no log entries being returned for that specific ID; 
+	 *             Users: Log entries associated with a deleted user will be returned unless the log entry itself has also been deleted;
+	 *
+	 * @var string
+	 */
+	public $userIdIn = null;
+
+	/**
+	 * The start date for filtering (Epoch format). Only logs created on or after this date are returned. If omitted, no start date filter is applied.
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * The end date for filtering (Epoch format). Only logs created on or before this date are returned. If omitted, no end date filter is applied.
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
 
 
 }
@@ -3709,7 +3765,7 @@ class KalturaMediaFileFilter extends KalturaFilter
 class KalturaPersonalAssetSelectionFilter extends KalturaFilter
 {
 	/**
-	 * selected assets for specific slot number
+	 * Filters the results of asset.listPersonalSelection by slot number.  Takes a slot number as input and returns only those assets from the personal selection that are assigned to that slot.
 	 *
 	 * @var int
 	 */
@@ -4861,6 +4917,176 @@ class KalturaSkipOnErrorCondition extends KalturaSkipCondition
 	 * @var KalturaSkipOptions
 	 */
 	public $condition = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenerateMetadataBySubtitlesJob extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the generation job
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Specifies when the job was created, expressed in Epoch timestamp.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Specifies when the job was updated, expressed in Epoch timestamp.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * Name of the uploaded subtitles file from which the metadata is generated.
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $fileName = null;
+
+	/**
+	 * Service status states.
+	 *
+	 * @var KalturaGenerateMetadataStatus
+	 * @readonly
+	 */
+	public $status = null;
+
+	/**
+	 * Error messages for non-success cases.
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $errorMessage = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenerateMetadataResult extends KalturaObjectBase
+{
+	/**
+	 * A dictionary/map containing the generated metadata. The map key includes the metadata name and the map value includes the generated value.
+	 *
+	 * @var map
+	 */
+	public $enrichedMetadata;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMetaFieldNameMap extends KalturaObjectBase
+{
+	/**
+	 * map &#39;genre&#39; AI generated metadata name to assetStruct&#39;s meta systemName
+	 *
+	 * @var string
+	 */
+	public $genre = null;
+
+	/**
+	 * map &#39;subGenre&#39; AI generated metadata name to assetStruct&#39;s meta systemName
+	 *
+	 * @var string
+	 */
+	public $subGenre = null;
+
+	/**
+	 * map &#39;sentiment&#39; AI generated metadata name to assetStruct&#39;s meta systemName
+	 *
+	 * @var string
+	 */
+	public $sentiment = null;
+
+	/**
+	 * map &#39;suggestedTitle&#39; AI generated metadata name to assetStruct&#39;s meta systemName
+	 *
+	 * @var string
+	 */
+	public $suggestedTitle = null;
+
+	/**
+	 * map &#39;Description&#39; AI generated metadata name to assetStruct&#39;s meta systemName
+	 *
+	 * @var string
+	 */
+	public $description = null;
+
+	/**
+	 * map &#39;oneLiner&#39; AI generated metadata name to assetStruct&#39;s meta systemName
+	 *
+	 * @var string
+	 */
+	public $oneLiner = null;
+
+	/**
+	 * map &#39;Keywords&#39; AI generated metadata name to assetStruct&#39;s meta systemName
+	 *
+	 * @var string
+	 */
+	public $keywords = null;
+
+	/**
+	 * map &#39;sensitiveContent&#39; AI generated metadata name to assetStruct&#39;s meta systemName
+	 *
+	 * @var string
+	 */
+	public $sensitiveContent = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Specifies if the feature is enabled or disabled.
+	 *
+	 * @var bool
+	 */
+	public $isEnabled = null;
+
+	/**
+	 * A map (dictionary) to indicate to which existing metadata or tag the newly generated metadata value should be pushed, per assetStruct (per &#39;asset type&#39;)
+	 *
+	 * @var map
+	 */
+	public $assetStructMetaNameMap;
+
+	/**
+	 * A read only array to list the set of languages which can be used with the service.
+	 *             In practice it is populated with the values set in KalturaMetadataGeneratorLanguages ENUM.
+	 *
+	 * @var array of KalturaStringValue
+	 * @readonly
+	 */
+	public $supportedLanguages;
 
 
 }
@@ -6460,7 +6686,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $id = null;
 
 	/**
-	 * A list of channels associated with this subscription
+	 * List of KalturaBaseChannel objects associated with this subscription
 	 *
 	 * @var array of KalturaBaseChannel
 	 * @readonly
@@ -6468,28 +6694,28 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $channels;
 
 	/**
-	 * Comma separated channels Ids associated with this subscription
+	 * Comma separated list identifying the KalturaBaseChannel objects associated with this subscription. In practice this is a list of KalturaBaseChannel.id values.
 	 *
 	 * @var string
 	 */
 	public $channelsIds = null;
 
 	/**
-	 * The first date the subscription is available for purchasing
+	 * The first date the subscription is available for purchasing (in seconds since the Unix epoch)
 	 *
 	 * @var int
 	 */
 	public $startDate = null;
 
 	/**
-	 * The last date the subscription is available for purchasing
+	 * The last date the subscription is available for purchasing (in seconds since the Unix epoch)
 	 *
 	 * @var int
 	 */
 	public $endDate = null;
 
 	/**
-	 * A list of file types identifiers that are supported in this subscription
+	 * List of file types (KalturaMediaFileType.id values) that are supported by this subscription
 	 *
 	 * @var array of KalturaIntegerValue
 	 * @readonly
@@ -6497,7 +6723,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $fileTypes;
 
 	/**
-	 * Comma separated file types identifiers that are supported in this subscription
+	 * Comma separated list of file types (KalturaMediaFileType.id values) that are supported by this subscription
 	 *
 	 * @var string
 	 */
@@ -6544,7 +6770,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $discountModule;
 
 	/**
-	 * The internal discount module identifier for the subscription
+	 * The internal discount module identifier (kalturaDiscountModule.id value) for the subscription
 	 *
 	 * @var int
 	 */
@@ -6581,7 +6807,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $multilingualDescription;
 
 	/**
-	 * Identifier of the media associated with the subscription
+	 * Identifier of the media (KalturaAsset.id value) associated with the subscription
 	 *
 	 * @var int
 	 * @readonly
@@ -6596,14 +6822,14 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $prorityInOrder = null;
 
 	/**
-	 * Comma separated subscription price plan IDs
+	 * Comma separated list of subscription price plans (KalturaPricePlan.id values) that are associated to this subscription
 	 *
 	 * @var string
 	 */
 	public $pricePlanIds = null;
 
 	/**
-	 * Optional: If the subscription has a flexible price plan. Represents an initial none-recurring discounted period which is charged immediately (no unified billing), followed by a recuring price plan which should be aligned with the unified billing cycle
+	 * Optional: If the subscription has a flexible price plan. Represents an initial non-recurring discounted period which is charged immediately (no unified billing), followed by a recurring price plan which should be aligned with the unified billing cycle
 	 *
 	 * @var int
 	 */
@@ -6618,14 +6844,14 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $previewModule;
 
 	/**
-	 * Subscription preview module identifier
+	 * Identifier of the KalturaPreviewModule (KalturaPreviewModule.id value) associated with this subscription
 	 *
 	 * @var int
 	 */
 	public $previewModuleId = null;
 
 	/**
-	 * The household limitation module identifier associated with this subscription
+	 * Identifier of the KalturaHouseholdLimitationModule (KalturaHouseholdLimitations.id value) associated with this subscription
 	 *
 	 * @var int
 	 */
@@ -6686,7 +6912,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $userTypes;
 
 	/**
-	 * List of Coupons group
+	 * List of KalturaCouponsGroup objects associated with the subscription
 	 *
 	 * @var array of KalturaCouponsGroup
 	 * @readonly
@@ -6694,7 +6920,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $couponsGroups;
 
 	/**
-	 * List of subscription Coupons group
+	 * List of KalturaSubscriptionCouponGroup objects associated with the subscription
 	 *
 	 * @var array of KalturaSubscriptionCouponGroup
 	 */
@@ -6715,7 +6941,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $dependencyType = null;
 
 	/**
-	 * External ID
+	 * Identifier of the subsription object as assigned by an external system
 	 *
 	 * @var string
 	 */
@@ -6729,7 +6955,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $isCancellationBlocked = null;
 
 	/**
-	 * The Pre-Sale date the subscription is available for purchasing
+	 * Pre-sale date that subscription is available for purchasing (in seconds since the Unix epoch)
 	 *
 	 * @var int
 	 */
@@ -6757,7 +6983,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $isActive = null;
 
 	/**
-	 * Specifies when was the Subscription created. Date and time represented as epoch.
+	 * Specifies when the subscription was created (in seconds since the Unix epoch)
 	 *
 	 * @var int
 	 * @readonly
@@ -6765,7 +6991,7 @@ class KalturaSubscription extends KalturaOTTObjectSupportNullable
 	public $createDate = null;
 
 	/**
-	 * Specifies when was the Subscription last updated. Date and time represented as epoch.
+	 * Specifies when the subscription was last updated (in seconds since the Unix epoch)
 	 *
 	 * @var int
 	 * @readonly
@@ -10277,6 +10503,68 @@ class KalturaBulkUploadProgramAssetResult extends KalturaBulkUploadResult
 	 * @readonly
 	 */
 	public $liveAssetId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubtitles extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the subtitles file.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Specifies when the file was uploaded, expressed in Epoch timestamp.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Name of the uploaded subtitles text file.
+	 *
+	 * @var string
+	 */
+	public $fileName = null;
+
+	/**
+	 * The content type included in the subtitles file, as auto-detected by the subtitles service. Can be of SRT, WebVTT or free text without cues.
+	 *
+	 * @var KalturaSubtitlesType
+	 */
+	public $detectedType = null;
+
+	/**
+	 * The language used for the subtitles.
+	 *
+	 * @var string
+	 */
+	public $language = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubtitlesListResponse extends KalturaListResponse
+{
+	/**
+	 * A list of subtitles files
+	 *
+	 * @var array of KalturaSubtitles
+	 */
+	public $objects;
 
 
 }
@@ -14242,6 +14530,63 @@ class KalturaIngestStatusEpgProgramResultListResponse extends KalturaListRespons
 	 * list of KalturaIngestEpgProgramResult
 	 *
 	 * @var array of KalturaIngestEpgProgramResult
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserLog extends KalturaObjectBase
+{
+	/**
+	 * UserLog entry unique identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * The log created date in epoch
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * A valid user unique identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $userId = null;
+
+	/**
+	 * Log message
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $message = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserLogListResponse extends KalturaListResponse
+{
+	/**
+	 * KalturaUserLog list response
+	 *
+	 * @var array of KalturaUserLog
 	 */
 	public $objects;
 
@@ -23557,6 +23902,167 @@ class KalturaSegmentationPartnerConfiguration extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSearchableAttribute extends KalturaObjectBase
+{
+	/**
+	 * The unique identifier of the asset structure.
+	 *
+	 * @var int
+	 */
+	public $assetStructId = null;
+
+	/**
+	 * Comma-separated list of field names to include in embedding.
+	 *
+	 * @var string
+	 */
+	public $attributes = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchableAttributes extends KalturaObjectBase
+{
+	/**
+	 * A list of searchable attributes.
+	 *
+	 * @var array of KalturaSearchableAttribute
+	 */
+	public $items;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFilteringCondition extends KalturaObjectBase
+{
+	/**
+	 * Meta Name (SystemName) to apply the rule to.
+	 *
+	 * @var string
+	 */
+	public $metaName = null;
+
+	/**
+	 * Operator to use for the rule.
+	 *
+	 * @var KalturaConditionOperator
+	 */
+	public $operator = null;
+
+	/**
+	 * Single value for the rule condition.
+	 *
+	 * @var string
+	 */
+	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenerateSemanticQuery extends KalturaObjectBase
+{
+	/**
+	 * A primary query to be extended with multiple sub-queries.
+	 *
+	 * @var string
+	 */
+	public $text = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSemanticSubQuery extends KalturaObjectBase
+{
+	/**
+	 * The text generated for the sub-query.
+	 *
+	 * @var string
+	 */
+	public $text = null;
+
+	/**
+	 * The name generated for the sub-query, using the account&#39;s Primary language.
+	 *
+	 * @var KalturaTranslationToken
+	 */
+	public $name;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSemanticQuery extends KalturaObjectBase
+{
+	/**
+	 * A list of generated sub-queries.
+	 *
+	 * @var array of KalturaSemanticSubQuery
+	 */
+	public $subQueries;
+
+	/**
+	 * A title generated for the entire queries&#39; generation.
+	 *
+	 * @var string
+	 */
+	public $title = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSemanticQueryPartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * The number of sub-queries to generate, including the main (base) one. Optional, Requires Admin role.
+	 *
+	 * @var int
+	 */
+	public $subQueriesCount = null;
+
+	/**
+	 * The number of default sub-queries to generate if the primary requested query is empty. Optional, Requires Admin role.
+	 *
+	 * @var int
+	 */
+	public $defaultQueriesCount = null;
+
+	/**
+	 * The number of assets per suggested collection.
+	 *
+	 * @var int
+	 */
+	public $assetsPerCollectionCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaNetworkActionStatus extends KalturaObjectBase
 {
 	/**
@@ -23802,6 +24308,29 @@ class KalturaSSOAdapterProfileInvoke extends KalturaObjectBase
 	 * @var string
 	 */
 	public $message = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUploadSubtitles extends KalturaObjectBase
+{
+	/**
+	 * Name of the subtitles file.
+	 *
+	 * @var string
+	 */
+	public $fileName = null;
+
+	/**
+	 * The language in which the subtitles are written.
+	 *
+	 * @var string
+	 */
+	public $language = null;
 
 
 }
