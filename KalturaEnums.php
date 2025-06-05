@@ -707,6 +707,16 @@ class KalturaConcurrencyLimitationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaConditionOperator extends KalturaEnumBase
+{
+	const EQUAL = "Equal";
+	const NOTEQUAL = "NotEqual";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConfigurationGroupDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1088,6 +1098,40 @@ class KalturaFollowTvSeriesOrderBy extends KalturaEnumBase
 {
 	const START_DATE_DESC = "START_DATE_DESC";
 	const START_DATE_ASC = "START_DATE_ASC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenerateMetadataStatus extends KalturaEnumBase
+{
+	const PROCESSING = "Processing";
+	const PARTIALSUCCESS = "PartialSuccess";
+	const SUCCESSPENDINGASSETS = "SuccessPendingAssets";
+	const SUCCESS = "Success";
+	const FAILED = "Failed";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGeoBlockMode extends KalturaEnumBase
+{
+	const ALLOWONLYSELECTED = "AllowOnlySelected";
+	const BLOCKONLYSELECTED = "BlockOnlySelected";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGeoBlockRuleOrderBy extends KalturaEnumBase
+{
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
 }
 
 /**
@@ -1931,6 +1975,16 @@ class KalturaProtectionPolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProxyRuleLevel extends KalturaEnumBase
+{
+	const MEDIUM = "Medium";
+	const HIGH = "High";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPurchaseSettingsType extends KalturaEnumBase
 {
 	const BLOCK = "block";
@@ -2479,6 +2533,17 @@ class KalturaSubscriptionTriggerType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSubtitlesType extends KalturaEnumBase
+{
+	const TEXT = "Text";
+	const SRT = "SRT";
+	const WEBVTT = "WebVTT";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSuspensionProfileInheritanceType extends KalturaEnumBase
 {
 	const ALWAYS = "ALWAYS";
@@ -2668,6 +2733,15 @@ class KalturaUserAssetsListType extends KalturaEnumBase
 	const WATCH = "watch";
 	const PURCHASE = "purchase";
 	const LIBRARY = "library";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaUserLogOrderBy extends KalturaEnumBase
+{
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
 }
 
 /**
