@@ -181,16 +181,16 @@ class KalturaAiRecommendationTreeService extends KalturaServiceBase
 	 * @param string $treeId ID of the tree to navigate (optional - if omitted, the active tree will be used)
 	 * @param string $previousQuestionId The question ID that is currently presented (omit for first question)
 	 * @param string $answerId Selected answer ID from the previous question (required if previousQuestionId is provided)
-	 * @param string $topQuestion Specific top-level question ID (relevant for first question only)
+	 * @param string $topQuestionId Specific top-level question ID (relevant for first question only)
 	 * @return KalturaTreeNextNodeResponse
 	 */
-	function getNextNodeAndRecommendation($treeId = null, $previousQuestionId = null, $answerId = null, $topQuestion = null)
+	function getNextNodeAndRecommendation($treeId = null, $previousQuestionId = null, $answerId = null, $topQuestionId = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "treeId", $treeId);
 		$this->client->addParam($kparams, "previousQuestionId", $previousQuestionId);
 		$this->client->addParam($kparams, "answerId", $answerId);
-		$this->client->addParam($kparams, "topQuestion", $topQuestion);
+		$this->client->addParam($kparams, "topQuestionId", $topQuestionId);
 		$this->client->queueServiceActionCall("airecommendationtree", "getNextNodeAndRecommendation", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -15447,7 +15447,7 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-06-04');
+		$this->setClientTag('php5:25-06-09');
 		$this->setApiVersion('11.3.0.0');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
