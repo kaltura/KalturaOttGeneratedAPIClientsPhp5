@@ -2583,6 +2583,13 @@ class KalturaRecordingFilter extends KalturaFilter
 	public $statusIn = null;
 
 	/**
+	 * Comma separated list of assets identifiers
+	 *
+	 * @var string
+	 */
+	public $assetIdIn = null;
+
+	/**
 	 * Comma separated external identifiers
 	 *
 	 * @var string
