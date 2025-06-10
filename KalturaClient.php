@@ -168,102 +168,6 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAiRecommendationTreeService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Returns the next question, available answers, and content recommendations based on the current path through the tree.
-	 * 
-	 * @param string $treeId ID of the tree to navigate (optional - if omitted, the active tree will be used)
-	 * @param string $previousQuestionId The question ID that is currently presented (omit for first question)
-	 * @param string $answerId Selected answer ID from the previous question (required if previousQuestionId is provided)
-	 * @param string $topQuestionId Specific top-level question ID (relevant for first question only)
-	 * @return KalturaTreeNextNodeResponse
-	 */
-	function getNextNodeAndRecommendation($treeId = null, $previousQuestionId = null, $answerId = null, $topQuestionId = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "treeId", $treeId);
-		$this->client->addParam($kparams, "previousQuestionId", $previousQuestionId);
-		$this->client->addParam($kparams, "answerId", $answerId);
-		$this->client->addParam($kparams, "topQuestionId", $topQuestionId);
-		$this->client->queueServiceActionCall("airecommendationtree", "getNextNodeAndRecommendation", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaTreeNextNodeResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Retrieves the current configuration settings for TV Genie for a specific partner.
-	 * 
-	 * @return KalturaAiRecommendationTreePartnerConfiguration
-	 */
-	function getPartnerConfig()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("airecommendationtree", "getPartnerConfig", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAiRecommendationTreePartnerConfiguration");
-		return $resultObject;
-	}
-
-	/**
-	 * Returns content recommendations based on natural language input.
-	 * 
-	 * @param string $naturalTextQuery The query text entered by the user
-	 * @param string $previousQuestionId Previous question ID if building on question history (optional)
-	 * @param string $treeId ID of the tree to use (mandatory if previousQuestionId is provided)
-	 * @return KalturaTreeNaturalTextResponse
-	 */
-	function getRecommendationWithNaturalText($naturalTextQuery, $previousQuestionId = null, $treeId = null)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "naturalTextQuery", $naturalTextQuery);
-		$this->client->addParam($kparams, "previousQuestionId", $previousQuestionId);
-		$this->client->addParam($kparams, "treeId", $treeId);
-		$this->client->queueServiceActionCall("airecommendationtree", "getRecommendationWithNaturalText", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaTreeNaturalTextResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Updates the configuration settings for TV Genie on a per-partner basis.
-	 * 
-	 * @param KalturaAiRecommendationTreePartnerConfiguration $configuration The partner configuration to be set
-	 * @return KalturaAiRecommendationTreePartnerConfiguration
-	 */
-	function upsertPartnerConfig(KalturaAiRecommendationTreePartnerConfiguration $configuration)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "configuration", $configuration->toParams());
-		$this->client->queueServiceActionCall("airecommendationtree", "upsertPartnerConfig", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAiRecommendationTreePartnerConfiguration");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAnnouncementService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -14474,12 +14378,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaAiRecommendationTreeService
-	 */
-	public $aiRecommendationTree = null;
-
-	/**
-	 * 
 	 * @var KalturaAnnouncementService
 	 */
 	public $announcement = null;
@@ -15448,10 +15346,9 @@ class KalturaClient extends KalturaClientBase
 		parent::__construct($config);
 		
 		$this->setClientTag('php5:25-06-10');
-		$this->setApiVersion('11.3.0.0');
+		$this->setApiVersion('11.2.1.0');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
-		$this->aiRecommendationTree = new KalturaAiRecommendationTreeService($this);
 		$this->announcement = new KalturaAnnouncementService($this);
 		$this->appToken = new KalturaAppTokenService($this);
 		$this->assetComment = new KalturaAssetCommentService($this);
