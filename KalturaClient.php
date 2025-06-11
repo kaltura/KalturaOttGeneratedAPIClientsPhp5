@@ -5061,6 +5061,100 @@ class KalturaFollowTvSeriesService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGeoBlockRuleService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Add a new geo block rule
+	 * 
+	 * @param KalturaGeoBlockRule $geoBlockRule The geo block rule to add
+	 * @return KalturaGeoBlockRule
+	 */
+	function add(KalturaGeoBlockRule $geoBlockRule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "geoBlockRule", $geoBlockRule->toParams());
+		$this->client->queueServiceActionCall("geoblockrule", "add", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGeoBlockRule");
+		return $resultObject;
+	}
+
+	/**
+	 * Delete a geo block rule
+	 * 
+	 * @param bigint $id The id of the geo block rule to delete
+	 * @return bool
+	 */
+	function delete($id)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->queueServiceActionCall("geoblockrule", "delete", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	/**
+	 * Get the list of geo block rules for the partner
+	 * 
+	 * @param KalturaGeoBlockRuleFilter $filter Filter criteria for the geo block rules
+	 * @param KalturaFilterPager $pager Paging information for retrieving paginated results
+	 * @return KalturaGeoBlockRuleListResponse
+	 */
+	function listAction(KalturaGeoBlockRuleFilter $filter = null, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		if ($filter !== null)
+			$this->client->addParam($kparams, "filter", $filter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("geoblockrule", "list", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGeoBlockRuleListResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Update an existing geo block rule
+	 * 
+	 * @param bigint $id The id of the geo block rule to update
+	 * @param KalturaGeoBlockRule $geoBlockRule The geo block rule data to update
+	 * @return KalturaGeoBlockRule
+	 */
+	function update($id, KalturaGeoBlockRule $geoBlockRule)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "id", $id);
+		$this->client->addParam($kparams, "geoBlockRule", $geoBlockRule->toParams());
+		$this->client->queueServiceActionCall("geoblockrule", "update", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGeoBlockRule");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaHomeNetworkService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -14810,6 +14904,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaGeoBlockRuleService
+	 */
+	public $geoBlockRule = null;
+
+	/**
+	 * 
 	 * @var KalturaHomeNetworkService
 	 */
 	public $homeNetwork = null;
@@ -15507,6 +15607,7 @@ class KalturaClient extends KalturaClientBase
 		$this->externalChannelProfile = new KalturaExternalChannelProfileService($this);
 		$this->favorite = new KalturaFavoriteService($this);
 		$this->followTvSeries = new KalturaFollowTvSeriesService($this);
+		$this->geoBlockRule = new KalturaGeoBlockRuleService($this);
 		$this->homeNetwork = new KalturaHomeNetworkService($this);
 		$this->household = new KalturaHouseholdService($this);
 		$this->householdCoupon = new KalturaHouseholdCouponService($this);
