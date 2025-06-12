@@ -48,10 +48,12 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	}
 
 	/**
-	 * Start metadata generation process based on subtitles.
+	 * Initiate the the process of metadata generation based on the subtitles file.
 	 * 
-	 * @param bigint $subtitlesFileId The subtitles file ID returned from subtitles.uploadFile.
-	 * @param array $externalAssetIds A list of external asset IDs to be populated with the generated metadata.
+	 * @param bigint $subtitlesFileId The subtitles file ID returned when uploaded the subtitles file by the subtitles service.
+            Represents also the job ID used by the generate metadata process
+	 * @param array $externalAssetIds A list of external asset IDs to be populated with the generated metadata
+            Must be a valid existing KalturaLanguage systemName.\nIf not provided then the subtitles language will be used
 	 * @return KalturaGenerateMetadataBySubtitlesJob
 	 */
 	function generateMetadataBySubtitles($subtitlesFileId, array $externalAssetIds = null)
@@ -75,7 +77,7 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	/**
 	 * Retrieve the generated metadata
 	 * 
-	 * @param bigint $jobId The job ID as received from GenerateMetadataBySubtitles.
+	 * @param bigint $jobId The job ID (equals the subtitles file ID returned by the subtitles.uploadFile service)
 	 * @return KalturaGenerateMetadataResult
 	 */
 	function getGeneratedMetadata($jobId)
@@ -92,9 +94,9 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	}
 
 	/**
-	 * Get a metadata generation job.
+	 * Retrieve the status of the metadata generation job, identified by the subtitles file ID.
 	 * 
-	 * @param bigint $id The job ID as received from GenerateMetadataBySubtitles.
+	 * @param bigint $id The file (job) ID as received from subtitles.uploadFile response"
 	 * @return KalturaGenerateMetadataBySubtitlesJob
 	 */
 	function getGenerateMetadataJob($id)
@@ -111,7 +113,7 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	}
 
 	/**
-	 * Get metadata mapping structure and available generated metadata fields.
+	 * Get metadata mapping structure and available generated metadata fields
 	 * 
 	 * @return KalturaMetaFieldNameMap
 	 */
@@ -128,7 +130,7 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	}
 
 	/**
-	 * Get the metadata generation configuration.
+	 * Retrieve feature configuration
 	 * 
 	 * @return KalturaAiMetadataGeneratorConfiguration
 	 */
@@ -145,7 +147,7 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update/set the metadata generation configuration
+	 * Update feature configuration
 	 * 
 	 * @param KalturaAiMetadataGeneratorConfiguration $configuration The partner configuration to be set
 	 * @return KalturaAiMetadataGeneratorConfiguration
@@ -738,7 +740,7 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Search for assets using semantic similarity to a natural language query, with optional query refinement using LLM.
+	 * This API provides search capabilities for assets using semantic similarity based on the provided query.
 	 * 
 	 * @param string $query The search query text used to find semantically similar assets
 	 * @param bool $refineQuery When true, the search query is refined using LLM before vector search
@@ -11330,7 +11332,7 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 	}
 
 	/**
-	 * Retrieve the filtering condition configuration for the partner.
+	 * Retrieves the filtering condition applied to asset searches.
 	 * 
 	 * @return KalturaFilteringCondition
 	 */
@@ -11347,9 +11349,9 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 	}
 
 	/**
-	 * Retrieve the current field configurations for semantic search.
+	 * Retrieves the searchable attributes associated with a specific asset structure.
 	 * 
-	 * @param int $assetStructId Asset structure ID to filter configurations.
+	 * @param int $assetStructId The unique identifier of the asset structure.
 	 * @return KalturaSearchableAttributes
 	 */
 	function getSearchableAttributes($assetStructId)
@@ -11366,9 +11368,9 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update rule that controls embedding generation and search behavior.
+	 * Adds or updates a filtering condition for asset searches.
 	 * 
-	 * @param KalturaFilteringCondition $filteringCondition Rule configuration parameters.
+	 * @param KalturaFilteringCondition $filteringCondition The filtering condition to be applied to asset searches.
 	 * @return KalturaFilteringCondition
 	 */
 	function upsertFilteringCondition(KalturaFilteringCondition $filteringCondition)
@@ -11385,9 +11387,9 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update which fields should be included in semantic search for specific asset types.
+	 * Adds or updates searchable attributes for a given asset structure.
 	 * 
-	 * @param KalturaSearchableAttributes $attributes Fields configuration parameters.
+	 * @param KalturaSearchableAttributes $attributes The searchable attributes to be added or updated.
 	 * @return KalturaSearchableAttributes
 	 */
 	function upsertSearchableAttributes(KalturaSearchableAttributes $attributes)
@@ -11400,85 +11402,6 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaSearchableAttributes");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSemanticQueryService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Generates a title and semantic sub-queries.
-	 * 
-	 * @param KalturaGenerateSemanticQuery $query Parameters required for generating semantic queries.
-	 * @return KalturaSemanticQuery
-	 */
-	function generate(KalturaGenerateSemanticQuery $query)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "query", $query->toParams());
-		$this->client->queueServiceActionCall("semanticquery", "generate", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSemanticQuery");
-		return $resultObject;
-	}
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaSemanticQueryPartnerConfigurationService extends KalturaServiceBase
-{
-	function __construct(KalturaClient $client = null)
-	{
-		parent::__construct($client);
-	}
-
-	/**
-	 * Retrieves partner configuration for semantic query service.
-	 * 
-	 * @return KalturaSemanticQueryPartnerConfiguration
-	 */
-	function get()
-	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("semanticquerypartnerconfiguration", "get", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSemanticQueryPartnerConfiguration");
-		return $resultObject;
-	}
-
-	/**
-	 * Updates the partner configuration for semantic query service.
-	 * 
-	 * @param KalturaSemanticQueryPartnerConfiguration $configuration The partner configuration for semantic query generation.
-	 * @return KalturaSemanticQueryPartnerConfiguration
-	 */
-	function update(KalturaSemanticQueryPartnerConfiguration $configuration)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "configuration", $configuration->toParams());
-		$this->client->queueServiceActionCall("semanticquerypartnerconfiguration", "update", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaSemanticQueryPartnerConfiguration");
 		return $resultObject;
 	}
 }
@@ -12596,10 +12519,10 @@ class KalturaSubtitlesService extends KalturaServiceBase
 	}
 
 	/**
-	 * Add a subtitles file to be used for generating metadata and enriching the assets using a multi-part form-data body including the JSON configuration object and the uploaded file.
+	 * Upload a subtitles file for a later analysis.
 	 * 
-	 * @param KalturaUploadSubtitles $subtitles Subtitle file metadata.
-	 * @param file $fileData The subtitles file to upload. The file must be in UTF-8 encoding.
+	 * @param KalturaUploadSubtitles $subtitles Subtitle metadata
+	 * @param file $fileData The subtitles text file to upload. Must be in UTF-8 encoding.
 	 * @return KalturaSubtitles
 	 */
 	function uploadFile(KalturaUploadSubtitles $subtitles, $fileData)
@@ -15122,18 +15045,6 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
-	 * @var KalturaSemanticQueryService
-	 */
-	public $semanticQuery = null;
-
-	/**
-	 * 
-	 * @var KalturaSemanticQueryPartnerConfigurationService
-	 */
-	public $semanticQueryPartnerConfiguration = null;
-
-	/**
-	 * 
 	 * @var KalturaSeriesRecordingService
 	 */
 	public $seriesRecording = null;
@@ -15345,8 +15256,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-06-11');
-		$this->setApiVersion('11.2.1.0');
+		$this->setClientTag('php5:25-06-12');
+		$this->setApiVersion('11.2.0.4');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
 		$this->announcement = new KalturaAnnouncementService($this);
@@ -15473,8 +15384,6 @@ class KalturaClient extends KalturaClientBase
 		$this->searchPriorityGroupOrderedIdsSet = new KalturaSearchPriorityGroupOrderedIdsSetService($this);
 		$this->segmentationType = new KalturaSegmentationTypeService($this);
 		$this->semanticAssetSearchPartnerConfig = new KalturaSemanticAssetSearchPartnerConfigService($this);
-		$this->semanticQuery = new KalturaSemanticQueryService($this);
-		$this->semanticQueryPartnerConfiguration = new KalturaSemanticQueryPartnerConfigurationService($this);
 		$this->seriesRecording = new KalturaSeriesRecordingService($this);
 		$this->session = new KalturaSessionService($this);
 		$this->smsAdapterProfile = new KalturaSmsAdapterProfileService($this);
