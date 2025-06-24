@@ -4840,6 +4840,15 @@ class KalturaUserRoleFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGeoBlockRuleFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEpgFilter extends KalturaFilter
 {
 	/**
@@ -20789,6 +20798,92 @@ class KalturaUserRoleListResponse extends KalturaListResponse
 	 * A list of generic rules
 	 *
 	 * @var array of KalturaUserRole
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGeoBlockRule extends KalturaObjectBase
+{
+	/**
+	 * Geo Block Rule id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Create Date Epoch time in seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update Date Epoch time in seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * comma separated string representing list of countries that the rule shall apply to
+	 *
+	 * @var string
+	 */
+	public $countryIds = null;
+
+	/**
+	 * mode - Defines the geo-blocking strategy based on user location.
+	 *             AllowOnlySelected - Implements a restrictive whitelist approach where content is only accessible from explicitly selected countries. All other countries are blocked by default.
+	 *             BlockOnlySelected - Implements a permissive blacklist approach where content is accessible from all countries except those explicitly selected for blocking.
+	 *
+	 * @var KalturaGeoBlockMode
+	 */
+	public $mode = null;
+
+	/**
+	 * Should geo block rule check proxy as well
+	 *
+	 * @var bool
+	 */
+	public $isProxyRuleEnabled = null;
+
+	/**
+	 * Level of proxy rule check - medium or high
+	 *
+	 * @var KalturaProxyRuleLevel
+	 */
+	public $proxyRuleLevel = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGeoBlockRuleListResponse extends KalturaListResponse
+{
+	/**
+	 * Geo block rules
+	 *
+	 * @var array of KalturaGeoBlockRule
 	 */
 	public $objects;
 
