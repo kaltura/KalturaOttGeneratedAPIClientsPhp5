@@ -22853,6 +22853,27 @@ class KalturaVodIngestAssetResult extends KalturaObjectBase
 	 */
 	public $warnings;
 
+	/**
+	 * The date and time for which the ingest file was uploaded to the remote file server. Expressed in milliseconds EPOCH time.
+	 *
+	 * @var int
+	 */
+	public $fileUploadDate = null;
+
+	/**
+	 * The date and time for which the ingest file moved to in progress folder and started processing. Expressed in milliseconds EPOCH time.
+	 *
+	 * @var int
+	 */
+	public $processingStartDate = null;
+
+	/**
+	 * The date and time for which the ingest file completed the ingest process. Expressed in milliseconds EPOCH time.
+	 *
+	 * @var int
+	 */
+	public $processingCompletionDate = null;
+
 
 }
 
@@ -22926,6 +22947,34 @@ class KalturaVodIngestAssetResultAggregation extends KalturaObjectBase
 	 * @var int
 	 */
 	public $successWithWarningCount = null;
+
+	/**
+	 * Average calculated for the total processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $averageTotalProcessingDuration = null;
+
+	/**
+	 * Average calculated for the active processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $averageTotalActiveProcessingDuration = null;
+
+	/**
+	 * 0.95 percentile calculated for the total processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $p95TotalProcessingDuration = null;
+
+	/**
+	 * 0.95 percentile calculated for the active processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $p95TotalActiveProcessingDuration = null;
 
 
 }
