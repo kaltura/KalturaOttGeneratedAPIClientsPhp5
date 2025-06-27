@@ -4840,6 +4840,15 @@ class KalturaUserRoleFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGeoBlockRuleFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEpgFilter extends KalturaFilter
 {
 	/**
@@ -15761,6 +15770,222 @@ class KalturaBillingTransactionListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaBulkResponseObject extends KalturaObjectBase
+{
+	/**
+	 * Indicates whether the bulk operation was successful
+	 *
+	 * @var bool
+	 */
+	public $isSuccess = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextResponse extends KalturaListResponse
+{
+	/**
+	 * Array of playback contexts or errors.
+	 *             Each item corresponds to the request at the same index in the request array.
+	 *             Items can be either KalturaPlaybackContext (success) or KalturaBulkPlaybackContextError (error).
+	 *
+	 * @var array of KalturaBulkResponseObject
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextError extends KalturaBulkResponseObject
+{
+	/**
+	 * The error code from the API exception
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+	/**
+	 * The error message from the API exception
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Additional error arguments from the API exception
+	 *
+	 * @var array of KalturaApiExceptionArg
+	 */
+	public $args;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAccessControlMessage extends KalturaObjectBase
+{
+	/**
+	 * Message
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCaptionPlaybackPluginData extends KalturaObjectBase
+{
+	/**
+	 * url
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+	/**
+	 * Language
+	 *
+	 * @var string
+	 */
+	public $language = null;
+
+	/**
+	 * Label
+	 *
+	 * @var string
+	 */
+	public $label = null;
+
+	/**
+	 * Format
+	 *
+	 * @var string
+	 */
+	public $format = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackPluginData extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackContext extends KalturaObjectBase
+{
+	/**
+	 * Sources
+	 *
+	 * @var array of KalturaPlaybackSource
+	 */
+	public $sources;
+
+	/**
+	 * Actions
+	 *
+	 * @var array of KalturaRuleAction
+	 */
+	public $actions;
+
+	/**
+	 * Messages
+	 *
+	 * @var array of KalturaAccessControlMessage
+	 */
+	public $messages;
+
+	/**
+	 * Playback captions
+	 *
+	 * @var array of KalturaCaptionPlaybackPluginData
+	 */
+	public $playbackCaptions;
+
+	/**
+	 * Plugins
+	 *
+	 * @var array of KalturaPlaybackPluginData
+	 */
+	public $plugins;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextSuccess extends KalturaBulkResponseObject
+{
+	/**
+	 * The successful playback context
+	 *
+	 * @var KalturaPlaybackContext
+	 */
+	public $playbackContext;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBumpersPlaybackPluginData extends KalturaPlaybackPluginData
+{
+	/**
+	 * url
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+	/**
+	 * Streamer type: hls, dash, progressive.
+	 *
+	 * @var string
+	 */
+	public $streamertype = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCDVRAdapterProfile extends KalturaObjectBase
 {
 	/**
@@ -20799,6 +21024,92 @@ class KalturaUserRoleListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGeoBlockRule extends KalturaObjectBase
+{
+	/**
+	 * Geo Block Rule id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Create Date Epoch time in seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update Date Epoch time in seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * comma separated string representing list of countries that the rule shall apply to
+	 *
+	 * @var string
+	 */
+	public $countryIds = null;
+
+	/**
+	 * mode - Defines the geo-blocking strategy based on user location.
+	 *             AllowOnlySelected - Implements a restrictive whitelist approach where content is only accessible from explicitly selected countries. All other countries are blocked by default.
+	 *             BlockOnlySelected - Implements a permissive blacklist approach where content is accessible from all countries except those explicitly selected for blocking.
+	 *
+	 * @var KalturaGeoBlockMode
+	 */
+	public $mode = null;
+
+	/**
+	 * Should geo block rule check proxy as well
+	 *
+	 * @var bool
+	 */
+	public $isProxyRuleEnabled = null;
+
+	/**
+	 * Level of proxy rule check - medium or high
+	 *
+	 * @var KalturaProxyRuleLevel
+	 */
+	public $proxyRuleLevel = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGeoBlockRuleListResponse extends KalturaListResponse
+{
+	/**
+	 * Geo block rules
+	 *
+	 * @var array of KalturaGeoBlockRule
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEpgListResponse extends KalturaListResponse
 {
 	/**
@@ -21098,21 +21409,35 @@ class KalturaPlaybackContextOptions extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAccessControlMessage extends KalturaObjectBase
+class KalturaGetPlaybackContextParams extends KalturaObjectBase
 {
 	/**
-	 * Message
+	 * Unique identifier of the asset
 	 *
 	 * @var string
 	 */
-	public $message = null;
+	public $assetId = null;
 
 	/**
-	 * Code
+	 * Type of the asset
+	 *
+	 * @var KalturaAssetType
+	 */
+	public $assetType = null;
+
+	/**
+	 * Playback context options
+	 *
+	 * @var KalturaPlaybackContextOptions
+	 */
+	public $contextDataParams;
+
+	/**
+	 * Source type (optional)
 	 *
 	 * @var string
 	 */
-	public $code = null;
+	public $sourceType = null;
 
 
 }
@@ -21121,111 +21446,15 @@ class KalturaAccessControlMessage extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCaptionPlaybackPluginData extends KalturaObjectBase
+class KalturaBulkPlaybackContextRequest extends KalturaObjectBase
 {
 	/**
-	 * url
+	 * Array of request parameters for getPlaybackContext.
+	 *             Each entry represents an individual playback context request.
 	 *
-	 * @var string
+	 * @var array of KalturaGetPlaybackContextParams
 	 */
-	public $url = null;
-
-	/**
-	 * Language
-	 *
-	 * @var string
-	 */
-	public $language = null;
-
-	/**
-	 * Label
-	 *
-	 * @var string
-	 */
-	public $label = null;
-
-	/**
-	 * Format
-	 *
-	 * @var string
-	 */
-	public $format = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPlaybackPluginData extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPlaybackContext extends KalturaObjectBase
-{
-	/**
-	 * Sources
-	 *
-	 * @var array of KalturaPlaybackSource
-	 */
-	public $sources;
-
-	/**
-	 * Actions
-	 *
-	 * @var array of KalturaRuleAction
-	 */
-	public $actions;
-
-	/**
-	 * Messages
-	 *
-	 * @var array of KalturaAccessControlMessage
-	 */
-	public $messages;
-
-	/**
-	 * Playback captions
-	 *
-	 * @var array of KalturaCaptionPlaybackPluginData
-	 */
-	public $playbackCaptions;
-
-	/**
-	 * Plugins
-	 *
-	 * @var array of KalturaPlaybackPluginData
-	 */
-	public $plugins;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBumpersPlaybackPluginData extends KalturaPlaybackPluginData
-{
-	/**
-	 * url
-	 *
-	 * @var string
-	 */
-	public $url = null;
-
-	/**
-	 * Streamer type: hls, dash, progressive.
-	 *
-	 * @var string
-	 */
-	public $streamertype = null;
+	public $playbackContextParamSets;
 
 
 }
