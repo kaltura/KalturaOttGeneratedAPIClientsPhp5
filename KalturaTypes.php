@@ -15770,222 +15770,6 @@ class KalturaBillingTransactionListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkResponseItem extends KalturaObjectBase
-{
-	/**
-	 * Indicates whether the bulk operation was successful
-	 *
-	 * @var bool
-	 */
-	public $isSuccess = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkPlaybackContextResponse extends KalturaListResponse
-{
-	/**
-	 * Array of playback contexts or errors.
-	 *             Each item corresponds to the request at the same index in the request array.
-	 *             Items can be either KalturaPlaybackContext (success) or KalturaBulkPlaybackContextError (error).
-	 *
-	 * @var array of KalturaBulkResponseItem
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkPlaybackContextError extends KalturaBulkResponseItem
-{
-	/**
-	 * The error code from the API exception
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-	/**
-	 * The error message from the API exception
-	 *
-	 * @var string
-	 */
-	public $message = null;
-
-	/**
-	 * Additional error arguments from the API exception
-	 *
-	 * @var array of KalturaApiExceptionArg
-	 */
-	public $args;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAccessControlMessage extends KalturaObjectBase
-{
-	/**
-	 * Message
-	 *
-	 * @var string
-	 */
-	public $message = null;
-
-	/**
-	 * Code
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCaptionPlaybackPluginData extends KalturaObjectBase
-{
-	/**
-	 * url
-	 *
-	 * @var string
-	 */
-	public $url = null;
-
-	/**
-	 * Language
-	 *
-	 * @var string
-	 */
-	public $language = null;
-
-	/**
-	 * Label
-	 *
-	 * @var string
-	 */
-	public $label = null;
-
-	/**
-	 * Format
-	 *
-	 * @var string
-	 */
-	public $format = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPlaybackPluginData extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPlaybackContext extends KalturaObjectBase
-{
-	/**
-	 * Sources
-	 *
-	 * @var array of KalturaPlaybackSource
-	 */
-	public $sources;
-
-	/**
-	 * Actions
-	 *
-	 * @var array of KalturaRuleAction
-	 */
-	public $actions;
-
-	/**
-	 * Messages
-	 *
-	 * @var array of KalturaAccessControlMessage
-	 */
-	public $messages;
-
-	/**
-	 * Playback captions
-	 *
-	 * @var array of KalturaCaptionPlaybackPluginData
-	 */
-	public $playbackCaptions;
-
-	/**
-	 * Plugins
-	 *
-	 * @var array of KalturaPlaybackPluginData
-	 */
-	public $plugins;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBulkPlaybackContextSuccess extends KalturaBulkResponseItem
-{
-	/**
-	 * The successful playback context
-	 *
-	 * @var KalturaPlaybackContext
-	 */
-	public $playbackContext;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBumpersPlaybackPluginData extends KalturaPlaybackPluginData
-{
-	/**
-	 * url
-	 *
-	 * @var string
-	 */
-	public $url = null;
-
-	/**
-	 * Streamer type: hls, dash, progressive.
-	 *
-	 * @var string
-	 */
-	public $streamertype = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaCDVRAdapterProfile extends KalturaObjectBase
 {
 	/**
@@ -21455,6 +21239,229 @@ class KalturaBulkPlaybackContextRequest extends KalturaObjectBase
 	 * @var array of KalturaGetPlaybackContextParams
 	 */
 	public $playbackContextParamSets;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkResponseItem extends KalturaObjectBase
+{
+	/**
+	 * Indicates whether the bulk operation was successful
+	 *
+	 * @var bool
+	 */
+	public $isSuccess = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextResponse extends KalturaObjectBase
+{
+	/**
+	 * Array of playback contexts or errors.
+	 *             Each item corresponds to the request at the same index in the request array.
+	 *             Items can be either KalturaPlaybackContext (success) or KalturaBulkPlaybackContextError (error).
+	 *
+	 * @var array of KalturaBulkResponseItem
+	 */
+	public $objects;
+
+	/**
+	 * Total items
+	 *
+	 * @var int
+	 */
+	public $totalCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextError extends KalturaBulkResponseItem
+{
+	/**
+	 * The error code from the API exception
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+	/**
+	 * The error message from the API exception
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Additional error arguments from the API exception
+	 *
+	 * @var array of KalturaApiExceptionArg
+	 */
+	public $args;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAccessControlMessage extends KalturaObjectBase
+{
+	/**
+	 * Message
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Code
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCaptionPlaybackPluginData extends KalturaObjectBase
+{
+	/**
+	 * url
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+	/**
+	 * Language
+	 *
+	 * @var string
+	 */
+	public $language = null;
+
+	/**
+	 * Label
+	 *
+	 * @var string
+	 */
+	public $label = null;
+
+	/**
+	 * Format
+	 *
+	 * @var string
+	 */
+	public $format = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackPluginData extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackContext extends KalturaObjectBase
+{
+	/**
+	 * Sources
+	 *
+	 * @var array of KalturaPlaybackSource
+	 */
+	public $sources;
+
+	/**
+	 * Actions
+	 *
+	 * @var array of KalturaRuleAction
+	 */
+	public $actions;
+
+	/**
+	 * Messages
+	 *
+	 * @var array of KalturaAccessControlMessage
+	 */
+	public $messages;
+
+	/**
+	 * Playback captions
+	 *
+	 * @var array of KalturaCaptionPlaybackPluginData
+	 */
+	public $playbackCaptions;
+
+	/**
+	 * Plugins
+	 *
+	 * @var array of KalturaPlaybackPluginData
+	 */
+	public $plugins;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextSuccess extends KalturaBulkResponseItem
+{
+	/**
+	 * The successful playback context
+	 *
+	 * @var KalturaPlaybackContext
+	 */
+	public $playbackContext;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBumpersPlaybackPluginData extends KalturaPlaybackPluginData
+{
+	/**
+	 * url
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+	/**
+	 * Streamer type: hls, dash, progressive.
+	 *
+	 * @var string
+	 */
+	public $streamertype = null;
 
 
 }
