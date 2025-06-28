@@ -15770,7 +15770,7 @@ class KalturaBillingTransactionListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkResponseObject extends KalturaObjectBase
+class KalturaBulkResponseItem extends KalturaObjectBase
 {
 	/**
 	 * Indicates whether the bulk operation was successful
@@ -15793,7 +15793,7 @@ class KalturaBulkPlaybackContextResponse extends KalturaListResponse
 	 *             Each item corresponds to the request at the same index in the request array.
 	 *             Items can be either KalturaPlaybackContext (success) or KalturaBulkPlaybackContextError (error).
 	 *
-	 * @var array of KalturaBulkResponseObject
+	 * @var array of KalturaBulkResponseItem
 	 */
 	public $objects;
 
@@ -15804,7 +15804,7 @@ class KalturaBulkPlaybackContextResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkPlaybackContextError extends KalturaBulkResponseObject
+class KalturaBulkPlaybackContextError extends KalturaBulkResponseItem
 {
 	/**
 	 * The error code from the API exception
@@ -15947,7 +15947,7 @@ class KalturaPlaybackContext extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkPlaybackContextSuccess extends KalturaBulkResponseObject
+class KalturaBulkPlaybackContextSuccess extends KalturaBulkResponseItem
 {
 	/**
 	 * The successful playback context
