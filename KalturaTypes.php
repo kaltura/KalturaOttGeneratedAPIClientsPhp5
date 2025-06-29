@@ -21247,7 +21247,7 @@ class KalturaBulkPlaybackContextRequest extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaBulkResponseItem extends KalturaObjectBase
+abstract class KalturaBulkResponseItem extends KalturaObjectBase
 {
 	/**
 	 * Indicates whether the bulk operation was successful
@@ -21272,7 +21272,7 @@ class KalturaBulkPlaybackContextResponse extends KalturaObjectBase
 	 *
 	 * @var array of KalturaBulkResponseItem
 	 */
-	public $objects;
+	public $items;
 
 	/**
 	 * Total items
