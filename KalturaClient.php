@@ -179,16 +179,14 @@ class KalturaAiRecommendationTreeService extends KalturaServiceBase
 	 * Returns the next question, available answers, and content recommendations based on the current path through the tree.
 	 * 
 	 * @param string $treeId ID of the tree to navigate (optional - if omitted, the active tree will be used)
-	 * @param string $previousQuestionId The question ID that is currently presented (omit for first question)
 	 * @param string $answerId Selected answer ID from the previous question (required if previousQuestionId is provided)
 	 * @param string $topQuestionId Specific top-level question ID (relevant for first question only)
 	 * @return KalturaTreeNextNodeResponse
 	 */
-	function getNextNodeAndRecommendation($treeId = null, $previousQuestionId = null, $answerId = null, $topQuestionId = null)
+	function getNextNodeAndRecommendation($treeId = null, $answerId = null, $topQuestionId = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "treeId", $treeId);
-		$this->client->addParam($kparams, "previousQuestionId", $previousQuestionId);
 		$this->client->addParam($kparams, "answerId", $answerId);
 		$this->client->addParam($kparams, "topQuestionId", $topQuestionId);
 		$this->client->queueServiceActionCall("airecommendationtree", "getNextNodeAndRecommendation", $kparams);
@@ -221,15 +219,15 @@ class KalturaAiRecommendationTreeService extends KalturaServiceBase
 	 * Returns content recommendations based on natural language input.
 	 * 
 	 * @param string $naturalTextQuery The query text entered by the user
-	 * @param string $previousQuestionId Previous question ID if building on question history (optional)
+	 * @param string $questionId The Id of the question that naturalTextQuery is the answer to (optional)
 	 * @param string $treeId ID of the tree to use (mandatory if previousQuestionId is provided)
 	 * @return KalturaTreeNaturalTextResponse
 	 */
-	function getRecommendationWithNaturalText($naturalTextQuery, $previousQuestionId = null, $treeId = null)
+	function getRecommendationWithNaturalText($naturalTextQuery, $questionId = null, $treeId = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "naturalTextQuery", $naturalTextQuery);
-		$this->client->addParam($kparams, "previousQuestionId", $previousQuestionId);
+		$this->client->addParam($kparams, "questionId", $questionId);
 		$this->client->addParam($kparams, "treeId", $treeId);
 		$this->client->queueServiceActionCall("airecommendationtree", "getRecommendationWithNaturalText", $kparams);
 		if ($this->client->isMultiRequest())
@@ -15547,7 +15545,7 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-06-17');
+		$this->setClientTag('php5:25-06-30');
 		$this->setApiVersion('11.3.0.0');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
