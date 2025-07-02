@@ -1117,6 +1117,27 @@ class KalturaGenerateMetadataStatus extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGeoBlockMode extends KalturaEnumBase
+{
+	const ALLOWONLYSELECTED = "AllowOnlySelected";
+	const BLOCKONLYSELECTED = "BlockOnlySelected";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGeoBlockRuleOrderBy extends KalturaEnumBase
+{
+	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
+	const NAME_ASC = "NAME_ASC";
+	const NAME_DESC = "NAME_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGroupByField extends KalturaEnumBase
 {
 	const MEDIA_TYPE_ID = "media_type_id";
@@ -1948,6 +1969,16 @@ class KalturaProtectionPolicy extends KalturaEnumBase
 {
 	const EXTENDINGRECORDINGLIFETIME = "ExtendingRecordingLifetime";
 	const LIMITEDBYRECORDINGLIFETIME = "LimitedByRecordingLifetime";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProxyRuleLevel extends KalturaEnumBase
+{
+	const MEDIUM = "Medium";
+	const HIGH = "High";
 }
 
 /**
