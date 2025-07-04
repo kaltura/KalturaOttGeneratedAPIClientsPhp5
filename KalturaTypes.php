@@ -2583,6 +2583,13 @@ class KalturaRecordingFilter extends KalturaFilter
 	public $statusIn = null;
 
 	/**
+	 * Comma separated list of assets identifiers
+	 *
+	 * @var string
+	 */
+	public $assetIdIn = null;
+
+	/**
 	 * Comma separated external identifiers
 	 *
 	 * @var string
@@ -4840,6 +4847,15 @@ class KalturaUserRoleFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGeoBlockRuleFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEpgFilter extends KalturaFilter
 {
 	/**
@@ -5066,14 +5082,9 @@ class KalturaMetaFieldNameMap extends KalturaObjectBase
 class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
 {
 	/**
-	 * Specifies if the feature is enabled or disabled.
-	 *
-	 * @var bool
-	 */
-	public $isEnabled = null;
-
-	/**
-	 * A map (dictionary) to indicate to which existing metadata or tag the newly generated metadata value should be pushed, per assetStruct (per &#39;asset type&#39;)
+	 * A type of dictionary defined as [long,KalturaMetaFieldNameMap]. 
+	 *             This property is used to correlate the newly generated metadata to
+	 *             existing metadata IDs which are available in the asset’s struct.
 	 *
 	 * @var map
 	 */
@@ -20799,6 +20810,92 @@ class KalturaUserRoleListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGeoBlockRule extends KalturaObjectBase
+{
+	/**
+	 * Geo Block Rule id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Create Date Epoch time in seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update Date Epoch time in seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * comma separated string representing list of countries that the rule shall apply to
+	 *
+	 * @var string
+	 */
+	public $countryIds = null;
+
+	/**
+	 * mode - Defines the geo-blocking strategy based on user location.
+	 *             AllowOnlySelected - Implements a restrictive whitelist approach where content is only accessible from explicitly selected countries. All other countries are blocked by default.
+	 *             BlockOnlySelected - Implements a permissive blacklist approach where content is accessible from all countries except those explicitly selected for blocking.
+	 *
+	 * @var KalturaGeoBlockMode
+	 */
+	public $mode = null;
+
+	/**
+	 * Should geo block rule check proxy as well
+	 *
+	 * @var bool
+	 */
+	public $isProxyRuleEnabled = null;
+
+	/**
+	 * Level of proxy rule check - medium or high
+	 *
+	 * @var KalturaProxyRuleLevel
+	 */
+	public $proxyRuleLevel = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGeoBlockRuleListResponse extends KalturaListResponse
+{
+	/**
+	 * Geo block rules
+	 *
+	 * @var array of KalturaGeoBlockRule
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEpgListResponse extends KalturaListResponse
 {
 	/**
@@ -22758,6 +22855,27 @@ class KalturaVodIngestAssetResult extends KalturaObjectBase
 	 */
 	public $warnings;
 
+	/**
+	 * The date and time for which the ingest file was uploaded to the remote file server. Expressed in milliseconds EPOCH time.
+	 *
+	 * @var int
+	 */
+	public $fileUploadDate = null;
+
+	/**
+	 * The date and time for which the ingest file moved to in progress folder and started processing. Expressed in milliseconds EPOCH time.
+	 *
+	 * @var int
+	 */
+	public $processingStartDate = null;
+
+	/**
+	 * The date and time for which the ingest file completed the ingest process. Expressed in milliseconds EPOCH time.
+	 *
+	 * @var int
+	 */
+	public $processingCompletionDate = null;
+
 
 }
 
@@ -22831,6 +22949,34 @@ class KalturaVodIngestAssetResultAggregation extends KalturaObjectBase
 	 * @var int
 	 */
 	public $successWithWarningCount = null;
+
+	/**
+	 * Average calculated for the total processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $averageTotalProcessingDuration = null;
+
+	/**
+	 * Average calculated for the active processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $averageTotalActiveProcessingDuration = null;
+
+	/**
+	 * 0.95 percentile calculated for the total processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $p95TotalProcessingDuration = null;
+
+	/**
+	 * 0.95 percentile calculated for the active processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $p95TotalActiveProcessingDuration = null;
 
 
 }
