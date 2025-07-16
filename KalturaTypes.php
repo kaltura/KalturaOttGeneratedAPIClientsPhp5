@@ -2583,6 +2583,13 @@ class KalturaRecordingFilter extends KalturaFilter
 	public $statusIn = null;
 
 	/**
+	 * Comma separated list of assets identifiers
+	 *
+	 * @var string
+	 */
+	public $assetIdIn = null;
+
+	/**
 	 * Comma separated external identifiers
 	 *
 	 * @var string
@@ -4840,6 +4847,15 @@ class KalturaUserRoleFilter extends KalturaFilter
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGeoBlockRuleFilter extends KalturaFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEpgFilter extends KalturaFilter
 {
 	/**
@@ -5066,14 +5082,9 @@ class KalturaMetaFieldNameMap extends KalturaObjectBase
 class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
 {
 	/**
-	 * Specifies if the feature is enabled or disabled.
-	 *
-	 * @var bool
-	 */
-	public $isEnabled = null;
-
-	/**
-	 * A map (dictionary) to indicate to which existing metadata or tag the newly generated metadata value should be pushed, per assetStruct (per &#39;asset type&#39;)
+	 * A type of dictionary defined as [long,KalturaMetaFieldNameMap]. 
+	 *             This property is used to correlate the newly generated metadata to
+	 *             existing metadata IDs which are available in the asset’s struct.
 	 *
 	 * @var map
 	 */
@@ -5087,6 +5098,1377 @@ class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $supportedLanguages;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTreeQuestion extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the question.
+	 *
+	 * @var string
+	 */
+	public $questionId = null;
+
+	/**
+	 * The question text to display to the user.
+	 *
+	 * @var string
+	 */
+	public $text = null;
+
+	/**
+	 * The depth level in the tree (1 for top-level).
+	 *
+	 * @var int
+	 */
+	public $level = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTreeAnswer extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the answer.
+	 *
+	 * @var string
+	 */
+	public $answerId = null;
+
+	/**
+	 * The answer text to display to the user.
+	 *
+	 * @var string
+	 */
+	public $text = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaImage extends KalturaObjectBase
+{
+	/**
+	 * Image aspect ratio
+	 *
+	 * @var string
+	 */
+	public $ratio = null;
+
+	/**
+	 * Image width
+	 *
+	 * @var int
+	 */
+	public $width = null;
+
+	/**
+	 * Image height
+	 *
+	 * @var int
+	 */
+	public $height = null;
+
+	/**
+	 * Image URL
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+	/**
+	 * Image Version
+	 *
+	 * @var int
+	 */
+	public $version = null;
+
+	/**
+	 * Image ID
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Determined whether image was taken from default configuration or not
+	 *
+	 * @var bool
+	 */
+	public $isDefault = null;
+
+	/**
+	 * Image type identifier
+	 *
+	 * @var int
+	 */
+	public $imageTypeId = null;
+
+	/**
+	 * Image type Name
+	 *
+	 * @var string
+	 */
+	public $imageTypeName = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetFile extends KalturaObjectBase
+{
+	/**
+	 * URL of the media file to be played
+	 *
+	 * @var string
+	 */
+	public $url = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaStringValueArray extends KalturaObjectBase
+{
+	/**
+	 * List of string values
+	 *
+	 * @var array of KalturaStringValue
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBusinessModuleDetails extends KalturaObjectBase
+{
+	/**
+	 * BusinessModuleId
+	 *
+	 * @var int
+	 */
+	public $businessModuleId = null;
+
+	/**
+	 * BusinessModuleType
+	 *
+	 * @var KalturaTransactionType
+	 */
+	public $businessModuleType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaFile extends KalturaAssetFile
+{
+	/**
+	 * Unique identifier for the asset
+	 *
+	 * @var int
+	 */
+	public $assetId = null;
+
+	/**
+	 * File unique identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Deprecated - Device types as defined in the system
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $type = null;
+
+	/**
+	 * Device types identifier as defined in the system
+	 *
+	 * @var int
+	 */
+	public $typeId = null;
+
+	/**
+	 * URL of the media file to be played
+	 *
+	 * @var string
+	 */
+	public $altUrl = null;
+
+	/**
+	 * Duration of the media file
+	 *
+	 * @var int
+	 */
+	public $duration = null;
+
+	/**
+	 * External identifier for the media file
+	 *
+	 * @var string
+	 */
+	public $externalId = null;
+
+	/**
+	 * Alternative external identifier for the media file
+	 *
+	 * @var string
+	 */
+	public $altExternalId = null;
+
+	/**
+	 * File size
+	 *
+	 * @var int
+	 */
+	public $fileSize = null;
+
+	/**
+	 * Additional Data
+	 *
+	 * @var string
+	 */
+	public $additionalData = null;
+
+	/**
+	 * Alternative streaming code
+	 *
+	 * @var string
+	 */
+	public $altStreamingCode = null;
+
+	/**
+	 * Alternative cdn adapter profile identifier
+	 *
+	 * @var int
+	 */
+	public $alternativeCdnAdapaterProfileId = null;
+
+	/**
+	 * EndDate
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+	/**
+	 * StartDate
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * ExternalStoreId
+	 *
+	 * @var string
+	 */
+	public $externalStoreId = null;
+
+	/**
+	 * IsDefaultLanguage
+	 *
+	 * @var bool
+	 */
+	public $isDefaultLanguage = null;
+
+	/**
+	 * Language
+	 *
+	 * @var string
+	 */
+	public $language = null;
+
+	/**
+	 * OrderNum
+	 *
+	 * @var int
+	 */
+	public $orderNum = null;
+
+	/**
+	 * OutputProtecationLevel
+	 *
+	 * @var string
+	 */
+	public $outputProtecationLevel = null;
+
+	/**
+	 * cdn adapter profile identifier
+	 *
+	 * @var int
+	 */
+	public $cdnAdapaterProfileId = null;
+
+	/**
+	 * The media file status
+	 *
+	 * @var bool
+	 */
+	public $status = null;
+
+	/**
+	 * Catalog end date
+	 *
+	 * @var int
+	 */
+	public $catalogEndDate = null;
+
+	/**
+	 * OPL
+	 *
+	 * @var string
+	 */
+	public $opl = null;
+
+	/**
+	 * businessModuleDetails
+	 *
+	 * @var KalturaBusinessModuleDetails
+	 */
+	public $businessModuleDetails;
+
+	/**
+	 * Labels associated with the media file
+	 *
+	 * @var string
+	 */
+	public $labels = null;
+
+	/**
+	 * List of KalturaMediaFile&#39;s dynamic data keys
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBuzzScore extends KalturaObjectBase
+{
+	/**
+	 * Normalized average score
+	 *
+	 * @var float
+	 */
+	public $normalizedAvgScore = null;
+
+	/**
+	 * Update date
+	 *
+	 * @var int
+	 */
+	public $updateDate = null;
+
+	/**
+	 * Average score
+	 *
+	 * @var float
+	 */
+	public $avgScore = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetStatistics extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the asset
+	 *
+	 * @var int
+	 */
+	public $assetId = null;
+
+	/**
+	 * Total number of likes for this asset
+	 *
+	 * @var int
+	 */
+	public $likes = null;
+
+	/**
+	 * Total number of views for this asset
+	 *
+	 * @var int
+	 */
+	public $views = null;
+
+	/**
+	 * Number of people that rated the asset
+	 *
+	 * @var int
+	 */
+	public $ratingCount = null;
+
+	/**
+	 * Average rating for the asset
+	 *
+	 * @var float
+	 */
+	public $rating = null;
+
+	/**
+	 * Buzz score
+	 *
+	 * @var KalturaBuzzScore
+	 */
+	public $buzzScore;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMultilingualStringValueArray extends KalturaObjectBase
+{
+	/**
+	 * List of string values
+	 *
+	 * @var array of KalturaMultilingualStringValue
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRelatedEntity extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the related entry
+	 *
+	 * @var string
+	 */
+	public $id = null;
+
+	/**
+	 * Defines related entry type
+	 *
+	 * @var KalturaRelatedEntityType
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRelatedEntityArray extends KalturaObjectBase
+{
+	/**
+	 * List of related entities
+	 *
+	 * @var array of KalturaRelatedEntity
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaAsset extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier for the asset
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Identifies the asset type (EPG, Recording, Movie, TV Series, etc). 
+	 *             Possible values: 0 - EPG linear programs, 1 - Recording; or any asset type ID according to the asset types IDs defined in the system.
+	 *
+	 * @var int
+	 * @insertonly
+	 */
+	public $type = null;
+
+	/**
+	 * Asset name
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $name = null;
+
+	/**
+	 * Asset name
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualName;
+
+	/**
+	 * Asset description
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $description = null;
+
+	/**
+	 * Asset description
+	 *
+	 * @var array of KalturaTranslationToken
+	 */
+	public $multilingualDescription;
+
+	/**
+	 * Collection of images details that can be used to represent this asset
+	 *
+	 * @var array of KalturaMediaImage
+	 * @readonly
+	 */
+	public $images;
+
+	/**
+	 * Files
+	 *
+	 * @var array of KalturaMediaFile
+	 * @readonly
+	 */
+	public $mediaFiles;
+
+	/**
+	 * Dynamic collection of key-value pairs according to the String Meta defined in the system
+	 *
+	 * @var map
+	 */
+	public $metas;
+
+	/**
+	 * Dynamic collection of key-value pairs according to the Tag Types defined in the system
+	 *
+	 * @var map
+	 */
+	public $tags;
+
+	/**
+	 * Dynamic collection of key-value pairs according to the related entity defined in the system
+	 *
+	 * @var map
+	 */
+	public $relatedEntities;
+
+	/**
+	 * Date and time represented as epoch. For VOD - since when the asset is available in the catalog. For EPG/Linear - when the program is aired (can be in the future).
+	 *
+	 * @var int
+	 */
+	public $startDate = null;
+
+	/**
+	 * Date and time represented as epoch. For VOD - till when the asset be available in the catalog. For EPG/Linear - program end time and date
+	 *
+	 * @var int
+	 */
+	public $endDate = null;
+
+	/**
+	 * Specifies when was the Asset was created. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Specifies when was the Asset last updated. Date and time represented as epoch.
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * External identifier for the asset
+	 *
+	 * @var string
+	 */
+	public $externalId = null;
+
+	/**
+	 * The media asset index status
+	 *
+	 * @var KalturaAssetIndexStatus
+	 * @readonly
+	 */
+	public $indexStatus = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTreeRecommendations extends KalturaObjectBase
+{
+	/**
+	 * Descriptive title for the recommendation set.
+	 *
+	 * @var string
+	 */
+	public $title = null;
+
+	/**
+	 * Array of content assets matching the recommendation criteria, this is essentially a KalturaAssetListResponseObject.
+	 *
+	 * @var array of KalturaAsset
+	 */
+	public $assets;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTreeNextNodeResponse extends KalturaObjectBase
+{
+	/**
+	 * The tree id whom this node belongs to.
+	 *
+	 * @var string
+	 */
+	public $treeId = null;
+
+	/**
+	 * The next question to present to the user, or null for terminal nodes.
+	 *
+	 * @var KalturaTreeQuestion
+	 */
+	public $question;
+
+	/**
+	 * Number of total questions in the level.
+	 *
+	 * @var int
+	 */
+	public $totalLevelQuestions = null;
+
+	/**
+	 * Array of possible answer options for the question.
+	 *
+	 * @var array of KalturaTreeAnswer
+	 */
+	public $answers;
+
+	/**
+	 * Content recommendations based on the current path.
+	 *
+	 * @var KalturaTreeRecommendations
+	 */
+	public $recommendations;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveToVodInfoAsset extends KalturaObjectBase
+{
+	/**
+	 * Linear Asset Id
+	 *
+	 * @var int
+	 */
+	public $linearAssetId = null;
+
+	/**
+	 * EPG Id
+	 *
+	 * @var string
+	 */
+	public $epgId = null;
+
+	/**
+	 * EPG Channel Id
+	 *
+	 * @var int
+	 */
+	public $epgChannelId = null;
+
+	/**
+	 * Crid
+	 *
+	 * @var string
+	 */
+	public $crid = null;
+
+	/**
+	 * Original Start Date
+	 *
+	 * @var int
+	 */
+	public $originalStartDate = null;
+
+	/**
+	 * Original End Date
+	 *
+	 * @var int
+	 */
+	public $originalEndDate = null;
+
+	/**
+	 * Padding before program starts
+	 *
+	 * @var int
+	 */
+	public $paddingBeforeProgramStarts = null;
+
+	/**
+	 * Padding after program ends
+	 *
+	 * @var int
+	 */
+	public $paddingAfterProgramEnds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaAsset extends KalturaAsset
+{
+	/**
+	 * External identifiers
+	 *
+	 * @var string
+	 */
+	public $externalIds = null;
+
+	/**
+	 * Entry Identifier
+	 *
+	 * @var string
+	 */
+	public $entryId = null;
+
+	/**
+	 * Device rule identifier
+	 *
+	 * @var int
+	 */
+	public $deviceRuleId = null;
+
+	/**
+	 * Geo block rule identifier
+	 *
+	 * @var int
+	 */
+	public $geoBlockRuleId = null;
+
+	/**
+	 * The media asset status
+	 *
+	 * @var bool
+	 */
+	public $status = null;
+
+	/**
+	 * The media asset inheritance policy
+	 *
+	 * @var KalturaAssetInheritancePolicy
+	 */
+	public $inheritancePolicy = null;
+
+	/**
+	 * Live to VOD (if present)
+	 *
+	 * @var KalturaLiveToVodInfoAsset
+	 */
+	public $liveToVod;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLiveAsset extends KalturaMediaAsset
+{
+	/**
+	 * Enable CDVR, configuration only
+	 *
+	 * @var KalturaTimeShiftedTvState
+	 */
+	public $enableCdvrState = null;
+
+	/**
+	 * Enable catch-up, configuration only
+	 *
+	 * @var KalturaTimeShiftedTvState
+	 */
+	public $enableCatchUpState = null;
+
+	/**
+	 * Enable start over, configuration only
+	 *
+	 * @var KalturaTimeShiftedTvState
+	 */
+	public $enableStartOverState = null;
+
+	/**
+	 * buffer Catch-up, configuration only
+	 *
+	 * @var int
+	 */
+	public $bufferCatchUpSetting = null;
+
+	/**
+	 * Returns padding before program starts in seconds from a live asset if configured,
+	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
+	 *
+	 * @var int
+	 */
+	public $paddingBeforeProgramStarts = null;
+
+	/**
+	 * Returns padding after program ends in seconds from a live asset if configured,
+	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
+	 *
+	 * @var int
+	 */
+	public $paddingAfterProgramEnds = null;
+
+	/**
+	 * buffer Trick-play, configuration only
+	 *
+	 * @var int
+	 */
+	public $bufferTrickPlaySetting = null;
+
+	/**
+	 * Enable Recording playback for non entitled channel, configuration only
+	 *
+	 * @var KalturaTimeShiftedTvState
+	 */
+	public $enableRecordingPlaybackNonEntitledChannelState = null;
+
+	/**
+	 * Enable trick-play, configuration only
+	 *
+	 * @var KalturaTimeShiftedTvState
+	 */
+	public $enableTrickPlayState = null;
+
+	/**
+	 * External identifier used when ingesting programs for this linear media asset
+	 *
+	 * @var string
+	 */
+	public $externalEpgIngestId = null;
+
+	/**
+	 * External identifier for the CDVR
+	 *
+	 * @var string
+	 */
+	public $externalCdvrId = null;
+
+	/**
+	 * Is CDVR enabled for this asset
+	 *             Please, note that value of this property is strictly connected with CDV-R setting on Partner level.
+	 *             In order to enable CDV-R for KalturaLiveAsset, Partner CDV-R setting should be enabled.
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $enableCdvr = null;
+
+	/**
+	 * Is catch-up enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Catch Up setting on Partner level.
+	 *             In order to enable Catch Up for KalturaLiveAsset, Partner Catch Up setting should be enabled.
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $enableCatchUp = null;
+
+	/**
+	 * Is start over enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Start Over setting on Partner level.
+	 *             In order to enable Start Over for KalturaLiveAsset, Partner Start Over setting should be enabled.
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $enableStartOver = null;
+
+	/**
+	 * summed Catch-up buffer, the TimeShiftedTvPartnerSettings are also taken into consideration
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $catchUpBuffer = null;
+
+	/**
+	 * summed Trick-play buffer, the TimeShiftedTvPartnerSettings are also taken into consideration
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $trickPlayBuffer = null;
+
+	/**
+	 * Is recording playback for non entitled channel enabled for this asset
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $enableRecordingPlaybackNonEntitledChannel = null;
+
+	/**
+	 * Is trick-play enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Trick Play setting on Partner level.
+	 *             In order to enable Trick Play for KalturaLiveAsset, Partner Trick Play setting should be enabled.
+	 *
+	 * @var bool
+	 * @readonly
+	 */
+	public $enableTrickPlay = null;
+
+	/**
+	 * channel type, possible values: UNKNOWN, DTT, OTT, DTT_AND_OTT
+	 *
+	 * @var KalturaLinearChannelType
+	 */
+	public $channelType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLineupChannelAsset extends KalturaLiveAsset
+{
+	/**
+	 * Lineup channel number (LCN) - A logical linear channel number. This number is unique in the region context.
+	 *
+	 * @var int
+	 */
+	public $lcn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramAsset extends KalturaAsset
+{
+	/**
+	 * EPG channel identifier
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $epgChannelId = null;
+
+	/**
+	 * EPG identifier
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $epgId = null;
+
+	/**
+	 * Ralated media identifier
+	 *
+	 * @var int
+	 */
+	public $relatedMediaId = null;
+
+	/**
+	 * Unique identifier for the program
+	 *
+	 * @var string
+	 */
+	public $crid = null;
+
+	/**
+	 * Id of linear media asset
+	 *
+	 * @var int
+	 * @insertonly
+	 */
+	public $linearAssetId = null;
+
+	/**
+	 * Is CDVR enabled for this asset
+	 *             Please, note that value of this property is strictly connected with CDV-R setting on Partner and KalturaLiveAsset levels.
+	 *             In order to enable CDV-R for KalturaProgramAsset, Partner and KalturaLiveAsset CDV-R settings should be enabled.
+	 *
+	 * @var bool
+	 */
+	public $enableCdvr = null;
+
+	/**
+	 * Is catch-up enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Catch Up setting on Partner and KalturaLiveAsset levels.
+	 *             In order to enable Catch Up for KalturaProgramAsset, Partner and KalturaLiveAsset Catch Up settings should be enabled.
+	 *
+	 * @var bool
+	 */
+	public $enableCatchUp = null;
+
+	/**
+	 * Is start over enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Start Over setting on Partner and KalturaLiveAsset levels.
+	 *             In order to enable Start Over for KalturaProgramAsset, Partner and KalturaLiveAsset Start Over settings should be enabled.
+	 *
+	 * @var bool
+	 */
+	public $enableStartOver = null;
+
+	/**
+	 * Is trick-play enabled for this asset
+	 *             Please, note that value of this property is strictly connected with Trick Play setting on Partner and KalturaLiveAsset levels.
+	 *             In order to enable Trick Play for KalturaProgramAsset, Partner and KalturaLiveAsset Trick Play settings should be enabled.
+	 *
+	 * @var bool
+	 */
+	public $enableTrickPlay = null;
+
+	/**
+	 * Contains comma separate list of KalturaProgramAssetGroupOffer.externalOfferId values indicating the PAGOs to which the Program Asset is bound.
+	 *
+	 * @var string
+	 */
+	public $externalOfferIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaRecordingAsset extends KalturaProgramAsset
+{
+	/**
+	 * Recording identifier
+	 *
+	 * @var string
+	 */
+	public $recordingId = null;
+
+	/**
+	 * Recording Type: single/season/series
+	 *
+	 * @var KalturaRecordingType
+	 */
+	public $recordingType = null;
+
+	/**
+	 * Specifies until when the recording is available for viewing. Date and time represented as epoch.
+	 *
+	 * @var int
+	 */
+	public $viewableUntilDate = null;
+
+	/**
+	 * When TRUE indicates that there are multiple KalturaImmediateRecording instances for the event.
+	 *
+	 * @var bool
+	 */
+	public $multiRecord = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEpg extends KalturaProgramAsset
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPluginData extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDrmPlaybackPluginData extends KalturaPluginData
+{
+	/**
+	 * Scheme
+	 *
+	 * @var KalturaDrmSchemeName
+	 */
+	public $scheme = null;
+
+	/**
+	 * License URL
+	 *
+	 * @var string
+	 */
+	public $licenseURL = null;
+
+	/**
+	 * Dynamic data
+	 *
+	 * @var map
+	 */
+	public $dynamicData;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaPlaybackSource extends KalturaMediaFile
+{
+	/**
+	 * Source format according to delivery profile streamer type (applehttp, mpegdash etc.)
+	 *
+	 * @var string
+	 */
+	public $format = null;
+
+	/**
+	 * Comma separated string according to deliveryProfile media protocols (&#39;http,https&#39; etc.)
+	 *
+	 * @var string
+	 */
+	public $protocols = null;
+
+	/**
+	 * DRM data object containing relevant license URL ,scheme name and certificate
+	 *
+	 * @var array of KalturaDrmPlaybackPluginData
+	 */
+	public $drm;
+
+	/**
+	 * Is Tokenized
+	 *
+	 * @var bool
+	 */
+	public $isTokenized = null;
+
+	/**
+	 * Business Module Id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $businessModuleId = null;
+
+	/**
+	 * Business Module Type
+	 *
+	 * @var KalturaTransactionType
+	 * @readonly
+	 */
+	public $businessModuleType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCustomDrmPlaybackPluginData extends KalturaDrmPlaybackPluginData
+{
+	/**
+	 * Custom DRM license data
+	 *
+	 * @var string
+	 */
+	public $data = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaFairPlayPlaybackPluginData extends KalturaDrmPlaybackPluginData
+{
+	/**
+	 * Custom data string
+	 *
+	 * @var string
+	 */
+	public $certificate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDiscoveryMediaFile extends KalturaMediaFile
+{
+	/**
+	 * show, if file could be played
+	 *
+	 * @var bool
+	 */
+	public $isPlaybackable = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTreeNaturalTextResponse extends KalturaObjectBase
+{
+	/**
+	 * Content recommendations based on the natural language query.
+	 *
+	 * @var KalturaTreeRecommendations
+	 */
+	public $recommendations;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAiRecommendationTreePartnerConfiguration extends KalturaObjectBase
+{
+	/**
+	 * Dictionary of metadata types to base questions on (genre, actor, director, etc.) with their respective counts.
+	 *
+	 * @var map
+	 */
+	public $activeMetadataTypes;
+
+	/**
+	 * Number of top-level questions to generate (range: 5-30).
+	 *
+	 * @var int
+	 */
+	public $topLevelQuestions = null;
+
+	/**
+	 * Number of regular answers per question (range: 2-5).
+	 *
+	 * @var int
+	 */
+	public $answersPerQuestion = null;
+
+	/**
+	 * Maximum depth of the decision tree (range: 1-4).
+	 *
+	 * @var int
+	 */
+	public $levels = null;
+
+	/**
+	 * Whether to include special answers (e.g., &quot;I don&#39;t know&quot;, &quot;Surprise me&quot;) in the tree.
+	 *
+	 * @var bool
+	 */
+	public $specialAnswers = null;
+
+	/**
+	 * Number of assets to include in each recommendation set (max limit is 50).
+	 *
+	 * @var int
+	 */
+	public $numOfRecommendedAssets = null;
+
+	/**
+	 * Cron expression for scheduling tree regeneration.
+	 *
+	 * @var string
+	 */
+	public $treeGenerationFrequency = null;
+
+	/**
+	 * Identifier for the tree that is currently marked as Active (can be only one at a time)
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $activeTreeId = null;
 
 
 }
@@ -5930,79 +7312,6 @@ class KalturaCollection extends KalturaOTTObjectSupportNullable
 	 * @insertonly
 	 */
 	public $assetUserRuleId = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaMediaImage extends KalturaObjectBase
-{
-	/**
-	 * Image aspect ratio
-	 *
-	 * @var string
-	 */
-	public $ratio = null;
-
-	/**
-	 * Image width
-	 *
-	 * @var int
-	 */
-	public $width = null;
-
-	/**
-	 * Image height
-	 *
-	 * @var int
-	 */
-	public $height = null;
-
-	/**
-	 * Image URL
-	 *
-	 * @var string
-	 */
-	public $url = null;
-
-	/**
-	 * Image Version
-	 *
-	 * @var int
-	 */
-	public $version = null;
-
-	/**
-	 * Image ID
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Determined whether image was taken from default configuration or not
-	 *
-	 * @var bool
-	 */
-	public $isDefault = null;
-
-	/**
-	 * Image type identifier
-	 *
-	 * @var int
-	 */
-	public $imageTypeId = null;
-
-	/**
-	 * Image type Name
-	 *
-	 * @var string
-	 */
-	public $imageTypeName = null;
 
 
 }
@@ -7154,61 +8463,6 @@ class KalturaUdidDynamicList extends KalturaDynamicList
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaPluginData extends KalturaObjectBase
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDrmPlaybackPluginData extends KalturaPluginData
-{
-	/**
-	 * Scheme
-	 *
-	 * @var KalturaDrmSchemeName
-	 */
-	public $scheme = null;
-
-	/**
-	 * License URL
-	 *
-	 * @var string
-	 */
-	public $licenseURL = null;
-
-	/**
-	 * Dynamic data
-	 *
-	 * @var map
-	 */
-	public $dynamicData;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCustomDrmPlaybackPluginData extends KalturaDrmPlaybackPluginData
-{
-	/**
-	 * Custom DRM license data
-	 *
-	 * @var string
-	 */
-	public $data = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaHouseholdDevice extends KalturaOTTObjectSupportNullable
 {
 	/**
@@ -7321,22 +8575,6 @@ class KalturaHouseholdDevice extends KalturaOTTObjectSupportNullable
 	 * @readonly
 	 */
 	public $lastActivityTime = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaFairPlayPlaybackPluginData extends KalturaDrmPlaybackPluginData
-{
-	/**
-	 * Custom data string
-	 *
-	 * @var string
-	 */
-	public $certificate = null;
 
 
 }
@@ -7844,22 +9082,6 @@ class KalturaConcurrencyCondition extends KalturaAssetCondition
 	 * @var KalturaConcurrencyLimitationType
 	 */
 	public $concurrencyLimitationType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaStringValueArray extends KalturaObjectBase
-{
-	/**
-	 * List of string values
-	 *
-	 * @var array of KalturaStringValue
-	 */
-	public $objects;
 
 
 }
@@ -9414,335 +10636,6 @@ class KalturaIotProfileAws extends KalturaOTTObjectSupportNullable
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaAssetFile extends KalturaObjectBase
-{
-	/**
-	 * URL of the media file to be played
-	 *
-	 * @var string
-	 */
-	public $url = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBusinessModuleDetails extends KalturaObjectBase
-{
-	/**
-	 * BusinessModuleId
-	 *
-	 * @var int
-	 */
-	public $businessModuleId = null;
-
-	/**
-	 * BusinessModuleType
-	 *
-	 * @var KalturaTransactionType
-	 */
-	public $businessModuleType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaMediaFile extends KalturaAssetFile
-{
-	/**
-	 * Unique identifier for the asset
-	 *
-	 * @var int
-	 */
-	public $assetId = null;
-
-	/**
-	 * File unique identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Deprecated - Device types as defined in the system
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $type = null;
-
-	/**
-	 * Device types identifier as defined in the system
-	 *
-	 * @var int
-	 */
-	public $typeId = null;
-
-	/**
-	 * URL of the media file to be played
-	 *
-	 * @var string
-	 */
-	public $altUrl = null;
-
-	/**
-	 * Duration of the media file
-	 *
-	 * @var int
-	 */
-	public $duration = null;
-
-	/**
-	 * External identifier for the media file
-	 *
-	 * @var string
-	 */
-	public $externalId = null;
-
-	/**
-	 * Alternative external identifier for the media file
-	 *
-	 * @var string
-	 */
-	public $altExternalId = null;
-
-	/**
-	 * File size
-	 *
-	 * @var int
-	 */
-	public $fileSize = null;
-
-	/**
-	 * Additional Data
-	 *
-	 * @var string
-	 */
-	public $additionalData = null;
-
-	/**
-	 * Alternative streaming code
-	 *
-	 * @var string
-	 */
-	public $altStreamingCode = null;
-
-	/**
-	 * Alternative cdn adapter profile identifier
-	 *
-	 * @var int
-	 */
-	public $alternativeCdnAdapaterProfileId = null;
-
-	/**
-	 * EndDate
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-	/**
-	 * StartDate
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * ExternalStoreId
-	 *
-	 * @var string
-	 */
-	public $externalStoreId = null;
-
-	/**
-	 * IsDefaultLanguage
-	 *
-	 * @var bool
-	 */
-	public $isDefaultLanguage = null;
-
-	/**
-	 * Language
-	 *
-	 * @var string
-	 */
-	public $language = null;
-
-	/**
-	 * OrderNum
-	 *
-	 * @var int
-	 */
-	public $orderNum = null;
-
-	/**
-	 * OutputProtecationLevel
-	 *
-	 * @var string
-	 */
-	public $outputProtecationLevel = null;
-
-	/**
-	 * cdn adapter profile identifier
-	 *
-	 * @var int
-	 */
-	public $cdnAdapaterProfileId = null;
-
-	/**
-	 * The media file status
-	 *
-	 * @var bool
-	 */
-	public $status = null;
-
-	/**
-	 * Catalog end date
-	 *
-	 * @var int
-	 */
-	public $catalogEndDate = null;
-
-	/**
-	 * OPL
-	 *
-	 * @var string
-	 */
-	public $opl = null;
-
-	/**
-	 * businessModuleDetails
-	 *
-	 * @var KalturaBusinessModuleDetails
-	 */
-	public $businessModuleDetails;
-
-	/**
-	 * Labels associated with the media file
-	 *
-	 * @var string
-	 */
-	public $labels = null;
-
-	/**
-	 * List of KalturaMediaFile&#39;s dynamic data keys
-	 *
-	 * @var map
-	 */
-	public $dynamicData;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaBuzzScore extends KalturaObjectBase
-{
-	/**
-	 * Normalized average score
-	 *
-	 * @var float
-	 */
-	public $normalizedAvgScore = null;
-
-	/**
-	 * Update date
-	 *
-	 * @var int
-	 */
-	public $updateDate = null;
-
-	/**
-	 * Average score
-	 *
-	 * @var float
-	 */
-	public $avgScore = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAssetStatistics extends KalturaObjectBase
-{
-	/**
-	 * Unique identifier for the asset
-	 *
-	 * @var int
-	 */
-	public $assetId = null;
-
-	/**
-	 * Total number of likes for this asset
-	 *
-	 * @var int
-	 */
-	public $likes = null;
-
-	/**
-	 * Total number of views for this asset
-	 *
-	 * @var int
-	 */
-	public $views = null;
-
-	/**
-	 * Number of people that rated the asset
-	 *
-	 * @var int
-	 */
-	public $ratingCount = null;
-
-	/**
-	 * Average rating for the asset
-	 *
-	 * @var float
-	 */
-	public $rating = null;
-
-	/**
-	 * Buzz score
-	 *
-	 * @var KalturaBuzzScore
-	 */
-	public $buzzScore;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaMultilingualStringValueArray extends KalturaObjectBase
-{
-	/**
-	 * List of string values
-	 *
-	 * @var array of KalturaMultilingualStringValue
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaFavorite extends KalturaObjectBase
 {
 	/**
@@ -9782,75 +10675,6 @@ class KalturaFavoriteListResponse extends KalturaListResponse
 	 * @var array of KalturaFavorite
 	 */
 	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaPlaybackSource extends KalturaMediaFile
-{
-	/**
-	 * Source format according to delivery profile streamer type (applehttp, mpegdash etc.)
-	 *
-	 * @var string
-	 */
-	public $format = null;
-
-	/**
-	 * Comma separated string according to deliveryProfile media protocols (&#39;http,https&#39; etc.)
-	 *
-	 * @var string
-	 */
-	public $protocols = null;
-
-	/**
-	 * DRM data object containing relevant license URL ,scheme name and certificate
-	 *
-	 * @var array of KalturaDrmPlaybackPluginData
-	 */
-	public $drm;
-
-	/**
-	 * Is Tokenized
-	 *
-	 * @var bool
-	 */
-	public $isTokenized = null;
-
-	/**
-	 * Business Module Id
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $businessModuleId = null;
-
-	/**
-	 * Business Module Type
-	 *
-	 * @var KalturaTransactionType
-	 * @readonly
-	 */
-	public $businessModuleType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDiscoveryMediaFile extends KalturaMediaFile
-{
-	/**
-	 * show, if file could be played
-	 *
-	 * @var bool
-	 */
-	public $isPlaybackable = null;
 
 
 }
@@ -16785,183 +17609,6 @@ class KalturaAssetHistoryListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaRelatedEntity extends KalturaObjectBase
-{
-	/**
-	 * Unique identifier for the related entry
-	 *
-	 * @var string
-	 */
-	public $id = null;
-
-	/**
-	 * Defines related entry type
-	 *
-	 * @var KalturaRelatedEntityType
-	 */
-	public $type = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRelatedEntityArray extends KalturaObjectBase
-{
-	/**
-	 * List of related entities
-	 *
-	 * @var array of KalturaRelatedEntity
-	 */
-	public $objects;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-abstract class KalturaAsset extends KalturaObjectBase
-{
-	/**
-	 * Unique identifier for the asset
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $id = null;
-
-	/**
-	 * Identifies the asset type (EPG, Recording, Movie, TV Series, etc). 
-	 *             Possible values: 0 - EPG linear programs, 1 - Recording; or any asset type ID according to the asset types IDs defined in the system.
-	 *
-	 * @var int
-	 * @insertonly
-	 */
-	public $type = null;
-
-	/**
-	 * Asset name
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $name = null;
-
-	/**
-	 * Asset name
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualName;
-
-	/**
-	 * Asset description
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $description = null;
-
-	/**
-	 * Asset description
-	 *
-	 * @var array of KalturaTranslationToken
-	 */
-	public $multilingualDescription;
-
-	/**
-	 * Collection of images details that can be used to represent this asset
-	 *
-	 * @var array of KalturaMediaImage
-	 * @readonly
-	 */
-	public $images;
-
-	/**
-	 * Files
-	 *
-	 * @var array of KalturaMediaFile
-	 * @readonly
-	 */
-	public $mediaFiles;
-
-	/**
-	 * Dynamic collection of key-value pairs according to the String Meta defined in the system
-	 *
-	 * @var map
-	 */
-	public $metas;
-
-	/**
-	 * Dynamic collection of key-value pairs according to the Tag Types defined in the system
-	 *
-	 * @var map
-	 */
-	public $tags;
-
-	/**
-	 * Dynamic collection of key-value pairs according to the related entity defined in the system
-	 *
-	 * @var map
-	 */
-	public $relatedEntities;
-
-	/**
-	 * Date and time represented as epoch. For VOD - since when the asset is available in the catalog. For EPG/Linear - when the program is aired (can be in the future).
-	 *
-	 * @var int
-	 */
-	public $startDate = null;
-
-	/**
-	 * Date and time represented as epoch. For VOD - till when the asset be available in the catalog. For EPG/Linear - program end time and date
-	 *
-	 * @var int
-	 */
-	public $endDate = null;
-
-	/**
-	 * Specifies when was the Asset was created. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $createDate = null;
-
-	/**
-	 * Specifies when was the Asset last updated. Date and time represented as epoch.
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $updateDate = null;
-
-	/**
-	 * External identifier for the asset
-	 *
-	 * @var string
-	 */
-	public $externalId = null;
-
-	/**
-	 * The media asset index status
-	 *
-	 * @var KalturaAssetIndexStatus
-	 * @readonly
-	 */
-	public $indexStatus = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaAssetListResponse extends KalturaListResponse
 {
 	/**
@@ -16971,440 +17618,6 @@ class KalturaAssetListResponse extends KalturaListResponse
 	 */
 	public $objects;
 
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLiveToVodInfoAsset extends KalturaObjectBase
-{
-	/**
-	 * Linear Asset Id
-	 *
-	 * @var int
-	 */
-	public $linearAssetId = null;
-
-	/**
-	 * EPG Id
-	 *
-	 * @var string
-	 */
-	public $epgId = null;
-
-	/**
-	 * EPG Channel Id
-	 *
-	 * @var int
-	 */
-	public $epgChannelId = null;
-
-	/**
-	 * Crid
-	 *
-	 * @var string
-	 */
-	public $crid = null;
-
-	/**
-	 * Original Start Date
-	 *
-	 * @var int
-	 */
-	public $originalStartDate = null;
-
-	/**
-	 * Original End Date
-	 *
-	 * @var int
-	 */
-	public $originalEndDate = null;
-
-	/**
-	 * Padding before program starts
-	 *
-	 * @var int
-	 */
-	public $paddingBeforeProgramStarts = null;
-
-	/**
-	 * Padding after program ends
-	 *
-	 * @var int
-	 */
-	public $paddingAfterProgramEnds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaMediaAsset extends KalturaAsset
-{
-	/**
-	 * External identifiers
-	 *
-	 * @var string
-	 */
-	public $externalIds = null;
-
-	/**
-	 * Entry Identifier
-	 *
-	 * @var string
-	 */
-	public $entryId = null;
-
-	/**
-	 * Device rule identifier
-	 *
-	 * @var int
-	 */
-	public $deviceRuleId = null;
-
-	/**
-	 * Geo block rule identifier
-	 *
-	 * @var int
-	 */
-	public $geoBlockRuleId = null;
-
-	/**
-	 * The media asset status
-	 *
-	 * @var bool
-	 */
-	public $status = null;
-
-	/**
-	 * The media asset inheritance policy
-	 *
-	 * @var KalturaAssetInheritancePolicy
-	 */
-	public $inheritancePolicy = null;
-
-	/**
-	 * Live to VOD (if present)
-	 *
-	 * @var KalturaLiveToVodInfoAsset
-	 */
-	public $liveToVod;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLiveAsset extends KalturaMediaAsset
-{
-	/**
-	 * Enable CDVR, configuration only
-	 *
-	 * @var KalturaTimeShiftedTvState
-	 */
-	public $enableCdvrState = null;
-
-	/**
-	 * Enable catch-up, configuration only
-	 *
-	 * @var KalturaTimeShiftedTvState
-	 */
-	public $enableCatchUpState = null;
-
-	/**
-	 * Enable start over, configuration only
-	 *
-	 * @var KalturaTimeShiftedTvState
-	 */
-	public $enableStartOverState = null;
-
-	/**
-	 * buffer Catch-up, configuration only
-	 *
-	 * @var int
-	 */
-	public $bufferCatchUpSetting = null;
-
-	/**
-	 * Returns padding before program starts in seconds from a live asset if configured,
-	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
-	 *
-	 * @var int
-	 */
-	public $paddingBeforeProgramStarts = null;
-
-	/**
-	 * Returns padding after program ends in seconds from a live asset if configured,
-	 *             otherwise returns corresponding value from TimeShiftedTvPartnerSettings.
-	 *
-	 * @var int
-	 */
-	public $paddingAfterProgramEnds = null;
-
-	/**
-	 * buffer Trick-play, configuration only
-	 *
-	 * @var int
-	 */
-	public $bufferTrickPlaySetting = null;
-
-	/**
-	 * Enable Recording playback for non entitled channel, configuration only
-	 *
-	 * @var KalturaTimeShiftedTvState
-	 */
-	public $enableRecordingPlaybackNonEntitledChannelState = null;
-
-	/**
-	 * Enable trick-play, configuration only
-	 *
-	 * @var KalturaTimeShiftedTvState
-	 */
-	public $enableTrickPlayState = null;
-
-	/**
-	 * External identifier used when ingesting programs for this linear media asset
-	 *
-	 * @var string
-	 */
-	public $externalEpgIngestId = null;
-
-	/**
-	 * External identifier for the CDVR
-	 *
-	 * @var string
-	 */
-	public $externalCdvrId = null;
-
-	/**
-	 * Is CDVR enabled for this asset
-	 *             Please, note that value of this property is strictly connected with CDV-R setting on Partner level.
-	 *             In order to enable CDV-R for KalturaLiveAsset, Partner CDV-R setting should be enabled.
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $enableCdvr = null;
-
-	/**
-	 * Is catch-up enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Catch Up setting on Partner level.
-	 *             In order to enable Catch Up for KalturaLiveAsset, Partner Catch Up setting should be enabled.
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $enableCatchUp = null;
-
-	/**
-	 * Is start over enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Start Over setting on Partner level.
-	 *             In order to enable Start Over for KalturaLiveAsset, Partner Start Over setting should be enabled.
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $enableStartOver = null;
-
-	/**
-	 * summed Catch-up buffer, the TimeShiftedTvPartnerSettings are also taken into consideration
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $catchUpBuffer = null;
-
-	/**
-	 * summed Trick-play buffer, the TimeShiftedTvPartnerSettings are also taken into consideration
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $trickPlayBuffer = null;
-
-	/**
-	 * Is recording playback for non entitled channel enabled for this asset
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $enableRecordingPlaybackNonEntitledChannel = null;
-
-	/**
-	 * Is trick-play enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Trick Play setting on Partner level.
-	 *             In order to enable Trick Play for KalturaLiveAsset, Partner Trick Play setting should be enabled.
-	 *
-	 * @var bool
-	 * @readonly
-	 */
-	public $enableTrickPlay = null;
-
-	/**
-	 * channel type, possible values: UNKNOWN, DTT, OTT, DTT_AND_OTT
-	 *
-	 * @var KalturaLinearChannelType
-	 */
-	public $channelType = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLineupChannelAsset extends KalturaLiveAsset
-{
-	/**
-	 * Lineup channel number (LCN) - A logical linear channel number. This number is unique in the region context.
-	 *
-	 * @var int
-	 */
-	public $lcn = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaProgramAsset extends KalturaAsset
-{
-	/**
-	 * EPG channel identifier
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $epgChannelId = null;
-
-	/**
-	 * EPG identifier
-	 *
-	 * @var string
-	 * @readonly
-	 */
-	public $epgId = null;
-
-	/**
-	 * Ralated media identifier
-	 *
-	 * @var int
-	 */
-	public $relatedMediaId = null;
-
-	/**
-	 * Unique identifier for the program
-	 *
-	 * @var string
-	 */
-	public $crid = null;
-
-	/**
-	 * Id of linear media asset
-	 *
-	 * @var int
-	 * @insertonly
-	 */
-	public $linearAssetId = null;
-
-	/**
-	 * Is CDVR enabled for this asset
-	 *             Please, note that value of this property is strictly connected with CDV-R setting on Partner and KalturaLiveAsset levels.
-	 *             In order to enable CDV-R for KalturaProgramAsset, Partner and KalturaLiveAsset CDV-R settings should be enabled.
-	 *
-	 * @var bool
-	 */
-	public $enableCdvr = null;
-
-	/**
-	 * Is catch-up enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Catch Up setting on Partner and KalturaLiveAsset levels.
-	 *             In order to enable Catch Up for KalturaProgramAsset, Partner and KalturaLiveAsset Catch Up settings should be enabled.
-	 *
-	 * @var bool
-	 */
-	public $enableCatchUp = null;
-
-	/**
-	 * Is start over enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Start Over setting on Partner and KalturaLiveAsset levels.
-	 *             In order to enable Start Over for KalturaProgramAsset, Partner and KalturaLiveAsset Start Over settings should be enabled.
-	 *
-	 * @var bool
-	 */
-	public $enableStartOver = null;
-
-	/**
-	 * Is trick-play enabled for this asset
-	 *             Please, note that value of this property is strictly connected with Trick Play setting on Partner and KalturaLiveAsset levels.
-	 *             In order to enable Trick Play for KalturaProgramAsset, Partner and KalturaLiveAsset Trick Play settings should be enabled.
-	 *
-	 * @var bool
-	 */
-	public $enableTrickPlay = null;
-
-	/**
-	 * Contains comma separate list of KalturaProgramAssetGroupOffer.externalOfferId values indicating the PAGOs to which the Program Asset is bound.
-	 *
-	 * @var string
-	 */
-	public $externalOfferIds = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaRecordingAsset extends KalturaProgramAsset
-{
-	/**
-	 * Recording identifier
-	 *
-	 * @var string
-	 */
-	public $recordingId = null;
-
-	/**
-	 * Recording Type: single/season/series
-	 *
-	 * @var KalturaRecordingType
-	 */
-	public $recordingType = null;
-
-	/**
-	 * Specifies until when the recording is available for viewing. Date and time represented as epoch.
-	 *
-	 * @var int
-	 */
-	public $viewableUntilDate = null;
-
-	/**
-	 * When TRUE indicates that there are multiple KalturaImmediateRecording instances for the event.
-	 *
-	 * @var bool
-	 */
-	public $multiRecord = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEpg extends KalturaProgramAsset
-{
 
 }
 
@@ -20799,6 +21012,92 @@ class KalturaUserRoleListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGeoBlockRule extends KalturaObjectBase
+{
+	/**
+	 * Geo Block Rule id
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $id = null;
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	public $name = null;
+
+	/**
+	 * Create Date Epoch time in seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createDate = null;
+
+	/**
+	 * Update Date Epoch time in seconds
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $updateDate = null;
+
+	/**
+	 * comma separated string representing list of countries that the rule shall apply to
+	 *
+	 * @var string
+	 */
+	public $countryIds = null;
+
+	/**
+	 * mode - Defines the geo-blocking strategy based on user location.
+	 *             AllowOnlySelected - Implements a restrictive whitelist approach where content is only accessible from explicitly selected countries. All other countries are blocked by default.
+	 *             BlockOnlySelected - Implements a permissive blacklist approach where content is accessible from all countries except those explicitly selected for blocking.
+	 *
+	 * @var KalturaGeoBlockMode
+	 */
+	public $mode = null;
+
+	/**
+	 * Should geo block rule check proxy as well
+	 *
+	 * @var bool
+	 */
+	public $isProxyRuleEnabled = null;
+
+	/**
+	 * Level of proxy rule check - medium or high
+	 *
+	 * @var KalturaProxyRuleLevel
+	 */
+	public $proxyRuleLevel = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGeoBlockRuleListResponse extends KalturaListResponse
+{
+	/**
+	 * Geo block rules
+	 *
+	 * @var array of KalturaGeoBlockRule
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEpgListResponse extends KalturaListResponse
 {
 	/**
@@ -21098,6 +21397,131 @@ class KalturaPlaybackContextOptions extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGetPlaybackContextParams extends KalturaObjectBase
+{
+	/**
+	 * Unique identifier of the asset
+	 *
+	 * @var string
+	 */
+	public $assetId = null;
+
+	/**
+	 * Type of the asset
+	 *
+	 * @var KalturaAssetType
+	 */
+	public $assetType = null;
+
+	/**
+	 * Playback context options
+	 *
+	 * @var KalturaPlaybackContextOptions
+	 */
+	public $contextDataParams;
+
+	/**
+	 * Source type (optional)
+	 *
+	 * @var string
+	 */
+	public $sourceType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextRequest extends KalturaObjectBase
+{
+	/**
+	 * Array of request parameters for getPlaybackContext.
+	 *             Each entry represents an individual playback context request.
+	 *
+	 * @var array of KalturaGetPlaybackContextParams
+	 */
+	public $playbackContextParamSets;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaBulkResponseItem extends KalturaObjectBase
+{
+	/**
+	 * Indicates whether the bulk operation was successful
+	 *
+	 * @var bool
+	 */
+	public $isSuccess = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextResponse extends KalturaObjectBase
+{
+	/**
+	 * Array of playback contexts or errors.
+	 *             Each item corresponds to the request at the same index in the request array.
+	 *             Items can be either KalturaPlaybackContext (success) or KalturaBulkPlaybackContextError (error).
+	 *
+	 * @var array of KalturaBulkResponseItem
+	 */
+	public $items;
+
+	/**
+	 * Total items
+	 *
+	 * @var int
+	 */
+	public $totalCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextError extends KalturaBulkResponseItem
+{
+	/**
+	 * The error code from the API exception
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+	/**
+	 * The error message from the API exception
+	 *
+	 * @var string
+	 */
+	public $message = null;
+
+	/**
+	 * Additional error arguments from the API exception
+	 *
+	 * @var array of KalturaApiExceptionArg
+	 */
+	public $args;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAccessControlMessage extends KalturaObjectBase
 {
 	/**
@@ -21203,6 +21627,22 @@ class KalturaPlaybackContext extends KalturaObjectBase
 	 * @var array of KalturaPlaybackPluginData
 	 */
 	public $plugins;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBulkPlaybackContextSuccess extends KalturaBulkResponseItem
+{
+	/**
+	 * The successful playback context
+	 *
+	 * @var KalturaPlaybackContext
+	 */
+	public $playbackContext;
 
 
 }
@@ -22758,6 +23198,27 @@ class KalturaVodIngestAssetResult extends KalturaObjectBase
 	 */
 	public $warnings;
 
+	/**
+	 * The date and time for which the ingest file was uploaded to the remote file server. Expressed in milliseconds EPOCH time.
+	 *
+	 * @var int
+	 */
+	public $fileUploadDate = null;
+
+	/**
+	 * The date and time for which the ingest file moved to in progress folder and started processing. Expressed in milliseconds EPOCH time.
+	 *
+	 * @var int
+	 */
+	public $processingStartDate = null;
+
+	/**
+	 * The date and time for which the ingest file completed the ingest process. Expressed in milliseconds EPOCH time.
+	 *
+	 * @var int
+	 */
+	public $processingCompletionDate = null;
+
 
 }
 
@@ -22831,6 +23292,34 @@ class KalturaVodIngestAssetResultAggregation extends KalturaObjectBase
 	 * @var int
 	 */
 	public $successWithWarningCount = null;
+
+	/**
+	 * Average calculated for the total processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $averageTotalProcessingDuration = null;
+
+	/**
+	 * Average calculated for the active processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $averageTotalActiveProcessingDuration = null;
+
+	/**
+	 * 0.95 percentile calculated for the total processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $p95TotalProcessingDuration = null;
+
+	/**
+	 * 0.95 percentile calculated for the active processing duration of the assets returned according to the applied filters.
+	 *
+	 * @var int
+	 */
+	public $p95TotalActiveProcessingDuration = null;
 
 
 }
