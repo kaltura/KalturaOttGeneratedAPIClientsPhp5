@@ -5030,9 +5030,9 @@ class KalturaGenerateMetadataByDescription extends KalturaObjectBase
 	 * A string that uniquely identifies the asset which will be enriched and from which the description will be extracted.
 	 *             This is the external asset ID set by the customer (CoGuid) and not the internal Kaltura asset ID.
 	 *
-	 * @var KalturaStringValue
+	 * @var string
 	 */
-	public $externalAssetId;
+	public $externalAssetId = null;
 
 
 }
