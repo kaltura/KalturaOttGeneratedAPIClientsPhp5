@@ -4949,7 +4949,7 @@ class KalturaGenerateMetadataBySubtitles extends KalturaObjectBase
 	 *
 	 * @var int
 	 */
-	public $id = null;
+	public $subtitlesFileId = null;
 
 	/**
 	 * An optional array of KalturaStringValue specifying the target assets to which the generated metadata will be pushed.
