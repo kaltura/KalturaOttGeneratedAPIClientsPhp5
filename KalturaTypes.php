@@ -6898,20 +6898,6 @@ class KalturaAssetFilePpv extends KalturaOTTObjectSupportNullable
 	 */
 	public $endDate = null;
 
-	/**
-	 * First date and time an KalturaAssetFilePpv.AssetFileId can be purchased with the given KalturaAssetFilePpv.PpvModuleId. Represented as epoch
-	 *
-	 * @var int
-	 */
-	public $purchaseStartDate = null;
-
-	/**
-	 * Final date and time an KalturaAssetFilePpv.AssetFileId can be purchased with the given KalturaAssetFilePpv.PpvModuleId. Represented as epoch
-	 *
-	 * @var int
-	 */
-	public $purchaseEndDate = null;
-
 
 }
 

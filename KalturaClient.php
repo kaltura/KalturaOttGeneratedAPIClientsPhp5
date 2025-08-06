@@ -1072,7 +1072,7 @@ class KalturaAssetFilePpvService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update assetFilePpv dates
+	 * Update assetFilePpv
 	 * 
 	 * @param bigint $assetFileId Asset file id
 	 * @param bigint $ppvModuleId Ppv module id
