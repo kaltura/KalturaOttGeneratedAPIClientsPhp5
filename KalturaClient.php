@@ -48,47 +48,27 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	}
 
 	/**
-	 * Initiate the process of metadata generation based on existing asset description metadata.
-            The service will analyze the asset&#39;s description and genre metadata using AI/LLM to generate
-            additional enriched metadata fields including enhanced genre classifications, sentiment analysis,
-            and relevant keywords. This method is useful for enriching assets that already have basic
-            description metadata but need additional AI-generated metadata fields.
+	 * Start metadata generation process based on subtitles.
 	 * 
-	 * @param KalturaGenerateMetadataByDescription $generateMetadataByDescription Request object containing the external asset ID to analyze and enrich
-	 * @return KalturaGenerateMetadataJob
+	 * @param bigint $subtitlesFileId The subtitles file ID returned from subtitles.uploadFile.
+	 * @param array $externalAssetIds A list of external asset IDs to be populated with the generated metadata.
+	 * @return KalturaGenerateMetadataBySubtitlesJob
 	 */
-	function generateMetadataByDescription(KalturaGenerateMetadataByDescription $generateMetadataByDescription)
+	function generateMetadataBySubtitles($subtitlesFileId, array $externalAssetIds = null)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "generateMetadataByDescription", $generateMetadataByDescription->toParams());
-		$this->client->queueServiceActionCall("aimetadatagenerator", "generateMetadataByDescription", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataJob");
-		return $resultObject;
-	}
-
-	/**
-	 * Initiate the process of metadata generation based on the subtitles file.
-            The subtitles file must be previously uploaded using the subtitles.uploadFile service.
-            The service will analyze the subtitle content using AI/LLM to generate enriched metadata including
-            genre, description, keywords, sentiment analysis, and other metadata fields.
-	 * 
-	 * @param KalturaGenerateMetadataBySubtitles $generateMetadataBySubtitles Request object containing the subtitles file ID and optional external asset IDs to update
-	 * @return KalturaGenerateMetadataJob
-	 */
-	function generateMetadataBySubtitles(KalturaGenerateMetadataBySubtitles $generateMetadataBySubtitles)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "generateMetadataBySubtitles", $generateMetadataBySubtitles->toParams());
+		$this->client->addParam($kparams, "subtitlesFileId", $subtitlesFileId);
+		if ($externalAssetIds !== null)
+			foreach($externalAssetIds as $index => $obj)
+			{
+				$this->client->addParam($kparams, "externalAssetIds:$index", $obj->toParams());
+			}
 		$this->client->queueServiceActionCall("aimetadatagenerator", "generateMetadataBySubtitles", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataJob");
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataBySubtitlesJob");
 		return $resultObject;
 	}
 
@@ -115,7 +95,7 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	 * Get a metadata generation job.
 	 * 
 	 * @param bigint $id The job ID as received from GenerateMetadataBySubtitles.
-	 * @return KalturaGenerateMetadataJob
+	 * @return KalturaGenerateMetadataBySubtitlesJob
 	 */
 	function getGenerateMetadataJob($id)
 	{
@@ -126,7 +106,7 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataJob");
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataBySubtitlesJob");
 		return $resultObject;
 	}
 
@@ -15584,8 +15564,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-08-06');
-		$this->setApiVersion('11.5.0.0');
+		$this->setClientTag('php5:25-08-14');
+		$this->setApiVersion('11.5.0.2');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
 		$this->aiRecommendationTree = new KalturaAiRecommendationTreeService($this);
