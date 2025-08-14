@@ -4941,31 +4941,7 @@ class KalturaSkipOnErrorCondition extends KalturaSkipCondition
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaGenerateMetadataBySubtitles extends KalturaObjectBase
-{
-	/**
-	 * A mandatory Long type with the subtitles file ID returned from the subtitles.uploadFile request.
-	 *             It is used to correlate the uploaded file with the metadata generation request.
-	 *
-	 * @var int
-	 */
-	public $subtitlesFileId = null;
-
-	/**
-	 * An optional array of KalturaStringValue specifying the target assets to which the generated metadata will be pushed.
-	 *
-	 * @var array of KalturaStringValue
-	 */
-	public $externalAssetIds;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaGenerateMetadataJob extends KalturaObjectBase
+class KalturaGenerateMetadataBySubtitlesJob extends KalturaObjectBase
 {
 	/**
 	 * Unique identifier for the generation job
@@ -4992,17 +4968,15 @@ class KalturaGenerateMetadataJob extends KalturaObjectBase
 	public $updateDate = null;
 
 	/**
-	 * Name of the source job element generating the metadata.
-	 *             For generateMetadataBySubtitles: the uploaded subtitle file name.
-	 *             For generateMetadataByDescription: the asset name from which metadata is generated.
+	 * Name of the uploaded subtitles file from which the metadata is generated.
 	 *
 	 * @var string
 	 * @readonly
 	 */
-	public $sourceName = null;
+	public $fileName = null;
 
 	/**
-	 * can be either Processing/Success/Failed, per the last status updated by the aiMetadataGenerator.
+	 * Service status states.
 	 *
 	 * @var KalturaGenerateMetadataStatus
 	 * @readonly
@@ -5016,23 +4990,6 @@ class KalturaGenerateMetadataJob extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $errorMessage = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaGenerateMetadataByDescription extends KalturaObjectBase
-{
-	/**
-	 * A string that uniquely identifies the asset which will be enriched and from which the description will be extracted.
-	 *             This is the external asset ID set by the customer (CoGuid) and not the internal Kaltura asset ID.
-	 *
-	 * @var string
-	 */
-	public $externalAssetId = null;
 
 
 }
