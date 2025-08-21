@@ -12541,6 +12541,20 @@ class KalturaWatchBasedRecommendationsProfile extends KalturaObjectBase
 	 */
 	public $playbackInterestsCalculationPeriodDays = null;
 
+	/**
+	 * Minimum required viewing time per session (in minutes) for live content to be considered in the analysis.
+	 *
+	 * @var int
+	 */
+	public $userInterestPlayThresholdForEventInMinutes = null;
+
+	/**
+	 * Minimum required viewing time per session (in minutes) for live content to be considered in the analysis.
+	 *
+	 * @var int
+	 */
+	public $maximumEventsPerSession = null;
+
 
 }
 
