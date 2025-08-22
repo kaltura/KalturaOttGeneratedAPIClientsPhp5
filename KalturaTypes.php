@@ -12542,6 +12542,20 @@ class KalturaWatchBasedRecommendationsProfile extends KalturaObjectBase
 	public $playbackInterestsCalculationPeriodDays = null;
 
 	/**
+	 * Determines whether catch-up viewing data should be included in the user&#39;s interest analysis.
+	 *
+	 * @var bool
+	 */
+	public $analyzeCatchUps = null;
+
+	/**
+	 * Determines whether linear events viewing data should be included in the user&#39;s interest analysis.
+	 *
+	 * @var bool
+	 */
+	public $analyzeLinearEvents = null;
+
+	/**
 	 * Minimum required viewing time per session (in minutes) for live content to be considered in the analysis.
 	 *
 	 * @var int
