@@ -67,6 +67,16 @@ class KalturaAggregationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAiRecommendationTreeFeatureLevel extends KalturaEnumBase
+{
+	const BASIC = "Basic";
+	const PREMIUM = "Premium";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnouncementOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";

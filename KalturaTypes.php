@@ -6478,7 +6478,7 @@ class KalturaAiRecommendationTreePartnerConfiguration extends KalturaObjectBase
 	public $topLevelQuestions = null;
 
 	/**
-	 * Number of regular answers per question (range: 2-5).
+	 * Number of regular answers per question (range: 2-4).
 	 *
 	 * @var int
 	 */
@@ -6519,6 +6519,14 @@ class KalturaAiRecommendationTreePartnerConfiguration extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $activeTreeId = null;
+
+	/**
+	 * Feature level of the recommendation tree (e.g., Basic, Premium).
+	 *
+	 * @var KalturaAiRecommendationTreeFeatureLevel
+	 * @readonly
+	 */
+	public $featureType = null;
 
 
 }
