@@ -1104,6 +1104,17 @@ class KalturaFollowTvSeriesOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGenerateMetadataJobType extends KalturaEnumBase
+{
+	const VODBYDESCRIPTION = "VodByDescription";
+	const VODBYSUBTITLES = "VodBySubtitles";
+	const PROGRAMBYDESCRIPTION = "ProgramByDescription";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGenerateMetadataStatus extends KalturaEnumBase
 {
 	const PROCESSING = "Processing";
@@ -1589,6 +1600,17 @@ class KalturaMetaDataType extends KalturaEnumBase
 	const BOOLEAN = "BOOLEAN";
 	const DATE = "DATE";
 	const RELEATED_ENTITY = "RELEATED_ENTITY";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMetadataUpdateOperation extends KalturaEnumBase
+{
+	const PROTECT = "PROTECT";
+	const EXTEND = "EXTEND";
+	const OVERWRITE = "OVERWRITE";
 }
 
 /**
