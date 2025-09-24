@@ -707,16 +707,6 @@ class KalturaConcurrencyLimitationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaConditionOperator extends KalturaEnumBase
-{
-	const EQUAL = "Equal";
-	const NOTEQUAL = "NotEqual";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaConfigurationGroupDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -1104,40 +1094,6 @@ class KalturaFollowTvSeriesOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaGenerateMetadataStatus extends KalturaEnumBase
-{
-	const PROCESSING = "Processing";
-	const PARTIALSUCCESS = "PartialSuccess";
-	const SUCCESSPENDINGASSETS = "SuccessPendingAssets";
-	const SUCCESS = "Success";
-	const FAILED = "Failed";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaGeoBlockMode extends KalturaEnumBase
-{
-	const ALLOWONLYSELECTED = "AllowOnlySelected";
-	const BLOCKONLYSELECTED = "BlockOnlySelected";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaGeoBlockRuleOrderBy extends KalturaEnumBase
-{
-	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-	const NAME_ASC = "NAME_ASC";
-	const NAME_DESC = "NAME_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaGroupByField extends KalturaEnumBase
 {
 	const MEDIA_TYPE_ID = "media_type_id";
@@ -1315,6 +1271,7 @@ class KalturaImageStatus extends KalturaEnumBase
 {
 	const PENDING = "PENDING";
 	const READY = "READY";
+	const FAILED = "FAILED";
 }
 
 /**
@@ -1975,16 +1932,6 @@ class KalturaProtectionPolicy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaProxyRuleLevel extends KalturaEnumBase
-{
-	const MEDIUM = "Medium";
-	const HIGH = "High";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaPurchaseSettingsType extends KalturaEnumBase
 {
 	const BLOCK = "block";
@@ -2533,17 +2480,6 @@ class KalturaSubscriptionTriggerType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSubtitlesType extends KalturaEnumBase
-{
-	const TEXT = "Text";
-	const SRT = "SRT";
-	const WEBVTT = "WebVTT";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaSuspensionProfileInheritanceType extends KalturaEnumBase
 {
 	const ALWAYS = "ALWAYS";
@@ -2739,15 +2675,6 @@ class KalturaUserAssetsListType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaUserLogOrderBy extends KalturaEnumBase
-{
-	const CREATE_DATE_DESC = "CREATE_DATE_DESC";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaUserRoleOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -2814,15 +2741,6 @@ class KalturaVodIngestAssetResultStatus extends KalturaEnumBase
 	const EXTERNAL_FAILURE = "EXTERNAL_FAILURE";
 	const SUCCESS_WARNING = "SUCCESS_WARNING";
 	const SUCCESS = "SUCCESS";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaWatchBasedRecommendationsProfileOrderBy extends KalturaEnumBase
-{
-	const NONE = "NONE";
 }
 
 /**
