@@ -1072,7 +1072,7 @@ class KalturaAssetFilePpvService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update assetFilePpv
+	 * Update assetFilePpv dates
 	 * 
 	 * @param bigint $assetFileId Asset file id
 	 * @param bigint $ppvModuleId Ppv module id
@@ -12548,14 +12548,16 @@ class KalturaStreamingDeviceService extends KalturaServiceBase
 	 * @param string $fileId KalturaMediaFile.id media file belonging to the asset for which a concurrency slot is being reserved
 	 * @param string $assetId KalturaAsset.id - asset for which a concurrency slot is being reserved
 	 * @param string $assetType Identifies the type of asset for which the concurrency slot is being reserved
+	 * @param bigint $programId Program Id for recording fallback
 	 * @return bool
 	 */
-	function bookPlaybackSession($fileId, $assetId, $assetType)
+	function bookPlaybackSession($fileId, $assetId, $assetType, $programId = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "fileId", $fileId);
 		$this->client->addParam($kparams, "assetId", $assetId);
 		$this->client->addParam($kparams, "assetType", $assetType);
+		$this->client->addParam($kparams, "programId", $programId);
 		$this->client->queueServiceActionCall("streamingdevice", "bookPlaybackSession", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -15584,8 +15586,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-08-06');
-		$this->setApiVersion('11.5.0.0');
+		$this->setClientTag('php5:25-11-02');
+		$this->setApiVersion('11.8.0.0');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
 		$this->aiRecommendationTree = new KalturaAiRecommendationTreeService($this);
