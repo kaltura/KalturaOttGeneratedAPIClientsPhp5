@@ -5017,6 +5017,14 @@ class KalturaGenerateMetadataJob extends KalturaObjectBase
 	 */
 	public $errorMessage = null;
 
+	/**
+	 * Type of the metadata generation job (vodByDescription, vodBySubtitles, programByDescription)
+	 *
+	 * @var KalturaGenerateMetadataJobType
+	 * @readonly
+	 */
+	public $type = null;
+
 
 }
 
@@ -5041,6 +5049,24 @@ class KalturaGenerateMetadataByDescription extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGenerateProgramMetadatasByDescription extends KalturaGenerateMetadataByDescription
+{
+	/**
+	 * A boolean flag that allows the API user to force the regeneration of metadata.
+	 *             If true, the service will run a new analysis even if enriched metadata already exists for the program&#39;s CRID.
+	 *             If false (default), the service will reuse existing metadata if available for the CRID.
+	 *
+	 * @var bool
+	 */
+	public $regenerate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGenerateMetadataResult extends KalturaObjectBase
 {
 	/**
@@ -5049,6 +5075,121 @@ class KalturaGenerateMetadataResult extends KalturaObjectBase
 	 * @var map
 	 */
 	public $enrichedMetadata;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMetadataFieldConfig extends KalturaObjectBase
+{
+	/**
+	 * The system name of the metadata field in the asset struct.
+	 *
+	 * @var string
+	 */
+	public $systemName = null;
+
+	/**
+	 * The update operation to be performed on this metadata field.
+	 *
+	 * @var KalturaMetadataUpdateOperation
+	 */
+	public $operation = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMetadataFieldConfigurationMap extends KalturaObjectBase
+{
+	/**
+	 * Configuration for &#39;genre&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $genre;
+
+	/**
+	 * Configuration for &#39;subGenre&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $subGenre;
+
+	/**
+	 * Configuration for &#39;sentiment&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $sentiment;
+
+	/**
+	 * Configuration for &#39;suggestedTitle&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $suggestedTitle;
+
+	/**
+	 * Configuration for &#39;Description&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $description;
+
+	/**
+	 * Configuration for &#39;oneLiner&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $oneLiner;
+
+	/**
+	 * Configuration for &#39;Keywords&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $keywords;
+
+	/**
+	 * Configuration for &#39;sensitiveContent&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $sensitiveContent;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
+{
+	/**
+	 * A type of dictionary defined as [string,KalturaMetadataFieldConfigurationMap].
+	 *             This property is used to correlate the newly generated metadata to
+	 *             existing metadata IDs which are available in the asset&#39;s struct with configuration.
+	 *
+	 * @var map
+	 */
+	public $assetStructConfigMap;
+
+	/**
+	 * A read only array to list the set of languages which can be used with the service.
+	 *             In practice it is populated with the values set in KalturaMetadataGeneratorLanguages ENUM.
+	 *
+	 * @var array of KalturaStringValue
+	 * @readonly
+	 */
+	public $supportedLanguages;
 
 
 }
@@ -5114,33 +5255,6 @@ class KalturaMetaFieldNameMap extends KalturaObjectBase
 	 * @var string
 	 */
 	public $sensitiveContent = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
-{
-	/**
-	 * A type of dictionary defined as [long,KalturaMetaFieldNameMap]. 
-	 *             This property is used to correlate the newly generated metadata to
-	 *             existing metadata IDs which are available in the asset’s struct.
-	 *
-	 * @var map
-	 */
-	public $assetStructMetaNameMap;
-
-	/**
-	 * A read only array to list the set of languages which can be used with the service.
-	 *             In practice it is populated with the values set in KalturaMetadataGeneratorLanguages ENUM.
-	 *
-	 * @var array of KalturaStringValue
-	 * @readonly
-	 */
-	public $supportedLanguages;
 
 
 }
@@ -6478,7 +6592,7 @@ class KalturaAiRecommendationTreePartnerConfiguration extends KalturaObjectBase
 	public $topLevelQuestions = null;
 
 	/**
-	 * Number of regular answers per question (range: 2-5).
+	 * Number of regular answers per question (range: 2-4).
 	 *
 	 * @var int
 	 */
@@ -6519,6 +6633,14 @@ class KalturaAiRecommendationTreePartnerConfiguration extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $activeTreeId = null;
+
+	/**
+	 * Feature level of the recommendation tree (e.g., Basic, Premium).
+	 *
+	 * @var KalturaAiRecommendationTreeFeatureLevel
+	 * @readonly
+	 */
+	public $featureType = null;
 
 
 }
@@ -6897,6 +7019,20 @@ class KalturaAssetFilePpv extends KalturaOTTObjectSupportNullable
 	 * @var int
 	 */
 	public $endDate = null;
+
+	/**
+	 * First date and time an KalturaAssetFilePpv.AssetFileId can be purchased with the given KalturaAssetFilePpv.PpvModuleId. Represented as epoch
+	 *
+	 * @var int
+	 */
+	public $purchaseStartDate = null;
+
+	/**
+	 * Final date and time an KalturaAssetFilePpv.AssetFileId can be purchased with the given KalturaAssetFilePpv.PpvModuleId. Represented as epoch
+	 *
+	 * @var int
+	 */
+	public $purchaseEndDate = null;
 
 
 }
@@ -9706,6 +9842,22 @@ class KalturaEndDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
  */
 class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
 {
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSetPlaybackContextUrlTypeAction extends KalturaAssetRuleAction
+{
+	/**
+	 * URL Type to override (DIRECT or PLAYMANIFEST)
+	 *
+	 * @var KalturaUrlType
+	 */
+	public $urlType = null;
+
 
 }
 
@@ -12540,6 +12692,34 @@ class KalturaWatchBasedRecommendationsProfile extends KalturaObjectBase
 	 * @var int
 	 */
 	public $playbackInterestsCalculationPeriodDays = null;
+
+	/**
+	 * Determines whether catch-up viewing data should be included in the user&#39;s interest analysis.
+	 *
+	 * @var bool
+	 */
+	public $analyzeCatchUps = null;
+
+	/**
+	 * Determines whether linear events viewing data should be included in the user&#39;s interest analysis.
+	 *
+	 * @var bool
+	 */
+	public $analyzeLinearEvents = null;
+
+	/**
+	 * Minimum required viewing time per session (in minutes) for live content to be considered in the analysis.
+	 *
+	 * @var int
+	 */
+	public $userInterestPlayThresholdForEventInMinutes = null;
+
+	/**
+	 * Minimum required viewing time per session (in minutes) for live content to be considered in the analysis.
+	 *
+	 * @var int
+	 */
+	public $maximumEventsPerSession = null;
 
 
 }
