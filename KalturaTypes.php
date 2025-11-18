@@ -6478,7 +6478,7 @@ class KalturaAiRecommendationTreePartnerConfiguration extends KalturaObjectBase
 	public $topLevelQuestions = null;
 
 	/**
-	 * Number of regular answers per question (range: 2-5).
+	 * Number of regular answers per question (range: 2-4).
 	 *
 	 * @var int
 	 */
@@ -6519,6 +6519,14 @@ class KalturaAiRecommendationTreePartnerConfiguration extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $activeTreeId = null;
+
+	/**
+	 * Feature level of the recommendation tree (e.g., Basic, Premium).
+	 *
+	 * @var KalturaAiRecommendationTreeFeatureLevel
+	 * @readonly
+	 */
+	public $featureType = null;
 
 
 }
@@ -6897,6 +6905,20 @@ class KalturaAssetFilePpv extends KalturaOTTObjectSupportNullable
 	 * @var int
 	 */
 	public $endDate = null;
+
+	/**
+	 * First date and time an KalturaAssetFilePpv.AssetFileId can be purchased with the given KalturaAssetFilePpv.PpvModuleId. Represented as epoch
+	 *
+	 * @var int
+	 */
+	public $purchaseStartDate = null;
+
+	/**
+	 * Final date and time an KalturaAssetFilePpv.AssetFileId can be purchased with the given KalturaAssetFilePpv.PpvModuleId. Represented as epoch
+	 *
+	 * @var int
+	 */
+	public $purchaseEndDate = null;
 
 
 }
@@ -12540,6 +12562,34 @@ class KalturaWatchBasedRecommendationsProfile extends KalturaObjectBase
 	 * @var int
 	 */
 	public $playbackInterestsCalculationPeriodDays = null;
+
+	/**
+	 * Determines whether catch-up viewing data should be included in the user&#39;s interest analysis.
+	 *
+	 * @var bool
+	 */
+	public $analyzeCatchUps = null;
+
+	/**
+	 * Determines whether linear events viewing data should be included in the user&#39;s interest analysis.
+	 *
+	 * @var bool
+	 */
+	public $analyzeLinearEvents = null;
+
+	/**
+	 * Minimum required viewing time per session (in minutes) for live content to be considered in the analysis.
+	 *
+	 * @var int
+	 */
+	public $userInterestPlayThresholdForEventInMinutes = null;
+
+	/**
+	 * Minimum required viewing time per session (in minutes) for live content to be considered in the analysis.
+	 *
+	 * @var int
+	 */
+	public $maximumEventsPerSession = null;
 
 
 }
