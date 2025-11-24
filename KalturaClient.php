@@ -93,6 +93,29 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	}
 
 	/**
+	 * Initiate the process of metadata generation for Program assets based on existing asset description metadata.
+            The service will analyze the program&#39;s description and genre metadata using AI/LLM to generate
+            additional enriched metadata fields. This method is specifically designed for Program/EPG assets
+            and supports CRID-based uniqueness, regeneration options, and configurable overwrite behavior.
+            Programs without a CRID are out of scope for this feature.
+	 * 
+	 * @param KalturaGenerateProgramMetadatasByDescription $generateProgramMetadataByDescription Request object containing the external asset ID and regenerate flag
+	 * @return KalturaGenerateMetadataJob
+	 */
+	function generateProgramMetadataByDescription(KalturaGenerateProgramMetadatasByDescription $generateProgramMetadataByDescription)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "generateProgramMetadataByDescription", $generateProgramMetadataByDescription->toParams());
+		$this->client->queueServiceActionCall("aimetadatagenerator", "generateProgramMetadataByDescription", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataJob");
+		return $resultObject;
+	}
+
+	/**
 	 * Retrieve the generated metadata
 	 * 
 	 * @param bigint $jobId The job ID as received from GenerateMetadataBySubtitles.
@@ -1072,7 +1095,7 @@ class KalturaAssetFilePpvService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update assetFilePpv
+	 * Update assetFilePpv dates
 	 * 
 	 * @param bigint $assetFileId Asset file id
 	 * @param bigint $ppvModuleId Ppv module id
@@ -12548,14 +12571,16 @@ class KalturaStreamingDeviceService extends KalturaServiceBase
 	 * @param string $fileId KalturaMediaFile.id media file belonging to the asset for which a concurrency slot is being reserved
 	 * @param string $assetId KalturaAsset.id - asset for which a concurrency slot is being reserved
 	 * @param string $assetType Identifies the type of asset for which the concurrency slot is being reserved
+	 * @param bigint $externalRecordingProgramId Optional EPG program ID used as fallback for concurrency checks when the external recording ID does not exist in the backend (e.g., recording not yet created). Only applicable for recording asset types when external recordings feature is enabled.
 	 * @return bool
 	 */
-	function bookPlaybackSession($fileId, $assetId, $assetType)
+	function bookPlaybackSession($fileId, $assetId, $assetType, $externalRecordingProgramId = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "fileId", $fileId);
 		$this->client->addParam($kparams, "assetId", $assetId);
 		$this->client->addParam($kparams, "assetType", $assetType);
+		$this->client->addParam($kparams, "externalRecordingProgramId", $externalRecordingProgramId);
 		$this->client->queueServiceActionCall("streamingdevice", "bookPlaybackSession", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -15584,8 +15609,8 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-08-06');
-		$this->setApiVersion('11.5.0.0');
+		$this->setClientTag('php5:25-11-24');
+		$this->setApiVersion('11.9.0.0');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
 		$this->aiRecommendationTree = new KalturaAiRecommendationTreeService($this);
