@@ -67,6 +67,16 @@ class KalturaAggregationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAiRecommendationTreeFeatureLevel extends KalturaEnumBase
+{
+	const BASIC = "Basic";
+	const PREMIUM = "Premium";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnouncementOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -709,8 +719,13 @@ class KalturaConcurrencyLimitationType extends KalturaEnumBase
  */
 class KalturaConditionOperator extends KalturaEnumBase
 {
+	const UNKNOWN = "Unknown";
 	const EQUAL = "Equal";
 	const NOTEQUAL = "NotEqual";
+	const GREATERTHAN = "GreaterThan";
+	const LESSTHAN = "LessThan";
+	const GREATERTHANOREQUAL = "GreaterThanOrEqual";
+	const LESSTHANOREQUAL = "LessThanOrEqual";
 }
 
 /**
@@ -1098,6 +1113,17 @@ class KalturaFollowTvSeriesOrderBy extends KalturaEnumBase
 {
 	const START_DATE_DESC = "START_DATE_DESC";
 	const START_DATE_ASC = "START_DATE_ASC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenerateMetadataJobType extends KalturaEnumBase
+{
+	const VODBYDESCRIPTION = "VodByDescription";
+	const VODBYSUBTITLES = "VodBySubtitles";
+	const PROGRAMBYDESCRIPTION = "ProgramByDescription";
 }
 
 /**
@@ -1589,6 +1615,17 @@ class KalturaMetaDataType extends KalturaEnumBase
 	const BOOLEAN = "BOOLEAN";
 	const DATE = "DATE";
 	const RELEATED_ENTITY = "RELEATED_ENTITY";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMetadataUpdateOperation extends KalturaEnumBase
+{
+	const PROTECT = "PROTECT";
+	const EXTEND = "EXTEND";
+	const OVERWRITE = "OVERWRITE";
 }
 
 /**
@@ -2272,6 +2309,17 @@ class KalturaSearchPriorityGroupOrderBy extends KalturaEnumBase
 	const PRIORITY_DESC = "PRIORITY_DESC";
 	const NAME_ASC = "NAME_ASC";
 	const NAME_DESC = "NAME_DESC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSearchType extends KalturaEnumBase
+{
+	const UNKNOWN = "Unknown";
+	const ASSET = "Asset";
+	const PROGRAM = "Program";
 }
 
 /**
