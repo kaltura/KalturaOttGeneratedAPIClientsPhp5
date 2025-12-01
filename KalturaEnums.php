@@ -2315,17 +2315,6 @@ class KalturaSearchPriorityGroupOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSearchType extends KalturaEnumBase
-{
-	const UNKNOWN = "Unknown";
-	const ASSET = "Asset";
-	const PROGRAM = "Program";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
 class KalturaSegmentationTypeOrderBy extends KalturaEnumBase
 {
 	const UPDATE_DATE_DESC = "UPDATE_DATE_DESC";

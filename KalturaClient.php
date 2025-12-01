@@ -917,24 +917,15 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Performs unified semantic search across both assets and programs.
+	 * Performs unified semantic search across media and programs.
 	 * 
-	 * @param string $query Search query text
-	 * @param array $searchScopes List of search scopes defining which types to search (Asset/Program) and optional filters
-	 * @param bool $refineQuery Whether to refine the query using LLM
-	 * @param int $size Maximum number of results to return
+	 * @param KalturaSemanticSearchParams $searchParams Search parameters including query text, content type filters, and optional type-specific filters
 	 * @return KalturaAssetListResponse
 	 */
-	function unifiedSemanticSearch($query, array $searchScopes, $refineQuery = false, $size = 10)
+	function unifiedSemanticSearch(KalturaSemanticSearchParams $searchParams)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "query", $query);
-		foreach($searchScopes as $index => $obj)
-		{
-			$this->client->addParam($kparams, "searchScopes:$index", $obj->toParams());
-		}
-		$this->client->addParam($kparams, "refineQuery", $refineQuery);
-		$this->client->addParam($kparams, "size", $size);
+		$this->client->addParam($kparams, "searchParams", $searchParams->toParams());
 		$this->client->queueServiceActionCall("asset", "unifiedSemanticSearch", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -15707,7 +15698,7 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-11-24');
+		$this->setClientTag('php5:25-12-01');
 		$this->setApiVersion('11.8.0.1');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);

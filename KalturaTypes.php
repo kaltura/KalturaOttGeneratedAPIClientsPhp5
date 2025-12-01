@@ -21487,28 +21487,23 @@ class KalturaSessionInfo extends KalturaSession
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSearchCondition extends KalturaObjectBase
+class KalturaProgramSemanticSearchParams extends KalturaObjectBase
 {
 	/**
-	 * Field name to filter by.
+	 * Only include programs that end after this timestamp (Unix epoch seconds).
+	 *             Optional filter.
 	 *
-	 * @var string
+	 * @var int
 	 */
-	public $field = null;
+	public $endsAfter = null;
 
 	/**
-	 * Operator to use for filtering.
+	 * Only include programs that expire after this timestamp (Unix epoch seconds).
+	 *             Optional filter.
 	 *
-	 * @var KalturaConditionOperator
+	 * @var int
 	 */
-	public $operator = null;
-
-	/**
-	 * Value to filter by.
-	 *
-	 * @var string
-	 */
-	public $value = null;
+	public $expiresAfter = null;
 
 
 }
@@ -21517,21 +21512,53 @@ class KalturaSearchCondition extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaSearchScope extends KalturaObjectBase
+class KalturaMediaSemanticSearchParams extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSemanticSearchParams extends KalturaObjectBase
 {
 	/**
-	 * The type of search scope (Asset or Program).
+	 * Search query text.
 	 *
-	 * @var KalturaSearchType
+	 * @var string
 	 */
-	public $type = null;
+	public $query = null;
 
 	/**
-	 * Optional filters to apply for this scope.
+	 * Whether to refine the query using LLM.
 	 *
-	 * @var array of KalturaSearchCondition
+	 * @var bool
 	 */
-	public $filters;
+	public $refineQuery = null;
+
+	/**
+	 * Maximum number of results to return.
+	 *
+	 * @var int
+	 */
+	public $size = null;
+
+	/**
+	 * Program-specific search parameters.
+	 *             If provided, programs will be included in search results.
+	 *
+	 * @var KalturaProgramSemanticSearchParams
+	 */
+	public $programParams;
+
+	/**
+	 * Media-specific search parameters.
+	 *             If provided, media/VOD assets will be included in search results.
+	 *
+	 * @var KalturaMediaSemanticSearchParams
+	 */
+	public $mediaParams;
 
 
 }
