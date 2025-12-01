@@ -894,39 +894,17 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Search for assets using semantic similarity to a natural language query, with optional query refinement using LLM.
-	 * 
-	 * @param string $query The search query text used to find semantically similar assets
-	 * @param bool $refineQuery When true, the search query is refined using LLM before vector search
-	 * @param int $size The maximum number of results to return. Must be between 1 and 100
-	 * @return KalturaAssetListResponse
-	 */
-	function semanticSearch($query, $refineQuery = false, $size = 10)
-	{
-		$kparams = array();
-		$this->client->addParam($kparams, "query", $query);
-		$this->client->addParam($kparams, "refineQuery", $refineQuery);
-		$this->client->addParam($kparams, "size", $size);
-		$this->client->queueServiceActionCall("asset", "semanticSearch", $kparams);
-		if ($this->client->isMultiRequest())
-			return $this->client->getMultiRequestResult();
-		$resultObject = $this->client->doQueue();
-		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAssetListResponse");
-		return $resultObject;
-	}
-
-	/**
-	 * Performs unified semantic search across media and programs.
+	 * Search for assets using semantic similarity to a natural language query.
+            Supports unified search across both media/VOD assets and programs/EPG with optional type-specific filters.
 	 * 
 	 * @param KalturaSemanticSearchParams $searchParams Search parameters including query text, content type filters, and optional type-specific filters
 	 * @return KalturaAssetListResponse
 	 */
-	function unifiedSemanticSearch(KalturaSemanticSearchParams $searchParams)
+	function semanticSearch(KalturaSemanticSearchParams $searchParams)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "searchParams", $searchParams->toParams());
-		$this->client->queueServiceActionCall("asset", "unifiedSemanticSearch", $kparams);
+		$this->client->queueServiceActionCall("asset", "semanticSearch", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
