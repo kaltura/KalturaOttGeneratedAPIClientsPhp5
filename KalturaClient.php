@@ -11613,7 +11613,7 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 	/**
 	 * Retrieve the current program field configurations for semantic search.
 	 * 
-	 * @return string
+	 * @return KalturaProgramSearchableAttributes
 	 */
 	function getProgramSearchableAttributes()
 	{
@@ -11623,7 +11623,7 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "string");
+		$this->client->validateObjectType($resultObject, "KalturaProgramSearchableAttributes");
 		return $resultObject;
 	}
 
@@ -11687,19 +11687,19 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 	/**
 	 * Update which fields should be included in semantic search for program assets.
 	 * 
-	 * @param string $programAttributes Comma-separated list of program attribute names to be searchable.
-	 * @return string
+	 * @param KalturaProgramSearchableAttributes $programAttributes Program searchable attributes configuration containing comma-separated attribute names.
+	 * @return KalturaProgramSearchableAttributes
 	 */
-	function upsertProgramSearchableAttributes($programAttributes)
+	function upsertProgramSearchableAttributes(KalturaProgramSearchableAttributes $programAttributes)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "programAttributes", $programAttributes);
+		$this->client->addParam($kparams, "programAttributes", $programAttributes->toParams());
 		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "upsertProgramSearchableAttributes", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "string");
+		$this->client->validateObjectType($resultObject, "KalturaProgramSearchableAttributes");
 		return $resultObject;
 	}
 
@@ -15676,7 +15676,7 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-12-02');
+		$this->setClientTag('php5:25-12-03');
 		$this->setApiVersion('11.8.0.1');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);

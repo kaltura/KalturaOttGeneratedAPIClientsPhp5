@@ -24754,6 +24754,23 @@ class KalturaFilteringCondition extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProgramSearchableAttributes extends KalturaObjectBase
+{
+	/**
+	 * Comma-separated list of Program metadata field names that should be searchable.
+	 *             Examples: &quot;name,description,genre,tags,meta_cast,meta_director&quot;
+	 *
+	 * @var string
+	 */
+	public $attributes = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGenerateSemanticQuery extends KalturaObjectBase
 {
 	/**
