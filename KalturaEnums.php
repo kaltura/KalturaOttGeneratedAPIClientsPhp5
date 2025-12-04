@@ -719,13 +719,8 @@ class KalturaConcurrencyLimitationType extends KalturaEnumBase
  */
 class KalturaConditionOperator extends KalturaEnumBase
 {
-	const UNKNOWN = "Unknown";
 	const EQUAL = "Equal";
 	const NOTEQUAL = "NotEqual";
-	const GREATERTHAN = "GreaterThan";
-	const LESSTHAN = "LessThan";
-	const GREATERTHANOREQUAL = "GreaterThanOrEqual";
-	const LESSTHANOREQUAL = "LessThanOrEqual";
 }
 
 /**

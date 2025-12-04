@@ -21490,12 +21490,12 @@ class KalturaSessionInfo extends KalturaSession
 class KalturaProgramSemanticSearchParams extends KalturaObjectBase
 {
 	/**
-	 * Only include programs that end after this timestamp (Unix epoch seconds).
+	 * Only include programs that end before this timestamp (Unix epoch seconds).
 	 *             Optional filter.
 	 *
 	 * @var int
 	 */
-	public $endsAfter = null;
+	public $endsBefore = null;
 
 	/**
 	 * Only include programs that expire after this timestamp (Unix epoch seconds).
