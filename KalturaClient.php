@@ -894,19 +894,16 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Search for assets using semantic similarity to a natural language query, with optional query refinement using LLM.
+	 * Search for assets using semantic similarity to a natural language query.
+            Supports unified search across both media/VOD assets and programs/EPG with optional type-specific filters.
 	 * 
-	 * @param string $query The search query text used to find semantically similar assets
-	 * @param bool $refineQuery When true, the search query is refined using LLM before vector search
-	 * @param int $size The maximum number of results to return. Must be between 1 and 100
+	 * @param KalturaSemanticSearchParams $searchParams Search parameters including query text, content type filters, and optional type-specific filters
 	 * @return KalturaAssetListResponse
 	 */
-	function semanticSearch($query, $refineQuery = false, $size = 10)
+	function semanticSearch(KalturaSemanticSearchParams $searchParams)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "query", $query);
-		$this->client->addParam($kparams, "refineQuery", $refineQuery);
-		$this->client->addParam($kparams, "size", $size);
+		$this->client->addParam($kparams, "searchParams", $searchParams->toParams());
 		$this->client->queueServiceActionCall("asset", "semanticSearch", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -11597,6 +11594,40 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 	}
 
 	/**
+	 * Retrieve the filtering condition configuration for program assets.
+	 * 
+	 * @return KalturaFilteringCondition
+	 */
+	function getProgramFilteringCondition()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "getProgramFilteringCondition", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve the current program field configurations for semantic search.
+	 * 
+	 * @return KalturaProgramSearchableAttributes
+	 */
+	function getProgramSearchableAttributes()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "getProgramSearchableAttributes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaProgramSearchableAttributes");
+		return $resultObject;
+	}
+
+	/**
 	 * Retrieve the current field configurations for semantic search.
 	 * 
 	 * @param int $assetStructId Asset structure ID to filter configurations.
@@ -11631,6 +11662,44 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Update rule that controls embedding generation and search behavior for program assets.
+	 * 
+	 * @param KalturaFilteringCondition $filteringCondition Rule configuration parameters for programs.
+	 * @return KalturaFilteringCondition
+	 */
+	function upsertProgramFilteringCondition(KalturaFilteringCondition $filteringCondition)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filteringCondition", $filteringCondition->toParams());
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "upsertProgramFilteringCondition", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Update which fields should be included in semantic search for program assets.
+	 * 
+	 * @param KalturaProgramSearchableAttributes $programAttributes Program searchable attributes configuration containing comma-separated attribute names.
+	 * @return KalturaProgramSearchableAttributes
+	 */
+	function upsertProgramSearchableAttributes(KalturaProgramSearchableAttributes $programAttributes)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "programAttributes", $programAttributes->toParams());
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "upsertProgramSearchableAttributes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaProgramSearchableAttributes");
 		return $resultObject;
 	}
 

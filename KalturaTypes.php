@@ -21503,6 +21503,86 @@ class KalturaSessionInfo extends KalturaSession
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProgramSemanticSearchParams extends KalturaObjectBase
+{
+	/**
+	 * Only include programs that end before this timestamp (Unix epoch seconds).
+	 *             Optional filter.
+	 *
+	 * @var int
+	 */
+	public $endsBefore = null;
+
+	/**
+	 * Only include programs that expire after this timestamp (Unix epoch seconds).
+	 *             Optional filter.
+	 *
+	 * @var int
+	 */
+	public $expiresAfter = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaSemanticSearchParams extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSemanticSearchParams extends KalturaObjectBase
+{
+	/**
+	 * Search query text.
+	 *
+	 * @var string
+	 */
+	public $query = null;
+
+	/**
+	 * Whether to refine the query using LLM.
+	 *
+	 * @var bool
+	 */
+	public $refineQuery = null;
+
+	/**
+	 * Maximum number of results to return.
+	 *
+	 * @var int
+	 */
+	public $size = null;
+
+	/**
+	 * Program-specific search parameters.
+	 *             If provided, programs will be included in search results.
+	 *
+	 * @var KalturaProgramSemanticSearchParams
+	 */
+	public $programParams;
+
+	/**
+	 * Media-specific search parameters.
+	 *             If provided, media/VOD assets will be included in search results.
+	 *
+	 * @var KalturaMediaSemanticSearchParams
+	 */
+	public $mediaParams;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaRepresentativeSelectionPolicy extends KalturaObjectBase
 {
 
@@ -24682,6 +24762,23 @@ class KalturaFilteringCondition extends KalturaObjectBase
 	 * @var string
 	 */
 	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramSearchableAttributes extends KalturaObjectBase
+{
+	/**
+	 * Comma-separated list of Program metadata field names that should be searchable.
+	 *             Examples: &quot;name,description,genre,tags,meta_cast,meta_director&quot;
+	 *
+	 * @var string
+	 */
+	public $attributes = null;
 
 
 }
