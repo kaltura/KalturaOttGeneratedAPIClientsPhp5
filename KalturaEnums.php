@@ -2206,6 +2206,7 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const FILTERFILEBYLABELINPLAYBACK = "FilterFileByLabelInPlayback";
 	const FILTERFILEBYDYNAMICDATAINDISCOVERY = "FilterFileByDynamicDataInDiscovery";
 	const FILTERFILEBYDYNAMICDATAINPLAYBACK = "FilterFileByDynamicDataInPlayback";
+	const SET_PLAYBACK_CONTEXT_URL_TYPE = "SET_PLAYBACK_CONTEXT_URL_TYPE";
 }
 
 /**

@@ -9849,6 +9849,22 @@ class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSetPlaybackContextUrlTypeAction extends KalturaAssetRuleAction
+{
+	/**
+	 * URL Type to override (DIRECT or PLAYMANIFEST)
+	 *
+	 * @var KalturaUrlType
+	 */
+	public $urlType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaBasePreActionCondition extends KalturaObjectBase
 {
 
