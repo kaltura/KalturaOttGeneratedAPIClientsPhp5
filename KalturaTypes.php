@@ -2603,6 +2603,13 @@ class KalturaRecordingFilter extends KalturaFilter
 	 */
 	public $kSql = null;
 
+	/**
+	 * Enforce content filtering
+	 *
+	 * @var bool
+	 */
+	public $contentFilteringEnforced = null;
+
 
 }
 
@@ -5017,6 +5024,14 @@ class KalturaGenerateMetadataJob extends KalturaObjectBase
 	 */
 	public $errorMessage = null;
 
+	/**
+	 * Type of the metadata generation job (vodByDescription, vodBySubtitles, programByDescription)
+	 *
+	 * @var KalturaGenerateMetadataJobType
+	 * @readonly
+	 */
+	public $type = null;
+
 
 }
 
@@ -5041,6 +5056,24 @@ class KalturaGenerateMetadataByDescription extends KalturaObjectBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaGenerateProgramMetadatasByDescription extends KalturaGenerateMetadataByDescription
+{
+	/**
+	 * A boolean flag that allows the API user to force the regeneration of metadata.
+	 *             If true, the service will run a new analysis even if enriched metadata already exists for the program&#39;s CRID.
+	 *             If false (default), the service will reuse existing metadata if available for the CRID.
+	 *
+	 * @var bool
+	 */
+	public $regenerate = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGenerateMetadataResult extends KalturaObjectBase
 {
 	/**
@@ -5049,6 +5082,121 @@ class KalturaGenerateMetadataResult extends KalturaObjectBase
 	 * @var map
 	 */
 	public $enrichedMetadata;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMetadataFieldConfig extends KalturaObjectBase
+{
+	/**
+	 * The system name of the metadata field in the asset struct.
+	 *
+	 * @var string
+	 */
+	public $systemName = null;
+
+	/**
+	 * The update operation to be performed on this metadata field.
+	 *
+	 * @var KalturaMetadataUpdateOperation
+	 */
+	public $operation = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMetadataFieldConfigurationMap extends KalturaObjectBase
+{
+	/**
+	 * Configuration for &#39;genre&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $genre;
+
+	/**
+	 * Configuration for &#39;subGenre&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $subGenre;
+
+	/**
+	 * Configuration for &#39;sentiment&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $sentiment;
+
+	/**
+	 * Configuration for &#39;suggestedTitle&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $suggestedTitle;
+
+	/**
+	 * Configuration for &#39;Description&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $description;
+
+	/**
+	 * Configuration for &#39;oneLiner&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $oneLiner;
+
+	/**
+	 * Configuration for &#39;Keywords&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $keywords;
+
+	/**
+	 * Configuration for &#39;sensitiveContent&#39; AI generated metadata field
+	 *
+	 * @var KalturaMetadataFieldConfig
+	 */
+	public $sensitiveContent;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
+{
+	/**
+	 * A type of dictionary defined as [string,KalturaMetadataFieldConfigurationMap].
+	 *             This property is used to correlate the newly generated metadata to
+	 *             existing metadata IDs which are available in the asset&#39;s struct with configuration.
+	 *
+	 * @var map
+	 */
+	public $assetStructConfigMap;
+
+	/**
+	 * A read only array to list the set of languages which can be used with the service.
+	 *             In practice it is populated with the values set in KalturaMetadataGeneratorLanguages ENUM.
+	 *
+	 * @var array of KalturaStringValue
+	 * @readonly
+	 */
+	public $supportedLanguages;
 
 
 }
@@ -5114,33 +5262,6 @@ class KalturaMetaFieldNameMap extends KalturaObjectBase
 	 * @var string
 	 */
 	public $sensitiveContent = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaAiMetadataGeneratorConfiguration extends KalturaObjectBase
-{
-	/**
-	 * A type of dictionary defined as [long,KalturaMetaFieldNameMap]. 
-	 *             This property is used to correlate the newly generated metadata to
-	 *             existing metadata IDs which are available in the asset’s struct.
-	 *
-	 * @var map
-	 */
-	public $assetStructMetaNameMap;
-
-	/**
-	 * A read only array to list the set of languages which can be used with the service.
-	 *             In practice it is populated with the values set in KalturaMetadataGeneratorLanguages ENUM.
-	 *
-	 * @var array of KalturaStringValue
-	 * @readonly
-	 */
-	public $supportedLanguages;
 
 
 }
@@ -6478,7 +6599,7 @@ class KalturaAiRecommendationTreePartnerConfiguration extends KalturaObjectBase
 	public $topLevelQuestions = null;
 
 	/**
-	 * Number of regular answers per question (range: 2-5).
+	 * Number of regular answers per question (range: 2-4).
 	 *
 	 * @var int
 	 */
@@ -6519,6 +6640,14 @@ class KalturaAiRecommendationTreePartnerConfiguration extends KalturaObjectBase
 	 * @readonly
 	 */
 	public $activeTreeId = null;
+
+	/**
+	 * Feature level of the recommendation tree (e.g., Basic, Premium).
+	 *
+	 * @var KalturaAiRecommendationTreeFeatureLevel
+	 * @readonly
+	 */
+	public $featureType = null;
 
 
 }
@@ -6897,6 +7026,20 @@ class KalturaAssetFilePpv extends KalturaOTTObjectSupportNullable
 	 * @var int
 	 */
 	public $endDate = null;
+
+	/**
+	 * First date and time an KalturaAssetFilePpv.AssetFileId can be purchased with the given KalturaAssetFilePpv.PpvModuleId. Represented as epoch
+	 *
+	 * @var int
+	 */
+	public $purchaseStartDate = null;
+
+	/**
+	 * Final date and time an KalturaAssetFilePpv.AssetFileId can be purchased with the given KalturaAssetFilePpv.PpvModuleId. Represented as epoch
+	 *
+	 * @var int
+	 */
+	public $purchaseEndDate = null;
 
 
 }
@@ -9713,6 +9856,22 @@ class KalturaStartDateOffsetRuleAction extends KalturaTimeOffsetRuleAction
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaSetPlaybackContextUrlTypeAction extends KalturaAssetRuleAction
+{
+	/**
+	 * URL Type to override (DIRECT or PLAYMANIFEST)
+	 *
+	 * @var KalturaUrlType
+	 */
+	public $urlType = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaBasePreActionCondition extends KalturaObjectBase
 {
 
@@ -11740,6 +11899,13 @@ class KalturaHouseholdSegmentListResponse extends KalturaListResponse
  */
 class KalturaBaseSegmentCondition extends KalturaObjectBase
 {
+	/**
+	 * Defines the scope of the condition evaluation.
+	 *
+	 * @var KalturaConditionLevel
+	 */
+	public $scope = null;
+
 
 }
 
@@ -11853,9 +12019,15 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 * Asset User Rule Id
 	 *
 	 * @var int
-	 * @insertonly
 	 */
 	public $assetUserRuleId = null;
+
+	/**
+	 * Defines whether segments are applied to users or households
+	 *
+	 * @var KalturaConditionLevel
+	 */
+	public $scope = null;
 
 
 }
@@ -11872,6 +12044,391 @@ class KalturaSegmentationTypeListResponse extends KalturaListResponse
 	 * @var array of KalturaSegmentationType
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaContentTypeSelector extends KalturaObjectBase
+{
+	/**
+	 * Determines if Recording assets are counted.
+	 *             Omitted or true: Recordings are included.
+	 *             false: Recordings are excluded.
+	 *
+	 * @var bool
+	 */
+	public $includeRecordings = null;
+
+	/**
+	 * Determines if EPG Program assets (Live, Catch-up, Start-over) are counted.
+	 *             Omitted or true: Programs are included.
+	 *             false: Programs are excluded.
+	 *
+	 * @var bool
+	 */
+	public $includePrograms = null;
+
+	/**
+	 * Filter for specific playable media types (e.g., Movie, Episode).
+	 *             Omitted: ALL playable media types are included.
+	 *             Provided (List of IDs): ONLY the media types matching the listed IDs are included.
+	 *             Provided (Empty String): NO media types are included.
+	 *             Constraint: IDs must correspond to valid playable media types. Providing an invalid ID will result in an error.
+	 *
+	 * @var string
+	 */
+	public $mediaTypeIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaViewTimeConstraint extends KalturaObjectBase
+{
+	/**
+	 * The starting time of the viewing window.
+	 *
+	 * @var string
+	 */
+	public $startTime = null;
+
+	/**
+	 * The ending time of the viewing window.
+	 *
+	 * @var string
+	 */
+	public $endTime = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBaseAttributeConstraint extends KalturaObjectBase
+{
+	/**
+	 * Discriminator field to identify the specific attribute constraint type.
+	 *
+	 * @var string
+	 */
+	public $attributeType = null;
+
+	/**
+	 * The system name of the metadata field to query.
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaBaseWatchCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * Defines the scope of the condition evaluation.
+	 *
+	 * @var KalturaConditionLevel
+	 */
+	public $level = null;
+
+	/**
+	 * Specifies criteria to include or exclude specific content types (recordings, programs, media types) from the evaluation.
+	 *
+	 * @var KalturaContentTypeSelector
+	 */
+	public $contentFilter;
+
+	/**
+	 * The period in days to look back for watch history.
+	 *
+	 * @var int
+	 */
+	public $evaluationDays = null;
+
+	/**
+	 * A comma-separated list of device family names (e.g., &#39;mobile&#39;, &#39;web&#39;, &#39;stb&#39;).
+	 *
+	 * @var string
+	 */
+	public $deviceFamilyIn = null;
+
+	/**
+	 * Filters watch actions that occurred within a specific time window.
+	 *
+	 * @var KalturaViewTimeConstraint
+	 */
+	public $viewTimeConstraint;
+
+	/**
+	 * Defines whether to use AND or OR between the items in constraintAttributes.
+	 *
+	 * @var KalturaLogicalOperator
+	 */
+	public $constraintsOperator = null;
+
+	/**
+	 * A list of up to 5 specific constraints to filter the watch history.
+	 *
+	 * @var array of KalturaBaseAttributeConstraint
+	 */
+	public $constraintAttributes;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchCountCondition extends KalturaBaseWatchCondition
+{
+	/**
+	 * The minimum count to be met.
+	 *             Constraint: Must be less than or equal to maxCount.
+	 *
+	 * @var int
+	 */
+	public $minCount = null;
+
+	/**
+	 * The maximum count to be met.
+	 *             Constraint: Must be greater than or equal to minCount.
+	 *
+	 * @var int
+	 */
+	public $maxCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchDurationCondition extends KalturaBaseWatchCondition
+{
+	/**
+	 * The minimum duration in hours to be met.
+	 *             Constraint: Must be less than or equal to maxDurationHours.
+	 *
+	 * @var int
+	 */
+	public $minDurationHours = null;
+
+	/**
+	 * The maximum duration in hours to be met.
+	 *             Constraint: Must be greater than or equal to minDurationHours.
+	 *
+	 * @var int
+	 */
+	public $maxDurationHours = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAudioLanguageConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of audio language codes.
+	 *
+	 * @var string
+	 */
+	public $languageCodes = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDateMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * The exact epoch timestamp the field must equal.
+	 *
+	 * @var string
+	 */
+	public $equals = null;
+
+	/**
+	 * The epoch timestamp the field must be greater than.
+	 *
+	 * @var string
+	 */
+	public $greaterThan = null;
+
+	/**
+	 * The epoch timestamp the field must be smaller than.
+	 *
+	 * @var string
+	 */
+	public $smallerThan = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlementConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of entitlement product IDs.
+	 *
+	 * @var string
+	 */
+	public $productIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEnumMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of values. The metadata field enum&#39;s values must match at least one of these items.
+	 *
+	 * @var string
+	 */
+	public $oneOf = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaNumberMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * The exact numeric value the field must equal.
+	 *
+	 * @var string
+	 */
+	public $equals = null;
+
+	/**
+	 * The numeric value the field must be greater than.
+	 *
+	 * @var string
+	 */
+	public $greaterThan = null;
+
+	/**
+	 * The numeric value the field must be smaller than.
+	 *
+	 * @var string
+	 */
+	public $smallerThan = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubtitleLanguageConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of subtitle language codes.
+	 *
+	 * @var string
+	 */
+	public $languageCodes = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTagsMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of values. The metadata field tag&#39;s values must match at least one of these items.
+	 *
+	 * @var string
+	 */
+	public $oneOf = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTextMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * The substring that the metadata field value must contain.
+	 *
+	 * @var string
+	 */
+	public $contains = null;
+
+	/**
+	 * The exact string value the field must equal.
+	 *
+	 * @var string
+	 */
+	public $equals = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCollectionPurchasedCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * Collection purchase conditions are always evaluated at the Household level.
+	 *
+	 * @var KalturaConditionLevel
+	 */
+	public $level = null;
+
+	/**
+	 * The specific purchased collection product identifier to check.
+	 *
+	 * @var int
+	 */
+	public $collectionIdEquals = null;
+
+	/**
+	 * The number of days to look back for the purchase.
+	 *
+	 * @var int
+	 */
+	public $days = null;
 
 
 }
@@ -11972,53 +12529,122 @@ class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
 class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 {
 	/**
-	 * How many days back should the actions be considered
+	 * Monetization conditions are always evaluated at the Household level.
 	 *
-	 * @var int
+	 * @var KalturaConditionLevel
 	 */
-	public $days = null;
+	public $level = null;
 
 	/**
-	 * Purchase type
-	 *
-	 * @var KalturaMonetizationType
-	 */
-	public $type = null;
-
-	/**
-	 * Mathermtical operator to calculate
-	 *
-	 * @var KalturaMathemticalOperatorType
-	 */
-	public $operator = null;
-
-	/**
-	 * Comma saperated list of business module IDs
+	 * A comma-separated list of business module IDs to include in the filter.
 	 *
 	 * @var string
 	 */
 	public $businessModuleIdIn = null;
 
 	/**
-	 * Which currency code should be taken into consideration
+	 * The ISO 4217 currency code to filter by.
 	 *
 	 * @var string
 	 */
 	public $currencyCode = null;
 
 	/**
-	 * The minimum value to be met
+	 * The number of days to look back for monetization actions.
+	 *
+	 * @var int
+	 */
+	public $days = null;
+
+	/**
+	 * The maximum allowable value for the calculated metric.
+	 *             MinValue must be greater than or equal to MaxValue.
+	 *
+	 * @var int
+	 */
+	public $maxValue = null;
+
+	/**
+	 * The minimum required value for the calculated metric.
+	 *             MinValue must be less than or equal to MaxValue.
 	 *
 	 * @var int
 	 */
 	public $minValue = null;
 
 	/**
-	 * The maximum value to be met
+	 * The aggregation method used to calculate the value (e.g., counting transactions, summing amounts).
+	 *
+	 * @var KalturaMathemticalOperatorType
+	 */
+	public $operator = null;
+
+	/**
+	 * The specific monetization type to filter by.
+	 *
+	 * @var KalturaMonetizationType
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionEntitledCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * Entitlement conditions are always evaluated at the Household level.
+	 *
+	 * @var KalturaConditionLevel
+	 */
+	public $level = null;
+
+	/**
+	 * The specific subscription product identifier to check.
 	 *
 	 * @var int
 	 */
-	public $maxValue = null;
+	public $subscriptionIdEquals = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTvodPurchasedCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * TVOD purchase conditions are always evaluated at the Household level.
+	 *
+	 * @var KalturaConditionLevel
+	 */
+	public $level = null;
+
+	/**
+	 * The specific purchased ppv product identifier to check.
+	 *
+	 * @var int
+	 */
+	public $ppvIdEquals = null;
+
+	/**
+	 * The specific purchased media entry identifier to check.
+	 *
+	 * @var int
+	 */
+	public $mediaIdEquals = null;
+
+	/**
+	 * The number of days to look back for the purchase.
+	 *
+	 * @var int
+	 */
+	public $days = null;
 
 
 }
@@ -12540,6 +13166,34 @@ class KalturaWatchBasedRecommendationsProfile extends KalturaObjectBase
 	 * @var int
 	 */
 	public $playbackInterestsCalculationPeriodDays = null;
+
+	/**
+	 * Determines whether catch-up viewing data should be included in the user&#39;s interest analysis.
+	 *
+	 * @var bool
+	 */
+	public $analyzeCatchUps = null;
+
+	/**
+	 * Determines whether linear events viewing data should be included in the user&#39;s interest analysis.
+	 *
+	 * @var bool
+	 */
+	public $analyzeLinearEvents = null;
+
+	/**
+	 * Minimum required viewing time per session (in minutes) for live content to be considered in the analysis.
+	 *
+	 * @var int
+	 */
+	public $userInterestPlayThresholdForEventInMinutes = null;
+
+	/**
+	 * Minimum required viewing time per session (in minutes) for live content to be considered in the analysis.
+	 *
+	 * @var int
+	 */
+	public $maximumEventsPerSession = null;
 
 
 }
@@ -17675,6 +18329,29 @@ class KalturaAssetListResponse extends KalturaListResponse
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaExternalAssetListResponse extends KalturaAssetListResponse
+{
+	/**
+	 * Identify the query that sent to the external subsystem to retrieve the response
+	 *
+	 * @var string
+	 */
+	public $externalQueryId = null;
+
+	/**
+	 * Assets
+	 *
+	 * @var array of KalturaAsset
+	 */
+	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetStatisticsListResponse extends KalturaListResponse
 {
 	/**
@@ -21323,6 +22000,86 @@ class KalturaSessionInfo extends KalturaSession
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaProgramSemanticSearchParams extends KalturaObjectBase
+{
+	/**
+	 * Only include programs that end before this timestamp (Unix epoch seconds).
+	 *             Optional filter.
+	 *
+	 * @var int
+	 */
+	public $endsBefore = null;
+
+	/**
+	 * Only include programs that expire after this timestamp (Unix epoch seconds).
+	 *             Optional filter.
+	 *
+	 * @var int
+	 */
+	public $expiresAfter = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMediaSemanticSearchParams extends KalturaObjectBase
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSemanticSearchParams extends KalturaObjectBase
+{
+	/**
+	 * Search query text.
+	 *
+	 * @var string
+	 */
+	public $query = null;
+
+	/**
+	 * Whether to refine the query using LLM.
+	 *
+	 * @var bool
+	 */
+	public $refineQuery = null;
+
+	/**
+	 * Maximum number of results to return.
+	 *
+	 * @var int
+	 */
+	public $size = null;
+
+	/**
+	 * Program-specific search parameters.
+	 *             If provided, programs will be included in search results.
+	 *
+	 * @var KalturaProgramSemanticSearchParams
+	 */
+	public $programParams;
+
+	/**
+	 * Media-specific search parameters.
+	 *             If provided, media/VOD assets will be included in search results.
+	 *
+	 * @var KalturaMediaSemanticSearchParams
+	 */
+	public $mediaParams;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaRepresentativeSelectionPolicy extends KalturaObjectBase
 {
 
@@ -24502,6 +25259,23 @@ class KalturaFilteringCondition extends KalturaObjectBase
 	 * @var string
 	 */
 	public $value = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaProgramSearchableAttributes extends KalturaObjectBase
+{
+	/**
+	 * Comma-separated list of Program metadata field names that should be searchable.
+	 *             Examples: &quot;name,description,genre,tags,meta_cast,meta_director&quot;
+	 *
+	 * @var string
+	 */
+	public $attributes = null;
 
 
 }

@@ -67,6 +67,16 @@ class KalturaAggregationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaAiRecommendationTreeFeatureLevel extends KalturaEnumBase
+{
+	const BASIC = "Basic";
+	const PREMIUM = "Premium";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnouncementOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";
@@ -707,6 +717,16 @@ class KalturaConcurrencyLimitationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaConditionLevel extends KalturaEnumBase
+{
+	const USER = "USER";
+	const HOUSEHOLD = "HOUSEHOLD";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConditionOperator extends KalturaEnumBase
 {
 	const EQUAL = "Equal";
@@ -1098,6 +1118,17 @@ class KalturaFollowTvSeriesOrderBy extends KalturaEnumBase
 {
 	const START_DATE_DESC = "START_DATE_DESC";
 	const START_DATE_ASC = "START_DATE_ASC";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGenerateMetadataJobType extends KalturaEnumBase
+{
+	const VODBYDESCRIPTION = "VodByDescription";
+	const VODBYSUBTITLES = "VodBySubtitles";
+	const PROGRAMBYDESCRIPTION = "ProgramByDescription";
 }
 
 /**
@@ -1501,6 +1532,16 @@ class KalturaListGroupsRepresentativesOrderBy extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaLogicalOperator extends KalturaEnumBase
+{
+	const AND = "AND";
+	const OR = "OR";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaManualCollectionAssetType extends KalturaEnumBase
 {
 	const MEDIA = "media";
@@ -1589,6 +1630,17 @@ class KalturaMetaDataType extends KalturaEnumBase
 	const BOOLEAN = "BOOLEAN";
 	const DATE = "DATE";
 	const RELEATED_ENTITY = "RELEATED_ENTITY";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMetadataUpdateOperation extends KalturaEnumBase
+{
+	const PROTECT = "PROTECT";
+	const EXTEND = "EXTEND";
+	const OVERWRITE = "OVERWRITE";
 }
 
 /**
@@ -2174,6 +2226,7 @@ class KalturaRuleActionType extends KalturaEnumBase
 	const FILTERFILEBYLABELINPLAYBACK = "FilterFileByLabelInPlayback";
 	const FILTERFILEBYDYNAMICDATAINDISCOVERY = "FilterFileByDynamicDataInDiscovery";
 	const FILTERFILEBYDYNAMICDATAINPLAYBACK = "FilterFileByDynamicDataInPlayback";
+	const SET_PLAYBACK_CONTEXT_URL_TYPE = "SET_PLAYBACK_CONTEXT_URL_TYPE";
 }
 
 /**
