@@ -11902,7 +11902,7 @@ class KalturaBaseSegmentCondition extends KalturaObjectBase
 	/**
 	 * Defines the scope of the condition evaluation.
 	 *
-	 * @var KalturaConditionLevel
+	 * @var KalturaConditionScope
 	 */
 	public $scope = null;
 
@@ -12025,7 +12025,7 @@ class KalturaSegmentationType extends KalturaObjectBase
 	/**
 	 * Defines whether segments are applied to users or households
 	 *
-	 * @var KalturaConditionLevel
+	 * @var KalturaConditionScope
 	 */
 	public $scope = null;
 
@@ -12116,13 +12116,6 @@ class KalturaViewTimeConstraint extends KalturaObjectBase
 class KalturaBaseAttributeConstraint extends KalturaObjectBase
 {
 	/**
-	 * Discriminator field to identify the specific attribute constraint type.
-	 *
-	 * @var string
-	 */
-	public $attributeType = null;
-
-	/**
 	 * The system name of the metadata field to query.
 	 *
 	 * @var string
@@ -12138,13 +12131,6 @@ class KalturaBaseAttributeConstraint extends KalturaObjectBase
  */
 abstract class KalturaBaseWatchCondition extends KalturaBaseSegmentCondition
 {
-	/**
-	 * Defines the scope of the condition evaluation.
-	 *
-	 * @var KalturaConditionLevel
-	 */
-	public $level = null;
-
 	/**
 	 * Specifies criteria to include or exclude specific content types (recordings, programs, media types) from the evaluation.
 	 *
@@ -12176,7 +12162,7 @@ abstract class KalturaBaseWatchCondition extends KalturaBaseSegmentCondition
 	/**
 	 * Defines whether to use AND or OR between the items in constraintAttributes.
 	 *
-	 * @var KalturaLogicalOperator
+	 * @var KalturaBooleanOperator
 	 */
 	public $constraintsOperator = null;
 
@@ -12265,21 +12251,21 @@ class KalturaDateMetaConstraint extends KalturaBaseAttributeConstraint
 	/**
 	 * The exact epoch timestamp the field must equal.
 	 *
-	 * @var string
+	 * @var int
 	 */
 	public $equals = null;
 
 	/**
 	 * The epoch timestamp the field must be greater than.
 	 *
-	 * @var string
+	 * @var int
 	 */
 	public $greaterThan = null;
 
 	/**
 	 * The epoch timestamp the field must be smaller than.
 	 *
-	 * @var string
+	 * @var int
 	 */
 	public $smallerThan = null;
 
@@ -12327,21 +12313,21 @@ class KalturaNumberMetaConstraint extends KalturaBaseAttributeConstraint
 	/**
 	 * The exact numeric value the field must equal.
 	 *
-	 * @var string
+	 * @var int
 	 */
 	public $equals = null;
 
 	/**
 	 * The numeric value the field must be greater than.
 	 *
-	 * @var string
+	 * @var int
 	 */
 	public $greaterThan = null;
 
 	/**
 	 * The numeric value the field must be smaller than.
 	 *
-	 * @var string
+	 * @var int
 	 */
 	public $smallerThan = null;
 
@@ -12400,6 +12386,13 @@ class KalturaTextMetaConstraint extends KalturaBaseAttributeConstraint
 	 */
 	public $equals = null;
 
+	/**
+	 * Discriminator field to identify the specific attribute constraint type.
+	 *
+	 * @var string
+	 */
+	public $attributeType = null;
+
 
 }
 
@@ -12409,13 +12402,6 @@ class KalturaTextMetaConstraint extends KalturaBaseAttributeConstraint
  */
 class KalturaCollectionPurchasedCondition extends KalturaBaseSegmentCondition
 {
-	/**
-	 * Collection purchase conditions are always evaluated at the Household level.
-	 *
-	 * @var KalturaConditionLevel
-	 */
-	public $level = null;
-
 	/**
 	 * The specific purchased collection product identifier to check.
 	 *
@@ -12529,13 +12515,6 @@ class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
 class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 {
 	/**
-	 * Monetization conditions are always evaluated at the Household level.
-	 *
-	 * @var KalturaConditionLevel
-	 */
-	public $level = null;
-
-	/**
 	 * A comma-separated list of business module IDs to include in the filter.
 	 *
 	 * @var string
@@ -12596,13 +12575,6 @@ class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 class KalturaSubscriptionEntitledCondition extends KalturaBaseSegmentCondition
 {
 	/**
-	 * Entitlement conditions are always evaluated at the Household level.
-	 *
-	 * @var KalturaConditionLevel
-	 */
-	public $level = null;
-
-	/**
 	 * The specific subscription product identifier to check.
 	 *
 	 * @var int
@@ -12618,13 +12590,6 @@ class KalturaSubscriptionEntitledCondition extends KalturaBaseSegmentCondition
  */
 class KalturaTvodPurchasedCondition extends KalturaBaseSegmentCondition
 {
-	/**
-	 * TVOD purchase conditions are always evaluated at the Household level.
-	 *
-	 * @var KalturaConditionLevel
-	 */
-	public $level = null;
-
 	/**
 	 * The specific purchased ppv product identifier to check.
 	 *

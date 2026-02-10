@@ -717,20 +717,20 @@ class KalturaConcurrencyLimitationType extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaConditionLevel extends KalturaEnumBase
+class KalturaConditionOperator extends KalturaEnumBase
 {
-	const USER = "USER";
-	const HOUSEHOLD = "HOUSEHOLD";
+	const EQUAL = "Equal";
+	const NOTEQUAL = "NotEqual";
 }
 
 /**
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaConditionOperator extends KalturaEnumBase
+class KalturaConditionScope extends KalturaEnumBase
 {
-	const EQUAL = "Equal";
-	const NOTEQUAL = "NotEqual";
+	const USER = "USER";
+	const HOUSEHOLD = "HOUSEHOLD";
 }
 
 /**
@@ -1526,16 +1526,6 @@ class KalturaLineupRegionalChannelOrderBy extends KalturaEnumBase
 class KalturaListGroupsRepresentativesOrderBy extends KalturaEnumBase
 {
 	const NONE = "None";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaLogicalOperator extends KalturaEnumBase
-{
-	const AND = "AND";
-	const OR = "OR";
 }
 
 /**
