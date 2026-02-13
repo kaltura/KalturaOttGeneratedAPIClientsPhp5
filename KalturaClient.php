@@ -93,6 +93,29 @@ class KalturaAiMetadataGeneratorService extends KalturaServiceBase
 	}
 
 	/**
+	 * Initiate the process of metadata generation for Program assets based on existing asset description metadata.
+            The service will analyze the program&#39;s description and genre metadata using AI/LLM to generate
+            additional enriched metadata fields. This method is specifically designed for Program/EPG assets
+            and supports CRID-based uniqueness, regeneration options, and configurable overwrite behavior.
+            Programs without a CRID are out of scope for this feature.
+	 * 
+	 * @param KalturaGenerateProgramMetadatasByDescription $generateProgramMetadataByDescription Request object containing the external asset ID and regenerate flag
+	 * @return KalturaGenerateMetadataJob
+	 */
+	function generateProgramMetadataByDescription(KalturaGenerateProgramMetadatasByDescription $generateProgramMetadataByDescription)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "generateProgramMetadataByDescription", $generateProgramMetadataByDescription->toParams());
+		$this->client->queueServiceActionCall("aimetadatagenerator", "generateProgramMetadataByDescription", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaGenerateMetadataJob");
+		return $resultObject;
+	}
+
+	/**
 	 * Retrieve the generated metadata
 	 * 
 	 * @param bigint $jobId The job ID as received from GenerateMetadataBySubtitles.
@@ -409,6 +432,133 @@ class KalturaAnnouncementService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAppleIdpService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Attaches the KS’s ottUser to a Apple identity. Note: Attempting to attach to an IDP, a user that is already attached to the IDP in question, will fail with the appropriate error.
+	 * 
+	 * @param string $idToken The Apple OIDC ID Token obtained from the client.
+	 * @return KalturaSocialAttachStatus
+	 */
+	function attach($idToken)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "idToken", $idToken);
+		$this->client->queueServiceActionCall("appleidp", "attach", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialAttachStatus");
+		return $resultObject;
+	}
+
+	/**
+	 * Detaches the KS’s ottUser from the Apple identity that he is connected to. Note: Attempting to detach from an IDP, a user that is not attached to the IDP in question, will fail with the appropriate error.
+	 * 
+	 * @return KalturaSocialAttachStatus
+	 */
+	function detach()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("appleidp", "detach", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialAttachStatus");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns the identification of Kaltura’s partner (acting as the service provider) in Apple (acting as the identity provider).
+	 * 
+	 * @return KalturaSocialServiceId
+	 */
+	function getServiceId()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("appleidp", "getServiceId", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialServiceId");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns whether the user in question is attached to the Apple.
+	 * 
+	 * @return KalturaSocialAttachStatus
+	 */
+	function isAttached()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("appleidp", "isAttached", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialAttachStatus");
+		return $resultObject;
+	}
+
+	/**
+	 * Login an ottUser (acquire KS) using an Apple id token.
+	 * 
+	 * @param int $partnerId Partner identifier
+	 * @param string $idToken The Apple OIDC ID Token used to verify user identity.
+	 * @param map $extraParams Partner specific extra parameters for the login process
+	 * @param string $udid The user device identification
+	 * @return KalturaLoginResponse
+	 */
+	function login($partnerId, $idToken, array $extraParams = null, $udid = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "partnerId", $partnerId);
+		$this->client->addParam($kparams, "idToken", $idToken);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
+		$this->client->addParam($kparams, "udid", $udid);
+		$this->client->queueServiceActionCall("appleidp", "login", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLoginResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Sets the identification of Kaltura’s partner (that acts as a service provider) in Apple (that acts as identity provider).
+	 * 
+	 * @param string $serviceId The Apple App ID (Application Identifier).
+	 * @return KalturaSocialServiceId
+	 */
+	function setServiceId($serviceId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "serviceId", $serviceId);
+		$this->client->queueServiceActionCall("appleidp", "setServiceId", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialServiceId");
 		return $resultObject;
 	}
 }
@@ -871,19 +1021,16 @@ class KalturaAssetService extends KalturaServiceBase
 	}
 
 	/**
-	 * Search for assets using semantic similarity to a natural language query, with optional query refinement using LLM.
+	 * Search for assets using semantic similarity to a natural language query.
+            Supports unified search across both media/VOD assets and programs/EPG with optional type-specific filters.
 	 * 
-	 * @param string $query The search query text used to find semantically similar assets
-	 * @param bool $refineQuery When true, the search query is refined using LLM before vector search
-	 * @param int $size The maximum number of results to return. Must be between 1 and 100
+	 * @param KalturaSemanticSearchParams $searchParams Search parameters including query text, content type filters, and optional type-specific filters
 	 * @return KalturaAssetListResponse
 	 */
-	function semanticSearch($query, $refineQuery = false, $size = 10)
+	function semanticSearch(KalturaSemanticSearchParams $searchParams)
 	{
 		$kparams = array();
-		$this->client->addParam($kparams, "query", $query);
-		$this->client->addParam($kparams, "refineQuery", $refineQuery);
-		$this->client->addParam($kparams, "size", $size);
+		$this->client->addParam($kparams, "searchParams", $searchParams->toParams());
 		$this->client->queueServiceActionCall("asset", "semanticSearch", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -1072,7 +1219,7 @@ class KalturaAssetFilePpvService extends KalturaServiceBase
 	}
 
 	/**
-	 * Update assetFilePpv
+	 * Update assetFilePpv dates
 	 * 
 	 * @param bigint $assetFileId Asset file id
 	 * @param bigint $ppvModuleId Ppv module id
@@ -4933,6 +5080,152 @@ class KalturaExternalChannelProfileService extends KalturaServiceBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaFacebookIdpService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Attaches the KS’s ottUser to a Facebook identity. Note: Attempting to attach to an IDP, a user that is already attached to the IDP in question, will fail with the appropriate error.
+	 * 
+	 * @param string $accessToken The valid Facebook Access Token obtained from the client-side login.
+	 * @return KalturaSocialAttachStatus
+	 */
+	function attach($accessToken)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "accessToken", $accessToken);
+		$this->client->queueServiceActionCall("facebookidp", "attach", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialAttachStatus");
+		return $resultObject;
+	}
+
+	/**
+	 * Detaches the KS’s ottUser from the Facebook identity that he is connected to. Note: Attempting to detach from an IDP, a user that is not attached to the IDP in question, will fail with the appropriate error.
+	 * 
+	 * @return KalturaSocialAttachStatus
+	 */
+	function detach()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("facebookidp", "detach", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialAttachStatus");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns the identification of Kaltura’s partner (acting as the service provider) in Facebook (acting as the identity provider).
+	 * 
+	 * @return KalturaSocialServiceId
+	 */
+	function getServiceId()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("facebookidp", "getServiceId", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialServiceId");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns whether the user in question is attached to the Facebook.
+	 * 
+	 * @return KalturaSocialAttachStatus
+	 */
+	function isAttached()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("facebookidp", "isAttached", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialAttachStatus");
+		return $resultObject;
+	}
+
+	/**
+	 * Login an ottUser (acquire KS) using a Facebook access token.
+	 * 
+	 * @param int $partnerId Partner identifier
+	 * @param string $accessToken The valid Facebook Access Token used to verify the user identity.
+	 * @param map $extraParams Partner specific extra parameters for the login process
+	 * @param string $udid The user device identification
+	 * @return KalturaLoginResponse
+	 */
+	function login($partnerId, $accessToken, array $extraParams = null, $udid = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "partnerId", $partnerId);
+		$this->client->addParam($kparams, "accessToken", $accessToken);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
+		$this->client->addParam($kparams, "udid", $udid);
+		$this->client->queueServiceActionCall("facebookidp", "login", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLoginResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Sets the secret that is shared between Kaltura’s partner (that acts as a service provider) in Facebook (that acts as identity provider) that enables Facebook to identify the partner.
+	 * 
+	 * @param string $secret The shared secret key provided by Facebook for the application.
+	 * @return KalturaSocialSetSecretResponse
+	 */
+	function setSecret($secret)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "secret", $secret);
+		$this->client->queueServiceActionCall("facebookidp", "setSecret", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialSetSecretResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Sets the identification of Kaltura’s partner (that acts as a service provider) in Facebook (that acts as identity provider).
+	 * 
+	 * @param string $serviceId The Facebook App ID (Application Identifier).
+	 * @return KalturaSocialServiceId
+	 */
+	function setServiceId($serviceId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "serviceId", $serviceId);
+		$this->client->queueServiceActionCall("facebookidp", "setServiceId", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialServiceId");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFavoriteService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -5184,6 +5477,133 @@ class KalturaGeoBlockRuleService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaGeoBlockRule");
+		return $resultObject;
+	}
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaGoogleIdpService extends KalturaServiceBase
+{
+	function __construct(KalturaClient $client = null)
+	{
+		parent::__construct($client);
+	}
+
+	/**
+	 * Attaches the KS’s ottUser to a Google identity. Note: Attempting to attach to an IDP, a user that is already attached to the IDP in question, will fail with the appropriate error.
+	 * 
+	 * @param string $idToken The Google OIDC ID Token obtained from the client.
+	 * @return KalturaSocialAttachStatus
+	 */
+	function attach($idToken)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "idToken", $idToken);
+		$this->client->queueServiceActionCall("googleidp", "attach", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialAttachStatus");
+		return $resultObject;
+	}
+
+	/**
+	 * Detaches the KS’s ottUser from the Google identity that he is connected to. Note: Attempting to detach from an IDP, a user that is not attached to the IDP in question, will fail with the appropriate error.
+	 * 
+	 * @return KalturaSocialAttachStatus
+	 */
+	function detach()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("googleidp", "detach", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialAttachStatus");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns the identification of Kaltura’s partner (acting as the service provider) in Google (acting as the identity provider).
+	 * 
+	 * @return KalturaSocialServiceId
+	 */
+	function getServiceId()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("googleidp", "getServiceId", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialServiceId");
+		return $resultObject;
+	}
+
+	/**
+	 * Returns whether the user in question is attached to the Google.
+	 * 
+	 * @return KalturaSocialAttachStatus
+	 */
+	function isAttached()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("googleidp", "isAttached", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialAttachStatus");
+		return $resultObject;
+	}
+
+	/**
+	 * Login an ottUser (acquire KS) using a Google id token.
+	 * 
+	 * @param int $partnerId Partner identifier
+	 * @param string $idToken The Google OIDC ID Token used to verify user identity.
+	 * @param map $extraParams Partner specific extra parameters for the login process
+	 * @param string $udid The user device identification
+	 * @return KalturaLoginResponse
+	 */
+	function login($partnerId, $idToken, array $extraParams = null, $udid = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "partnerId", $partnerId);
+		$this->client->addParam($kparams, "idToken", $idToken);
+		if ($extraParams !== null)
+			$this->client->addParam($kparams, "extraParams", $extraParams->toParams());
+		$this->client->addParam($kparams, "udid", $udid);
+		$this->client->queueServiceActionCall("googleidp", "login", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaLoginResponse");
+		return $resultObject;
+	}
+
+	/**
+	 * Sets the identification of Kaltura’s partner (that acts as a service provider) in Google (that acts as identity provider).
+	 * 
+	 * @param string $serviceId The Google App ID (Application Identifier).
+	 * @return KalturaSocialServiceId
+	 */
+	function setServiceId($serviceId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "serviceId", $serviceId);
+		$this->client->queueServiceActionCall("googleidp", "setServiceId", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaSocialServiceId");
 		return $resultObject;
 	}
 }
@@ -11574,6 +11994,40 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 	}
 
 	/**
+	 * Retrieve the filtering condition configuration for program assets.
+	 * 
+	 * @return KalturaFilteringCondition
+	 */
+	function getProgramFilteringCondition()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "getProgramFilteringCondition", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Retrieve the current program field configurations for semantic search.
+	 * 
+	 * @return KalturaProgramSearchableAttributes
+	 */
+	function getProgramSearchableAttributes()
+	{
+		$kparams = array();
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "getProgramSearchableAttributes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaProgramSearchableAttributes");
+		return $resultObject;
+	}
+
+	/**
 	 * Retrieve the current field configurations for semantic search.
 	 * 
 	 * @param int $assetStructId Asset structure ID to filter configurations.
@@ -11608,6 +12062,44 @@ class KalturaSemanticAssetSearchPartnerConfigService extends KalturaServiceBase
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
 		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Update rule that controls embedding generation and search behavior for program assets.
+	 * 
+	 * @param KalturaFilteringCondition $filteringCondition Rule configuration parameters for programs.
+	 * @return KalturaFilteringCondition
+	 */
+	function upsertProgramFilteringCondition(KalturaFilteringCondition $filteringCondition)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "filteringCondition", $filteringCondition->toParams());
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "upsertProgramFilteringCondition", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaFilteringCondition");
+		return $resultObject;
+	}
+
+	/**
+	 * Update which fields should be included in semantic search for program assets.
+	 * 
+	 * @param KalturaProgramSearchableAttributes $programAttributes Program searchable attributes configuration containing comma-separated attribute names.
+	 * @return KalturaProgramSearchableAttributes
+	 */
+	function upsertProgramSearchableAttributes(KalturaProgramSearchableAttributes $programAttributes)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "programAttributes", $programAttributes->toParams());
+		$this->client->queueServiceActionCall("semanticassetsearchpartnerconfig", "upsertProgramSearchableAttributes", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaProgramSearchableAttributes");
 		return $resultObject;
 	}
 
@@ -12548,14 +13040,16 @@ class KalturaStreamingDeviceService extends KalturaServiceBase
 	 * @param string $fileId KalturaMediaFile.id media file belonging to the asset for which a concurrency slot is being reserved
 	 * @param string $assetId KalturaAsset.id - asset for which a concurrency slot is being reserved
 	 * @param string $assetType Identifies the type of asset for which the concurrency slot is being reserved
+	 * @param bigint $externalRecordingProgramId Optional EPG program ID used as fallback for concurrency checks when the external recording ID does not exist in the backend (e.g., recording not yet created). Only applicable for recording asset types when external recordings feature is enabled.
 	 * @return bool
 	 */
-	function bookPlaybackSession($fileId, $assetId, $assetType)
+	function bookPlaybackSession($fileId, $assetId, $assetType, $externalRecordingProgramId = null)
 	{
 		$kparams = array();
 		$this->client->addParam($kparams, "fileId", $fileId);
 		$this->client->addParam($kparams, "assetId", $assetId);
 		$this->client->addParam($kparams, "assetType", $assetType);
+		$this->client->addParam($kparams, "externalRecordingProgramId", $externalRecordingProgramId);
 		$this->client->queueServiceActionCall("streamingdevice", "bookPlaybackSession", $kparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
@@ -14617,6 +15111,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaAppleIdpService
+	 */
+	public $appleIdp = null;
+
+	/**
+	 * 
 	 * @var KalturaAppTokenService
 	 */
 	public $appToken = null;
@@ -14929,6 +15429,12 @@ class KalturaClient extends KalturaClientBase
 
 	/**
 	 * 
+	 * @var KalturaFacebookIdpService
+	 */
+	public $facebookIdp = null;
+
+	/**
+	 * 
 	 * @var KalturaFavoriteService
 	 */
 	public $favorite = null;
@@ -14944,6 +15450,12 @@ class KalturaClient extends KalturaClientBase
 	 * @var KalturaGeoBlockRuleService
 	 */
 	public $geoBlockRule = null;
+
+	/**
+	 * 
+	 * @var KalturaGoogleIdpService
+	 */
+	public $googleIdp = null;
 
 	/**
 	 * 
@@ -15584,12 +16096,13 @@ class KalturaClient extends KalturaClientBase
 	{
 		parent::__construct($config);
 		
-		$this->setClientTag('php5:25-08-06');
-		$this->setApiVersion('11.5.0.0');
+		$this->setClientTag('php5:26-02-13');
+		$this->setApiVersion('12.1.0.0');
 		
 		$this->aiMetadataGenerator = new KalturaAiMetadataGeneratorService($this);
 		$this->aiRecommendationTree = new KalturaAiRecommendationTreeService($this);
 		$this->announcement = new KalturaAnnouncementService($this);
+		$this->appleIdp = new KalturaAppleIdpService($this);
 		$this->appToken = new KalturaAppTokenService($this);
 		$this->assetComment = new KalturaAssetCommentService($this);
 		$this->asset = new KalturaAssetService($this);
@@ -15642,9 +16155,11 @@ class KalturaClient extends KalturaClientBase
 		$this->eventNotification = new KalturaEventNotificationService($this);
 		$this->exportTask = new KalturaExportTaskService($this);
 		$this->externalChannelProfile = new KalturaExternalChannelProfileService($this);
+		$this->facebookIdp = new KalturaFacebookIdpService($this);
 		$this->favorite = new KalturaFavoriteService($this);
 		$this->followTvSeries = new KalturaFollowTvSeriesService($this);
 		$this->geoBlockRule = new KalturaGeoBlockRuleService($this);
+		$this->googleIdp = new KalturaGoogleIdpService($this);
 		$this->homeNetwork = new KalturaHomeNetworkService($this);
 		$this->household = new KalturaHouseholdService($this);
 		$this->householdCoupon = new KalturaHouseholdCouponService($this);
