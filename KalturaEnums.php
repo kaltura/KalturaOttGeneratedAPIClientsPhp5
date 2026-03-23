@@ -727,6 +727,16 @@ class KalturaConditionOperator extends KalturaEnumBase
  * @package Kaltura
  * @subpackage Client
  */
+class KalturaConditionScope extends KalturaEnumBase
+{
+	const USER = "USER";
+	const HOUSEHOLD = "HOUSEHOLD";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConfigurationGroupDeviceOrderBy extends KalturaEnumBase
 {
 	const NONE = "NONE";

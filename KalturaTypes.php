@@ -11908,6 +11908,13 @@ class KalturaHouseholdSegmentListResponse extends KalturaListResponse
  */
 class KalturaBaseSegmentCondition extends KalturaObjectBase
 {
+	/**
+	 * Defines the scope of the condition evaluation.
+	 *
+	 * @var KalturaConditionScope
+	 */
+	public $scope = null;
+
 
 }
 
@@ -12025,6 +12032,13 @@ class KalturaSegmentationType extends KalturaObjectBase
 	 */
 	public $assetUserRuleId = null;
 
+	/**
+	 * Defines whether segments are applied to users or households
+	 *
+	 * @var KalturaConditionScope
+	 */
+	public $scope = null;
+
 
 }
 
@@ -12040,6 +12054,370 @@ class KalturaSegmentationTypeListResponse extends KalturaListResponse
 	 * @var array of KalturaSegmentationType
 	 */
 	public $objects;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaContentTypeSelector extends KalturaObjectBase
+{
+	/**
+	 * Determines if Recording assets are counted.
+	 *             Omitted or true: Recordings are included.
+	 *             false: Recordings are excluded.
+	 *
+	 * @var bool
+	 */
+	public $includeRecordings = null;
+
+	/**
+	 * Determines if EPG Program assets (Live, Catch-up, Start-over) are counted.
+	 *             Omitted or true: Programs are included.
+	 *             false: Programs are excluded.
+	 *
+	 * @var bool
+	 */
+	public $includePrograms = null;
+
+	/**
+	 * Filter for specific playable media types (e.g., Movie, Episode).
+	 *             Omitted: ALL playable media types are included.
+	 *             Provided (List of IDs): ONLY the media types matching the listed IDs are included.
+	 *             Provided (Empty String): NO media types are included.
+	 *             Constraint: IDs must correspond to valid playable media types. Providing an invalid ID will result in an error.
+	 *
+	 * @var string
+	 */
+	public $mediaTypeIdIn = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaViewTimeConstraint extends KalturaObjectBase
+{
+	/**
+	 * The starting time of the viewing window.
+	 *
+	 * @var string
+	 */
+	public $startTime = null;
+
+	/**
+	 * The ending time of the viewing window.
+	 *
+	 * @var string
+	 */
+	public $endTime = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaBaseAttributeConstraint extends KalturaObjectBase
+{
+	/**
+	 * The system name of the metadata field to query.
+	 *
+	 * @var string
+	 */
+	public $key = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+abstract class KalturaBaseWatchCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * Specifies criteria to include or exclude specific content types (recordings, programs, media types) from the evaluation.
+	 *
+	 * @var KalturaContentTypeSelector
+	 */
+	public $contentFilter;
+
+	/**
+	 * The period in days to look back for watch history.
+	 *
+	 * @var int
+	 */
+	public $evaluationDays = null;
+
+	/**
+	 * A comma-separated list of device family names (e.g., &#39;mobile&#39;, &#39;web&#39;, &#39;stb&#39;).
+	 *
+	 * @var string
+	 */
+	public $deviceFamilyIn = null;
+
+	/**
+	 * Filters watch actions that occurred within a specific time window.
+	 *
+	 * @var KalturaViewTimeConstraint
+	 */
+	public $viewTimeConstraint;
+
+	/**
+	 * Defines whether to use AND or OR between the items in constraintAttributes.
+	 *
+	 * @var KalturaBooleanOperator
+	 */
+	public $constraintsOperator = null;
+
+	/**
+	 * A list of up to 5 specific constraints to filter the watch history.
+	 *
+	 * @var array of KalturaBaseAttributeConstraint
+	 */
+	public $constraintAttributes;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchCountCondition extends KalturaBaseWatchCondition
+{
+	/**
+	 * The minimum count to be met.
+	 *             Constraint: Must be less than or equal to maxCount.
+	 *
+	 * @var int
+	 */
+	public $minCount = null;
+
+	/**
+	 * The maximum count to be met.
+	 *             Constraint: Must be greater than or equal to minCount.
+	 *
+	 * @var int
+	 */
+	public $maxCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaWatchDurationCondition extends KalturaBaseWatchCondition
+{
+	/**
+	 * The minimum duration in hours to be met.
+	 *             Constraint: Must be less than or equal to maxDurationHours.
+	 *
+	 * @var int
+	 */
+	public $minDurationHours = null;
+
+	/**
+	 * The maximum duration in hours to be met.
+	 *             Constraint: Must be greater than or equal to minDurationHours.
+	 *
+	 * @var int
+	 */
+	public $maxDurationHours = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAudioLanguageConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of audio language codes.
+	 *
+	 * @var string
+	 */
+	public $languageCodes = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaDateMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * The exact epoch timestamp the field must equal.
+	 *
+	 * @var int
+	 */
+	public $equals = null;
+
+	/**
+	 * The epoch timestamp the field must be greater than.
+	 *
+	 * @var int
+	 */
+	public $greaterThan = null;
+
+	/**
+	 * The epoch timestamp the field must be smaller than.
+	 *
+	 * @var int
+	 */
+	public $smallerThan = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEntitlementConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of entitlement product IDs.
+	 *
+	 * @var string
+	 */
+	public $productIds = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEnumMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of values. The metadata field enum&#39;s values must match at least one of these items.
+	 *
+	 * @var string
+	 */
+	public $oneOf = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaNumberMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * The exact numeric value the field must equal.
+	 *
+	 * @var int
+	 */
+	public $equals = null;
+
+	/**
+	 * The numeric value the field must be greater than.
+	 *
+	 * @var int
+	 */
+	public $greaterThan = null;
+
+	/**
+	 * The numeric value the field must be smaller than.
+	 *
+	 * @var int
+	 */
+	public $smallerThan = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubtitleLanguageConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of subtitle language codes.
+	 *
+	 * @var string
+	 */
+	public $languageCodes = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTagsMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * A comma-separated list of values. The metadata field tag&#39;s values must match at least one of these items.
+	 *
+	 * @var string
+	 */
+	public $oneOf = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTextMetaConstraint extends KalturaBaseAttributeConstraint
+{
+	/**
+	 * The substring that the metadata field value must contain.
+	 *
+	 * @var string
+	 */
+	public $contains = null;
+
+	/**
+	 * The exact string value the field must equal.
+	 *
+	 * @var string
+	 */
+	public $equals = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaCollectionPurchasedCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * The specific purchased collection product identifier to check.
+	 *
+	 * @var int
+	 */
+	public $collectionIdEquals = null;
+
+	/**
+	 * The number of days to look back for the purchase.
+	 *
+	 * @var int
+	 */
+	public $days = null;
 
 
 }
@@ -12140,53 +12518,101 @@ class KalturaContentScoreCondition extends KalturaBaseSegmentCondition
 class KalturaMonetizationCondition extends KalturaBaseSegmentCondition
 {
 	/**
-	 * How many days back should the actions be considered
-	 *
-	 * @var int
-	 */
-	public $days = null;
-
-	/**
-	 * Purchase type
-	 *
-	 * @var KalturaMonetizationType
-	 */
-	public $type = null;
-
-	/**
-	 * Mathermtical operator to calculate
-	 *
-	 * @var KalturaMathemticalOperatorType
-	 */
-	public $operator = null;
-
-	/**
-	 * Comma saperated list of business module IDs
+	 * A comma-separated list of business module IDs to include in the filter.
 	 *
 	 * @var string
 	 */
 	public $businessModuleIdIn = null;
 
 	/**
-	 * Which currency code should be taken into consideration
+	 * The ISO 4217 currency code to filter by.
 	 *
 	 * @var string
 	 */
 	public $currencyCode = null;
 
 	/**
-	 * The minimum value to be met
+	 * The number of days to look back for monetization actions.
+	 *
+	 * @var int
+	 */
+	public $days = null;
+
+	/**
+	 * The maximum allowable value for the calculated metric.
+	 *             MinValue must be greater than or equal to MaxValue.
+	 *
+	 * @var int
+	 */
+	public $maxValue = null;
+
+	/**
+	 * The minimum required value for the calculated metric.
+	 *             MinValue must be less than or equal to MaxValue.
 	 *
 	 * @var int
 	 */
 	public $minValue = null;
 
 	/**
-	 * The maximum value to be met
+	 * The aggregation method used to calculate the value (e.g., counting transactions, summing amounts).
+	 *
+	 * @var KalturaMathemticalOperatorType
+	 */
+	public $operator = null;
+
+	/**
+	 * The specific monetization type to filter by.
+	 *
+	 * @var KalturaMonetizationType
+	 */
+	public $type = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaSubscriptionEntitledCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * The specific subscription product identifier to check.
 	 *
 	 * @var int
 	 */
-	public $maxValue = null;
+	public $subscriptionIdEquals = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTvodPurchasedCondition extends KalturaBaseSegmentCondition
+{
+	/**
+	 * The specific purchased ppv product identifier to check.
+	 *
+	 * @var int
+	 */
+	public $ppvIdEquals = null;
+
+	/**
+	 * The specific purchased media entry identifier to check.
+	 *
+	 * @var int
+	 */
+	public $mediaIdEquals = null;
+
+	/**
+	 * The number of days to look back for the purchase.
+	 *
+	 * @var int
+	 */
+	public $days = null;
 
 
 }
