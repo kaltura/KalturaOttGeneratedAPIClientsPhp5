@@ -25864,7 +25864,7 @@ class KalturaTimeShiftedTvPartnerSettings extends KalturaObjectBase
 	 *
 	 * @var bool
 	 */
-	public $recordingsV2Enabled = null;
+	public $isRecordingsV2Enabled = null;
 
 
 }
